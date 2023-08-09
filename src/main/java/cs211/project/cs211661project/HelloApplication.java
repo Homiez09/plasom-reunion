@@ -18,6 +18,7 @@ public class HelloApplication extends Application {
     private static void configRoute() {
         String resourcesPath = "cs211/project/views/";
         FXRouter.when("welcome", resourcesPath+ "welcome-view.fxml");
+        FXRouter.when("dev-profile", resourcesPath+ "develop-profile-view.fxml");
     }
 
 
