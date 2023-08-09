@@ -1,0 +1,60 @@
+Text, Label {
+    -fx-font-family: FreesiaUPC;
+}
+
+.background-develop-profile {
+    -fx-background-color: linear-gradient(#FF7217, #FAA929, #FA8729);
+}
+
+.h1 {
+    -fx-font-size: 69;
+}
+
+.h3 {
+    -fx-font-size: 25;
+}
+
+.bold700 {
+    -fx-font-weight: 700;
+}
+
+.card {
+    -fx-background-color: #F9F6F7;
+    -fx-background-radius: 0 0 21 21;
+    -fx-border-radius: 0 0 21 21;
+    -fx-content-display: inline-block;
+}
+
+.card-image-preview {
+    -fx-fit-to-width: true;
+}
+
+.card-description-background {
+    -fx-background-color: #F9F6F7;
+    -fx-background-radius: 0 0 21 21;
+}
+
+.card-description-header {
+    -fx-font-size: 29;
+    -fx-fill: linear-gradient(#FF780C 0%, #FF8806 52.60%, #F90 98.96%);
+    -fx-font-weight: 700;
+}
+
+.card-description-body {
+    -fx-font-size: 24;
+    -fx-fill: #494949;
+}
+
+.container-card {
+    -fx-spacing: 30;
+    -fx-alignment: center;
+}
+
+.container-vbox {
+    -fx-alignment: center;
+    -fx-spacing: 50;
+}
+
+.text-gray-linear-gradient {
+    -fx-fill: linear-gradient(#353535, #494949);
+}
