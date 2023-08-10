@@ -71,6 +71,33 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 10), 10, 0, 0, 5);
 }
 
+/* check box*/
+.check-box .box {
+    -fx-background-color: #FF922E;
+    -fx-background-radius: 3;
+}
+.check-box:selected .mark {
+    -fx-background-color: #F5F3ED;
+}
+.check-box:selected .box {
+    -fx-background-color: #FF922E;
+}
+
+/* for click button */
+
+.next-page:hover {
+    -fx-font-size: 22;
+}
+
+.next-page-bar:hover{
+    -fx-font-size: 28;
+
+}
+.next-page-shadow:hover{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 2, 0, 0, 2);
+}
+
+
 /* for login page */
 
 Text, Label {
