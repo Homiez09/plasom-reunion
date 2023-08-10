@@ -15,7 +15,7 @@ public class WelcomeController {
     }
 
     private void loadTopBarComponent() {
-        FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/top-bar.fxml"));
+        FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/topbar.fxml"));
         try {
             AnchorPane topBarComponent = topBarComponentLoader.load();
             topBarAnchorPane.getChildren().add(topBarComponent);
