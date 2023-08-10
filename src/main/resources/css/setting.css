@@ -1,0 +1,16 @@
+.bgPane{
+    -fx-background-radius: 15;
+    -fx-background-color: #FFFFFF;
+}
+.bgAchorPane{
+    -fx-background-color:  #F9F6F7CC;
+}
+.headPane{
+
+    -fx-background-color: #FF9900;
+ }
+
+.fontText{
+    -fx-font-family: Leelawadee;
+
+}
