@@ -22,9 +22,7 @@ public class HelloApplication extends Application {
         FXRouter.when("dev-profile", resourcesPath+ "develop-profile-view.fxml");
         FXRouter.when("sign-in", resourcesPath + "sign-in.fxml");
         FXRouter.when("sign-up", resourcesPath + "sign-up.fxml");
-
     }
-
 
     public static void main(String[] args) {
         launch();
