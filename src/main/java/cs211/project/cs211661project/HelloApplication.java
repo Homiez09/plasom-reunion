@@ -21,9 +21,7 @@ public class HelloApplication extends Application {
         FXRouter.when("welcome", resourcesPath+ "welcome-view.fxml");
         FXRouter.when("dev-profile", resourcesPath+ "develop-profile-view.fxml");
         FXRouter.when("sign-in", resourcesPath + "sign-in.fxml");
-
     }
-
 
     public static void main(String[] args) {
         launch();
