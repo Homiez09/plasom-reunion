@@ -28,6 +28,7 @@ public class SettingPageController {
 
     @FXML
     public void initialize(){
+        mainPane.setVisible(true);
         loadTopBarComponent();
 
     }
