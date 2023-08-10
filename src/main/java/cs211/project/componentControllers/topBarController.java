@@ -2,12 +2,14 @@ package cs211.project.componentControllers;
 
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
 public class topBarController {
+    @FXML Button backButton;
     @FXML private void initialize() {
-        System.out.println("Top Bar Controller Initialized");
+        System.out.println(backButton.getProperties());
     }
 
     @FXML protected void onBackButtonClick() {
@@ -24,9 +26,8 @@ public class topBarController {
     }
 
     @FXML protected void onCurrentEventButtonClick() {
-
         try {
-            FXRouter.goTo("home-guest");
+            FXRouter.goTo("home");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

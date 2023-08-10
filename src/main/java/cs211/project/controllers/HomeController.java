@@ -2,30 +2,27 @@ package cs211.project.controllers;
 
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class HomeController {
+    @FXML private AnchorPane navbarAnchorPane;
     @FXML
-    private  void initialize() {}
+    private  void initialize() {
+        loadNavbarComponent();
+    }
 
-    @FXML
-    protected void onSignUpButtonClick()
-    {
+
+    private void loadNavbarComponent() {
+        FXMLLoader navbarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));
         try {
-            FXRouter.goTo("sign-up");
+            AnchorPane navbarComponent = navbarComponentLoader.load();
+            navbarAnchorPane.getChildren().add(navbarComponent);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @FXML
-    protected void onSignInButtonClick()
-    {
-        try {
-            FXRouter.goTo("sign-in");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

@@ -133,3 +133,8 @@ Text, Label {
     -fx-font-family: Leelawadee;
     -fx-font-color : #413B3B;
 }
+
+.top-bar-items:hover {
+    -fx-font-size: 20;
+    -fx-text-fill: #413B3B;
+}

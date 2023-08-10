@@ -40,7 +40,7 @@ public class navbarController {
             toggleProfilePane.setVisible(true);
         }
     }
-
+    @FXML protected void onProfileButtonClick() {}
     @FXML protected void onSettingButtonClick() throws IOException {
         FXRouter.goTo("setting");
     }

@@ -112,7 +112,7 @@
 /* for click button */
 
 .next-page:hover {
-    -fx-font-style: 30 ;
+    -fx-font-size: 20 ;
 }
 
 .next-page-bar:hover{
