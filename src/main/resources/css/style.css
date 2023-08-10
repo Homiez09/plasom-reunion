@@ -1,60 +1,127 @@
-Text, Label {
-    -fx-font-family: FreesiaUPC;
+
+/* font */
+.font{
+    -fx-font-family: Leelawadee;
 }
 
-.background-develop-profile {
-    -fx-background-color: linear-gradient(#FF7217, #FAA929, #FA8729);
+.text-xs{-fx-font-style-size: 12;}
+.text-ms{-fx-font-size: 14;}
+.text-base{-fx-font-size: 16;}
+.text-lg{-fx-font-size: 18;}
+.text-xl{-fx-font-size: 20;}
+.text-2xl{-fx-font-size: 24;}
+.text-3xl{-fx-font-size: 30;}
+.text-4xl{-fx-font-size: 36;}
+.text-5xl{-fx-font-size: 48;}
+.text-6xl{-fx-font-size: 60;}
+
+.weight-thin{-fx-font-weight: 100;}
+.weight-extra-light{-fx-font-weight: 200;}
+.weight-light{-fx-font-weight: 300;}
+.weight-normal{-fx-font-weight: 400;}
+.weight-medium{-fx-font-weight: 500;}
+.weight-semi-bold{-fx-font-weight: 600}
+.weight-bold{-fx-font-weight: 700;}
+
+
+
+
+/* for login page */
+/* for background */
+.signin-signup-background1{
+    -fx-background-color:  #FEF4E0;
+
 }
 
-.h1 {
-    -fx-font-size: 69;
+.signin-signup-background2{
+    fx--background-color : linear-gradient(#F08A4E 50%, #FDA83A 100%);
 }
 
-.h3 {
-    -fx-font-size: 25;
+.signin-signup-border {
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: FEF4E0;
+    -fx-background-color: rgba(255, 255, 255, 0.20);
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 4, 0, 0, 0.7);
 }
 
-.bold700 {
+
+.upcoming-border {
+    -fx-border-radius: 127;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0.1, 0, 0.1), 4, 0.1, 1, 2);
+}
+
+
+/* field */
+.signin-signup-field {
+    -fx-background-radius: 23;
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #413B3B;
+    -fx-border-width: 1;
+    -fx-border-radius: 23;
+    -fx-font-size: 17;
+
+}
+
+/* button */
+.orange-button:hover{
+    -fx-background-color : linear-gradient(to left,  #FFC75A 5.37%, #FFAC60 52.40%, #F7973E 91.98%);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
+}
+
+.orange-button{
+    -fx-background-color : linear-gradient(to left, #FF9839 20.10%, #FF922E 53.96%, #F97800 91.98%);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
+}
+
+.text-orange-button{
+    -fx-font-size: 27;
     -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
 }
 
-.card {
-    -fx-background-color: #F9F6F7;
-    -fx-background-radius: 0 0 21 21;
-    -fx-border-radius: 0 0 21 21;
-    -fx-content-display: inline-block;
-}
-
-.card-image-preview {
-    -fx-fit-to-width: true;
-}
-
-.card-description-background {
-    -fx-background-color: #F9F6F7;
-    -fx-background-radius: 0 0 21 21;
-}
-
-.card-description-header {
-    -fx-font-size: 29;
-    -fx-fill: linear-gradient(#FF780C 0%, #FF8806 52.60%, #F90 98.96%);
+.arrow-button {
+    -fx-font-size: 60;
     -fx-font-weight: 700;
+    -fx-background-color: transparent;
 }
 
-.card-description-body {
+.arrow-circle-button {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 3);
+}
+
+.arrow-circle-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 10), 10, 0, 0, 5);
+}
+
+/* check box*/
+.check-box .box {
+    -fx-background-color: #FF922E;
+    -fx-background-radius: 3;
+}
+.check-box:selected .mark {
+    -fx-background-color: #F5F3ED;
+}
+.check-box:selected .box {
+    -fx-background-color: #FF922E;
+}
+
+/* for click button */
+
+.next-page:hover {
+    -fx-font-style: 30 ;
+}
+
+.next-page-bar:hover{
     -fx-font-size: 24;
-    -fx-fill: #494949;
+
+}
+.next-page-shadow:hover{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 2, 0, 0, 2);
 }
 
-.container-card {
-    -fx-spacing: 30;
-    -fx-alignment: center;
-}
 
-.container-vbox {
-    -fx-alignment: center;
-    -fx-spacing: 50;
-}
-
-.text-gray-linear-gradient {
-    -fx-fill: linear-gradient(#353535, #494949);
-}
+/* for login page */
