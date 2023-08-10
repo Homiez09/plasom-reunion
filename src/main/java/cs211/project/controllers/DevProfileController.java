@@ -33,7 +33,7 @@ public class DevProfileController {
     }
 
     private void showProfile() {
-        Image profile = new Image(getClass().getResource("/images/profiles-dev/no-user.jpg").toString(), 600, 0, true, false);
+        Image profile = new Image(getClass().getResource("/images/profiles-dev/ging.png").toString(), 600, 0, true, false);
         nameLabel.setText("จินดามณี ศรีหะรัญ");
         nickLabel.setText("กุ๊งกิ๊ง");
         studentIdLabel.setText("6510405385");
