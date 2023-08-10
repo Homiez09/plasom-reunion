@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
 
+
 <AnchorPane prefHeight="30.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.topBarController">
+
    <AnchorPane layoutY="14.0" prefHeight="23.0" prefWidth="1152.0">
       <children>
          <Button layoutX="11.0" layoutY="-5.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="38.0" prefWidth="113.0" styleClass="top-bar" text="&lt; Back">

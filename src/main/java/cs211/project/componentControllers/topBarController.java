@@ -24,7 +24,12 @@ public class topBarController {
     }
 
     @FXML protected void onCurrentEventButtonClick() {
-        System.out.println("Current Event Clicked");
+
+        try {
+            FXRouter.goTo("home-guest");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML protected void onDevProfileButtonClick() {
