@@ -1,0 +1,80 @@
+Text {
+    -fx-font-family: FreesiaUPC;
+}
+
+.h1 {
+    -fx-font-size: 69;
+}
+
+.h3 {
+    -fx-font-size: 25;
+}
+
+.bold700 {
+    -fx-font-weight: 700;
+}
+
+.text-color-white {
+    -fx-fill: #F9F6F7;
+}
+
+.body {
+    -fx-background-color: #F9F6F7;
+}
+
+.background {
+    -fx-rotate: -190deg;
+    -fx-background-radius: 300;
+    -fx-background-color: linear-gradient(#FF7A00, #FF9900);
+}
+
+.background2 {
+    -fx-rotate: 8deg;
+    -fx-background-radius: 300;
+    -fx-background-color: linear-gradient(#FFBB6A, #FF9900);
+}
+
+.profile-border {
+    -fx-border-radius: 200;
+    -fx-border-width: 2;
+    -fx-border-color: #413B3B;
+    -fx-background-radius: 200;
+    -fx-background-color: #F9F6F7;
+    -fx-border-style: solid;
+    -fx-alignment: center;
+}
+
+.profile-image {
+    -fx-border-radius: 200;
+}
+
+.btn {
+    -fx-font-family: FreesiaUPC;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-alignment: center;
+    -fx-border-width: 2;
+    -fx-border-color : white;
+    -fx-font-size: 40;
+    -fx-font-weight: 900;
+    -fx-border-style: solid;
+}
+
+.btn-primary {
+    -fx-background-color: linear-gradient(#FFC554, #F97528);
+    -fx-border-color: #413B3B;
+}
+
+.btn-primary:hover {
+    -fx-background-color: linear-gradient( #FDA83A,#F08A4E);
+    -fx-border-color: #F9F6F7;
+    -fx-text-fill: white;
+}
+
+.btn-shadow {
+    -fx-stroke-type: outside;
+    -fx-stroke-width: 10;
+    -fx-stroke: #DA0f53;
+    -fx-stroke-line-join: round;
+    -fx-stroke-line-cap: round;
+}
