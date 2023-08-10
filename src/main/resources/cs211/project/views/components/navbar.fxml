@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
+<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
          <children>
