@@ -1,6 +1,7 @@
 package cs211.project.controllers;
 
 import cs211.project.services.FXRouter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -144,5 +145,14 @@ public class SignInController {
         Image image = new Image(getClass().getResourceAsStream(path));
         upComingEventsImageView.setImage(image);
         updateVisibleButton();
+    }
+
+    public void onLoginButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

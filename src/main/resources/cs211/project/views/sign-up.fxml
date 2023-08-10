@@ -65,7 +65,7 @@
                <children>
                   <BorderPane layoutX="123.0" layoutY="26.0" prefHeight="364.0" prefWidth="376.0">
                      <bottom>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="278.0" text="CREATE ACCOUNT" wrapText="true" BorderPane.alignment="TOP_CENTER">
+                        <Button mnemonicParsing="false" onAction="#onCreateAccountButton" prefHeight="42.0" prefWidth="278.0" text="CREATE ACCOUNT" wrapText="true" BorderPane.alignment="TOP_CENTER">
                            <BorderPane.margin>
                               <Insets bottom="110.0" />
                            </BorderPane.margin>

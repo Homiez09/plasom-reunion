@@ -92,7 +92,7 @@
                         </TextField>
                      </top>
                      <bottom>
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="166.0" text="LOG IN" wrapText="true" BorderPane.alignment="TOP_CENTER">
+                        <Button mnemonicParsing="false" onAction="#onLoginButton" prefHeight="36.0" prefWidth="166.0" text="LOG IN" wrapText="true" BorderPane.alignment="TOP_CENTER">
                            <BorderPane.margin>
                               <Insets bottom="165.0" />
                            </BorderPane.margin>
