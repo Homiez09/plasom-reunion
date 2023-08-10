@@ -1,10 +1,13 @@
 package cs211.project.componentControllers;
 
+import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+
+import java.io.IOException;
 
 public class navbarController {
     @FXML private ImageView profileImageView;
@@ -36,5 +39,17 @@ public class navbarController {
         } else {
             toggleProfilePane.setVisible(true);
         }
+    }
+
+    @FXML protected void onSettingButtonClick() throws IOException {
+        FXRouter.goTo("setting");
+    }
+
+    @FXML protected void onHomeButtonClick() throws IOException {
+        FXRouter.goTo("home");
+    }
+
+    @FXML protected void onWelcomeButtonClick() throws IOException {
+        FXRouter.goTo("welcome");
     }
 }
