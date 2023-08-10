@@ -32,4 +32,11 @@ public class WelcomeController {
             throw new RuntimeException(e);
         }
     }
+    @FXML protected void onSignUpButtonClick(){
+        try {
+            FXRouter.goTo("sign-up");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
