@@ -45,7 +45,7 @@ public class DevProfileController {
         studentIdLabel1.setText("6510405750");
         profileImageView1.setImage(profile1);
 
-        Image profile2 = new Image(getClass().getResource("/images/profiles-dev/no-user.jpg").toString(), 600, 0, true, false);
+        Image profile2 = new Image(getClass().getResource("/images/profiles-dev/man.jpg").toString(), 600, 0, true, false);
         nameLabel2.setText("ปิยะ กองศรี");
         nickLabel2.setText("แมน");
         studentIdLabel2.setText("6510450666");
