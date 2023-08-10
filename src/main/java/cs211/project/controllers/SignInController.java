@@ -1,5 +1,6 @@
 package cs211.project.controllers;
 
+import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -9,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
+
+import java.io.IOException;
 
 public class SignInController {
 
@@ -81,6 +84,24 @@ public class SignInController {
             page--;
         }
         showImage(page);
+    }
+
+    @FXML
+    protected void onBackClick(){
+        try {
+            FXRouter.goTo("welcome");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    protected void onSignUpClick(){
+        try {
+            FXRouter.goTo("sign-up");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private int calculateMaxPage() {
