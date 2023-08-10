@@ -2,7 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,7 +16,7 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0">
          <children>
-            <Pane fx:id="loginsercurityPane" accessibleRole="TOGGLE_BUTTON" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane">
+            <Pane fx:id="loginsercurityPane" accessibleRole="TOGGLE_BUTTON" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css">
                <children>
                   <Line endX="722.0" layoutX="76.5" layoutY="262.5" style="-fx-fill: #BFBFBF;" />
                   <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Login &amp; Security" textAlignment="CENTER">
@@ -28,9 +29,9 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="newpassTextField" layoutX="132.0" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="new password" styleClass="fontText" stylesheets="@../../../css/setting.css" />
-                  <TextField fx:id="newpassconTextField" layoutX="392.25" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="re-new password" styleClass="fontText" stylesheets="@../../../css/setting.css" />
-                  <TextField fx:id="oldpassTextField" layoutX="228.0" layoutY="193.5" prefHeight="30.0" prefWidth="214.0" promptText="old password" styleClass="fontText" stylesheets="@../../../css/setting.css" />
+                  <PasswordField fx:id="newPasswordField" layoutX="132.0" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="new password" styleClass="font" />
+                  <PasswordField fx:id="renewPasswordField" layoutX="392.25" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="re-new password" styleClass="font" />
+                  <PasswordField fx:id="oldPasswordField" layoutX="228.0" layoutY="193.5" prefHeight="30.0" prefWidth="214.0" promptText="old password" styleClass="font" />
                   <Button layoutX="473.0" layoutY="196.0" mnemonicParsing="false" style="-fx-background-color: #4CAF50; -fx-background-radius: 7.5;" styleClass="fontText" stylesheets="@../../../css/setting.css" text="OK" textAlignment="CENTER" />
                   <Label fx:id="settingLabel1" layoutX="88.5" layoutY="279.75" styleClass="fontText" stylesheets="@../../../css/setting.css" text="active status" textAlignment="CENTER">
                      <font>
@@ -42,9 +43,9 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Pane layoutX="116.0" layoutY="316.0" onMouseClicked="#onPaneClick">
+                  <Pane layoutX="116.0" layoutY="317.0">
                      <children>
-                        <ImageView fx:id="offImageView" visible="false">
+                        <ImageView fx:id="offImageView">
                            <image>
                               <Image url="@../../../images/switch-bodyOff.png" />
                            </image>
@@ -54,11 +55,12 @@
                               <Image url="@../../../images/switch-bodyOn.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="switchImageView" fitHeight="29.0" fitWidth="29.0" layoutX="30.0">
+                        <ImageView fx:id="switchImageView" fitHeight="29.0" fitWidth="29.0">
                            <image>
                               <Image url="@../../../images/Switch.png" />
                            </image>
                         </ImageView>
+                        <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#onToggleButton" prefHeight="29.0" prefWidth="61.0" />
                      </children>
                   </Pane>
                </children></Pane>

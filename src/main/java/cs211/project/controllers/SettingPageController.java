@@ -4,6 +4,7 @@ import cs211.project.services.FXRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,12 +19,13 @@ public class SettingPageController {
     @FXML
     Pane mainPane,loginsercurityPane,interfacePane;
     @FXML
-    ToggleButton privateaccountToggleButton;
-    @FXML
     ImageView offImageView,onImageView,switchImageView;
+    @FXML
+    PasswordField newPasswordField,renewPasswordField,oldPasswordField;
+    @FXML
+    ToggleButton toggleButton;
 
-    private boolean isClicked = false;
-
+    // top-bar
     private void loadTopBarComponent() {
         FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));
         try {
@@ -37,10 +39,38 @@ public class SettingPageController {
     @FXML
     public void initialize(){
         mainPane.setVisible(true);
-        ToggleOff();
-
         loadTopBarComponent();
 
+    }
+
+    // interface page
+    public void onInterfaceButton(ActionEvent actionEvent) {
+        ShowPaneInterface();
+    }
+    private void ShowPaneInterface(){
+        mainPane.setVisible(false);
+        loginsercurityPane.setVisible(false);
+        interfacePane.setVisible(true);
+    }
+
+    // login page
+    public void onLoginButton(ActionEvent actionEvent) {
+        ShowPaneLogin();
+    }
+    private void ShowPaneLogin(){
+        mainPane.setVisible(false);
+        interfacePane.setVisible(false);
+        loginsercurityPane.setVisible(true);
+    }
+
+
+    // toggle switch
+    public void onToggleButton(ActionEvent actionEvent) {
+        if (toggleButton.isSelected()) {
+            ToggleOn();
+        } else {
+            ToggleOff();
+        }
     }
     public void ToggleOn(){
         offImageView.setVisible(false);
@@ -52,35 +82,5 @@ public class SettingPageController {
         offImageView.setVisible(true);
         onImageView.setVisible(false);
         switchImageView.setLayoutX(0);
-    }
-    private void ShowPaneInterface(){
-        mainPane.setVisible(false);
-        loginsercurityPane.setVisible(false);
-        interfacePane.setVisible(true);
-    }
-    private void ShowPaneLogin(){
-        mainPane.setVisible(false);
-        interfacePane.setVisible(false);
-        loginsercurityPane.setVisible(true);
-    }
-
-
-    public void onInterfaceButton(ActionEvent actionEvent) {
-        ShowPaneInterface();
-    }
-
-    public void onLoginButton(ActionEvent actionEvent) {
-        ShowPaneLogin();
-    }
-
-    public void onPaneClick(MouseEvent mouseEvent) {
-        if (isClicked){
-            isClicked = false;
-            ToggleOff();
-        }else {
-            isClicked = true;
-            ToggleOn();
-        }
-
     }
 }
