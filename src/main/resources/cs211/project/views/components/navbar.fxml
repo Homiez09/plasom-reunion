@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
+<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
          <children>
@@ -36,7 +36,7 @@
             </ImageView>
             <HBox layoutX="793.0" prefHeight="75.0" prefWidth="221.0" styleClass="container">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Home" textFill="#413b3b" />
+                  <Button mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Home" textFill="#413b3b" />
                   <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
                </children>
             </HBox>
@@ -51,19 +51,19 @@
          <children>
             <VBox layoutY="1.0" prefHeight="151.0" prefWidth="206.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="214.0" text="Profile">
+                  <Button mnemonicParsing="false" onAction="#onProfileButtonClick" prefHeight="26.0" prefWidth="214.0" text="Profile">
                      <styleClass>
                         <String fx:value="items" />
                         <String fx:value="text-primary" />
                      </styleClass>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="214.0" text="Setting">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSettingButtonClick" prefHeight="26.0" prefWidth="214.0" text="Setting">
                      <styleClass>
                         <String fx:value="items" />
                         <String fx:value="text-primary" />
                      </styleClass>
                   </Button>
-                  <Button layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="214.0" text="Logout">
+                  <Button layoutX="10.0" layoutY="52.0" mnemonicParsing="false" onAction="#onWelcomeButtonClick" prefHeight="26.0" prefWidth="214.0" text="Logout">
                      <styleClass>
                         <String fx:value="items" />
                         <String fx:value="text-danger" />

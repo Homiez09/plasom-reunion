@@ -24,7 +24,6 @@ public class topBarController {
     }
 
     @FXML protected void onCurrentEventButtonClick() {
-
         try {
             FXRouter.goTo("home");
         } catch (IOException e) {
