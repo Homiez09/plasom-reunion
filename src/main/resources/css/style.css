@@ -1,8 +1,36 @@
 
+/* font */
+.font{
+    -fx-font-family: Leelawadee;
+}
+
+.text-xs{-fx-font-style-size: 12;}
+.text-ms{-fx-font-size: 14;}
+.text-base{-fx-font-size: 16;}
+.text-lg{-fx-font-size: 18;}
+.text-xl{-fx-font-size: 20;}
+.text-2xl{-fx-font-size: 24;}
+.text-3xl{-fx-font-size: 30;}
+.text-4xl{-fx-font-size: 36;}
+.text-5xl{-fx-font-size: 48;}
+.text-6xl{-fx-font-size: 60;}
+
+.weight-thin{-fx-font-weight: 100;}
+.weight-extra-light{-fx-font-weight: 200;}
+.weight-light{-fx-font-weight: 300;}
+.weight-normal{-fx-font-weight: 400;}
+.weight-medium{-fx-font-weight: 500;}
+.weight-semi-bold{-fx-font-weight: 600}
+.weight-bold{-fx-font-weight: 700;}
+
+
+
+
 /* for login page */
 /* for background */
 .signin-signup-background1{
     -fx-background-color:  #FEF4E0;
+
 }
 
 .signin-signup-background2{
@@ -32,8 +60,7 @@
     -fx-border-color: #413B3B;
     -fx-border-width: 1;
     -fx-border-radius: 23;
-    -fx-font-family: FreesiaUPC;
-    -fx-font-size: 25;
+    -fx-font-size: 17;
 
 }
 
@@ -51,14 +78,13 @@
 }
 
 .text-orange-button{
-    -fx-font-family: FreesiaUPC;
     -fx-font-size: 27;
     -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
 }
 
 .arrow-button {
     -fx-font-size: 60;
-    -fx-font-family: FreesiaUPC;
     -fx-font-weight: 700;
     -fx-background-color: transparent;
 }
@@ -86,11 +112,11 @@
 /* for click button */
 
 .next-page:hover {
-    -fx-font-size: 22;
+    -fx-font-style: 30 ;
 }
 
 .next-page-bar:hover{
-    -fx-font-size: 28;
+    -fx-font-size: 24;
 
 }
 .next-page-shadow:hover{
@@ -100,9 +126,6 @@
 
 /* for login page */
 
-Text, Label {
-    -fx-font-family: FreesiaUPC;
-}
 
 .background-develop-profile {
     -fx-background-color: linear-gradient(#FF7217, #FAA929, #FA8729);
@@ -169,7 +192,7 @@ Text, Label {
 
 .Nav > .search-box {
     -fx-padding: 0 0 0 37;
-    -fx-font-family: FreesiaUPC;
+    -fx-font-family: Leelawadee;
     -fx-font-size: 25;
     -fx-background-radius: 30;
     -fx-focus-traversable: false;
@@ -188,7 +211,7 @@ Text, Label {
     -fx-padding: 0 2 0 2;
     -fx-font-size: 30;
     -fx-font-weight: 700;
-    -fx-font-family: FreesiaUPC;
+    -fx-font-family: Leelawadee;
     -fx-background-color: transparent;
 }
 
@@ -208,7 +231,7 @@ Text, Label {
     -fx-padding: 12 0 12 0;
     -fx-background-color: transparent;
     -fx-border-color: #494949;
-    -fx-font-family: FreesiaUPC;
+    -fx-font-family: Leelawadee;
     -fx-font-size: 25;
     -fx-font-weight: 700;
     -fx-border-width: 0 0 0.6 0;
@@ -232,7 +255,7 @@ Text, Label {
 .top-bar{
     -fx-background-color: transparent;
     -fx-font-size: 26;
-    -fx-font-family: FreesiaUPC;
+    -fx-font-family: Leelawadee;
     -fx-font-color : #413B3B;
 }
 
