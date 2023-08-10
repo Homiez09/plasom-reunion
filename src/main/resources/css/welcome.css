@@ -1,13 +1,13 @@
 Text {
-    -fx-font-family: FreesiaUPC;
+    -fx-font-family: Leelawadee;
 }
 
 .h1 {
-    -fx-font-size: 69;
+    -fx-font-size: 45;
 }
 
 .h3 {
-    -fx-font-size: 25;
+    -fx-font-size: 19;
 }
 
 .bold700 {
@@ -49,13 +49,13 @@ Text {
 }
 
 .btn {
-    -fx-font-family: FreesiaUPC;
+    -fx-font-family: Leelawadee;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-alignment: center;
     -fx-border-width: 2;
     -fx-border-color : white;
-    -fx-font-size: 40;
+    -fx-font-size: 20;
     -fx-font-weight: 900;
     -fx-border-style: solid;
 }
