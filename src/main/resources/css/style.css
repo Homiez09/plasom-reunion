@@ -1,0 +1,70 @@
+/* for background */
+.signin-signup-background1{
+    -fx-background-color:  #FEF4E0;
+}
+
+.signin-signup-background2{
+    fx--background-color : linear-gradient(#F08A4E 50%, #FDA83A 100%);
+}
+
+.signin-signup-border {
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: FEF4E0;
+    -fx-background-color: rgba(255, 255, 255, 0.20);
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 4, 0, 0, 0.7);
+}
+
+
+.upcoming-border {
+    -fx-border-radius: 127;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0.1, 0, 0.1), 4, 0.1, 1, 2);
+}
+
+
+/* field */
+.signin-signup-field {
+    -fx-background-radius: 23;
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #413B3B;
+    -fx-border-width: 1;
+    -fx-border-radius: 23;
+    -fx-font-family: FreesiaUPC;
+    -fx-font-size: 25;
+
+}
+
+/* button */
+.orange-button:hover{
+    -fx-background-color : linear-gradient(to left,  #FFC75A 5.37%, #FFAC60 52.40%, #F7973E 91.98%);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
+}
+
+.orange-button{
+    -fx-background-color : linear-gradient(to left, #FF9839 20.10%, #FF922E 53.96%, #F97800 91.98%);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
+}
+
+.text-orange-button{
+    -fx-font-family: FreesiaUPC;
+    -fx-font-size: 27;
+    -fx-font-weight: 700;
+}
+
+.arrow-button {
+    -fx-font-size: 60;
+    -fx-font-family: FreesiaUPC;
+    -fx-font-weight: 700;
+    -fx-background-color: transparent;
+}
+
+.arrow-circle-button {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 3);
+}
+
+.arrow-circle-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 10), 10, 0, 0, 5); /* เปลี่ยนค่าของเอฟเฟค */
+}
