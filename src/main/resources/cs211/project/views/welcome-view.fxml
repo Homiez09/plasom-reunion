@@ -24,7 +24,7 @@
             <Image url="@../../../images/logo_orange.png" />
          </image></ImageView>
       </Pane>
-      <Button layoutX="188.0" layoutY="514.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="287.0" text="Sign in" textFill="#403737">
+      <Button layoutX="188.0" layoutY="514.0" mnemonicParsing="false" onAction="#onSignInButtonClick" prefHeight="90.0" prefWidth="287.0" text="Sign in" textFill="#403737">
       <styleClass>
          <String fx:value="btn-primary" />
          <String fx:value="btn" />
