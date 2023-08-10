@@ -124,4 +124,157 @@
 }
 
 
+
 /* for login page */
+
+Text, Label {
+    -fx-font-family: FreesiaUPC;
+}
+
+.background-develop-profile {
+    -fx-background-color: linear-gradient(#FF7217, #FAA929, #FA8729);
+}
+
+.h1 {
+    -fx-font-size: 69;
+}
+
+.h3 {
+    -fx-font-size: 25;
+}
+
+.bold700 {
+    -fx-font-weight: 700;
+}
+
+.card {
+    -fx-background-color: #F9F6F7;
+    -fx-background-radius: 0 0 21 21;
+    -fx-border-radius: 0 0 21 21;
+    -fx-content-display: inline-block;
+}
+
+.card-image-preview {
+    -fx-fit-to-width: true;
+}
+
+.card-description-background {
+    -fx-background-color: #F9F6F7;
+    -fx-background-radius: 0 0 21 21;
+}
+
+.card-description-header {
+    -fx-font-size: 29;
+    -fx-fill: linear-gradient(#FF780C 0%, #FF8806 52.60%, #F90 98.96%);
+    -fx-font-weight: 700;
+}
+
+.card-description-body {
+    -fx-font-size: 24;
+    -fx-fill: #494949;
+}
+
+.container-card {
+    -fx-spacing: 30;
+    -fx-alignment: center;
+}
+
+.container-vbox {
+    -fx-alignment: center;
+    -fx-spacing: 50;
+}
+
+.text-gray-linear-gradient {
+    -fx-fill: linear-gradient(#353535, #494949);
+}
+
+.Nav {
+    -fx-background-color: #FF9900;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 2, 0, 0, 0);
+    -fx-background-radius: 0 0 10 10;
+}
+
+.Nav > .search-box {
+    -fx-padding: 0 0 0 37;
+    -fx-font-family: FreesiaUPC;
+    -fx-font-size: 25;
+    -fx-background-radius: 30;
+    -fx-focus-traversable: false;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 2, 0, 0, 0);
+}
+
+.Nav > .profile-menu {
+    -fx-effect: dropshadow(three-pass-box, #428a2e, 10, 0, 0, 0);
+}
+
+.Nav > .container {
+    -fx-spacing: 10;
+}
+
+.Nav > .container > .items {
+    -fx-padding: 0 2 0 2;
+    -fx-font-size: 30;
+    -fx-font-weight: 700;
+    -fx-font-family: FreesiaUPC;
+    -fx-background-color: transparent;
+}
+
+.toggle-menu {
+    -fx-background-radius: 0 0 10 10;
+    -fx-background-color: #F5F3EE;
+}
+
+.toggle-menu > VBox {
+    -fx-border-width: 0.6;
+    -fx-border-style: solid;
+    -fx-border-radius: 0 0 10 10;
+    -fx-border-color: #494949;
+}
+
+.toggle-menu > VBox > .items {
+    -fx-padding: 12 0 12 0;
+    -fx-background-color: transparent;
+    -fx-border-color: #494949;
+    -fx-font-family: FreesiaUPC;
+    -fx-font-size: 25;
+    -fx-font-weight: 700;
+    -fx-border-width: 0 0 0.6 0;
+    -fx-border-style: solid;
+    -fx-text-fill: #413b3b;
+}
+
+.toggle-menu > VBox > .items:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);
+}
+
+.toggle-menu > VBox > .text-primary {
+    -fx-text-fill: #413b3b;
+}
+
+.toggle-menu > VBox > .text-danger {
+    -fx-text-fill: #c22f2f;
+}
+
+.button-setting{
+        -fx-background-color: transparent;
+        -fx-font-size: 24;
+        -fx-font-family: Leelawadee;
+
+}
+
+.button-setting:hover{
+        -fx-background-color: #FFE4B8;
+        -fx-background-radius: 13;
+
+}
+
+.bgPane{
+    -fx-background-radius: 15;
+    -fx-background-color: #FFFFFF;
+}
+
+.toggle-button{
+        -fx-background-color: transparent;
+        -fx-font-size: 12;
+        -fx-font-family: Leelawadee;
+}
