@@ -1,7 +1,4 @@
-.bgPane{
-    -fx-background-radius: 15;
-    -fx-background-color: #FFFFFF;
-}
+
 .bgAchorPane{
     -fx-background-color:  #F9F6F7CC;
 }
@@ -13,4 +10,12 @@
 .fontText{
     -fx-font-family: Leelawadee;
 
+}
+
+.myButton {
+  -fx-background-color:transparent;
+}
+
+.myButton:hover {
+  -fx-background-color:#dae7f3;
 }

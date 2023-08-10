@@ -1,16 +1,21 @@
 package cs211.project.controllers;
 
 import cs211.project.services.FXRouter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 public class SettingPageController {
     @FXML
     AnchorPane navbarAnchorPane;
+    @FXML
+    Pane mainPane,loginsercurityPane,interfacePane;
+
     private void loadTopBarComponent() {
         FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));
         try {
@@ -21,28 +26,29 @@ public class SettingPageController {
         }
     }
 
-
-
     @FXML
     public void initialize(){
         loadTopBarComponent();
 
     }
 
-
-
-
-    public void onMyEventClicked(MouseEvent mouseEvent) {
-
+    private void ShowPaneInterface(){
+        mainPane.setVisible(false);
+        loginsercurityPane.setVisible(false);
+        interfacePane.setVisible(true);
+    }
+    private void ShowPaneLogin(){
+        mainPane.setVisible(false);
+        interfacePane.setVisible(false);
+        loginsercurityPane.setVisible(true);
     }
 
-    public void onHomeClicked(MouseEvent mouseEvent) {
 
+    public void onInterfaceButton(ActionEvent actionEvent) {
+        ShowPaneInterface();
     }
 
-    public void onLoginSecurityClicked(MouseEvent mouseEvent) {
-    }
-
-    public void onInterfaceClick(MouseEvent mouseEvent) {
+    public void onLoginButton(ActionEvent actionEvent) {
+        ShowPaneLogin();
     }
 }

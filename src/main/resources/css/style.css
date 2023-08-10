@@ -227,3 +227,27 @@ Text, Label {
 .toggle-menu > VBox > .text-danger {
     -fx-text-fill: #c22f2f;
 }
+
+.button-setting{
+        -fx-background-color: transparent;
+        -fx-font-size: 24;
+        -fx-font-family: Leelawadee;
+
+}
+
+.button-setting:hover{
+        -fx-background-color: #FFE4B8;
+        -fx-background-radius: 13;
+
+}
+
+.bgPane{
+    -fx-background-radius: 15;
+    -fx-background-color: #FFFFFF;
+}
+
+.toggle-button{
+        -fx-background-color: transparent;
+        -fx-font-size: 12;
+        -fx-font-family: Leelawadee;
+}
