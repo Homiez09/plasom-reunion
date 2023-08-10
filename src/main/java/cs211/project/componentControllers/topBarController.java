@@ -2,12 +2,14 @@ package cs211.project.componentControllers;
 
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
 public class topBarController {
+    @FXML Button backButton;
     @FXML private void initialize() {
-        System.out.println("Top Bar Controller Initialized");
+        System.out.println(backButton.getProperties());
     }
 
     @FXML protected void onBackButtonClick() {
