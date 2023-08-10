@@ -227,3 +227,16 @@ Text, Label {
 .toggle-menu > VBox > .text-danger {
     -fx-text-fill: #c22f2f;
 }
+/* components */
+
+.top-bar{
+    -fx-background-color: transparent;
+    -fx-font-size: 26;
+    -fx-font-family: FreesiaUPC;
+    -fx-font-color : #413B3B;
+}
+
+
+.black-color{
+    -fx-font-color: white;
+}
