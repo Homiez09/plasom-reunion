@@ -12,7 +12,7 @@ public class HelloApplication extends Application {
         configRoute();
 
         FXRouter.bind(this, stage, "CS211 661 Project");
-        FXRouter.goTo("welcome");
+        FXRouter.goTo("sign-up");
     }
 
     private static void configRoute() {
@@ -21,6 +21,7 @@ public class HelloApplication extends Application {
         FXRouter.when("welcome", resourcesPath+ "welcome-view.fxml");
         FXRouter.when("dev-profile", resourcesPath+ "develop-profile-view.fxml");
         FXRouter.when("sign-in", resourcesPath + "sign-in.fxml");
+        FXRouter.when("sign-up", resourcesPath + "sign-up.fxml");
 
     }
 
