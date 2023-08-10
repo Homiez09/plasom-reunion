@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="signin-signup-background1" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.SignInController">
+   <children>
+      <ImageView fx:id="signBackgroundImageView" fitHeight="768.0" fitWidth="616.0" />
+      <AnchorPane layoutX="66.0" layoutY="98.0" prefHeight="590.0" prefWidth="487.0" styleClass="signin-signup-border" />
+      <BorderPane fx:id="eventListImageView" prefHeight="768.0" prefWidth="610.0">
+         <top>
+            <Label prefHeight="213.0" prefWidth="186.0" text="SIGN IN" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="FreesiaUPC Bold" size="79.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="-20.0" top="2.0" />
+               </BorderPane.margin>
+               <textFill>
+                  <LinearGradient endX="0.957345971563981" endY="0.014218009478673077" startX="0.4312796208530806" startY="0.5023696682464455">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.2763157784938812" green="0.24049708247184753" blue="0.24049708247184753" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.3199999928474426" green="0.27504763007164" blue="0.23999999463558197" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <padding>
+                  <Insets top="120.0" />
+               </padding>
+            </Label>
+         </top>
+         <center>
+            <Circle fill="#ffffff00" radius="80.0" stroke="#403a3a" strokeType="INSIDE" BorderPane.alignment="TOP_CENTER">
+               <BorderPane.margin>
+                  <Insets top="15.0" />
+               </BorderPane.margin>
+            </Circle>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="391.0" prefWidth="588.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane layoutX="123.0" layoutY="26.0" prefHeight="364.0" prefWidth="376.0">
+                     <top>
+                        <TextField fx:id="usernameTextField" prefHeight="46.0" prefWidth="383.0" promptText="Username" styleClass="signin-signup-field" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </TextField>
+                     </top>
+                     <bottom>
+                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="166.0" text="LOG IN" wrapText="true" BorderPane.alignment="TOP_CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="165.0" />
+                           </BorderPane.margin>
+                           <font>
+                              <Font name="FreesiaUPC" size="28.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="orange-button" />
+                              <String fx:value="text-orange-button" />
+                           </styleClass>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="0.6587677725118484" startY="0.20853080568720378">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.9607843160629272" green="0.9529411792755127" blue="0.929411768913269" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Button>
+                     </bottom>
+                     <center>
+                        <PasswordField fx:id="passwordField" onKeyReleased="#onKeyHidePassword" prefHeight="46.0" prefWidth="376.0" promptText="Password" styleClass="signin-signup-field" BorderPane.alignment="TOP_CENTER">
+                           <BorderPane.margin>
+                              <Insets top="28.0" />
+                           </BorderPane.margin>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </PasswordField>
+                     </center>
+                  </BorderPane>
+                  <ImageView fx:id="visiblePasswordImageView" fitHeight="24.0" fitWidth="24.0" layoutX="505.0" layoutY="109.0" onMouseClicked="#onVisiblePasswordClick" pickOnBounds="true" preserveRatio="true" />
+                  <TextField fx:id="showPasswordTextField" layoutX="123.0" layoutY="100.0" onKeyReleased="#onKeyShowPassword" prefHeight="46.0" prefWidth="376.0" promptText="Password" styleClass="signin-signup-field">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+      <Circle fill="#bdbdbd31" layoutX="305.0" layoutY="289.0" radius="70.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <AnchorPane layoutX="155.0" layoutY="652.0" prefHeight="23.0" prefWidth="375.0">
+         <children>
+            <HBox layoutX="47.0" layoutY="-38.0" prefHeight="24.0" prefWidth="339.0">
+               <children>
+                  <Label lineSpacing="2.0" prefHeight="18.0" prefWidth="154.0" styleClass="spacing1" text="Dont' have an account ?" textFill="#f78123">
+                     <font>
+                        <Font name="FreesiaUPC" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label lineSpacing="2.0" prefHeight="18.0" prefWidth="175.0" styleClass="spacing1" text="Sign up" textFill="#413b3b">
+                     <font>
+                        <Font name="FreesiaUPC" size="19.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="25.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="772.0" layoutX="616.0" layoutY="-4.0" stroke="#17171700" strokeType="INSIDE" width="536.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.5023696682464456" startX="1.0" startY="0.1753554502369668">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9411764740943909" green="0.5411764979362488" blue="0.30588236451148987" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9921568632125854" green="0.658823549747467" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fx:id="upComingEventsBackgroundImageView" fitHeight="771.0" fitWidth="537.0" layoutX="615.0" layoutY="-3.0" />
+      <VBox layoutX="616.0" prefHeight="768.0" prefWidth="536.0">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="182.0" prefWidth="381.0" text="upcoming events" textAlignment="CENTER">
+               <font>
+                  <Font name="FreesiaUPC Bold" size="75.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="100.0" top="12.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="25.0" />
+               </padding>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="0.4360189573459715" startX="0.18009478672985782" startY="0.43601895734597157">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.9607843160629272" green="0.9529411792755127" blue="0.929411768913269" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Pane prefHeight="514.0" prefWidth="529.0">
+               <children>
+                  <ImageView fx:id="upComingEventsImageView" fitHeight="478.0" fitWidth="320.0" layoutX="115.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" styleClass="custom-box" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="224.0" layoutX="115.0" layoutY="267.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="320.0">
+                     <fill>
+                        <LinearGradient endX="0.6445497630331753" endY="0.16587677725118488" startX="0.5260663507109005" startY="0.8246445497630331">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9921568632125854" green="0.658823549747467" blue="0.22745098173618317" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.9921568632125854" green="0.658823549747467" blue="0.22745098173618317" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                     <styleClass>
+                        <String fx:value="upcoming-border" />
+                        <String fx:value="custom-box" />
+                     </styleClass>
+                  </Rectangle>
+                  <Label layoutX="155.0" layoutY="287.0" prefHeight="0.0" prefWidth="207.0" text="EVENT NAME" textFill="#f5f3ed">
+                     <font>
+                        <Font name="FreesiaUPC Bold" size="35.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="155.0" layoutY="326.0" prefHeight="0.0" prefWidth="207.0" text="PLACE" textFill="#f5f3ed">
+                     <font>
+                        <Font name="FreesiaUPC Bold" size="35.0" />
+                     </font>
+                  </Label>
+                  <Circle fx:id="nextCircle" fill="#fff5e5d6" layoutX="445.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button" />
+                  <Label layoutX="155.0" layoutY="425.0" prefHeight="0.0" prefWidth="207.0" text="22  Aug,2023" textFill="#e8e8e8">
+                     <font>
+                        <Font name="FreesiaUPC" size="20.0" />
+                     </font>
+                  </Label>
+                  <Circle fx:id="backCircle" fill="#fff4e3d7" layoutX="104.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button">
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Circle>
+                  <Button fx:id="backButton" layoutX="50.0" layoutY="152.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="52.0" prefWidth="102.0" text="&lt;" textFill="#00000099">
+                     <font>
+                        <Font name="Agency FB" size="12.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="arrow-button" />
+                        <String fx:value="arrow-circle-button" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="nextButton" layoutX="391.0" layoutY="152.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="43.0" prefWidth="109.0" text="&gt;" textFill="#00000099">
+                     <styleClass>
+                        <String fx:value="arrow-button" />
+                        <String fx:value="arrow-circle-button" />
+                     </styleClass>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Pane>
+         </children>
+      </VBox>
+      <Label layoutX="30.0" layoutY="20.0" lineSpacing="2.0" prefHeight="23.0" prefWidth="58.0" styleClass="spacing1" text="back " textFill="#413b3b">
+         <font>
+            <Font name="FreesiaUPC" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="22.0" lineSpacing="2.0" prefHeight="17.0" prefWidth="11.0" styleClass="spacing1" text="&lt;" textFill="#413b3b">
+         <font>
+            <Font name="FreesiaUPC" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="20.0" lineSpacing="2.0" prefHeight="23.0" prefWidth="50.0" styleClass="spacing1" text="sign in" textFill="#413b3b">
+         <font>
+            <Font name="FreesiaUPC" size="26.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="passwordIconView" fitHeight="24.0" fitWidth="24.0" layoutX="135.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="profileImageView" fitHeight="140.0" fitWidth="142.0" layoutX="235.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="usernameIconView" fitHeight="24.0" fitWidth="24.0" layoutX="135.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
