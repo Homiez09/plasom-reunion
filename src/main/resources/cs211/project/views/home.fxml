@@ -83,78 +83,9 @@
                                 </HBox>
                                 <HBox prefHeight="450.0" spacing="20.0">
                                     <children>
-                                        <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="300.0" style="-fx-border-radius: 20px; -fx-border-color: #000; -fx-background-color: F9F6F7;">
-                                            <children>
-                                                <ImageView fitHeight="270.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
-                                                    <VBox.margin>
-                                                        <Insets left="20.0" right="20.0" top="20.0" />
-                                                    </VBox.margin>
-                                                    <image>
-                                                        <Image url="@../../../images/home/event2.png" />
-                                                    </image>
-                                                </ImageView>
-                                                <Separator prefHeight="20.0" prefWidth="200.0" />
-                                                <Label text="eventNameLabel">
-                                                    <font>
-                                                        <Font name="Leelawadee UI Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
-                                                <Label text="eventDetail">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                 </VBox>
-                                        <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="300.0" style="-fx-border-radius: 20px; -fx-border-color: #000; -fx-background-color: F9F6F7;">
-                                            <children>
-                                                <ImageView fitHeight="270.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
-                                                    <VBox.margin>
-                                                        <Insets left="20.0" right="20.0" top="20.0" />
-                                                    </VBox.margin>
-                                                    <image>
-                                                        <Image url="@../../../images/home/event2.png" />
-                                                    </image>
-                                                </ImageView>
-                                                <Separator prefHeight="20.0" prefWidth="200.0" />
-                                                <Label text="eventNameLabel">
-                                                    <font>
-                                                        <Font name="Leelawadee UI Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
-                                                <Label text="eventDetail">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </VBox>
-                                        <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="300.0" style="-fx-border-radius: 20px; -fx-border-color: #000; -fx-background-color: F9F6F7;">
-                                            <children>
-                                                <ImageView fitHeight="270.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
-                                                    <VBox.margin>
-                                                        <Insets left="20.0" right="20.0" top="20.0" />
-                                                    </VBox.margin>
-                                                    <image>
-                                                        <Image url="@../../../images/home/event2.png" />
-                                                    </image>
-                                                </ImageView>
-                                                <Separator prefHeight="20.0" prefWidth="200.0" />
-                                                <Label text="eventNameLabel">
-                                                    <font>
-                                                        <Font name="Leelawadee UI Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
-                                                <Label text="eventDetail">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </VBox>
+                                 <AnchorPane fx:id="upEventTileAnchorPane1" prefHeight="450.0" prefWidth="300.0" />
+                                 <AnchorPane fx:id="upEventTileAnchorPane2" prefHeight="450.0" prefWidth="300.0" />
+                                 <AnchorPane fx:id="upEventTileAnchorPane3" prefHeight="450.0" prefWidth="300.0" />
                                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
                                                 <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
@@ -186,78 +117,9 @@
                                 </HBox>
                                 <HBox prefHeight="450.0" spacing="20.0">
                                     <children>
-                                        <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="300.0" style="-fx-border-radius: 20px; -fx-border-color: #000; -fx-background-color: F9F6F7;">
-                                            <children>
-                                                <ImageView fitHeight="270.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
-                                                    <VBox.margin>
-                                                        <Insets left="20.0" right="20.0" top="20.0" />
-                                                    </VBox.margin>
-                                                    <image>
-                                                        <Image url="@../../../images/home/event2.png" />
-                                                    </image>
-                                                </ImageView>
-                                                <Separator prefHeight="20.0" prefWidth="200.0" />
-                                                <Label text="eventNameLabel">
-                                                    <font>
-                                                        <Font name="Leelawadee UI Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
-                                                <Label text="eventDetail">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </VBox>
-                                        <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="300.0" style="-fx-border-radius: 20px; -fx-border-color: #000; -fx-background-color: F9F6F7;">
-                                            <children>
-                                                <ImageView fitHeight="270.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
-                                                    <VBox.margin>
-                                                        <Insets left="20.0" right="20.0" top="20.0" />
-                                                    </VBox.margin>
-                                                    <image>
-                                                        <Image url="@../../../images/home/event2.png" />
-                                                    </image>
-                                                </ImageView>
-                                                <Separator prefHeight="20.0" prefWidth="200.0" />
-                                                <Label text="eventNameLabel">
-                                                    <font>
-                                                        <Font name="Leelawadee UI Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
-                                                <Label text="eventDetail">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </VBox>
-                                        <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="300.0" style="-fx-border-radius: 20px; -fx-border-color: #000; -fx-background-color: F9F6F7;">
-                                            <children>
-                                                <ImageView fitHeight="270.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
-                                                    <VBox.margin>
-                                                        <Insets left="20.0" right="20.0" top="20.0" />
-                                                    </VBox.margin>
-                                                    <image>
-                                                        <Image url="@../../../images/home/event2.png" />
-                                                    </image>
-                                                </ImageView>
-                                                <Separator prefHeight="20.0" prefWidth="200.0" />
-                                                <Label text="eventNameLabel">
-                                                    <font>
-                                                        <Font name="Leelawadee UI Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
-                                                <Label text="eventDetail">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </VBox>
+                                 <AnchorPane fx:id="newEventTileAnchorPane1" prefHeight="450.0" prefWidth="300.0" />
+                                 <AnchorPane fx:id="newEventTileAnchorPane2" prefHeight="450.0" prefWidth="300.0" />
+                                 <AnchorPane fx:id="newEventTileAnchorPane3" prefHeight="450.0" prefWidth="300.0" />
                                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
                                                 <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
