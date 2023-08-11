@@ -14,9 +14,9 @@
 
 <VBox alignment="CENTER" fillWidth="false" focusTraversable="true" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.SettingPageController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <Pane fx:id="loginsercurityPane" accessibleRole="TOGGLE_BUTTON" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css">
+            <Pane fx:id="loginsercurityPane" accessibleRole="TOGGLE_BUTTON" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false">
                <children>
                   <Line endX="722.0" layoutX="76.5" layoutY="262.5" style="-fx-fill: #BFBFBF;" />
                   <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Login &amp; Security" textAlignment="CENTER">
@@ -64,9 +64,27 @@
                      </children>
                   </Pane>
                </children></Pane>
-            <Pane fx:id="interfacePane" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" visible="false">
+            <Pane fx:id="interfacePane" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane">
                <children>
                   <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Interface" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="helpPane" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane">
+               <children>
+                  <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Help &amp; Support" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="aboutPane" layoutX="313.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane">
+               <children>
+                  <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="About" textAlignment="CENTER">
                      <font>
                         <Font size="35.0" />
                      </font>
@@ -87,11 +105,15 @@
                         </ImageView>
                      </graphic>
                   </Label>
-                  <Line endX="218.25" layoutX="8.25" layoutY="155.25" />
                   <Line endX="218.25" layoutX="8.25" layoutY="76.5" />
-                  <Line endX="218.25" layoutX="7.0" layoutY="229.0" />
                   <Button graphicTextGap="0.0" layoutX="12.0" layoutY="84.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Login &amp; Security" />
+                  <Line endX="218.25" layoutX="8.25" layoutY="155.25" />
                   <Button layoutX="12.0" layoutY="160.0" mnemonicParsing="false" onAction="#onInterfaceButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Interface" />
+                  <Line endX="218.25" layoutX="7.0" layoutY="229.0" />
+                  <Button layoutX="12.0" layoutY="235.0" mnemonicParsing="false" onAction="#onHelpSupportButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Help &amp; Support" />
+                  <Line endX="218.25" layoutX="5.0" layoutY="305.0" />
+                  <Button layoutX="12.0" layoutY="312.0" mnemonicParsing="false" onAction="#onAboutButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="About" />
+                  <Line endX="218.25" layoutX="6.0" layoutY="383.0" />
                </children>
             </Pane>
             <Pane fx:id="mainPane" layoutX="307.0" layoutY="124.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false" />

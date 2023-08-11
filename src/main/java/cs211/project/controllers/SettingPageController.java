@@ -17,7 +17,7 @@ public class SettingPageController {
     @FXML
     AnchorPane navbarAnchorPane;
     @FXML
-    Pane mainPane,loginsercurityPane,interfacePane;
+    Pane mainPane,loginsercurityPane,interfacePane,helpPane,aboutPane;
     @FXML
     ImageView offImageView,onImageView,switchImageView;
     @FXML
@@ -43,26 +43,40 @@ public class SettingPageController {
 
     }
 
+    // login page
+    public void onLoginButton(ActionEvent actionEvent) {
+        mainPane.setVisible(false);
+        loginsercurityPane.setVisible(true);
+        interfacePane.setVisible(false);
+        helpPane.setVisible(false);
+        aboutPane.setVisible(false);
+    }
+
     // interface page
     public void onInterfaceButton(ActionEvent actionEvent) {
-        ShowPaneInterface();
-    }
-    private void ShowPaneInterface(){
         mainPane.setVisible(false);
         loginsercurityPane.setVisible(false);
         interfacePane.setVisible(true);
+        helpPane.setVisible(false);
+        aboutPane.setVisible(false);
     }
 
-    // login page
-    public void onLoginButton(ActionEvent actionEvent) {
-        ShowPaneLogin();
-    }
-    private void ShowPaneLogin(){
+    public void onHelpSupportButton(ActionEvent actionEvent) {
         mainPane.setVisible(false);
+        loginsercurityPane.setVisible(false);
         interfacePane.setVisible(false);
-        loginsercurityPane.setVisible(true);
+        helpPane.setVisible(true);
+        aboutPane.setVisible(false);
     }
 
+
+    public void onAboutButton(ActionEvent actionEvent) {
+        mainPane.setVisible(false);
+        loginsercurityPane.setVisible(false);
+        interfacePane.setVisible(false);
+        helpPane.setVisible(false);
+        aboutPane.setVisible(true);
+    }
 
     // toggle switch
     public void onToggleButton(ActionEvent actionEvent) {
@@ -83,4 +97,6 @@ public class SettingPageController {
         onImageView.setVisible(false);
         switchImageView.setLayoutX(0);
     }
+
+
 }
