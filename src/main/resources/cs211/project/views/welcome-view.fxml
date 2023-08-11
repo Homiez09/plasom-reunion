@@ -5,7 +5,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.RadialGradient?>
@@ -22,16 +21,18 @@
     <Pane layoutX="426.0" layoutY="62.0" prefHeight="300.0" prefWidth="300.0" styleClass="profile-border">
             <ImageView fx:id="profileImageView" fitHeight="242.0" fitWidth="238.0" layoutX="38.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
          <image>
-            <Image url="@../../../images/LOGO.png" />
+            <Image url="@../../../images/logo_orange.png" />
          </image></ImageView>
       </Pane>
-      <Button layoutX="188.0" layoutY="514.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="287.0" text="Sign in" textFill="#403737">
+      <Button layoutX="188.0" layoutY="514.0" mnemonicParsing="false" onAction="#onSignInButtonClick" prefHeight="90.0" prefWidth="287.0" text="Sign in" textFill="#403737">
       <styleClass>
          <String fx:value="btn-primary" />
          <String fx:value="btn" />
          <String fx:value="btn-shadow" />
       </styleClass></Button>
-      <Button layoutX="676.0" layoutY="514.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="287.0" text="Sign up" textFill="#483c3c">
+
+      <Button onAction="#onSignUpButtonClick" layoutX="676.0" layoutY="514.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="287.0" text="Sign up" textFill="#483c3c">
+
          <font>
             <Font name="FreesiaUPC" size="24.0" />
          </font>
@@ -67,23 +68,5 @@
          <String fx:value="h3" />
          <String fx:value="text-color-white" />
       </styleClass></Text>
-   <HBox alignment="TOP_RIGHT" fillHeight="false" layoutX="820.0" layoutY="1.0" opacity="0.5" prefHeight="7.0" prefWidth="314.0" spacing="10.0" styleClass="menu">
-      <children>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="instruction">
-            <font>
-               <Font size="64.0" />
-            </font>
-         </Text>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="current event">
-            <font>
-               <Font size="64.0" />
-            </font>
-         </Text>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="developer profile">
-            <font>
-               <Font size="64.0" />
-            </font>
-         </Text>
-      </children>
-   </HBox>
+   <AnchorPane fx:id="topBarAnchorPane" prefHeight="86.0" prefWidth="1152.0" />
 </AnchorPane>
