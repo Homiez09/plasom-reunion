@@ -7,13 +7,9 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 public class topBarController {
-    @FXML Button backButton;
-    @FXML private void initialize() {
-        System.out.println(backButton.getProperties());
-    }
+    @FXML private void initialize() {}
 
     @FXML protected void onBackButtonClick() {
-        System.out.println("Back Clicked");
         try {
             FXRouter.goTo("welcome");
         } catch (IOException e) {
