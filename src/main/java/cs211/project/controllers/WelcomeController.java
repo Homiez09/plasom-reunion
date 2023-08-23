@@ -19,6 +19,7 @@ public class WelcomeController {
         FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/topbar.fxml"));
         try {
             AnchorPane topBarComponent = topBarComponentLoader.load();
+            topBarComponent.getChildren().get(0).setVisible(false);
             topBarAnchorPane.getChildren().add(topBarComponent);
         } catch (IOException e) {
             throw new RuntimeException(e);
