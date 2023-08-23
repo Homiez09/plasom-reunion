@@ -13,7 +13,6 @@ public class topBarController {
     }
 
     @FXML protected void onBackButtonClick() {
-        System.out.println("Back Clicked");
         try {
             FXRouter.goTo("welcome");
         } catch (IOException e) {
