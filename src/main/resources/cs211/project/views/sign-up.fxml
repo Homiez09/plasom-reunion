@@ -352,6 +352,8 @@
          </font>
          <styleClass>
             <String fx:value="spacing1" />
+            <String fx:value="next-page" />
+            <String fx:value="font" />
             <String fx:value="text-xl" />
          </styleClass>
       </Label>
