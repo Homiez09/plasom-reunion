@@ -1,6 +1,7 @@
 package cs211.project.models;
 
-import java.util.UUID;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Account {
     private String userid;
@@ -9,7 +10,6 @@ public class Account {
     private String password;
     private String role;
     private String status;
-    private String lastlogin;
     private String registerDate;
     private String imagePath;
 
@@ -22,11 +22,41 @@ public class Account {
         this.role = role;
         this.userid = generateRandomUserID();
     }
-    public static String generateRandomUserID() {
-        UUID uuid = UUID.randomUUID();
-        String randomUserID = uuid.toString();
-        return randomUserID;
+    public String generateRandomUserID() {
+        final int MAX_ID_LENGTH = 16;
+        StringBuilder sb = new StringBuilder();
+
+        // ดึงวันปัจจุบัน
+        LocalDate currentDate = LocalDate.now();
+
+        // รูปแบบวันที่ในรูป "yyMMdd"
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyMMdd"));
+
+        // ใช้ username และวันที่ปัจจุบันในการสร้าง User ID
+        StringBuilder numericText = new StringBuilder();
+        for (char c : username.toCharArray()) {
+            int numericValue = Character.getNumericValue(c);
+            if (numericValue != -1) {  // ถ้าไม่ใช่ตัวอักษรไม่แปลง
+                numericText.append(numericValue);
+            } else {
+                numericText.append(c);
+            }
+        }
+
+        // ความยาวของ User ID ห้ามเกิน 10 ตัว
+        int totalLength = formattedDate.length() + numericText.length();
+        if (totalLength > MAX_ID_LENGTH) {
+            int excessLength = totalLength - MAX_ID_LENGTH;
+            numericText.delete(numericText.length() - excessLength, numericText.length());
+        }
+
+        sb.append(formattedDate);
+        sb.append(numericText);
+
+        return sb.toString();
+
     }
+
     public String getUserid() {
         return userid;
     }
@@ -49,10 +79,6 @@ public class Account {
 
     public String getStatus() {
         return status;
-    }
-
-    public String getLastlogin() {
-        return lastlogin;
     }
 
     public String getRegisterDate() {
