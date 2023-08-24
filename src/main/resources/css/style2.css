@@ -168,10 +168,6 @@ Text, Label {
     -fx-padding: 0 0 0 20;
 }
 
-.admin-sidebar-bg > VBox > Button:hover {
-    -fx-background-color: #FFE4B8;
-}
-
 .btn {
     -fx-font-family: Leelawadee;
     -fx-font-size: 19;
