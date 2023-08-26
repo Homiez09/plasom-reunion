@@ -54,4 +54,8 @@ public class navbarController {
     @FXML protected void onWelcomeButtonClick() throws IOException {
         FXRouter.goTo("welcome");
     }
+
+    @FXML protected void onAdminButtonClick() throws IOException {
+        FXRouter.goTo("admin-dashboard");
+    }
 }
