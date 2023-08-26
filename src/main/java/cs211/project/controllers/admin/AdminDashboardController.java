@@ -1,19 +1,24 @@
 package cs211.project.controllers.admin;
 
+import cs211.project.models.UserFake;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AdminDashboardController {
     @FXML private TabPane mainTab;
     @FXML private Tab menu1Tab, menu2Tab;
     @FXML private Button menu1, menu2, menu3, menu4;
+    @FXML private TableView userTableView;
+
+    private ArrayList<UserFake> users = new ArrayList<>();
 
     @FXML private void initialize() {
+        showTable();
         ButtonSelectGraphic(1);
     }
 
@@ -45,7 +50,41 @@ public class AdminDashboardController {
         }
     }
 
-    void ButtonSelectGraphic(int page) {
+    void showTable() {
+        // todo : get data from datasource
+        TableColumn<UserFake, String> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        TableColumn<UserFake, String> usernameCol = new TableColumn<>("Username");
+        usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+        TableColumn<UserFake, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<UserFake, String> roleCol = new TableColumn<>("Role");
+        roleCol.setCellValueFactory(new PropertyValueFactory<>("role"));
+
+        TableColumn<UserFake, String> statusCol = new TableColumn<>("Status");
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        TableColumn<UserFake, String> lastLoginCol = new TableColumn<>("Last Login");
+        lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastLogin"));
+
+        userTableView.getColumns().clear();
+        userTableView.getItems().clear();
+
+        userTableView.getColumns().addAll(idCol, usernameCol, nameCol, roleCol, statusCol, lastLoginCol);
+
+        users.add(new UserFake("1", "admin", "User", "User", "Offline", "2020-01-01"));
+        users.add(new UserFake("2", "user", "User", "User", "Offline", "2020-01-01"));
+        users.add(new UserFake("3", "user2", "User2", "User", "Offline", "2020-01-01"));
+
+        userTableView.getItems().addAll(users);
+
+
+    }
+
+    void ButtonSelectGraphic(int page) { // Change button graphic when selected
         ResetSelectGraphic();
         switch(page) {
             case 1:
@@ -66,8 +105,7 @@ public class AdminDashboardController {
                 break;
         }
     }
-
-    void ResetSelectGraphic() {
+    void ResetSelectGraphic() { // Reset all button to default
         menu1.setStyle("-fx-background-color: transparent");
         menu2.setStyle("-fx-background-color: transparent");
         menu3.setStyle("-fx-background-color: transparent");
