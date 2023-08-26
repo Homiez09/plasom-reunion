@@ -337,21 +337,14 @@
             <String fx:value="text-xl" />
          </styleClass>
       </Label>
-      <Label layoutX="83.0" layoutY="23.0" lineSpacing="2.0" prefHeight="24.0" prefWidth="34.0" text="&lt;" textFill="#413b3b">
-         <font>
-            <Font name="FreesiaUPC" size="26.0" />
-         </font>
-         <styleClass>
-            <String fx:value="spacing1" />
-            <String fx:value="text-xl" />
-         </styleClass>
-      </Label>
       <Label layoutX="110.0" layoutY="20.0" lineSpacing="2.0" prefHeight="32.0" prefWidth="85.0" text="sign up" textFill="#413b3b">
          <font>
             <Font name="FreesiaUPC" size="26.0" />
          </font>
          <styleClass>
             <String fx:value="spacing1" />
+            <String fx:value="next-page" />
+            <String fx:value="font" />
             <String fx:value="text-xl" />
          </styleClass>
       </Label>
@@ -413,5 +406,14 @@
          </padding>
       </HBox>
       <ImageView fx:id="confirmPasswordIconView" fitHeight="24.0" fitWidth="24.0" layoutX="136.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="78.0" layoutY="20.0" lineSpacing="2.0" prefHeight="32.0" prefWidth="32.0" text="&lt;" textFill="#413b3b">
+         <font>
+            <Font name="FreesiaUPC" size="26.0" />
+         </font>
+         <styleClass>
+            <String fx:value="spacing1" />
+            <String fx:value="font" />
+         </styleClass>
+      </Label>
    </children>
 </AnchorPane>
