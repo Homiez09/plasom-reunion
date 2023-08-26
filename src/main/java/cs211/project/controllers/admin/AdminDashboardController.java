@@ -13,12 +13,11 @@ public class AdminDashboardController {
     @FXML private TabPane mainTab;
     @FXML private Tab menu1Tab, menu2Tab;
     @FXML private Button menu1, menu2, menu3, menu4;
-    @FXML private TableView userTableView;
-
-    private ArrayList<UserFake> users = new ArrayList<>();
+    @FXML private TableView userTableView, adminTableView;
 
     @FXML private void initialize() {
-        showTable();
+        showUserTable();
+        showAdminTable();
         ButtonSelectGraphic(1);
     }
 
@@ -50,8 +49,8 @@ public class AdminDashboardController {
         }
     }
 
-    void showTable() {
-        // todo : get data from datasource
+    // column
+    private void CreateTableColumn(TableView tableView) {
         TableColumn<UserFake, String> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 
@@ -70,17 +69,37 @@ public class AdminDashboardController {
         TableColumn<UserFake, String> lastLoginCol = new TableColumn<>("Last Login");
         lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastLogin"));
 
-        userTableView.getColumns().clear();
-        userTableView.getItems().clear();
+        tableView.getColumns().clear();
+        tableView.getColumns().addAll(idCol, usernameCol, nameCol, roleCol, statusCol, lastLoginCol);
+    }
 
-        userTableView.getColumns().addAll(idCol, usernameCol, nameCol, roleCol, statusCol, lastLoginCol);
+    private void CreateTableItem(TableView tableView, ArrayList<UserFake> users) {
+        tableView.getItems().clear();
+        tableView.getItems().addAll(users);
+    }
+    void showUserTable() {
+        // todo : get data from datasource
+        ArrayList<UserFake> users = new ArrayList<>();
 
         users.add(new UserFake("1", "admin", "User", "User", "Offline", "2020-01-01"));
-        users.add(new UserFake("2", "user", "User", "User", "Offline", "2020-01-01"));
+        users.add(new UserFake("2", "user", "User", "User", "Online", "2020-01-01"));
         users.add(new UserFake("3", "user2", "User2", "User", "Offline", "2020-01-01"));
+        users.add(new UserFake("4", "user3", "User3", "User", "Offline", "2020-01-01"));
 
-        userTableView.getItems().addAll(users);
+        CreateTableColumn(userTableView);
+        CreateTableItem(userTableView, users);
+    }
 
+    void showAdminTable() {
+        // todo : get data from datasource
+        ArrayList<UserFake> users = new ArrayList<>();
+
+        users.add(new UserFake("1", "admin", "User", "Admin", "Online", "2020-01-01"));
+        users.add(new UserFake("2", "user", "User", "Admin", "Offline", "2020-01-01"));
+        users.add(new UserFake("3", "user2", "User2", "Admin", "Offline", "2020-01-01"));
+
+        CreateTableColumn(adminTableView);
+        CreateTableItem(adminTableView, users);
 
     }
 
