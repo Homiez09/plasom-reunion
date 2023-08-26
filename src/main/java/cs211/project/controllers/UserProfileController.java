@@ -1,5 +1,6 @@
 package cs211.project.controllers;
 
+import cs211.project.services.LoadNavbarComponent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -28,7 +29,7 @@ public class UserProfileController {
     @FXML
     private void initialize() {
         loadImage();
-        loadNavbarComponent();
+        new LoadNavbarComponent(navbarAnchorPane);
         loadPasswordFieldAndButtonProfile();
         loadIconImageProfile();
     }
@@ -164,16 +165,6 @@ public class UserProfileController {
             fullNameTextField.getStyleClass().add("font");
             contactNumberTextField.getStyleClass().add("font");
             bioTextArea.getStyleClass().add("font");
-        }
-    }
-
-    private void loadNavbarComponent() {
-        try {
-            FXMLLoader navbarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));
-            AnchorPane navbarComponent = navbarComponentLoader.load();
-            navbarAnchorPane.getChildren().add(navbarComponent);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load navbar component", e);
         }
     }
 
