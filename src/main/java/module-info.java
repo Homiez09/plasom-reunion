@@ -14,4 +14,7 @@ module cs211.project.cs211661project {
 
     exports cs211.project.controllers.admin;
     opens cs211.project.controllers.admin to javafx.fxml;
+
+    exports cs211.project.models;
+    opens cs211.project.models to javafx.fxml;
 }
