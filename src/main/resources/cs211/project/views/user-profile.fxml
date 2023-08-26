@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.UserProfileController">
+   <children>
+      <AnchorPane layoutY="65.0" prefHeight="728.0" prefWidth="1152.0" styleClass="bgProfile1">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="537.0" layoutX="58.0" layoutY="117.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgProfile2" width="380.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="538.0" layoutX="458.0" layoutY="117.0" stroke="#ffffff00" strokeType="INSIDE" styleClass="bgProfile2" width="638.0" />
+            <Label layoutX="486.0" layoutY="46.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="164.0" text="Profile">
+               <styleClass>
+                  <String fx:value="text-5xl" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label layoutX="497.0" layoutY="129.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="137.0" text="Username :">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label layoutX="858.0" layoutY="129.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="206.0" text="ID :">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label layoutX="497.0" layoutY="174.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="137.0" text="Fullname">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label layoutX="497.0" layoutY="255.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="164.0" text="Contact number">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label layoutX="497.0" layoutY="345.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="164.0" text="Bio">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="usernameLabel" layoutX="619.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="137.0" text="PinkPPanther">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label layoutX="901.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="59.0" text="#">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <ImageView fx:id="iconProfileImageView" fitHeight="43.0" fitWidth="43.0" layoutX="68.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
+            <Circle fill="#ff9e22" layoutX="254.0" layoutY="241.0" radius="75.0" stroke="WHITE" strokeType="INSIDE" />
+            <Label fx:id="fullNameProfileLabel" alignment="CENTER" layoutX="77.0" layoutY="332.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="342.0" text="Phunyisa  Tanyapong">
+               <styleClass>
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+                  <String fx:value="text-2xl" />
+               </styleClass>
+            </Label>
+            <Label fx:id="usernameProfileLabel" alignment="CENTER" layoutX="86.0" layoutY="386.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="346.0" text="PinkPPanther">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="bioProfileLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="5.0" layoutX="99.0" layoutY="434.0" lineSpacing="1.0" prefHeight="134.0" prefWidth="298.0" text="A kiddo who uses Bootstrap and Laravel in web development. Currently playing around with design via Figma">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+               </styleClass>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9e22" height="30.0" layoutX="209.0" layoutY="581.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 10; -fx-arc-width: 10;" width="90.0" />
+            <Label alignment="CENTER" layoutX="223.0" layoutY="548.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="24.0" text="id: " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <ImageView fx:id="ellipseIconImageView" fitHeight="170.0" fitWidth="170.0" layoutX="213.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="frameIconImageView" fitHeight="64.0" fitWidth="387.0" layoutX="56.0" layoutY="591.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="profileIconImageView" fitHeight="142.0" fitWidth="142.0" layoutX="183.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="editButton" layoutX="905.0" layoutY="587.0" mnemonicParsing="false" onAction="#onEditProfileButtonClick" prefHeight="37.0" prefWidth="150.0" text="Edit Profile" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="text-lg" />
+                  <String fx:value="edit-profile-button" />
+               </styleClass>
+            </Button>
+            <TextField fx:id="fullNameTextField" layoutX="529.0" layoutY="224.0" prefHeight="37.0" prefWidth="358.0" promptText="Phunyisa Tanyapong">
+               <styleClass>
+                  <String fx:value="profile-text-field" />
+                  <String fx:value="font" />
+               </styleClass>
+            </TextField>
+            <TextField fx:id="contactNumberTextField" layoutX="530.0" layoutY="309.0" prefHeight="37.0" prefWidth="263.0" promptText="xxx xxx xxxx">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="profile-text-field" />
+               </styleClass>
+            </TextField>
+            <TextArea fx:id="bioTextArea" layoutX="528.0" layoutY="395.0" onKeyReleased="#onKeyBioCountText" prefHeight="150.0" prefWidth="526.0" promptText="A kiddo who uses Bootstrap and Laravel in web development. Currently playing around with design via Figma" styleClass="profile-text-area2" />
+            <Button fx:id="saveButton" layoutX="960.0" layoutY="585.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="40.0" prefWidth="95.0" text="Save" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="text-lg" />
+                  <String fx:value="edit-profile-button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="cancelButton" layoutX="848.0" layoutY="586.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="40.0" prefWidth="95.0" text="Cancel" textFill="#ff9e22">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="text-lg" />
+                  <String fx:value="cancel-profile-button" />
+               </styleClass>
+            </Button>
+            <Label fx:id="passwordLabel" layoutX="497.0" layoutY="541.0" lineSpacing="1.0" prefHeight="45.0" prefWidth="164.0" text="Password">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-bold" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <PasswordField fx:id="passwordField" layoutX="530.0" layoutY="587.0" onKeyReleased="#onKeyHidePassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxx">
+               <styleClass>
+                  <String fx:value="profile-text-field2" />
+                  <String fx:value="font" />
+               </styleClass>
+            </PasswordField>
+            <TextField fx:id="showPasswordTextField" layoutX="530.0" layoutY="587.0" onKeyReleased="#onKeyShowPassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxxxxxxxxx">
+               <styleClass>
+                  <String fx:value="profile-text-field2" />
+                  <String fx:value="font" />
+               </styleClass>
+            </TextField>
+            <ImageView fx:id="visiblePasswordImageView" fitHeight="20.0" fitWidth="24.0" layoutX="799.0" layoutY="596.0" onMouseClicked="#onVisiblePasswordClick" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="fullNameIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="539.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="contactIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="539.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="passwordIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="539.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageChangeView" fitHeight="30.0" fitWidth="30.0" layoutX="190.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" styleClass="image-change-effect" />
+            <Label alignment="CENTER" layoutX="220.0" layoutY="580.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="36.0" text="#" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="idLabel" layoutX="913.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="59.0" text="4931">
+               <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="idProfileLabel" alignment="CENTER" layoutX="237.0" layoutY="580.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="45.0" text="4931" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="maximumCountBioLabel" layoutX="1012.0" layoutY="523.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="36.0" text="/ 288">
+               <styleClass>
+                  <String fx:value="text-xs" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="countBioLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="978.0" layoutY="523.0" lineSpacing="1.0" prefHeight="11.0" prefWidth="30.0" text="0">
+               <styleClass>
+                  <String fx:value="text-xs" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
+   </children>
+</AnchorPane>
