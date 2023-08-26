@@ -152,5 +152,5 @@
         </ScrollPane>
       </children>
    </AnchorPane>
-<AnchorPane fx:id="navbarAnchorPane" prefHeight="220.0" prefWidth="1152.0" />
+<AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
 </AnchorPane>
