@@ -1,10 +1,12 @@
 package cs211.project.controllers.admin;
 
 import cs211.project.models.UserFake;
+import cs211.project.services.BlockArrowKeyFromTabPane;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class AdminDashboardController {
     @FXML private TableView userTableView, adminTableView;
 
     @FXML private void initialize() {
+        new BlockArrowKeyFromTabPane(mainTab);
         showUserTable();
         showAdminTable();
         ButtonSelectGraphic(1);
@@ -49,7 +52,6 @@ public class AdminDashboardController {
         }
     }
 
-    // column
     private void CreateTableColumn(TableView tableView) {
         TableColumn<UserFake, String> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
