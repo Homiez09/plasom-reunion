@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
+<AnchorPane maxHeight="-Infinity" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
    <AnchorPane layoutY="75.0" prefHeight="693.0" prefWidth="1152.0">
       <children>
         <ScrollPane prefHeight="693.0" prefWidth="1152.0">
             <content>
-                <VBox alignment="TOP_CENTER" prefHeight="1525.0" prefWidth="1152.0" style="-fx-background-color: F9F6F7;">
+                <VBox alignment="TOP_CENTER" prefHeight="1525.0" prefWidth="1152.0" styleClass="bg" stylesheets="@../../../css/home.css">
                     <children>
                         <Separator opacity="0.0" prefHeight="30.0" />
                         <HBox alignment="CENTER" prefHeight="300.0">
@@ -140,8 +140,8 @@
                             <children>
                                 <VBox alignment="BOTTOM_CENTER" prefHeight="115.0" prefWidth="1152.0">
                                     <children>
-                                        <HBox prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: FFE8D6;" />
-                                        <HBox prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: FF971D;" />
+                                        <HBox prefHeight="20.0" prefWidth="200.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
+                                        <HBox prefHeight="50.0" prefWidth="200.0" styleClass="outer-bottom-tab" stylesheets="@../../../css/home.css" />
                                     </children>
                                 </VBox>
                             </children>
