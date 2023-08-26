@@ -129,7 +129,7 @@
                               </Pane>
                            </children>
                         </HBox>
-                        <TableView layoutX="36.0" layoutY="179.0" prefHeight="479.0" prefWidth="766.0">
+                        <TableView fx:id="userTableView" layoutX="36.0" layoutY="179.0" prefHeight="479.0" prefWidth="766.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
