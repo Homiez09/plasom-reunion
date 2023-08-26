@@ -1,6 +1,7 @@
 package cs211.project.componentControllers;
 
 import cs211.project.services.FXRouter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -57,5 +58,9 @@ public class navbarController {
 
     @FXML protected void onAdminButtonClick() throws IOException {
         FXRouter.goTo("admin-dashboard");
+    }
+
+    public void onMyEventsButton() throws IOException {
+        FXRouter.goTo("my-event");
     }
 }
