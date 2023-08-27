@@ -19,10 +19,9 @@ public class navbarController {
     }
 
     private void showProfile() {
-        Image profile = new Image(getClass().getResource("/images/profiles-dev/ming.jpg").toString(), 1280, 1280, false, false);
+        Image profile = new Image(getClass().getResource("/images/profiles-dev/ming.jpg").toString(), 1280, 1280, true, false);
         profileImageView.setImage(profile);
         profileImageView.setFitWidth(58);
-        profileImageView.setFitHeight(58);
         profileImageView.setClip(getProfileCircle(profileImageView));
     }
 
