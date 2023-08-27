@@ -36,7 +36,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#onAdminButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Admin" textFill="#413b3b" />
                   <Button mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Home" textFill="#413b3b" />
-                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
+                  <Button mnemonicParsing="false" onAction="#onMyEventsButton" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
                </children>
             </HBox>
             <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="1052.0" layoutY="9.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
