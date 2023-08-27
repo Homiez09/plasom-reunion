@@ -23,6 +23,7 @@ Text, Label {
     -fx-background-radius: 0 0 21 21;
     -fx-border-radius: 0 0 21 21;
     -fx-content-display: inline-block;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 15, 0, 0, 6);
 }
 
 .card-image-preview {
@@ -140,8 +141,7 @@ Text, Label {
 }
 
 .top-bar-items:hover {
-    -fx-font-size: 20;
-    -fx-text-fill: #413B3B;
+    -fx-background-color: #FF9900;
 }
 
 .admin-bg {
