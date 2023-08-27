@@ -4,26 +4,31 @@ import cs211.project.services.FXRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.IOException;
+import java.awt.Desktop;
 
 public class SettingPageController {
     @FXML
     AnchorPane navbarAnchorPane;
     @FXML
-    Pane mainPane,loginsercurityPane,interfacePane,helpPane,aboutPane;
+    Pane mainPane,loginPane,themePane,privacyPane,contactPane;
     @FXML
     ImageView offImageView,onImageView,switchImageView;
     @FXML
     PasswordField newPasswordField,renewPasswordField,oldPasswordField;
     @FXML
     ToggleButton toggleButton;
+    @FXML
+    Hyperlink privalcyHyperlink;
+
 
     // top-bar
     private void loadTopBarComponent() {
@@ -38,44 +43,59 @@ public class SettingPageController {
 
     @FXML
     public void initialize(){
-        mainPane.setVisible(true);
+        hidePane();
         loadTopBarComponent();
-
     }
+
+    public void hidePane(){
+        mainPane.setVisible(true);
+        loginPane.setVisible(false);
+        themePane.setVisible(false);
+        privacyPane.setVisible(false);
+        contactPane.setVisible(false);
+    }
+
 
     // login page
     public void onLoginButton(ActionEvent actionEvent) {
+        hidePane();
         mainPane.setVisible(false);
-        loginsercurityPane.setVisible(true);
-        interfacePane.setVisible(false);
-        helpPane.setVisible(false);
-        aboutPane.setVisible(false);
+        loginPane.setVisible(true);
+
     }
 
     // interface page
-    public void onInterfaceButton(ActionEvent actionEvent) {
+    public void onThemeButton(ActionEvent actionEvent) {
+        hidePane();
         mainPane.setVisible(false);
-        loginsercurityPane.setVisible(false);
-        interfacePane.setVisible(true);
-        helpPane.setVisible(false);
-        aboutPane.setVisible(false);
+        themePane.setVisible(true);
+
     }
 
-    public void onHelpSupportButton(ActionEvent actionEvent) {
+    public void onPrivacyButton(ActionEvent actionEvent) {
+        hidePane();
         mainPane.setVisible(false);
-        loginsercurityPane.setVisible(false);
-        interfacePane.setVisible(false);
-        helpPane.setVisible(true);
-        aboutPane.setVisible(false);
+        privacyPane.setVisible(true);
+        privalcyHyperlink.setText("open");
+
+    }
+
+    @FXML
+    private void openDocxFile(ActionEvent actionEvent) {
+        File docxFile = new File("src/main/resources/data/Privacy.docx");
+        try {
+            Desktop.getDesktop().open(docxFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    public void onAboutButton(ActionEvent actionEvent) {
+    public void onContactButton(ActionEvent actionEvent) {
+        hidePane();
         mainPane.setVisible(false);
-        loginsercurityPane.setVisible(false);
-        interfacePane.setVisible(false);
-        helpPane.setVisible(false);
-        aboutPane.setVisible(true);
+        contactPane.setVisible(true);
+
     }
 
     // toggle switch
@@ -98,5 +118,13 @@ public class SettingPageController {
         switchImageView.setLayoutX(0);
     }
 
+
+    public void onLogoutButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("welcome");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
