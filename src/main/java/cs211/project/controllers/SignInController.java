@@ -1,7 +1,10 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.EventDataSourceHardCode;
 import cs211.project.services.FXRouter;
+import cs211.project.services.UserDataSourceHardCode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,21 +25,32 @@ public class SignInController {
     private int maxPage;
     private Image showPasswordImage, hidePasswordImage;
 
-    @FXML private Button backButton, nextButton;
-    @FXML private Shape backCircle, nextCircle;
+    @FXML
+    private Button backButton, nextButton;
+    @FXML
+    private Shape backCircle, nextCircle;
 
-    @FXML private PasswordField passwordField;
-    @FXML private TextField showPasswordTextField,usernameTextField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private TextField showPasswordTextField, usernameTextField;
 
-    @FXML private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
-    @FXML private ImageView usernameIconView, passwordIconView, visiblePasswordImageView ,profileImageView;
+    @FXML
+    private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
+    @FXML
+    private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
 
+    private UserList userList;
+    private User user;
     String password;
-    User user = (User) FXRouter.getData();
+//    User user = (User) FXRouter.getData();
+
 
     @FXML
     void initialize() {
-        System.out.println(user.getUsername() + user.getPassword());
+        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+        userList = datasource.readData();
+//        System.out.println(user.getUsername() + user.getPassword());
         loadImage();
         showPasswordTextField.setVisible(false);
         visiblePasswordImageView.setImage(hidePasswordImage);
@@ -54,12 +68,12 @@ public class SignInController {
         nextCircle.setVisible(page != maxPage);
     }
 
-    public void onKeyHidePassword(KeyEvent keyEvent){
+    public void onKeyHidePassword(KeyEvent keyEvent) {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
     }
 
-    public void onKeyShowPassword(KeyEvent keyEvent){
+    public void onKeyShowPassword(KeyEvent keyEvent) {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
     }
@@ -92,7 +106,7 @@ public class SignInController {
     }
 
     @FXML
-    protected void onBackClick(){
+    protected void onBackClick() {
         try {
             FXRouter.goTo("welcome");
         } catch (IOException e) {
@@ -101,7 +115,7 @@ public class SignInController {
     }
 
     @FXML
-    protected void onSignUpClick(){
+    protected void onSignUpClick() {
         try {
             FXRouter.goTo("sign-up");
         } catch (IOException e) {
@@ -151,12 +165,20 @@ public class SignInController {
         updateVisibleButton();
     }
 
-    private boolean validateUser(){
-        if(usernameTextField.getText().equals(user.getUsername())){
-            profileImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getImagePath()))));
+    private boolean validateUser() {
+        user = userList.findUsername(usernameTextField.getText());
+        if(user != null && user.getUsername().equals(usernameTextField.getText()) && user.getPassword().equals(password)){
+            return true;
+        }else{
+            return false;
         }
-        return usernameTextField.getText().equals(user.getUsername()) && password.equals(user.getPassword());
+//        if(usernameTextField.getText().equals(user.getUsername())){
+//            profileImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getImagePath()))));
+//        }
+//        return usernameTextField.getText().equals(user.getUsername()) && password.equals(user.getPassword());
     }
+
+
 
 
     public void onLoginButton(ActionEvent actionEvent) {
