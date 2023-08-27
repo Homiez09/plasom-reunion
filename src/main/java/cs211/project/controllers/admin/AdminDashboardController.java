@@ -2,11 +2,14 @@ package cs211.project.controllers.admin;
 
 import cs211.project.models.UserFake;
 import cs211.project.services.BlockArrowKeyFromTabPane;
+import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,9 +19,12 @@ public class AdminDashboardController {
     @FXML private Tab menu1Tab, menu2Tab;
     @FXML private Button menu1, menu2, menu3, menu4;
     @FXML private TableView userTableView, adminTableView;
+    @FXML private ImageView profileImageView;
 
     @FXML private void initialize() {
+        profileImageView.setImage(new Image(getClass().getResource("/images/profile/default-avatar/default0.png").toString(), 1280, 1280, false, false));
         new BlockArrowKeyFromTabPane(mainTab);
+        new CreateProfileCircle(profileImageView, 28);
         showUserTable();
         showAdminTable();
         ButtonSelectGraphic(1);

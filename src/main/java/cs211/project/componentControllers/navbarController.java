@@ -1,17 +1,24 @@
 package cs211.project.componentControllers;
 
+import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventDispatcher;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 
 public class navbarController {
     @FXML private ImageView profileImageView;
     @FXML private Pane toggleProfilePane;
+    @FXML private AnchorPane mainNavbarAnchorPane;
 
     @FXML private void initialize() {
         toggleProfilePane.setVisible(false);
@@ -19,18 +26,8 @@ public class navbarController {
     }
 
     private void showProfile() {
-        Image profile = new Image(getClass().getResource("/images/profile/develop/ming.jpg").toString(), 1280, 1280, true, false);
-        profileImageView.setImage(profile);
-        profileImageView.setFitWidth(58);
-        profileImageView.setFitHeight(58);
-        profileImageView.setClip(getProfileCircle(profileImageView));
-    }
-
-    private Circle getProfileCircle(ImageView profileImageView) {
-        Circle circle = new Circle(28);
-        circle.setCenterX(profileImageView.getFitWidth() / 2);
-        circle.setCenterY(profileImageView.getFitHeight() / 2);
-        return circle;
+        profileImageView.setImage(new Image(getClass().getResource("/images/profile/default-avatar/default0.png").toString(), 1280, 1280, false, false));
+        new CreateProfileCircle(profileImageView, 28);
     }
 
     @FXML protected void onToggleProfileMenuClick() {
@@ -40,6 +37,7 @@ public class navbarController {
             toggleProfilePane.setVisible(true);
         }
     }
+
     @FXML protected void onProfileButtonClick() throws IOException {
         FXRouter.goTo("user-profile");
     }
@@ -51,11 +49,15 @@ public class navbarController {
         FXRouter.goTo("home");
     }
 
-    @FXML protected void onWelcomeButtonClick() throws IOException {
+    @FXML protected void onLogOutButtonClick() throws IOException {
         FXRouter.goTo("welcome");
     }
 
     @FXML protected void onAdminButtonClick() throws IOException {
         FXRouter.goTo("admin-dashboard");
+    }
+
+    @FXML public void onMyEventsButton() throws IOException {
+        FXRouter.goTo("my-event");
     }
 }
