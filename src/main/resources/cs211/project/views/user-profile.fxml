@@ -31,7 +31,7 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label layoutX="858.0" layoutY="129.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="206.0" text="ID :">
+            <Label layoutX="811.0" layoutY="129.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="206.0" text="UID :">
                <styleClass>
                   <String fx:value="text-xl" />
                   <String fx:value="weight-bold" />
@@ -66,7 +66,7 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label layoutX="901.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="59.0" text="#">
+            <Label layoutX="866.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="11.0" text="#">
                <styleClass>
                   <String fx:value="text-xl" />
                   <String fx:value="weight-medium" />
@@ -97,7 +97,7 @@
                   <String fx:value="center-label" />
                </styleClass>
             </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9e22" height="30.0" layoutX="209.0" layoutY="581.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 10; -fx-arc-width: 10;" width="90.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9e22" height="30.0" layoutX="167.0" layoutY="581.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 10; -fx-arc-width: 10;" width="150.0" />
             <Label alignment="CENTER" layoutX="223.0" layoutY="548.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="24.0" text="id: " textFill="WHITE">
                <styleClass>
                   <String fx:value="text-ms" />
@@ -169,21 +169,21 @@
             <ImageView fx:id="contactIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="539.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="passwordIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="539.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="imageChangeView" fitHeight="30.0" fitWidth="30.0" layoutX="190.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" styleClass="image-change-effect" />
-            <Label alignment="CENTER" layoutX="220.0" layoutY="580.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="36.0" text="#" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="167.0" layoutY="581.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="24.0" text="#" textFill="WHITE">
                <styleClass>
                   <String fx:value="text-ms" />
                   <String fx:value="weight-medium" />
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label fx:id="idLabel" layoutX="913.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="59.0" text="4931">
+            <Label fx:id="idLabel" layoutX="885.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="177.0" text="4931444444444444">
                <styleClass>
                   <String fx:value="text-xl" />
                   <String fx:value="weight-medium" />
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label fx:id="idProfileLabel" alignment="CENTER" layoutX="237.0" layoutY="580.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="45.0" text="4931" textFill="WHITE">
+            <Label fx:id="idProfileLabel" alignment="CENTER" layoutX="186.0" layoutY="581.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="123.0" text="4931444444444444" textFill="WHITE">
                <styleClass>
                   <String fx:value="text-ms" />
                   <String fx:value="weight-medium" />

@@ -41,7 +41,7 @@
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/admin-sidebar/user-group.png" />
+                              <Image url="@../../../images/icons/admin-sidebar/user-group.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -50,7 +50,7 @@
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/admin-sidebar/chart-bar.png" />
+                              <Image url="@../../../images/icons/admin-sidebar/chart-bar.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -59,7 +59,7 @@
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/admin-sidebar/cog.png" />
+                              <Image url="@../../../images/icons/admin-sidebar/cog.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -68,7 +68,7 @@
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/admin-sidebar/folder.png" />
+                              <Image url="@../../../images/icons/admin-sidebar/folder.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -90,7 +90,7 @@
                                     <Text layoutX="34.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ONLINE" wrappingWidth="58.0" />
                                     <ImageView layoutX="117.0" layoutY="61.0">
                                        <image>
-                                          <Image url="@../../../images/admin-sidebar/user-group.png" />
+                                          <Image url="@../../../images/icons/admin-sidebar/user-group.png" />
                                        </image>
                                     </ImageView>
                                     <Label layoutX="42.0" layoutY="58.0" text="7" />
@@ -100,7 +100,7 @@
                                     <Text layoutX="34.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OFFLINE" wrappingWidth="58.0" />
                                     <ImageView layoutX="117.0" layoutY="61.0">
                                        <image>
-                                          <Image url="@../../../images/admin-sidebar/user-group.png" />
+                                          <Image url="@../../../images/icons/admin-sidebar/user-group.png" />
                                        </image>
                                     </ImageView>
                                     <Label layoutX="42.0" layoutY="58.0" text="21" />
@@ -116,7 +116,7 @@
                                     </Label>
                                     <ImageView layoutX="323.0" layoutY="62.0">
                                        <image>
-                                          <Image url="@../../../images/admin-sidebar/folder.png" />
+                                          <Image url="@../../../images/icons/admin-sidebar/folder.png" />
                                        </image>
                                     </ImageView>
                                     <ProgressBar layoutX="114.0" layoutY="71.0" prefHeight="12.0" prefWidth="200.0" progress="0.0" />
@@ -158,7 +158,7 @@
          <children>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="19.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/logo_white.png" />
+                  <Image url="@../../../images/logo/logo_white.png" />
                </image>
             </ImageView>
             <Circle fx:id="profileCircle" fill="WHITE" layoutX="770.0" layoutY="38.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" styleClass="profile-menu" />
@@ -166,7 +166,7 @@
             <Line endX="-100.00003051757812" endY="34.199981689453125" layoutX="820.0" layoutY="25.0" startX="-100.0" startY="-8.600000381469727" stroke="WHITE" />
             <ImageView fitHeight="40.0" fitWidth="44.0" layoutX="652.0" layoutY="18.0">
                <image>
-                  <Image url="@../../../images/navbar/mail.png" />
+                  <Image url="@../../../images/icons/navbar/mail.png" />
                </image>
             </ImageView>
             <AnchorPane layoutX="688.0" layoutY="18.0" prefHeight="14.0" prefWidth="14.0" style="-fx-background-color: #E61B1B; -fx-background-radius: 5;">

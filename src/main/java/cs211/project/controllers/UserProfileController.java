@@ -1,8 +1,8 @@
 package cs211.project.controllers;
 
+import cs211.project.models.User;
 import cs211.project.services.LoadNavbarComponent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,8 +12,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
-
 public class UserProfileController {
 
     @FXML private ImageView iconProfileImageView, imageChangeView, ellipseIconImageView, frameIconImageView, profileIconImageView, visiblePasswordImageView, fullNameIconImageView, contactIconImageView, passwordIconImageView;
@@ -22,7 +20,7 @@ public class UserProfileController {
     @FXML private TextArea bioTextArea;
     @FXML private PasswordField passwordField;
     @FXML private Button editButton, cancelButton, saveButton;
-    @FXML private Label passwordLabel,countBioLabel,maximumCountBioLabel,bioProfileLabel;
+    @FXML private Label passwordLabel,countBioLabel,maximumCountBioLabel,bioProfileLabel,fullNameProfileLabel,usernameProfileLabel,idProfileLabel,idLabel;
     private Image showPasswordImage, hidePasswordImage;
     private String password,bioText,previousBioText,previousBioCount;
 
@@ -169,32 +167,32 @@ public class UserProfileController {
     }
 
     private void loadImage() {
-        Image iconProfile = new Image(getClass().getResourceAsStream("/images/profiles-user/icons/iconProfile.png"));
+        Image iconProfile = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconProfile.png"));
         iconProfileImageView.setImage(iconProfile);
 
-        Image ellipseIcon = new Image(getClass().getResourceAsStream("/images/profiles-user/icons/iconEllipse.png"));
+        Image ellipseIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconEllipse.png"));
         ellipseIconImageView.setImage(ellipseIcon);
 
-        Image frameIcon = new Image(getClass().getResourceAsStream("/images/profiles-user/icons/iconFrame.png"));
+        Image frameIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconFrame.png"));
         frameIconImageView.setImage(frameIcon);
 
-        Image profileIcon = new Image(getClass().getResourceAsStream("/images/login/profiles/profile_test1.png"));
+        Image profileIcon = new Image(getClass().getResourceAsStream("/images/profile/sign-in/sign-in-avatar.png"));
         profileIconImageView.setImage(profileIcon);
 
-        Image fullNameIcon = new Image(getClass().getResourceAsStream("/images/login/icons/username_field.png"));
+        Image fullNameIcon = new Image(getClass().getResourceAsStream("/images/icons/login/username_field.png"));
         fullNameIconImageView.setImage(fullNameIcon);
 
-        Image passwordIcon = new Image(getClass().getResourceAsStream("/images/login/icons/password_field.png"));
+        Image passwordIcon = new Image(getClass().getResourceAsStream("/images/icons/login/password_field.png"));
         passwordIconImageView.setImage(passwordIcon);
 
-        Image contactIcon = new Image(getClass().getResourceAsStream("/images/login/icons/contact_field.png"));
+        Image contactIcon = new Image(getClass().getResourceAsStream("/images/icons/login/contact_field.png"));
         contactIconImageView.setImage(contactIcon);
 
-        Image changeImageIcon = new Image(getClass().getResourceAsStream("/images/login/icons/change_image.png"));
+        Image changeImageIcon = new Image(getClass().getResourceAsStream("/images/icons/login/change_image.png"));
         imageChangeView.setImage(changeImageIcon);
 
-        showPasswordImage = new Image(getClass().getResourceAsStream("/images/login/icons/show_password.png"));
-        hidePasswordImage = new Image(getClass().getResourceAsStream("/images/login/icons/hide_password.png"));
+        showPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
+        hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
 
     }
 

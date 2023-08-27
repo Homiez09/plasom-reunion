@@ -25,13 +25,13 @@
             </TextField>
             <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="164.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../images/navbar/search.png" />
+                  <Image url="@../../../../images/icons/navbar/search.png" />
                </image>
             </ImageView>
             <Circle fx:id="profileCircle" fill="WHITE" layoutX="1079.0" layoutY="38.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" styleClass="profile-menu" />
             <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="525.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../images/navbar/exit.png" />
+                  <Image url="@../../../../images/icons/navbar/exit.png" />
                </image>
             </ImageView>
             <HBox alignment="TOP_RIGHT" layoutX="661.0" prefHeight="75.0" prefWidth="354.0" styleClass="container">
@@ -46,7 +46,7 @@
       <ImageView fx:id="profileImageView" fitHeight="75.0" fitWidth="58.0" layoutX="1050.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="75.0" fitWidth="108.0" layoutX="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/logo_white.png" />
+            <Image url="@../../../../images/logo/logo_white.png" />
          </image>
       </ImageView>
       <Pane fx:id="toggleProfilePane" layoutX="901.0" layoutY="81.0" prefHeight="151.0" prefWidth="206.0" styleClass="toggle-menu">
