@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
+<AnchorPane fx:id="searchBoxTextField" prefHeight="251.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
          <children>
@@ -28,8 +27,6 @@
                   <Image url="@../../../../images/navbar/search.png" />
                </image>
             </ImageView>
-            <Circle fx:id="profileCircle" fill="WHITE" layoutX="1079.0" layoutY="38.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" styleClass="profile-menu" />
-            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="1050.0" layoutY="9.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="525.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../images/navbar/exit.png" />
@@ -42,6 +39,7 @@
                   <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
                </children>
             </HBox>
+            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="1052.0" layoutY="9.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="75.0" fitWidth="108.0" layoutX="37.0" pickOnBounds="true" preserveRatio="true">
