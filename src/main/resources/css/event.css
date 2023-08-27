@@ -11,7 +11,7 @@
 -fx-background-radius: 10px;
 -fx-border-width: 2px;
 }
-.button:hover {
+.page-button:hover {
 -fx-background-color: #FF971D;
 -fx-border-radius: 9px;
 -fx-border-color: #F9F6F7;
