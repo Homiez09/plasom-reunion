@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainNavbarAnchorPane" onMouseClicked="#onUserClickOutside" prefHeight="171.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
+<AnchorPane fx:id="mainNavbarAnchorPane" prefHeight="171.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
          <children>
