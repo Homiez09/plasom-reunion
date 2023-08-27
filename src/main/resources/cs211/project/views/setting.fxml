@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.SettingPageController">
+   <children>
+      <AnchorPane prefHeight="768.0" prefWidth="1152.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="48.0" layoutY="120.0" prefWidth="271.0" stylesheets="@../../../css/setting.css">
+               <children>
+                  <Pane prefHeight="591.75" prefWidth="234.75" styleClass="bgPane">
+                     <children>
+                        <Label layoutX="61.0" layoutY="23.0" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Setting" textAlignment="CENTER">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/cog.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Line endX="218.25" layoutX="29.0" layoutY="77.0" />
+                        <Button graphicTextGap="0.0" layoutX="34.0" layoutY="84.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Login &amp; Security" />
+                        <Line endX="218.25" layoutX="30.0" layoutY="155.0" />
+                        <Button layoutX="34.0" layoutY="160.0" mnemonicParsing="false" onAction="#onThemeButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Theme" />
+                        <Line endX="218.25" layoutX="29.0" layoutY="229.0" />
+                        <Button layoutX="34.0" layoutY="235.0" mnemonicParsing="false" onAction="#onPrivacyButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Privacy Policy" />
+                        <Line endX="218.25" layoutX="27.0" layoutY="305.0" />
+                        <Button layoutX="34.0" layoutY="312.0" mnemonicParsing="false" onAction="#onContactButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Contact us" />
+                        <Line endX="218.25" layoutX="28.0" layoutY="383.0" />
+                        <Button layoutX="32.0" layoutY="501.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Logout" textFill="RED" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <Pane fx:id="contactPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false">
+               <children>
+                  <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Contact us" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="privacyPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css">
+               <children>
+                  <Label layoutX="181.0" layoutY="21.0" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Privacy Policy for Customers" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="privalcyHyperlink" layoutX="341.0" layoutY="92.0" onAction="#openDocxFile" text="Hyperlink">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Hyperlink>
+               </children></Pane>
+            <Pane fx:id="themePane" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" visible="false">
+               <children>
+                  <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Theme" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="whiteCheckBox" layoutX="128.0" layoutY="332.0" mnemonicParsing="false" selected="true" text="White" />
+                  <CheckBox fx:id="blackCheckBox" layoutX="463.0" layoutY="332.0" mnemonicParsing="false" text="Black" />
+                  <ImageView fx:id="whiteImageView" fitHeight="150.0" fitWidth="200.0" layoutX="64.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="blackImageVIew" fitHeight="150.0" fitWidth="200.0" layoutX="411.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Pane fx:id="loginPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false">
+               <children>
+                  <Line endX="722.0" layoutX="34.0" layoutY="264.0" style="-fx-fill: #BFBFBF;" />
+                  <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Login &amp; Security" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="88.5" layoutY="88.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="reset password">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="newPasswordField" layoutX="132.0" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="new password" styleClass="font" />
+                  <PasswordField fx:id="renewPasswordField" layoutX="392.25" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="re-new password" styleClass="font" />
+                  <PasswordField fx:id="oldPasswordField" layoutX="228.0" layoutY="193.5" prefHeight="30.0" prefWidth="214.0" promptText="old password" styleClass="font" />
+                  <Button layoutX="473.0" layoutY="196.0" mnemonicParsing="false" style="-fx-background-color: #4CAF50; -fx-background-radius: 7.5;" styleClass="fontText" stylesheets="@../../../css/setting.css" text="OK" textAlignment="CENTER" />
+                  <Label fx:id="settingLabel1" layoutX="88.5" layoutY="279.75" styleClass="fontText" stylesheets="@../../../css/setting.css" text="active status" textAlignment="CENTER">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="settingLabel11" layoutX="194.0" layoutY="323.0" styleClass="fontText" stylesheets="@../../../css/setting.css" text="private account" textAlignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="116.0" layoutY="317.0">
+                     <children>
+                        <ImageView fx:id="offImageView">
+                           <image>
+                              <Image url="@../../../images/switch-bodyOff.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="onImageView" visible="false">
+                           <image>
+                              <Image url="@../../../images/switch-bodyOn.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="switchImageView" fitHeight="29.0" fitWidth="29.0">
+                           <image>
+                              <Image url="@../../../images/Switch.png" />
+                           </image>
+                        </ImageView>
+                        <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#onToggleButton" prefHeight="29.0" prefWidth="61.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="mainPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false" />
+            <AnchorPane fx:id="navbarAnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" prefWidth="1152.0" />
+         </children>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../../../css/style.css" />
+      <URL value="@../../../css/style2.css" />
+   </stylesheets>
+</VBox>
