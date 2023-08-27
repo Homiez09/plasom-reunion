@@ -123,6 +123,21 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 2, 0, 0, 2);
 }
 
+/* for condition box */
+.condition-box-text{
+    -fx-wrap-text: true;
+    -fx-text-fill: #F5F3ED;
+
+
+}
+
+.condition-box{
+    -fx-arc-width: 12;
+    -fx-arc-height: 12;
+    -fx-opacity: 1;
+
+
+}
 
 
 /* for login page */

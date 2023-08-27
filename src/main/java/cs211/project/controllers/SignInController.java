@@ -1,5 +1,6 @@
 package cs211.project.controllers;
 
+import cs211.project.models.User;
 import cs211.project.services.FXRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class SignInController {
 
@@ -24,15 +26,17 @@ public class SignInController {
     @FXML private Shape backCircle, nextCircle;
 
     @FXML private PasswordField passwordField;
-    @FXML private TextField showPasswordTextField;
+    @FXML private TextField showPasswordTextField,usernameTextField;
 
     @FXML private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
     @FXML private ImageView usernameIconView, passwordIconView, visiblePasswordImageView ,profileImageView;
 
     String password;
+    User user = (User) FXRouter.getData();
 
     @FXML
     void initialize() {
+        System.out.println(user.getUsername() + user.getPassword());
         loadImage();
         showPasswordTextField.setVisible(false);
         visiblePasswordImageView.setImage(hidePasswordImage);
@@ -147,12 +151,26 @@ public class SignInController {
         updateVisibleButton();
     }
 
-    public void onLoginButton(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("home");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private boolean validateUser(){
+        if(usernameTextField.getText().equals(user.getUsername())){
+            profileImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getImagePath()))));
         }
+        return usernameTextField.getText().equals(user.getUsername()) && password.equals(user.getPassword());
+    }
+
+
+    public void onLoginButton(ActionEvent actionEvent) {
+        if(validateUser()){
+            try {
+                FXRouter.goTo("home", user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            return ;
+            //todo: error
+        }
+
 
     }
 }
