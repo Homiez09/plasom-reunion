@@ -19,7 +19,7 @@ public class navbarController {
     }
 
     private void showProfile() {
-        Image profile = new Image(getClass().getResource("/images/profiles-dev/ming.jpg").toString(), 1280, 1280, false, false);
+        Image profile = new Image(getClass().getResource("/images/profile/develop/ming.jpg").toString(), 1280, 1280, false, false);
         profileImageView.setImage(profile);
         profileImageView.setFitWidth(58);
         profileImageView.setFitHeight(58);
@@ -40,7 +40,9 @@ public class navbarController {
             toggleProfilePane.setVisible(true);
         }
     }
-    @FXML protected void onProfileButtonClick() {}
+    @FXML protected void onProfileButtonClick() throws IOException {
+        FXRouter.goTo("user-profile");
+    }
     @FXML protected void onSettingButtonClick() throws IOException {
         FXRouter.goTo("setting");
     }
@@ -51,5 +53,9 @@ public class navbarController {
 
     @FXML protected void onWelcomeButtonClick() throws IOException {
         FXRouter.goTo("welcome");
+    }
+
+    @FXML protected void onAdminButtonClick() throws IOException {
+        FXRouter.goTo("admin-dashboard");
     }
 }

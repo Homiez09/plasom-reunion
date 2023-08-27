@@ -1,0 +1,17 @@
+/*main home*/
+.bg{
+-fx-background-color:  #F9F6F7;
+}
+.inner-bottom-tab{
+-fx-background-color:  #FFE8D6;
+}
+.outer-bottom-tab{
+ -fx-background-color:  #FF971D;
+}
+/*event tile*/
+.tile-bg{
+-fx-border-radius: 20px;
+-fx-border-color: black;
+-fx-background-color: #F9F6F7;
+-fx-background-radius: 20px;
+}

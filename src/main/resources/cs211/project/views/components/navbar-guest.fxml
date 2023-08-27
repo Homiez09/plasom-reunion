@@ -19,12 +19,12 @@
                 </TextField>
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="164.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../images/navbar/search.png" />
+                        <Image url="@../../../../images/icons/navbar/search.png" />
                     </image>
                 </ImageView>
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="525.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../images/navbar/exit.png" />
+                        <Image url="@../../../../images/icons/navbar/exit.png" />
                     </image>
                 </ImageView>
                 <HBox layoutX="894.0" prefHeight="75.0" prefWidth="221.0" styleClass="container">
@@ -37,7 +37,7 @@
         </AnchorPane>
         <ImageView fitHeight="75.0" fitWidth="108.0" layoutX="37.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../../images/logo_white.png" />
+                <Image url="@../../../../images/logo/logo_white.png" />
             </image>
         </ImageView>
     </children>

@@ -63,7 +63,6 @@ Text, Label {
 .Nav {
     -fx-background-color: #FF9900;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 2, 0, 0, 0);
-    -fx-background-radius: 0 0 10 10;
 }
 
 .Nav > .search-box {
@@ -119,6 +118,11 @@ Text, Label {
     -fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);
 }
 
+.toggle-menu > VBox > HBox {
+    -fx-background-color: #F5F3EE;
+    -fx-background-radius: 0 0 10 10;
+}
+
 .toggle-menu > VBox > .text-primary {
     -fx-text-fill: #413b3b;
 }
@@ -137,4 +141,110 @@ Text, Label {
 .top-bar-items:hover {
     -fx-font-size: 20;
     -fx-text-fill: #413B3B;
+}
+
+.admin-bg {
+    -fx-background-color: #FFF5E5;
+}
+
+.admin-body {
+    -fx-background-color: #FFF5E5;
+}
+
+.admin-body > TableView {
+    -fx-background-radius: 0 10 10 0;
+}
+
+.admin-sidebar-bg {
+    -fx-background-color: #FFFFFF;
+}
+
+.admin-sidebar-bg > VBox {
+    -fx-spacing: 10;
+}
+
+.admin-sidebar-bg > VBox > Button {
+    -fx-background-color: transparent;
+    -fx-font-family: Leelawadee;
+    -fx-font-size: 19;
+    -fx-text-fill: #666666;
+    -fx-background-radius: 10;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 20;
+}
+
+.btn {
+    -fx-font-family: Leelawadee;
+    -fx-font-size: 19;
+    -fx-text-fill: #FFFFFF;
+}
+
+.btn-danger {
+    -fx-background-color: #E61B1B;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #e76767;
+}
+
+.box-success {
+    -fx-background-radius: 10;
+    -fx-background-color: linear-gradient(from 0px 0px to 17px 0px, #4CAF50 0%, #4CAF50 36.84%, #FFFFFF 36.84%, #FFFFFF 100%);
+}
+
+.box-success > Text{
+    -fx-fill: #4CAF50;
+    -fx-font-weight: 700;
+}
+
+.box-success > Label{
+    -fx-font-size: 29;
+    -fx-text-fill: #666666;
+}
+
+.box-danger {
+    -fx-background-radius: 10;
+    -fx-background-color: linear-gradient(from 0px 0px to 17px 0px, #E61B1B 0%, #E61B1B 36.84%, #FFFFFF 36.84%, #FFFFFF 100%);
+}
+
+.box-danger > Text{
+    -fx-fill: #E61B1B;
+    -fx-font-weight: 700;
+}
+
+.box-danger > Label{
+    -fx-font-size: 29;
+    -fx-text-fill: #666666;
+}
+
+.box-primary {
+    -fx-background-radius: 10;
+    -fx-background-color: linear-gradient(from 0px 0px to 17px 0px, #FF9900 0%, #FF9900 36.84%, #FFFFFF 36.84%, #FFFFFF 100%);
+}
+
+.box-primary > Text{
+    -fx-fill: #FF9900;
+    -fx-font-weight: 700;
+}
+
+.box-primary > Label{
+    -fx-font-size: 29;
+    -fx-text-fill: #666666;
+}
+
+.spacing10{
+    -fx-spacing: 10;
+}
+
+.spacing20{
+    -fx-spacing: 20;
+}
+
+.spacing30{
+    -fx-spacing: 30;
+}
+
+ProgressBar {
+    -fx-text-box-border: forestgreen;
+    -fx-control-inner-background: palegreen;
 }

@@ -270,11 +270,124 @@ Text, Label {
 
 .bgPane{
     -fx-background-radius: 15;
-    -fx-background-color: #FFFFFF;
-}
+    -fx-background-color: #FFFFFF;}
 
 .toggle-button{
         -fx-background-color: transparent;
         -fx-font-size: 12;
         -fx-font-family: Leelawadee;
 }
+
+
+/* for user-profile page */
+.bgProfile1{
+    -fx-background-color: #FFF5E5;
+}
+.bgProfile2{
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 40, 0.4, 0, 0.7);
+    -fx-arc-height: 50;
+    -fx-arc-width: 50;
+}
+.profile-text-field{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 0.1;-fx-padding: 0 0 0 30;
+}
+
+.profile-text-field2 {
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 1;-fx-padding: 0 0 0 35;
+}
+.profile-text-area2{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 0.1;-fx-padding: 0 0 0 35;
+}
+.profile-text-area2{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 0.1;-fx-padding: 10 15 16 15;
+    -fx-wrap-text: true;
+}
+.profile-text-area {
+    -fx-background-radius: 11;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 1;
+    -fx-wrap-text: true;
+
+}
+.profile-text-area .content{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-radius: 11;
+    -fx-border-width: 1;
+    -fx-font-size: 17;
+    -fx-opacity: 1;
+    -fx-padding: 10 15 16 18;
+    -fx-wrap-text: true;
+
+
+
+}
+
+.center-label {
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.edit-profile-button {
+    -fx-background-color: linear-gradient(to left, #FF922E 45.96%, #FF9E22 70.98%);
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.edit-profile-button:hover {
+    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.cancel-profile-button{
+    -fx-background-color: transparent;
+    -fx-border-radius: 12;
+    -fx-border-color: #FF922E;
+    -fx-border-width: 2;
+    -fx-text-fill: #FF922E;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.cancel-profile-button:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 12;
+    -fx-border-color: #BFBFBF;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-text-fill: #BFBFBF;
+}
+
+.image-change-effect:hover{
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.description-profile-text{
+    -fx-text-fill: #8f6e6e;
+}
+
+/* end for user-profile page */
