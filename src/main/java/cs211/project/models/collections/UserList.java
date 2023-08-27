@@ -11,4 +11,13 @@ public class UserList {
         users = new ArrayList<>();
     }
 
+    public void addUser(String displayName, String username, String password){
+        displayName = displayName.trim();
+        username = username.trim();
+        password = password.trim();
+        if(!username.equals("") && !password.equals("")){
+            users.add(new User(displayName,username,password));
+        }
+    }
+
 }
