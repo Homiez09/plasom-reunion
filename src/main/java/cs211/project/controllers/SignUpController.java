@@ -140,22 +140,22 @@ public class SignUpController {
     }
 
     private void loadImage() {
-        Image upComingBackground = new Image(getClass().getResourceAsStream("/images/login/backgrounds/sign_event_bg1.png"));
+        Image upComingBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg1.png"));
         upComingEventsBackgroundImageView.setImage(upComingBackground);
 
-        Image signBackground = new Image(getClass().getResourceAsStream("/images/login/backgrounds/sign_evnt_bg2.png"));
+        Image signBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_evnt_bg2.png"));
         signBackgroundImageView.setImage(signBackground);
 
-        Image usernameIcon = new Image(getClass().getResourceAsStream("/images/login/icons/username_field.png"));
+        Image usernameIcon = new Image(getClass().getResourceAsStream("/images/icons/login/username_field.png"));
         usernameIconView.setImage(usernameIcon);
         fullNameIconView.setImage(usernameIcon);
 
-        Image passwordIcon = new Image(getClass().getResourceAsStream("/images/login/icons/password_field.png"));
+        Image passwordIcon = new Image(getClass().getResourceAsStream("/images/icons/login/password_field.png"));
         passwordIconView.setImage(passwordIcon);
         confirmPasswordIconView.setImage(passwordIcon);
 
-        showPasswordImage = new Image(getClass().getResourceAsStream("/images/login/icons/show_password.png"));
-        hidePasswordImage = new Image(getClass().getResourceAsStream("/images/login/icons/hide_password.png"));
+        showPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
+        hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
 
         visiblePasswordImageView.setImage(hidePasswordImage);
         visibleConfirmPasswordImageView.setImage(hidePasswordImage);

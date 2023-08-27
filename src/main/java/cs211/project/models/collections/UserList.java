@@ -4,10 +4,10 @@ import cs211.project.models.User;
 
 import java.util.ArrayList;
 
-public class UserCollection {
+public class UserList {
     private ArrayList<User> users;
 
-    public UserCollection() {
+    public UserList() {
         users = new ArrayList<>();
     }
 
