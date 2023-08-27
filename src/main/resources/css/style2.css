@@ -115,7 +115,8 @@ Text, Label {
 }
 
 .toggle-menu > VBox > .items:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);
+    -fx-background-color: #ffa527;
+    /*-fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);*/
 }
 
 .toggle-menu > VBox > HBox {

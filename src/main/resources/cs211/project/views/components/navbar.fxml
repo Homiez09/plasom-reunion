@@ -15,12 +15,13 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
+<AnchorPane fx:id="mainNavbarAnchorPane" prefHeight="171.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
          <children>
-            <TextField layoutX="156.0" layoutY="20.0" prefHeight="36.0" prefWidth="399.0" promptText="Searching..." styleClass="search-box">
+            <TextField fx:id="searchBoxTextField" layoutX="156.0" layoutY="20.0" prefHeight="36.0" prefWidth="399.0" promptText="Searching..." styleClass="search-box">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -42,16 +43,16 @@
                   <Button mnemonicParsing="false" onAction="#onMyEventsButton" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
                </children>
             </HBox>
-            <Circle fill="#ffa527" layoutX="1081.0" layoutY="38.0" radius="30.0" stroke="#ffa527" strokeType="INSIDE">
+            <Circle fill="#ffa527" layoutX="1075.0" layoutY="38.0" radius="30.0" stroke="#ffa527" strokeType="INSIDE">
                <effect>
-                  <DropShadow height="16.35" offsetY="2.0" radius="3.5875000000000004" width="0.0">
+                  <DropShadow height="0.0" offsetY="2.0" radius="0.0" width="0.0">
                      <color>
-                        <Color opacity="0.28343465924263" />
+                        <Color opacity="0.41717326641082764" />
                      </color>
                   </DropShadow>
                </effect>
             </Circle>
-            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="1052.0" layoutY="9.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="1046.0" layoutY="10.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="75.0" fitWidth="108.0" layoutX="37.0" pickOnBounds="true" preserveRatio="true">
@@ -59,9 +60,12 @@
             <Image url="@../../../../images/logo/logo_white.png" />
          </image>
       </ImageView>
-      <Pane fx:id="toggleProfilePane" layoutX="901.0" layoutY="81.0" prefHeight="151.0" prefWidth="206.0" styleClass="toggle-menu">
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="814.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
+      <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="706.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
+      <Pane fx:id="toggleProfilePane" layoutX="838.0" layoutY="17.0" prefHeight="151.0" prefWidth="206.0" styleClass="toggle-menu">
          <children>
-            <VBox layoutY="-6.0" prefHeight="151.0" prefWidth="206.0">
+            <VBox layoutY="1.0" prefHeight="151.0" prefWidth="206.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onProfileButtonClick" prefHeight="26.0" prefWidth="214.0" text="Profile">
                      <styleClass>
@@ -83,15 +87,16 @@
                   </Button>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="16.0" prefWidth="206.0" style="-fx-alignment: center;" text="12/2/2000 - 19:00" />
+                        <Label prefHeight="16.0" prefWidth="206.0" style="-fx-alignment: center;" styleClass="bold700" text="12/2/2000 - 19:00">
+                           <font>
+                              <Font name="Leelawadee" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
             </VBox>
          </children>
       </Pane>
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="814.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
-      <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="706.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
    </children>
 </AnchorPane>
