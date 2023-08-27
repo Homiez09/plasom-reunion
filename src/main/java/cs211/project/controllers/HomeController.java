@@ -1,5 +1,10 @@
 package cs211.project.controllers;
 
+import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.FXRouter;
+import cs211.project.services.LoadNavbarComponent;
+import cs211.project.services.UserDataSourceHardCode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -11,10 +16,10 @@ public class HomeController {
     @FXML private AnchorPane newEventTileAnchorPane1,newEventTileAnchorPane2,newEventTileAnchorPane3;
     @FXML private AnchorPane upEventTileAnchorPane1,upEventTileAnchorPane2,upEventTileAnchorPane3;
 
+
     @FXML
     private  void initialize() {
-
-        loadNavbarComponent();
+        new LoadNavbarComponent(navbarAnchorPane);
         loadEventTileComponent(newEventTileAnchorPane1);
         loadEventTileComponent(newEventTileAnchorPane2);
         loadEventTileComponent(newEventTileAnchorPane3);
@@ -24,15 +29,6 @@ public class HomeController {
     }
 
 
-    private void loadNavbarComponent() {
-        FXMLLoader navbarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));
-        try {
-            AnchorPane navbarComponent = navbarComponentLoader.load();
-            navbarAnchorPane.getChildren().add(navbarComponent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private void loadEventTileComponent(AnchorPane eventTile) {
         FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile.fxml"));
