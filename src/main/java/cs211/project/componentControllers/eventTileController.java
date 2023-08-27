@@ -1,9 +1,12 @@
 package cs211.project.componentControllers;
 
+import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.IOException;
 
 public class eventTileController {
     @FXML private ImageView eventTileImageView;
@@ -20,6 +23,14 @@ public class eventTileController {
         eventPlaceLabel.setText("Event Place");
         Image image = new Image(getClass().getResource("/images/home/event2.png").toString());
         eventTileImageView.setImage(image);
+    }
+
+    @FXML protected void onEventTileClick() {
+        try {
+            FXRouter.goTo("event");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
