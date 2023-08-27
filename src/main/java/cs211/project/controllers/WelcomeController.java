@@ -17,7 +17,7 @@ public class WelcomeController {
     }
 
     @FXML protected void onSignInButtonClick()  throws IOException {
-        FXRouter.goTo("sign-in");
+        FXRouter.goTo("sign-up");
     }
 
     @FXML protected void onSignUpButtonClick() throws IOException {
