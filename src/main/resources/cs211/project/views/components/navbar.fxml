@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainNavbarAnchorPane" prefHeight="171.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
+<AnchorPane fx:id="mainNavbarAnchorPane" onMouseClicked="#onUserClickOutside" prefHeight="171.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
          <children>
@@ -65,7 +65,7 @@
       <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="706.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
       <Pane fx:id="toggleProfilePane" layoutX="838.0" layoutY="17.0" prefHeight="151.0" prefWidth="206.0" styleClass="toggle-menu">
          <children>
-            <VBox layoutY="1.0" prefHeight="151.0" prefWidth="206.0">
+            <VBox fx:id="toggleMenu" layoutY="1.0" prefHeight="151.0" prefWidth="206.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onProfileButtonClick" prefHeight="26.0" prefWidth="214.0" text="Profile">
                      <styleClass>
@@ -79,7 +79,7 @@
                         <String fx:value="text-primary" />
                      </styleClass>
                   </Button>
-                  <Button layoutX="10.0" layoutY="52.0" mnemonicParsing="false" onAction="#onWelcomeButtonClick" prefHeight="26.0" prefWidth="214.0" text="Logout">
+                  <Button layoutX="10.0" layoutY="52.0" mnemonicParsing="false" onAction="#onLogOutButtonClick" prefHeight="26.0" prefWidth="214.0" text="Logout">
                      <styleClass>
                         <String fx:value="items" />
                         <String fx:value="text-danger" />

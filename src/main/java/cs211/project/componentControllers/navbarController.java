@@ -2,12 +2,16 @@ package cs211.project.componentControllers;
 
 import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventDispatcher;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 
@@ -33,6 +37,7 @@ public class navbarController {
             toggleProfilePane.setVisible(true);
         }
     }
+
     @FXML protected void onProfileButtonClick() throws IOException {
         FXRouter.goTo("user-profile");
     }
@@ -44,7 +49,7 @@ public class navbarController {
         FXRouter.goTo("home");
     }
 
-    @FXML protected void onWelcomeButtonClick() throws IOException {
+    @FXML protected void onLogOutButtonClick() throws IOException {
         FXRouter.goTo("welcome");
     }
 
