@@ -8,12 +8,14 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -161,8 +163,6 @@
                   <Image url="@../../../images/logo/logo_white.png" />
                </image>
             </ImageView>
-            <Circle fx:id="profileCircle" fill="WHITE" layoutX="770.0" layoutY="38.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" styleClass="profile-menu" />
-            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="741.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
             <Line endX="-100.00003051757812" endY="34.199981689453125" layoutX="820.0" layoutY="25.0" startX="-100.0" startY="-8.600000381469727" stroke="WHITE" />
             <ImageView fitHeight="40.0" fitWidth="44.0" layoutX="652.0" layoutY="18.0">
                <image>
@@ -178,6 +178,16 @@
                   </Text>
                </children>
             </AnchorPane>
+            <Circle fill="#ffa527" layoutX="777.0" layoutY="38.0" radius="30.0" stroke="#ffa527" strokeType="INSIDE">
+               <effect>
+                  <DropShadow height="0.0" offsetY="2.0" radius="0.0" width="0.0">
+                     <color>
+                        <Color opacity="0.41717326641082764" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Circle>
+            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="748.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>
