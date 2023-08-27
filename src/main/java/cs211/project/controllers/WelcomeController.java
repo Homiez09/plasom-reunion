@@ -13,7 +13,7 @@ public class WelcomeController {
     @FXML private AnchorPane topBarAnchorPane;
 
     @FXML private void initialize() {
-        new LoadTopbarComponent(topBarAnchorPane);
+        new LoadTopbarComponent(topBarAnchorPane, true);
     }
 
     @FXML protected void onSignInButtonClick()  throws IOException {
