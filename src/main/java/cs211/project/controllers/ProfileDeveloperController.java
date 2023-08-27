@@ -2,15 +2,12 @@ package cs211.project.controllers;
 
 import cs211.project.services.LoadTopbarComponent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
-
-public class DevProfileController {
+public class ProfileDeveloperController {
     @FXML private Label nameLabel, nameLabel1, nameLabel2, nameLabel3;
     @FXML private Label nickLabel, nickLabel1, nickLabel2, nickLabel3;
     @FXML private Label studentIdLabel, studentIdLabel1, studentIdLabel2, studentIdLabel3;
