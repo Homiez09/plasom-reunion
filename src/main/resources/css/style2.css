@@ -91,14 +91,14 @@ Text, Label {
 }
 
 .toggle-menu {
-    -fx-background-radius: 0 0 10 10;
+    -fx-background-radius: 10;
     -fx-background-color: #F5F3EE;
 }
 
 .toggle-menu > VBox {
     -fx-border-width: 0.6;
     -fx-border-style: solid;
-    -fx-border-radius: 0 0 10 10;
+    -fx-border-radius: 10;
     -fx-border-color: #494949;
 }
 
@@ -115,7 +115,8 @@ Text, Label {
 }
 
 .toggle-menu > VBox > .items:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);
+    -fx-background-color: #ffa527;
+    /*-fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);*/
 }
 
 .toggle-menu > VBox > HBox {
