@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -20,7 +21,15 @@
                   <VBox prefHeight="693.0" prefWidth="200.0">
                      <children>
                         <Pane prefHeight="50.0" />
-                        <Pane prefHeight="593.0" styleClass="bgPane" />
+                        <Pane prefHeight="593.0" styleClass="bgPane">
+                           <children>
+                              <ImageView fx:id="userImageView" fitHeight="150.0" fitWidth="150.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="usernameLabel" layoutX="79.0" layoutY="192.0" styleClass="font" text="Name">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children></Pane>
                         <Pane prefHeight="50.0" />
                      </children>
                   </VBox>
@@ -35,7 +44,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <TableView layoutX="26.0" layoutY="69.0" prefHeight="503.0" prefWidth="800.0">
+                              <TableView fx:id="myeventTableView" layoutX="26.0" layoutY="69.0" prefHeight="503.0" prefWidth="800.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />
