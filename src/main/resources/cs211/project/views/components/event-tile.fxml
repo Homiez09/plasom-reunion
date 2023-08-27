@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" style="-fx-border-radius: 20px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.eventTileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" stylesheets="@../../../../css/home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.eventTileController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="300.0" spacing="20.0" style="-fx-border-radius: 20px; -fx-border-color: #000; -fx-background-color: F9F6F7;">
+      <VBox alignment="TOP_CENTER" onMouseClicked="#onEventTileClick" prefHeight="450.0" prefWidth="300.0" spacing="20.0" styleClass="tile-bg" stylesheets="@../../../../css/home.css">
          <children>
             <ImageView fx:id="eventTileImageView" fitHeight="270.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
