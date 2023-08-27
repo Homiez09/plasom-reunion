@@ -1,0 +1,27 @@
+.bg{
+-fx-background-color:  #F9F6F7;
+}
+.top-bg{
+-fx-background-color: #FFE8D6;
+}
+.page-button{
+-fx-background-color: #F9F6F7;
+-fx-border-radius: 9px;
+-fx-border-color: black;
+-fx-background-radius: 10px;
+-fx-border-width: 2px;
+}
+.button:hover {
+-fx-background-color: #FF971D;
+-fx-border-radius: 9px;
+-fx-border-color: #F9F6F7;
+-fx-background-radius: 10px;
+-fx-border-width: 2px;
+}
+.staff-apply-box{
+-fx-background-color: #FF971D;
+-fx-border-radius: 18px;
+-fx-border-color: black;
+-fx-background-radius: 20px;
+-fx-border-width: 3px;
+}

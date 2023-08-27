@@ -118,6 +118,11 @@ Text, Label {
     -fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);
 }
 
+.toggle-menu > VBox > HBox {
+    -fx-background-color: #F5F3EE;
+    -fx-background-radius: 0 0 10 10;
+}
+
 .toggle-menu > VBox > .text-primary {
     -fx-text-fill: #413b3b;
 }
@@ -164,7 +169,7 @@ Text, Label {
     -fx-font-size: 19;
     -fx-text-fill: #666666;
     -fx-background-radius: 10;
-    -fx-alignment: left;
+    -fx-alignment: center-left;
     -fx-padding: 0 0 0 20;
 }
 

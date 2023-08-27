@@ -28,7 +28,6 @@ public class HelloApplication extends Application {
         FXRouter.when("admin-dashboard", resourcesPath+ "admin-dashboard.fxml");
         FXRouter.when("my-event", resourcesPath+ "my-event-view.fxml");
 
-
     }
 
     public static void main(String[] args) {
