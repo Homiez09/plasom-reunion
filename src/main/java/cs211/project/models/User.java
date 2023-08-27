@@ -5,19 +5,26 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class User {
-    private String userid, name, username, password, role, status, lastedLogin, registerDate, imagePath;
+    private String  displayName, password, status, lastedLogin, imagePath;
+    private final String role, registerDate, userid, username;
 
-    public User(String name, String username, String password) {
-        this.name = name;
+    public User(String displayName, String username, String password) {
+        this.displayName = displayName;
         this.username = username;
         this.password = password;
         this.status = "offline";
-        this.imagePath = "no-user.jpg";
+        this.imagePath = generateAvatar();
         this.role = "user";
         this.userid = generateUserID();
         this.registerDate = generateRegisterDate();
 
     }
+
+    private String generateAvatar(){
+        int randomAvatar = (int)(Math.random()*10);
+        return "/images/profile/default-avatar/default" + randomAvatar + ".png";
+    }
+
     private String generateRegisterDate(){
         LocalDate currentDate = LocalDate.now();
         String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -46,7 +53,6 @@ public class User {
                 numericText.append(c);
             }
         }
-
         // maximum length is 16
         int totalLength = formattedDate.length() + formattedTime.length() + numericText.length();
         if (totalLength > MAX_ID_LENGTH) {
@@ -65,8 +71,8 @@ public class User {
         return userid;
     }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getUsername() {
@@ -97,8 +103,8 @@ public class User {
         return imagePath;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public void setPassword(String password) {
@@ -116,5 +122,7 @@ public class User {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
+
+
 }
 
