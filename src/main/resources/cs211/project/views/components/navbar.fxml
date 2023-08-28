@@ -52,9 +52,9 @@
                   </DropShadow>
                </effect>
             </Circle>
-            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="1046.0" layoutY="10.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
+      <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="1046.0" layoutY="9.0" onMouseClicked="#onToggleProfileMenuClick" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="75.0" fitWidth="108.0" layoutX="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/logo/logo_white.png" />

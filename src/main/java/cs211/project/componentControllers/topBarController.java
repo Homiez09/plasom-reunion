@@ -11,7 +11,7 @@ public class topBarController {
 
     @FXML protected void onBackButtonClick() {
         try {
-            FXRouter.goTo("welcome");
+            FXRouter.goTo("welcome", null);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -23,7 +23,7 @@ public class topBarController {
 
     @FXML protected void onCurrentEventButtonClick() {
         try {
-            FXRouter.goTo("home");
+            FXRouter.goTo("home", null);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,7 +31,7 @@ public class topBarController {
 
     @FXML protected void onDevProfileButtonClick() {
         try {
-            FXRouter.goTo("dev-profile");
+            FXRouter.goTo("dev-profile", null);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

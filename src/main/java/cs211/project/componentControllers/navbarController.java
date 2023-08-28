@@ -1,5 +1,6 @@
 package cs211.project.componentControllers;
 
+import cs211.project.models.User;
 import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
 
@@ -20,13 +21,15 @@ public class navbarController {
     @FXML private Pane toggleProfilePane;
     @FXML private AnchorPane mainNavbarAnchorPane;
 
+    private User user = (User) FXRouter.getData();
     @FXML private void initialize() {
         toggleProfilePane.setVisible(false);
         showProfile();
     }
 
     private void showProfile() {
-        profileImageView.setImage(new Image(getClass().getResource("/images/profile/default-avatar/default0.png").toString(), 1280, 1280, false, false));
+        String path = (user != null) ? user.getImagePath() : "/images/profile/default-avatar/default0.png";
+        profileImageView.setImage(new Image(getClass().getResource(path).toString(), 1280, 1280, false, false));
         new CreateProfileCircle(profileImageView, 28);
     }
 
@@ -39,14 +42,14 @@ public class navbarController {
     }
 
     @FXML protected void onProfileButtonClick() throws IOException {
-        FXRouter.goTo("user-profile");
+        FXRouter.goTo("user-profile", user);
     }
     @FXML protected void onSettingButtonClick() throws IOException {
-        FXRouter.goTo("setting");
+        FXRouter.goTo("setting", user);
     }
 
     @FXML protected void onHomeButtonClick() throws IOException {
-        FXRouter.goTo("home");
+        FXRouter.goTo("home", user);
     }
 
     @FXML protected void onLogOutButtonClick() throws IOException {
@@ -58,6 +61,6 @@ public class navbarController {
     }
 
     @FXML public void onMyEventsButton() throws IOException {
-        FXRouter.goTo("my-event");
+        FXRouter.goTo("my-event", user);
     }
 }
