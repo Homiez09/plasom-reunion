@@ -1,9 +1,11 @@
 package cs211.project.controllers;
 
 import cs211.project.models.Event;
+import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.Datasource;
 import cs211.project.services.EventDataSourceHardCode;
+import cs211.project.services.FXRouter;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -29,6 +31,7 @@ public class MyEventController {
     private Event selectEvent;
     private Datasource<EventList> datasourcecsv;
 
+    private User user = (User) FXRouter.getData();
 
     @FXML
     public void initialize(){

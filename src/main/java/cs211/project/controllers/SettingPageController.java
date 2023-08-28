@@ -1,5 +1,6 @@
 package cs211.project.controllers;
 
+import cs211.project.models.User;
 import cs211.project.services.FXRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +30,7 @@ public class SettingPageController {
     @FXML
     Hyperlink privalcyHyperlink;
 
+    private User user = (User) FXRouter.getData();
 
     // top-bar
     private void loadTopBarComponent() {

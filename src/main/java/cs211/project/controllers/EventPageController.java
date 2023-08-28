@@ -1,5 +1,7 @@
 package cs211.project.controllers;
 
+import cs211.project.models.User;
+import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -12,6 +14,8 @@ public class EventPageController {
     @FXML private void initialize() {
         loadNavbarComponent();
     }
+
+    private User user = (User) FXRouter.getData();
 
     private void loadNavbarComponent() {
         FXMLLoader navbarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));

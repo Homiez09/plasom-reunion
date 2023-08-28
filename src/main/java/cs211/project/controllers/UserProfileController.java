@@ -1,6 +1,7 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
+import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -24,6 +25,7 @@ public class UserProfileController {
     private Image showPasswordImage, hidePasswordImage;
     private String password,bioText,previousBioText,previousBioCount;
 
+    private User user = (User) FXRouter.getData();
     @FXML
     private void initialize() {
         loadImage();
