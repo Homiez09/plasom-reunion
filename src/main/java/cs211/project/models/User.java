@@ -1,23 +1,39 @@
 package cs211.project.models;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class User {
-    private String  displayName, password, status, lastedLogin, imagePath;
-    private final String role, registerDate, userid, username;
+    private String  username,displayName, password, status, lastedLogin, imagePath;
+    private final String role, registerDate, userid;
 
-    public User(String displayName, String username, String password) {
-        this.displayName = displayName;
+    public User(String username){
         this.username = username;
-        this.password = password;
-        this.status = "offline";
-        this.imagePath = generateAvatar();
+        password = null;
         this.role = "user";
         this.userid = generateUserID();
         this.registerDate = generateRegisterDate();
+    }
+    public User(String displayName, String username, String password) {
+        this(username);
+        this.displayName = displayName;
+        setPassword(password);
+        this.status = "offline";
+        this.imagePath = generateAvatar();
+    }
 
+    public boolean isUserName(String username){
+        // to check user verified
+        return this.username.equals(username);
+    }
+
+    public boolean validatePassword(String password){
+        // to check result verified
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), this.password);
+        return result.verified;
     }
 
     private String generateAvatar(){
@@ -107,12 +123,12 @@ public class User {
         this.displayName = displayName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setPassword(String password){
+        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
 
     public void setLastedLogin(String lastedLogin) {
