@@ -41,16 +41,14 @@ public class SignInController {
     private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
 
     private UserList userList;
-    private User user;
     String password;
-//    User user = (User) FXRouter.getData();
 
 
     @FXML
     void initialize() {
         UserDataSourceHardCode datasource = new UserDataSourceHardCode();
         userList = datasource.readData();
-//        System.out.println(user.getUsername() + user.getPassword());
+
         loadImage();
         showPasswordTextField.setVisible(false);
         visiblePasswordImageView.setImage(hidePasswordImage);
@@ -165,24 +163,10 @@ public class SignInController {
         updateVisibleButton();
     }
 
-    private boolean validateUser() {
-        user = userList.findUsername(usernameTextField.getText());
-        if(user != null && user.getUsername().equals(usernameTextField.getText()) && user.getPassword().equals(password)){
-            return true;
-        }else{
-            return false;
-        }
-//        if(usernameTextField.getText().equals(user.getUsername())){
-//            profileImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getImagePath()))));
-//        }
-//        return usernameTextField.getText().equals(user.getUsername()) && password.equals(user.getPassword());
-    }
-
-
-
 
     public void onLoginButton(ActionEvent actionEvent) {
-        if(validateUser()){
+        User user = userList.login(usernameTextField.getText(), password);
+        if(user!=null){
             try {
                 FXRouter.goTo("home", user);
             } catch (IOException e) {
