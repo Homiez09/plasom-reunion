@@ -36,7 +36,7 @@ public class SettingPageController {
     @FXML
     public void initialize(){
         hidePane();
-        new LoadNavbarComponent(navbarAnchorPane);
+        new LoadNavbarComponent(user, navbarAnchorPane);
     }
 
     public void hidePane(){
