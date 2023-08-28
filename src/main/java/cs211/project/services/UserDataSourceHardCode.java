@@ -8,6 +8,7 @@ public class UserDataSourceHardCode implements Datasource<UserList>{
     public UserList readData() {
         UserList users = new UserList();
         users.addUser("Homiez","HomieZ09","@Mingnaruk1234");
+        users.addUser("Homiez1","HomieZ09_test","@Mingnaruk1234");
         users.addUser("PinkPPanther","mingmmie","@Phumnaruk1234");
         users.addUser("Owlvi","Owvil","@Manza1150");
         users.addUser("Ging","Ginglnwza09","@GlinglowTest5555");

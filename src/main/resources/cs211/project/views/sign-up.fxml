@@ -51,7 +51,7 @@
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.3199999928474426" green="0.27504763007164" blue="0.23999999463558197" />
+                              <Color red="0.2549019753932953" green="0.23137255012989044" blue="0.23137255012989044" />
                            </color>
                         </Stop>
                      </stops>
@@ -146,6 +146,24 @@
                         <String fx:value="text-base" />
                      </styleClass>
                   </TextField>
+                  <Label fx:id="errorLabel" layoutX="144.0" layoutY="142.0" prefHeight="43.0" prefWidth="255.0" text="Those passwords didn't match. Please try again." textFill="#ff1515">
+                     <styleClass>
+                        <String fx:value="font" />
+                        <String fx:value="text-xs" />
+                     </styleClass>
+                  </Label>
+                  <Label fx:id="displayNameReq" layoutX="144.0" layoutY="-78.0" prefHeight="15.0" prefWidth="397.0" text="Other users can see your displayname, and you can use special characters." textFill="#413b3b">
+                     <styleClass>
+                        <String fx:value="font" />
+                        <String fx:value="text-xs" />
+                     </styleClass>
+                  </Label>
+                  <Label fx:id="usernameReq" layoutX="144.0" prefHeight="15.0" prefWidth="382.0" text="must use only alphabets, digits, underscores (_), or periods (.) ." textFill="#413b3b">
+                     <styleClass>
+                        <String fx:value="font" />
+                        <String fx:value="text-xs" />
+                     </styleClass>
+                  </Label>
                </children>
             </AnchorPane>
          </bottom>
@@ -393,7 +411,7 @@
          </styleClass>
       </Label>
       <ImageView fx:id="passwordIconView" fitHeight="24.0" fitWidth="24.0" layoutX="136.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="usernameTextField" layoutX="123.0" layoutY="313.0" prefHeight="46.0" prefWidth="376.0" promptText="Username">
+      <TextField fx:id="usernameTextField" layoutX="123.0" layoutY="313.0" onKeyReleased="#onKeyUsername" prefHeight="46.0" prefWidth="376.0" promptText="Username">
          <font>
             <Font size="16.0" />
          </font>
@@ -409,7 +427,7 @@
             <String fx:value="font" />
          </styleClass>
       </TextField>
-      <TextField fx:id="DisplayNameTextfield" layoutX="123.0" layoutY="237.0" prefHeight="46.0" prefWidth="376.0" promptText="DisplayName">
+      <TextField fx:id="displayNameTextfield" layoutX="123.0" layoutY="237.0" onKeyReleased="#onKeyDisplayName" prefHeight="46.0" prefWidth="376.0" promptText="Display name">
          <font>
             <Font size="16.0" />
          </font>

@@ -12,22 +12,33 @@ public class UserList {
         users = new ArrayList<>();
     }
 
-    public void addUser(String displayName, String username, String password){
-        displayName = displayName.trim();
-        username = username.trim();
-        password = password.trim();
-        if(!username.equals("") && !password.equals("")){
-            users.add(new User(displayName,username,password));
-        }
-    }
 
     public User findUsername(String username) {
         for (User user: users) {
-            if (user.getUsername().equals(username)) {
+            if (user.isUserName(username)) {
                 return user;
             }
         }
         return null;
     }
+
+    public void addUser(String displayName, String username, String password){
+        username = username.trim();
+        password = password.trim();
+        User exist = findUsername(username);
+        if(exist == null){
+            users.add(new User(displayName, username, password));
+        }
+    }
+
+    public User login(String username, String password){
+        for(User user: users){
+            if(user.getUsername().equals(username) && user.validatePassword(password)){
+                return user;
+            }
+        }
+        return null;
+    }
+
 
 }

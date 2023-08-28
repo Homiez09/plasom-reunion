@@ -16,6 +16,8 @@ import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 
+import static java.awt.SystemColor.text;
+
 public class SignUpController {
     private int page = 0;
     private int maxPage;
@@ -26,31 +28,118 @@ public class SignUpController {
     private Shape backCircle, nextCircle, passwordRequireBox, passwordRequireBoxLabel;
 
     @FXML
-    private Label passwordRequireLabel, passwordLengthReq, passwordUpperCaseReq, passwordLowerCaseReq, passwordSpecialReq, passwordNumReq;
+    private Label passwordRequireLabel, passwordLengthReq, passwordUpperCaseReq, passwordLowerCaseReq, passwordSpecialReq, passwordNumReq, usernameReq, displayNameReq, errorLabel;
 
     @FXML
     private PasswordField passwordField, confirmPasswordField;
     @FXML
-    private TextField showPasswordTextField, showConfirmPasswordTextField, DisplayNameTextfield, usernameTextField;
+    private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
 
     @FXML
     private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
     @FXML
     private ImageView fullNameIconView, usernameIconView, passwordIconView, confirmPasswordIconView, visiblePasswordImageView,checkBoxPasswordImageView,checkBoxConfirmPasswordImageView;
     private Image showPasswordImage, hidePasswordImage,checkBoxPasswordIcon;
-    private String password, confirmPassword;
-    private boolean isHandlingFocusChange = false,passwordMatching =false;
+
+    private String password, confirmPassword, displayName, username;
+    private boolean passwordMatching =false;
+    private int maxDisplayNameLimit = 24,maxUsernameLimit = 20,maxPasswordLimit = 30;
+
 
     @FXML
     void initialize() {
-
+        maximumLengthField();
+        showFocusRequirementName();
         showFocusRequirementsPassword();
         loadImage();
         setTextFieldVisible(false);
         updateVisibleButton();
         showImage(page);
         maxPage = calculateMaxPage();
+        errorLabel.setVisible(false);
 
+    }
+    private void showFocusRequirementName() {
+        displayNameReq.setVisible(false);
+        usernameReq.setVisible(false);
+
+        displayNameTextfield.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                displayNameReq.setVisible(false);
+                showFocusRequirementName();
+            } else {
+                displayName = displayNameTextfield.getText();
+                displayNameReq.setStyle(!displayName.isEmpty() ? "-fx-text-fill: #413b3b" : "-fx-text-fill: red");
+                displayNameReq.setVisible(true);
+            }
+        });
+
+        usernameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (!newValue) {
+                usernameReq.setVisible(false);
+                showFocusRequirementName();
+            } else {
+                username = usernameTextField.getText();
+                usernameReq.setStyle(!username.isEmpty() ? "-fx-text-fill: #413b3b" : "-fx-text-fill: red");
+                boolean isValid = true;
+                for(char p:username.toCharArray()){
+                    if(!(Character.isDigit(p) || Character.isLowerCase(p) || Character.isUpperCase(p) || "_.".contains(String.valueOf(p))) ){
+                        isValid = false;
+                        break;
+                    }
+                }
+                usernameReq.setStyle((!username.isEmpty()) && isValid ? "-fx-text-fill: #413b3b" : "-fx-text-fill: red");
+                usernameReq.setVisible(true);
+            }
+        });
+    }
+
+    public void onKeyDisplayName(KeyEvent event) {
+        displayName = displayNameTextfield.getText();
+        displayNameReq.setStyle(!displayName.isEmpty() ? "-fx-text-fill: #413b3b" : "-fx-text-fill: red");
+    }
+
+    public void onKeyUsername(KeyEvent event){
+        username = usernameTextField.getText();
+        usernameReq.setStyle(!username.isEmpty() ? "-fx-text-fill: #413b3b" : "-fx-text-fill: red");
+        boolean isValid = true;
+        for(char p:username.toCharArray()){
+            if(!(Character.isDigit(p) || Character.isLowerCase(p) || Character.isUpperCase(p) || "_.".contains(String.valueOf(p))) ){
+                isValid = false;
+                break;
+            }
+
+        }
+        usernameReq.setStyle((!username.isEmpty()) && isValid ? "-fx-text-fill: #413b3b" : "-fx-text-fill: red");
+    }
+
+    private void maximumLengthField(){
+        displayNameTextfield.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(newValue.length() > maxDisplayNameLimit){
+                displayNameTextfield.setText(oldValue);
+            }
+        });
+
+        usernameTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxUsernameLimit){
+                usernameTextField.setText(oldValue);
+            }
+        }));
+
+        showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
+                passwordField.setText(oldValue);
+                showPasswordTextField.setText(oldValue);
+            }
+        }));
+
+        showConfirmPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
+                confirmPasswordField.setText(oldValue);
+                showConfirmPasswordTextField.setText(oldValue);
+            }
+        }));
     }
 
     private void updateVisibleButton() {
@@ -95,31 +184,25 @@ public class SignUpController {
     }
 
     private void showFocusRequirementsPassword() {
-
-        if (isHandlingFocusChange) {
-            return;
-        }
-
-        isHandlingFocusChange = true;
-
-        if (passwordField.isFocused() || showPasswordTextField.isFocused()) {
-            showRequirementPassword(true);
-        } else {
-            showRequirementPassword(false);
-        }
-
-        passwordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+        showRequirementPassword(false);
+        passwordField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!newValue) {
+                showRequirementPassword(false);
                 showFocusRequirementsPassword();
-            }
-        });
-        showPasswordTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                showFocusRequirementsPassword();
+            }else{
+                showRequirementPassword(true);
             }
         });
 
-        isHandlingFocusChange = false;
+        showPasswordTextField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue) {
+                showRequirementPassword(false);
+                showFocusRequirementsPassword();
+            }else{
+                showRequirementPassword(true);
+            }
+        });
+
     }
 
     private void showRequirementPassword(boolean require){
@@ -180,8 +263,10 @@ public class SignUpController {
             if(password.equals(confirmPassword)){
                 checkBoxConfirmPasswordImageView.setVisible(true);
                 checkBoxConfirmPasswordImageView.setImage(checkBoxPasswordIcon);
+                errorLabel.setVisible(false);
             }else {
                 checkBoxConfirmPasswordImageView.setVisible(false);
+                errorLabel.setVisible(true);
             }
         }else{
             checkBoxConfirmPasswordImageView.setVisible(false);
@@ -222,8 +307,6 @@ public class SignUpController {
 
         }
     }
-
-
 
     private int calculateMaxPage() {
         int countImage = 0;
@@ -274,16 +357,14 @@ public class SignUpController {
 
     public void onCreateAccountButton(ActionEvent actionEvent) {
         if(validatePasswordConfirmation()){
-            User user = new User(DisplayNameTextfield.getText(), usernameTextField.getText(),password); // todo:hash password!
+            User user = new User(displayNameTextfield.getText(), usernameTextField.getText(),password);
             try {
                 FXRouter.goTo("sign-in", user);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }else{
-            System.out.println("wrong pass");
-            return ;
-            // todo: error!
+            errorLabel.setVisible(true);
         }
 
     }
