@@ -30,7 +30,7 @@
                            <graphic>
                               <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../images/cog.png" />
+                                    <Image url="@../../../images/icons/setting/cog.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -115,17 +115,17 @@
                      <children>
                         <ImageView fx:id="offImageView">
                            <image>
-                              <Image url="@../../../images/switch-bodyOff.png" />
+                              <Image url="@../../../images/icons/setting/switch-bodyOff.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="onImageView" visible="false">
                            <image>
-                              <Image url="@../../../images/switch-bodyOn.png" />
+                              <Image url="@../../../images/icons/setting/switch-bodyOn.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="switchImageView" fitHeight="29.0" fitWidth="29.0">
                            <image>
-                              <Image url="@../../../images/Switch.png" />
+                              <Image url="@../../../images/icons/setting/Switch.png" />
                            </image>
                         </ImageView>
                         <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#onToggleButton" prefHeight="29.0" prefWidth="61.0" />
