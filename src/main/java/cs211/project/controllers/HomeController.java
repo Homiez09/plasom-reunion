@@ -16,10 +16,10 @@ public class HomeController {
     @FXML private AnchorPane newEventTileAnchorPane1,newEventTileAnchorPane2,newEventTileAnchorPane3;
     @FXML private AnchorPane upEventTileAnchorPane1,upEventTileAnchorPane2,upEventTileAnchorPane3;
 
-
+    private User user = (User) FXRouter.getData();
     @FXML
     private  void initialize() {
-        new LoadNavbarComponent(navbarAnchorPane);
+        new LoadNavbarComponent(user, navbarAnchorPane);
         loadEventTileComponent(newEventTileAnchorPane1);
         loadEventTileComponent(newEventTileAnchorPane2);
         loadEventTileComponent(newEventTileAnchorPane3);
