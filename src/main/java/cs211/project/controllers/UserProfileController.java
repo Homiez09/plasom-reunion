@@ -29,7 +29,7 @@ public class UserProfileController {
     @FXML
     private void initialize() {
         loadImage();
-        new LoadNavbarComponent(navbarAnchorPane);
+        new LoadNavbarComponent(user, navbarAnchorPane);
         loadPasswordFieldAndButtonProfile();
         loadIconImageProfile();
     }
