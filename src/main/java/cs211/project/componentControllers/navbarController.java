@@ -28,7 +28,7 @@ public class navbarController {
     }
 
     private void showProfile() {
-        String path = (user != null) ? user.getImagePath() : "/images/profile/default-avatar/default0.png";
+        String path = (user != null) ? user.getImagePath() : "/images/profile/sign-in/sign-in-avatar.png";
         profileImageView.setImage(new Image(getClass().getResource(path).toString(), 1280, 1280, false, false));
         new CreateProfileCircle(profileImageView, 28);
     }
