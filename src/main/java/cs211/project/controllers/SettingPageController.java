@@ -2,6 +2,7 @@ package cs211.project.controllers;
 
 import cs211.project.models.User;
 import cs211.project.services.FXRouter;
+import cs211.project.services.LoadNavbarComponent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,21 +33,10 @@ public class SettingPageController {
 
     private User user = (User) FXRouter.getData();
 
-    // top-bar
-    private void loadTopBarComponent() {
-        FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));
-        try {
-            AnchorPane topBarComponent = topBarComponentLoader.load();
-            navbarAnchorPane.getChildren().add(topBarComponent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @FXML
     public void initialize(){
         hidePane();
-        loadTopBarComponent();
+        new LoadNavbarComponent(navbarAnchorPane);
     }
 
     public void hidePane(){
