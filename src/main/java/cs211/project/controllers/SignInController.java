@@ -2,10 +2,8 @@ package cs211.project.controllers;
 
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
-import cs211.project.services.EventDataSourceHardCode;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataSourceHardCode;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -17,13 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class SignInController {
 
     private int page = 0;
     private int maxPage;
-    private Image showPasswordImage, hidePasswordImage;
 
     @FXML
     private Button backButton, nextButton;
@@ -39,9 +35,10 @@ public class SignInController {
     private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
     @FXML
     private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
+    private Image showPasswordImage, hidePasswordImage;
 
+    private String password;
     private UserList userList;
-    String password;
 
 
     @FXML
@@ -50,12 +47,13 @@ public class SignInController {
         userList = datasource.readData();
 
         loadImage();
+        showImage(page);
+        maxPage = calculateMaxPage();
+
         showPasswordTextField.setVisible(false);
         visiblePasswordImageView.setImage(hidePasswordImage);
-
-        maxPage = calculateMaxPage();
         updateVisibleButton();
-        showImage(page);
+
     }
 
 
@@ -85,6 +83,48 @@ public class SignInController {
             showPasswordTextField.setVisible(false);
             visiblePasswordImageView.setImage(hidePasswordImage);
         }
+    }
+
+
+    private void loadImage() {
+        Image upComingBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg1.png"));
+        upComingEventsBackgroundImageView.setImage(upComingBackground);
+
+        Image signBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg2.png"));
+        signBackgroundImageView.setImage(signBackground);
+
+        Image usernameIcon = new Image(getClass().getResourceAsStream("/images/icons/login/username_field.png"));
+        usernameIconView.setImage(usernameIcon);
+
+        Image passwordIcon = new Image(getClass().getResourceAsStream("/images/icons/login/password_field.png"));
+        passwordIconView.setImage(passwordIcon);
+
+        Image profileImage = new Image(getClass().getResourceAsStream("/images/profile/sign-in/sign-in-avatar.png"));
+        profileImageView.setImage(profileImage);
+
+
+        showPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
+        hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
+        visiblePasswordImageView.setImage(hidePasswordImage);
+    }
+
+    private void showImage(int pageNumber) {
+        Image image = new Image(getClass().getResourceAsStream("/images/login/event" + pageNumber + "_test.jpg"));
+        upComingEventsImageView.setImage(image);
+        updateVisibleButton();
+    }
+
+    private int calculateMaxPage() {
+        int countImage = 0;
+        while (true) {
+            String path = "/images/login/event" + countImage + "_test.jpg";
+            if (getClass().getResource(path) != null) {
+                countImage++;
+            } else {
+                break;
+            }
+        }
+        return countImage - 1;
     }
 
     @FXML
@@ -121,50 +161,7 @@ public class SignInController {
         }
     }
 
-    private int calculateMaxPage() {
-        int countImage = 0;
-        while (true) {
-            String path = "/images/login/event" + countImage + "_test.jpg";
-            if (getClass().getResource(path) != null) {
-                countImage++;
-            } else {
-                break;
-            }
-        }
-        return countImage - 1;
-    }
-
-    private void loadImage() {
-        Image upComingBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg1.png"));
-        upComingEventsBackgroundImageView.setImage(upComingBackground);
-
-        Image signBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_evnt_bg2.png"));
-        signBackgroundImageView.setImage(signBackground);
-
-        Image usernameIcon = new Image(getClass().getResourceAsStream("/images/icons/login/username_field.png"));
-        usernameIconView.setImage(usernameIcon);
-
-        Image passwordIcon = new Image(getClass().getResourceAsStream("/images/icons/login/password_field.png"));
-        passwordIconView.setImage(passwordIcon);
-
-        Image profileImage = new Image(getClass().getResourceAsStream("/images/profile/sign-in/sign-in-avatar.png"));
-        profileImageView.setImage(profileImage);
-
-
-        showPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
-        hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
-        visiblePasswordImageView.setImage(hidePasswordImage);
-    }
-
-    private void showImage(int pageNumber) {
-        String path = "/images/login/event" + pageNumber + "_test.jpg";
-        Image image = new Image(getClass().getResourceAsStream(path));
-        upComingEventsImageView.setImage(image);
-        updateVisibleButton();
-    }
-
-
-    public void onLoginButton(ActionEvent actionEvent) {
+    public void onLoginButton() {
         User user = userList.login(usernameTextField.getText(), password);
         if(user!=null){
             try {
