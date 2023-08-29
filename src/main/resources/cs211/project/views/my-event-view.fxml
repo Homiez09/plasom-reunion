@@ -29,7 +29,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="63.0" layoutY="450.0" mnemonicParsing="false" text="Edit Profile" />
+                              <Button layoutX="63.0" layoutY="449.0" mnemonicParsing="false" styleClass="edit-profile-button" text="Edit Profile" />
                            </children></Pane>
                         <Pane prefHeight="50.0" />
                      </children>
@@ -39,8 +39,8 @@
                      <children>
                         <Pane prefHeight="50.0">
                            <children>
-                              <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="&lt; Back" />
-                              <Button layoutX="75.0" layoutY="13.0" mnemonicParsing="false" text="+ Create" />
+                              <Button layoutX="7.0" layoutY="11.0" mnemonicParsing="false" styleClass="cancel-profile-button" text="&lt; Back" />
+                              <Button layoutX="79.0" layoutY="11.0" mnemonicParsing="false" styleClass="cancel-profile-button" text="+ Create" />
                               <Label layoutX="270.0" layoutY="11.0" styleClass="font" text="My Event">
                                  <font>
                                     <Font size="24.0" />
@@ -49,12 +49,7 @@
                            </children></Pane>
                         <Pane prefHeight="500.0" prefWidth="852.0" styleClass="bgPane">
                            <children>
-                              <ListView fx:id="myeventListView" layoutX="51.0" layoutY="10.0" prefHeight="485.0" prefWidth="750.0" visible="false" />
-                              <VBox fx:id="eventVbox" alignment="TOP_CENTER" layoutX="20.0" layoutY="10.0" prefHeight="485.0" prefWidth="812.0">
-                                 <children>
-                                    <AnchorPane fx:id="eventAnchorPane" prefHeight="112.0" />
-                                 </children>
-                              </VBox>
+                              <ListView fx:id="myeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" />
                            </children>
                         </Pane>
                         <Pane prefHeight="50.0" />
@@ -68,6 +63,7 @@
          <stylesheets>
             <URL value="@../../../css/style.css" />
             <URL value="@../../../css/style2.css" />
+            <URL value="@../../../css/event.css" />
          </stylesheets>
       </AnchorPane>
    </children>

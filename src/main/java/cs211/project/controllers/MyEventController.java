@@ -44,10 +44,15 @@ public class MyEventController {
     @FXML
     public void initialize() {
         loadTopBarComponent();
-        loadEventComponent();
+//        loadEventComponent();
         EventDataSourceHardCode datasource = new EventDataSourceHardCode();
         eventList = datasource.readData();
+        for (int i = 0 ; i < 4 ;i++){
+            AnchorPane anchorPane = new AnchorPane();
+            new LoadEventComponent(anchorPane);
+            myeventListView.getItems().add(anchorPane);
 
+        }
 
 
 
