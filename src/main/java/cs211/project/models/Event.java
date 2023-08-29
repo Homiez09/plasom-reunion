@@ -8,7 +8,7 @@ public class Event {
     private String eventDateStart;
     private String eventDateEnd;
     private String eventDescription;
-    private UserList userList ;
+    private int member = 0;
     private int slotMember;
 
     public Event(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription) {
@@ -52,8 +52,8 @@ public class Event {
         return slotMember;
     }
 
-    public UserList getUserList() {
-        return userList;
+    public int getMember() {
+        return member;
     }
 
     public void changeDateStart(String newDate){
@@ -84,14 +84,14 @@ public class Event {
                 '}';
     }
 
-    //    public boolean isFull(){
-//        if(slotMember == userList.getMember()){
-//            return true;
-//        }else {
-//            return false;
-//        }
-//
-//    }
+    public boolean isFull(){
+        if(slotMember == member){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
 
 }
 

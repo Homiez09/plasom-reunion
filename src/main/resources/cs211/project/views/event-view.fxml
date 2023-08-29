@@ -62,6 +62,25 @@
                                           </Label>
                                        </children>
                                     </HBox>
+                                    <HBox alignment="BOTTOM_LEFT" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../images/event/person.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="currentParticipantsLabel" text="currentParticipantsLabel">
+                                             <font>
+                                                <Font name="Leelawadee" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="participantLimitLabel" text="participantLimitLabel">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
                                     <Label fx:id="eventTagLabel" text="eventTagLabel" />
                                     <Button mnemonicParsing="false" styleClass="page-button" text="Add to Calendar" />
                                     <VBox alignment="CENTER" prefWidth="200.0" spacing="10.0" styleClass="staff-apply-box">
@@ -71,7 +90,7 @@
                                                 <Font name="Leelawadee" size="14.0" />
                                              </font>
                                           </Text>
-                                          <Button mnemonicParsing="false" styleClass="page-button" text="Apply for staff" />
+                                          <Button mnemonicParsing="false" onAction="#onApplyStaffButtonClick" styleClass="page-button" text="Apply for staff" />
                                        </children>
                                        <VBox.margin>
                                           <Insets />
@@ -125,5 +144,6 @@
          </content>
       </ScrollPane>
       <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
+      <AnchorPane fx:id="staffApplicationAnchorPane" prefHeight="768.0" prefWidth="1152.0" />
    </children>
 </AnchorPane>

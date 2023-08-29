@@ -178,7 +178,7 @@ public class UserProfileController {
         Image frameIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconFrame.png"));
         frameIconImageView.setImage(frameIcon);
 
-        Image profileIcon = new Image(getClass().getResourceAsStream("/images/profile/sign-in/sign-in-avatar.png"));
+        Image profileIcon = new Image(getClass().getResourceAsStream(user.getImagePath()));
         profileIconImageView.setImage(profileIcon);
 
         Image fullNameIcon = new Image(getClass().getResourceAsStream("/images/icons/login/username_field.png"));
