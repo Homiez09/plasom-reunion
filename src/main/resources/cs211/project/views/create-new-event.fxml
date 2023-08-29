@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
@@ -23,14 +24,14 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="1152.0" spacing="20.0" AnchorPane.topAnchor="75.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create your own event!">
-               <VBox.margin>
-                  <Insets top="25.0" />
-               </VBox.margin>
+            <Label fx:id="headCreateEventLabel" text="headCreateEventLabel">
                <font>
                   <Font name="Leelawadee Bold" size="48.0" />
                </font>
-            </Text>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </Label>
             <ScrollPane prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg">
               <content>
                   <VBox prefWidth="1000.0" spacing="15.0" styleClass="inbox-bg">

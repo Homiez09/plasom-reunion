@@ -29,11 +29,16 @@
                               <ImageView fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0" />
                               <VBox prefHeight="400.0" spacing="25.0" AnchorPane.leftAnchor="500.0">
                                  <children>
-                                    <Label text="eventNameLabel">
-                                       <font>
-                                          <Font name="Leelawadee Bold" size="36.0" />
-                                       </font>
-                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" spacing="30.0">
+                                       <children>
+                                          <Label text="eventNameLabel">
+                                             <font>
+                                                <Font name="Leelawadee Bold" size="36.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="editEventButton" mnemonicParsing="false" onAction="#onEditButtonClick" styleClass="page-button" text="Edit event" />
+                                       </children>
+                                    </HBox>
                                     <HBox alignment="CENTER_LEFT" spacing="20.0">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">

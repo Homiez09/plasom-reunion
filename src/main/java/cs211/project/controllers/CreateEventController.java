@@ -1,9 +1,11 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
+import cs211.project.models.Event;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
 import javafx.event.ActionEvent;
+//import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -11,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import cs211.project.models.Event;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
+    @FXML private Label headCreateEventLabel;
     @FXML private ChoiceBox<String> eventTagChoiceBox;
     @FXML private ImageView eventImageView;
     @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField,
@@ -34,7 +36,7 @@ public class CreateEventController {
     @FXML
     private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner,activityStartHourSpinner,activityEndHourSpinner,
             eventStartMinuteSpinner,eventEndMinuteSpinner,activityStartMinuteSpinner,activityEndMinuteSpinner;
-
+    private Event thisEvent = (Event) FXRouter.getData();
     String newEventImagePath;
     private User user = (User) FXRouter.getData();
     @FXML  void initialize() {
@@ -50,6 +52,7 @@ public class CreateEventController {
         setSpinner(activityEndMinuteSpinner,59);
 
         eventTagChoiceBox.getItems().addAll("Art","Music","Sport");
+        setPageHeader();
     }
 
     @FXML protected void handleUploadButton(ActionEvent event) {
@@ -89,31 +92,44 @@ public class CreateEventController {
         spinner.setValueFactory(valueFactory);
         spinner.setEditable(true);
     }
+    private void setPageHeader() {
+        if(thisEvent == null) {
+            headCreateEventLabel.setText("Create your own event!");
+        } else {
+            headCreateEventLabel.setText("Edit event");
+        }
+    }
 
     @FXML protected void onSubmitBasicInformationClick() {
-        String eventNameString = eventNameTextField.getText().trim();
-        String startDate = eventStartDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String endDate = eventEndDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String eventDescriptionString = eventDescriptionTextArea.getText();
-        String eventLocationString = eventLocationTextField.getText().trim();
-        String numMemberString = eventCapTextField.getText().trim();
-        int numMember = Integer.parseInt(numMemberString);
-        //add event
+        if (thisEvent == null) {
+            String eventNameString = eventNameTextField.getText().trim();
+            String startDate = eventStartDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String endDate = eventEndDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String eventDescriptionString = eventDescriptionTextArea.getText();
+            String eventLocationString = eventLocationTextField.getText().trim();
+            String numMemberString = eventCapTextField.getText().trim();
+            int numMember = Integer.parseInt(numMemberString);
+            //add event
+        }
     }
 
     @FXML protected void onAddActivityButtonClick() {
-        String activityNameString = activityNameTextField.getText().trim();
-        String activityDescriptionString = activityDescriptionTextArea.getText().trim();
-        String activityStartDate = activityStartDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String activityEndDate = activityEndDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String activityStartTime = activityStartHourSpinner.getValue() + " : " + activityStartMinuteSpinner.getValue();
-        String activityEndTime = activityEndHourSpinner.getValue() + " : " + activityEndMinuteSpinner.getValue();
-        // add to activity list
+        if (thisEvent == null) {
+            String activityNameString = activityNameTextField.getText().trim();
+            String activityDescriptionString = activityDescriptionTextArea.getText().trim();
+            String activityStartDate = activityStartDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String activityEndDate = activityEndDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String activityStartTime = activityStartHourSpinner.getValue() + " : " + activityStartMinuteSpinner.getValue();
+            String activityEndTime = activityEndHourSpinner.getValue() + " : " + activityEndMinuteSpinner.getValue();
+            // add to activity list
+        }
     }
     @FXML protected void onAddTeamButtonClick() {
-        String teamNameString = teamNameTextField.getText().trim();
-        String teamCapString = teamMemberCapTextField.getText().trim();
-        int numTeamMember = Integer.parseInt(teamCapString);
-        // add to team list
+        if (thisEvent == null) {
+            String teamNameString = teamNameTextField.getText().trim();
+            String teamCapString = teamMemberCapTextField.getText().trim();
+            int numTeamMember = Integer.parseInt(teamCapString);
+            // add to team list
+        }
     }
 }
