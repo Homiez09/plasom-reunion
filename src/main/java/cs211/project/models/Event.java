@@ -8,6 +8,7 @@ public class Event {
     private String eventDateStart;
     private String eventDateEnd;
     private String eventDescription;
+    private String eventLocation;
     private int member = 0;
     private int slotMember;
 
@@ -19,12 +20,13 @@ public class Event {
         this.eventDescription = eventDescription;
     }
 
-    public Event(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription, int slotMember) {
+    public Event(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation, int slotMember) {
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
         this.eventDateStart = eventDateStart;
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
+        this.eventLocation = eventLocation;
         this.slotMember = slotMember;
     }
 
@@ -55,6 +57,8 @@ public class Event {
     public int getMember() {
         return member;
     }
+
+    public String getEventLocation() { return eventLocation; }
 
     public void changeDateStart(String newDate){
         this.eventDateStart = newDate;
