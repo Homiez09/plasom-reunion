@@ -29,6 +29,7 @@ public class HelloApplication extends Application {
         FXRouter.when("my-event", resourcesPath+ "my-event-view.fxml");
         FXRouter.when("event", resourcesPath+ "event-view.fxml");
         FXRouter.when("create-event", resourcesPath+ "create-new-event.fxml");
+        FXRouter.when("select-team", resourcesPath+ "select-team.fxml");
 
     }
 
