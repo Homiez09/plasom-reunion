@@ -47,8 +47,7 @@ public class SignInController {
 
     @FXML
     void initialize() {
-        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
-        userList = datasource.readData();
+
 
         loadImage();
         showImage(page);
@@ -85,8 +84,9 @@ public class SignInController {
         }));
 
     }
-
     public void onLoginButton() {
+        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+        userList = datasource.readData();
         User user = userList.login(usernameTextField.getText(), password);
         username = usernameTextField.getText();
         password = passwordField.getText();
