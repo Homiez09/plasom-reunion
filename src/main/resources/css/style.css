@@ -339,3 +339,17 @@ Text, Label {
 }
 
 /* end for user-profile page */
+
+/* for select-team page */
+.selected-team-background{
+    -fx-background-color: #FFF5E5;
+}
+
+/* for team box */
+.team-box-background{
+    -fx-background-color: #F5F3ED;
+    -fx-background-radius: 8;
+    -fx-stroke-width: 2;
+    -fx-border-color: #413B3B;
+    -fx-border-radius: 8;
+}
