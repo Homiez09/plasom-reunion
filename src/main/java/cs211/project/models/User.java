@@ -1,6 +1,8 @@
 package cs211.project.models;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class User {
     private String  username,displayName, password, status, lastedLogin, imagePath;
     private final String role, registerDate, userid;
+    private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
 
     public User(String username){
         this.username = username;
@@ -23,6 +26,7 @@ public class User {
         setPassword(password);
         this.status = "offline";
         this.imagePath = generateAvatar();
+        this.avatar = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
     }
 
     public boolean isUserName(String username){
@@ -137,6 +141,12 @@ public class User {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public ImageView getAvatar(){
+        this.avatar.setFitWidth(35);
+        this.avatar.setFitHeight(35);
+        return avatar;
     }
 
 
