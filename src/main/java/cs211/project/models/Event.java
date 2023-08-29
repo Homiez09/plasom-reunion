@@ -84,14 +84,14 @@ public class Event {
                 '}';
     }
 
-    //    public boolean isFull(){
-//        if(slotMember == userList.getMember()){
-//            return true;
-//        }else {
-//            return false;
-//        }
-//
-//    }
+    public boolean isFull(){
+        if(slotMember == userList.getMember()){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
 
 }
 

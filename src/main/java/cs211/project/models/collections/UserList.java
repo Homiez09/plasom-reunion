@@ -40,5 +40,14 @@ public class UserList {
         return null;
     }
 
+    public int getMember(){
+        int count = 0;
+        for (User user:users){
+            count++;
+        }
+    
+        return count;
+    }
+    
 
 }
