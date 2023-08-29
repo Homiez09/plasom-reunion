@@ -9,8 +9,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class SignUpController {
 
     private int page = 0;
     private int maxPage;
-    private final int maxPasswordLimit = 30, maxUsernameLimit = 20, maxDisplayNameLimit = 24;
+    private final int maxPasswordLimit = 27, maxUsernameLimit = 20, maxDisplayNameLimit = 24;
 
     @FXML
     private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
@@ -35,7 +33,7 @@ public class SignUpController {
     private Shape backCircle, nextCircle, passwordRequireBox, passwordRequireBoxLabel;
 
     @FXML
-    private Label passwordRequireLabel, passwordLengthReq, passwordUpperCaseReq, passwordLowerCaseReq, passwordSpecialReq, passwordNumReq, usernameReq, displayNameReq, errorLabel, onCreateAccountLabel;
+    private Label passwordRequireLabel, passwordLengthReq, passwordUpperCaseReq, passwordLowerCaseReq, passwordSpecialReq, passwordNumReq, usernameReq, displayNameReq, errorLabel;
 
     @FXML
     private PasswordField passwordField, confirmPasswordField;
@@ -247,7 +245,7 @@ public class SignUpController {
     }
 
 
-    public void onKeyDisplayName(KeyEvent event) {
+    public void onKeyDisplayName() {
         displayName = displayNameTextfield.getText();
         if(!displayName.isEmpty()){
             displayNameReq.setStyle(setColorTextFill("black"));
@@ -260,30 +258,30 @@ public class SignUpController {
 
     }
 
-    public void onKeyUsername(KeyEvent event){
+    public void onKeyUsername(){
         username = usernameTextField.getText();
         checkUsernameRequirement();
     }
 
-    public void onKeyHidePassword(KeyEvent keyEvent) {
+    public void onKeyHidePassword() {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
         checkPasswordRequirement();
     }
 
-    public void onKeyShowPassword(KeyEvent keyEvent) {
+    public void onKeyShowPassword() {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
         checkPasswordRequirement();
     }
 
-    public void onKeyHideConfirmPassword(KeyEvent keyEvent) {
+    public void onKeyHideConfirmPassword() {
         confirmPassword = confirmPasswordField.getText();
         showConfirmPasswordTextField.setText(confirmPassword);
         checkPasswordRequirement();
     }
 
-    public void onKeyShowConfirmPassword(KeyEvent keyEvent) {
+    public void onKeyShowConfirmPassword() {
         confirmPassword = showConfirmPasswordTextField.getText();
         confirmPasswordField.setText(confirmPassword);
         checkPasswordRequirement();
@@ -308,16 +306,26 @@ public class SignUpController {
             }
         }));
 
-        showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+        passwordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             if(newValue.length() > maxPasswordLimit){
                 passwordField.setText(oldValue);
+            }
+        }));
+
+        showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
                 showPasswordTextField.setText(oldValue);
+            }
+        }));
+
+        confirmPasswordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
+                confirmPasswordField.setText(oldValue);
             }
         }));
 
         showConfirmPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             if(newValue.length() > maxPasswordLimit){
-                confirmPasswordField.setText(oldValue);
                 showConfirmPasswordTextField.setText(oldValue);
             }
         }));
@@ -327,7 +335,6 @@ public class SignUpController {
         switch (color) {
             case "clear" -> color = "-fx-border-color: ''";
             case "black" -> color = "-fx-border-color: #413b3b";
-            case "red" -> color = "-fx-border-color: red";
         }
         return color;
     }
@@ -362,7 +369,7 @@ public class SignUpController {
     }
 
     @FXML
-    private void onVisiblePasswordClick(MouseEvent event) {
+    private void onVisiblePasswordClick() {
         if (visiblePasswordImageView.getImage() == hidePasswordImage) {
             setTextFieldPasswordVisible(true);
             visiblePasswordImageView.setImage(showPasswordImage);
