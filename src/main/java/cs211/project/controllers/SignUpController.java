@@ -333,7 +333,7 @@ public class SignUpController {
 
     private String setColorBorderTextField(String color){
         switch (color) {
-            case "clear" -> color = "-fx-border-color: ''";
+            case "red" -> color = "-fx-border-color: red";
             case "black" -> color = "-fx-border-color: #413b3b";
         }
         return color;
