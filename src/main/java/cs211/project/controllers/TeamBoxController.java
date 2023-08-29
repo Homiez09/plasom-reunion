@@ -7,17 +7,9 @@ import javafx.scene.image.ImageView;
 
 public class TeamBoxController {
 
-    @FXML
-    private ImageView bookMarkImageView;
+    @FXML private ImageView peopleImageView, roleImageView, activeImageView, faceImageView,bookMarkImageView;
 
-
-    @FXML
-    private ImageView peopleImageView, roleImageView, activeImageView, faceImageView;
-
-    @FXML
-    private Label numActiveLabel, teamNameLabel;
-
-    @FXML private List<Team>
+    @FXML private Label numActiveLabel, teamNameLabel;
 
     @FXML private void initialize(){
         loadIcon();
