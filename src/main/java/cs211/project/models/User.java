@@ -1,14 +1,17 @@
 package cs211.project.models;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import cs211.project.models.collections.EventList;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class User {
     private String  username,displayName, password, status, lastedLogin, imagePath;
     private final String role, registerDate, userid;
+    private ArrayList<Event> events;
 
     public User(String username){
         this.username = username;
@@ -127,6 +130,10 @@ public class User {
         this.status = status;
     }
 
+    public ArrayList<Event> getEvents() {
+        return events;
+    }
+
     public void setPassword(String password){
         this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
@@ -139,6 +146,11 @@ public class User {
         this.imagePath = imagePath;
     }
 
+    public void joinEvent(Event event){
+        if(event.getEventName().equals("")){
+            events.add(event);
+        }
+    }
 
 }
 

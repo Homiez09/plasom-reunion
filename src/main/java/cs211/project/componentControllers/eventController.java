@@ -17,18 +17,20 @@ public class eventController {
     Label eventnameLabel,dateLabel,memberLabel;
     @FXML
     ImageView eventImageView;
-
-    private Event event = (Event) FXRouter.getData();
-
+    private Event event = (Event) FXRouter.getData() ;
+    private User user = (User) FXRouter.getData();
     @FXML
     private void initialize() {
         if (event != null){
+            System.out.println("Event test");
             showProfile();
+        }else {
+            System.out.println("NULL");
         }
     }
 
     private void showProfile(){
-        Image image = new Image(getClass().getResource("/images/home/event2.png").toString(), 25, 25, true, false);
+        Image image = new Image(getClass().getResource(event.getEventImagePath()).toString(), 25, 25, true, false);
         eventImageView.setImage(image);
         eventnameLabel.setText(event.getEventName());
         dateLabel.setText(event.getEventDateEnd());

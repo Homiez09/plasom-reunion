@@ -18,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MyEventController {
     @FXML
@@ -28,52 +29,38 @@ public class MyEventController {
     ImageView userImageView;
     @FXML
     ListView myeventListView;
-    @FXML
-    VBox eventVbox;
-    @FXML
-    AnchorPane eventAnchorPane;
+
 
     private EventList eventList;
-    private Event selectEvent;
-    private Datasource<EventList> datasourcecsv;
-
+    private Datasource<EventList> datasource;
     private User user = (User) FXRouter.getData();
-    private Event event;
 
 
     @FXML
     public void initialize() {
         loadTopBarComponent();
-//        loadEventComponent();
+
         EventDataSourceHardCode datasource = new EventDataSourceHardCode();
+
+        if (user != null){
+            System.out.println("Test user");
+        }
+
         eventList = datasource.readData();
-        for (int i = 0 ; i < 4 ;i++){
-            AnchorPane anchorPane = new AnchorPane();
-            new LoadEventComponent(anchorPane);
-            myeventListView.getItems().add(anchorPane);
-
-        }
+        int eventListSize = eventList.getEvents().size();
 
 
-
-
-    }
-
-
-
-
-
-
-
-    private void loadEventComponent() {
-        FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event.fxml"));
-        try {
-            AnchorPane eventComponent = eventComponentLoader.load();
-            eventAnchorPane.getChildren().add(eventComponent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        for (int i = 0; i < eventListSize; i++) {
+            Event event = (Event) eventList.getEvents().get(i);
+            System.out.println(event.toString());
+            if (event != null) {
+                AnchorPane anchorPane = new AnchorPane();
+                new LoadEventComponent(event, anchorPane);
+                myeventListView.getItems().add(anchorPane);
+            }
         }
     }
+
 
     // top-bar
     private void loadTopBarComponent() {

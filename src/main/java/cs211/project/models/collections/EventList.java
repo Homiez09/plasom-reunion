@@ -15,18 +15,15 @@ public class EventList<T> {
     public EventList() {
         events = new ArrayList<>();
     }
-    public void addEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription) {
+    public void createEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription) {
         eventName = eventName.trim();
         if (!eventName.equals("") ){
             events.add(new Event(eventName,eventImagePath,eventDateStart,eventDateEnd,eventDescription));
         }
     }
-
-    public void addEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription, int slotMember) {
+    public void createEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription, int slotMember) {
         eventName = eventName.trim();
-        eventDateStart = eventDateStart.trim();
-        eventDateEnd = eventDateEnd.trim();
-        if (!eventName.equals("") && eventDateStart.equals("") && eventDateEnd.equals("") ){
+        if (!eventName.equals("")){
             events.add(new Event(eventName,eventImagePath,eventDateStart,eventDateEnd,eventDescription,slotMember));
         }
     }
@@ -44,12 +41,7 @@ public class EventList<T> {
         return events;
     }
 
-    public int size(){
-        int count =0;
-        for (Event event : events)
-            count++;
-        return count;
-    }
+
 
 
 }

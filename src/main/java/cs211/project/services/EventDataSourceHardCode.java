@@ -8,10 +8,10 @@ public class EventDataSourceHardCode implements Datasource<EventList> {
     @Override
     public EventList readData() {
         EventList list = new EventList();
-        list.addEvent("E-sport Valorant", "imgpath1","01-02-2023","27/8/2023","",100);
-        list.addEvent("Songskan", "imgpath2","12/04/2023","16/4/2023","",50);
-        list.addEvent("Commart", "imgpath3","07/07/2023","09-07-2023","",1000);
-        list.addEvent("Commart", "imgpath4","12/12/2023","12-12-2023","",1000);
+        list.createEvent("E-sport Valorant", "/images/logo/logo_orange.png","01-02-2023","27/8/2023","",100);
+        list.createEvent("Songskan", "/images/logo/logo_orange.png","12/04/2023","16/4/2023","",50);
+        list.createEvent("Commart", "/images/logo/logo_orange.png","07/07/2023","09-07-2023","",1000);
+        list.createEvent("Mobile expo", "images/logo/logo_orange.png","12/12/2023","12-12-2023","",1000);
 
         return list;
     }
@@ -21,7 +21,4 @@ public class EventDataSourceHardCode implements Datasource<EventList> {
 
     }
 
-    public void writeData(Event data) {
-
-    }
 }
