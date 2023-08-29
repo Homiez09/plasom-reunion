@@ -6,12 +6,11 @@ import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataSourceHardCode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -20,6 +19,8 @@ public class SignInController {
 
     private int page = 0;
     private int maxPage;
+    private final int maxPasswordLimit = 27, maxUsernameLimit = 20;
+
 
     @FXML
     private Button backButton, nextButton;
@@ -37,7 +38,10 @@ public class SignInController {
     private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
     private Image showPasswordImage, hidePasswordImage;
 
-    private String password;
+    @FXML
+    private Label errorLabel;
+
+    private String password,username;
     private UserList userList;
 
 
@@ -50,9 +54,135 @@ public class SignInController {
         showImage(page);
         maxPage = calculateMaxPage();
 
+        maximumLengthField();
+
         showPasswordTextField.setVisible(false);
         visiblePasswordImageView.setImage(hidePasswordImage);
         updateVisibleButton();
+
+        errorLabel.setVisible(false);
+
+    }
+
+
+    private void maximumLengthField(){
+        usernameTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxUsernameLimit){
+                usernameTextField.setText(oldValue);
+            }
+        }));
+
+        passwordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
+                passwordField.setText(oldValue);
+            }
+        }));
+
+        showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
+                showPasswordTextField.setText(oldValue);
+            }
+        }));
+
+    }
+
+    public void onLoginButton() {
+        User user = userList.login(usernameTextField.getText(), password);
+        username = usernameTextField.getText();
+        password = passwordField.getText();
+        User matchingUsername = userList.findUsername(username);
+        if(user!=null){
+            try {
+                FXRouter.goTo("home", user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }else{
+            if(matchingUsername == null){
+                errorLabel.setText("Incorrect username and password. Please try again.");
+                errorLabel.setVisible(true);
+            }
+            if (matchingUsername != null){
+                errorLabel.setText("Incorrect password. Please try again.");
+                errorLabel.setVisible(true);
+            }
+            setBorderColorTextField();
+            resetBorderTextField();
+        }
+    }
+
+
+    @FXML
+    protected void onNextButtonClick() {
+        if (page < maxPage) {
+            page++;
+        }
+        showImage(page);
+    }
+
+    @FXML
+    protected void onBackButtonClick() {
+        if (page > 0) {
+            page--;
+        }
+        showImage(page);
+    }
+
+    @FXML
+    protected void onBackClick() {
+        try {
+            FXRouter.goTo("welcome");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    protected void onSignUpClick() {
+        try {
+            FXRouter.goTo("sign-up");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String setColorBorderTextField(String color){
+        switch (color) {
+            case "red" -> color = "-fx-border-color: red";
+            case "black" -> color = "-fx-border-color: #413b3b";
+        }
+        return color;
+    }
+
+    private void setBorderColorTextField(){
+        username = usernameTextField.getText();
+        password = passwordField.getText();
+        usernameTextField.setStyle(username.isEmpty() ? setColorBorderTextField("red") : setColorBorderTextField("black"));
+        if(password.isEmpty()){
+            passwordField.setStyle(setColorBorderTextField("red"));
+            showPasswordTextField.setStyle(setColorBorderTextField("red"));
+        }else{
+            passwordField.setStyle(setColorBorderTextField("black"));
+            showPasswordTextField.setStyle(setColorBorderTextField("black"));
+        }
+
+    }
+
+    private void resetBorderTextField(){
+        usernameTextField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                usernameTextField.setStyle("-fx-border-color: #413b3b");
+                errorLabel.setVisible(false);
+            }
+        });
+
+        passwordField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                passwordField.setStyle("-fx-border-color: #413b3b");
+                errorLabel.setVisible(false);
+            }
+        });
 
     }
 
@@ -64,18 +194,18 @@ public class SignInController {
         nextCircle.setVisible(page != maxPage);
     }
 
-    public void onKeyHidePassword(KeyEvent keyEvent) {
+    public void onKeyHidePassword() {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
     }
 
-    public void onKeyShowPassword(KeyEvent keyEvent) {
+    public void onKeyShowPassword() {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
     }
 
     @FXML
-    private void onVisiblePasswordClick(MouseEvent event) {
+    private void onVisiblePasswordClick() {
         if (visiblePasswordImageView.getImage() == hidePasswordImage) {
             showPasswordTextField.setVisible(true);
             visiblePasswordImageView.setImage(showPasswordImage);
@@ -127,53 +257,4 @@ public class SignInController {
         return countImage - 1;
     }
 
-    @FXML
-    protected void onNextButtonClick() {
-        if (page < maxPage) {
-            page++;
-        }
-        showImage(page);
-    }
-
-    @FXML
-    protected void onBackButtonClick() {
-        if (page > 0) {
-            page--;
-        }
-        showImage(page);
-    }
-
-    @FXML
-    protected void onBackClick() {
-        try {
-            FXRouter.goTo("welcome");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    protected void onSignUpClick() {
-        try {
-            FXRouter.goTo("sign-up");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void onLoginButton() {
-        User user = userList.login(usernameTextField.getText(), password);
-        if(user!=null){
-            try {
-                FXRouter.goTo("home", user);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else{
-            return ;
-            //todo: error
-        }
-
-
-    }
 }
