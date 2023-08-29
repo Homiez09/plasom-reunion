@@ -28,6 +28,10 @@ public class Event {
         this.slotMember = slotMember;
     }
 
+    public Event() {
+
+    }
+
     public String getEventName() {
         return eventName;
     }

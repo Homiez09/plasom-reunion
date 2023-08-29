@@ -1,19 +1,21 @@
 package cs211.project.controllers;
 
+import cs211.project.componentControllers.eventController;
 import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.Datasource;
 import cs211.project.services.EventDataSourceHardCode;
 import cs211.project.services.FXRouter;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import cs211.project.services.LoadEventComponent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -21,43 +23,51 @@ public class MyEventController {
     @FXML
     AnchorPane navbarAnchorPane;
     @FXML
-    Label usernameLabel;
+    Label nameLabel;
     @FXML
     ImageView userImageView;
     @FXML
     ListView myeventListView;
+    @FXML
+    VBox eventVbox;
+    @FXML
+    AnchorPane eventAnchorPane;
 
     private EventList eventList;
     private Event selectEvent;
     private Datasource<EventList> datasourcecsv;
 
     private User user = (User) FXRouter.getData();
+    private Event event;
+
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         loadTopBarComponent();
+        loadEventComponent();
         EventDataSourceHardCode datasource = new EventDataSourceHardCode();
         eventList = datasource.readData();
-        showlist(eventList);
-        myeventListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
-            @Override
-            public void changed(ObservableValue<? extends Event> observableValue, Event oldValue, Event newValue) {
-                if (newValue == null){
-                    selectEvent = null;
-                }else {
-                    selectEvent = newValue;
-                }
-            }
-        });
+
+
+
 
 
     }
 
-    private void showlist(EventList eventList){
-        loadTopBarComponent();
-        myeventListView.getItems().clear();
-        myeventListView.getItems().addAll(eventList.getEvents());
 
+
+
+
+
+
+    private void loadEventComponent() {
+        FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event.fxml"));
+        try {
+            AnchorPane eventComponent = eventComponentLoader.load();
+            eventAnchorPane.getChildren().add(eventComponent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // top-bar
@@ -70,5 +80,6 @@ public class MyEventController {
             throw new RuntimeException(e);
         }
     }
+
 
 }
