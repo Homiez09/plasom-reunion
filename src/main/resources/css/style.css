@@ -347,9 +347,42 @@ Text, Label {
 
 /* for team box */
 .team-box-background{
-    -fx-background-color: #F5F3ED;
-    -fx-background-radius: 8;
+    -fx-background-color: transparent;
+    -fx-stroke-width: 0;
+}
+
+.team-box-shape{
+    -fx-arc-width: 15;
+    -fx-arc-height: 15;
     -fx-stroke-width: 2;
     -fx-border-color: #413B3B;
     -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+}
+
+/* for select team */
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane:hover .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane:hover .scroll-bar .thumb {
+    -fx-background-color: #DDD3C3;
+}
+
+.create-team-button{
+    -fx-background-color: transparent;
+    -fx-border-color: #413B3B;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-stroke-width: 10;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+
 }
