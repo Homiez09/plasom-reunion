@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class EventList<T> {
+public class EventList {
     private ArrayList<Event> events;
 
     public EventList() {

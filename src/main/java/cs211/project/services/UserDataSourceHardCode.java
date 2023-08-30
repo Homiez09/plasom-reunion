@@ -12,7 +12,7 @@ public class UserDataSourceHardCode implements Datasource<UserList>{
         users.addUser("PinkPPanther","mingmmie","@Ming1234");
         users.addUser("Owlvi","Owvil","@Manza1150");
         users.addUser("Ging","Ginglnwza09","@GlinglowTest5555");
-
+        users.addUser("test","t","t");
         return users;
     }
 

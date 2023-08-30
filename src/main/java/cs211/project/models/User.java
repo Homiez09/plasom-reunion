@@ -12,7 +12,7 @@ public class User {
     private String  username,displayName, password, status, lastedLogin, imagePath;
     private final String role, registerDate, userid;
     private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
-    private ArrayList<Event> events;
+    private ArrayList<Event> events = new ArrayList<>();
 
 
     public User(String username){
@@ -134,7 +134,7 @@ public class User {
     }
 
     public ArrayList<Event> getEvents() {
-        return events;
+        return this.events;
     }
 
     public void setPassword(String password){
@@ -151,7 +151,7 @@ public class User {
 
     public void joinEvent(Event event){
         if(event.getEventName().equals("")){
-            events.add(event);
+            this.events.add(event);
         }
     }
     public ImageView getAvatar(){

@@ -1,24 +1,25 @@
 package cs211.project.controllers;
 
-import cs211.project.componentControllers.eventController;
+import cs211.project.componentControllers.EventComponentController;
 import cs211.project.models.Event;
+import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
-import cs211.project.services.Datasource;
-import cs211.project.services.EventDataSourceHardCode;
-import cs211.project.services.FXRouter;
-import cs211.project.services.LoadEventComponent;
+import cs211.project.services.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MyEventController {
     @FXML
@@ -28,50 +29,85 @@ public class MyEventController {
     @FXML
     ImageView userImageView;
     @FXML
-    ListView myeventListView;
+    ListView myeventListView,historyeventListView;
+    @FXML
+    Button currentButton;
 
 
-    private EventList eventList;
+    private EventList eventList ;
     private Datasource<EventList> datasource;
-    private User user = (User) FXRouter.getData();
+    private User currentUser = (User) FXRouter.getData();
+
 
 
     @FXML
     public void initialize() {
-        loadTopBarComponent();
-
+        new LoadNavbarComponent(currentUser, navbarAnchorPane);
+        showInfo();
         EventDataSourceHardCode datasource = new EventDataSourceHardCode();
-
-        if (user != null){
-            System.out.println("Test user");
-        }
-
         eventList = datasource.readData();
-        int eventListSize = eventList.getEvents().size();
 
+        for (Event event : eventList.getEvents()) {
+            try {
+                FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
+                AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
+                EventComponentController eventComponent = eventComponentLoader.getController();
+                eventComponent.setEventData(event);
 
-        for (int i = 0; i < eventListSize; i++) {
-            Event event = (Event) eventList.getEvents().get(i);
-            System.out.println(event.toString());
-            if (event != null) {
-                AnchorPane anchorPane = new AnchorPane();
-                new LoadEventComponent(event, anchorPane);
-                myeventListView.getItems().add(anchorPane);
+                if (event.isEnd()) {
+                    historyeventListView.getItems().add(eventAnchorPaneComponent);
+                }else {
+                    myeventListView.getItems().add(eventAnchorPaneComponent);
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+
+
+   }
+    private void showInfo(){
+        userImageView.setImage(new Image(getClass().getResource(currentUser.getImagePath()).toExternalForm()));
+        nameLabel.setText(currentUser.getDisplayName());
+
     }
 
 
-    // top-bar
-    private void loadTopBarComponent() {
-        FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/navbar.fxml"));
+    public void onEditAction(ActionEvent actionEvent) {
         try {
-            AnchorPane topBarComponent = topBarComponentLoader.load();
-            navbarAnchorPane.getChildren().add(topBarComponent);
+            FXRouter.goTo("user-profile",currentUser);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public void onBackAction(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("home",currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public void onCreateAction(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("create-event",currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void onHistoryAction(ActionEvent actionEvent) {
+        currentButton.setVisible(true);
+        myeventListView.setVisible(false);
+        historyeventListView.setVisible(true);
+    }
+
+    public void onCurrentAction(ActionEvent actionEvent) {
+        currentButton.setVisible(false);
+        historyeventListView.setVisible(false);
+        myeventListView.setVisible(true);
+
+    }
 }
