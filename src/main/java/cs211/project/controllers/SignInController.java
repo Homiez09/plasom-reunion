@@ -42,11 +42,12 @@ public class SignInController {
     private Label errorLabel;
 
     private String password,username;
-
+    private UserList userList;
+    UserDataSourceHardCode datasource = new UserDataSourceHardCode();
 
     @FXML
     void initialize() {
-
+        userList = datasource.readData();
 
         loadImage();
         showImage(page);
@@ -86,22 +87,16 @@ public class SignInController {
     public void onLoginButton() {
         username = usernameTextField.getText();
         password = passwordField.getText();
-        if (username.isEmpty() || password.isEmpty()) {
+        if(username.isEmpty() || password.isEmpty()){
+            errorLabel.setText("Incorrect username or password. Please try again.");
+            errorLabel.setVisible(true);
             setBorderColorTextField();
             resetBorderTextField();
-            return;
+            return ;
         }
-
-
-        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
-        UserList userList = datasource.readData();
-
-        User user = userList.login(usernameTextField.getText(), password);
-
-
-
+        User user = userList.login(username, password);
         User matchingUsername = userList.findUsername(username);
-        if(user!=null && !password.isEmpty()){
+        if(user!=null){
             try {
                 FXRouter.goTo("home", user);
             } catch (IOException e) {
@@ -113,13 +108,14 @@ public class SignInController {
                 errorLabel.setText("Incorrect username and password. Please try again.");
                 errorLabel.setVisible(true);
             }
-            if (matchingUsername != null){
+            if (matchingUsername != null && password.isEmpty()){
                 errorLabel.setText("Incorrect password. Please try again.");
                 errorLabel.setVisible(true);
             }
             setBorderColorTextField();
             resetBorderTextField();
         }
+
     }
 
 
