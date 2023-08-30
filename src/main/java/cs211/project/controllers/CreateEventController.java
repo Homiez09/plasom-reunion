@@ -101,6 +101,22 @@ public class CreateEventController {
         }
     }
 
+    @FXML protected void onBackButtonClick() {
+        if (thisEvent == null) {
+            try {
+                FXRouter.goTo("event",user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            try {
+                FXRouter.goTo("event",user,thisEvent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     @FXML protected void onSubmitBasicInformationClick() {
         if (thisEvent == null) {
             String eventNameString = eventNameTextField.getText().trim();

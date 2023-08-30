@@ -24,12 +24,24 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="1152.0" spacing="20.0" AnchorPane.topAnchor="75.0">
          <children>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="15.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="&lt;Back">
+                     <font>
+                        <Font name="Leelawadee" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
             <Label fx:id="headCreateEventLabel" text="headCreateEventLabel">
                <font>
                   <Font name="Leelawadee Bold" size="48.0" />
                </font>
                <VBox.margin>
-                  <Insets top="25.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
             <ScrollPane prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg">

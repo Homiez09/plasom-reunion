@@ -41,7 +41,7 @@ public class EventList {
         return events;
     }
 
-
+    public Event getIndex(int n) {return events.get(n);}
 
 
 }
