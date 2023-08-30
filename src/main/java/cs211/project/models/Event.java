@@ -1,6 +1,8 @@
 package cs211.project.models;
 
-import cs211.project.models.collections.UserList;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event {
     private String eventName;
@@ -12,12 +14,16 @@ public class Event {
     private int member = 0;
     private int slotMember;
 
-    public Event(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription) {
+    public Event() {
+
+    }
+    public Event(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation) {
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
         this.eventDateStart = eventDateStart;
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
+        this.eventLocation = eventLocation;
     }
 
     public Event(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation, int slotMember) {
@@ -81,9 +87,13 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "Name='" + eventName + '\'' +
-                ", DateStart='" + eventDateStart + '\'' +
-                ", DateEnd='" + eventDateEnd + '\'' +
+                "eventName='" + eventName + '\'' +
+                ", eventImagePath='" + eventImagePath + '\'' +
+                ", eventDateStart='" + eventDateStart + '\'' +
+                ", eventDateEnd='" + eventDateEnd + '\'' +
+                ", eventDescription='" + eventDescription + '\'' +
+                ", eventLocation='" + eventLocation + '\'' +
+                ", member=" + member +
                 ", slotMember=" + slotMember +
                 '}';
     }
@@ -96,6 +106,18 @@ public class Event {
         }
 
     }
+
+    public boolean isEnd() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-M-yyyy");
+        LocalDate parsedEventDateEnd = LocalDate.parse(eventDateEnd, formatter);
+
+        LocalDateTime endOfDayParsedEventDateEnd = parsedEventDateEnd.atStartOfDay();
+
+        return currentDateTime.isAfter(endOfDayParsedEventDateEnd);
+    }
+
 
 }
 

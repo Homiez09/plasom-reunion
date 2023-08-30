@@ -27,7 +27,7 @@ public class EventPageController {
     private User user = (User) FXRouter.getData();
     @FXML protected void onEditButtonClick() {
         try {
-            FXRouter.goTo("create-event", null); //send event class as second parameter
+            FXRouter.goTo("create-event", user); //send event class as second parameter
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

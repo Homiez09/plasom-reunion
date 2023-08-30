@@ -1,5 +1,6 @@
 package cs211.project.componentControllers;
 
+import cs211.project.models.User;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,7 +13,7 @@ public class eventTileController {
     @FXML private ImageView eventTileImageView;
     @FXML
     Label eventNameLabel,eventDateLabel,eventPlaceLabel;
-
+    private User currentUser = (User) FXRouter.getData();
     @FXML private void initialize() {
         showEventTile();
     }
@@ -27,7 +28,7 @@ public class eventTileController {
 
     @FXML protected void onEventTileClick() {
         try {
-            FXRouter.goTo("event");
+            FXRouter.goTo("event",currentUser);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

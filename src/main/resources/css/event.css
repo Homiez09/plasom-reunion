@@ -25,3 +25,11 @@
 -fx-background-radius: 20px;
 -fx-border-width: 3px;
 }
+.font-component-head{
+    -fx-font-size: 18;
+    -fx-font-family: Leelawadee;
+}
+.font-component-subhead{
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+}

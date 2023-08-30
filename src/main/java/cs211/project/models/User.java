@@ -3,15 +3,17 @@ package cs211.project.models;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class User {
     private String  username,displayName, password, status, lastedLogin, imagePath, bio, contactNumber;
     private final String role, registerDate, userid;
     private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
+    private ArrayList<Event> events = new ArrayList<>();
+
 
     public User(String username){
         this.username = username;
@@ -141,6 +143,10 @@ public class User {
         this.status = status;
     }
 
+    public ArrayList<Event> getEvents() {
+        return this.events;
+    }
+
     public void setPassword(String password){
         this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
@@ -165,6 +171,11 @@ public class User {
         this.imagePath = imagePath;
     }
 
+    public void joinEvent(Event event){
+        if(event.getEventName().equals("")){
+            this.events.add(event);
+        }
+    }
     public ImageView getAvatar(){
         this.avatar.setFitWidth(35);
         this.avatar.setFitHeight(35);
