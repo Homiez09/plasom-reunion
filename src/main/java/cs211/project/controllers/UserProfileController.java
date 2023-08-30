@@ -1,18 +1,12 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
-import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
-import cs211.project.services.UserDataSourceHardCode;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class UserProfileController {
@@ -25,16 +19,18 @@ public class UserProfileController {
     @FXML private Button editButton, cancelButton, saveButton;
     @FXML private Label passwordLabel,countBioLabel,maximumCountBioLabel,usernameLabel,idLabel,bioProfileLabel,displayNameProfileLabel,usernameProfileLabel,idProfileLabel;
     private Image showPasswordImage, hidePasswordImage;
-    private String password,bioText,previousBioText,previousBioCount, username, displayName, userId, contactNumber;
+    private String password;
+    private String bioText;
+    private String previousBioText;
+    private String previousBioCount;
+    private String displayName;
+    private String contactNumber;
 
     private final int MAX_PASSWORD_LIMIT = 27,  MAX_DISPLAY_NAME_LIMIT = 24, MAX_CONTACT_LIMIT = 10, MAX_BIO_LIMIT = 300;
-    private User user = (User) FXRouter.getData();
-    private UserList userList;
+    private final User user = (User) FXRouter.getData();
+
     @FXML
     private void initialize() {
-        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
-        userList = datasource.readData();
-
         userData();
         maximumLengthField();
 
@@ -46,11 +42,11 @@ public class UserProfileController {
     }
 
     private void userData(){
-        username = user.getUsername();
+        String username = user.getUsername();
         displayName = user.getDisplayName();
         bioText = user.getBio();
 
-        userId = user.getUserid();
+        String userId = user.getUserid();
         contactNumber = user.getContactNumber();
 
         usernameLabel.setText(username);
@@ -150,7 +146,7 @@ public class UserProfileController {
         loadIconImageEditProfile();
         previousBioText = bioTextArea.getText();
         previousBioCount = String.valueOf(previousBioText.length());
-        if (previousBioCount == null || previousBioCount.equals("0")) {
+        if (previousBioCount.equals("0")) {
             previousBioCount = "0";
             countBioLabel.setText("0");
         } else {
@@ -194,18 +190,18 @@ public class UserProfileController {
         }
     }
 
-    public void onKeyHidePassword(KeyEvent keyEvent) {
+    public void onKeyHidePassword() {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
     }
 
-    public void onKeyShowPassword(KeyEvent keyEvent) {
+    public void onKeyShowPassword() {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
     }
 
     @FXML
-    private void onVisiblePasswordClick(MouseEvent event) {
+    private void onVisiblePasswordClick() {
         if (visiblePasswordImageView.getImage() == hidePasswordImage) {
             passwordField.setVisible(false);
             showPasswordTextField.setVisible(true);
