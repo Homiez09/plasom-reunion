@@ -13,10 +13,10 @@ public class EventList<T> {
         events = new ArrayList<>();
     }
 
-    public void addEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription, int slotMember) {
+    public void addEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation, int slotMember) {
         eventName = eventName.trim();
         if (!eventName.equals("") ){
-            events.add(new Event(eventName,eventImagePath,eventDateStart,eventDateEnd,eventDescription,slotMember));
+            events.add(new Event(eventName,eventImagePath,eventDateStart,eventDateEnd,eventDescription,eventLocation,slotMember));
         }
     }
 
