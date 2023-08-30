@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class CreateEventController {
@@ -36,8 +37,8 @@ public class CreateEventController {
     @FXML
     private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner,activityStartHourSpinner,activityEndHourSpinner,
             eventStartMinuteSpinner,eventEndMinuteSpinner,activityStartMinuteSpinner,activityEndMinuteSpinner;
-    private Event thisEvent = new Event();
-    String newEventImagePath;
+    private Event thisEvent = null;
+    private String newEventImagePath;
     private User user = (User) FXRouter.getData();
     @FXML  void initialize() {
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -110,6 +111,8 @@ public class CreateEventController {
             String numMemberString = eventCapTextField.getText().trim();
             int numMember = Integer.parseInt(numMemberString);
             //add event
+            thisEvent = new Event(eventNameString,newEventImagePath,startDate,endDate,
+                    eventDescriptionString,eventLocationString,numMember);
         }
     }
 
@@ -117,11 +120,16 @@ public class CreateEventController {
         if (thisEvent == null) {
             String activityNameString = activityNameTextField.getText().trim();
             String activityDescriptionString = activityDescriptionTextArea.getText().trim();
-            String activityStartDate = activityStartDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            String activityEndDate = activityEndDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            String activityStartTime = activityStartHourSpinner.getValue() + " : " + activityStartMinuteSpinner.getValue();
-            String activityEndTime = activityEndHourSpinner.getValue() + " : " + activityEndMinuteSpinner.getValue();
+            LocalDate activityStartDate = activityStartDatePick.getValue();
+            LocalDate activityEndDate = activityEndDatePick.getValue();
+            int activityStartHour = activityStartHourSpinner.getValue();
+            int activityEndHour = activityEndHourSpinner.getValue();
+            int activityStartMinute = activityStartMinuteSpinner.getValue();
+            int activityEndMinute = activityEndMinuteSpinner.getValue();
+            LocalDateTime startDateTime = activityStartDate.atTime(activityStartHour,activityStartMinute);
+            LocalDateTime endDateTime = activityEndDate.atTime(activityEndHour,activityEndMinute);
             // add to activity list
+            thisEvent.getActivities().addActivity(activityNameString,activityDescriptionString,startDateTime,endDateTime);
         }
     }
     @FXML protected void onAddTeamButtonClick() {
@@ -130,6 +138,7 @@ public class CreateEventController {
             String teamCapString = teamMemberCapTextField.getText().trim();
             int numTeamMember = Integer.parseInt(teamCapString);
             // add to team list
+            //thisEvent.getTeams().addTeam();
         }
     }
 }
