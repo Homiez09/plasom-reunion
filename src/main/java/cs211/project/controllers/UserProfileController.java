@@ -1,8 +1,10 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
+import cs211.project.services.UserDataSourceHardCode;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -17,22 +19,87 @@ public class UserProfileController {
 
     @FXML private ImageView iconProfileImageView, imageChangeView, ellipseIconImageView, frameIconImageView, profileIconImageView, visiblePasswordImageView, fullNameIconImageView, contactIconImageView, passwordIconImageView;
     @FXML private AnchorPane navbarAnchorPane;
-    @FXML private TextField fullNameTextField, showPasswordTextField, contactNumberTextField;
+    @FXML private TextField displayNameTextField, showPasswordTextField, contactNumberTextField;
     @FXML private TextArea bioTextArea;
     @FXML private PasswordField passwordField;
     @FXML private Button editButton, cancelButton, saveButton;
-    @FXML private Label passwordLabel,countBioLabel,maximumCountBioLabel,bioProfileLabel,fullNameProfileLabel,usernameProfileLabel,idProfileLabel,idLabel;
+    @FXML private Label passwordLabel,countBioLabel,maximumCountBioLabel,usernameLabel,idLabel,bioProfileLabel,displayNameProfileLabel,usernameProfileLabel,idProfileLabel;
     private Image showPasswordImage, hidePasswordImage;
-    private String password,bioText,previousBioText,previousBioCount;
+    private String password,bioText,previousBioText,previousBioCount, username, displayName, userId, contactNumber;
 
+    private final int MAX_PASSWORD_LIMIT = 27,  MAX_DISPLAY_NAME_LIMIT = 24, MAX_CONTACT_LIMIT = 10, MAX_BIO_LIMIT = 300;
     private User user = (User) FXRouter.getData();
+    private UserList userList;
     @FXML
     private void initialize() {
+        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+        userList = datasource.readData();
+
+        userData();
+        maximumLengthField();
+
         loadImage();
+
         new LoadNavbarComponent(user, navbarAnchorPane);
         loadPasswordFieldAndButtonProfile();
         loadIconImageProfile();
     }
+
+    private void userData(){
+        username = user.getUsername();
+        displayName = user.getDisplayName();
+        bioText = user.getBio();
+
+        userId = user.getUserid();
+        contactNumber = user.getContactNumber();
+
+        usernameLabel.setText(username);
+        usernameProfileLabel.setText(username);
+
+        displayNameTextField.setText(displayName);
+        displayNameProfileLabel.setText(displayName);
+
+        bioTextArea.setText(bioText);
+        bioProfileLabel.setText(bioText);
+
+        idLabel.setText(userId);
+        idProfileLabel.setText(userId);
+
+        contactNumberTextField.setText(contactNumber);
+    }
+
+    private void maximumLengthField(){
+        displayNameTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > MAX_DISPLAY_NAME_LIMIT) {
+                displayNameTextField.setText(oldValue);
+            }
+        });
+
+        contactNumberTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > MAX_CONTACT_LIMIT) {
+                contactNumberTextField.setText(oldValue);
+            }
+        });
+
+        bioTextArea.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > MAX_BIO_LIMIT) {
+                bioTextArea.setText(oldValue);
+            }
+        });
+
+        passwordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > MAX_PASSWORD_LIMIT) {
+                passwordField.setText(oldValue);
+            }
+        });
+
+        showPasswordTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > MAX_PASSWORD_LIMIT) {
+                showPasswordTextField.setText(oldValue);
+            }
+        });
+    }
+
 
     @FXML private void loadPasswordFieldAndButtonProfile() {
         passwordField.setVisible(false);
@@ -81,6 +148,8 @@ public class UserProfileController {
     private void onEditProfileButtonClick() {
         loadPasswordFieldAndButtonEditProfile();
         loadIconImageEditProfile();
+        previousBioText = bioTextArea.getText();
+        previousBioCount = String.valueOf(previousBioText.length());
         if (previousBioCount == null || previousBioCount.equals("0")) {
             previousBioCount = "0";
             countBioLabel.setText("0");
@@ -95,18 +164,29 @@ public class UserProfileController {
     protected void onCancelButtonClick() {
         loadPasswordFieldAndButtonProfile();
         loadIconImageProfile();
+        displayNameTextField.setText(displayName);
+        contactNumberTextField.setText(contactNumber);
         bioTextArea.setText(previousBioText);
         countBioLabel.setText(previousBioCount);
+        user.setBio(previousBioText);
 
     }
 
     @FXML
-    protected void onSaveButtonClick() {
+    public void onSaveButtonClick() {
         if (bioText.length() <= 280) {
+            displayName = displayNameTextField.getText();
+            contactNumber = contactNumberTextField.getText();
+            bioText = bioTextArea.getText();
+
             loadPasswordFieldAndButtonProfile();
             loadIconImageProfile();
-            previousBioText = bioText;
-            previousBioCount = String.valueOf((int) previousBioText.length());
+
+            user.setBio(bioText);
+            user.setDisplayName(displayName);
+            user.setContactNumber(contactNumber);
+
+            displayNameProfileLabel.setText(displayName);
             bioProfileLabel.setText(bioText);
         } else {
             saveButton.setCancelButton(true);
@@ -138,7 +218,7 @@ public class UserProfileController {
     }
 
     private void setEditableFields(boolean editable) {
-        fullNameTextField.setEditable(editable);
+        displayNameTextField.setEditable(editable);
         contactNumberTextField.setEditable(editable);
         bioTextArea.setEditable(editable);
         setStylesEditable(true);
@@ -146,23 +226,23 @@ public class UserProfileController {
 
     private void setStylesEditable(boolean stylesEditable) {
         if (stylesEditable) {
-            fullNameTextField.getStyleClass().clear();
+            displayNameTextField.getStyleClass().clear();
             contactNumberTextField.getStyleClass().clear();
             bioTextArea.getStyleClass().clear();
-            fullNameTextField.getStyleClass().add("profile-text-field2");
+            displayNameTextField.getStyleClass().add("profile-text-field2");
             contactNumberTextField.getStyleClass().add("profile-text-field2");
             bioTextArea.getStyleClass().add("profile-text-area");
-            fullNameTextField.getStyleClass().add("font");
+            displayNameTextField.getStyleClass().add("font");
             contactNumberTextField.getStyleClass().add("font");
             bioTextArea.getStyleClass().add("font");
         } else {
-            fullNameTextField.getStyleClass().clear();
+            displayNameTextField.getStyleClass().clear();
             contactNumberTextField.getStyleClass().clear();
             bioTextArea.getStyleClass().clear();
-            fullNameTextField.getStyleClass().add("profile-text-field");
+            displayNameTextField.getStyleClass().add("profile-text-field");
             contactNumberTextField.getStyleClass().add("profile-text-field");
             bioTextArea.getStyleClass().add("profile-text-area2");
-            fullNameTextField.getStyleClass().add("font");
+            displayNameTextField.getStyleClass().add("font");
             contactNumberTextField.getStyleClass().add("font");
             bioTextArea.getStyleClass().add("font");
         }
@@ -198,26 +278,19 @@ public class UserProfileController {
 
     }
 
-    public void onKeyBioCountText(KeyEvent event){
-        if (saveButton.isVisible()){
+    public void onKeyBioCountText(){
+        if (saveButton.isVisible()) {
             bioText = bioTextArea.getText();
             countBioLabel.setText(String.valueOf((int) bioText.length()));
-            if(bioText.length() >= 280){
-                if(bioText.length() > 280){
+            if (bioText.length() >= 280) {
+                if (bioText.length() > 280) {
                     countBioLabel.setStyle("-fx-text-fill: red ");
+                } else {
+                    countBioLabel.setStyle("");
                 }
-                bioTextArea.setEditable(false);
-                if(event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE){
-                    if(bioText.length() <= 280){
-                        countBioLabel.setStyle("");
-                    }bioTextArea.setEditable(true);
-                }
-            }else{
-                bioTextArea.setEditable(true);
-
+            }else {
+                countBioLabel.setStyle("");
             }
-        }else{
-            bioTextArea.setEditable(false);
         }
     }
 
