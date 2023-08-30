@@ -21,7 +21,7 @@ public class eventTileController {
         eventNameLabel.setText("Event Name");
         eventDateLabel.setText("Event Date");
         eventPlaceLabel.setText("Event Place");
-        Image image = new Image(getClass().getResource("/images/home/event2.png").toString());
+        Image image = new Image(getClass().getResourceAsStream("/images/home/event2.png"));
         eventTileImageView.setImage(image);
     }
 
