@@ -42,7 +42,6 @@ public class SignInController {
     private Label errorLabel;
 
     private String password,username;
-    private UserList userList;
 
 
     @FXML
@@ -85,13 +84,24 @@ public class SignInController {
 
     }
     public void onLoginButton() {
-        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
-        userList = datasource.readData();
-        User user = userList.login(usernameTextField.getText(), password);
         username = usernameTextField.getText();
         password = passwordField.getText();
+        if (username.isEmpty() || password.isEmpty()) {
+            setBorderColorTextField();
+            resetBorderTextField();
+            return;
+        }
+
+
+        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+        UserList userList = datasource.readData();
+
+        User user = userList.login(usernameTextField.getText(), password);
+
+
+
         User matchingUsername = userList.findUsername(username);
-        if(user!=null){
+        if(user!=null && !password.isEmpty()){
             try {
                 FXRouter.goTo("home", user);
             } catch (IOException e) {
