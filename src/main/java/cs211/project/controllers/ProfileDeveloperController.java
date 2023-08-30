@@ -21,25 +21,25 @@ public class ProfileDeveloperController {
     }
 
     private void showProfile() {
-        Image profile = new Image(getClass().getResource("/images/profile/develop/ging.png").toString(), 600, 0, true, false);
+        Image profile = new Image(getClass().getResourceAsStream("/images/profile/develop/ging.png"), 600, 0, true, false);
         nameLabel.setText("จินดามณี ศรีหะรัญ");
         nickLabel.setText("กุ๊งกิ๊ง");
         studentIdLabel.setText("6510405385");
         profileImageView.setImage(profile);
 
-        Image profile1 = new Image(getClass().getResource("/images/profile/develop/phum.jpg").toString(), 600, 0, true, false);
+        Image profile1 = new Image(getClass().getResourceAsStream("/images/profile/develop/phum.jpg"), 600, 0, true, false);
         nameLabel1.setText("ภูมิระพี เสริญวณิชกุล");
         nickLabel1.setText("ภูมิ");
         studentIdLabel1.setText("6510405750");
         profileImageView1.setImage(profile1);
 
-        Image profile2 = new Image(getClass().getResource("/images/profile/develop/man.jpg").toString(), 600, 0, true, false);
+        Image profile2 = new Image(getClass().getResourceAsStream("/images/profile/develop/man.jpg"), 600, 0, true, false);
         nameLabel2.setText("ปิยะ กองศรี");
         nickLabel2.setText("แมน");
         studentIdLabel2.setText("6510450666");
         profileImageView2.setImage(profile2);
 
-        Image profile3 = new Image(getClass().getResource("/images/profile/develop/ming.jpg").toString(), 600, 0, true, false);
+        Image profile3 = new Image(getClass().getResourceAsStream("/images/profile/develop/ming.jpg"), 600, 0, true, false);
         nameLabel3.setText("ปุญญิศา ธัญญพงษ์");
         nickLabel3.setText("หมิง");
         studentIdLabel3.setText("6510450674");

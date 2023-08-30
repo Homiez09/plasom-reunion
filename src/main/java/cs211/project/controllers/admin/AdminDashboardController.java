@@ -26,7 +26,7 @@ public class AdminDashboardController {
         UserDataSourceHardCode datasource = new UserDataSourceHardCode();
         userList = datasource.readData();
 
-        profileImageView.setImage(new Image(getClass().getResource("/images/profile/default-avatar/default0.png").toString(), 1280, 1280, false, false));
+        profileImageView.setImage(new Image(getClass().getResourceAsStream("/images/profile/default-avatar/default0.png"), 1280, 1280, false, false));
         new CreateProfileCircle(profileImageView, 28);
         new BlockArrowKeyFromTabPane(mainTab);
 

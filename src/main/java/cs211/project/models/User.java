@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class User {
-    private String  username,displayName, password, status, lastedLogin, imagePath;
+    private String  username,displayName, password, status, lastedLogin, imagePath, bio, contactNumber;
     private final String role, registerDate, userid;
     private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
     private ArrayList<Event> events = new ArrayList<>();
@@ -27,7 +27,9 @@ public class User {
         this.displayName = displayName;
         setPassword(password);
         this.status = "offline";
+        this.bio = "";
         this.imagePath = generateAvatar();
+        this.contactNumber = "";
         this.avatar = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
     }
 
@@ -109,6 +111,10 @@ public class User {
         return role;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -125,6 +131,10 @@ public class User {
         return imagePath;
     }
 
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
@@ -139,6 +149,18 @@ public class User {
 
     public void setPassword(String password){
         this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public void setAvatar(ImageView avatar) {
+        this.avatar = avatar;
     }
 
     public void setLastedLogin(String lastedLogin) {
@@ -162,4 +184,5 @@ public class User {
 
 
 }
+
 
