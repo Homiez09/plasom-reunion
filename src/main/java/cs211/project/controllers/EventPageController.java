@@ -32,6 +32,13 @@ public class EventPageController {
             throw new RuntimeException(e);
         }
     }
+    @FXML protected void onBackButtonClick() {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML protected void onApplyStaffButtonClick() {
         if (!staffApplicationAnchorPane.isVisible()) {
