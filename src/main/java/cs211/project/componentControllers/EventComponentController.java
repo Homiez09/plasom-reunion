@@ -54,17 +54,13 @@ public class EventComponentController {
     public void setEventData(Event event) {
         if (event.isEnd()) {
             buttonVisible(false);
-            eventImageView.setImage(new Image(getClass().getResource(event.getEventImagePath()).toExternalForm()));
-            eventnameLabel.setText(event.getEventName());
-            dateLabel.setText(event.getEventDateEnd());
-            memberLabel.setText(event.getMember() + "");
         }else {
             buttonVisible(true);
-            eventImageView.setImage(new Image(getClass().getResource(event.getEventImagePath()).toExternalForm()));
-            eventnameLabel.setText(event.getEventName());
-            dateLabel.setText(event.getEventDateEnd());
-            memberLabel.setText(event.getMember() + "");
         }
+        eventImageView.setImage(new Image(getClass().getResource(event.getEventImagePath()).toExternalForm()));
+        eventnameLabel.setText(event.getEventName());
+        dateLabel.setText(event.getEventDateEnd());
+        memberLabel.setText(event.getMember() + "");
     }
 
     public void buttonVisible(Boolean is){
