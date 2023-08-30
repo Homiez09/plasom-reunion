@@ -38,7 +38,7 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label layoutX="497.0" layoutY="174.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="137.0" text="Fullname">
+            <Label layoutX="497.0" layoutY="174.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="137.0" text="Display name">
                <styleClass>
                   <String fx:value="text-xl" />
                   <String fx:value="weight-bold" />
@@ -75,7 +75,7 @@
             </Label>
             <ImageView fx:id="iconProfileImageView" fitHeight="43.0" fitWidth="43.0" layoutX="68.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
             <Circle fill="#ff9e22" layoutX="254.0" layoutY="241.0" radius="75.0" stroke="WHITE" strokeType="INSIDE" />
-            <Label fx:id="fullNameProfileLabel" alignment="CENTER" layoutX="77.0" layoutY="332.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="342.0" text="Phunyisa  Tanyapong">
+            <Label fx:id="displayNameProfileLabel" alignment="CENTER" layoutX="77.0" layoutY="332.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="342.0" text="Phunyisa  Tanyapong">
                <styleClass>
                   <String fx:value="weight-bold" />
                   <String fx:value="font" />
@@ -89,7 +89,7 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label fx:id="bioProfileLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="5.0" layoutX="99.0" layoutY="434.0" lineSpacing="1.0" prefHeight="134.0" prefWidth="298.0" text="A kiddo who uses Bootstrap and Laravel in web development. Currently playing around with design via Figma">
+            <Label fx:id="bioProfileLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="5.0" layoutX="99.0" layoutY="434.0" lineSpacing="1.0" prefHeight="134.0" prefWidth="298.0">
                <styleClass>
                   <String fx:value="text-ms" />
                   <String fx:value="weight-medium" />
@@ -116,7 +116,7 @@
                   <String fx:value="edit-profile-button" />
                </styleClass>
             </Button>
-            <TextField fx:id="fullNameTextField" layoutX="529.0" layoutY="224.0" prefHeight="37.0" prefWidth="358.0" promptText="Phunyisa Tanyapong">
+            <TextField fx:id="displayNameTextField" layoutX="529.0" layoutY="224.0" prefHeight="37.0" prefWidth="358.0" promptText="Phunyisa Tanyapong">
                <styleClass>
                   <String fx:value="profile-text-field" />
                   <String fx:value="font" />
