@@ -37,7 +37,7 @@ public class CreateEventController {
     @FXML
     private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner,activityStartHourSpinner,activityEndHourSpinner,
             eventStartMinuteSpinner,eventEndMinuteSpinner,activityStartMinuteSpinner,activityEndMinuteSpinner;
-    private Event thisEvent = null;
+    private Event thisEvent = (Event) FXRouter.getData2();
     private String newEventImagePath;
     private User user = (User) FXRouter.getData();
     @FXML  void initialize() {

@@ -94,7 +94,13 @@ public final class FXRouter {
 
     public static void goTo(String routeLabel, Object data) throws IOException {
         RouteScene route = (RouteScene)routes.get(routeLabel);
-        route.data = data;
+        route.data1 = data;
+        loadNewRoute(route);
+    }
+    public static void goTo(String routeLabel, Object data1, Object data2) throws IOException {
+        RouteScene route = (RouteScene)routes.get(routeLabel);
+        route.data1 = data1;
+        route.data2 = data2;
         loadNewRoute(route);
     }
 
@@ -148,7 +154,10 @@ public final class FXRouter {
     }
 
     public static Object getData() {
-        return currentRoute.data;
+        return currentRoute.data1;
+    }
+    public static Object getData2() {
+        return currentRoute.data2;
     }
 
     private static class RouteScene {
@@ -156,7 +165,7 @@ public final class FXRouter {
         private String windowTitle;
         private double sceneWidth;
         private double sceneHeight;
-        private Object data;
+        private Object data1,data2;
 
         private RouteScene(String scenePath) {
             this(scenePath, getWindowTitle(), getWindowWidth(), getWindowHeight());
