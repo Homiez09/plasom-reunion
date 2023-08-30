@@ -146,7 +146,7 @@
                         <String fx:value="text-base" />
                      </styleClass>
                   </TextField>
-                  <Label fx:id="errorLabel" layoutX="144.0" layoutY="142.0" prefHeight="43.0" prefWidth="255.0" text="Those passwords didn't match. Please try again." textFill="#ff1515">
+                  <Label fx:id="errorLabel" layoutX="144.0" layoutY="142.0" prefHeight="43.0" prefWidth="360.0" text="errorLabel" textFill="#ff1515">
                      <styleClass>
                         <String fx:value="font" />
                         <String fx:value="text-xs" />
@@ -284,7 +284,7 @@
                         <String fx:value="custom-box" />
                      </styleClass>
                   </Rectangle>
-                  <Label layoutX="155.0" layoutY="287.0" prefHeight="43.0" prefWidth="235.0" text="EVENT NAME" textFill="#f5f3ed">
+                  <Label fx:id="eventUpComingName" layoutX="155.0" layoutY="287.0" prefHeight="43.0" prefWidth="235.0" text="EVENT NAME" textFill="#f5f3ed">
                      <font>
                         <Font name="FreesiaUPC Bold" size="35.0" />
                      </font>
@@ -294,7 +294,7 @@
                         <String fx:value="font" />
                      </styleClass>
                   </Label>
-                  <Label layoutX="155.0" layoutY="330.0" prefHeight="0.0" prefWidth="207.0" text="PLACE" textFill="#f5f3ed">
+                  <Label fx:id="eventUpComingPlace" layoutX="155.0" layoutY="330.0" prefHeight="0.0" prefWidth="207.0" text="PLACE" textFill="#f5f3ed">
                      <font>
                         <Font name="FreesiaUPC Bold" size="35.0" />
                      </font>
@@ -305,7 +305,7 @@
                      </styleClass>
                   </Label>
                   <Circle fx:id="nextCircle" fill="#fff5e5d6" layoutX="445.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button" />
-                  <Label layoutX="155.0" layoutY="442.0" prefHeight="32.0" prefWidth="207.0" text="22  Aug,2023" textFill="#e8e8e8">
+                  <Label fx:id="eventUpComingDate" layoutX="155.0" layoutY="442.0" prefHeight="32.0" prefWidth="207.0" text="22  Aug,2023" textFill="#e8e8e8">
                      <font>
                         <Font name="FreesiaUPC" size="20.0" />
                      </font>

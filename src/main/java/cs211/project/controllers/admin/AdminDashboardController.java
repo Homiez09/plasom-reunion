@@ -1,9 +1,8 @@
 package cs211.project.controllers.admin;
 
-import cs211.project.models.UserFake;
-import cs211.project.services.BlockArrowKeyFromTabPane;
-import cs211.project.services.CreateProfileCircle;
-import cs211.project.services.FXRouter;
+import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -12,42 +11,32 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class AdminDashboardController {
     @FXML private TabPane mainTab;
-    @FXML private Tab menu1Tab, menu2Tab;
-    @FXML private Button menu1, menu2, menu3, menu4;
-    @FXML private TableView userTableView, adminTableView;
+    @FXML private Tab menu1Tab;
+    @FXML private Button menu1;
+    @FXML private TableView userTableView;
     @FXML private ImageView profileImageView;
+    @FXML private ProgressBar eventProgressBar;
+
+    private UserList userList;
 
     @FXML private void initialize() {
+        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+        userList = datasource.readData();
+
         profileImageView.setImage(new Image(getClass().getResource("/images/profile/default-avatar/default0.png").toString(), 1280, 1280, false, false));
-        new BlockArrowKeyFromTabPane(mainTab);
         new CreateProfileCircle(profileImageView, 28);
+        new BlockArrowKeyFromTabPane(mainTab);
+
         showUserTable();
-        showAdminTable();
         ButtonSelectGraphic(1);
     }
 
     @FXML protected void onMenuOneClick() {
         mainTab.getSelectionModel().select(menu1Tab);
         ButtonSelectGraphic(1);
-    }
-
-    @FXML protected void onMenuTwoClick() {
-        mainTab.getSelectionModel().select(menu2Tab);
-        ButtonSelectGraphic(2);
-    }
-
-    @FXML protected void onMenuThreeClick() {
-//        mainTab.getSelectionModel().select(menu3Tab);
-        ButtonSelectGraphic(3);
-    }
-
-    @FXML protected void onMenuFourClick() {
-//        mainTab.getSelectionModel().select(menu4Tab);
-        ButtonSelectGraphic(4);
     }
 
     @FXML protected void onLogoutButtonClick() {
@@ -57,74 +46,37 @@ public class AdminDashboardController {
             throw new RuntimeException(e);
         }
     }
+    private void showUserTable() {
+        TableColumn<User, String> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("userid"));
 
-    private void CreateTableColumn(TableView tableView) {
-        TableColumn<UserFake, String> idCol = new TableColumn<>("ID");
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<User, ImageView> profileCol = new TableColumn<>("Profile");
+        profileCol.setCellValueFactory(new PropertyValueFactory<>("avatar"));
 
-        TableColumn<UserFake, String> usernameCol = new TableColumn<>("Username");
+        TableColumn<User, String> usernameCol = new TableColumn<>("Username");
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 
-        TableColumn<UserFake, String> nameCol = new TableColumn<>("Name");
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        TableColumn<User, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("displayName"));
 
-        TableColumn<UserFake, String> roleCol = new TableColumn<>("Role");
-        roleCol.setCellValueFactory(new PropertyValueFactory<>("role"));
-
-        TableColumn<UserFake, String> statusCol = new TableColumn<>("Status");
+        TableColumn<User, String> statusCol = new TableColumn<>("Status");
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        TableColumn<UserFake, String> lastLoginCol = new TableColumn<>("Last Login");
-        lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastLogin"));
+        TableColumn<User, String> lastLoginCol = new TableColumn<>("Last Login");
+        lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastedLogin"));
 
-        tableView.getColumns().clear();
-        tableView.getColumns().addAll(idCol, usernameCol, nameCol, roleCol, statusCol, lastLoginCol);
-    }
-
-    private void CreateTableItem(TableView tableView, ArrayList<UserFake> users) {
-        tableView.getItems().clear();
-        tableView.getItems().addAll(users);
-    }
-    void showUserTable() {
-        // todo : get data from datasource
-        ArrayList<UserFake> users = new ArrayList<>();
-
-        users.add(new UserFake("1", "admin", "User", "User", "Offline", "2020-01-01"));
-        users.add(new UserFake("2", "user", "User", "User", "Online", "2020-01-01"));
-        users.add(new UserFake("3", "user2", "User2", "User", "Offline", "2020-01-01"));
-        users.add(new UserFake("4", "user3", "User3", "User", "Offline", "2020-01-01"));
-
-        CreateTableColumn(userTableView);
-        CreateTableItem(userTableView, users);
-    }
-
-    void showAdminTable() {
-        // todo : get data from datasource
-        ArrayList<UserFake> users = new ArrayList<>();
-
-        users.add(new UserFake("1", "admin", "User", "Admin", "Online", "2020-01-01"));
-        users.add(new UserFake("2", "user", "User", "Admin", "Offline", "2020-01-01"));
-        users.add(new UserFake("3", "user2", "User2", "Admin", "Offline", "2020-01-01"));
-
-        CreateTableColumn(adminTableView);
-        CreateTableItem(adminTableView, users);
+        userTableView.getColumns().clear();
+        userTableView.getColumns().addAll(idCol, profileCol, usernameCol, nameCol, statusCol, lastLoginCol);
+        userTableView.getItems().clear();
+        userTableView.getItems().addAll(userList.getUsers());
 
     }
 
-    void ButtonSelectGraphic(int page) { // Change button graphic when selected
+    private void ButtonSelectGraphic(int page) { // Change button graphic when selected
         ResetSelectGraphic();
         switch(page) {
             case 1:
                 menu1.setStyle("-fx-background-color: #FFE4B8");
-                break;
-            case 2:
-                menu2.setStyle("-fx-background-color: #FFE4B8");
-                break;
-            case 3:
-                menu3.setStyle("-fx-background-color: #FFE4B8");
-                break;
-            case 4:
-                menu4.setStyle("-fx-background-color: #FFE4B8");
                 break;
             default:
                 ResetSelectGraphic();
@@ -132,11 +84,8 @@ public class AdminDashboardController {
                 break;
         }
     }
-    void ResetSelectGraphic() { // Reset all button to default
+    private void ResetSelectGraphic() { // Reset all button to default
         menu1.setStyle("-fx-background-color: transparent");
-        menu2.setStyle("-fx-background-color: transparent");
-        menu3.setStyle("-fx-background-color: transparent");
-        menu4.setStyle("-fx-background-color: transparent");
     }
 
 }

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0" styleClass="bg" stylesheets="@../../../css/create-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.CreateEventController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="1152.0" spacing="20.0" AnchorPane.topAnchor="75.0">
+         <children>
+            <Label fx:id="headCreateEventLabel" text="headCreateEventLabel">
+               <font>
+                  <Font name="Leelawadee Bold" size="48.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </Label>
+            <ScrollPane prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg">
+              <content>
+                  <VBox prefWidth="1000.0" spacing="15.0" styleClass="inbox-bg">
+                     <children>
+                        <HBox style="-fx-background-color: transparent;">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Basic information">
+                                 <font>
+                                    <Font name="Leelawadee Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="25.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutX="20.0" layoutY="30.026561737060547" strokeType="OUTSIDE" strokeWidth="0.0" text="Event name" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="eventNameTextField" layoutX="128.0" layoutY="10.399999618530273" prefHeight="26.0" prefWidth="400.0" styleClass="text-field-bg" AnchorPane.leftAnchor="200.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Event tag" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <ChoiceBox fx:id="eventTagChoiceBox" layoutX="74.4000015258789" prefWidth="150.0" styleClass="text-field-bg" AnchorPane.leftAnchor="200.0" />
+                              <Text layoutX="224.8000030517578" layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Event capacity" AnchorPane.leftAnchor="420.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="eventCapTextField" layoutX="338.3999938964844" prefHeight="26.0" prefWidth="100.0" styleClass="text-field-bg" AnchorPane.leftAnchor="550.0" />
+                              <ImageView fx:id="eventImageView" fitHeight="25.0" fitWidth="25.0" layoutX="438.3999938964844" layoutY="0.800000011920929" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0">
+                                 <image>
+                                    <Image url="@../../../images/event/person.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutY="17.2265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Event location" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="eventLocationTextField" layoutX="112.80000305175781" prefWidth="400.0" styleClass="text-field-bg" AnchorPane.leftAnchor="200.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="startDatePick">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <children>
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <DatePicker fx:id="eventStartDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" AnchorPane.leftAnchor="420.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="eventStartHourSpinner" layoutX="519.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Text layoutX="620.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="eventStartMinuteSpinner" layoutX="632.0" layoutY="1.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="10.0" layoutY="158.0">
+                           <children>
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <DatePicker fx:id="eventEndDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="End time" AnchorPane.leftAnchor="420.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="eventEndHourSpinner" layoutX="519.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Text layoutX="620.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="eventEndMinuteSpinner" layoutX="632.0" layoutY="1.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutX="20.0" layoutY="27.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Event description" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextArea fx:id="eventDescriptionTextArea" layoutX="172.8000030517578" layoutY="10.399999618530273" prefHeight="200.0" prefWidth="600.0" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutY="17.2265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload event image" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="350.0" fitWidth="300.0" layoutX="160.8000030517578" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="200.0" />
+                              <Text fill="RED" layoutX="360.79998779296875" layoutY="13.3984375" strokeType="OUTSIDE" strokeWidth="0.0" text="Image guideline" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="200.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="14.0" />
+                                 </font>
+                              </Text>
+                              <Button mnemonicParsing="false" onAction="#handleUploadButton" styleClass="page-button" stylesheets="@../../../css/event.css" text="Upload" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="250.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Button mnemonicParsing="false" onAction="#onSubmitBasicInformationClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="submit">
+                           <font>
+                              <Font name="Leelawadee" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="900.0" right="25.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Separator />
+                        <Text layoutX="35.0" layoutY="856.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create activity">
+                           <font>
+                              <Font name="Leelawadee Bold" size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="25.0" />
+                           </VBox.margin>
+                        </Text>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutY="17.2265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity name" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="activityNameTextField" layoutX="112.80000305175781" prefWidth="400.0" styleClass="text-field-bg" AnchorPane.leftAnchor="200.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutX="20.0" layoutY="27.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity description" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextArea fx:id="activityDescriptionTextArea" layoutX="172.8000030517578" layoutY="10.399999618530273" prefHeight="200.0" prefWidth="600.0" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <DatePicker fx:id="activityStartDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" AnchorPane.leftAnchor="420.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="activityStartHourSpinner" layoutX="519.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Text layoutX="620.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="activityStartMinuteSpinner" layoutX="632.0" layoutY="1.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" AnchorPane.leftAnchor="20.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <DatePicker fx:id="activityEndDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="End time" AnchorPane.leftAnchor="420.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="activityEndHourSpinner" layoutX="519.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Text layoutX="620.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="activityEndMinuteSpinner" layoutX="632.0" layoutY="1.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Button mnemonicParsing="false" onAction="#onAddActivityButtonClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="Add activity" AnchorPane.rightAnchor="100.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <TableView fx:id="createActivityTableView">
+                          <columns>
+                            <TableColumn prefWidth="125.0" text="Activity name" />
+                            <TableColumn prefWidth="100.0" text="start time" />
+                              <TableColumn prefWidth="100.0" text="end time" />
+                              <TableColumn prefWidth="550.0" text="description" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </TableView>
+                        <Separator />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create team(optional)">
+                           <font>
+                              <Font name="Leelawadee Bold" size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="25.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox alignment="TOP_CENTER" spacing="20.0">
+                           <padding>
+                              <Insets left="20.0" right="20.0" />
+                           </padding>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Team name">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="teamNameTextField" prefWidth="350.0" styleClass="text-field-bg" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Team member limit">
+                                 <font>
+                                    <Font name="Leelawadee" size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="teamMemberCapTextField" prefWidth="100.0" styleClass="text-field-bg" />
+                              <Button mnemonicParsing="false" onAction="#onAddTeamButtonClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="Add team" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="createTeamTableView">
+                          <columns>
+                            <TableColumn prefWidth="700.0" text="Team name" />
+                            <TableColumn prefWidth="175.0" text="Team member limit" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+              </content>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </ScrollPane>
+         </children>
+      </VBox>
+      <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" />
+   </children>
+</AnchorPane>

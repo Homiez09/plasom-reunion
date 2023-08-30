@@ -132,7 +132,6 @@
                         </PasswordField>
                      </center>
                   </BorderPane>
-                  <ImageView fx:id="visiblePasswordImageView" fitHeight="24.0" fitWidth="24.0" layoutX="505.0" layoutY="109.0" onMouseClicked="#onVisiblePasswordClick" pickOnBounds="true" preserveRatio="true" />
                   <TextField fx:id="showPasswordTextField" layoutX="123.0" layoutY="100.0" onKeyReleased="#onKeyShowPassword" prefHeight="46.0" prefWidth="376.0" promptText="Password">
                      <font>
                         <Font size="16.0" />
@@ -149,6 +148,13 @@
                         <String fx:value="text-base" />
                      </styleClass>
                   </TextField>
+                  <Label fx:id="errorLabel" layoutX="137.0" layoutY="125.0" prefHeight="64.0" prefWidth="364.0" text="errorLabel" textFill="#ff1515">
+                     <styleClass>
+                        <String fx:value="font" />
+                        <String fx:value="text-xs" />
+                     </styleClass>
+                  </Label>
+                  <ImageView fx:id="visiblePasswordImageView" fitHeight="24.0" fitWidth="24.0" layoutX="462.0" layoutY="113.0" onMouseClicked="#onVisiblePasswordClick" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </bottom>
@@ -169,7 +175,7 @@
                         <String fx:value="text-lg" />
                      </styleClass>
                   </Label>
-                  <Label lineSpacing="2.0" onMouseClicked="#onSignUpClick" prefHeight="24.0" prefWidth="169.0" text="Sign up" textFill="#413b3b">
+                  <Label fx:id="signUpButtonLabel" lineSpacing="2.0" onMouseClicked="#onSignUpClick" prefHeight="24.0" prefWidth="169.0" text="Sign up" textFill="#413b3b">
                      <font>
                         <Font name="FreesiaUPC" size="19.0" />
                      </font>
@@ -272,7 +278,7 @@
                         <String fx:value="custom-box" />
                      </styleClass>
                   </Rectangle>
-                  <Label layoutX="155.0" layoutY="287.0" prefHeight="43.0" prefWidth="235.0" text="EVENT NAME" textFill="#f5f3ed">
+                  <Label fx:id="eventUpComingName" layoutX="155.0" layoutY="287.0" prefHeight="43.0" prefWidth="235.0" text="EVENT NAME" textFill="#f5f3ed">
                      <font>
                         <Font name="FreesiaUPC Bold" size="24.0" />
                      </font>
@@ -282,7 +288,7 @@
                         <String fx:value="weight-bold" />
                      </styleClass>
                   </Label>
-                  <Label layoutX="155.0" layoutY="330.0" prefHeight="0.0" prefWidth="207.0" text="PLACE" textFill="#f5f3ed">
+                  <Label fx:id="eventUpComingPlace" layoutX="155.0" layoutY="330.0" prefHeight="0.0" prefWidth="207.0" text="PLACE" textFill="#f5f3ed">
                      <font>
                         <Font name="FreesiaUPC Bold" size="20.0" />
                      </font>
@@ -293,7 +299,7 @@
                      </styleClass>
                   </Label>
                   <Circle fx:id="nextCircle" fill="#fff5e5d6" layoutX="445.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button" />
-                  <Label layoutX="155.0" layoutY="442.0" prefHeight="32.0" prefWidth="207.0" text="22  Aug,2023" textFill="#e8e8e8">
+                  <Label fx:id="eventUpComingDate" layoutX="155.0" layoutY="442.0" prefHeight="32.0" prefWidth="207.0" text="22  Aug,2023" textFill="#e8e8e8">
                      <font>
                         <Font name="FreesiaUPC" size="18.0" />
                      </font>
@@ -329,7 +335,7 @@
             </Pane>
          </children>
       </VBox>
-      <Label layoutX="30.0" layoutY="20.0" lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="32.0" prefWidth="64.0" text="back " textFill="#413b3b">
+      <Label fx:id="backButtonLabel" layoutX="30.0" layoutY="20.0" lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="32.0" prefWidth="64.0" text="back " textFill="#413b3b">
          <font>
             <Font name="FreesiaUPC" size="20.0" />
          </font>
@@ -350,7 +356,7 @@
             <String fx:value="font" />
          </styleClass>
       </Label>
-      <Label layoutX="110.0" layoutY="20.0" lineSpacing="2.0" prefHeight="32.0" prefWidth="85.0" text="sign in" textFill="#413b3b">
+      <Label fx:id="SignInLabel" layoutX="110.0" layoutY="20.0" lineSpacing="2.0" prefHeight="32.0" prefWidth="85.0" text="sign in" textFill="#413b3b">
          <font>
             <Font name="FreesiaUPC" size="20.0" />
          </font>

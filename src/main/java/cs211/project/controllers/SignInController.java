@@ -2,28 +2,25 @@ package cs211.project.controllers;
 
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
-import cs211.project.services.EventDataSourceHardCode;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataSourceHardCode;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class SignInController {
 
     private int page = 0;
     private int maxPage;
-    private Image showPasswordImage, hidePasswordImage;
+    private final int maxPasswordLimit = 27, maxUsernameLimit = 20;
+
 
     @FXML
     private Button backButton, nextButton;
@@ -39,53 +36,82 @@ public class SignInController {
     private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
     @FXML
     private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
+    private Image showPasswordImage, hidePasswordImage;
 
+    @FXML
+    private Label errorLabel;
+
+    private String password,username;
     private UserList userList;
-    String password;
 
 
     @FXML
     void initialize() {
-        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
-        userList = datasource.readData();
+
 
         loadImage();
+        showImage(page);
+        maxPage = calculateMaxPage();
+
+        maximumLengthField();
+
         showPasswordTextField.setVisible(false);
         visiblePasswordImageView.setImage(hidePasswordImage);
-
-        maxPage = calculateMaxPage();
         updateVisibleButton();
-        showImage(page);
+
+        errorLabel.setVisible(false);
+
     }
 
 
-    private void updateVisibleButton() {
-        backButton.setVisible(page > 0);
-        backCircle.setVisible(page > 0);
-        nextButton.setVisible(page != maxPage);
-        nextCircle.setVisible(page != maxPage);
-    }
+    private void maximumLengthField(){
+        usernameTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxUsernameLimit){
+                usernameTextField.setText(oldValue);
+            }
+        }));
 
-    public void onKeyHidePassword(KeyEvent keyEvent) {
+        passwordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
+                passwordField.setText(oldValue);
+            }
+        }));
+
+        showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue.length() > maxPasswordLimit){
+                showPasswordTextField.setText(oldValue);
+            }
+        }));
+
+    }
+    public void onLoginButton() {
+        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+        userList = datasource.readData();
+        User user = userList.login(usernameTextField.getText(), password);
+        username = usernameTextField.getText();
         password = passwordField.getText();
-        showPasswordTextField.setText(password);
-    }
+        User matchingUsername = userList.findUsername(username);
+        if(user!=null){
+            try {
+                FXRouter.goTo("home", user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-    public void onKeyShowPassword(KeyEvent keyEvent) {
-        password = showPasswordTextField.getText();
-        passwordField.setText(password);
-    }
-
-    @FXML
-    private void onVisiblePasswordClick(MouseEvent event) {
-        if (visiblePasswordImageView.getImage() == hidePasswordImage) {
-            showPasswordTextField.setVisible(true);
-            visiblePasswordImageView.setImage(showPasswordImage);
-        } else {
-            showPasswordTextField.setVisible(false);
-            visiblePasswordImageView.setImage(hidePasswordImage);
+        }else{
+            if(matchingUsername == null){
+                errorLabel.setText("Incorrect username and password. Please try again.");
+                errorLabel.setVisible(true);
+            }
+            if (matchingUsername != null){
+                errorLabel.setText("Incorrect password. Please try again.");
+                errorLabel.setVisible(true);
+            }
+            setBorderColorTextField();
+            resetBorderTextField();
         }
     }
+
 
     @FXML
     protected void onNextButtonClick() {
@@ -121,24 +147,80 @@ public class SignInController {
         }
     }
 
-    private int calculateMaxPage() {
-        int countImage = 0;
-        while (true) {
-            String path = "/images/login/event" + countImage + "_test.jpg";
-            if (getClass().getResource(path) != null) {
-                countImage++;
-            } else {
-                break;
-            }
+    private String setColorBorderTextField(String color){
+        switch (color) {
+            case "red" -> color = "-fx-border-color: red";
+            case "black" -> color = "-fx-border-color: #413b3b";
         }
-        return countImage - 1;
+        return color;
     }
+
+    private void setBorderColorTextField(){
+        username = usernameTextField.getText();
+        password = passwordField.getText();
+        usernameTextField.setStyle(username.isEmpty() ? setColorBorderTextField("red") : setColorBorderTextField("black"));
+        if(password.isEmpty()){
+            passwordField.setStyle(setColorBorderTextField("red"));
+            showPasswordTextField.setStyle(setColorBorderTextField("red"));
+        }else{
+            passwordField.setStyle(setColorBorderTextField("black"));
+            showPasswordTextField.setStyle(setColorBorderTextField("black"));
+        }
+
+    }
+
+    private void resetBorderTextField(){
+        usernameTextField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                usernameTextField.setStyle("-fx-border-color: #413b3b");
+                errorLabel.setVisible(false);
+            }
+        });
+
+        passwordField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                passwordField.setStyle("-fx-border-color: #413b3b");
+                errorLabel.setVisible(false);
+            }
+        });
+
+    }
+
+
+    private void updateVisibleButton() {
+        backButton.setVisible(page > 0);
+        backCircle.setVisible(page > 0);
+        nextButton.setVisible(page != maxPage);
+        nextCircle.setVisible(page != maxPage);
+    }
+
+    public void onKeyHidePassword() {
+        password = passwordField.getText();
+        showPasswordTextField.setText(password);
+    }
+
+    public void onKeyShowPassword() {
+        password = showPasswordTextField.getText();
+        passwordField.setText(password);
+    }
+
+    @FXML
+    private void onVisiblePasswordClick() {
+        if (visiblePasswordImageView.getImage() == hidePasswordImage) {
+            showPasswordTextField.setVisible(true);
+            visiblePasswordImageView.setImage(showPasswordImage);
+        } else {
+            showPasswordTextField.setVisible(false);
+            visiblePasswordImageView.setImage(hidePasswordImage);
+        }
+    }
+
 
     private void loadImage() {
         Image upComingBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg1.png"));
         upComingEventsBackgroundImageView.setImage(upComingBackground);
 
-        Image signBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_evnt_bg2.png"));
+        Image signBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg2.png"));
         signBackgroundImageView.setImage(signBackground);
 
         Image usernameIcon = new Image(getClass().getResourceAsStream("/images/icons/login/username_field.png"));
@@ -157,26 +239,22 @@ public class SignInController {
     }
 
     private void showImage(int pageNumber) {
-        String path = "/images/login/event" + pageNumber + "_test.jpg";
-        Image image = new Image(getClass().getResourceAsStream(path));
+        Image image = new Image(getClass().getResourceAsStream("/images/login/event" + pageNumber + "_test.jpg"));
         upComingEventsImageView.setImage(image);
         updateVisibleButton();
     }
 
-
-    public void onLoginButton(ActionEvent actionEvent) {
-        User user = userList.login(usernameTextField.getText(), password);
-        if(user!=null){
-            try {
-                FXRouter.goTo("home", user);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+    private int calculateMaxPage() {
+        int countImage = 0;
+        while (true) {
+            String path = "/images/login/event" + countImage + "_test.jpg";
+            if (getClass().getResource(path) != null) {
+                countImage++;
+            } else {
+                break;
             }
-        }else{
-            return ;
-            //todo: error
         }
-
-
+        return countImage - 1;
     }
+
 }

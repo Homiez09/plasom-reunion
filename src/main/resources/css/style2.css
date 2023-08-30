@@ -174,6 +174,10 @@ Text, Label {
     -fx-padding: 0 0 0 20;
 }
 
+.admin-sidebar-bg > VBox > Button:hover {
+    -fx-background-color: FFE4B8;
+}
+
 .btn {
     -fx-font-family: Leelawadee;
     -fx-font-size: 19;
@@ -246,6 +250,6 @@ Text, Label {
 }
 
 ProgressBar {
-    -fx-text-box-border: forestgreen;
-    -fx-control-inner-background: palegreen;
+    -fx-text-box-border: #666666;
+    -fx-accent: #FF9900;
 }
