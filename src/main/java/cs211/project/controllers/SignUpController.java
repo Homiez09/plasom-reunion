@@ -67,7 +67,7 @@ public class SignUpController {
         if(validateConfirmation()){
             User user = new User(displayNameTextfield.getText(), usernameTextField.getText(),password);
             try {
-                FXRouter.goTo("sign-in", user);
+                FXRouter.goTo("sign-in");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -383,29 +383,29 @@ public class SignUpController {
 
 
     private void loadImage() {
-        Image upComingBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg1.png"));
+        Image upComingBackground = new Image(getClass().getResource("/images/backgrounds/login/sign_event_bg1.png").toString());
         upComingEventsBackgroundImageView.setImage(upComingBackground);
 
-        Image signBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg2.png"));
+        Image signBackground = new Image(getClass().getResource("/images/backgrounds/login/sign_event_bg2.png").toString());
         signBackgroundImageView.setImage(signBackground);
 
-        Image usernameIcon = new Image(getClass().getResourceAsStream("/images/icons/login/username_field.png"));
+        Image usernameIcon = new Image(getClass().getResource("/images/icons/login/username_field.png").toString());
         usernameIconView.setImage(usernameIcon);
         fullNameIconView.setImage(usernameIcon);
 
-        Image passwordIcon = new Image(getClass().getResourceAsStream("/images/icons/login/password_field.png"));
+        Image passwordIcon = new Image(getClass().getResource("/images/icons/login/password_field.png").toString());
         passwordIconView.setImage(passwordIcon);
         confirmPasswordIconView.setImage(passwordIcon);
 
-        checkBoxPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/checkbox_password.png"));
-        showPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
-        hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
+        checkBoxPasswordImage = new Image(getClass().getResource("/images/icons/login/checkbox_password.png").toString());
+        showPasswordImage = new Image(getClass().getResource("/images/icons/login/show_password.png").toString());
+        hidePasswordImage = new Image(getClass().getResource("/images/icons/login/hide_password.png").toString());
 
         visiblePasswordImageView.setImage(hidePasswordImage);
     }
 
     private void showImage(int pageNumber) {
-        Image image = new Image(getClass().getResourceAsStream("/images/login/event" + pageNumber + "_test.jpg"));
+        Image image = new Image(getClass().getResource("/images/login/event" + pageNumber + "_test.jpg").toString());
         upComingEventsImageView.setImage(image);
         updateVisibleButton();
     }
