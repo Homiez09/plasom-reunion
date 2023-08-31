@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
@@ -75,28 +76,6 @@
             </Label>
             <ImageView fx:id="iconProfileImageView" fitHeight="43.0" fitWidth="43.0" layoutX="68.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
             <Circle fill="#ff9e22" layoutX="254.0" layoutY="241.0" radius="75.0" stroke="WHITE" strokeType="INSIDE" />
-            <Label fx:id="displayNameProfileLabel" alignment="CENTER" layoutX="77.0" layoutY="332.0" lineSpacing="1.0" prefHeight="63.0" prefWidth="342.0" text="Phunyisa  Tanyapong">
-               <styleClass>
-                  <String fx:value="weight-bold" />
-                  <String fx:value="font" />
-                  <String fx:value="text-2xl" />
-               </styleClass>
-            </Label>
-            <Label fx:id="usernameProfileLabel" alignment="CENTER" layoutX="86.0" layoutY="386.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="346.0" text="PinkPPanther">
-               <styleClass>
-                  <String fx:value="text-xl" />
-                  <String fx:value="weight-medium" />
-                  <String fx:value="font" />
-               </styleClass>
-            </Label>
-            <Label fx:id="bioProfileLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="5.0" layoutX="99.0" layoutY="434.0" lineSpacing="1.0" prefHeight="134.0" prefWidth="298.0">
-               <styleClass>
-                  <String fx:value="text-ms" />
-                  <String fx:value="weight-medium" />
-                  <String fx:value="font" />
-                  <String fx:value="center-label" />
-               </styleClass>
-            </Label>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9e22" height="30.0" layoutX="167.0" layoutY="581.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 10; -fx-arc-width: 10;" width="150.0" />
             <Label alignment="CENTER" layoutX="223.0" layoutY="548.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="24.0" text="id: " textFill="WHITE">
                <styleClass>
@@ -204,6 +183,33 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
+            <VBox alignment="CENTER" layoutX="58.0" layoutY="331.0" prefHeight="232.0" prefWidth="380.0">
+               <children>
+                  <Label fx:id="displayNameProfileLabel" alignment="CENTER" lineSpacing="1.0" prefHeight="34.0" prefWidth="342.0" text="Phunyisa  Tanyapong">
+                     <styleClass>
+                        <String fx:value="weight-bold" />
+                        <String fx:value="font" />
+                        <String fx:value="text-2xl" />
+                     </styleClass>
+                  </Label>
+                  <Label fx:id="usernameProfileLabel" alignment="CENTER" lineSpacing="1.0" prefHeight="31.0" prefWidth="346.0" text="PinkPPanther">
+                     <styleClass>
+                        <String fx:value="text-xl" />
+                        <String fx:value="weight-medium" />
+                        <String fx:value="font" />
+                     </styleClass>
+                  </Label>
+                  <AnchorPane prefHeight="25.0" prefWidth="380.0" />
+                  <Label fx:id="bioProfileLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="5.0" lineSpacing="1.0" prefHeight="134.0" prefWidth="298.0">
+                     <styleClass>
+                        <String fx:value="text-ms" />
+                        <String fx:value="weight-medium" />
+                        <String fx:value="font" />
+                        <String fx:value="center-label" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
