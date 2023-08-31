@@ -4,22 +4,16 @@ import cs211.project.models.User;
 import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventDispatcher;
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 
 public class navbarController {
     @FXML private ImageView profileImageView;
     @FXML private Pane toggleProfilePane;
-    @FXML private AnchorPane mainNavbarAnchorPane;
 
     private User user = (User) FXRouter.getData();
     @FXML private void initialize() {
