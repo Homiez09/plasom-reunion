@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class LoadTopbarComponent {
-    public LoadTopbarComponent(User user, AnchorPane topBarAnchorPane, boolean hideBackButton) {
+    public LoadTopbarComponent(AnchorPane topBarAnchorPane, boolean hideBackButton) {
         FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/topbar.fxml"));
         try {
             AnchorPane topBarComponent = topBarComponentLoader.load();
@@ -19,10 +19,7 @@ public class LoadTopbarComponent {
     }
 
     public LoadTopbarComponent(AnchorPane topBarAnchorPane) {
-        this(null, topBarAnchorPane,false);
+        this(topBarAnchorPane,false);
     }
 
-    public LoadTopbarComponent(AnchorPane topBarAnchorPane, boolean hideBackButton) {
-        this(null, topBarAnchorPane, hideBackButton);
-    }
 }

@@ -26,6 +26,11 @@
                      <children>
                         <AnchorPane prefHeight="400.0" prefWidth="1152.0" styleClass="top-bg">
                            <children>
+                              <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="page-button" text="&lt;Back" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="12.0" />
+                                 </font>
+                              </Button>
                               <ImageView fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0" />
                               <VBox prefHeight="400.0" spacing="25.0" AnchorPane.leftAnchor="500.0">
                                  <children>

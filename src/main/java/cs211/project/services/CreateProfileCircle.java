@@ -15,13 +15,10 @@ profileImageView.setImage(new Image(getClass().getResource("/images/profile/defa
 new CreateProfileCircle(profileImageView, 28);
 */
 public class CreateProfileCircle {
-    public CreateProfileCircle(User user, ImageView profileImageView, double radius) {
+    public CreateProfileCircle(ImageView profileImageView, double radius) {
         profileImageView.setClip(getProfileCircle(profileImageView, radius));
     }
 
-    public CreateProfileCircle(ImageView profileImageView, double radius) {
-        this(null, profileImageView, radius);
-    }
     private Circle getProfileCircle(ImageView profileImageView, double radius) {
         Circle circle = new Circle(radius);
         circle.setCenterX(profileImageView.getFitWidth() / 2);

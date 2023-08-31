@@ -1,5 +1,8 @@
 package cs211.project.models;
 
+import cs211.project.models.collections.ActivityList;
+import cs211.project.models.collections.TeamList;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +16,8 @@ public class Event {
     private String eventLocation;
     private int member = 0;
     private int slotMember;
+    private ActivityList activities;
+    private TeamList teams;
 
     public Event() {
 
@@ -66,6 +71,10 @@ public class Event {
 
     public String getEventLocation() { return eventLocation; }
 
+    public ActivityList getActivities() { return activities; }
+
+    public TeamList getTeams() { return teams; }
+
     public void changeDateStart(String newDate){
         this.eventDateStart = newDate;
     }
@@ -117,7 +126,6 @@ public class Event {
 
         return currentDateTime.isAfter(endOfDayParsedEventDateEnd);
     }
-
 
 }
 
