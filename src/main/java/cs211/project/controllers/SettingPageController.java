@@ -13,9 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Desktop;
 
 public class SettingPageController {
     @FXML
@@ -36,11 +36,11 @@ public class SettingPageController {
     @FXML
     public void initialize(){
         hidePane();
+        loginPane.setVisible(true);
         new LoadNavbarComponent(user, navbarAnchorPane);
     }
 
     public void hidePane(){
-        mainPane.setVisible(true);
         loginPane.setVisible(false);
         themePane.setVisible(false);
         privacyPane.setVisible(false);
@@ -82,7 +82,6 @@ public class SettingPageController {
         }
     }
 
-
     public void onContactButton(ActionEvent actionEvent) {
         hidePane();
         mainPane.setVisible(false);
@@ -119,4 +118,14 @@ public class SettingPageController {
         }
     }
 
+    public void onLightAction(ActionEvent actionEvent) {
+
+
+    }
+
+    public void onDarkAction(ActionEvent actionEvent) {
+
+
+
+    }
 }

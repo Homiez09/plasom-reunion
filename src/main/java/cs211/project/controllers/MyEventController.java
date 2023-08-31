@@ -6,6 +6,8 @@ import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,28 +27,49 @@ public class MyEventController {
     @FXML
     AnchorPane navbarAnchorPane;
     @FXML
-    Label nameLabel;
+    Label nameLabel,bioLabel;
     @FXML
     ImageView userImageView;
     @FXML
     ListView myeventListView,historyeventListView;
     @FXML
-    Button currentButton;
-
-
-    private EventList eventList ;
-    private Datasource<EventList> datasource;
+    Button currentButton,leaveButton;
+    private EventDataSourceHardCode datasource = new EventDataSourceHardCode();
+    private EventList eventList = datasource.readData();
+    private Event selectEvent;
+    private Datasource<EventList> data;
     private User currentUser = (User) FXRouter.getData();
 
 
 
     @FXML
     public void initialize() {
+
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         showInfo();
-        EventDataSourceHardCode datasource = new EventDataSourceHardCode();
-        eventList = datasource.readData();
+        showList(eventList);
 
+
+
+
+
+   }
+    private void showInfo(){
+        userImageView.setImage(new Image(getClass().getResource(currentUser.getImagePath()).toExternalForm()));
+        nameLabel.setText(currentUser.getDisplayName());
+        bioLabel.setText(currentUser.getBio());
+
+    }
+
+
+    public void onEditAction(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("user-profile",currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void showList(EventList eventList){
         for (Event event : eventList.getEvents()) {
             try {
                 FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
@@ -64,23 +87,9 @@ public class MyEventController {
                 e.printStackTrace();
             }
         }
-
-
-   }
-    private void showInfo(){
-        userImageView.setImage(new Image(getClass().getResource(currentUser.getImagePath()).toExternalForm()));
-        nameLabel.setText(currentUser.getDisplayName());
-
     }
 
 
-    public void onEditAction(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("user-profile",currentUser);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void onBackAction(ActionEvent actionEvent) {
         try {
@@ -98,16 +107,23 @@ public class MyEventController {
         }
     }
 
+    public void onLeaveAction(ActionEvent actionEvent) {
+
+    }
+
     public void onHistoryAction(ActionEvent actionEvent) {
         currentButton.setVisible(true);
         myeventListView.setVisible(false);
         historyeventListView.setVisible(true);
+        leaveButton.setVisible(false);
     }
 
     public void onCurrentAction(ActionEvent actionEvent) {
         currentButton.setVisible(false);
         historyeventListView.setVisible(false);
         myeventListView.setVisible(true);
-
+        leaveButton.setVisible(true);
     }
+
+
 }

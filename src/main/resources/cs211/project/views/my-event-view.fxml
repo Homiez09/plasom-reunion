@@ -30,6 +30,11 @@
                                  </font>
                               </Label>
                               <Button layoutX="63.0" layoutY="449.0" mnemonicParsing="false" onAction="#onEditAction" styleClass="edit-profile-button" text="Edit Profile" />
+                              <Label fx:id="bioLabel" alignment="TOP_CENTER" layoutY="227.0" prefHeight="150.0" prefWidth="200.0" styleClass="font" text="Bio" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                            </children></Pane>
                         <Pane prefHeight="50.0" />
                      </children>
@@ -44,15 +49,16 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="7.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackAction" styleClass="cancel-profile-button" text="&lt; Back" />
-                              <Button layoutX="79.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create" />
+                              <Button layoutY="11.0" mnemonicParsing="false" onAction="#onBackAction" styleClass="cancel-profile-button" text="&lt; Back" />
+                              <Button layoutX="80.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create" />
                               <Button layoutX="772.0" layoutY="11.0" mnemonicParsing="false" onAction="#onHistoryAction" styleClass="cancel-profile-button" text="History" />
                               <Button fx:id="currentButton" layoutX="702.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCurrentAction" styleClass="cancel-profile-button" text="Current" visible="false" />
+                              <Button fx:id="leaveButton" layoutX="154.0" layoutY="11.0" mnemonicParsing="false" onAction="#onLeaveAction" styleClass="cancel-profile-button" text="- Leave" />
                            </children></Pane>
                         <Pane prefHeight="500.0" prefWidth="852.0" styleClass="bgPane">
                            <children>
-                              <ListView fx:id="myeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" />
-                              <ListView fx:id="historyeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" visible="false" />
+                              <ListView fx:id="myeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" styleClass="list-view-set" />
+                              <ListView fx:id="historyeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" styleClass="list-view-set" visible="false" />
                            </children>
                         </Pane>
                         <Pane prefHeight="50.0" />
