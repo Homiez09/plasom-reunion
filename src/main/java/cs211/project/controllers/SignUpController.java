@@ -1,7 +1,9 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
+import cs211.project.services.UserDataSourceHardCode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,9 +43,10 @@ public class SignUpController {
     private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
 
     private String password, confirmPassword, displayName, username;
-    private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false;
+    private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false;
 
-
+    UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+    UserList userList = datasource.readData();
     @FXML
     void initialize() {
         loadImage();
@@ -64,6 +67,8 @@ public class SignUpController {
 
 
     public void onCreateAccountButton() {
+        errorLabel.setVisible(false);
+        findUsernameValidate = false;
         if(validateConfirmation()){
             User user = new User(displayNameTextfield.getText(), usernameTextField.getText(),password);
             try {
@@ -91,17 +96,24 @@ public class SignUpController {
                 errorLabel.setVisible(true);
             }if(password.equals(confirmPassword)){
                 errorLabel.setVisible(false);
+            }if(findUsernameValidate){
+                errorLabel.setText("Duplicate username. Please use another username.");
+                errorLabel.setVisible(true);
             }
         }
 
     }
 
     private boolean validateConfirmation(){
+        User findUsername = userList.findUsername(username);
+        if(findUsername != null){
+            findUsernameValidate = true;
+        }
         displayName = displayNameTextfield.getText();
         username = usernameTextField.getText();
         password = passwordField.getText();
         confirmPassword = confirmPasswordField.getText();
-        if (usernameRequirement && displayNameRequirement && !displayName.isEmpty() && !username.isEmpty()) {
+        if (usernameRequirement && displayNameRequirement && !displayName.isEmpty() && !username.isEmpty() && !findUsernameValidate) {
             return (password.equals(confirmPassword) && passwordMatching);
         }
         return false;

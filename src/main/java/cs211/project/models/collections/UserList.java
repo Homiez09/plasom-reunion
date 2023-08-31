@@ -12,7 +12,6 @@ public class UserList {
         users = new ArrayList<>();
     }
 
-
     public User findUsername(String username) {
         for (User user: users) {
             if (user.isUserName(username)) {
@@ -32,9 +31,9 @@ public class UserList {
     }
 
     public User login(String username, String password){
-        for(User user: users){
-            if(user.getUsername().equals(username) && user.validatePassword(password)){
-                return user;
+        for(User exist: users){
+            if(exist.getUsername().equals(username) && exist.validatePassword(password)){
+                return exist;
             }
         }
         return null;

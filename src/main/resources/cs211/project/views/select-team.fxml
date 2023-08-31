@@ -71,7 +71,7 @@
                <children>
                   <ScrollPane prefHeight="550.0" prefWidth="1152.0">
                      <content>
-                        <AnchorPane prefHeight="595.0" prefWidth="1136.0" styleClass="selected-team-background">
+                        <AnchorPane prefHeight="616.0" prefWidth="1136.0" styleClass="selected-team-background">
                            <children>
                               <GridPane fx:id="teamContainer" prefHeight="66.0" prefWidth="98.0">
                                  <columnConstraints>
@@ -115,21 +115,6 @@
       <ImageView fx:id="settingImageView" fitHeight="40.0" fitWidth="40.0" layoutX="875.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/icons/select-team/setting_icon.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="sortNameLabel" layoutX="95.0" layoutY="184.0" lineSpacing="2.0" prefHeight="32.0" prefWidth="129.0" text="Bookmark Teams" textFill="#413b3b">
-         <font>
-            <Font name="FreesiaUPC" size="20.0" />
-         </font>
-         <styleClass>
-            <String fx:value="spacing1" />
-            <String fx:value="font" />
-            <String fx:value="text-base" />
-         </styleClass>
-      </Label>
-      <ImageView fx:id="pointImageView" fitHeight="23.0" fitWidth="21.0" layoutX="74.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/icons/select-team/point_icon.png" />
          </image>
       </ImageView>
    </children>
