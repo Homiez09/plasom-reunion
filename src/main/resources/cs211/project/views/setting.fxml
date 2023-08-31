@@ -44,21 +44,21 @@
                         <Line endX="218.25" layoutX="27.0" layoutY="305.0" />
                         <Button layoutX="34.0" layoutY="312.0" mnemonicParsing="false" onAction="#onContactButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Contact us" />
                         <Line endX="218.25" layoutX="28.0" layoutY="383.0" />
-                        <Button layoutX="32.0" layoutY="501.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Logout" textFill="RED" />
+                        <Button alignment="CENTER" layoutX="32.0" layoutY="501.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="64.0" prefWidth="207.5" styleClass="button-setting" text="Logout" textFill="RED" />
                      </children>
                   </Pane>
                </children>
             </VBox>
             <Pane fx:id="contactPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false">
                <children>
-                  <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Contact us" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="2.0" prefHeight="64.0" prefWidth="214.0" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Contact us" textAlignment="CENTER">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="privacyPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css">
+            <Pane fx:id="privacyPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false">
                <children>
                   <Label layoutX="181.0" layoutY="21.0" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Privacy Policy for Customers" textAlignment="CENTER">
                      <font>
@@ -71,17 +71,25 @@
                      </font>
                   </Hyperlink>
                </children></Pane>
-            <Pane fx:id="themePane" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" visible="false">
+            <Pane fx:id="themePane" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane">
                <children>
                   <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Theme" textAlignment="CENTER">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <CheckBox fx:id="whiteCheckBox" layoutX="128.0" layoutY="332.0" mnemonicParsing="false" selected="true" text="White" />
-                  <CheckBox fx:id="blackCheckBox" layoutX="463.0" layoutY="332.0" mnemonicParsing="false" text="Black" />
                   <ImageView fx:id="whiteImageView" fitHeight="150.0" fitWidth="200.0" layoutX="64.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="blackImageVIew" fitHeight="150.0" fitWidth="200.0" layoutX="411.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="blackImageVIew" fitHeight="150.0" fitWidth="200.0" layoutX="311.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button alignment="CENTER" layoutX="112.0" layoutY="283.0" mnemonicParsing="false" styleClass="button-setting" text="Light">
+                     <graphic>
+                        <CheckBox fx:id="LightCheck" mnemonicParsing="false" selected="true" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="359.0" layoutY="284.0" mnemonicParsing="false" styleClass="button-setting" text="Dark">
+                     <graphic>
+                        <CheckBox fx:id="DarkCheck" mnemonicParsing="false" />
+                     </graphic>
+                  </Button>
                </children>
             </Pane>
             <Pane fx:id="loginPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false">

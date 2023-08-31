@@ -20,7 +20,6 @@ public class Event {
     private TeamList teams;
 
     public Event() {
-
     }
     public Event(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation) {
         this.eventName = eventName;

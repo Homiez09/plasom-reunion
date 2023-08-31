@@ -1,5 +1,6 @@
 package cs211.project.componentControllers;
 
+import cs211.project.controllers.MyEventController;
 import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.services.FXRouter;
@@ -12,8 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class EventComponentController {
+public class EventComponentController extends MyEventController {
     @FXML
     Label eventnameLabel,dateLabel,memberLabel;
     @FXML
@@ -21,18 +24,14 @@ public class EventComponentController {
     @FXML
     AnchorPane eventAnchorPane;
     @FXML
-    Button leaveButton,staffButton,editButton;
+    Button staffButton,editButton;
     private User currentUser = (User) FXRouter.getData();
     @FXML
-    private void initialize() {
+    public void initialize() {
 
 
     }
 
-    public void onLeaveAction(ActionEvent actionEvent) {
-
-
-    }
 
     public void onStaffAction(ActionEvent actionEvent) {
         try {
@@ -57,14 +56,37 @@ public class EventComponentController {
         }else {
             buttonVisible(true);
         }
-        eventImageView.setImage(new Image(getClass().getResource(event.getEventImagePath()).toExternalForm()));
+        if (!event.getEventImagePath().equals("")){
+            eventImageView.setImage(new Image(getClass().getResource(event.getEventImagePath()).toExternalForm()));
+        }else {
+            eventImageView.setImage(new Image(getClass().getResource("/images/event/event-default.png").toExternalForm()));
+
+        }
         eventnameLabel.setText(event.getEventName());
-        dateLabel.setText(event.getEventDateEnd());
+
+        // Date
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String eventDateStr = event.getEventDateEnd();
+        try {
+            String formattedDate = dateFormat.format(dateFormat.parse(eventDateStr));
+            dateLabel.setText(formattedDate);
+        } catch (Exception e) {
+            // กรณีที่ไม่สามารถแปลงเป็นวันที่ได้
+            dateLabel.setText("Invalid date");
+        }
+
         memberLabel.setText(event.getMember() + "");
     }
+    private void clear(){
 
+        eventImageView.setImage(new Image(getClass().getResource("/images/event/event-default.png").toExternalForm()));
+        eventnameLabel.setText("");
+        dateLabel.setText("");
+        memberLabel.setText("");
+
+    }
     public void buttonVisible(Boolean is){
-        leaveButton.setVisible(is);
         staffButton.setVisible(is);
         editButton.setVisible(is);
     }
