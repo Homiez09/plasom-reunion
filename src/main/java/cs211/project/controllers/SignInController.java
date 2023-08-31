@@ -87,13 +87,6 @@ public class SignInController {
     public void onLoginButton() {
         username = usernameTextField.getText();
         password = passwordField.getText();
-        if(username.isEmpty() || password.isEmpty()){
-            errorLabel.setText("Incorrect username or password. Please try again.");
-            errorLabel.setVisible(true);
-            setBorderColorTextField();
-            resetBorderTextField();
-            return ;
-        }
         User user = userList.login(username, password);
         User matchingUsername = userList.findUsername(username);
         if(user!=null){
@@ -104,11 +97,11 @@ public class SignInController {
             }
 
         }else{
-            if(matchingUsername == null){
+            if(matchingUsername == null || username.isEmpty() || password.isEmpty() ){
                 errorLabel.setText("Incorrect username and password. Please try again.");
                 errorLabel.setVisible(true);
             }
-            if (matchingUsername != null && password.isEmpty()){
+            if (matchingUsername != null && (password.isEmpty() || !matchingUsername.validatePassword(password))){
                 errorLabel.setText("Incorrect password. Please try again.");
                 errorLabel.setVisible(true);
             }
