@@ -1,0 +1,55 @@
+.bg{
+-fx-background-color:  #F9F6F7;
+}
+.top-bg{
+-fx-background-color: #FFE8D6;
+}
+.page-button{
+-fx-background-color: #F9F6F7;
+-fx-border-radius: 9px;
+-fx-border-color: black;
+-fx-background-radius: 10px;
+-fx-border-width: 2px;
+}
+.page-button:hover {
+-fx-background-color: linear-gradient(#FF7A00, #FF9900);
+-fx-border-radius: 9px;
+-fx-border-color: #F9F6F7;
+-fx-background-radius: 10px;
+-fx-border-width: 2px;
+}
+.staff-apply-box{
+-fx-background-color: linear-gradient(#FFBB6A, #FF9900);
+-fx-border-radius: 18px;
+-fx-border-color: black;
+-fx-background-radius: 20px;
+-fx-border-width: 3px;
+}
+.font-component-head{
+    -fx-font-size: 18;
+    -fx-font-family: Leelawadee;
+}
+.font-component-subhead{
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+}
+.button-component{
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #000;
+    -fx-font-family: Leelawadee;
+}
+.event-component{
+    -fx-background-color: #D9D9D9 ;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #000;
+
+}
+.list-view-set{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 15 ;
+    -fx-border-radius: 15;
+    -fx-border-color: #FFFFFF;
+
+}

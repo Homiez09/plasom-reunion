@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/welcome.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.WelcomeController">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1152.0">
+         <image>
+            <Image url="@../../../images/backgrounds/welcome/wecome_new_bg.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="307.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLASOM REUNION">
+         <styleClass>
+            <String fx:value="h1" />
+            <String fx:value="bold700" />
+            <String fx:value="text-shadow" />
+         </styleClass>
+         <fill>
+            <RadialGradient centerX="0.5925110300206927" centerY="0.4469697114193078" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.2549019753932953" green="0.23137255012989044" blue="0.23137255012989044" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.18000000715255737" green="0.10187999904155731" blue="0.012600000016391277" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <Text layoutX="409.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Join event, meet people">
+         <styleClass>
+            <String fx:value="h3" />
+            <String fx:value="text-color-white" />
+            <String fx:value="bold700" />
+            <String fx:value="text-shadow" />
+         </styleClass>
+      </Text>
+      <Button layoutX="390.0" layoutY="469.0" mnemonicParsing="false" onAction="#onSignInButtonClick" prefHeight="112.0" prefWidth="400.0" text="ENTER SITE" textFill="#403737">
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn" />
+            <String fx:value="btn-shadow" />
+         </styleClass>
+      </Button>
+      <AnchorPane fx:id="topBarAnchorPane" prefHeight="60.0" prefWidth="1152.0" />
+   </children>
+</AnchorPane>

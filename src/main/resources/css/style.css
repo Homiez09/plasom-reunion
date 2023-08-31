@@ -123,6 +123,21 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 2, 0, 0, 2);
 }
 
+/* for condition box */
+.condition-box-text{
+    -fx-wrap-text: true;
+    -fx-text-fill: #F5F3ED;
+
+
+}
+
+.condition-box{
+    -fx-arc-width: 12;
+    -fx-arc-height: 12;
+    -fx-opacity: 1;
+
+
+}
 
 
 /* for login page */
@@ -188,73 +203,6 @@ Text, Label {
     -fx-fill: linear-gradient(#353535, #494949);
 }
 
-.Nav {
-    -fx-background-color: #FF9900;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 2, 0, 0, 0);
-    -fx-background-radius: 0 0 10 10;
-}
-
-.Nav > .search-box {
-    -fx-padding: 0 0 0 37;
-    -fx-font-family: FreesiaUPC;
-    -fx-font-size: 25;
-    -fx-background-radius: 30;
-    -fx-focus-traversable: false;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 2, 0, 0, 0);
-}
-
-.Nav > .profile-menu {
-    -fx-effect: dropshadow(three-pass-box, #428a2e, 10, 0, 0, 0);
-}
-
-.Nav > .container {
-    -fx-spacing: 10;
-}
-
-.Nav > .container > .items {
-    -fx-padding: 0 2 0 2;
-    -fx-font-size: 30;
-    -fx-font-weight: 700;
-    -fx-font-family: FreesiaUPC;
-    -fx-background-color: transparent;
-}
-
-.toggle-menu {
-    -fx-background-radius: 0 0 10 10;
-    -fx-background-color: #F5F3EE;
-}
-
-.toggle-menu > VBox {
-    -fx-border-width: 0.6;
-    -fx-border-style: solid;
-    -fx-border-radius: 0 0 10 10;
-    -fx-border-color: #494949;
-}
-
-.toggle-menu > VBox > .items {
-    -fx-padding: 12 0 12 0;
-    -fx-background-color: transparent;
-    -fx-border-color: #494949;
-    -fx-font-family: FreesiaUPC;
-    -fx-font-size: 25;
-    -fx-font-weight: 700;
-    -fx-border-width: 0 0 0.6 0;
-    -fx-border-style: solid;
-    -fx-text-fill: #413b3b;
-}
-
-.toggle-menu > VBox > .items:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);
-}
-
-.toggle-menu > VBox > .text-primary {
-    -fx-text-fill: #413b3b;
-}
-
-.toggle-menu > VBox > .text-danger {
-    -fx-text-fill: #c22f2f;
-}
-
 .button-setting{
         -fx-background-color: transparent;
         -fx-font-size: 24;
@@ -270,11 +218,171 @@ Text, Label {
 
 .bgPane{
     -fx-background-radius: 15;
-    -fx-background-color: #FFFFFF;
-}
+    -fx-background-color: #FFFFFF;}
 
 .toggle-button{
         -fx-background-color: transparent;
         -fx-font-size: 12;
         -fx-font-family: Leelawadee;
+}
+
+
+/* for user-profile page */
+.bgProfile1{
+    -fx-background-color: #FFF5E5;
+}
+.bgProfile2{
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 40, 0.4, 0, 0.7);
+    -fx-arc-height: 50;
+    -fx-arc-width: 50;
+}
+.profile-text-field{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 0.1;-fx-padding: 0 0 0 30;
+}
+
+.profile-text-field2 {
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 1;-fx-padding: 0 0 0 35;
+}
+.profile-text-area2{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 0.1;-fx-padding: 0 0 0 35;
+}
+.profile-text-area2{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 0.1;-fx-padding: 10 15 16 15;
+    -fx-wrap-text: true;
+}
+.profile-text-area {
+    -fx-background-radius: 11;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 1;
+    -fx-wrap-text: true;
+
+}
+.profile-text-area .content{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-radius: 11;
+    -fx-border-width: 1;
+    -fx-font-size: 17;
+    -fx-opacity: 1;
+    -fx-padding: 10 15 16 18;
+    -fx-wrap-text: true;
+
+
+
+}
+
+.center-label {
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.edit-profile-button {
+    -fx-background-color: linear-gradient(to left, #FF922E 45.96%, #FF9E22 70.98%);
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.edit-profile-button:hover {
+    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.cancel-profile-button{
+    -fx-background-color: transparent;
+    -fx-border-radius: 12;
+    -fx-border-color: #FF922E;
+    -fx-border-width: 2;
+    -fx-text-fill: #FF922E;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.cancel-profile-button:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 12;
+    -fx-border-color: #BFBFBF;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-text-fill: #BFBFBF;
+}
+
+.image-change-effect:hover{
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.description-profile-text{
+    -fx-text-fill: #8f6e6e;
+}
+
+/* end for user-profile page */
+
+/* for select-team page */
+.selected-team-background{
+    -fx-background-color: #FFF5E5;
+}
+
+/* for team box */
+.team-box-background{
+    -fx-background-color: transparent;
+    -fx-stroke-width: 0;
+}
+
+.team-box-shape{
+    -fx-arc-width: 15;
+    -fx-arc-height: 15;
+    -fx-stroke-width: 2;
+    -fx-border-color: #413B3B;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+}
+
+/* for select team */
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane:hover .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane:hover .scroll-bar .thumb {
+    -fx-background-color: #DDD3C3;
+}
+
+.create-team-button{
+    -fx-background-color: transparent;
+    -fx-border-color: #413B3B;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-stroke-width: 10;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+
 }

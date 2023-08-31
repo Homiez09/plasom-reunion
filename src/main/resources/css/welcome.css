@@ -3,11 +3,11 @@ Text {
 }
 
 .h1 {
-    -fx-font-size: 45;
+    -fx-font-size: 64;
 }
 
 .h3 {
-    -fx-font-size: 19;
+    -fx-font-size: 32;
 }
 
 .bold700 {
@@ -50,31 +50,32 @@ Text {
 
 .btn {
     -fx-font-family: Leelawadee;
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
+    -fx-border-radius: 60;
+    -fx-background-radius: 60;
     -fx-alignment: center;
-    -fx-border-width: 2;
+    -fx-border-width: 6;
     -fx-border-color : white;
-    -fx-font-size: 20;
-    -fx-font-weight: 900;
+    -fx-font-size: 36;
+    -fx-font-weight: 700;
     -fx-border-style: solid;
 }
 
 .btn-primary {
-    -fx-background-color: linear-gradient(#FFC554, #F97528);
-    -fx-border-color: #413B3B;
+    -fx-background-color: transparent;
+    -fx-border-color: #ffffff;
+    -fx-text-fill: #ffffff;
 }
 
 .btn-primary:hover {
-    -fx-background-color: linear-gradient( #FDA83A,#F08A4E);
+    -fx-background-color: #ece6e6;
     -fx-border-color: #F9F6F7;
-    -fx-text-fill: white;
+    -fx-text-fill: #000000;
 }
 
 .btn-shadow {
-    -fx-stroke-type: outside;
-    -fx-stroke-width: 10;
-    -fx-stroke: #DA0f53;
-    -fx-stroke-line-join: round;
-    -fx-stroke-line-cap: round;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 4);
+}
+
+.text-shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 4);
 }
