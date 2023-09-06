@@ -18,16 +18,16 @@ public class EventList {
     public EventList() {
         events = new ArrayList<>();
     }
-    public void createEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation) {
+    public void createEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation,int member) {
         eventName = eventName.trim();
         if (!eventName.equals("") ){
-            events.add(new Event(eventName,eventImagePath,eventDateStart,eventDateEnd,eventDescription,eventLocation));
+            events.add(new Event(eventName,eventImagePath,eventDateStart,eventDateEnd,eventDescription,eventLocation,member));
         }
     }
-    public void createEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation, int slotMember) {
+    public void createEvent(String eventName, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation,int member, int slotMember) {
         eventName = eventName.trim();
         if (!eventName.equals("")) {
-            events.add(new Event(eventName, eventImagePath, eventDateStart, eventDateEnd, eventDescription,eventLocation, slotMember));
+            events.add(new Event(eventName, eventImagePath, eventDateStart, eventDateEnd, eventDescription,eventLocation,member, slotMember));
         }
     }
 
@@ -45,8 +45,6 @@ public class EventList {
     }
 
     public Event getIndex(int n) {return events.get(n);}
-
-
 
 
 

@@ -73,16 +73,15 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventEnd = data[3].trim();
                 String eventDescription = data[4].trim();
                 String eventLocation = data[5].trim();
+                int memberOfEvent = Integer.parseInt(data[6].trim());
 
-                events.createEvent(eventName,imagePath,eventStart,eventEnd,eventDescription,eventLocation);
 
-//                if (data[7].trim().equals("")){
-//                    int slotmember = Integer.parseInt(data[7].trim());
-//                    events.createEvent(eventName,imagePath,eventStart,eventEnd,eventDescription,eventLocation,slotmember);
-//
-//                }else {
-//                    events.createEvent(eventName,imagePath,eventStart,eventEnd,eventDescription,eventLocation);
-//                }
+                if (!data[7].trim().equals("")){
+                    int slotmember = Integer.parseInt(data[7].trim());
+                    events.createEvent(eventName,imagePath,eventStart,eventEnd,eventDescription,eventLocation,memberOfEvent,slotmember);
+                }else {
+                    events.createEvent(eventName,imagePath,eventStart,eventEnd,eventDescription,eventLocation,memberOfEvent);
+                }
 
                 // เพิ่มข้อมูลลงใน list
             }
@@ -115,16 +114,28 @@ public class EventListDataSource implements Datasource<EventList> {
         try {
             // สร้าง csv
             for (Event event : data.getEvents()) {
-                String line = event.getEventName() + ","
-                        + event.getEventImagePath() +","
-                        + event.getEventDateStart() + ","
-                        + event.getEventDateEnd() + ","
-                        + event.getEventDescription() + ","
-                        + event.getEventLocation();
-
-
+                String line;
+                if (event.getSlotMember() != 0) {
+                    line = event.getEventName() + ","
+                            + event.getEventImagePath() + ","
+                            + event.getEventDateStart() + ","
+                            + event.getEventDateEnd() + ","
+                            + event.getEventDescription() + ","
+                            + event.getEventLocation() + ","
+                            + event.getMember() + ","
+                            + event.getSlotMember();
+                }else {
+                    line = event.getEventName() + ","
+                            + event.getEventImagePath() + ","
+                            + event.getEventDateStart() + ","
+                            + event.getEventDateEnd() + ","
+                            + event.getEventDescription() + ","
+                            + event.getEventLocation() + ","
+                            + event.getMember();
+                }
                 buffer.append(line);
                 buffer.append("\n");
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
