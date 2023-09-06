@@ -48,13 +48,9 @@ public class Event {
         return eventImagePath;
     }
 
-    public String getEventDateStart() {
-        return eventDateStart;
-    }
+    public String getEventDateStart() {return eventDateStart;}
 
-    public String getEventDateEnd() {
-        return eventDateEnd;
-    }
+    public String getEventDateEnd() {return eventDateEnd;}
 
     public String getEventDescription() {
         return eventDescription;

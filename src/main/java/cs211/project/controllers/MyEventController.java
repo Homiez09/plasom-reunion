@@ -34,17 +34,17 @@ public class MyEventController {
     ListView myeventListView,historyeventListView;
     @FXML
     Button currentButton,leaveButton;
-    private EventDataSourceHardCode datasource = new EventDataSourceHardCode();
-    private EventList eventList = datasource.readData();
+    private Datasource<EventList> datasource;
+    private EventList eventList;
     private Event selectEvent;
-    private Datasource<EventList> data;
     private User currentUser = (User) FXRouter.getData();
 
 
 
     @FXML
     public void initialize() {
-
+        datasource = new EventListDataSource("data","eventlist.csv");
+        eventList = datasource.readData();
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         showInfo();
         showList(eventList);
@@ -53,7 +53,7 @@ public class MyEventController {
 
 
 
-   }
+    }
     private void showInfo(){
         userImageView.setImage(new Image(getClass().getResource(currentUser.getImagePath()).toExternalForm()));
         nameLabel.setText(currentUser.getDisplayName());
@@ -69,7 +69,8 @@ public class MyEventController {
             throw new RuntimeException(e);
         }
     }
-    public void showList(EventList eventList){
+    public void showList(EventList eventList) {
+        myeventListView.getItems().clear();
         for (Event event : eventList.getEvents()) {
             try {
                 FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
@@ -77,18 +78,19 @@ public class MyEventController {
                 EventComponentController eventComponent = eventComponentLoader.getController();
                 eventComponent.setEventData(event);
 
+                // ตั้งค่าข้อมูล Event ให้กับ AnchorPane
+                eventAnchorPaneComponent.setUserData(event);
+
                 if (event.isEnd()) {
                     historyeventListView.getItems().add(eventAnchorPaneComponent);
-                }else {
+                } else {
                     myeventListView.getItems().add(eventAnchorPaneComponent);
-
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 
     public void onBackAction(ActionEvent actionEvent) {
@@ -108,7 +110,33 @@ public class MyEventController {
     }
 
     public void onLeaveAction(ActionEvent actionEvent) {
+        AnchorPane selectedPane = (AnchorPane) myeventListView.getSelectionModel().getSelectedItem();
 
+        if (selectedPane != null) {
+            System.out.println("selectedPane NotNull");
+            // ดึงข้อมูล Event ออกจาก AnchorPane โดยอ้างอิงถึงข้อมูลของ Event ใน AnchorPane
+            Event selectedEvent = (Event) selectedPane.getUserData();
+            System.out.println(selectedEvent.toString());
+            // ตรวจสอบว่า selectedEvent ไม่เป็น null ก่อนที่จะลบ Event ออกจาก eventList
+            if (selectedEvent != null) {
+                // ลบ Event ตามที่คุณต้องการ
+                eventList.getEvents().remove(selectedEvent);
+                // บันทึกข้อมูล Event ใหม่ลงในไฟล์
+                datasource.writeData(eventList);
+
+                // ตรวจสอบว่าข้อมูลถูกบันทึกลงในไฟล์เรียบร้อยแล้ว
+                eventList = datasource.readData(); // อ่านข้อมูล Event จากไฟล์ใหม่
+                if (!eventList.getEvents().contains(selectedEvent)) {
+                    System.out.println("Event deleted successfully");
+                } else {
+                    System.out.println("Failed to delete event");
+                }
+
+                selectEvent = null; // รีเซ็ตตัวแปร selectEvent เป็น null
+
+            }
+        }
+        showList(eventList);
     }
 
     public void onHistoryAction(ActionEvent actionEvent) {
