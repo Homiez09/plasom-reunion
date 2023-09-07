@@ -1,44 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventAnchorPane" prefHeight="115.0" prefWidth="800.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventComponentController">
+<AnchorPane fx:id="eventAnchorPane" prefHeight="140.0" prefWidth="800.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventComponentController">
    <children>
-      <Button fx:id="editButton" contentDisplay="CENTER" layoutX="716.0" layoutY="38.0" mnemonicParsing="false" onAction="#onEditAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: DB73FF;" styleClass="button-component" text="Edit" />
-      <Button fx:id="staffButton" contentDisplay="CENTER" layoutX="642.0" layoutY="38.0" mnemonicParsing="false" onAction="#onStaffAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: FFF95E;" styleClass="button-component" text="Staff" />
-      <ImageView fx:id="eventImageView" fitHeight="75.0" fitWidth="75.0" layoutX="34.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/logo/logo_orange.png" />
-         </image></ImageView>
-      <Label fx:id="eventnameLabel" layoutX="155.0" layoutY="14.0" styleClass="font-component-head" text="eventnameLabel">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="dateLabel" layoutX="172.0" layoutY="61.0" styleClass="font-component-subhead" text="dateLabel">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="memberLabel" layoutX="315.0" layoutY="61.0" styleClass="font-component-subhead" text="memberLabel">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="140.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/eventcomponent/clock.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="283.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/eventcomponent/user.png" />
-         </image>
-      </ImageView>
+      <VBox alignment="CENTER" layoutX="35.0" layoutY="11.0">
+         <children>
+            <ImageView fx:id="eventImageView" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/logo/logo_orange.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </ImageView>
+         </children>
+      </VBox>
+      <VBox layoutX="182.0" layoutY="5.0">
+         <children>
+            <Label fx:id="eventnameLabel" styleClass="font-component-head" text="eventnameLabel">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/eventcomponent/clock.jpg" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="startdateLabel" styleClass="font-component-subhead" text="startdateLabel">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label fx:id="enddateLabel" prefHeight="18.0" prefWidth="150.0" styleClass="font-component-subhead" text="enddateLabel">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="35.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_LEFT" layoutX="367.0" layoutY="58.0">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/eventcomponent/user.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="memberLabel" styleClass="font-component-subhead" text="memberLabel">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <Button fx:id="viewButton" contentDisplay="CENTER" layoutX="550.0" layoutY="51.0" mnemonicParsing="false" onAction="#onViewAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: FFF95E;" styleClass="button-component" text="View" />
+      <HBox alignment="CENTER_RIGHT" layoutX="655.0" layoutY="44.0" prefHeight="50.0">
+         <children>
+            <Button fx:id="staffButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onStaffAction" prefHeight="38.0" prefWidth="60.0" style="-fx-background-color: FFF95E;" styleClass="button-component" text="Staff">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="editButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: DB73FF;" styleClass="button-component" text="Edit">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
+   <opaqueInsets>
+      <Insets bottom="5.0" top="5.0" />
+   </opaqueInsets>
 </AnchorPane>

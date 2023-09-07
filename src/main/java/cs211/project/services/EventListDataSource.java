@@ -5,6 +5,8 @@ import cs211.project.models.collections.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EventListDataSource implements Datasource<EventList> {
     private String directoryName;
@@ -67,21 +69,17 @@ public class EventListDataSource implements Datasource<EventList> {
                 String[] data = line.split(",");
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-                String eventName = data[0].trim();
-                String imagePath = data[1].trim();
-                String eventStart = data[2].trim();
-                String eventEnd = data[3].trim();
-                String eventDescription = data[4].trim();
-                String eventLocation = data[5].trim();
-                int memberOfEvent = Integer.parseInt(data[6].trim());
+                String eventName = data[1].trim();
+                String eventHost = data[2].trim();
+                String imagePath = data[3].trim();
+                String eventStart = data[4].trim();
+                String eventEnd = data[5].trim();
+                String eventDescription = data[6].trim();
+                String eventLocation = data[7].trim();
+                int slotmember = Integer.parseInt(data[8].trim());
 
+                events.createEvent(eventName,eventHost,imagePath,eventStart,eventEnd,eventDescription,eventLocation,slotmember);
 
-                if (!data[7].trim().equals("")){
-                    int slotmember = Integer.parseInt(data[7].trim());
-                    events.createEvent(eventName,imagePath,eventStart,eventEnd,eventDescription,eventLocation,memberOfEvent,slotmember);
-                }else {
-                    events.createEvent(eventName,imagePath,eventStart,eventEnd,eventDescription,eventLocation,memberOfEvent);
-                }
 
                 // เพิ่มข้อมูลลงใน list
             }
@@ -113,26 +111,19 @@ public class EventListDataSource implements Datasource<EventList> {
 
         try {
             // สร้าง csv
+
             for (Event event : data.getEvents()) {
-                String line;
-                if (event.getSlotMember() != 0) {
-                    line = event.getEventName() + ","
-                            + event.getEventImagePath() + ","
-                            + event.getEventDateStart() + ","
-                            + event.getEventDateEnd() + ","
-                            + event.getEventDescription() + ","
-                            + event.getEventLocation() + ","
-                            + event.getMember() + ","
-                            + event.getSlotMember();
-                }else {
-                    line = event.getEventName() + ","
-                            + event.getEventImagePath() + ","
-                            + event.getEventDateStart() + ","
-                            + event.getEventDateEnd() + ","
-                            + event.getEventDescription() + ","
-                            + event.getEventLocation() + ","
-                            + event.getMember();
-                }
+                String line = event.getEventID()+","
+                        + event.getEventName() + ","
+                        + event.getEventHost()+","
+                        + event.getEventImagePath() + ","
+                        + event.getEventDateStart()+ ","
+                        + event.getEventDateEnd() + ","
+                        + event.getEventDescription() + ","
+                        + event.getEventLocation() + ","
+                        + event.getMember() + ","
+                        + event.getSlotMember();
+
                 buffer.append(line);
                 buffer.append("\n");
 

@@ -20,7 +20,10 @@
                   <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="50.0" />
                   <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="50.0" />
+                        <Pane prefHeight="50.0">
+                           <children>
+                              <Button layoutX="7.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackAction" styleClass="cancel-profile-button" text="&lt; Back" />
+                           </children></Pane>
                         <Pane prefHeight="500.0" prefWidth="200.0" styleClass="bgPane">
                            <children>
                               <ImageView fx:id="userImageView" fitHeight="150.0" fitWidth="150.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
@@ -49,11 +52,10 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Button layoutY="11.0" mnemonicParsing="false" onAction="#onBackAction" styleClass="cancel-profile-button" text="&lt; Back" />
-                              <Button layoutX="80.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create" />
+                              <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create" />
                               <Button layoutX="772.0" layoutY="11.0" mnemonicParsing="false" onAction="#onHistoryAction" styleClass="cancel-profile-button" text="History" />
                               <Button fx:id="currentButton" layoutX="702.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCurrentAction" styleClass="cancel-profile-button" text="Current" visible="false" />
-                              <Button fx:id="leaveButton" layoutX="154.0" layoutY="11.0" mnemonicParsing="false" onAction="#onLeaveAction" styleClass="cancel-profile-button" text="- Leave" />
+                              <Button fx:id="deleteButton" layoutX="90.0" layoutY="11.0" mnemonicParsing="false" onAction="#onDeleteAction" styleClass="cancel-profile-button" text="- Delete" />
                            </children></Pane>
                         <Pane prefHeight="500.0" prefWidth="852.0" styleClass="bgPane">
                            <children>

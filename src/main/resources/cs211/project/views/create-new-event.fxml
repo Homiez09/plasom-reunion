@@ -86,7 +86,7 @@
                               <TextField fx:id="eventCapTextField" layoutX="338.3999938964844" prefHeight="26.0" prefWidth="100.0" styleClass="text-field-bg" AnchorPane.leftAnchor="550.0" />
                               <ImageView fx:id="eventImageView" fitHeight="25.0" fitWidth="25.0" layoutX="438.3999938964844" layoutY="0.800000011920929" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0">
                                  <image>
-                                    <Image url="@../../../images/event/person.png" />
+                                    <Image url="@../../../images/events/person.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -165,13 +165,13 @@
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <ImageView fitHeight="350.0" fitWidth="300.0" layoutX="160.8000030517578" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="200.0" />
+                              <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" layoutX="38.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="38.0" />
                               <Text fill="RED" layoutX="360.79998779296875" layoutY="13.3984375" strokeType="OUTSIDE" strokeWidth="0.0" text="Image guideline" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="200.0">
                                  <font>
                                     <Font name="Leelawadee" size="14.0" />
                                  </font>
                               </Text>
-                              <Button mnemonicParsing="false" onAction="#handleUploadButton" styleClass="page-button" stylesheets="@../../../css/event.css" text="Upload" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="250.0">
+                              <Button layoutX="570.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleUploadButton" styleClass="page-button" stylesheets="@../../../css/event.css" text="Upload" AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="226.0">
                                  <font>
                                     <Font name="Leelawadee" size="12.0" />
                                  </font>

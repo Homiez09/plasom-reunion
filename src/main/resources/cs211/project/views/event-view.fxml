@@ -48,7 +48,7 @@
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/event/calendar.png" />
+                                                <Image url="@../../../images/events/calendar.png" />
                                              </image>
                                           </ImageView>
                                           <Label fx:id="eventDateLabel" text="eventDateLabel">
@@ -62,7 +62,7 @@
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/event/pin.png" />
+                                                <Image url="@../../../images/events/pin.png" />
                                              </image>
                                           </ImageView>
                                           <Label fx:id="eventLocationLabel" text="eventLocationLabel">
@@ -76,7 +76,7 @@
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/event/person.png" />
+                                                <Image url="@../../../images/events/person.png" />
                                              </image>
                                           </ImageView>
                                           <Label fx:id="currentParticipantsLabel" text="currentParticipantsLabel">

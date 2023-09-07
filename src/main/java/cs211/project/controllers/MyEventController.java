@@ -2,23 +2,18 @@ package cs211.project.controllers;
 
 import cs211.project.componentControllers.EventComponentController;
 import cs211.project.models.Event;
-import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 
 
 import java.io.IOException;
@@ -33,7 +28,7 @@ public class MyEventController {
     @FXML
     ListView myeventListView,historyeventListView;
     @FXML
-    Button currentButton,leaveButton;
+    Button currentButton, deleteButton;
     private Datasource<EventList> datasource;
     private EventList eventList;
     private Event selectEvent;
@@ -43,11 +38,12 @@ public class MyEventController {
 
     @FXML
     public void initialize() {
-        datasource = new EventListDataSource("data","eventlist.csv");
+        datasource = new EventListDataSource("data","event-list.csv");
         eventList = datasource.readData();
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         showInfo();
         showList(eventList);
+
 
 
 
@@ -77,10 +73,8 @@ public class MyEventController {
                 AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
                 EventComponentController eventComponent = eventComponentLoader.getController();
                 eventComponent.setEventData(event);
-
                 // ตั้งค่าข้อมูล Event ให้กับ AnchorPane
                 eventAnchorPaneComponent.setUserData(event);
-
                 if (event.isEnd()) {
                     historyeventListView.getItems().add(eventAnchorPaneComponent);
                 } else {
@@ -109,21 +103,18 @@ public class MyEventController {
         }
     }
 
-    public void onLeaveAction(ActionEvent actionEvent) {
+    public void onDeleteAction(ActionEvent actionEvent) {
         AnchorPane selectedPane = (AnchorPane) myeventListView.getSelectionModel().getSelectedItem();
 
         if (selectedPane != null) {
-            System.out.println("selectedPane NotNull");
             // ดึงข้อมูล Event ออกจาก AnchorPane โดยอ้างอิงถึงข้อมูลของ Event ใน AnchorPane
             Event selectedEvent = (Event) selectedPane.getUserData();
-            System.out.println(selectedEvent.toString());
             // ตรวจสอบว่า selectedEvent ไม่เป็น null ก่อนที่จะลบ Event ออกจาก eventList
             if (selectedEvent != null) {
                 // ลบ Event ตามที่คุณต้องการ
                 eventList.getEvents().remove(selectedEvent);
                 // บันทึกข้อมูล Event ใหม่ลงในไฟล์
                 datasource.writeData(eventList);
-
                 // ตรวจสอบว่าข้อมูลถูกบันทึกลงในไฟล์เรียบร้อยแล้ว
                 eventList = datasource.readData(); // อ่านข้อมูล Event จากไฟล์ใหม่
                 if (!eventList.getEvents().contains(selectedEvent)) {
@@ -131,9 +122,7 @@ public class MyEventController {
                 } else {
                     System.out.println("Failed to delete event");
                 }
-
                 selectEvent = null; // รีเซ็ตตัวแปร selectEvent เป็น null
-
             }
         }
         showList(eventList);
@@ -143,14 +132,14 @@ public class MyEventController {
         currentButton.setVisible(true);
         myeventListView.setVisible(false);
         historyeventListView.setVisible(true);
-        leaveButton.setVisible(false);
+        deleteButton.setVisible(false);
     }
 
     public void onCurrentAction(ActionEvent actionEvent) {
         currentButton.setVisible(false);
         historyeventListView.setVisible(false);
         myeventListView.setVisible(true);
-        leaveButton.setVisible(true);
+        deleteButton.setVisible(true);
     }
 
 

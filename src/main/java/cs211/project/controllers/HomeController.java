@@ -4,9 +4,7 @@ import cs211.project.componentControllers.EventTileController;
 import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
-import cs211.project.services.EventDataSourceHardCode;
-import cs211.project.services.FXRouter;
-import cs211.project.services.LoadNavbarComponent;
+import cs211.project.services.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -19,18 +17,22 @@ public class HomeController {
     @FXML private AnchorPane upEventTileAnchorPane1,upEventTileAnchorPane2,upEventTileAnchorPane3;
 
     private User user = (User) FXRouter.getData();
-    EventDataSourceHardCode datasource = new EventDataSourceHardCode();
-    private EventList eventList = datasource.readData();
+    private Datasource<EventList> datasource;
+    private EventList eventList;
 
     @FXML
     private  void initialize() {
+        datasource = new EventListDataSource("data","event-list.csv");
+        eventList = datasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
-        loadEventTileComponent(newEventTileAnchorPane1,eventList.getIndex(0));
-        loadEventTileComponent(newEventTileAnchorPane2,eventList.getIndex(1));
-        loadEventTileComponent(newEventTileAnchorPane3,eventList.getIndex(2));
-        loadEventTileComponent(upEventTileAnchorPane1,eventList.getIndex(3));
-        loadEventTileComponent(upEventTileAnchorPane2,eventList.getIndex(4));
-        loadEventTileComponent(upEventTileAnchorPane3,eventList.getIndex(5));
+
+        loadEventTileComponent(newEventTileAnchorPane1,eventList.getEvents().get(0));
+        loadEventTileComponent(newEventTileAnchorPane2,eventList.getEvents().get(1));
+        loadEventTileComponent(newEventTileAnchorPane3,eventList.getEvents().get(2));
+        loadEventTileComponent(upEventTileAnchorPane1,eventList.getEvents().get(3));
+        loadEventTileComponent(upEventTileAnchorPane2,eventList.getEvents().get(4));
+        loadEventTileComponent(upEventTileAnchorPane3,eventList.getEvents().get(5));
+
     }
 
 

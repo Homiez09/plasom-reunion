@@ -15,17 +15,24 @@ public class EventTileController {
     @FXML
     Label eventNameLabel,eventDateLabel,eventPlaceLabel;
     private User currentUser = (User) FXRouter.getData();
+    private Image image;
     @FXML private void initialize() {
 
     }
 
     public void showEventTile(Event event) {
-        eventNameLabel.setText(event.getEventName());
-        eventDateLabel.setText(event.getEventDateStart());
-        eventPlaceLabel.setText(event.getEventLocation());
-        Image image = new Image(getClass().getResourceAsStream(event.getEventImagePath()));
-        //eventImageView.setImage(new Image(getClass().getResource(event.getEventImagePath()).toExternalForm()));
-        eventTileImageView.setImage(image);
+        if (event!=null) {
+            eventNameLabel.setText(event.getEventName());
+            eventDateLabel.setText(event.getEventDateStart());
+            eventPlaceLabel.setText(event.getEventLocation());
+            image = new Image(getClass().getResource("/images/events/event-default.png").toString());
+            try {
+                image = new Image("file:"+event.getEventImagePath(),true);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            eventTileImageView.setImage(image);
+        }
     }
 
     @FXML protected void onEventTileClick() {

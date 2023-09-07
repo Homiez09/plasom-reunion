@@ -3,11 +3,13 @@ package cs211.project.controllers;
 import cs211.project.models.User;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class EventPageController {
@@ -32,7 +34,7 @@ public class EventPageController {
             throw new RuntimeException(e);
         }
     }
-    @FXML protected void onBackButtonClick() {
+    public void onBackButtonClick(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("home");
         } catch (IOException e) {
