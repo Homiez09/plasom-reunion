@@ -15,6 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class SignUpController {
@@ -75,8 +78,9 @@ public class SignUpController {
         findDisplayNameValidate = false;
         if(validateConfirmation()){
             setPassword(password);
-            User user = new User(displayNameTextfield.getText(), usernameTextField.getText(),this.password,generateAvatar());
+            User user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password,generateAvatar(),generateRegisterDate(),null,false,false);
             user.setImagePath(generateAvatar());
+            user.setAdmin(false);
             userList.getUsers().add(user);
             try {
                 datasource.writeData(userList);
@@ -112,6 +116,50 @@ public class SignUpController {
                 errorLabel.setVisible(true);
             }
         }
+
+    }
+
+
+    private String generateRegisterDate(){
+        LocalDate currentDate = LocalDate.now();
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return formattedDate;
+    }
+
+
+    private String generateUserID() {
+
+        final int MAX_ID_LENGTH = 16;
+        StringBuilder sb = new StringBuilder();
+
+        // formatted date & time now
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyMMdd"));
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("hhmmss"));
+
+        // create UID by using local time&date
+        StringBuilder numericText = new StringBuilder();
+        for (char c : username.toCharArray()) {
+            int numericValue = Character.getNumericValue(c);
+            if (numericValue != -1) {
+                numericText.append(numericValue);
+            } else {
+                numericText.append(c);
+            }
+        }
+        // maximum length is 16
+        int totalLength = formattedDate.length() + formattedTime.length() + numericText.length();
+        if (totalLength > MAX_ID_LENGTH) {
+            int excessLength = totalLength - MAX_ID_LENGTH;
+            numericText.delete(numericText.length() - excessLength, numericText.length());
+        }
+        sb.append(formattedDate);
+        sb.append(formattedTime);
+        sb.append(numericText);
+
+        return sb.toString();
 
     }
 

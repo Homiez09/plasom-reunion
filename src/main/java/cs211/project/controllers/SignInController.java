@@ -14,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class SignInController {
 
@@ -93,7 +95,15 @@ public class SignInController {
         User matchingUsername = userList.findUsername(username);
         if(user!=null){
             try {
-                FXRouter.goTo("home", user);
+                if(user.isAdmin()){
+                    FXRouter.goTo("admin-dashboard", user);
+                    datasource.writeData(userList);
+                }else{
+                    user.setStatus(true);
+                    user.setLastedLogin(generateLastedLogin());
+                    datasource.writeData(userList);
+                    FXRouter.goTo("home", user);
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -110,6 +120,7 @@ public class SignInController {
             setBorderColorTextField();
             resetBorderTextField();
         }
+
 
     }
 
@@ -147,6 +158,13 @@ public class SignInController {
             throw new RuntimeException(e);
         }
     }
+
+    private String generateLastedLogin(){
+        LocalDate currentDate = LocalDate.now();
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return formattedDate;
+    }
+
 
     private String setColorBorderTextField(String color){
         switch (color) {

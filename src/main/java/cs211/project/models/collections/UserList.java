@@ -30,12 +30,12 @@ public class UserList {
         return null;
     }
 
-    public void addUser(String displayName, String username, String password, String imagePath){
+    public void addUser(String userId,String displayName, String username, String password, String imagePath, String registerDate, String lastedLogin, boolean status, boolean admin){
         username = username.trim();
         password = password.trim();
         User exist = findUsername(username);
         if(exist == null){
-            users.add(new User(displayName, username, password, imagePath));
+            users.add(new User(userId, displayName, username, password, imagePath,registerDate,lastedLogin,status, admin));
         }
     }
 
