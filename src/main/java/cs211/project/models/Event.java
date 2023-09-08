@@ -27,7 +27,14 @@ public class Event {
 
     public Event() {
     }
-    public Event(String eventName,String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation) {
+    public Event(String eventName,
+                 String eventHost,
+                 String eventImagePath,
+                 String eventDateStart,
+                 String eventDateEnd,
+                 String eventDescription,
+                 String eventLocation) {
+
         this.eventID = generateEventID();
         this.eventName = eventName;
         this.eventHost = eventHost;
@@ -36,9 +43,19 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
+        this.member = 0;
+        this.slotMember = -1;
     }
 
-    public Event(String eventName,String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation, int slotMember) {
+    public Event(String eventName,
+                 String eventHost,
+                 String eventImagePath,
+                 String eventDateStart,
+                 String eventDateEnd,
+                 String eventDescription,
+                 String eventLocation,
+                 int slotMember) {
+
         this.eventID = generateEventID();
         this.eventHost = eventHost;
         this.eventName = eventName;
@@ -47,9 +64,37 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
+        this.member = 0;
         this.slotMember = slotMember;
-
     }
+
+    public Event(String eventID,
+                 String eventHost,
+                 String eventName,
+                 String eventImagePath,
+                 String eventDateStart,
+                 String eventDateEnd,
+                 String eventDescription,
+                 String eventLocation,
+                 int member,
+                 int slotMember,
+                 ActivityList activities,
+                 TeamList teams) {
+
+        this.eventID = eventID;
+        this.eventName = eventName;
+        this.eventImagePath = eventImagePath;
+        this.eventDateStart = eventDateStart;
+        this.eventDateEnd = eventDateEnd;
+        this.eventDescription = eventDescription;
+        this.eventLocation = eventLocation;
+        this.member = member;
+        this.slotMember = slotMember;
+        this.eventHost = eventHost;
+        this.activities = activities;
+        this.teams = teams;
+    }
+
     public String getEventID() {return eventID;}
     public String getEventName() {
         return eventName;
@@ -119,7 +164,20 @@ public class Event {
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
 
-
-
+    @Override
+    public String toString() {
+        return      eventID + ','
+                +   eventHost + ','
+                +   eventName + ','
+                +   eventImagePath + ','
+                +   eventDateStart + ','
+                +   eventDateEnd + ','
+                +   eventDescription + ','
+                +   eventLocation + ','
+                +   member + ','
+                +   slotMember + ','
+                +   activities + ','
+                +   teams;
+    }
 }
 

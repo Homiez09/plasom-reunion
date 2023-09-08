@@ -5,15 +5,12 @@ import cs211.project.models.collections.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class EventListDataSource implements Datasource<EventList> {
     private String directoryName;
     private String fileName;
     private Datasource<EventList> datasource;
     private EventList eventList;
-
     public EventListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
@@ -39,8 +36,9 @@ public class EventListDataSource implements Datasource<EventList> {
 
     @Override
     public EventList readData() {
-        EventList events = new EventList();
+        eventList = new EventList();
         String filePath = directoryName + File.separator + fileName;
+
         File file = new File(filePath);
 
         // เตรียม object ที่ใช้ในการอ่านไฟล์
@@ -56,6 +54,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 fileInputStream,
                 StandardCharsets.UTF_8
         );
+
         BufferedReader buffer = new BufferedReader(inputStreamReader);
 
         String line = "";
@@ -69,16 +68,22 @@ public class EventListDataSource implements Datasource<EventList> {
                 String[] data = line.split(",");
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-                String eventName = data[1].trim();
-                String eventHost = data[2].trim();
+
+                String eventId = data[0].trim();
+                String eventHost = data[1].trim();
+                String eventName = data[2].trim();
                 String imagePath = data[3].trim();
                 String eventStart = data[4].trim();
                 String eventEnd = data[5].trim();
                 String eventDescription = data[6].trim();
                 String eventLocation = data[7].trim();
-                int slotmember = Integer.parseInt(data[8].trim());
+                int member = Integer.parseInt(data[8].trim());
+                int slotmember = Integer.parseInt(data[9].trim());
+                ActivityList activities = new ActivityList();
+                TeamList teams = new TeamDataSourceHardCode().readData();
 
-                events.createEvent(eventName,eventHost,imagePath,eventStart,eventEnd,eventDescription,eventLocation,slotmember);
+                eventList.addEvent(     eventId,eventHost, eventName, imagePath, eventStart, eventEnd,
+                                        eventDescription, eventLocation, member, slotmember, activities, teams);
 
 
                 // เพิ่มข้อมูลลงใน list
@@ -87,7 +92,7 @@ public class EventListDataSource implements Datasource<EventList> {
             throw new RuntimeException(e);
         }
 
-        return events;
+        return eventList;
     }
     @Override
     public void writeData(EventList data) {
@@ -113,16 +118,17 @@ public class EventListDataSource implements Datasource<EventList> {
             // สร้าง csv
 
             for (Event event : data.getEvents()) {
-                String line = event.getEventID()+","
-                        + event.getEventName() + ","
-                        + event.getEventHost()+","
-                        + event.getEventImagePath() + ","
-                        + event.getEventDateStart()+ ","
-                        + event.getEventDateEnd() + ","
-                        + event.getEventDescription() + ","
-                        + event.getEventLocation() + ","
-                        + event.getMember() + ","
-                        + event.getSlotMember();
+                String line = event.toString();
+//                String line = event.getEventID()+","
+//                        + event.getEventName() + ","
+//                        + event.getEventHost()+","
+//                        + event.getEventImagePath() + ","
+//                        + event.getEventDateStart()+ ","
+//                        + event.getEventDateEnd() + ","
+//                        + event.getEventDescription() + ","
+//                        + event.getEventLocation() + ","
+//                        + event.getMember() + ","
+//                        + event.getSlotMember();
 
                 buffer.append(line);
                 buffer.append("\n");
