@@ -21,7 +21,7 @@ public class SelectTeamController {
     @FXML private AnchorPane navbarAnchorPane;
     @FXML private GridPane teamContainer;
 
-    @FXML private ImageView settingImageView, sortImageView, createTeamImageView, pointImageView;
+    @FXML private ImageView settingImageView, sortImageView, createTeamImageView;
 
     private User user = (User) FXRouter.getData();
     private TeamList teamList;
@@ -80,8 +80,6 @@ public class SelectTeamController {
         sortImageView.setImage(sortIcon);
         Image createTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
         createTeamImageView.setImage(createTeamIcon);
-        Image pointIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/point_icon.png"));
-        pointImageView.setImage(pointIcon);
     }
 }
 
