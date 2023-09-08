@@ -15,61 +15,74 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0">
          <children>
-            <HBox layoutY="75.0" prefHeight="693.0" prefWidth="1152.0">
+            <VBox fx:id="bgAnchorPane" alignment="CENTER" layoutY="75.0">
                <children>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="50.0" />
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="200.0">
+                  <HBox prefHeight="643.0" prefWidth="1152.0" styleClass="bgProfile1">
                      <children>
-                        <Pane prefHeight="50.0">
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="50.0" />
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="7.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackAction" styleClass="cancel-profile-button" text="&lt; Back" />
-                           </children></Pane>
-                        <Pane prefHeight="500.0" prefWidth="200.0" styleClass="bgPane">
-                           <children>
-                              <ImageView fx:id="userImageView" fitHeight="150.0" fitWidth="150.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="nameLabel" alignment="CENTER" layoutX="1.0" layoutY="192.0" prefHeight="23.0" prefWidth="200.0" styleClass="font" text="Name" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Button layoutX="63.0" layoutY="449.0" mnemonicParsing="false" onAction="#onEditAction" styleClass="edit-profile-button" text="Edit Profile" />
-                              <Label fx:id="bioLabel" alignment="TOP_CENTER" layoutY="227.0" prefHeight="150.0" prefWidth="200.0" styleClass="font" text="Bio" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                        <Pane prefHeight="50.0" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="20.0" />
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="852.0">
-                     <children>
-                        <Pane prefHeight="50.0">
-                           <children>
-                              <Label alignment="CENTER" layoutY="11.0" prefHeight="29.0" prefWidth="852.0" styleClass="font" text="My Event">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create" />
-                              <Button layoutX="772.0" layoutY="11.0" mnemonicParsing="false" onAction="#onHistoryAction" styleClass="cancel-profile-button" text="History" />
-                              <Button fx:id="currentButton" layoutX="702.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCurrentAction" styleClass="cancel-profile-button" text="Current" visible="false" />
-                              <Button fx:id="deleteButton" layoutX="90.0" layoutY="11.0" mnemonicParsing="false" onAction="#onDeleteAction" styleClass="cancel-profile-button" text="- Delete" />
-                           </children></Pane>
-                        <Pane prefHeight="500.0" prefWidth="852.0" styleClass="bgPane">
-                           <children>
-                              <ListView fx:id="myeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" styleClass="list-view-set" />
-                              <ListView fx:id="historyeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" styleClass="list-view-set" visible="false" />
+                              <Pane prefHeight="50.0">
+                                 <children>
+                                    <Button layoutX="7.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackAction" styleClass="cancel-profile-button" text="&lt; Back" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="525.0" prefWidth="200.0" styleClass="bgPane">
+                                 <children>
+                                    <ImageView fx:id="userImageView" fitHeight="150.0" fitWidth="150.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label fx:id="nameLabel" alignment="CENTER" layoutY="198.0" prefHeight="40.0" prefWidth="200.0" styleClass="font" text="Name" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="63.0" layoutY="477.0" mnemonicParsing="false" onAction="#onEditAction" styleClass="edit-profile-button" text="Edit Profile" />
+                                    <Label fx:id="bioLabel" alignment="TOP_CENTER" layoutY="252.0" prefHeight="200.0" prefWidth="200.0" styleClass="font" text="Bio" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="10.0" />
                            </children>
-                        </Pane>
-                        <Pane prefHeight="50.0" />
+                        </VBox>
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="20.0" />
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="852.0">
+                           <children>
+                              <Pane prefHeight="50.0" prefWidth="852.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutY="11.0" prefHeight="29.0" prefWidth="852.0" styleClass="font" text="My Event">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create" />
+                                    <Button layoutX="772.0" layoutY="11.0" mnemonicParsing="false" onAction="#onHistoryAction" styleClass="cancel-profile-button" text="History" />
+                                    <Button fx:id="currentButton" layoutX="702.0" layoutY="11.0" mnemonicParsing="false" onAction="#onCurrentAction" styleClass="cancel-profile-button" text="Current" visible="false" />
+                                    <Button fx:id="deleteButton" layoutX="90.0" layoutY="11.0" mnemonicParsing="false" onAction="#onDeleteAction" styleClass="cancel-profile-button" text="- Delete" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="525.0" prefWidth="852.0" styleClass="bgPane">
+                                 <children>
+                                    <ListView fx:id="myeventListView" layoutX="9.0" layoutY="14.0" prefHeight="500.0" prefWidth="835.0" styleClass="list-view-set" />
+                                    <ListView fx:id="historyeventListView" layoutX="9.0" layoutY="13.0" prefHeight="475.0" prefWidth="835.0" styleClass="list-view-set" visible="false" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="10.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="30.0" />
+                     </children>
+                  </HBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="1152.0">
+                     <children>
+                        <HBox prefHeight="20.0" prefWidth="200.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
+                        <HBox prefHeight="50.0" prefWidth="200.0" styleClass="outer-bottom-tab" stylesheets="@../../../css/home.css" />
                      </children>
                   </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="663.0" prefWidth="30.0" />
                </children>
-            </HBox>
-            <AnchorPane fx:id="navbarAnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="1152.0" />
+            </VBox>
+            <AnchorPane fx:id="navbarAnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" prefWidth="1152.0" />
          </children>
          <stylesheets>
             <URL value="@../../../css/style.css" />
