@@ -13,20 +13,29 @@ public class UserList {
     }
 
     public User findUsername(String username) {
-        for (User user: users) {
-            if (user.isUserName(username)) {
-                return user;
+        for (User exist: users) {
+            if (exist.isUserName(username)) {
+                return exist;
             }
         }
         return null;
     }
 
-    public void addUser(String displayName, String username, String password){
+    public User findDisplayName(String displayName) {
+        for (User exist: users) {
+            if (exist.isDisplayName(displayName)) {
+                return exist;
+            }
+        }
+        return null;
+    }
+
+    public void addUser(String displayName, String username, String password, String imagePath){
         username = username.trim();
         password = password.trim();
         User exist = findUsername(username);
         if(exist == null){
-            users.add(new User(displayName, username, password));
+            users.add(new User(displayName, username, password, imagePath));
         }
     }
 

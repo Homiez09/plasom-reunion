@@ -3,7 +3,7 @@ package cs211.project.controllers;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataSourceHardCode;
+import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,12 +42,14 @@ public class SignInController {
     private Label errorLabel;
 
     private String password,username;
+    private UserListDataSource datasource;
     private UserList userList;
-    UserDataSourceHardCode datasource = new UserDataSourceHardCode();
 
     @FXML
     void initialize() {
+        datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
+
 
         loadImage();
         showImage(page);
@@ -87,7 +89,7 @@ public class SignInController {
     public void onLoginButton() {
         username = usernameTextField.getText();
         password = passwordField.getText();
-        User user = userList.login(username, password);
+        User user = userList.login(username,password);
         User matchingUsername = userList.findUsername(username);
         if(user!=null){
             try {

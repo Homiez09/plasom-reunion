@@ -1,9 +1,10 @@
 package cs211.project.controllers;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataSourceHardCode;
+import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,12 +44,14 @@ public class SignUpController {
     private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
 
     private String password, confirmPassword, displayName, username;
-    private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false;
+    private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false, findDisplayNameValidate = false;
 
-    UserDataSourceHardCode datasource = new UserDataSourceHardCode();
-    UserList userList = datasource.readData();
+    UserListDataSource datasource ;
+    UserList userList ;
     @FXML
     void initialize() {
+        datasource = new UserListDataSource("data","user-list.csv");
+        userList = datasource.readData();
         loadImage();
         showImage(page);
         maxPage = calculateMaxPage();
@@ -69,9 +72,14 @@ public class SignUpController {
     public void onCreateAccountButton() {
         errorLabel.setVisible(false);
         findUsernameValidate = false;
+        findDisplayNameValidate = false;
         if(validateConfirmation()){
-            User user = new User(displayNameTextfield.getText(), usernameTextField.getText(),password);
+            setPassword(password);
+            User user = new User(displayNameTextfield.getText(), usernameTextField.getText(),this.password,generateAvatar());
+            user.setImagePath(generateAvatar());
+            userList.getUsers().add(user);
             try {
+                datasource.writeData(userList);
                 FXRouter.goTo("sign-in");
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -99,15 +107,31 @@ public class SignUpController {
             }if(findUsernameValidate){
                 errorLabel.setText("Duplicate username. Please use another username.");
                 errorLabel.setVisible(true);
+            }if(findDisplayNameValidate){
+                errorLabel.setText("Duplicate display name. Please use another display name.");
+                errorLabel.setVisible(true);
             }
         }
 
+    }
+
+    private void setPassword(String password){
+        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+    }
+
+    private String generateAvatar(){
+        int randomAvatar = (int)(Math.random()*10);
+        return "/images/profile/default-avatar/default" + randomAvatar + ".png";
     }
 
     private boolean validateConfirmation(){
         User findUsername = userList.findUsername(username);
         if(findUsername != null){
             findUsernameValidate = true;
+        }
+        User findDisplayName = userList.findDisplayName(displayName);
+        if(findDisplayName != null){
+            findDisplayNameValidate = true;
         }
         displayName = displayNameTextfield.getText();
         username = usernameTextField.getText();

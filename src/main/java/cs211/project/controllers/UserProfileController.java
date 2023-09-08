@@ -1,8 +1,10 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
+import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -29,8 +31,12 @@ public class UserProfileController {
     private final int MAX_PASSWORD_LIMIT = 27,  MAX_DISPLAY_NAME_LIMIT = 24, MAX_CONTACT_LIMIT = 10, MAX_BIO_LIMIT = 300;
     private final User user = (User) FXRouter.getData();
 
+    UserListDataSource datasource ;
+    UserList userList ;
     @FXML
     private void initialize() {
+        datasource = new UserListDataSource("data","user-list.csv");
+        userList = datasource.readData();
         userData();
         maximumLengthField();
 
@@ -171,6 +177,7 @@ public class UserProfileController {
     @FXML
     public void onSaveButtonClick() {
         if (bioText.length() <= 280) {
+            User currentUser =  userList.findUsername(user.getUsername());
             displayName = displayNameTextField.getText();
             contactNumber = contactNumberTextField.getText();
             bioText = bioTextArea.getText();
@@ -178,16 +185,20 @@ public class UserProfileController {
             loadPasswordFieldAndButtonProfile();
             loadIconImageProfile();
 
-            user.setBio(bioText);
-            user.setDisplayName(displayName);
-            user.setContactNumber(contactNumber);
+            currentUser.setBio(bioText);
+            currentUser.setDisplayName(displayName);
+            currentUser.setContactNumber(contactNumber);
 
             displayNameProfileLabel.setText(displayName);
             bioProfileLabel.setText(bioText);
+
+            datasource.writeData(userList);
+
         } else {
             saveButton.setCancelButton(true);
             countBioLabel.setStyle("-fx-text-fill: red");
         }
+
     }
 
     public void onKeyHidePassword() {

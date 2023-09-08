@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class User {
     private String  username,displayName, password, status, lastedLogin, imagePath, bio, contactNumber;
-    private final String role, registerDate, userid;
+    private String role, registerDate, userid;
     private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
     private ArrayList<Event> events = new ArrayList<>();
 
@@ -18,17 +18,20 @@ public class User {
     public User(String username){
         this.username = username;
         password = null;
+
+
+    }
+
+    public User(String displayName, String username, String password, String imagePath) {
+        this(username);
+        this.displayName = displayName;
+        this.password = password;
+        this.status = "offline";
         this.role = "user";
         this.userid = generateUserID();
         this.registerDate = generateRegisterDate();
-    }
-    public User(String displayName, String username, String password) {
-        this(username);
-        this.displayName = displayName;
-        setPassword(password);
-        this.status = "offline";
         this.bio = "";
-        this.imagePath = generateAvatar();
+        this.imagePath = imagePath;
         this.contactNumber = "";
         this.avatar = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
     }
@@ -38,16 +41,18 @@ public class User {
         return this.username.equals(username);
     }
 
+    public boolean isDisplayName(String displayName){
+        // to check display name verified
+        return this.displayName.equals(displayName);
+    }
+
     public boolean validatePassword(String password){
         // to check result verified
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), this.password);
         return result.verified;
     }
 
-    private String generateAvatar(){
-        int randomAvatar = (int)(Math.random()*10);
-        return "/images/profile/default-avatar/default" + randomAvatar + ".png";
-    }
+
 
     private String generateRegisterDate(){
         LocalDate currentDate = LocalDate.now();
@@ -147,9 +152,6 @@ public class User {
         return this.events;
     }
 
-    public void setPassword(String password){
-        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
-    }
 
     public void setBio(String bio) {
         this.bio = bio;
@@ -162,6 +164,7 @@ public class User {
     public void setAvatar(ImageView avatar) {
         this.avatar = avatar;
     }
+
 
     public void setLastedLogin(String lastedLogin) {
         this.lastedLogin = lastedLogin;
