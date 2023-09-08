@@ -2,7 +2,7 @@ package cs211.project.models;
 import java.time.LocalDateTime;
 
 public class EventActivity {
-    private String name;
+    private String name,eventID;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String description;
@@ -50,6 +50,10 @@ public class EventActivity {
 
     public  String timeToString(LocalDateTime time) {
         return time.getHour()+":"+time.getMinute();
+    }
+
+    public String getEventID() {
+        return eventID;
     }
 }
 
