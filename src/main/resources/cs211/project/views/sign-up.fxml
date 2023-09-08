@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -66,7 +65,7 @@
                      <bottom>
                         <Button mnemonicParsing="false" onAction="#onCreateAccountButton" prefHeight="42.0" prefWidth="278.0" text="CREATE ACCOUNT" wrapText="true" BorderPane.alignment="TOP_CENTER">
                            <BorderPane.margin>
-                              <Insets bottom="110.0" />
+                              <Insets bottom="120.0" />
                            </BorderPane.margin>
                            <font>
                               <Font name="FreesiaUPC" size="29.0" />
@@ -146,10 +145,10 @@
                         <String fx:value="text-base" />
                      </styleClass>
                   </TextField>
-                  <Label fx:id="errorLabel" layoutX="144.0" layoutY="142.0" prefHeight="43.0" prefWidth="360.0" text="errorLabel" textFill="#ff1515">
+                  <Label fx:id="errorLabel" layoutX="144.0" layoutY="161.0" prefHeight="46.0" prefWidth="396.0" text="errorLabel" textFill="#ff1515">
                      <styleClass>
                         <String fx:value="font" />
-                        <String fx:value="text-xs" />
+                        <String fx:value="text-ms" />
                      </styleClass>
                   </Label>
                   <Label fx:id="displayNameReq" layoutX="144.0" layoutY="-78.0" prefHeight="15.0" prefWidth="397.0" text="Other users can see your displayname, and you can use special characters." textFill="#413b3b">
@@ -170,7 +169,7 @@
       </BorderPane>
       <AnchorPane layoutX="165.0" layoutY="652.0" prefHeight="32.0" prefWidth="408.0">
          <children>
-            <HBox layoutX="-1.0" layoutY="-23.0" prefHeight="54.0" prefWidth="418.0" styleClass="text-lg">
+            <HBox layoutX="-1.0" layoutY="-33.0" prefHeight="64.0" prefWidth="418.0" styleClass="text-lg">
                <children>
                   <Label lineSpacing="2.0" prefHeight="23.0" prefWidth="278.0" text="Already have an account?" textFill="#f78123">
                      <font>
@@ -446,23 +445,6 @@
       <ImageView fx:id="fullNameIconView" fitHeight="24.0" fitWidth="24.0" layoutX="136.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="usernameIconView" fitHeight="24.0" fitWidth="24.0" layoutX="136.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true" />
       <HBox layoutX="189.0" layoutY="531.0" prefHeight="64.0" prefWidth="292.0">
-         <children>
-            <CheckBox mnemonicParsing="false" prefHeight="23.0" prefWidth="215.0" text=" I agree to the terms and conditions" textFill="#463d3d">
-               <HBox.margin>
-                  <Insets bottom="3.0" left="1.0" />
-               </HBox.margin>
-               <opaqueInsets>
-                  <Insets left="2.0" />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="2.0" />
-               </padding>
-               <styleClass>
-                  <String fx:value="font" />
-                  <String fx:value="text-xs" />
-               </styleClass>
-            </CheckBox>
-         </children>
          <padding>
             <Insets left="10.0" top="30.0" />
          </padding>
