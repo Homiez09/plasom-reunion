@@ -68,12 +68,18 @@ public class UserListDataSource implements Datasource<UserList> {
                 String[] data = line.split(",");
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
+                String userId = data[0];
                 String displayName = data[1].trim();
                 String username = data[2].trim();
                 String password = data[3].trim();
                 String imagePath = data[9];
+                String registerDate = data[5];
+                String lastedLogin = data[6];
+                boolean status = Boolean.parseBoolean(data[7]);
+                boolean admin = Boolean.parseBoolean(data[8]);
 
-                userList.addUser(displayName,username,password,imagePath);
+
+                userList.addUser(userId, displayName,username,password,imagePath, registerDate, lastedLogin, status, admin);
 
             }
         } catch (IOException e) {
@@ -115,7 +121,7 @@ public class UserListDataSource implements Datasource<UserList> {
                         + user.getRegisterDate() + ","
                         + user.getLastedLogin() + ","
                         + user.getStatus() + ","
-                        + user.getRole() + ","
+                        + user.isAdmin() + ","
                         + user.getImagePath() + ","
                         + user.getAvatar() + ","
                         + user.getBio() + ","
