@@ -16,7 +16,6 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="selected-team-background" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.SelectTeamController">
    <children>
-      <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
       <Label fx:id="myEventLabel" alignment="CENTER" layoutX="29.0" layoutY="90.0" lineSpacing="2.0" onMouseClicked="#onMyEventClick" prefHeight="32.0" prefWidth="119.0" text="my event" textFill="#413b3b">
          <font>
             <Font name="FreesiaUPC" size="20.0" />
@@ -117,5 +116,6 @@
             <Image url="@../../../images/icons/select-team/setting_icon.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
    </children>
 </AnchorPane>
