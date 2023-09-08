@@ -1,0 +1,139 @@
+package cs211.project.services;
+
+import cs211.project.models.Event;
+import cs211.project.models.User;
+import cs211.project.models.collections.EventList;
+import cs211.project.models.collections.UserList;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+public class UserListDataSource implements Datasource<UserList> {
+    private String directoryName;
+    private String fileName;
+
+    private Datasource<UserList> datasource;
+    private UserList userList;
+
+    public UserListDataSource(String directoryName, String fileName){
+        this.directoryName = directoryName;
+        this.fileName = fileName;
+        checkFileIsExisted();
+    }
+
+    private void checkFileIsExisted() {
+        File file = new File(directoryName);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        String filePath = directoryName + File.separator + fileName;
+        file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @Override
+    public UserList readData() {
+        userList = new UserList();
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        FileInputStream fileInputStream = null;
+
+        try {
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        InputStreamReader inputStreamReader = new InputStreamReader(
+                fileInputStream,
+                StandardCharsets.UTF_8
+        );
+        BufferedReader buffer = new BufferedReader(inputStreamReader);
+
+        String line = "";
+        try {
+            // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด
+            while ( (line = buffer.readLine()) != null ){
+                // ถ้าเป็นบรรทัดว่าง ให้ข้าม
+                if (line.equals("")) continue;
+
+                // แยกสตริงด้วย ,
+                String[] data = line.split(",");
+
+                // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
+                String displayName = data[1].trim();
+                String username = data[2].trim();
+                String password = data[3].trim();
+                String imagePath = data[9];
+
+                userList.addUser(displayName,username,password,imagePath);
+
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return userList;
+    }
+
+    @Override
+    public void writeData(UserList data) {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        // เตรียม object ที่ใช้ในการเขียนไฟล์
+        FileOutputStream fileOutputStream = null;
+
+        try {
+            fileOutputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
+                fileOutputStream,
+                StandardCharsets.UTF_8
+        );
+        BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
+
+        try {
+            // สร้าง csv
+
+            for (User user : data.getUsers()) {
+                String line = user.getUserid() + ","
+                        + user.getDisplayName() + ","
+                        + user.getUsername() + ","
+                        + user.getPassword() + ","
+                        + user.getContactNumber() + ","
+                        + user.getRegisterDate() + ","
+                        + user.getLastedLogin() + ","
+                        + user.getStatus() + ","
+                        + user.getRole() + ","
+                        + user.getImagePath() + ","
+                        + user.getAvatar() + ","
+                        + user.getBio() + ","
+                        + user.getEvents();
+
+                buffer.append(line);
+                buffer.append("\n");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.flush();
+                buffer.close();
+            }
+            catch (IOException e){
+                throw new RuntimeException(e);
+            }
+        }
+    }
+}
