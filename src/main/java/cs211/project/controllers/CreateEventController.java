@@ -163,7 +163,7 @@ public class CreateEventController {
 
     }
     @FXML protected void onAddActivityButtonClick() {
-        if (thisEvent == null) {
+        if (thisEvent != null) {
             String activityNameString = activityNameTextField.getText().trim();
             String activityDescriptionString = activityDescriptionTextArea.getText().trim();
             LocalDate activityStartDate = activityStartDatePick.getValue();
@@ -179,7 +179,7 @@ public class CreateEventController {
         }
     }
     @FXML protected void onAddTeamButtonClick() {
-        if (thisEvent == null) {
+        if (thisEvent != null) {
             String teamNameString = teamNameTextField.getText().trim();
             String teamCapString = teamMemberCapTextField.getText().trim();
             int numTeamMember = Integer.parseInt(teamCapString);
