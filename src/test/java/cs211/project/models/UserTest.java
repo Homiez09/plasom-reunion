@@ -13,7 +13,7 @@ class UserTest {
 
     @BeforeEach
     void init() {
-        user = new User("PinkPPanther", "mingmmie", "@Ming1234");
+        user = new User("PinkPPanther", "mingmmie", "@Ming1234","/images/profile/default-avatar/default0.png");
     }
 
     @Test
