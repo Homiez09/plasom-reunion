@@ -1,25 +1,46 @@
 package cs211.project.models;
 
+import cs211.project.models.collections.UserList;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Team{
-    private ArrayList<User> memberList = new ArrayList<>();
     private String teamID, teamName, teamDescription, teamImagePath;
-    private User teamManager;
     private int maxSlotTeamMember;
+    private UserList memberList;
 
-    private Event event;
-
-    public Team(String teamName, String teamDescription, String teamImagePath, User teamManager, int maxSlotTeamMember) {
+    public Team (String teamName, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
+        this.teamName = teamName;
+        this.maxSlotTeamMember = maxSlotTeamMember;
+    }
+
+    public Team (String teamName, int maxSlotTeamMember, String teamDescription) {
+        this(teamName, maxSlotTeamMember);
+        this.teamDescription = teamDescription;
+    }
+
+    public Team (String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath) {
+        this(teamName, maxSlotTeamMember, teamDescription);
+        this.teamImagePath = teamImagePath;
+    }
+
+    public Team (String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath, UserList memberList) {
+        this(teamName, maxSlotTeamMember, teamDescription, teamImagePath);
+        this.memberList = memberList;
+    }
+
+    public Team (String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember) {
+        // this constructor is used when loading from database
+        this.teamID = teamID;
         this.teamName = teamName;
         this.teamDescription = teamDescription;
         this.teamImagePath = teamImagePath;
-        this.teamManager = teamManager;
         this.maxSlotTeamMember = maxSlotTeamMember;
+        this.memberList = memberList;
     }
 
     private String generateTeamID() {
@@ -49,10 +70,6 @@ public class Team{
         return result;
     }
 
-    public ArrayList<User> getMemberList() {
-        return memberList;
-    }
-
     public String getTeamID() {
         return teamID;
     }
@@ -69,24 +86,36 @@ public class Team{
         return teamImagePath;
     }
 
-    public User getTeamManager() {
-        return teamManager;
-    }
-
     public int getMaxSlotTeamMember() {
         return maxSlotTeamMember;
     }
 
-    public void ChangeTeamName(String newName) {
-        this.teamName = newName;
+    public UserList getMemberList() {
+        return memberList;
     }
 
-    public void ChangeTeamDescription(String newDescription) {
-        this.teamDescription = newDescription;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
-    public void ChangeTeamImagePath(String newImagePath) {
-        this.teamImagePath = newImagePath;
+    public void setTeamDescription(String teamDescription) {
+        this.teamDescription = teamDescription;
+    }
+
+    public void setTeamImagePath(String teamImagePath) {
+        this.teamImagePath = teamImagePath;
+    }
+
+    public void setMaxSlotTeamMember(int maxSlotTeamMember) {
+        this.maxSlotTeamMember = maxSlotTeamMember;
+    }
+
+    public void AddMemberToTeam(/* todo: param require */) {
+        // todo: add member to team
+    }
+
+    public boolean isID(String teamID) {
+        return this.teamID.equals(teamID);
     }
 
     public boolean isName(String teamName) {
