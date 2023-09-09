@@ -3,6 +3,7 @@ package cs211.project.services;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
+import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -13,6 +14,8 @@ public class TeamListDataSource implements Datasource<TeamList> {
     private TeamList teamList;
 
     public TeamListDataSource(String directoryName, String fileName) {
+        this.directoryName = directoryName;
+        this.fileName = fileName;
         checkFileIsExisted();
     }
 
@@ -56,8 +59,15 @@ public class TeamListDataSource implements Datasource<TeamList> {
         String line = "";
         try {
             while ((line = bufferedReader.readLine()) != null) {
-                // todo: read data from file
+                if (line.equals("")) continue;
+                String[] data = line.split(",");
+                String teamID = data[0];
+                String teamName = data[1];
+                String teamDescription = data[2];
+                String teamImagePath = data[3];
+                int maxSlotTeamMember = Integer.parseInt(data[4]);
 
+                teamList.addTeam(teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -88,8 +98,11 @@ public class TeamListDataSource implements Datasource<TeamList> {
 
         try {
             for (Team team : data.getTeams()) {
-                String line =  team.getTeamID() + ",";
-                // todo : write data to file
+                String line =  team.getTeamID() + ","
+                        + team.getTeamName() + ","
+                        + team.getTeamDescription() + ","
+                        + team.getTeamImagePath() + ","
+                        + team.getMaxSlotTeamMember();
 
                 buffer.append(line);
                 buffer.append("\n");
