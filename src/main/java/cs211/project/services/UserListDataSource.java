@@ -77,7 +77,6 @@ public class UserListDataSource implements Datasource<UserList> {
                 String contactNumber = data[4];
                 String lastedLogin = data[6];
                 String bio = data[10];
-
                 boolean status = Boolean.parseBoolean(data[8]);
                 boolean admin = Boolean.parseBoolean(data[9]);
 
