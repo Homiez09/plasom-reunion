@@ -78,9 +78,7 @@ public class SignUpController {
         findDisplayNameValidate = false;
         if(validateConfirmation()){
             setPassword(password);
-            User user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password,generateAvatar(),generateRegisterDate(),null,false,false);
-            user.setImagePath(generateAvatar());
-            user.setAdmin(false);
+            User user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,"");
             userList.getUsers().add(user);
             try {
                 datasource.writeData(userList);
