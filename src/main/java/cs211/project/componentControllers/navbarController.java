@@ -34,9 +34,8 @@ public class navbarController {
                 e.printStackTrace();
             }
         });
-
-        showProfile();
         
+        showProfile();
     }
 
     private void goTo(String page) throws IOException {
