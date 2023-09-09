@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 public class Event {
@@ -142,9 +143,16 @@ public class Event {
         this.slotMember = slotMember;
     }
 
-    public static String generateEventID() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString();
+    private String generateEventID() {
+        Random random = new Random();
+
+        String id = "event-";
+        int ranInt = random.nextInt(1000);
+        String ranText = generateRandomText(3);
+
+        id = id + ranText + ranInt;
+
+        return id;
     }
 
     public boolean isFull(){
@@ -162,6 +170,21 @@ public class Event {
         LocalDateTime parsedEventDateEnd = LocalDateTime.parse(eventDateEnd, formatter);
 
         return currentDateTime.isAfter(parsedEventDateEnd);
+    }
+
+    private String generateRandomText(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder randomText = new StringBuilder();
+
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            randomText.append(randomChar);
+        }
+
+        return randomText.toString();
     }
 
     @Override

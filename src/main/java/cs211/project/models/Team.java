@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Team{
     private ArrayList<User> memberList = new ArrayList<>();
@@ -91,5 +92,20 @@ public class Team{
 
     public boolean isName(String teamName) {
         return this.teamName.equals(teamName);
+    }
+
+    public String generateRandomText(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder randomText = new StringBuilder();
+
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            randomText.append(randomChar);
+        }
+
+        return randomText.toString();
     }
 }
