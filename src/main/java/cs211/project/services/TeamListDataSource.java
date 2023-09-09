@@ -8,11 +8,11 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class TeamListDataSource implements Datasource<TeamList> {
-    private String directoryName = "data";
-    private String fileName = "team-list.csv";
+    private String directoryName;
+    private String fileName;
     private TeamList teamList;
 
-    public TeamListDataSource() {
+    public TeamListDataSource(String directoryName, String fileName) {
         checkFileIsExisted();
     }
 

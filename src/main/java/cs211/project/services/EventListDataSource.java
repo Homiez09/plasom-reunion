@@ -80,7 +80,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 int member = Integer.parseInt(data[8].trim());
                 int slotmember = Integer.parseInt(data[9].trim());
                 ActivityList activities = new ActivityList();
-                TeamList teams = new TeamListDataSource().readData();
+                TeamList teams = new TeamListDataSource("data", "team-list.csv").readData();
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath, eventStart, eventEnd,
                                         eventDescription, eventLocation, member, slotmember, activities, teams);
