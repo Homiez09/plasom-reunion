@@ -1,9 +1,11 @@
 package cs211.project.componentControllers;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
 
+import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
@@ -14,9 +16,14 @@ import java.io.IOException;
 public class navbarController {
     @FXML private ImageView profileImageView;
     @FXML private ComboBox<String> toggleComboBox;
-
     private User user = (User) FXRouter.getData();
+
+    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
+    private UserList userList;
+
     @FXML private void initialize() {
+        userList = datasource.readData();
+
         String menu[] = {"profile", "setting", "logout"};
 
         toggleComboBox.getItems().addAll(menu);
@@ -29,6 +36,7 @@ public class navbarController {
         });
 
         showProfile();
+        
     }
 
     private void goTo(String page) throws IOException {
@@ -40,6 +48,9 @@ public class navbarController {
                 FXRouter.goTo("setting", user);
                 break;
             case "logout":
+                userList.logout(user);
+                datasource.writeData(userList);
+                System.out.println(user.getStatus());
                 FXRouter.goTo("welcome");
                 break;
         }
@@ -47,10 +58,6 @@ public class navbarController {
 
     @FXML protected void onHomeButtonClick() throws IOException {
         FXRouter.goTo("home", user);
-    }
-
-    @FXML protected void onAdminButtonClick() throws IOException {
-        FXRouter.goTo("admin-dashboard");
     }
 
     @FXML public void onMyEventsButton() throws IOException {
