@@ -48,7 +48,7 @@ public class AdminDashboardController {
     }
     private void showUserTable() {
         TableColumn<User, String> idCol = new TableColumn<>("ID");
-        idCol.setCellValueFactory(new PropertyValueFactory<>("userid"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         TableColumn<User, ImageView> profileCol = new TableColumn<>("Profile");
         profileCol.setCellValueFactory(new PropertyValueFactory<>("avatar"));
