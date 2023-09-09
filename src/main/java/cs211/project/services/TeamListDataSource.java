@@ -7,6 +7,7 @@ import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 public class TeamListDataSource implements Datasource<TeamList> {
     private String directoryName;
@@ -97,7 +98,9 @@ public class TeamListDataSource implements Datasource<TeamList> {
         BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
 
         try {
-            for (Team team : data.getTeams()) {
+            for (HashMap.Entry<String, Team> item : data.getTeams().entrySet()) {
+                Team team = item.getValue();
+                System.out.println(team.getTeamID());
                 String line =  team.getTeamID() + ","
                         + team.getTeamName() + ","
                         + team.getTeamDescription() + ","

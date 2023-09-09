@@ -5,26 +5,18 @@ import cs211.project.models.Team;
 import cs211.project.models.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TeamList {
-    private ArrayList<Team> teams;
+    private HashMap<String, Team> teams;
 
     public TeamList() {
-        teams = new ArrayList<>();
-    }
-
-
-    public Team findTeam(String teamID) {
-        for (Team team: teams) {
-            if (team.isID(teamID)) {
-                return team;
-            }
-        }
-        return null;
+        teams = new HashMap<>();
     }
 
     public Team findTeamByName(String teamName) {
-        for (Team team: teams) {
+        for (Team team: teams.values()) {
+
             if (team.isName(teamName)) {
                 return team;
             }
@@ -36,15 +28,17 @@ public class TeamList {
         teamName = teamName.trim();
         Team exist = findTeamByName(teamName);
         if (exist == null) {
-            teams.add(new Team(teamName, maxSlotTeamMember));
+            Team team = new Team(teamName, maxSlotTeamMember);
+            teams.put(team.getTeamID(), team);
         }
     }
     public void addTeam(String teamName, int maxSlotTeamMember, String teamDescription){
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
-        Team exist = findTeam(teamName);
+        Team exist = findTeamByName(teamName);
         if(exist == null){
-            teams.add(new Team (teamName, maxSlotTeamMember, teamDescription));
+            Team team = new Team (teamName, maxSlotTeamMember, teamDescription);
+            teams.put(team.getTeamID(), team);
         }
     }
 
@@ -52,9 +46,10 @@ public class TeamList {
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         teamImagePath = teamImagePath.trim();
-        Team exist = findTeam(teamName);
+        Team exist = findTeamByName(teamName);
         if(exist == null){
-            teams.add(new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath));
+            Team team = new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath);
+            teams.put(team.getTeamID(), team);
         }
     }
 
@@ -62,9 +57,10 @@ public class TeamList {
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         teamImagePath = teamImagePath.trim();
-        Team exist = findTeam(teamName);
+        Team exist = findTeamByName(teamName);
         if(exist == null){
-            teams.add(new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath, memberList));
+            Team team = new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath, memberList);
+            teams.put(team.getTeamID(), team);
         }
     }
 
@@ -72,9 +68,10 @@ public class TeamList {
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         teamImagePath = teamImagePath.trim();
-        Team exist = findTeam(teamID);
+        Team exist = findTeamByName(teamID);
         if(exist == null){
-            teams.add(new Team (teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember));
+            Team team = new Team (teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember);
+            teams.put(team.getTeamID(), team);
         }
     }
 
@@ -86,7 +83,7 @@ public class TeamList {
         return teams;
     }
 
-    public ArrayList<Team> getTeams() {
+    public HashMap<String, Team> getTeams() {
         return teams;
     }
 }
