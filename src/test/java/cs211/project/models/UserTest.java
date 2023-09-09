@@ -13,6 +13,7 @@ class UserTest {
 
     @BeforeEach
     void init() {
+        // todo : แก้ไข test ให้ถูกต้อง
         user = new User("PinkPPanther", "mingmmie", "@Ming1234","/images/profile/default-avatar/default0.png");
     }
 
