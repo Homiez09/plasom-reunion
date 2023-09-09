@@ -43,13 +43,14 @@ public class SignInController {
     @FXML
     private Label errorLabel;
 
-    private String password,username;
+    private String password, username;
     private UserListDataSource datasource;
     private UserList userList;
 
+
     @FXML
     void initialize() {
-        datasource = new UserListDataSource("data","user-list.csv");
+        datasource = new UserListDataSource("data", "user-list.csv");
         userList = datasource.readData();
 
 
@@ -68,60 +69,58 @@ public class SignInController {
     }
 
 
-    private void maximumLengthField(){
+    private void maximumLengthField() {
         usernameTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxUsernameLimit){
+            if (newValue.length() > maxUsernameLimit) {
                 usernameTextField.setText(oldValue);
             }
         }));
 
         passwordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxPasswordLimit){
+            if (newValue.length() > maxPasswordLimit) {
                 passwordField.setText(oldValue);
             }
         }));
 
         showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxPasswordLimit){
+            if (newValue.length() > maxPasswordLimit) {
                 showPasswordTextField.setText(oldValue);
             }
         }));
 
     }
+
     public void onLoginButton() {
         username = usernameTextField.getText();
         password = passwordField.getText();
-        User user = userList.login(username,password);
+        User user = userList.login(username, password);
         User matchingUsername = userList.findUsername(username);
-        if(user!=null){
+        if (user != null) {
+            user.setStatus(true);
+            user.setLastedLogin(generateLastedLogin());
+            datasource.writeData(userList);
+
             try {
-                if(user.isAdmin()){
+                if (user.isAdmin()) {
                     FXRouter.goTo("admin-dashboard", user);
-                    datasource.writeData(userList);
-                }else{
-                    user.setStatus(true);
-                    user.setLastedLogin(generateLastedLogin());
-                    datasource.writeData(userList);
+                } else {
                     FXRouter.goTo("home", user);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-        }else{
-            if(matchingUsername == null || username.isEmpty() || password.isEmpty() ){
+        } else {
+            if (matchingUsername == null || username.isEmpty() || password.isEmpty()) {
                 errorLabel.setText("Incorrect username and password. Please try again.");
                 errorLabel.setVisible(true);
             }
-            if (matchingUsername != null && (password.isEmpty() || !matchingUsername.validatePassword(password))){
+            if (matchingUsername != null && (password.isEmpty() || !matchingUsername.validatePassword(password))) {
                 errorLabel.setText("Incorrect password. Please try again.");
                 errorLabel.setVisible(true);
             }
             setBorderColorTextField();
             resetBorderTextField();
         }
-
-
     }
 
 
