@@ -3,7 +3,11 @@ package cs211.project.componentControllers;
 import cs211.project.controllers.MyEventController;
 import cs211.project.models.Event;
 import cs211.project.models.User;
+import cs211.project.models.collections.EventList;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.Datasource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.UserListDataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,11 +27,16 @@ public class EventComponentController extends MyEventController {
     @FXML
     AnchorPane eventAnchorPane;
     @FXML
-    Button staffButton,editButton,viewButton;
+    Button staffButton,editButton,viewjoinButton;
     private User currentUser = (User) FXRouter.getData();
+    private Datasource<UserList> datasource;
+    private UserList userList;
     private Event event;
     @FXML
     public void initialize() {
+        datasource = new UserListDataSource("data","user-list.csv");
+        userList = datasource.readData();
+
 
 
 
@@ -50,11 +59,19 @@ public class EventComponentController extends MyEventController {
             throw new RuntimeException(e);
         }
     }
-    public void onViewAction(ActionEvent actionEvent){
-        try {
-            FXRouter.goTo("event", currentUser);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public void onButtonAction(ActionEvent actionEvent){
+        if (!currentUser.getEvents().contains(event)) {
+
+            User user = userList.findUsername(currentUser.getUsername());
+            user.getEvents().add(event);
+            datasource.writeData(userList);
+
+        }else {
+            try {
+                FXRouter.goTo("event",currentUser,event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -65,6 +82,11 @@ public class EventComponentController extends MyEventController {
             buttonVisible(false);
         }else {
             buttonVisible(true);
+        }
+        if (currentUser.getEvents().contains(event)){
+            viewjoinButton.setText("View");
+        }else {
+            viewjoinButton.setText("Join");
         }
         image = new Image(getClass().getResource("/images/events/event-default.png").toExternalForm());
         try {

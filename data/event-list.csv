@@ -1,6 +1,6 @@
-61242181-4108-4d8b-8054-479c494b821f,OwlVi,event1,null,09/09/2023 00:00,09/09/2023 00:00,asdf,asdf,0,111,cs211.project.models.collections.ActivityList@1ef7e288,cs211.project.models.collections.TeamList@1664c247
-17e444a9-ae34-41f4-a5f6-3ebed297c318,OwlVi,event2,images/events/2023-09-08_1694184668558.png,10/09/2023 12:00,10/09/2023 15:00,,vtwi,0,100,cs211.project.models.collections.ActivityList@51c704c1,cs211.project.models.collections.TeamList@5e4aa778
-c28bded5-14d1-4d8e-b125-1aba24de6e5d,OwlVi,event 3,images/events/2023-09-08_1694185286802.png,16/09/2023 12:00,17/09/2023 14:00,,test,0,111,cs211.project.models.collections.ActivityList@7f88fd9b,cs211.project.models.collections.TeamList@4fce6ed7
-3d0f73af-1021-4521-b71f-7df5d016f7ce,OwlVi,event4,null,11/09/2023 10:00,11/09/2023 12:00,,tesst,0,12345,cs211.project.models.collections.ActivityList@26c69ae3,cs211.project.models.collections.TeamList@2d3c8824
-3bbdefa6-bdca-4cc0-b10a-755cbdd48ebf,OwlVi,event5,null,15/09/2023 14:00,15/09/2023 15:00,,test,0,123,cs211.project.models.collections.ActivityList@15e0dc3d,cs211.project.models.collections.TeamList@29e4b080
-b3866a03-1d86-4a14-b1f4-66ff93b57cb5,OwlVi,event6,null,23/09/2023 17:00,23/09/2023 15:00,test,rt,0,1,null,null
+61242181-4108-4d8b-8054-479c494b821f,OwlVi,event1,null,09/09/2023 00:00,09/09/2023 00:00,asdf,asdf,0,111,cs211.project.models.collections.ActivityList@2c77b4ab,cs211.project.models.collections.TeamList@2c95505b
+17e444a9-ae34-41f4-a5f6-3ebed297c318,OwlVi,event2,images/events/2023-09-08_1694184668558.png,10/09/2023 12:00,10/09/2023 15:00,,vtwi,0,100,cs211.project.models.collections.ActivityList@3a9bed57,cs211.project.models.collections.TeamList@65b6352d
+c28bded5-14d1-4d8e-b125-1aba24de6e5d,OwlVi,event 3,images/events/2023-09-08_1694185286802.png,16/09/2023 12:00,17/09/2023 14:00,,test,0,111,cs211.project.models.collections.ActivityList@747517dc,cs211.project.models.collections.TeamList@72649681
+3d0f73af-1021-4521-b71f-7df5d016f7ce,OwlVi,event4,null,11/09/2023 10:00,11/09/2023 12:00,,tesst,0,12345,cs211.project.models.collections.ActivityList@17f02ccf,cs211.project.models.collections.TeamList@43bb7c41
+3bbdefa6-bdca-4cc0-b10a-755cbdd48ebf,OwlVi,event5,null,15/09/2023 14:00,15/09/2023 15:00,,test,0,123,cs211.project.models.collections.ActivityList@1f2c581d,cs211.project.models.collections.TeamList@492a05e7
+b3866a03-1d86-4a14-b1f4-66ff93b57cb5,OwlVi,event6,null,23/09/2023 17:00,23/09/2023 15:00,test,rt,0,1,cs211.project.models.collections.ActivityList@5faace59,cs211.project.models.collections.TeamList@47ebe899

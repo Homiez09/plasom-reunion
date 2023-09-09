@@ -29,19 +29,21 @@ public class MyEventController {
     ListView myeventListView,historyeventListView;
     @FXML
     Button currentButton, deleteButton;
-    private Datasource<EventList> datasource;
-    private EventList eventList;
-    private Event selectEvent;
     private User currentUser = (User) FXRouter.getData();
+    private String page = (String) FXRouter.getData2();
+    private Datasource<EventList> eventDatasource;
+    private Datasource<UserEventMap> mapDatasource;
+    private EventList eventList;
+
+    private Event selectEvent;
 
 
 
     @FXML
     public void initialize() {
-        datasource = new EventListDataSource("data","event-list.csv");
-        eventList = datasource.readData();
+        eventDatasource = new EventListDataSource("data","event-list.csv");
+        eventList = eventDatasource.readData();
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
-        showInfo();
         showList(eventList);
 
 
@@ -67,21 +69,32 @@ public class MyEventController {
     }
     public void showList(EventList eventList) {
         myeventListView.getItems().clear();
+        historyeventListView.getItems().clear();
         for (Event event : eventList.getEvents()) {
             try {
                 FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
                 AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
                 EventComponentController eventComponent = eventComponentLoader.getController();
-                eventComponent.setEventData(event);
+
+
+                if (    !currentUser.getEvents().contains(event) && page.equals("all")
+                        && !currentUser.getUsername().equals(event.getEventHost())){
+                    eventComponent.setEventData(event);
+                }
+                if (    currentUser.getEvents().contains(event) && page.equals("have")
+                        || currentUser.getUsername().equals(event.getEventHost())) {
+                    eventComponent.setEventData(event);
+                }
+
                 // ตั้งค่าข้อมูล Event ให้กับ AnchorPane
-                eventAnchorPaneComponent.setUserData(event);
+
                 if (event.isEnd()) {
                     historyeventListView.getItems().add(eventAnchorPaneComponent);
                 } else {
                     myeventListView.getItems().add(eventAnchorPaneComponent);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException();
             }
         }
     }
@@ -114,9 +127,9 @@ public class MyEventController {
                 // ลบ Event ตามที่คุณต้องการ
                 eventList.getEvents().remove(selectedEvent);
                 // บันทึกข้อมูล Event ใหม่ลงในไฟล์
-                datasource.writeData(eventList);
+                eventDatasource.writeData(eventList);
                 // ตรวจสอบว่าข้อมูลถูกบันทึกลงในไฟล์เรียบร้อยแล้ว
-                eventList = datasource.readData(); // อ่านข้อมูล Event จากไฟล์ใหม่
+                eventList = eventDatasource.readData(); // อ่านข้อมูล Event จากไฟล์ใหม่
                 if (!eventList.getEvents().contains(selectedEvent)) {
                     System.out.println("Event deleted successfully");
                 } else {
