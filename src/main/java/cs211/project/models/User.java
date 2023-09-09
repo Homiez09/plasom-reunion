@@ -44,6 +44,12 @@ public class User {
         return this.displayName.equals(displayName);
     }
 
+    public boolean isId(String userId){
+        // to check user ID verified
+        return this.userId.equals(userId);
+    }
+
+
     public boolean validatePassword(String password){
         // to check result verified
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), this.password);
@@ -92,10 +98,6 @@ public class User {
         return contactNumber;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
     public void setStatus(boolean status) {
         this.status = status;
     }
@@ -104,9 +106,21 @@ public class User {
         return this.events;
     }
 
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
     }
 
     public void setContactNumber(String contactNumber) {
