@@ -10,32 +10,24 @@ import java.util.ArrayList;
 
 public class User {
     private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber;
-    private String  registerDate, userid;
+    private String  registerDate, userId;
     private boolean admin, status;
-    private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
     private ArrayList<Event> events = new ArrayList<>();
 
 
-    public User(String username){
+
+    public User( String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, String bio) {
         this.username = username;
-        password = null;
-
-
-    }
-
-    public User( String userid, String displayName, String username, String password, String imagePath, String registerDate, String lastedLogin, boolean status, boolean admin) {
-        this(username);
         this.displayName = displayName;
+        this.userId = userId;
         this.password = password;
+        this.contactNumber = contactNumber;
         this.status = status;
         this.admin = admin;
-        this.userid = userid;
         this.registerDate = registerDate;
         this.lastedLogin = lastedLogin;
-        this.bio = "";
+        this.bio = bio;
         this.imagePath = imagePath;
-        this.contactNumber = "";
-        this.avatar = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
     }
 
 
@@ -60,8 +52,8 @@ public class User {
 
 
 
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
     public String getDisplayName() {
@@ -125,10 +117,6 @@ public class User {
         this.admin = admin;
     }
 
-    public void setAvatar(ImageView avatar) {
-        this.avatar = avatar;
-    }
-
 
     public void setLastedLogin(String lastedLogin) {
         this.lastedLogin = lastedLogin;
@@ -143,10 +131,11 @@ public class User {
             this.events.add(event);
         }
     }
-    public ImageView getAvatar(){
-        this.avatar.setFitWidth(35);
-        this.avatar.setFitHeight(35);
-        return avatar;
+
+    public void updateProfile(String displayName, String contactNumber, String bio) {
+        this.displayName = displayName;
+        this.contactNumber = contactNumber;
+        this.bio = bio;
     }
 
 
