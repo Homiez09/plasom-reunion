@@ -28,7 +28,7 @@ public class SelectTeamController {
 
     @FXML
     private void initialize() {
-        TeamListDataSource datasource = new TeamListDataSource();
+        TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         teamList = datasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
         loadIconImage();
