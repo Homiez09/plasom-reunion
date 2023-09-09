@@ -2,15 +2,8 @@ package cs211.project.models.collections;
 
 import cs211.project.models.Event;
 import cs211.project.services.Datasource;
-import cs211.project.services.EventListDataSource;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
+import java.util.*;
 
 public class EventList {
     private ArrayList<Event> events;
@@ -19,23 +12,37 @@ public class EventList {
     public EventList() {
         events = new ArrayList<>();
     }
-    public void createEvent(String eventName, String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription, String eventLocation) {
+    public void addEvent(String eventName, String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd,
+                         String eventDescription, String eventLocation) {
         eventName = eventName.trim();
         eventHost = eventHost.trim();
-        if (!eventName.equals("") ){
+        if (!eventName.equals("") && !eventHost.equals("")){
             events.add(new Event(eventName,eventHost,eventImagePath,eventDateStart,eventDateEnd,eventDescription,eventLocation));
         }
     }
-    public void createEvent(String eventName,String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd, String eventDescription,String eventLocation, int slotMember) {
+    public void addEvent(String eventName, String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd,
+                         String eventDescription, String eventLocation, int slotMember) {
         eventName = eventName.trim();
-        if (!eventName.equals("")) {
-            events.add(new Event(eventName,eventHost, eventImagePath, eventDateStart, eventDateEnd, eventDescription,eventLocation, slotMember));
+        eventHost = eventHost.trim();
+        if (!eventName.equals("")&& !eventHost.equals("")) {
+            events.add(new Event(   eventName,eventHost, eventImagePath, eventDateStart, eventDateEnd,
+                                    eventDescription,eventLocation,slotMember));
+        }
+    }
+    public void addEvent(String eventId, String eventHost, String eventName, String imagePath, String eventStart, String eventEnd,
+                         String eventDescription, String eventLocation, int member, int slotmember, ActivityList activities,
+                         TeamList teams) {
+        eventName = eventName.trim();
+        eventHost = eventHost.trim();
+        if (!eventName.equals("") && !eventHost.equals("")){
+            events.add(new Event(   eventId,eventHost,eventName,imagePath,eventStart,eventEnd,eventDescription,
+                                    eventLocation,member,slotmember,activities,teams));
         }
     }
 
-    public Event findEvent(String name) {
+    public Event findEvent(String eventId) {
         for (Event event : events) {
-            if (event.getEventName().equals(name)) {
+            if (event.getEventID().equals(eventId)) {
                 return event;
             }
         }
@@ -45,5 +52,6 @@ public class EventList {
     public ArrayList<Event> getEvents() {
         return events;
     }
+
 
 }

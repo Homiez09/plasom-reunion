@@ -1,17 +1,22 @@
 package cs211.project.services;
 
-import cs211.project.models.*;
-import cs211.project.models.collections.*;
+import cs211.project.models.Event;
+import cs211.project.models.EventActivity;
+import cs211.project.models.collections.ActivityList;
+import cs211.project.models.collections.EventList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class EventListDataSource implements Datasource<EventList> {
+public class ActivityListDataSource implements Datasource<ActivityList>{
     private String directoryName;
     private String fileName;
-    private Datasource<EventList> datasource;
-    private EventList eventList;
-    public EventListDataSource(String directoryName, String fileName) {
+    private Datasource<ActivityList> datasource;
+    private ActivityList activityList;
+
+    public ActivityListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -35,10 +40,9 @@ public class EventListDataSource implements Datasource<EventList> {
     }
 
     @Override
-    public EventList readData() {
-        eventList = new EventList();
+    public ActivityList readData() {
+        ActivityList activities = new ActivityList();
         String filePath = directoryName + File.separator + fileName;
-
         File file = new File(filePath);
 
         // เตรียม object ที่ใช้ในการอ่านไฟล์
@@ -54,7 +58,6 @@ public class EventListDataSource implements Datasource<EventList> {
                 fileInputStream,
                 StandardCharsets.UTF_8
         );
-
         BufferedReader buffer = new BufferedReader(inputStreamReader);
 
         String line = "";
@@ -68,23 +71,15 @@ public class EventListDataSource implements Datasource<EventList> {
                 String[] data = line.split(",");
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
+                String activityName = data[1].trim();
+                String activityDescription = data[2].trim();
+                String activityStart = data[3].trim();
+                String activityEnd = data[4].trim();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime parsedActivityStart = LocalDateTime.parse(activityStart, formatter);
+                LocalDateTime parsedActivityEnd = LocalDateTime.parse(activityEnd,formatter);
 
-                String eventId = data[0].trim();
-                String eventHost = data[1].trim();
-                String eventName = data[2].trim();
-                String imagePath = data[3].trim();
-                String eventStart = data[4].trim();
-                String eventEnd = data[5].trim();
-                String eventDescription = data[6].trim();
-                String eventLocation = data[7].trim();
-                int member = Integer.parseInt(data[8].trim());
-                int slotmember = Integer.parseInt(data[9].trim());
-                ActivityList activities = new ActivityList();
-                TeamList teams = new TeamDataSourceHardCode().readData();
-
-                eventList.addEvent(     eventId,eventHost, eventName, imagePath, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember, activities, teams);
-
+                activities.addActivity(activityName,activityDescription,parsedActivityStart,parsedActivityEnd);
 
                 // เพิ่มข้อมูลลงใน list
             }
@@ -92,10 +87,10 @@ public class EventListDataSource implements Datasource<EventList> {
             throw new RuntimeException(e);
         }
 
-        return eventList;
+        return activities;
     }
     @Override
-    public void writeData(EventList data) {
+    public void writeData(ActivityList data) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -117,18 +112,12 @@ public class EventListDataSource implements Datasource<EventList> {
         try {
             // สร้าง csv
 
-            for (Event event : data.getEvents()) {
-                String line = event.toString();
-//                String line = event.getEventID()+","
-//                        + event.getEventName() + ","
-//                        + event.getEventHost()+","
-//                        + event.getEventImagePath() + ","
-//                        + event.getEventDateStart()+ ","
-//                        + event.getEventDateEnd() + ","
-//                        + event.getEventDescription() + ","
-//                        + event.getEventLocation() + ","
-//                        + event.getMember() + ","
-//                        + event.getSlotMember();
+            for (EventActivity activity : data.getActivities()) {
+                String line = activity.getEventID()+","
+                        + activity.getName() + ",\""
+                        + activity.getDescription()+"\","
+                        + activity.timeToString(activity.getStartTime()) + ","
+                        + activity.timeToString(activity.getEndTime());
 
                 buffer.append(line);
                 buffer.append("\n");

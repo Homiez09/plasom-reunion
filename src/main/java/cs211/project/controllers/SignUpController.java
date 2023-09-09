@@ -1,9 +1,10 @@
 package cs211.project.controllers;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataSourceHardCode;
+import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class SignUpController {
@@ -43,12 +47,14 @@ public class SignUpController {
     private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
 
     private String password, confirmPassword, displayName, username;
-    private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false;
+    private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false, findDisplayNameValidate = false;
 
-    UserDataSourceHardCode datasource = new UserDataSourceHardCode();
-    UserList userList = datasource.readData();
+    UserListDataSource datasource ;
+    UserList userList ;
     @FXML
     void initialize() {
+        datasource = new UserListDataSource("data","user-list.csv");
+        userList = datasource.readData();
         loadImage();
         showImage(page);
         maxPage = calculateMaxPage();
@@ -69,9 +75,15 @@ public class SignUpController {
     public void onCreateAccountButton() {
         errorLabel.setVisible(false);
         findUsernameValidate = false;
+        findDisplayNameValidate = false;
         if(validateConfirmation()){
-            User user = new User(displayNameTextfield.getText(), usernameTextField.getText(),password);
+            setPassword(password);
+            User user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password,generateAvatar(),generateRegisterDate(),null,false,false);
+            user.setImagePath(generateAvatar());
+            user.setAdmin(false);
+            userList.getUsers().add(user);
             try {
+                datasource.writeData(userList);
                 FXRouter.goTo("sign-in");
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -99,15 +111,75 @@ public class SignUpController {
             }if(findUsernameValidate){
                 errorLabel.setText("Duplicate username. Please use another username.");
                 errorLabel.setVisible(true);
+            }if(findDisplayNameValidate){
+                errorLabel.setText("Duplicate display name. Please use another display name.");
+                errorLabel.setVisible(true);
             }
         }
 
+    }
+
+
+    private String generateRegisterDate(){
+        LocalDate currentDate = LocalDate.now();
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return formattedDate;
+    }
+
+
+    private String generateUserID() {
+
+        final int MAX_ID_LENGTH = 16;
+        StringBuilder sb = new StringBuilder();
+
+        // formatted date & time now
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyMMdd"));
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("hhmmss"));
+
+        // create UID by using local time&date
+        StringBuilder numericText = new StringBuilder();
+        for (char c : username.toCharArray()) {
+            int numericValue = Character.getNumericValue(c);
+            if (numericValue != -1) {
+                numericText.append(numericValue);
+            } else {
+                numericText.append(c);
+            }
+        }
+        // maximum length is 16
+        int totalLength = formattedDate.length() + formattedTime.length() + numericText.length();
+        if (totalLength > MAX_ID_LENGTH) {
+            int excessLength = totalLength - MAX_ID_LENGTH;
+            numericText.delete(numericText.length() - excessLength, numericText.length());
+        }
+        sb.append(formattedDate);
+        sb.append(formattedTime);
+        sb.append(numericText);
+
+        return sb.toString();
+
+    }
+
+    private void setPassword(String password){
+        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+    }
+
+    private String generateAvatar(){
+        int randomAvatar = (int)(Math.random()*10);
+        return "/images/profile/default-avatar/default" + randomAvatar + ".png";
     }
 
     private boolean validateConfirmation(){
         User findUsername = userList.findUsername(username);
         if(findUsername != null){
             findUsernameValidate = true;
+        }
+        User findDisplayName = userList.findDisplayName(displayName);
+        if(findDisplayName != null){
+            findDisplayNameValidate = true;
         }
         displayName = displayNameTextfield.getText();
         username = usernameTextField.getText();

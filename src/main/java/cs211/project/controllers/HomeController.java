@@ -25,13 +25,22 @@ public class HomeController {
         datasource = new EventListDataSource("data","event-list.csv");
         eventList = datasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
+        if (eventList != null) {
+            for (int i = 0 ; i < eventList.getEvents().size() - 5 ;i++) {
+                try {
+                    loadEventTileComponent(newEventTileAnchorPane1, eventList.getEvents().get(i));
+                    loadEventTileComponent(newEventTileAnchorPane2, eventList.getEvents().get(i+1));
+                    loadEventTileComponent(newEventTileAnchorPane3, eventList.getEvents().get(i+2));
+                    loadEventTileComponent(upEventTileAnchorPane1, eventList.getEvents().get(i+3));
+                    loadEventTileComponent(upEventTileAnchorPane2, eventList.getEvents().get(i+4));
+                    loadEventTileComponent(upEventTileAnchorPane3, eventList.getEvents().get(i+5));
+                } catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                }
 
-        loadEventTileComponent(newEventTileAnchorPane1,eventList.getEvents().get(0));
-        loadEventTileComponent(newEventTileAnchorPane2,eventList.getEvents().get(1));
-        loadEventTileComponent(newEventTileAnchorPane3,eventList.getEvents().get(2));
-        loadEventTileComponent(upEventTileAnchorPane1,eventList.getEvents().get(3));
-        loadEventTileComponent(upEventTileAnchorPane2,eventList.getEvents().get(4));
-        loadEventTileComponent(upEventTileAnchorPane3,eventList.getEvents().get(5));
+            }
+
+        }
 
     }
 

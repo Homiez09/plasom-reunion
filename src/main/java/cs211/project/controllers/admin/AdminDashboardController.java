@@ -23,7 +23,7 @@ public class AdminDashboardController {
     private UserList userList;
 
     @FXML private void initialize() {
-        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
+        UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
 
         profileImageView.setImage(new Image(getClass().getResourceAsStream("/images/profile/default-avatar/default0.png"), 1280, 1280, false, false));

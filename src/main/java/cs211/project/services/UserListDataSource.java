@@ -1,23 +1,26 @@
 package cs211.project.services;
 
-import cs211.project.models.*;
-import cs211.project.models.collections.*;
+import cs211.project.models.Event;
+import cs211.project.models.User;
+import cs211.project.models.collections.EventList;
+import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class EventListDataSource implements Datasource<EventList> {
+public class UserListDataSource implements Datasource<UserList> {
     private String directoryName;
     private String fileName;
-    private Datasource<EventList> datasource;
-    private EventList eventList;
-    public EventListDataSource(String directoryName, String fileName) {
+
+    private Datasource<UserList> datasource;
+    private UserList userList;
+
+    public UserListDataSource(String directoryName, String fileName){
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
     }
 
-    // ตรวจสอบว่ามีไฟล์ให้อ่านหรือไม่ ถ้าไม่มีให้สร้างไฟล์เปล่า
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -35,13 +38,11 @@ public class EventListDataSource implements Datasource<EventList> {
     }
 
     @Override
-    public EventList readData() {
-        eventList = new EventList();
+    public UserList readData() {
+        userList = new UserList();
         String filePath = directoryName + File.separator + fileName;
-
         File file = new File(filePath);
 
-        // เตรียม object ที่ใช้ในการอ่านไฟล์
         FileInputStream fileInputStream = null;
 
         try {
@@ -54,7 +55,6 @@ public class EventListDataSource implements Datasource<EventList> {
                 fileInputStream,
                 StandardCharsets.UTF_8
         );
-
         BufferedReader buffer = new BufferedReader(inputStreamReader);
 
         String line = "";
@@ -68,34 +68,29 @@ public class EventListDataSource implements Datasource<EventList> {
                 String[] data = line.split(",");
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-
-                String eventId = data[0].trim();
-                String eventHost = data[1].trim();
-                String eventName = data[2].trim();
-                String imagePath = data[3].trim();
-                String eventStart = data[4].trim();
-                String eventEnd = data[5].trim();
-                String eventDescription = data[6].trim();
-                String eventLocation = data[7].trim();
-                int member = Integer.parseInt(data[8].trim());
-                int slotmember = Integer.parseInt(data[9].trim());
-                ActivityList activities = new ActivityList();
-                TeamList teams = new TeamDataSourceHardCode().readData();
-
-                eventList.addEvent(     eventId,eventHost, eventName, imagePath, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember, activities, teams);
+                String userId = data[0];
+                String displayName = data[1].trim();
+                String username = data[2].trim();
+                String password = data[3].trim();
+                String imagePath = data[9];
+                String registerDate = data[5];
+                String lastedLogin = data[6];
+                boolean status = Boolean.parseBoolean(data[7]);
+                boolean admin = Boolean.parseBoolean(data[8]);
 
 
-                // เพิ่มข้อมูลลงใน list
+                userList.addUser(userId, displayName,username,password,imagePath, registerDate, lastedLogin, status, admin);
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return eventList;
+        return userList;
     }
+
     @Override
-    public void writeData(EventList data) {
+    public void writeData(UserList data) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -117,22 +112,23 @@ public class EventListDataSource implements Datasource<EventList> {
         try {
             // สร้าง csv
 
-            for (Event event : data.getEvents()) {
-                String line = event.toString();
-//                String line = event.getEventID()+","
-//                        + event.getEventName() + ","
-//                        + event.getEventHost()+","
-//                        + event.getEventImagePath() + ","
-//                        + event.getEventDateStart()+ ","
-//                        + event.getEventDateEnd() + ","
-//                        + event.getEventDescription() + ","
-//                        + event.getEventLocation() + ","
-//                        + event.getMember() + ","
-//                        + event.getSlotMember();
+            for (User user : data.getUsers()) {
+                String line = user.getUserid() + ","
+                        + user.getDisplayName() + ","
+                        + user.getUsername() + ","
+                        + user.getPassword() + ","
+                        + user.getContactNumber() + ","
+                        + user.getRegisterDate() + ","
+                        + user.getLastedLogin() + ","
+                        + user.getStatus() + ","
+                        + user.isAdmin() + ","
+                        + user.getImagePath() + ","
+                        + user.getAvatar() + ","
+                        + user.getBio() + ","
+                        + user.getEvents();
 
                 buffer.append(line);
                 buffer.append("\n");
-
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -146,5 +142,4 @@ public class EventListDataSource implements Datasource<EventList> {
             }
         }
     }
-
 }
