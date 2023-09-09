@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class SelectTeamController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -34,7 +35,8 @@ public class SelectTeamController {
         loadIconImage();
 
         int row = 0, column = 0;
-        for (Team team:teamList.getTeams()) {
+        for (HashMap.Entry<String, Team> item : teamList.getTeams().entrySet()) {
+            Team team = item.getValue();
             try {
                 FXMLLoader teamBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team.fxml"));
                 AnchorPane teamBoxComponent = teamBoxLoader.load();
