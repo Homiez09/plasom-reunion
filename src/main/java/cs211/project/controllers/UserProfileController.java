@@ -186,6 +186,7 @@ public class UserProfileController {
 
         passwordField.setText("");
         showPasswordTextField.setText("");
+        password = null;
 
         displayNameTextField.setText(previousDisplayName);
         contactNumberTextField.setText(previousContactNumber);
@@ -207,9 +208,8 @@ public class UserProfileController {
             passwordField.setText("");
             showPasswordTextField.setText("");
 
-
             userList.updateUserProfile(user.getUsername(), displayName, contactNumber, bioText);
-
+            password = null;
             datasource.writeData(userList);
         } else {
             contactNumberReq.setText("Incorrect contact number entered.");
