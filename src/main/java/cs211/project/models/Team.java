@@ -40,7 +40,6 @@ public class Team{
         this.teamDescription = teamDescription;
         this.teamImagePath = teamImagePath;
         this.maxSlotTeamMember = maxSlotTeamMember;
-        this.memberList = memberList;
     }
 
     private String generateTeamID() {
