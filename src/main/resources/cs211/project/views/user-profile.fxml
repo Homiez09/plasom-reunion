@@ -138,7 +138,7 @@
                   <String fx:value="font" />
                </styleClass>
             </PasswordField>
-            <TextField fx:id="showPasswordTextField" layoutX="530.0" layoutY="587.0" onKeyReleased="#onKeyShowPassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxxxxxxxxx">
+            <TextField fx:id="showPasswordTextField" layoutX="530.0" layoutY="587.0" onKeyReleased="#onKeyShowPassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxx">
                <styleClass>
                   <String fx:value="profile-text-field2" />
                   <String fx:value="font" />
