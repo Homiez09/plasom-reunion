@@ -37,6 +37,7 @@ public class UserProfileController {
     private void initialize() {
         datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
+
         userData();
         maximumLengthField();
 
@@ -48,12 +49,13 @@ public class UserProfileController {
     }
 
     private void userData(){
-        String username = user.getUsername();
-        displayName = user.getDisplayName();
-        bioText = user.getBio();
+        User currentUser = userList.findUsername(user.getUsername());
+        String username = currentUser.getUsername();
+        displayName = currentUser.getDisplayName();
+        bioText = currentUser.getBio();
 
-        String userId = user.getUserid();
-        contactNumber = user.getContactNumber();
+        String userId = currentUser.getUserId();
+        contactNumber = currentUser.getContactNumber();
 
         usernameLabel.setText(username);
         usernameProfileLabel.setText(username);
@@ -177,7 +179,7 @@ public class UserProfileController {
     @FXML
     public void onSaveButtonClick() {
         if (bioText.length() <= 280) {
-            User currentUser =  userList.findUsername(user.getUsername());
+            User currentUser = userList.findUsername(user.getUsername());
             displayName = displayNameTextField.getText();
             contactNumber = contactNumberTextField.getText();
             bioText = bioTextArea.getText();
@@ -193,12 +195,10 @@ public class UserProfileController {
             bioProfileLabel.setText(bioText);
 
             datasource.writeData(userList);
-
         } else {
             saveButton.setCancelButton(true);
             countBioLabel.setStyle("-fx-text-fill: red");
         }
-
     }
 
     public void onKeyHidePassword() {
