@@ -35,7 +35,6 @@
             </ImageView>
             <HBox alignment="TOP_RIGHT" layoutX="661.0" prefHeight="75.0" prefWidth="354.0" styleClass="container">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onAdminButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Admin" textFill="#413b3b" />
                   <Button mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Home" textFill="#413b3b" />
                   <Button mnemonicParsing="false" onAction="#onMyEventsButton" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
                </children>
@@ -59,6 +58,5 @@
       </ImageView>
       <Line endX="100.0" startX="-100.0" />
       <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="814.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
-      <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="706.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
    </children>
 </AnchorPane>
