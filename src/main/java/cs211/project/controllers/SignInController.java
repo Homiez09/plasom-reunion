@@ -47,7 +47,6 @@ public class SignInController {
     private UserListDataSource datasource;
     private UserList userList;
 
-
     @FXML
     void initialize() {
         datasource = new UserListDataSource("data", "user-list.csv");
@@ -99,7 +98,6 @@ public class SignInController {
             user.setStatus(true);
             user.setLastedLogin(generateLastedLogin());
             datasource.writeData(userList);
-
             try {
                 if (user.isAdmin()) {
                     FXRouter.goTo("admin-dashboard", user);
