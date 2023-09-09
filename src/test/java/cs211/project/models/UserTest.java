@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
     User user;
 
-    @BeforeEach
-    void init() {
-        // todo : แก้ไข test ให้ถูกต้อง
-        user = new User("PinkPPanther", "mingmmie", "@Ming1234","/images/profile/default-avatar/default0.png");
-    }
+//    @BeforeEach
+//    void init() {
+//        // todo : แก้ไข test ให้ถูกต้อง
+//        user = new User("PinkPPanther", "mingmmie", "@Ming1234","/images/profile/default-avatar/default0.png");
+//    }
 
     @Test
     @DisplayName(" is username check")
