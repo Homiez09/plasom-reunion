@@ -46,6 +46,8 @@ public class AdminDashboardController {
 
     @FXML protected void onLogoutButtonClick() {
         try {
+            userList.logout(user);
+            datasource.writeData(userList);
             FXRouter.goTo("welcome");
         } catch (IOException e) {
             throw new RuntimeException(e);
