@@ -86,7 +86,7 @@ public class UserList {
     public ArrayList<User> getOnlineUsers() {
         ArrayList<User> onlineUsers = new ArrayList<>();
         for (User exist: users) {
-            if (exist.getStatus()) {
+            if (exist.getStatus() && !exist.isAdmin()) {
                 onlineUsers.add(exist);
             }
         }
