@@ -32,9 +32,10 @@ public class EventList {
     public void addEvent(String eventId, String eventHost, String eventName, String imagePath, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation, int member, int slotmember, ActivityList activities,
                          TeamList teams) {
+        eventId = eventId.trim();
         eventName = eventName.trim();
         eventHost = eventHost.trim();
-        if (!eventName.equals("") && !eventHost.equals("")){
+        if (!events.contains(eventId) &&!eventName.equals("") && !eventHost.equals("")){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventStart,eventEnd,eventDescription,
                                     eventLocation,member,slotmember,activities,teams));
         }

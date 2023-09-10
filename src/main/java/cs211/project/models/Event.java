@@ -147,7 +147,7 @@ public class Event {
         Random random = new Random();
 
         String id = "event-";
-        int ranInt = random.nextInt(1000);
+        int ranInt = random.nextInt(100000);
         String ranText = generateRandomText(3);
 
         id = id + ranText + ranInt;

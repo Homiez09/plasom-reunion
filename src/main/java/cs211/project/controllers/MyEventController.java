@@ -1,9 +1,8 @@
 package cs211.project.controllers;
 
 import cs211.project.componentControllers.EventComponentController;
-import cs211.project.models.Event;
-import cs211.project.models.User;
-import cs211.project.models.collections.EventList;
+import cs211.project.models.*;
+import cs211.project.models.collections.*;
 import cs211.project.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class MyEventController {
     @FXML
@@ -32,7 +32,7 @@ public class MyEventController {
     private User currentUser = (User) FXRouter.getData();
     private String page = (String) FXRouter.getData2();
     private Datasource<EventList> eventDatasource;
-    private Datasource<UserEventMap> mapDatasource;
+
     private EventList eventList;
 
     private Event selectEvent;
@@ -43,6 +43,10 @@ public class MyEventController {
     public void initialize() {
         eventDatasource = new EventListDataSource("data","event-list.csv");
         eventList = eventDatasource.readData();
+
+
+
+
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         showList(eventList);
 
@@ -70,31 +74,33 @@ public class MyEventController {
     public void showList(EventList eventList) {
         myeventListView.getItems().clear();
         historyeventListView.getItems().clear();
-        for (Event event : eventList.getEvents()) {
-            try {
-                FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
-                AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
-                EventComponentController eventComponent = eventComponentLoader.getController();
+        if(eventList != null){
+            for (Event event : eventList.getEvents()) {
+                try {
+                    FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
+                    AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
+                    EventComponentController eventComponent = eventComponentLoader.getController();
 
 
-                if (    !currentUser.getEvents().contains(event) && page.equals("all")
-                        && !currentUser.getUsername().equals(event.getEventHost())){
-                    eventComponent.setEventData(event);
+                    if (    !currentUser.getEvents().contains(event)
+                            && !currentUser.getUsername().equals(event.getEventHost())){
+                        eventComponent.setEventData(event);
+                    }
+                    if (    currentUser.getEvents().contains(event)
+                            || currentUser.getUsername().equals(event.getEventHost())) {
+                        eventComponent.setEventData(event);
+                    }
+
+                    // ตั้งค่าข้อมูล Event ให้กับ AnchorPane
+
+                    if (event.isEnd()) {
+                        historyeventListView.getItems().add(eventAnchorPaneComponent);
+                    } else {
+                        myeventListView.getItems().add(eventAnchorPaneComponent);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-                if (    currentUser.getEvents().contains(event) && page.equals("have")
-                        || currentUser.getUsername().equals(event.getEventHost())) {
-                    eventComponent.setEventData(event);
-                }
-
-                // ตั้งค่าข้อมูล Event ให้กับ AnchorPane
-
-                if (event.isEnd()) {
-                    historyeventListView.getItems().add(eventAnchorPaneComponent);
-                } else {
-                    myeventListView.getItems().add(eventAnchorPaneComponent);
-                }
-            } catch (IOException e) {
-                throw new RuntimeException();
             }
         }
     }

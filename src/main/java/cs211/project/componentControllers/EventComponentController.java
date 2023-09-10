@@ -1,12 +1,9 @@
 package cs211.project.componentControllers;
 
 import cs211.project.controllers.MyEventController;
-import cs211.project.models.Event;
-import cs211.project.models.User;
-import cs211.project.models.collections.EventList;
-import cs211.project.models.collections.UserList;
-import cs211.project.services.Datasource;
-import cs211.project.services.FXRouter;
+import cs211.project.models.*;
+import cs211.project.models.collections.*;
+import cs211.project.services.*;
 import cs211.project.services.UserListDataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class EventComponentController extends MyEventController {
     @FXML
@@ -29,13 +30,26 @@ public class EventComponentController extends MyEventController {
     @FXML
     Button staffButton,editButton,viewjoinButton;
     private User currentUser = (User) FXRouter.getData();
-    private Datasource<UserList> datasource;
+    private Datasource<UserList> userListDatasource;
     private UserList userList;
+    private Datasource<EventList> eventListDatasource;
+    private EventList eventList;
+    private UserEventMap mapDatasource ;
+    private HashMap<User, Set<Event>> userMap;
+    private Set<Event> treeSet;
     private Event event;
+
     @FXML
     public void initialize() {
-        datasource = new UserListDataSource("data","user-list.csv");
-        userList = datasource.readData();
+        userListDatasource = new UserListDataSource("data","user-list.csv");
+        userList = userListDatasource.readData();
+
+        mapDatasource = new UserEventMap("data","user-event.csv");
+        userMap = mapDatasource.readData();
+
+
+
+
 
 
 
@@ -60,19 +74,22 @@ public class EventComponentController extends MyEventController {
         }
     }
     public void onButtonAction(ActionEvent actionEvent){
-        if (!currentUser.getEvents().contains(event)) {
+        treeSet = new HashSet<>();
+        mapDatasource = new UserEventMap("data","user-event.csv");
+        userMap = mapDatasource.readData();
 
-            User user = userList.findUsername(currentUser.getUsername());
-            user.getEvents().add(event);
-            datasource.writeData(userList);
-
-        }else {
-            try {
-                FXRouter.goTo("event",currentUser,event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        if(!userMap.containsKey(currentUser)){
+            userMap.put(currentUser,treeSet);
+            System.out.println(userMap.get(currentUser));
         }
+
+        userMap.put(currentUser,treeSet);
+        System.out.println(userMap.get(currentUser));
+        mapDatasource.writeData(userMap);
+
+
+
+
     }
 
     public void setEventData(Event event) {

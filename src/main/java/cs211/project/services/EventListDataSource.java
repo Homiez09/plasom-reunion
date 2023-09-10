@@ -10,7 +10,11 @@ public class EventListDataSource implements Datasource<EventList> {
     private String directoryName;
     private String fileName;
     private Datasource<EventList> datasource;
+    private Datasource<ActivityList> activityListDatasource;
+    private Datasource<TeamList> teamListDatasource;
     private EventList eventList;
+    private ActivityList activityList;
+    private TeamList teamList;
     public EventListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
@@ -37,6 +41,19 @@ public class EventListDataSource implements Datasource<EventList> {
     @Override
     public EventList readData() {
         eventList = new EventList();
+
+        teamList = new TeamList();
+
+        activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
+        teamListDatasource = new TeamDataSourceHardCode();
+
+        activityList = activityListDatasource.readData();
+
+
+
+
+
+
         String filePath = directoryName + File.separator + fileName;
 
         File file = new File(filePath);
@@ -77,10 +94,10 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventEnd = data[5].trim();
                 String eventDescription = data[6].trim();
                 String eventLocation = data[7].trim();
-                int member = Integer.parseInt(data[8].trim());
+                int member = Integer.parseInt(data[8].toString());
                 int slotmember = Integer.parseInt(data[9].trim());
-                ActivityList activities = new ActivityList();
-                TeamList teams = new TeamDataSourceHardCode().readData();
+                ActivityList activities = null;
+                TeamList teams = null;
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath, eventStart, eventEnd,
                                         eventDescription, eventLocation, member, slotmember, activities, teams);
@@ -119,16 +136,6 @@ public class EventListDataSource implements Datasource<EventList> {
 
             for (Event event : data.getEvents()) {
                 String line = event.toString();
-//                String line = event.getEventID()+","
-//                        + event.getEventName() + ","
-//                        + event.getEventHost()+","
-//                        + event.getEventImagePath() + ","
-//                        + event.getEventDateStart()+ ","
-//                        + event.getEventDateEnd() + ","
-//                        + event.getEventDescription() + ","
-//                        + event.getEventLocation() + ","
-//                        + event.getMember() + ","
-//                        + event.getSlotMember();
 
                 buffer.append(line);
                 buffer.append("\n");
