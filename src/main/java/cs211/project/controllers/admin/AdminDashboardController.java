@@ -3,6 +3,7 @@ package cs211.project.controllers.admin;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -19,17 +20,21 @@ public class AdminDashboardController {
     @FXML private TableView userTableView;
     @FXML private ImageView profileImageView;
     @FXML private ProgressBar eventProgressBar;
+    @FXML private Label onlineLabel, offlineLabel, eventLabel;
 
+    private User user = (User) FXRouter.getData();
+    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
     private UserList userList;
 
     @FXML private void initialize() {
-        UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
 
-        profileImageView.setImage(new Image(getClass().getResourceAsStream("/images/profile/default-avatar/default0.png"), 1280, 1280, false, false));
         new CreateProfileCircle(profileImageView, 28);
         new BlockArrowKeyFromTabPane(mainTab);
 
+        showProfile();
+        showOnlineUserLabel();
+        showOfflineUserLabel();
         showUserTable();
         ButtonSelectGraphic(1);
     }
@@ -41,6 +46,8 @@ public class AdminDashboardController {
 
     @FXML protected void onLogoutButtonClick() {
         try {
+            userList.logout(user);
+            datasource.writeData(userList);
             FXRouter.goTo("welcome");
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -48,10 +55,30 @@ public class AdminDashboardController {
     }
     private void showUserTable() {
         TableColumn<User, String> idCol = new TableColumn<>("ID");
-        idCol.setCellValueFactory(new PropertyValueFactory<>("userid"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
-        TableColumn<User, ImageView> profileCol = new TableColumn<>("Profile");
-        profileCol.setCellValueFactory(new PropertyValueFactory<>("avatar"));
+        TableColumn<User, String> profileCol = new TableColumn<>("Profile");
+        profileCol.setCellValueFactory(new PropertyValueFactory<>("imagePath"));
+
+        profileCol.setCellFactory(column -> {
+            return new TableCell<User, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        ImageView avatar = new ImageView(new Image(getClass().getResourceAsStream(item)));
+                        avatar.setFitWidth(35);
+                        avatar.setFitHeight(35);
+                        new CreateProfileCircle(profileImageView, 28);
+                        setGraphic(avatar);
+                    }
+                }
+            };
+        });
 
         TableColumn<User, String> usernameCol = new TableColumn<>("Username");
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -59,8 +86,25 @@ public class AdminDashboardController {
         TableColumn<User, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(new PropertyValueFactory<>("displayName"));
 
-        TableColumn<User, String> statusCol = new TableColumn<>("Status");
+        TableColumn<User, Boolean> statusCol = new TableColumn<>("Status");
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        statusCol.setCellFactory(column -> {
+            return new TableCell<User, Boolean>() {
+                @Override
+                protected void updateItem(Boolean item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        setText(item ? "Online" : "Offline");
+                    }
+                }
+            };
+        });
+
 
         TableColumn<User, String> lastLoginCol = new TableColumn<>("Last Login");
         lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastedLogin"));
@@ -68,7 +112,22 @@ public class AdminDashboardController {
         userTableView.getColumns().clear();
         userTableView.getColumns().addAll(idCol, profileCol, usernameCol, nameCol, statusCol, lastLoginCol);
         userTableView.getItems().clear();
-        userTableView.getItems().addAll(userList.getUsers());
+        userTableView.getItems().addAll(userList.getNotAdminUsers());
+        userTableView.getSortOrder().add(lastLoginCol);
+
+    }
+
+    private void showOnlineUserLabel() {
+        int online = userList.getOnlineUsers().size();
+        onlineLabel.setText(String.valueOf(online));
+    }
+
+    private void showOfflineUserLabel() {
+        int offline = userList.getNotAdminUsers().size() - userList.getOnlineUsers().size();
+        offlineLabel.setText(String.valueOf(offline));
+    }
+
+    private void showEventProgressBarAndEventLabel() {
 
     }
 
@@ -88,4 +147,9 @@ public class AdminDashboardController {
         menu1.setStyle("-fx-background-color: transparent");
     }
 
+    private void showProfile() {
+        String path = (user != null) ? user.getImagePath() : "/images/profile/default-avatar/default0.png";
+        profileImageView.setImage(new Image(getClass().getResourceAsStream(path), 1280, 1280, false, false));
+        new CreateProfileCircle(profileImageView, 28);
+    }
 }

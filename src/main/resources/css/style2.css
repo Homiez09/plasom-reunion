@@ -92,45 +92,38 @@ Text, Label {
 }
 
 .toggle-menu {
-    -fx-background-radius: 10;
-    -fx-background-color: #F5F3EE;
-}
-
-.toggle-menu > VBox {
-    -fx-border-width: 0.6;
-    -fx-border-style: solid;
-    -fx-border-radius: 10;
-    -fx-border-color: #494949;
-}
-
-.toggle-menu > VBox > .items {
-    -fx-padding: 12 0 12 0;
+    -fx-font-size: 16;
     -fx-background-color: transparent;
-    -fx-border-color: #494949;
+}
+
+.toggle-menu .list-cell {
+    -fx-background-color: transparent;
     -fx-font-family: Leelawadee;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
     -fx-font-size: 19;
-    -fx-font-weight: 700;
-    -fx-border-width: 0 0 0.6 0;
-    -fx-border-style: solid;
-    -fx-text-fill: #413b3b;
+    -fx-text-fill: #666666;
+    -fx-alignment: center;
 }
 
-.toggle-menu > VBox > .items:hover {
-    -fx-background-color: #ffa527;
-    /*-fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);*/
+.toggle-menu .list-cell:hover {
+    -fx-background-color: #FFE4B8;
+    -fx-text-fill: #666666;
 }
 
-.toggle-menu > VBox > HBox {
-    -fx-background-color: #F5F3EE;
-    -fx-background-radius: 0 0 10 10;
+.toggle-menu .list-view {
+    -fx-border-color: linear-gradient(#353535, #494949);
+    -fx-border-width: 0.5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
-.toggle-menu > VBox > .text-primary {
-    -fx-text-fill: #413b3b;
+.toggle-menu .arrow {
+    -fx-background-color: transparent;
 }
 
-.toggle-menu > VBox > .text-danger {
-    -fx-text-fill: #c22f2f;
+.toggle-menu .arrow-button {
+    -fx-font-size: 0;
 }
 
 .top-bar-items {

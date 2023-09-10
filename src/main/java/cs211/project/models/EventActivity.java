@@ -8,13 +8,20 @@ public class EventActivity {
     private String description;
 
     // Constructors
-    public EventActivity(String name, LocalDateTime startTime, LocalDateTime endTime, String description) {
-        this.name = name;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.description = description;
+
+
+    public EventActivity(String eventId, String activityName, String activityDescription,LocalDateTime activityStart, LocalDateTime activityEnd) {
+        this.eventID =eventId;
+        this.name =activityName;
+        this.description = activityDescription;
+        this.startTime = activityStart;
+        this.endTime = activityEnd;
     }
 
+    public String removeQuote(String text) {
+        text = text.substring(1, text.length() - 1);
+        return text;
+    }
     // Getters and Setters
     public String getName() {
         return name;
@@ -25,11 +32,11 @@ public class EventActivity {
     }
 
     public String getDescription() {
-        return description;
+        return removeQuote(description);
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = "\""+description+"\"";
     }
 
     public LocalDateTime getStartTime() {
@@ -49,11 +56,25 @@ public class EventActivity {
     }
 
     public  String timeToString(LocalDateTime time) {
-        return time.getHour()+":"+time.getMinute();
+        String day = String.format("%02d",time.getDayOfMonth());
+        String month = String.format("%02d",time.getMonthValue());
+        String year = String.format("%04d",time.getYear());
+        String hour = String.format("%02d",time.getHour());
+        String minute = String.format("%02d",time.getMinute());
+        return day+"/"+month+"/"+year+" "+hour+":"+minute;
     }
 
     public String getEventID() {
         return eventID;
+    }
+
+    @Override
+    public String toString() {
+        return    eventID + ','
+                + name + ",\""
+                + description + "\","
+                + timeToString(startTime) + ','
+                + timeToString(endTime) ;
     }
 }
 

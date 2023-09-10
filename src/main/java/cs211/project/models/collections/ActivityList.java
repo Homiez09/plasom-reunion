@@ -10,14 +10,24 @@ public class ActivityList {
 
     public ActivityList() { activities = new ArrayList<>(); }
 
-    public void addActivity(String name, String description, LocalDateTime start, LocalDateTime end) {
-        name = name.trim();
-        if (!name.equals("")) {
-            activities.add(new EventActivity(name,start,end,description));
+
+    public void addActivity(String eventId, String activityName, String activityDescription,LocalDateTime ActivityStart, LocalDateTime ActivityEnd) {
+        activityName = activityName.trim();
+        if (!activityName.equals("")) {
+            activities.add(new EventActivity(eventId,activityName,activityDescription,ActivityStart,ActivityEnd));
         }
     }
 
+    public EventActivity findActivity(String eventId){
+        for (EventActivity activity:activities) {
+            if (activity.getEventID().equals(eventId)){
+                return activity;
+            }
+        }
+        return null;
+    }
     public ArrayList<EventActivity> getActivities() {
         return activities;
     }
 }
+

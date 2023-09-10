@@ -170,9 +170,10 @@ public class CreateEventController {
             String startDateTime = formatTime(activityStartDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
             String endDateTime = formatTime(activityEndDatePick,activityEndHourSpinner,activityEndMinuteSpinner);
             // add to activity list
-            thisEvent.getActivities().addActivity(activityNameString,activityDescriptionString,startDateTime,endDateTime);
+//            thisEvent.getActivities().addActivity(activityNameString,activityDescriptionString,startDateTime,endDateTime);
 
 
+//            thisEvent.getActivities().addActivity(thisEvent.getEventID(),activityNameString,activityDescriptionString,startDateTime,endDateTime);
         }
     }
     @FXML protected void onAddTeamButtonClick() {

@@ -5,7 +5,7 @@ import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
-import cs211.project.services.TeamDataSourceHardCode;
+import cs211.project.services.TeamListDataSource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -16,6 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class SelectTeamController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -28,13 +31,23 @@ public class SelectTeamController {
 
     @FXML
     private void initialize() {
-        TeamDataSourceHardCode datasource = new TeamDataSourceHardCode();
+        TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         teamList = datasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
         loadIconImage();
 
         int row = 0, column = 0;
-        for (Team team:teamList.getTeams()) {
+
+        // sort teamList
+        List<Team> teamListSorted = new ArrayList<>();
+        for (HashMap.Entry<String, Team> item : teamList.getTeams().entrySet()) {
+            Team team = item.getValue();
+            teamListSorted.add(team);
+        }
+
+        teamListSorted.sort((o1, o2) -> o2.getCreatedAt().compareTo(o1.getCreatedAt()));
+
+        for (Team team : teamListSorted) {
             try {
                 FXMLLoader teamBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team.fxml"));
                 AnchorPane teamBoxComponent = teamBoxLoader.load();

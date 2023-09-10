@@ -30,14 +30,25 @@ public class UserList {
         return null;
     }
 
-    public void addUser(String userId,String displayName, String username, String password, String imagePath, String registerDate, String lastedLogin, boolean status, boolean admin){
+    public User findUserId(String userId) {
+        for (User exist: users) {
+            if (exist.isId(userId)) {
+                return exist;
+            }
+        }
+        return null;
+    }
+
+
+    public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, String bio){
         username = username.trim();
         password = password.trim();
-        User exist = findUsername(username);
-        if(exist == null){
-            users.add(new User(userId, displayName, username, password, imagePath,registerDate,lastedLogin,status, admin));
+        User newUser = findUsername(username);
+        if(newUser == null){
+            users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, bio));
         }
     }
+
 
     public User login(String username, String password){
         for(User exist: users){
@@ -47,6 +58,41 @@ public class UserList {
         }
         return null;
     }
+
+    public void logout(User oldUser) {
+        User newUser = findUsername(oldUser.getUsername());
+        newUser.setStatus(false);
+    }
+
+
+    public void updateUserProfile(String username, String displayName, String contactNumber, String bio) {
+        User exist = findUsername(username);
+        if (exist != null) {
+            exist.updateProfile(displayName, contactNumber, bio);
+        }
+    }
+
+
+    public ArrayList<User> getNotAdminUsers() {
+        ArrayList<User> notAdminUsers = new ArrayList<>();
+        for (User exist: users) {
+            if (!exist.isAdmin()) {
+                notAdminUsers.add(exist);
+            }
+        }
+        return notAdminUsers;
+    }
+
+    public ArrayList<User> getOnlineUsers() {
+        ArrayList<User> onlineUsers = new ArrayList<>();
+        for (User exist: users) {
+            if (exist.getStatus() && !exist.isAdmin()) {
+                onlineUsers.add(exist);
+            }
+        }
+        return onlineUsers;
+    }
+
 
     public ArrayList<User> getUsers() {
         return users;

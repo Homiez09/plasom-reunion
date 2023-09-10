@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 public class EventListDataSource implements Datasource<EventList> {
     private String directoryName;
     private String fileName;
-    private Datasource<EventList> datasource;
+    private Datasource<EventList> eventListDatasource;
     private Datasource<ActivityList> activityListDatasource;
     private Datasource<TeamList> teamListDatasource;
     private EventList eventList;
@@ -40,14 +40,14 @@ public class EventListDataSource implements Datasource<EventList> {
 
     @Override
     public EventList readData() {
-        eventList = new EventList();
-
-        teamList = new TeamList();
-
         activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
-        teamListDatasource = new TeamDataSourceHardCode();
-
         activityList = activityListDatasource.readData();
+
+        teamListDatasource = new TeamListDataSource("data", "team-list.csv");
+        teamList = teamListDatasource.readData();
+
+        eventListDatasource = new EventListDataSource("data","event-list.csv");
+        eventList = eventListDatasource.readData();
 
 
 
@@ -96,8 +96,9 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventLocation = data[7].trim();
                 int member = Integer.parseInt(data[8].toString());
                 int slotmember = Integer.parseInt(data[9].trim());
-                ActivityList activities = null;
-                TeamList teams = null;
+
+                ActivityList activities = activityList;
+                TeamList teams = teamList;
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath, eventStart, eventEnd,
                                         eventDescription, eventLocation, member, slotmember, activities, teams);

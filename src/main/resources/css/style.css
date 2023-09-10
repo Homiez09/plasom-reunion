@@ -98,15 +98,19 @@
 }
 
 /* check box*/
+.check-box {
+    -fx-text-fill:  #BFBFBF;
+}
 .check-box .box {
-    -fx-background-color: #FF922E;
-    -fx-background-radius: 3;
+    -fx-background-color: #DCDCDD;
+    -fx-background-radius: 4;
 }
 .check-box:selected .mark {
     -fx-background-color: #F5F3ED;
 }
 .check-box:selected .box {
     -fx-background-color: #FF922E;
+    -fx-text-fill: #413B3B;
 }
 
 /* for click button */

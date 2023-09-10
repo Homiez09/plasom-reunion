@@ -11,32 +11,24 @@ import java.util.Random;
 
 public class User {
     private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber;
-    private String  registerDate, userid;
+    private String  registerDate, userId;
     private boolean admin, status;
-    private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
     private ArrayList<Event> events = new ArrayList<>();
 
 
-    public User(String username){
+
+    public User( String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, String bio) {
         this.username = username;
-        password = null;
-
-
-    }
-
-    public User( String userid, String displayName, String username, String password, String imagePath, String registerDate, String lastedLogin, boolean status, boolean admin) {
-        this(username);
         this.displayName = displayName;
+        this.userId = userId;
         this.password = password;
+        this.contactNumber = contactNumber;
         this.status = status;
         this.admin = admin;
-        this.userid = userid;
         this.registerDate = registerDate;
         this.lastedLogin = lastedLogin;
-        this.bio = "";
+        this.bio = bio;
         this.imagePath = imagePath;
-        this.contactNumber = "";
-        this.avatar = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
     }
 
 
@@ -53,6 +45,12 @@ public class User {
         return this.displayName.equals(displayName);
     }
 
+    public boolean isId(String userId){
+        // to check user ID verified
+        return this.userId.equals(userId);
+    }
+
+
     public boolean validatePassword(String password){
         // to check result verified
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), this.password);
@@ -61,8 +59,8 @@ public class User {
 
 
 
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
     public String getDisplayName() {
@@ -101,10 +99,6 @@ public class User {
         return contactNumber;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
     public void setStatus(boolean status) {
         this.status = status;
     }
@@ -113,9 +107,21 @@ public class User {
         return this.events;
     }
 
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
     }
 
     public void setContactNumber(String contactNumber) {
@@ -124,10 +130,6 @@ public class User {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
-    }
-
-    public void setAvatar(ImageView avatar) {
-        this.avatar = avatar;
     }
 
 
@@ -144,10 +146,11 @@ public class User {
             this.events.add(event);
         }
     }
-    public ImageView getAvatar(){
-        this.avatar.setFitWidth(35);
-        this.avatar.setFitHeight(35);
-        return avatar;
+
+    public void updateProfile(String displayName, String contactNumber, String bio) {
+        this.displayName = displayName;
+        this.contactNumber = contactNumber;
+        this.bio = bio;
     }
 
     public String generateRandomText(int length) {

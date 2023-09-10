@@ -72,14 +72,15 @@ public class UserListDataSource implements Datasource<UserList> {
                 String displayName = data[1].trim();
                 String username = data[2].trim();
                 String password = data[3].trim();
-                String imagePath = data[9];
+                String imagePath = data[7];
                 String registerDate = data[5];
+                String contactNumber = data[4];
                 String lastedLogin = data[6];
-                boolean status = Boolean.parseBoolean(data[7]);
-                boolean admin = Boolean.parseBoolean(data[8]);
+                String bio = data[10];
+                boolean status = Boolean.parseBoolean(data[8]);
+                boolean admin = Boolean.parseBoolean(data[9]);
 
-
-                userList.addUser(userId, displayName,username,password,imagePath, registerDate, lastedLogin, status, admin);
+                userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, bio);
 
             }
         } catch (IOException e) {
@@ -113,17 +114,17 @@ public class UserListDataSource implements Datasource<UserList> {
             // สร้าง csv
 
             for (User user : data.getUsers()) {
-                String line = user.getUserid() + ","
+
+                String line = user.getUserId() + ","
                         + user.getDisplayName() + ","
                         + user.getUsername() + ","
                         + user.getPassword() + ","
                         + user.getContactNumber() + ","
                         + user.getRegisterDate() + ","
                         + user.getLastedLogin() + ","
+                        + user.getImagePath() + ","
                         + user.getStatus() + ","
                         + user.isAdmin() + ","
-                        + user.getImagePath() + ","
-                        + user.getAvatar() + ","
                         + user.getBio() + ","
                         + user.getEvents();
 
