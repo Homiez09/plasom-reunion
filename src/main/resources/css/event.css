@@ -40,16 +40,15 @@
     -fx-font-family: Leelawadee;
 }
 .event-component{
-    -fx-background-color: #D9D9D9 ;
-    -fx-background-radius: 30;
-    -fx-border-radius: 30;
-    -fx-border-color: #000;
+    -fx-background-color: #FFF5E5 ;
+    -fx-background-radius: 15 ;
+
 
 }
 .list-view-set{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #FFF5E5;
     -fx-background-radius: 15 ;
     -fx-border-radius: 15;
-    -fx-border-color: #FFFFFF;
+    -fx-border-color: #FFF5E5;
 
 }

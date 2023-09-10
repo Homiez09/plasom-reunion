@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Team implements Comparable<Team> {
     private String teamID, teamName, teamDescription, teamImagePath, createdAt;
@@ -123,6 +124,20 @@ public class Team implements Comparable<Team> {
         return this.teamName.equals(teamName);
     }
 
+    public String generateRandomText(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder randomText = new StringBuilder();
+
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            randomText.append(randomChar);
+        }
+
+        return randomText.toString();
+    }
     @Override
     public int compareTo(Team team) {
         int s = Integer.parseInt(this.createdAt.replace("|", "").replace(":", "").replace("-", ""));
