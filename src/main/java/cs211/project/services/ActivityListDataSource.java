@@ -1,9 +1,7 @@
 package cs211.project.services;
 
-import cs211.project.models.Event;
 import cs211.project.models.EventActivity;
 import cs211.project.models.collections.ActivityList;
-import cs211.project.models.collections.EventList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -68,9 +66,10 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 if (line.equals("")) continue;
 
                 // แยกสตริงด้วย ,
-                String[] data = line.split(",");
+                String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
+                String eventID = data[0].trim();
                 String activityName = data[1].trim();
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
@@ -79,7 +78,7 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 LocalDateTime parsedActivityStart = LocalDateTime.parse(activityStart, formatter);
                 LocalDateTime parsedActivityEnd = LocalDateTime.parse(activityEnd,formatter);
 
-                activities.addActivity(activityName,activityDescription,parsedActivityStart,parsedActivityEnd);
+                activities.addActivity(eventID,activityName,activityDescription,parsedActivityStart,parsedActivityEnd);
 
                 // เพิ่มข้อมูลลงใน list
             }
@@ -113,11 +112,7 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
             // สร้าง csv
 
             for (EventActivity activity : data.getActivities()) {
-                String line = activity.getEventID()+","
-                        + activity.getName() + ",\""
-                        + activity.getDescription()+"\","
-                        + activity.timeToString(activity.getStartTime()) + ","
-                        + activity.timeToString(activity.getEndTime());
+                String line = activity.toString();
 
                 buffer.append(line);
                 buffer.append("\n");

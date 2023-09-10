@@ -175,7 +175,7 @@ public class CreateEventController {
             LocalDateTime startDateTime = activityStartDate.atTime(activityStartHour,activityStartMinute);
             LocalDateTime endDateTime = activityEndDate.atTime(activityEndHour,activityEndMinute);
             // add to activity list
-            thisEvent.getActivities().addActivity(activityNameString,activityDescriptionString,startDateTime,endDateTime);
+            thisEvent.getActivities().addActivity(thisEvent.getEventID(),activityNameString,activityDescriptionString,startDateTime,endDateTime);
         }
     }
     @FXML protected void onAddTeamButtonClick() {
