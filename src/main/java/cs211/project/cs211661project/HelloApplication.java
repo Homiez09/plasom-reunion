@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
 
         FXRouter.bind(this, stage, "CS211 661 Project");
 
-        FXRouter.goTo("welcome");
+        FXRouter.goTo("home");
     }
 
     private static void configRoute() {

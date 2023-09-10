@@ -36,7 +36,7 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="30.0">
                                        <children>
-                                          <Label text="eventNameLabel">
+                                          <Label fx:id="eventNameLabel" text="eventNameLabel">
                                              <font>
                                                 <Font name="Leelawadee Bold" size="36.0" />
                                              </font>
@@ -135,7 +135,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0">
                                        <children>
-                                          <TableView layoutX="152.0" layoutY="14.0" prefWidth="800.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+                                          <TableView fx:id="eventActivityTableView" layoutX="152.0" layoutY="14.0" prefWidth="800.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
                                             <columns>
                                               <TableColumn prefWidth="100.0" text="C1" />
                                               <TableColumn prefWidth="-1.0" text="C2" />

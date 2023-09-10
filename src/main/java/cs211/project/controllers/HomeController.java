@@ -52,6 +52,7 @@ public class HomeController {
             AnchorPane eventTileComponent = eventTileLoader.load();
             EventTileController eventTileController = eventTileLoader.getController();
             eventTileController.showEventTile(event);
+            eventTileController.onEventTileClick(event);
             eventTile.getChildren().add(eventTileComponent);
         } catch (IOException e) {
             throw new RuntimeException(e);
