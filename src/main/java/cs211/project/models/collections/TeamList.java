@@ -16,7 +16,6 @@ public class TeamList {
 
     public Team findTeamByName(String teamName) {
         for (Team team: teams.values()) {
-
             if (team.isName(teamName)) {
                 return team;
             }
@@ -64,13 +63,13 @@ public class TeamList {
         }
     }
 
-    public void addTeam(String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember){
+    public void addTeam(String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember, String createdAt){
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         teamImagePath = teamImagePath.trim();
         Team exist = findTeamByName(teamID);
         if(exist == null){
-            Team team = new Team (teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember);
+            Team team = new Team (teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember, createdAt);
             teams.put(team.getTeamID(), team);
         }
     }
