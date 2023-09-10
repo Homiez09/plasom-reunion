@@ -17,8 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class EventComponentController extends MyEventController {
     @FXML
@@ -35,25 +35,12 @@ public class EventComponentController extends MyEventController {
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     private UserEventMap mapDatasource ;
-    private HashMap<User, Set<Event>> userMap;
-    private Set<Event> treeSet;
+    private HashMap<String, Set<String>> userMap;
+    private Set<String> eventSet;
     private Event event;
 
     @FXML
     public void initialize() {
-        userListDatasource = new UserListDataSource("data","user-list.csv");
-        userList = userListDatasource.readData();
-
-        mapDatasource = new UserEventMap("data","user-event.csv");
-        userMap = mapDatasource.readData();
-
-
-
-
-
-
-
-
     }
 
 
@@ -74,18 +61,23 @@ public class EventComponentController extends MyEventController {
         }
     }
     public void onButtonAction(ActionEvent actionEvent){
-        treeSet = new HashSet<>();
-        mapDatasource = new UserEventMap("data","user-event.csv");
+        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+        userMap = new HashMap<>();
+        mapDatasource = new UserEventMap("data", "user-event.csv");
         userMap = mapDatasource.readData();
 
-        if(!userMap.containsKey(currentUser)){
-            userMap.put(currentUser,treeSet);
-            System.out.println(userMap.get(currentUser));
+        if (userMap.containsKey(currentUser.getUsername())) {
+            eventSet = userMap.get(currentUser.getUsername());
+        }else {
+            eventSet = new HashSet<>();
         }
-
-        userMap.put(currentUser,treeSet);
-        System.out.println(userMap.get(currentUser));
+        eventSet.add(event.getEventID());
+        userMap.put(currentUser.getUsername(), eventSet);
+        for (Map.Entry<String, Set<String>> entry : userMap.entrySet()) {
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
         mapDatasource.writeData(userMap);
+
 
 
 

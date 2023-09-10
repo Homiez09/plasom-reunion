@@ -6,7 +6,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class UserEventMap implements Datasource<HashMap<User,Set<Event>>>{
+public class UserEventMap implements Datasource<HashMap<String,Set<String>>>{
     private String directoryName;
     private String fileName;
     private Datasource<EventList> eventListDatasource;
@@ -14,8 +14,8 @@ public class UserEventMap implements Datasource<HashMap<User,Set<Event>>>{
     private Event event;
     private Datasource<UserList> userListDatasource;
     private UserList userList;
-    private Set<Event> eventSet;
-    private HashMap<User,Set<Event>> hashMap;
+    private Set<String> eventSet;
+    private HashMap<String,Set<String>> hashMap;
 
     
 
@@ -42,15 +42,9 @@ public class UserEventMap implements Datasource<HashMap<User,Set<Event>>>{
     }
 
     @Override
-    public HashMap<User, Set<Event>> readData() {
+    public HashMap<String, Set<String>> readData() {
         hashMap = new HashMap<>();
         eventSet = new HashSet<>();
-        
-        eventListDatasource = new EventListDataSource("data", "event-list.csv");
-        eventList = eventListDatasource.readData();
-
-        userListDatasource = new UserListDataSource("data", "user-list.csv");
-        userList = userListDatasource.readData();
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -76,18 +70,17 @@ public class UserEventMap implements Datasource<HashMap<User,Set<Event>>>{
 
         try {
             while ((line = buffer.readLine()) != null) {
-                if (!line.isEmpty()) {
-                    String[] data = line.split(",");
-                    User user = userList.findUsername(data[0].trim());
-                    String[] parts = data[1].split("\\[|,|\\]");
-                    for (String id:parts) {
-                        Event event = eventList.findEvent(id);
-                        eventSet.add(event);
+                if (line.equals("")) continue;
+                    String cleanedData = line.replace("[", "").replace("]", "");
+                    String[] data = cleanedData.split(",");
+                    String user = data[0].trim();
+                    for (int i = 1 ; i <data.length;i++) {
+                        eventSet.add(data[i].trim());
                     }
 
                     hashMap.put(user,eventSet);
 
-                }
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -97,9 +90,8 @@ public class UserEventMap implements Datasource<HashMap<User,Set<Event>>>{
     }
 
     @Override
-    public void writeData(HashMap<User, Set<Event>> data) {
+    public void writeData(HashMap<String, Set<String>> data) {
         String filePath = directoryName + File.separator + fileName;
-
         File file = new File(filePath);
 
         // เตรียม object ที่ใช้ในการเขียนไฟล์
@@ -117,17 +109,15 @@ public class UserEventMap implements Datasource<HashMap<User,Set<Event>>>{
         );
         BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
         try {
-            String line ="";
 
-            for (Map.Entry<User, Set<Event>> entry : data.entrySet()) {
-                User user = entry.getKey();
-                Set<Event> eventList = entry.getValue();
-
-
-                line = user.getUsername()+","+ eventList;
+            for (Map.Entry<String, Set<String>> entry : data.entrySet()) {
+                String line ="";
+                String user = entry.getKey();
+                Set<String> eventList = entry.getValue();
+                line = user+","+eventList;
+                buffer.write(line);
+                buffer.newLine();
             }
-            buffer.write(line);
-            buffer.newLine();
 
 
         } catch (IOException e) {

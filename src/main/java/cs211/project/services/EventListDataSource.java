@@ -40,19 +40,13 @@ public class EventListDataSource implements Datasource<EventList> {
 
     @Override
     public EventList readData() {
+        eventList = new EventList();
+
         activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
         activityList = activityListDatasource.readData();
 
         teamListDatasource = new TeamListDataSource("data", "team-list.csv");
         teamList = teamListDatasource.readData();
-
-        eventListDatasource = new EventListDataSource("data","event-list.csv");
-        eventList = eventListDatasource.readData();
-
-
-
-
-
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -154,5 +148,6 @@ public class EventListDataSource implements Datasource<EventList> {
             }
         }
     }
+
 
 }
