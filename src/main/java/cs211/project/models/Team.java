@@ -7,8 +7,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Team{
-    private String teamID, teamName, teamDescription, teamImagePath;
+public class Team implements Comparable<Team> {
+    private String teamID, teamName, teamDescription, teamImagePath, createdAt;
     private int maxSlotTeamMember;
     private UserList memberList;
 
@@ -16,6 +16,7 @@ public class Team{
         this.teamID = generateTeamID();
         this.teamName = teamName;
         this.maxSlotTeamMember = maxSlotTeamMember;
+        this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss:SSS"));
     }
 
     public Team (String teamName, int maxSlotTeamMember, String teamDescription) {
@@ -33,13 +34,14 @@ public class Team{
         this.memberList = memberList;
     }
 
-    public Team (String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember) {
+    public Team (String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember, String createdAt) {
         // this constructor is used when loading from database
         this.teamID = teamID;
         this.teamName = teamName;
         this.teamDescription = teamDescription;
         this.teamImagePath = teamImagePath;
         this.maxSlotTeamMember = maxSlotTeamMember;
+        this.createdAt = createdAt;
     }
 
     private String generateTeamID() {
@@ -93,6 +95,10 @@ public class Team{
         return memberList;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
@@ -113,11 +119,14 @@ public class Team{
         // todo: add member to team
     }
 
-    public boolean isID(String teamID) {
-        return this.teamID.equals(teamID);
-    }
-
     public boolean isName(String teamName) {
         return this.teamName.equals(teamName);
+    }
+
+    @Override
+    public int compareTo(Team team) {
+        int s = Integer.parseInt(this.createdAt.replace("|", "").replace(":", "").replace("-", ""));
+        int t = Integer.parseInt(team.getCreatedAt().replace("|", "").replace(":", "").replace("-", ""));
+        return (int)t - s;
     }
 }
