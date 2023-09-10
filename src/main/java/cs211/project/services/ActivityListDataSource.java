@@ -74,11 +74,8 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
                 String activityEnd = data[4].trim();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                LocalDateTime parsedActivityStart = LocalDateTime.parse(activityStart, formatter);
-                LocalDateTime parsedActivityEnd = LocalDateTime.parse(activityEnd,formatter);
 
-                activities.addActivity(eventID,activityName,activityDescription,parsedActivityStart,parsedActivityEnd);
+                activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd);
 
                 // เพิ่มข้อมูลลงใน list
             }

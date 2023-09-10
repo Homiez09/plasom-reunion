@@ -166,14 +166,8 @@ public class CreateEventController {
         if (thisEvent != null) {
             String activityNameString = activityNameTextField.getText().trim();
             String activityDescriptionString = activityDescriptionTextArea.getText().trim();
-            LocalDate activityStartDate = activityStartDatePick.getValue();
-            LocalDate activityEndDate = activityEndDatePick.getValue();
-            int activityStartHour = activityStartHourSpinner.getValue();
-            int activityEndHour = activityEndHourSpinner.getValue();
-            int activityStartMinute = activityStartMinuteSpinner.getValue();
-            int activityEndMinute = activityEndMinuteSpinner.getValue();
-            LocalDateTime startDateTime = activityStartDate.atTime(activityStartHour,activityStartMinute);
-            LocalDateTime endDateTime = activityEndDate.atTime(activityEndHour,activityEndMinute);
+            String startDateTime = formatTime(activityStartDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
+            String endDateTime = formatTime(activityEndDatePick,activityEndHourSpinner,activityEndMinuteSpinner);
             // add to activity list
             thisEvent.getActivities().addActivity(thisEvent.getEventID(),activityNameString,activityDescriptionString,startDateTime,endDateTime);
         }
