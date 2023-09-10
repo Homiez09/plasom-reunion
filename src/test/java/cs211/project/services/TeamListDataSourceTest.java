@@ -14,9 +14,14 @@ class TeamListDataSourceTest {
         TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         TeamList teamList = datasource.readData();
 
-        teamList.addTeam("Team 1", 5);
-        teamList.addTeam("Team 9", 5, "Team 2 description");
-        teamList.addTeam("Team 10", 5, "Team 3 description", "Team 3 image path");
+        for (int i = 0; i < 10; i++) {
+            teamList.addTeam("Team " + i, 5);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         System.out.println(teamList.getTeams());
         datasource.writeData(teamList);
