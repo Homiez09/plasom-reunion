@@ -20,19 +20,19 @@ public class UserProfileController {
     @FXML private PasswordField passwordField;
     @FXML private Button editButton, cancelButton, saveButton;
     @FXML private Label passwordLabel,countBioLabel,maximumCountBioLabel,usernameLabel,idLabel,bioProfileLabel,displayNameProfileLabel,usernameProfileLabel,idProfileLabel;
+    @FXML private Label displayNameReq, contactNumberReq, passwordReq;
+
     private Image showPasswordImage, hidePasswordImage;
-    private String password;
-    private String bioText;
-    private String previousBioText;
-    private String previousBioCount;
-    private String displayName;
-    private String contactNumber;
+    private String displayName, password, contactNumber, bioText, previousDisplayName, previousContactNumber , previousBioText, previousBioCount ;
+
+    private Boolean displayNameRequirement = false ,isValid = false, isValidContactNumber = false;
 
     private final int MAX_PASSWORD_LIMIT = 27,  MAX_DISPLAY_NAME_LIMIT = 24, MAX_CONTACT_LIMIT = 10, MAX_BIO_LIMIT = 300;
     private final User user = (User) FXRouter.getData();
 
     UserListDataSource datasource ;
     UserList userList ;
+
     @FXML
     private void initialize() {
         datasource = new UserListDataSource("data","user-list.csv");
@@ -40,22 +40,30 @@ public class UserProfileController {
 
         userData();
         maximumLengthField();
+        setRequirementLabel();
 
         loadImage();
+
+        showFocusRequirement();
 
         new LoadNavbarComponent(user, navbarAnchorPane);
         loadPasswordFieldAndButtonProfile();
         loadIconImageProfile();
     }
 
-    private void userData(){
-        User currentUser = userList.findUsername(user.getUsername());
-        String username = currentUser.getUsername();
-        displayName = currentUser.getDisplayName();
-        bioText = currentUser.getBio();
+    public void setRequirementLabel(){
+        displayNameReq.setVisible(false);
+        contactNumberReq.setVisible(false);
+        passwordReq.setVisible(false);
+    }
 
-        String userId = currentUser.getUserId();
-        contactNumber = currentUser.getContactNumber();
+    private void userData(){
+        String username = user.getUsername();
+        displayName = user.getDisplayName();
+        bioText = user.getBio();
+
+        String userId = user.getUserId();
+        contactNumber = user.getContactNumber();
 
         usernameLabel.setText(username);
         usernameProfileLabel.setText(username);
@@ -106,6 +114,9 @@ public class UserProfileController {
 
 
     @FXML private void loadPasswordFieldAndButtonProfile() {
+        displayNameReq.setVisible(false);
+        passwordReq.setVisible(false);
+        contactNumberReq.setVisible(false);
         passwordField.setVisible(false);
         showPasswordTextField.setVisible(false);
         passwordLabel.setVisible(false);
@@ -152,8 +163,13 @@ public class UserProfileController {
     private void onEditProfileButtonClick() {
         loadPasswordFieldAndButtonEditProfile();
         loadIconImageEditProfile();
+
         previousBioText = bioTextArea.getText();
         previousBioCount = String.valueOf(previousBioText.length());
+
+        previousDisplayName = displayNameTextField.getText();
+        previousContactNumber = contactNumberTextField.getText();
+
         if (previousBioCount.equals("0")) {
             previousBioCount = "0";
             countBioLabel.setText("0");
@@ -161,43 +177,57 @@ public class UserProfileController {
             countBioLabel.setText(previousBioCount);
         }
         countBioLabel.setStyle("");
-
     }
 
     @FXML
     protected void onCancelButtonClick() {
         loadPasswordFieldAndButtonProfile();
         loadIconImageProfile();
-        displayNameTextField.setText(displayName);
-        contactNumberTextField.setText(contactNumber);
-        bioTextArea.setText(previousBioText);
-        countBioLabel.setText(previousBioCount);
-        user.setBio(previousBioText);
 
+        passwordField.setText("");
+        showPasswordTextField.setText("");
+        password = null;
+
+        displayNameTextField.setText(previousDisplayName);
+        contactNumberTextField.setText(previousContactNumber);
+        bioTextArea.setText(previousBioText);
+        user.updateProfile(previousDisplayName, previousContactNumber, previousBioText);
     }
+
 
     @FXML
     public void onSaveButtonClick() {
-        if (bioText.length() <= 280) {
-            User currentUser = userList.findUsername(user.getUsername());
-            displayName = displayNameTextField.getText();
-            contactNumber = contactNumberTextField.getText();
-            bioText = bioTextArea.getText();
-
-            loadPasswordFieldAndButtonProfile();
-            loadIconImageProfile();
-
-            currentUser.setBio(bioText);
-            currentUser.setDisplayName(displayName);
-            currentUser.setContactNumber(contactNumber);
-
+        validateData();
+        if (isValid) {
             displayNameProfileLabel.setText(displayName);
             bioProfileLabel.setText(bioText);
 
+            loadPasswordFieldAndButtonProfile();
+            loadIconImageProfile();
+            passwordReq.setVisible(false);
+            passwordField.setText("");
+            showPasswordTextField.setText("");
+
+            userList.updateUserProfile(user.getUsername(), displayName, contactNumber, bioText);
+            password = null;
             datasource.writeData(userList);
         } else {
+            contactNumberReq.setText("Incorrect contact number entered.");
+            contactNumberReq.setStyle(setColorTextFill("red"));
+            contactNumberReq.setVisible(!isValidContactNumber);
             saveButton.setCancelButton(true);
-            countBioLabel.setStyle("-fx-text-fill: red");
+            countBioLabel.setStyle(bioTextArea.getText().length() <= 280 ? setColorTextFill("black") : setColorTextFill("red"));
+            if(password == null){
+                passwordReq.setVisible(true);
+                passwordReq.setStyle(setColorTextFill("red"));
+                passwordReq.setText("Enter your password to save changes to your profile.");
+            }else if(!user.validatePassword(password)){
+                passwordReq.setVisible(true);
+                passwordReq.setStyle(setColorTextFill("red"));
+                passwordReq.setText("Wrong password. Please Try Again.");
+            }else{
+                passwordReq.setVisible(false);
+            }
         }
     }
 
@@ -211,6 +241,21 @@ public class UserProfileController {
         passwordField.setText(password);
     }
 
+    public void validateData(){
+        checkDisplayNameReq();
+        checkContactNumberReq();
+        isValid = displayNameRequirement && isValidContactNumber && bioTextArea.getText().length() <= 280 && checkValidatePassword();
+    }
+
+    public boolean checkValidatePassword(){
+        if(password != null){
+            return user.validatePassword(password);
+        }else {
+            return false;
+        }
+    }
+
+
     @FXML
     private void onVisiblePasswordClick() {
         if (visiblePasswordImageView.getImage() == hidePasswordImage) {
@@ -223,6 +268,107 @@ public class UserProfileController {
             visiblePasswordImageView.setImage(hidePasswordImage);
         }
     }
+
+    private void showFocusRequirement() {
+        displayNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                checkDisplayNameReq();
+            }
+        });
+
+        displayNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            displayNameProfileLabel.setText(newValue);
+        });
+
+        contactNumberTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                checkContactNumberReq();
+            }
+        });
+
+        contactNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            checkContactNumberReq();
+        });
+
+        bioTextArea.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                bioProfileLabel.setText(bioTextArea.getText());
+            }
+        });
+
+        bioTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            bioProfileLabel.setText(newValue);
+        });
+    }
+
+
+    public void onKeyDisplayName(){
+        checkDisplayNameReq();
+    }
+
+    public void checkDisplayNameReq(){
+        displayNameRequirement = false;
+        User currentUser = userList.findUsername(user.getUsername());
+        displayName = displayNameTextField.getText();
+        if(!displayName.isEmpty() && ((userList.findDisplayName(displayName) != null && currentUser.isDisplayName(displayName)) || (userList.findDisplayName(displayName) == null) || currentUser.isDisplayName(displayName))){
+            displayNameReq.setVisible(false);
+            displayNameReq.setStyle(setColorTextFill("black"));
+            displayNameTextField.setStyle("-fx-border-color: #413b3b");
+            displayNameRequirement = true;
+        }else{
+            displayNameRequirement = false;
+            displayNameReq.setVisible(true);
+            displayNameReq.setStyle(setColorTextFill("red"));
+            if(displayName.isEmpty()){
+                displayNameReq.setText("Incorrect display name entered.");
+            }else if (userList.findDisplayName(displayName) != null && !currentUser.isDisplayName(displayName)){
+                displayNameReq.setText("Duplicate display name. Please use another display name.");
+            }else {
+                displayNameReq.setVisible(false);
+            }
+        }
+    }
+
+
+    public void checkContactNumberReq(){
+        isValidContactNumber = false;
+        boolean isDigit = false,  isLength = false;
+        contactNumber = contactNumberTextField.getText();
+        if(contactNumber.length() == 10){
+            isLength = true;
+        }
+        for(char c : contactNumber.toCharArray()){
+            if(Character.isDigit(c)){
+                isDigit = true;
+            }else{
+                isDigit = false;
+                break;
+            }
+        }isValidContactNumber = isDigit && isLength || contactNumber.length() == 0;
+
+        if(!isValidContactNumber){
+            contactNumberReq.setVisible(true);
+            contactNumberReq.setText("Incorrect contact number entered.");
+            contactNumberReq.setStyle(setColorTextFill("red"));
+        }else{
+            contactNumberReq.setVisible(false);
+        }
+
+    }
+
+    public void onKeyContactNumber(){
+        checkContactNumberReq();
+    }
+
+    private String setColorTextFill(String color){
+        switch (color) {
+            case "black" -> color = "-fx-text-fill: #413b3b";
+            case "red" -> color = "-fx-text-fill: red";
+
+        }
+        return color;
+    }
+
 
     private void setEditableFields(boolean editable) {
         displayNameTextField.setEditable(editable);

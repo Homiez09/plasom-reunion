@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
@@ -46,14 +47,14 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label layoutX="497.0" layoutY="255.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="164.0" text="Contact number">
+            <Label layoutX="497.0" layoutY="255.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="263.0" text="Contact number (Optional)">
                <styleClass>
                   <String fx:value="text-xl" />
                   <String fx:value="weight-bold" />
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label layoutX="497.0" layoutY="345.0" lineSpacing="1.0" prefHeight="57.0" prefWidth="164.0" text="Bio">
+            <Label layoutX="497.0" layoutY="351.0" lineSpacing="1.0" prefHeight="51.0" prefWidth="142.0" text="Bio (Optional)">
                <styleClass>
                   <String fx:value="text-xl" />
                   <String fx:value="weight-bold" />
@@ -95,13 +96,13 @@
                   <String fx:value="edit-profile-button" />
                </styleClass>
             </Button>
-            <TextField fx:id="displayNameTextField" layoutX="529.0" layoutY="224.0" prefHeight="37.0" prefWidth="358.0" promptText="Phunyisa Tanyapong">
+            <TextField fx:id="displayNameTextField" layoutX="529.0" layoutY="224.0" onKeyReleased="#onKeyDisplayName" prefHeight="37.0" prefWidth="358.0" promptText="Phunyisa Tanyapong">
                <styleClass>
                   <String fx:value="profile-text-field" />
                   <String fx:value="font" />
                </styleClass>
             </TextField>
-            <TextField fx:id="contactNumberTextField" layoutX="530.0" layoutY="309.0" prefHeight="37.0" prefWidth="263.0" promptText="xxx xxx xxxx">
+            <TextField fx:id="contactNumberTextField" layoutX="530.0" layoutY="309.0" onKeyReleased="#onKeyContactNumber" prefHeight="37.0" prefWidth="263.0" promptText="xxx xxx xxxx">
                <styleClass>
                   <String fx:value="font" />
                   <String fx:value="profile-text-field" />
@@ -137,7 +138,7 @@
                   <String fx:value="font" />
                </styleClass>
             </PasswordField>
-            <TextField fx:id="showPasswordTextField" layoutX="530.0" layoutY="587.0" onKeyReleased="#onKeyShowPassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxxxxxxxxx">
+            <TextField fx:id="showPasswordTextField" layoutX="530.0" layoutY="587.0" onKeyReleased="#onKeyShowPassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxx">
                <styleClass>
                   <String fx:value="profile-text-field2" />
                   <String fx:value="font" />
@@ -155,7 +156,7 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label fx:id="idLabel" layoutX="885.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="177.0" text="4931444444444444">
+            <Label fx:id="idLabel" layoutX="880.0" layoutY="145.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="182.0" text="4931444444444444">
                <styleClass>
                   <String fx:value="text-xl" />
                   <String fx:value="weight-medium" />
@@ -169,14 +170,14 @@
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label fx:id="maximumCountBioLabel" layoutX="1012.0" layoutY="523.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="36.0" text="/ 280">
+            <Label fx:id="maximumCountBioLabel" layoutX="1004.0" layoutY="521.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="36.0" text="/ 280">
                <styleClass>
                   <String fx:value="text-xs" />
                   <String fx:value="weight-medium" />
                   <String fx:value="font" />
                </styleClass>
             </Label>
-            <Label fx:id="countBioLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="978.0" layoutY="523.0" lineSpacing="1.0" prefHeight="11.0" prefWidth="30.0" text="0">
+            <Label fx:id="countBioLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="970.0" layoutY="522.0" lineSpacing="1.0" prefHeight="11.0" prefWidth="30.0" text="0">
                <styleClass>
                   <String fx:value="text-xs" />
                   <String fx:value="weight-medium" />
@@ -210,6 +211,34 @@
                   </Label>
                </children>
             </VBox>
+            <Label fx:id="passwordReq" layoutX="548.0" layoutY="626.0" lineSpacing="1.0" prefHeight="21.0" prefWidth="514.0" text="Wrong password, Please try again." textFill="#f50606">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="weight-base" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="displayNameReq" layoutX="634.0" layoutY="193.0" lineSpacing="1.0" prefHeight="19.0" prefWidth="427.0" text="displayError">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="weight-base" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <CheckBox fx:id="contactCheckBox" layoutX="814.0" layoutY="319.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="182.0" text="Show / Hide on Profile">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="font" />
+                  <String fx:value="check-box" />
+               </styleClass>
+            </CheckBox>
+            <Label fx:id="contactNumberReq" layoutX="760.0" layoutY="278.0" lineSpacing="1.0" prefHeight="18.0" prefWidth="323.0" text="contactError">
+               <styleClass>
+                  <String fx:value="text-ms" />
+                  <String fx:value="weight-base" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
