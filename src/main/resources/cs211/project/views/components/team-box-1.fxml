@@ -8,8 +8,9 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBoxController">
+<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBox1Controller">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="228.0" stroke="BLACK" strokeType="INSIDE" styleClass="team-box-shape" width="228.0">
          <fill>
@@ -37,15 +38,17 @@
             <String fx:value="font" />
             <String fx:value="text-lg" />
             <String fx:value="center-label" />
+            <String fx:value="color-gray" />
          </styleClass>
       </Label>
-      <ImageView fx:id="roleImageView" fitHeight="36.0" fitWidth="36.0" layoutX="73.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="peopleImageView" fitHeight="36.0" fitWidth="36.0" layoutX="122.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="roleImageView" fitHeight="36.0" fitWidth="36.0" layoutX="73.0" layoutY="167.0" onMouseEntered="#onRoleEntered" onMouseExited="#onRoleExited" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="peopleImageView" fitHeight="36.0" fitWidth="36.0" layoutX="122.0" layoutY="167.0" onMouseEntered="#onParticipantsEntered" onMouseExited="#onParticipantsExited" pickOnBounds="true" preserveRatio="true" />
       <Label alignment="CENTER" layoutX="171.0" layoutY="204.0" prefHeight="10.0" prefWidth="40.0" text="online">
          <styleClass>
             <String fx:value="font" />
             <String fx:value="text-ปห" />
             <String fx:value="center-label" />
+            <String fx:value="color-gray" />
          </styleClass>
       </Label>
       <Label fx:id="numActiveLabel" alignment="CENTER_RIGHT" layoutX="154.0" layoutY="205.0" prefHeight="10.0" prefWidth="21.0" text="111">
@@ -53,8 +56,79 @@
             <String fx:value="font" />
             <String fx:value="text-ปห" />
             <String fx:value="center-label" />
+            <String fx:value="color-gray" />
          </styleClass>
       </Label>
       <ImageView fx:id="activeImageView" fitHeight="4.0" fitWidth="4.0" layoutX="147.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane fx:id="memberShipAnchorPane" layoutX="20.0" layoutY="207.0" prefHeight="26.0" prefWidth="166.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="19.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="membership-message-box" width="139.0" />
+            <Label contentDisplay="RIGHT" layoutX="13.0" layoutY="2.0" prefHeight="15.0" prefWidth="77.0" text="Membership :">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="participantsAnchorPane" layoutX="82.0" layoutY="198.0" prefHeight="29.0" prefWidth="129.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="19.0" layoutX="-3.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="membership-message-box" width="128.0" />
+            <Label contentDisplay="RIGHT" layoutX="8.0" layoutY="11.0" prefHeight="15.0" prefWidth="77.0" text="Participants :">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="82.0" layoutY="12.0" prefHeight="15.0" prefWidth="16.0" text="10">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="RIGHT" layoutX="99.0" layoutY="11.0" prefHeight="15.0" prefWidth="7.0" text="/">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="RIGHT" layoutX="103.0" layoutY="12.0" prefHeight="15.0" prefWidth="16.0" text="15">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
