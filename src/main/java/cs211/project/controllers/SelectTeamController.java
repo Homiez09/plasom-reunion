@@ -9,6 +9,7 @@ import cs211.project.services.TeamListDataSource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,12 +26,13 @@ public class SelectTeamController {
     @FXML private GridPane teamContainer;
 
     @FXML private ImageView settingImageView, sortImageView, createTeamImageView;
-
+    @FXML private ComboBox settingMenuComboBox;
     private User user = (User) FXRouter.getData();
     private TeamList teamList;
 
     @FXML
     private void initialize() {
+        initMenu();
         TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         teamList = datasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -66,7 +68,6 @@ public class SelectTeamController {
 
     }
 
-
     @FXML
     private void onMyEventClick(){
         try {
@@ -85,7 +86,6 @@ public class SelectTeamController {
         }
     }
 
-
     private void loadIconImage(){
         Image settingIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
         settingImageView.setImage(settingIcon);
@@ -93,6 +93,32 @@ public class SelectTeamController {
         sortImageView.setImage(sortIcon);
         Image createTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
         createTeamImageView.setImage(createTeamIcon);
+    }
+
+    @FXML private void onShowSettingMenuClick() {
+        settingMenuComboBox.show();
+    }
+
+    private void initMenu() {
+        String menu[] = {"Edit Teams", "Switch View"};
+
+        settingMenuComboBox.getItems().addAll(menu);
+        settingMenuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            showBlock((String) newValue);
+        });
+    }
+
+    private void showBlock(String select) {
+        System.out.println(select);
+        switch (select) {
+            case "Edit Teams":
+                // todo : [id of block for show].setVisible(false);
+                System.out.println("Click Edit Teams");
+                break;
+            case "Switch View":
+                // todo : [id of block for show].setVisible(false);
+                System.out.println("Click Switch View");
+        }
     }
 }
 
