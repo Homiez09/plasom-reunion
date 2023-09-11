@@ -49,7 +49,7 @@ public class EventComponentController extends EventListController {
 
     public void onStaffAction(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("select-team", currentUser);
+            FXRouter.goTo("select-team", currentUser, event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
