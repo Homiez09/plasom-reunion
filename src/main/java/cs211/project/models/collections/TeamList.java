@@ -3,9 +3,7 @@ package cs211.project.models.collections;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TeamList {
     private ArrayList<Team> teams;
