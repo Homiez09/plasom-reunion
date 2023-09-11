@@ -15,7 +15,7 @@
 <AnchorPane maxHeight="-Infinity" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
    <AnchorPane layoutY="75.0" prefHeight="693.0" prefWidth="1152.0" styleClass="bgProfile1">
       <children>
-        <ScrollPane fitToWidth="true" prefHeight="693.0" prefWidth="1152.0">
+        <ScrollPane fitToWidth="true" prefHeight="693.0" prefWidth="1152.0" vvalue="1.0">
             <content>
                 <VBox alignment="CENTER" prefHeight="1525.0" styleClass="bg">
                     <children>
@@ -188,7 +188,7 @@
                             <children>
                                 <VBox alignment="BOTTOM_CENTER" prefHeight="115.0">
                                     <children>
-                                        <HBox prefHeight="20.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
+                                        <HBox prefHeight="20.0" prefWidth="1137.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
                                         <HBox prefHeight="50.0" styleClass="outer-bottom-tab" stylesheets="@../../../css/home.css" />
                                     </children>
                                 </VBox>

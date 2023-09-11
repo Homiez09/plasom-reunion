@@ -26,11 +26,11 @@ public class HelloApplication extends Application {
         FXRouter.when("home", resourcesPath+ "home.fxml");
         FXRouter.when("user-profile", resourcesPath+ "user-profile.fxml");
         FXRouter.when("admin-dashboard", resourcesPath+ "admin-dashboard.fxml");
-        FXRouter.when("my-event", resourcesPath+ "my-event-view.fxml");
+        FXRouter.when("my-event", resourcesPath+ "event-list-view.fxml");
         FXRouter.when("event", resourcesPath+ "event-view.fxml");
         FXRouter.when("create-event", resourcesPath+ "create-new-event.fxml");
         FXRouter.when("select-team", resourcesPath+ "select-team.fxml");
-        FXRouter.when("events-view",resourcesPath+"event-list-view.fxml");
+        FXRouter.when("event-list",resourcesPath+"event-list-view.fxml");
 
     }
 

@@ -36,7 +36,7 @@
             <HBox alignment="TOP_RIGHT" layoutX="661.0" prefHeight="75.0" prefWidth="354.0" styleClass="container">
                <children>
                   <Button mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Home" textFill="#413b3b" />
-                  <Button mnemonicParsing="false" onAction="#onMyEventsButton" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
+                  <Button mnemonicParsing="false" onAction="#onEventsButton" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="Events" textFill="#413b3b" />
                </children>
             </HBox>
             <Circle fill="#ffa527" layoutX="1075.0" layoutY="38.0" radius="30.0" stroke="#ffa527" strokeType="INSIDE">
