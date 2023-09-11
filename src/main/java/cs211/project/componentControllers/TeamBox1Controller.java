@@ -4,17 +4,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
-public class TeamBoxController {
+public class TeamBox1Controller {
 
     @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
     @FXML private Label numActiveLabel, teamNameLabel;
+    @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     private Image unBookMarkIcon, bookMarkIcon;
 
 
     @FXML private void initialize() {
 
         loadIcon();
+
+        memberShipAnchorPane.setVisible(false);
+        participantsAnchorPane.setVisible(false);
     }
 
     @FXML
@@ -24,6 +30,27 @@ public class TeamBoxController {
         }else {
         bookMarkImageView.setImage(unBookMarkIcon);
         }
+    }
+    @FXML
+    private void onRoleEntered(MouseEvent event){
+        memberShipAnchorPane.setVisible(true);
+        participantsAnchorPane.setVisible(false);
+    }
+
+    @FXML
+    private void onRoleExited(MouseEvent event){
+        memberShipAnchorPane.setVisible(false);
+    }
+
+    @FXML
+    private void onParticipantsEntered(MouseEvent event){
+        participantsAnchorPane.setVisible(true);
+        memberShipAnchorPane.setVisible(false);
+    }
+
+    @FXML
+    private void onParticipantsExited(MouseEvent event){
+        participantsAnchorPane.setVisible(false);
     }
 
     private void loadIcon() {
