@@ -12,31 +12,37 @@ public class EventList {
     public EventList() {
         events = new ArrayList<>();
     }
-    public void addEvent(String eventName, String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd,
+    public void addEvent(String eventName, String eventHost, String eventImagePath,String eventTag, String eventDateStart, String eventDateEnd,
                          String eventDescription, String eventLocation) {
         eventName = eventName.trim();
         eventHost = eventHost.trim();
         if (!eventName.equals("") && !eventHost.equals("")){
-            events.add(new Event(eventName,eventHost,eventImagePath,eventDateStart,eventDateEnd,eventDescription,eventLocation));
+            events.add(new Event(eventName,eventHost,eventImagePath,eventTag,
+                                eventDateStart,eventDateEnd,eventDescription,eventLocation));
         }
     }
-    public void addEvent(String eventName, String eventHost, String eventImagePath, String eventDateStart, String eventDateEnd,
+    public void addEvent(String eventName, String eventHost, String eventImagePath,
+                         String eventTag, String eventDateStart, String eventDateEnd,
                          String eventDescription, String eventLocation, int slotMember) {
         eventName = eventName.trim();
         eventHost = eventHost.trim();
         if (!eventName.equals("")&& !eventHost.equals("")) {
-            events.add(new Event(   eventName,eventHost, eventImagePath, eventDateStart, eventDateEnd,
+            events.add(new Event(   eventName,eventHost, eventImagePath,eventTag, eventDateStart, eventDateEnd,
                                     eventDescription,eventLocation,slotMember));
         }
     }
-    public void addEvent(String eventId, String eventHost, String eventName, String imagePath, String eventStart, String eventEnd,
-                         String eventDescription, String eventLocation, int member, int slotMember, ActivityList activities,
+    public void addEvent(String eventId, String eventHost, String eventName, String imagePath,
+                         String eventTag, String eventStart, String eventEnd,
+                         String eventDescription, String eventLocation,
+                         int member, int slotMember,
+                         ActivityList activities,
                          TeamList teams) {
         eventId = eventId.trim();
         eventName = eventName.trim();
         eventHost = eventHost.trim();
-        if (!events.contains(eventId) &&!eventName.equals("") && !eventHost.equals("")){
-            events.add(new Event(   eventId,eventHost,eventName,imagePath,eventStart,eventEnd,eventDescription,
+        Event exist = findEvent(eventId);
+        if (exist == null &&!eventName.equals("") && !eventHost.equals("")){
+            events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
                                     eventLocation,member,slotMember,activities,teams));
         }
     }

@@ -2,20 +2,20 @@ package cs211.project.models.collections;
 
 import cs211.project.models.Event;
 import cs211.project.models.Team;
-import cs211.project.models.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 public class TeamList {
-    private HashMap<String, Team> teams;
+    private ArrayList<Team> teams;
 
     public TeamList() {
-        teams = new HashMap<>();
+        teams = new ArrayList<>();
     }
 
     public Team findTeamByName(String teamName) {
-        for (Team team: teams.values()) {
+        for (Team team: teams) {
             if (team.isName(teamName)) {
                 return team;
             }
@@ -28,7 +28,7 @@ public class TeamList {
         Team exist = findTeamByName(teamName);
         if (exist == null) {
             Team team = new Team(teamName, maxSlotTeamMember);
-            teams.put(team.getTeamID(), team);
+            teams.add(team);
         }
     }
     public void addTeam(String teamName, int maxSlotTeamMember, String teamDescription){
@@ -37,7 +37,7 @@ public class TeamList {
         Team exist = findTeamByName(teamName);
         if(exist == null){
             Team team = new Team (teamName, maxSlotTeamMember, teamDescription);
-            teams.put(team.getTeamID(), team);
+            teams.add(team);
         }
     }
 
@@ -48,7 +48,7 @@ public class TeamList {
         Team exist = findTeamByName(teamName);
         if(exist == null){
             Team team = new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath);
-            teams.put(team.getTeamID(), team);
+            teams.add(team);
         }
     }
 
@@ -59,7 +59,7 @@ public class TeamList {
         Team exist = findTeamByName(teamName);
         if(exist == null){
             Team team = new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath, memberList);
-            teams.put(team.getTeamID(), team);
+            teams.add(team);
         }
     }
 
@@ -70,7 +70,7 @@ public class TeamList {
         Team exist = findTeamByName(teamID);
         if(exist == null){
             Team team = new Team (teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember, createdAt);
-            teams.put(team.getTeamID(), team);
+            teams.add(team);
         }
     }
 
@@ -82,7 +82,15 @@ public class TeamList {
         return teams;
     }
 
-    public HashMap<String, Team> getTeams() {
+    public void sortTeamByNewCreatedAt() { // from new to old
+        teams.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
+    }
+
+    public void sortTeamByOldCreatedAt() { // from old to new
+        teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
+    }
+
+    public ArrayList<Team> getTeams() {
         return teams;
     }
 }

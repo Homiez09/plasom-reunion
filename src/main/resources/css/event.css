@@ -45,10 +45,9 @@
 
 
 }
-.list-view-set{
+.list-view-event{
     -fx-background-color: #FFF5E5;
     -fx-background-radius: 15 ;
     -fx-border-radius: 15;
     -fx-border-color: #FFF5E5;
-
 }
