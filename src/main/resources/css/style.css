@@ -23,8 +23,12 @@
 .weight-semi-bold{-fx-font-weight: 600}
 .weight-bold{-fx-font-weight: 700;}
 
-
-
+.color-gray{
+    -fx-text-fill: #585858;
+}
+.color-black{
+    -fx-text-fill: #413B3B;
+}
 
 /* for login page */
 /* for background */
@@ -421,4 +425,35 @@ Text, Label {
 
 .setting-select-team-dropdown .list-cell:hover {
     -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+.switch-view{
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 5, 0.2, 0, 0);
+    -fx-arc-height: 15;
+    -fx-arc-width: 15;
+}
+
+/* check box for switch view*/
+.check-box {
+    -fx-text-fill:  #413B3B;
+}
+.check-box .box {
+    -fx-background-color: #DCDCDD;
+    -fx-background-radius: 4;
+}
+.check-box:selected .mark {
+    -fx-background-color: #F5F3ED;
+}
+.check-box:selected .box {
+    -fx-background-color: #FF922E;
+    -fx-text-fill: #413B3B;
+}
+
+.membership-message-box{
+    -fx-arc-height: 2;
+    -fx-arc-width: 2;
+    -fx-font-size: 10;
+    -fx-text-fill: #585858;
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 4, 0.5, 0, 1);
+
 }
