@@ -155,16 +155,8 @@
             </Label>
             <Line fx:id="selectViewLine" endX="57.0" fill="#403a3a" layoutX="130.0" layoutY="106.0" startX="-74.63" stroke="#ff9900" strokeWidth="3.0" />
             <Line endX="611.6666870117188" endY="0.5" fill="#403a3a" layoutX="129.0" layoutY="107.0" startX="-74.8" startY="0.5" stroke="#403a3a" />
-            <ImageView fx:id="teamBox1ImageView" fitHeight="200.0" fitWidth="200.0" layoutX="133.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../../../../Users/mingg/Downloads/Group%2069.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="teamBox2ImageView" fitHeight="200.0" fitWidth="200.0" layoutX="461.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../../../../Users/mingg/Downloads/Group%2069.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="teamBox1ImageView" fitHeight="200.0" fitWidth="200.0" layoutX="133.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="teamBox2ImageView" fitHeight="200.0" fitWidth="200.0" layoutX="461.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" />
             <CheckBox fx:id="teamBox1CheckBox" layoutX="190.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#onTeamBox1CheckBoxClick" text="View 1">
                <styleClass>
                   <String fx:value="font" />
