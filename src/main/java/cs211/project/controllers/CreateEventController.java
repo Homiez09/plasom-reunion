@@ -32,7 +32,7 @@ public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
     @FXML private Label headCreateEventLabel;
     @FXML private ChoiceBox<String> eventTagChoiceBox;
-    @FXML private ImageView eventImageView,uploadImageView;
+    @FXML private ImageView uploadImageView;
     @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField,
             teamNameTextField,teamMemberCapTextField,activityNameTextField;
     @FXML private TextArea eventDescriptionTextArea,activityDescriptionTextArea;
@@ -91,8 +91,9 @@ public class CreateEventController {
                 uploadImageView.setImage(new Image(target.toUri().toString()));
                 this.newEventImagePath = destDir.toString().replace("\\", "/") + "/" + filename;
 
+
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException();
             }
         }
     }
@@ -132,20 +133,33 @@ public class CreateEventController {
         if (thisEvent == null) {
             String eventNameString = eventNameTextField.getText().trim();
             String eventHost = user.getUsername();
+            String eventTag = eventTagChoiceBox.getValue();
             String startDate = formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner);
             String endDate = formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner);
             String eventDescriptionString = eventDescriptionTextArea.getText();
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
-            int numMember = Integer.parseInt(numMemberString);
+            if (newEventImagePath == null) {
+                this.newEventImagePath = "images/events/event-default.png";
+            }
+            if (!numMemberString.equals("")){
+                int numMember = Integer.parseInt(numMemberString);
+                thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,
+                        eventTag,startDate,endDate,
+                        eventDescriptionString,eventLocationString,numMember);
+            }else {
+                thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,
+                        eventTag,startDate,endDate,
+                        eventDescriptionString,eventLocationString);
+            }
             //add event
-            thisEvent = new Event(eventNameString,eventHost,newEventImagePath,startDate,endDate,
-                    eventDescriptionString,eventLocationString,numMember);
+
+
             eventList.getEvents().add(thisEvent);
             eventListDatasource.writeData(eventList);
         }
         try {
-            FXRouter.goTo("my-event");
+            FXRouter.goTo("event-list");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

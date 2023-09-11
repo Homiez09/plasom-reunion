@@ -1,10 +1,9 @@
 package cs211.project.componentControllers;
 
-import cs211.project.controllers.MyEventController;
+import cs211.project.controllers.EventListController;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import cs211.project.services.UserListDataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,7 +19,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class EventComponentController extends MyEventController {
+public class EventComponentController extends EventListController {
     @FXML
     Label eventnameLabel,startdateLabel,enddateLabel,memberLabel;
     @FXML
@@ -41,6 +40,10 @@ public class EventComponentController extends MyEventController {
 
     @FXML
     public void initialize() {
+        this.userMap = new HashMap<>();
+        this.mapDatasource = new UserEventMap("data", "user-event.csv");
+        this.userMap = mapDatasource.readData();
+
     }
 
 
@@ -62,22 +65,29 @@ public class EventComponentController extends MyEventController {
     }
     public void onButtonAction(ActionEvent actionEvent){
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        userMap = new HashMap<>();
-        mapDatasource = new UserEventMap("data", "user-event.csv");
-        userMap = mapDatasource.readData();
 
         if (userMap.containsKey(currentUser.getUsername())) {
             eventSet = userMap.get(currentUser.getUsername());
         }else {
             eventSet = new HashSet<>();
         }
-        eventSet.add(event.getEventID());
-        userMap.put(currentUser.getUsername(), eventSet);
-        for (Map.Entry<String, Set<String>> entry : userMap.entrySet()) {
-            System.out.println(entry.getKey()+":"+entry.getValue());
+        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+        if (eventSet.contains(event.getEventID())||currentUser.getUsername().equals(event.getEventHost())){
+            try {
+                FXRouter.goTo("event",currentUser,event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            eventSet.add(event.getEventID());
+            userMap.put(currentUser.getUsername(), eventSet);
+            mapDatasource.writeData(userMap);
+            try {
+                FXRouter.goTo("event-list",currentUser);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        mapDatasource.writeData(userMap);
-
 
 
 
@@ -87,22 +97,23 @@ public class EventComponentController extends MyEventController {
     public void setEventData(Event event) {
         this.event = event;
         Image image;
-        if (event.isEnd()) {
-            buttonVisible(false);
+        userMap = new HashMap<>();
+        mapDatasource = new UserEventMap("data", "user-event.csv");
+        userMap = mapDatasource.readData();
+
+        if (userMap.containsKey(currentUser.getUsername())) {
+            eventSet = userMap.get(currentUser.getUsername());
         }else {
-            buttonVisible(true);
+            eventSet = new HashSet<>();
         }
-        if (currentUser.getEvents().contains(event)){
+        buttonVisible(!event.isEnd());
+
+        if (eventSet.contains(event.getEventID())|| currentUser.getUsername().equals(event.getEventHost())){
             viewjoinButton.setText("View");
         }else {
             viewjoinButton.setText("Join");
         }
-        image = new Image(getClass().getResource("/images/events/event-default.png").toExternalForm());
-        try {
-            image = new Image("file:"+event.getEventImagePath(),true);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        image = new Image("file:"+event.getEventImagePath(),true);
 
 
         eventImageView.setImage(image);

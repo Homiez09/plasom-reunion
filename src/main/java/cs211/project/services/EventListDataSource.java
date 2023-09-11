@@ -9,7 +9,6 @@ import java.nio.charset.StandardCharsets;
 public class EventListDataSource implements Datasource<EventList> {
     private String directoryName;
     private String fileName;
-    private Datasource<EventList> eventListDatasource;
     private Datasource<ActivityList> activityListDatasource;
     private Datasource<TeamList> teamListDatasource;
     private EventList eventList;
@@ -20,7 +19,6 @@ public class EventListDataSource implements Datasource<EventList> {
         this.fileName = fileName;
         checkFileIsExisted();
     }
-
     // ตรวจสอบว่ามีไฟล์ให้อ่านหรือไม่ ถ้าไม่มีให้สร้างไฟล์เปล่า
     private void checkFileIsExisted() {
         File file = new File(directoryName);
@@ -84,17 +82,18 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventHost = data[1].trim();
                 String eventName = data[2].trim();
                 String imagePath = data[3].trim();
-                String eventStart = data[4].trim();
-                String eventEnd = data[5].trim();
-                String eventDescription = data[6].trim();
-                String eventLocation = data[7].trim();
-                int member = Integer.parseInt(data[8].toString());
-                int slotmember = Integer.parseInt(data[9].trim());
+                String eventTag = data[4].trim();
+                String eventStart = data[5].trim();
+                String eventEnd = data[6].trim();
+                String eventDescription = data[7].trim();
+                String eventLocation = data[8].trim();
+                int member = Integer.parseInt(data[9].trim());
+                int slotmember = Integer.parseInt(data[10].trim());
 
                 ActivityList activities = activityList;
                 TeamList teams = teamList;
 
-                eventList.addEvent(     eventId,eventHost, eventName, imagePath, eventStart, eventEnd,
+                eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
                                         eventDescription, eventLocation, member, slotmember, activities, teams);
 
 
@@ -128,7 +127,6 @@ public class EventListDataSource implements Datasource<EventList> {
 
         try {
             // สร้าง csv
-
             for (Event event : data.getEvents()) {
                 String line = event.toString();
 
