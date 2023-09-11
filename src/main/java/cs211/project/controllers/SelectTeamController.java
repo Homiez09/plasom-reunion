@@ -41,15 +41,8 @@ public class SelectTeamController {
         int row = 0, column = 0;
 
         // sort teamList
-        List<Team> teamListSorted = new ArrayList<>();
-        for (HashMap.Entry<String, Team> item : teamList.getTeams().entrySet()) {
-            Team team = item.getValue();
-            teamListSorted.add(team);
-        }
-
-        teamListSorted.sort((o1, o2) -> o2.getCreatedAt().compareTo(o1.getCreatedAt()));
-
-        for (Team team : teamListSorted) {
+        teamList.sortTeamByNewCreatedAt();
+        for (Team team : teamList.getTeams()) {
             try {
                 FXMLLoader teamBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team.fxml"));
                 AnchorPane teamBoxComponent = teamBoxLoader.load();
