@@ -3,9 +3,8 @@ package cs211.project.models.collections;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class TeamList {
     private ArrayList<Team> teams;
@@ -23,63 +22,68 @@ public class TeamList {
         return null;
     }
 
-    public void addTeam(String teamName, int maxSlotTeamMember) {
+    public void addTeam(String eventID, String teamName, int maxSlotTeamMember) {
         teamName = teamName.trim();
         Team exist = findTeamByName(teamName);
         if (exist == null) {
-            Team team = new Team(teamName, maxSlotTeamMember);
+            Team team = new Team(eventID, teamName, maxSlotTeamMember);
             teams.add(team);
         }
     }
-    public void addTeam(String teamName, int maxSlotTeamMember, String teamDescription){
+    public void addTeam(String eventID, String teamName, int maxSlotTeamMember, String teamDescription){
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         Team exist = findTeamByName(teamName);
         if(exist == null){
-            Team team = new Team (teamName, maxSlotTeamMember, teamDescription);
+            Team team = new Team (eventID, teamName, maxSlotTeamMember, teamDescription);
             teams.add(team);
         }
     }
 
-    public void addTeam(String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath){
-        teamName = teamName.trim();
-        teamDescription = teamDescription.trim();
-        teamImagePath = teamImagePath.trim();
-        Team exist = findTeamByName(teamName);
-        if(exist == null){
-            Team team = new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath);
-            teams.add(team);
-        }
-    }
-
-    public void addTeam(String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath, UserList memberList){
+    public void addTeam(String eventID, String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath){
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         teamImagePath = teamImagePath.trim();
         Team exist = findTeamByName(teamName);
         if(exist == null){
-            Team team = new Team (teamName, maxSlotTeamMember, teamDescription, teamImagePath, memberList);
+            Team team = new Team (eventID, teamName, maxSlotTeamMember, teamDescription, teamImagePath);
             teams.add(team);
         }
     }
 
-    public void addTeam(String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember, String createdAt){
+    public void addTeam(String eventID, String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath, UserList memberList){
+        teamName = teamName.trim();
+        teamDescription = teamDescription.trim();
+        teamImagePath = teamImagePath.trim();
+        Team exist = findTeamByName(teamName);
+        if(exist == null){
+            Team team = new Team (eventID, teamName, maxSlotTeamMember, teamDescription, teamImagePath, memberList);
+            teams.add(team);
+        }
+    }
+
+    public void addTeam(String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember, String createdAt, String eventID){
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         teamImagePath = teamImagePath.trim();
         Team exist = findTeamByName(teamID);
         if(exist == null){
-            Team team = new Team (teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember, createdAt);
+            Team team = new Team (teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember, createdAt, eventID);
             teams.add(team);
         }
     }
 
     // find teamlist by event id and user correct
     public ArrayList<Team> getTeamOfEvent(Event event) {
-        ArrayList<Team> teams = new ArrayList<>();
-        // todo: find teamlist by event id and user correct
+        String eventID = event.getEventID();
+        ArrayList<Team> teamOfEvent = new ArrayList<>();
+        for (Team team: teams) {
+            if (team.getEventID().equals(eventID)) {
+                teamOfEvent.add(team);
+            }
+        }
 
-        return teams;
+        return teamOfEvent;
     }
 
     public void sortTeamByNewCreatedAt() { // from new to old

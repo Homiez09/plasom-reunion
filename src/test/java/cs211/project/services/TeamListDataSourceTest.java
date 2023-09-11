@@ -15,7 +15,7 @@ class TeamListDataSourceTest {
         TeamList teamList = datasource.readData();
 
         for (int i = 0; i < 10; i++) {
-            teamList.addTeam("Team " + i, 5);
+            teamList.addTeam("event-KHO24442", "Team " + i, 5);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

@@ -39,6 +39,7 @@ public class SelectTeamController {
 
 
     private User user = (User) FXRouter.getData();
+    private Event event = (Event) FXRouter.getData2();
     private TeamList teamList;
 
     @FXML
@@ -56,7 +57,6 @@ public class SelectTeamController {
     }
 
     private void teamBoxView(String teamBox){
-        // sort teamList
         int row = 0, column = 0;
 
         teamList.sortTeamByNewCreatedAt();

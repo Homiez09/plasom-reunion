@@ -67,8 +67,9 @@ public class TeamListDataSource implements Datasource<TeamList> {
                 String teamImagePath = data[3];
                 int maxSlotTeamMember = Integer.parseInt(data[4]);
                 String createdAt = data[5];
+                String eventID = data[6];
 
-                teamList.addTeam(teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember, createdAt);
+                teamList.addTeam(teamID, teamName, teamDescription, teamImagePath, maxSlotTeamMember, createdAt, eventID);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -104,7 +105,8 @@ public class TeamListDataSource implements Datasource<TeamList> {
                         + team.getTeamDescription() + ","
                         + team.getTeamImagePath() + ","
                         + team.getMaxSlotTeamMember() + ","
-                        + team.getCreatedAt();
+                        + team.getCreatedAt() + ","
+                        + team.getEventID();
 
 
                 buffer.append(line);
