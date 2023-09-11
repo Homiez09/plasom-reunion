@@ -392,6 +392,7 @@ Text, Label {
 
 .setting-select-team-dropdown {
     -fx-background-color: transparent;
+    -fx-pref-width: 179;
 }
 
 .setting-select-team-dropdown .arrow {
@@ -400,9 +401,9 @@ Text, Label {
 
 
 .setting-select-team-dropdown .list-view {
-    -fx-padding: 10 5 10 5;
+    -fx-padding: 14 4 14 5;
     -fx-spacing: 5;
-    -fx-background-color: #413B3B;
+    -fx-background-color: #F6F4EE;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
@@ -414,10 +415,10 @@ Text, Label {
     -fx-background-radius: 5;
     -fx-font-size: 18;
     -fx-border-radius: 5;
-    -fx-text-fill: #F6F4EE;
+    -fx-text-fill: #413B3B;
     -fx-alignment: center;
 }
 
 .setting-select-team-dropdown .list-cell:hover {
-    -fx-background-color: rgba(217, 217, 217, 0.21);
+    -fx-background-color: rgba(255, 153, 0, 0.37);
 }
