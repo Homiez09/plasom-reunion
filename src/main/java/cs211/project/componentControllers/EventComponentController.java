@@ -41,7 +41,7 @@ public class EventComponentController extends EventListController {
     @FXML
     public void initialize() {
         this.userMap = new HashMap<>();
-        this.mapDatasource = new UserEventMap("data", "user-event.csv");
+        this.mapDatasource = new UserEventMap("data", "join-event.csv");
         this.userMap = mapDatasource.readData();
 
     }
@@ -96,9 +96,10 @@ public class EventComponentController extends EventListController {
 
     public void setEventData(Event event) {
         this.event = event;
-        Image image;
+        String imgpath = "/images/events/event-default.png";
+        Image image = new Image(getClass().getResourceAsStream(imgpath),200,200,true,true);
         userMap = new HashMap<>();
-        mapDatasource = new UserEventMap("data", "user-event.csv");
+        mapDatasource = new UserEventMap("data", "join-event.csv");
         userMap = mapDatasource.readData();
 
         if (userMap.containsKey(currentUser.getUsername())) {
@@ -113,14 +114,12 @@ public class EventComponentController extends EventListController {
         }else {
             viewjoinButton.setText("Join");
         }
-        image = new Image("file:"+event.getEventImagePath(),true);
-
-
+        if(!event.getEventImagePath().isEmpty()){
+            image = new Image("file:"+event.getEventImagePath(),300,300,true,true);
+        }
         eventImageView.setImage(image);
         eventnameLabel.setText(event.getEventName());
-
         // Date
-
         startdateLabel.setText(event.getEventDateStart());
         enddateLabel.setText(event.getEventDateEnd());
 

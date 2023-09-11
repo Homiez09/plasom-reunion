@@ -139,9 +139,7 @@ public class CreateEventController {
             String eventDescriptionString = eventDescriptionTextArea.getText();
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
-            if (newEventImagePath == null) {
-                this.newEventImagePath = "images/events/event-default.png";
-            }
+
             if (!numMemberString.equals("")){
                 int numMember = Integer.parseInt(numMemberString);
                 thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,

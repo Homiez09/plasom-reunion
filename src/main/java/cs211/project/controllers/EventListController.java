@@ -55,7 +55,7 @@ public class EventListController {
         myeventsListView.getItems().clear();
         historyeventListView.getItems().clear();
 
-        this.mapDatasource = new UserEventMap("data", "user-event.csv");
+        this.mapDatasource = new UserEventMap("data", "join-event.csv");
         this.userMap = mapDatasource.readData();
 
         if (userMap.containsKey(currentUser.getUsername())) {
