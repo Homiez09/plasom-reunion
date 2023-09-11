@@ -35,7 +35,8 @@ public class EventList {
         eventId = eventId.trim();
         eventName = eventName.trim();
         eventHost = eventHost.trim();
-        if (!events.contains(eventId) &&!eventName.equals("") && !eventHost.equals("")){
+        Event exist = findEvent(eventId);
+        if (exist == null &&!eventName.equals("") && !eventHost.equals("")){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventStart,eventEnd,eventDescription,
                                     eventLocation,member,slotMember,activities,teams));
         }
