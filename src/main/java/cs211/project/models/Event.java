@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Event {
     private String eventID, eventHost, eventName, eventImagePath;
-    private String eventDateStart, eventDateEnd;
+    private String eventTag,eventDateStart, eventDateEnd;
     private String eventDescription, eventLocation;
     private int member = 0 ,slotMember;
     private ActivityList activities;
@@ -17,6 +17,7 @@ public class Event {
     public Event(String eventName,
                  String eventHost,
                  String eventImagePath,
+                 String eventTag,
                  String eventDateStart,
                  String eventDateEnd,
                  String eventDescription,
@@ -25,6 +26,7 @@ public class Event {
         this.eventName = eventName;
         this.eventHost = eventHost;
         this.eventImagePath = eventImagePath;
+        this.eventTag = eventTag;
         this.eventDateStart = eventDateStart;
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
@@ -36,6 +38,7 @@ public class Event {
     public Event(String eventName,
                  String eventHost,
                  String eventImagePath,
+                 String eventTag,
                  String eventDateStart,
                  String eventDateEnd,
                  String eventDescription,
@@ -45,6 +48,7 @@ public class Event {
         this.eventHost = eventHost;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
+        this.eventTag = eventTag;
         this.eventDateStart = eventDateStart;
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
@@ -57,6 +61,7 @@ public class Event {
                  String eventHost,
                  String eventName,
                  String eventImagePath,
+                 String eventTag,
                  String eventDateStart,
                  String eventDateEnd,
                  String eventDescription,
@@ -68,6 +73,7 @@ public class Event {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
+        this.eventTag = eventTag;
         this.eventDateStart = eventDateStart;
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
@@ -153,6 +159,7 @@ public class Event {
                 +   eventHost + ','
                 +   eventName + ','
                 +   eventImagePath + ','
+                +   eventTag + ','
                 +   eventDateStart + ','
                 +   eventDateEnd + ','
                 +   eventDescription + ','

@@ -59,8 +59,8 @@ public class navbarController {
         FXRouter.goTo("home", user);
     }
 
-    @FXML public void onMyEventsButton() throws IOException {
-        FXRouter.goTo("my-event", user);
+    @FXML public void onEventsButton() throws IOException {
+        FXRouter.goTo("event-list", user);
     }
 
     @FXML protected void onToggleProfileMenuClick() {
