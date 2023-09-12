@@ -13,6 +13,8 @@ public class Team implements Comparable<Team> {
     private int maxSlotTeamMember;
     private UserList memberList;
 
+    private String role;
+
     public Team (String eventID, String teamName, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
         this.teamName = teamName;
@@ -104,6 +106,8 @@ public class Team implements Comparable<Team> {
         return createdAt;
     }
 
+    public String getRole() { return role; }
+
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
@@ -120,6 +124,9 @@ public class Team implements Comparable<Team> {
         this.maxSlotTeamMember = maxSlotTeamMember;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
     public void AddMemberToTeam(/* todo: param require */) {
         // todo: add member to team
     }
