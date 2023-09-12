@@ -13,7 +13,6 @@ public class Team implements Comparable<Team> {
     private int maxSlotTeamMember;
     private boolean isBookmarked;
     private UserList memberList;
-
     private String role;
 
     public Team (String eventID, String teamName, int maxSlotTeamMember) {
@@ -24,6 +23,7 @@ public class Team implements Comparable<Team> {
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss:SSS"));
         this.eventID = eventID;
+        this.isBookmarked = false;
     }
 
     public Team (String eventID, String teamName, int maxSlotTeamMember, String teamDescription) {
@@ -108,6 +108,10 @@ public class Team implements Comparable<Team> {
     }
 
     public String getRole() { return role; }
+
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;

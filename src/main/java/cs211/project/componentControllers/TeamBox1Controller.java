@@ -18,12 +18,14 @@ import java.io.IOException;
 public class TeamBox1Controller {
 
     @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
-    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel, roleLabel;
+    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
     private User user = (User) FXRouter.getData();
     private UserList userList;
+
+    private boolean bookmarked = false, initBookMarkCheck = false;
     UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
 
     @FXML private void initialize() {
@@ -38,11 +40,12 @@ public class TeamBox1Controller {
 
     @FXML
     private void onBookMarkClick(){
-        if(bookMarkImageView.getImage() == unBookMarkIcon) {
+        if (bookmarked) {
+            bookMarkImageView.setImage(unBookMarkIcon);
+        } else {
             bookMarkImageView.setImage(bookMarkIcon);
-        }else {
-        bookMarkImageView.setImage(unBookMarkIcon);
         }
+        bookmarked = !bookmarked;
     }
     @FXML
     private void onRoleEntered(MouseEvent event){
@@ -53,6 +56,25 @@ public class TeamBox1Controller {
     @FXML
     private void onRoleExited(MouseEvent event){
         memberShipAnchorPane.setVisible(false);
+    }
+
+    @FXML
+    private void onBookMarkEntered() {
+        initBookmark();
+        if(bookmarked) {
+            bookMarkImageView.setImage(unBookMarkIcon);
+        } else {
+            bookMarkImageView.setImage(bookMarkIcon);
+        }
+    }
+
+    @FXML
+    private void onBookMarkExited() {
+        if(bookmarked) {
+            bookMarkImageView.setImage(bookMarkIcon);
+        } else {
+            bookMarkImageView.setImage(unBookMarkIcon);
+        }
     }
 
     @FXML
@@ -72,11 +94,6 @@ public class TeamBox1Controller {
     }
 
     private void initMenu() {
-        String menuOwner[] = {"Manage Team", "Delete Team"};
-        String menuMember[] = {"Manage Team", "Leave Team"};
-
-
-        menuDropDown.getItems().addAll(menuOwner);
         menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             if (newValue == null) return;
             try {
@@ -87,11 +104,22 @@ public class TeamBox1Controller {
         });
     }
 
+    private void initBookmark() {
+        if (initBookMarkCheck) return;
+        if (bookmarkLabel.getText().equals("true")) {
+            bookmarked = true;
+        } else {
+            bookmarked = false;
+        }
+        initBookMarkCheck = true;
+    }
+
     private void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
                 //print user data
                 System.out.println(teamIdLabel.getText());
+                System.out.println(bookmarkLabel.getText());
                 break;
             case "Delete Team":
                 //todo : do something
@@ -117,5 +145,4 @@ public class TeamBox1Controller {
 
         bookMarkImageView.setImage(unBookMarkIcon);
     }
-
 }

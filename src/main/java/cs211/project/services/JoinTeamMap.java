@@ -69,10 +69,12 @@ public class JoinTeamMap implements Datasource<HashMap<String, Team>> {
                 String username = data[0]; // check
                 String teamID = data[1]; // key
                 String role = data[2]; // value
+                String isBookmarked = data[3]; // bookmarked
 
                 if (user.isUserName(username)) {
                     Team team = teamHashMapGlobal.get(teamID);
                     team.setRole(role);
+                    team.setBookmarked(Boolean.parseBoolean(isBookmarked));
                     joinTeamMap.put(teamID, teamHashMapGlobal.get(teamID));
                 }
             }

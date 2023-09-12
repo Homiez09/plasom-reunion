@@ -119,8 +119,8 @@ public class TeamList {
         teams.removeIf(team -> !team.getRole().equals(role));
     }
 
-    public void filterByFavorite() {
-        return; // todo : เพิ่มเก็บข้อมูล favorite ใน team
+    public void filterByBookmark() {
+        teams.removeIf(team -> !team.isBookmarked());
     }
 
     public ArrayList<Team> getTeams() {

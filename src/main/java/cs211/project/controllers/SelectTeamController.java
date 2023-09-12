@@ -1,6 +1,7 @@
 package cs211.project.controllers;
 
 import at.favre.lib.crypto.bcrypt.BCryptFormatter;
+import cs211.project.componentControllers.TeamBox1Controller;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -67,11 +68,11 @@ public class SelectTeamController {
         TeamList teamListSort = new TeamList(teamHashMap);
         teamListSort.sortTeamByNewCreatedAt();
 
-        if (filter.equals("All")) teamListSort.filterByAll();
+        if (filter.equals("Favorite")) teamListSort.filterByBookmark();
         else if (filter.equals("Owner")) teamListSort.filterByRole(filter);
         else if (filter.equals("Leader")) teamListSort.filterByRole(filter);
         else if (filter.equals("Member")) teamListSort.filterByRole(filter);
-        // else if (filter.equals("Favorite")) teamListSort.filterByFavorite(); todo : add favorite
+        else teamListSort.filterByAll();
 
         for (Team team : teamListSort.getTeams()) {
             if (!team.getEventID().equals(event.getEventID())) continue;
@@ -89,15 +90,36 @@ public class SelectTeamController {
                     teamBox2CheckBox.setSelected(true);
                     teamBoxComponent = teamBoxLoader2.load();
                 }
+
                 Label teamID = (Label) teamBoxComponent.getChildren().get(1);
                 Label teamName = (Label)teamBoxComponent.getChildren().get(6);
+                ImageView bookMarkImageView = (ImageView) teamBoxComponent.getChildren().get(5);
                 ImageView roleImageView = (ImageView) teamBoxComponent.getChildren().get(7);
                 AnchorPane memberShipAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(12);
+                ComboBox menuDropDown = (ComboBox) teamBoxComponent.getChildren().get(0);
                 Label roleLabel = (Label) memberShipAnchorPane.getChildren().get(2);
+                Label bookmarkLabel = (Label) teamBoxComponent.getChildren().get(14);
+
                 teamID.setText(team.getTeamID());
                 teamName.setText(team.getTeamName());
-                roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
                 roleLabel.setText(team.getRole());
+
+                if (team.getRole().equals("Owner")) {
+                    menuDropDown.getItems().addAll("Manage Team", "Delete Team");
+                } else {
+                    menuDropDown.getItems().addAll("Manage Team", "Leave Team");
+                }
+
+                if (team.isBookmarked()) {
+                    bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png")));
+                    bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
+                } else {
+                    bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/unbookmark_icon.png")));
+                    bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
+                }
+
+                roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
+
                 if (column == 4) {
                     column = 0;
                     row++;
@@ -212,7 +234,6 @@ public class SelectTeamController {
             teamBoxView(teamBox);
         }
     }
-
 
     @FXML
     private void onBackClick(){
