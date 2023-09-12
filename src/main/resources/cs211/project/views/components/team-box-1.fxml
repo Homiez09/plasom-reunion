@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,6 +13,7 @@
 
 <AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBox1Controller">
    <children>
+      <Label fx:id="teamIdLabel" layoutX="50.0" layoutY="50.0" text="Label" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="228.0" stroke="BLACK" strokeType="INSIDE" styleClass="team-box-shape" width="228.0">
          <fill>
             <LinearGradient endX="1.0" endY="0.8625592417061612" startX="1.0" startY="0.33175355450236965">
@@ -31,7 +33,7 @@
          </fill>
       </Rectangle>
       <ImageView fx:id="faceImageView" fitHeight="72.0" fitWidth="72.0" layoutX="82.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="manageTeamImageView" fitHeight="4.8" fitWidth="21.16" layoutX="191.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="manageTeamImageView" fitHeight="4.8" fitWidth="21.16" layoutX="191.0" layoutY="13.0" onMouseClicked="#onMenuDropDownComponentClick" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bookMarkImageView" fitHeight="30.0" fitWidth="25.0" layoutX="190.0" layoutY="25.0" onMouseClicked="#onBookMarkClick" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="teamNameLabel" alignment="CENTER" layoutX="9.0" layoutY="134.0" prefHeight="23.0" prefWidth="214.0" text="teamNameLabel">
          <styleClass>
@@ -130,5 +132,6 @@
             </Label>
          </children>
       </AnchorPane>
+      <ComboBox fx:id="menuDropDown" layoutX="32.0" layoutY="-9.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
    </children>
 </AnchorPane>

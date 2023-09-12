@@ -1,22 +1,36 @@
 package cs211.project.componentControllers;
 
+import cs211.project.models.Event;
+import cs211.project.models.Team;
+import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.FXRouter;
+import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+
 public class TeamBox1Controller {
 
     @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
-    @FXML private Label numActiveLabel, teamNameLabel;
+    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
+    @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
-
+    private User user = (User) FXRouter.getData();
+    private UserList userList;
+    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
 
     @FXML private void initialize() {
+        userList = datasource.readData();
 
+        initMenu();
         loadIcon();
 
         memberShipAnchorPane.setVisible(false);
@@ -53,6 +67,43 @@ public class TeamBox1Controller {
         participantsAnchorPane.setVisible(false);
     }
 
+    @FXML
+    protected void onMenuDropDownComponentClick() {
+        menuDropDown.show();
+    }
+
+    private void initMenu() {
+        String menuOwner[] = {"Manage Team", "Delete Team"};
+        String menuMember[] = {"Manage Team", "Leave Team"};
+
+
+        menuDropDown.getItems().addAll(menuOwner);
+        menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            if (newValue == null) return;
+            try {
+                goTo((String) newValue);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private void goTo(String page) throws IOException {
+        switch(page) {
+            case "Manage Team":
+                //print user data
+                System.out.println(teamIdLabel.getText());
+                break;
+            case "Delete Team":
+                //todo : do something
+                break;
+            case "Leave Team":
+                //todo : do something
+                break;
+        }
+        menuDropDown.getSelectionModel().clearSelection();
+    }
+
     private void loadIcon() {
         unBookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/unbookmark_icon.png"));
         bookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png"));
@@ -68,8 +119,6 @@ public class TeamBox1Controller {
         manageTeamImageView.setImage(manageIcon);
 
         bookMarkImageView.setImage(unBookMarkIcon);
-
-
     }
 
 }
