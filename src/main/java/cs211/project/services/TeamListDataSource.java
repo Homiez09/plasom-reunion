@@ -100,14 +100,7 @@ public class TeamListDataSource implements Datasource<TeamList> {
 
         try {
             for (Team team : data.getTeams()) {
-                String line =  team.getTeamID() + ","
-                        + team.getTeamName() + ","
-                        + team.getTeamDescription() + ","
-                        + team.getTeamImagePath() + ","
-                        + team.getMaxSlotTeamMember() + ","
-                        + team.getCreatedAt() + ","
-                        + team.getEventID();
-
+                String line =  team.toString();
 
                 buffer.append(line);
                 buffer.append("\n");
