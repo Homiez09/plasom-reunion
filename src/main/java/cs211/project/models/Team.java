@@ -170,4 +170,15 @@ public class Team implements Comparable<Team> {
         int t = Integer.parseInt(team.getCreatedAt().replace("|", "").replace(":", "").replace("-", ""));
         return (int)t - s;
     }
+
+    @Override
+    public String toString() {
+        return teamID + ","
+                + teamName + ","
+                + teamDescription + ","
+                + teamImagePath + ","
+                + maxSlotTeamMember + ","
+                + createdAt + ","
+                + eventID;
+    }
 }
