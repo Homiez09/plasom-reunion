@@ -5,22 +5,17 @@ import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.*;
 
-public class JoinTeamMap implements Datasource<HashMap<String, Team>> {
+public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
     private String directoryName = "data";
     private String fileName = "join-team.csv";
     User user;
     HashMap<String, Team> teamHashMapGlobal;
 
-    public JoinTeamMap(User user, HashMap<String, Team> teamHashMap) {
-        this.user = user;
-        this.teamHashMapGlobal = teamHashMap;
+    public JoinTeamMap() {
         checkFileIsExisted();
     }
     private void checkFileIsExisted() {
@@ -41,17 +36,21 @@ public class JoinTeamMap implements Datasource<HashMap<String, Team>> {
     }
 
     @Override
-    public HashMap<String, Team> readData() {
-        HashMap<String, Team>  joinTeamMap = new HashMap<>();
+    public HashMap<String, TeamList> readData() {
+        HashMap<String, TeamList> hashMap = new HashMap<>();
+
+        TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+        HashMap<String, Team> teamHashMap = teamListDataSource.readData().teamHashMap();
 
         String filePath = directoryName + File.separator + fileName;
+
         File file = new File(filePath);
 
         FileInputStream fileInputStream = null;
 
         try {
             fileInputStream = new FileInputStream(file);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -59,34 +58,78 @@ public class JoinTeamMap implements Datasource<HashMap<String, Team>> {
                 fileInputStream,
                 StandardCharsets.UTF_8
         );
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+        BufferedReader buffer = new BufferedReader(inputStreamReader);
 
         String line = "";
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.equals("")) continue;
-                String[] data = line.split(",");
-                String username = data[0]; // check
-                String teamID = data[1]; // key
-                String role = data[2]; // value
-                String isBookmarked = data[3]; // bookmarked
 
-                if (user.isUserName(username)) {
-                    Team team = teamHashMapGlobal.get(teamID);
+        try {
+            while ((line = buffer.readLine()) != null) {
+                String[] data = line.split(",");
+                String username = data[0];
+                String teamID = data[1];
+                String role = data[2];
+                boolean isBookmarked = Boolean.parseBoolean(data[3]);
+
+                if (hashMap.containsKey(username)) {
+                    TeamList teamList = hashMap.get(username);
+                    Team team = teamHashMap.get(teamID);
                     team.setRole(role);
-                    team.setBookmarked(Boolean.parseBoolean(isBookmarked));
-                    joinTeamMap.put(teamID, teamHashMapGlobal.get(teamID));
+                    team.setBookmarked(isBookmarked);
+                    teamList.addTeam(team);
+                    hashMap.put(username, teamList);
+                } else {
+                    TeamList teamList = new TeamList();
+                    Team team = teamHashMap.get(teamID);
+                    team.setRole(role);
+                    team.setBookmarked(isBookmarked);
+                    teamList.addTeam(team);
+                    hashMap.put(username, teamList);
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return joinTeamMap;
+        return hashMap;
     }
 
     @Override
-    public void writeData(HashMap<String, Team> data) {
+    public void writeData(HashMap<String, TeamList> data) {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
 
+        FileOutputStream fileOutputStream = null;
+
+        try {
+            fileOutputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
+                fileOutputStream,
+                StandardCharsets.UTF_8
+        );
+
+        BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
+        try {
+            for (String username : data.keySet()) {
+                ArrayList<Team> teamArrayList = data.get(username).getTeams();
+                for (Team team : teamArrayList) {
+                    buffer.write(username + "," + team.getTeamID() + "," + team.getRole() + "," + team.isBookmarked());
+                    buffer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.flush();
+                buffer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
