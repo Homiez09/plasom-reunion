@@ -63,7 +63,6 @@ public class CreateEventController {
         eventTagChoiceBox.getItems().addAll("Art","Music","Sport");
         setPageHeader();
     }
-
     @FXML protected void handleUploadButton(ActionEvent event) {
         FileChooser chooser = new FileChooser();
         // SET FILECHOOSER INITIAL DIRECTORY
@@ -110,7 +109,6 @@ public class CreateEventController {
             headCreateEventLabel.setText("Edit event");
         }
     }
-
     @FXML protected void onBackButtonClick() {
         if (thisEvent == null) {
             try {
@@ -126,7 +124,6 @@ public class CreateEventController {
             }
         }
     }
-
     @FXML protected void onSubmitBasicInformationClick() {
         eventListDatasource = new EventListDataSource("data","event-list.csv");
         eventList = eventListDatasource.readData();
@@ -139,9 +136,7 @@ public class CreateEventController {
             String eventDescriptionString = eventDescriptionTextArea.getText();
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
-            if (newEventImagePath == null) {
-                this.newEventImagePath = "images/events/event-default.png";
-            }
+
             if (!numMemberString.equals("")){
                 int numMember = Integer.parseInt(numMemberString);
                 thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,
@@ -153,7 +148,6 @@ public class CreateEventController {
                         eventDescriptionString,eventLocationString);
             }
             //add event
-
 
             eventList.getEvents().add(thisEvent);
             eventListDatasource.writeData(eventList);

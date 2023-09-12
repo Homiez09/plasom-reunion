@@ -21,15 +21,14 @@ public class EventTileController {
     }
 
     public void showEventTile(Event event) {
+        String imgpath = "/images/events/event-default.png";
+        image = new Image(getClass().getResourceAsStream(imgpath),300,300,false,false);
         if (event!=null) {
             eventNameLabel.setText(event.getEventName());
             eventDateLabel.setText(event.getEventDateStart());
             eventPlaceLabel.setText(event.getEventLocation());
-            image = new Image(getClass().getResource("/images/events/event-default.png").toString());
-            try {
-                image = new Image("file:"+event.getEventImagePath(),true);
-            }catch (Exception e){
-                e.printStackTrace();
+            if(!event.getEventImagePath().isEmpty()){
+                image = new Image("file:"+event.getEventImagePath(),300,300,true,true);
             }
             eventTileImageView.setImage(image);
         }

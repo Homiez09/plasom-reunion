@@ -50,12 +50,13 @@ public class EventListController {
     }
 
     public void showList(EventList eventList) {
+
         eventsListView.getItems().clear();
         hosteventListView.getItems().clear();
         myeventsListView.getItems().clear();
         historyeventListView.getItems().clear();
 
-        this.mapDatasource = new UserEventMap("data", "user-event.csv");
+        this.mapDatasource = new UserEventMap("data", "join-event.csv");
         this.userMap = mapDatasource.readData();
 
         if (userMap.containsKey(currentUser.getUsername())) {
@@ -101,30 +102,6 @@ public class EventListController {
             throw new RuntimeException(e);
         }
     }
-//    public void onDeleteAction(ActionEvent actionEvent) {
-//        AnchorPane selectedPane = (AnchorPane) myeventListView.getSelectionModel().getSelectedItem();
-//
-//        if (selectedPane != null) {
-//            // ดึงข้อมูล Event ออกจาก AnchorPane โดยอ้างอิงถึงข้อมูลของ Event ใน AnchorPane
-//            Event selectedEvent = (Event) selectedPane.getUserData();
-//            // ตรวจสอบว่า selectedEvent ไม่เป็น null ก่อนที่จะลบ Event ออกจาก eventList
-//            if (selectedEvent != null) {
-//                // ลบ Event ตามที่คุณต้องการ
-//                eventList.getEvents().remove(selectedEvent);
-//                // บันทึกข้อมูล Event ใหม่ลงในไฟล์
-//                eventDatasource.writeData(eventList);
-//                // ตรวจสอบว่าข้อมูลถูกบันทึกลงในไฟล์เรียบร้อยแล้ว
-//                eventList = eventDatasource.readData(); // อ่านข้อมูล Event จากไฟล์ใหม่
-//                if (!eventList.getEvents().contains(selectedEvent)) {
-//                    System.out.println("Event deleted successfully");
-//                } else {
-//                    System.out.println("Failed to delete event");
-//                }
-//                selectEvent = null; // รีเซ็ตตัวแปร selectEvent เป็น null
-//            }
-//        }
-//        showList(eventList);
-//    }
     public void onShowAllButton(ActionEvent actionEvent) {
         showallButton.setVisible(false);
         hosteventButton.setVisible(true);
@@ -169,8 +146,5 @@ public class EventListController {
         myeventsListView.setVisible(false);
         historyeventListView.setVisible(true);
     }
-
-
-
 
 }
