@@ -40,7 +40,7 @@ public class SelectTeamController {
     private User user = (User) FXRouter.getData();
     private Event event = (Event) FXRouter.getData2();
     private TeamList teamList;
-    private HashMap<String, Team> teamHashMap;
+    HashMap<String, TeamList> teamHashMap;
 
     @FXML
     private void initialize() {
@@ -49,9 +49,9 @@ public class SelectTeamController {
         TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         teamList = datasource.readData();
         teamList.getTeamOfEvent(event);
-        HashMap<String, Team> teamHashMapAll = teamList.teamHashMap();
-        JoinTeamMap datasourceJoinTeamMap = new JoinTeamMap(user, teamHashMapAll);
-        teamHashMap = datasourceJoinTeamMap.readData();
+
+        JoinTeamMap joinTeamMap = new JoinTeamMap();
+        teamHashMap = joinTeamMap.readData();
 
         teamBox = "teamBox1";
         teamBoxView(teamBox);
@@ -65,7 +65,7 @@ public class SelectTeamController {
         System.out.println(filter);
         int row = 0, column = 0;
 
-        TeamList teamListSort = new TeamList(teamHashMap);
+        TeamList teamListSort = teamHashMap.get(user.getUsername());
         teamListSort.sortTeamByNewCreatedAt();
 
         if (filter.equals("Favorite")) teamListSort.filterByBookmark();
@@ -148,6 +148,33 @@ public class SelectTeamController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    private void onCreateTeamButtonClick() {
+        // todo : create team
+        // test create team
+        TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
+        JoinTeamMap joinTeamMap = new JoinTeamMap();
+        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
+        // check key exist
+        if (teamHashMap.containsKey(user.getUsername())) {
+            TeamList teamList = teamHashMap.get(user.getUsername());
+            Team team = new Team(event.getEventID(), "Team-" + user.getLastedLogin(), 5);
+            team.setRole("Owner");
+            teamList.addTeam(team);
+            datasource.writeData(teamList);
+            joinTeamMap.writeData(teamHashMap);
+        } else {
+            teamHashMap.put(user.getUsername(), new TeamList());
+            TeamList teamList = teamHashMap.get(user.getUsername());
+            Team team = new Team(event.getEventID(), "Team-" + user.getLastedLogin(), 5);
+            team.setRole("Owner");
+            teamList.addTeam(team);
+            datasource.writeData(teamList);
+            joinTeamMap.writeData(teamHashMap);
+        }
+
     }
 
     private void loadIconImage(){
