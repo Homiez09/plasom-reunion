@@ -11,6 +11,7 @@ import java.util.Random;
 public class Team implements Comparable<Team> {
     private String teamID, teamName, teamDescription, teamImagePath, createdAt, eventID;
     private int maxSlotTeamMember;
+    private boolean isBookmarked;
     private UserList memberList;
 
     private String role;
@@ -127,6 +128,11 @@ public class Team implements Comparable<Team> {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setBookmarked(boolean bookmarked) {
+        this.isBookmarked = bookmarked;
+    }
+
     public void AddMemberToTeam(/* todo: param require */) {
         // todo: add member to team
     }

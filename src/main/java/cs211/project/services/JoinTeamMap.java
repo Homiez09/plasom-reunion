@@ -16,13 +16,13 @@ public class JoinTeamMap implements Datasource<HashMap<String, Team>> {
     private String directoryName = "data";
     private String fileName = "join-team.csv";
     User user;
-    TeamList teamList;
-    public JoinTeamMap(User user, TeamList teams) {
+    HashMap<String, Team> teamHashMapGlobal;
+
+    public JoinTeamMap(User user, HashMap<String, Team> teamHashMap) {
         this.user = user;
-        this.teamList = teams;
+        this.teamHashMapGlobal = teamHashMap;
         checkFileIsExisted();
     }
-
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -71,12 +71,9 @@ public class JoinTeamMap implements Datasource<HashMap<String, Team>> {
                 String role = data[2]; // value
 
                 if (user.isUserName(username)) {
-                    HashMap<String, Team> teams = teamList.teamHashMap();
-                    Team team = teams.get(teamID);
+                    Team team = teamHashMapGlobal.get(teamID);
                     team.setRole(role);
-                    joinTeamMap.put(teamID, team);
-                    System.out.println(user.getUsername());
-                    System.out.println(username);
+                    joinTeamMap.put(teamID, teamHashMapGlobal.get(teamID));
                 }
             }
         } catch (Exception e) {

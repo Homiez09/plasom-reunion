@@ -15,6 +15,13 @@ public class TeamList {
         teams = new ArrayList<>();
     }
 
+    public TeamList(HashMap<String, Team> teamHashMap) {
+        teams = new ArrayList<>();
+        for (String key: teamHashMap.keySet()) {
+            teams.add(teamHashMap.get(key));
+        }
+    }
+
     public Team findTeamByName(String teamName) {
         for (Team team: teams) {
             if (team.isName(teamName)) {
@@ -102,6 +109,18 @@ public class TeamList {
 
     public void sortTeamByOldCreatedAt() { // from old to new
         teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
+    }
+
+    public void filterByAll() {
+        return;
+    }
+
+    public void filterByRole(String role) {
+        teams.removeIf(team -> !team.getRole().equals(role));
+    }
+
+    public void filterByFavorite() {
+        return; // todo : เพิ่มเก็บข้อมูล favorite ใน team
     }
 
     public ArrayList<Team> getTeams() {
