@@ -84,42 +84,26 @@ public class Event {
         this.activities = activities;
         this.teams = teams;}
     public String getEventID() {return eventID;}
-    public String getEventName() {
-        return eventName;
-    }
-    public String getEventImagePath() {
-        return eventImagePath;
-    }
+    public String getEventHost() {return eventHost;}
+    public String getEventName() {return eventName;}
+    public String getEventImagePath() {return eventImagePath;}
+    public String getEventTag() {return eventTag;}
     public String getEventDateStart() {return eventDateStart;}
     public String getEventDateEnd() {return eventDateEnd;}
-    public String getEventDescription() {
-        return eventDescription;
-    }
-    public int getSlotMember() {
-        return slotMember;
-    }
-    public int getMember() {
-        return member;
-    }
+    public String getEventDescription() {return eventDescription;}
+    public int getSlotMember() {return slotMember;}
+    public int getMember() {return member;}
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivities() { return activities; }
-    public String getEventHost() {return eventHost;}
     public TeamList getTeams() { return teams; }
-    public void changeDateStart(String newDate){
-        this.eventDateStart = newDate;
-    }
-    public void changeDateEnd(String newDate){
-        this.eventDateEnd = newDate;
-    }
-    public void changeName(String newName){
-        this.eventName = newName;
-    }
-    public void changeDescription(String newDescription){
-        this.eventDescription = newDescription;
-    }
-    public void changeSlotMember(int slotMember){
-        this.slotMember = slotMember;
-    }
+    public void changeDateStart(String newDate){this.eventDateStart = newDate;}
+    public void changeDateEnd(String newDate){this.eventDateEnd = newDate;}
+    public void changeName(String newName){this.eventName = newName;}
+    public void changeDescription(String newDescription){this.eventDescription = newDescription;}
+    public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
+    public void addMember(){if(!isFull())this.member++;}
+    public void delMember(){if(member >0) this.member--;}
+
     private String generateEventID() {
         Random random = new Random();
 
