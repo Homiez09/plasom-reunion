@@ -22,6 +22,10 @@ public class TeamList {
         }
     }
 
+    public TeamList(ArrayList<Team> teams) {
+        this.teams = teams;
+    }
+
     public Team findTeamByName(String teamName) {
         for (Team team: teams) {
             if (team.isName(teamName)) {
@@ -29,6 +33,10 @@ public class TeamList {
             }
         }
         return null;
+    }
+
+    public void addTeam(Team team) {
+        teams.add(team);
     }
 
     public void addTeam(String eventID, String teamName, int maxSlotTeamMember) {
