@@ -31,13 +31,11 @@ public class SelectTeamController {
     @FXML private GridPane teamContainer;
 
     @FXML private ImageView settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
-    @FXML private ComboBox settingMenuComboBox;
+    @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
 
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
-
+    private String filter = "All";
     private String teamBox ;
-
-
     private User user = (User) FXRouter.getData();
     private Event event = (Event) FXRouter.getData2();
     private TeamList teamList;
@@ -50,9 +48,10 @@ public class SelectTeamController {
         TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         teamList = datasource.readData();
         teamList.getTeamOfEvent(event);
-
-        JoinTeamMap datasourceJoinTeamMap = new JoinTeamMap(user, teamList);
+        HashMap<String, Team> teamHashMapAll = teamList.teamHashMap();
+        JoinTeamMap datasourceJoinTeamMap = new JoinTeamMap(user, teamHashMapAll);
         teamHashMap = datasourceJoinTeamMap.readData();
+
         teamBox = "teamBox1";
         teamBoxView(teamBox);
 
@@ -61,11 +60,20 @@ public class SelectTeamController {
 
     }
 
-    private void teamBoxView(String teamBox){
+    private void teamBoxView(String teamBox) {
+        System.out.println(filter);
         int row = 0, column = 0;
-        ArrayList<Team> teamListSort = new ArrayList<>(teamHashMap.values());
-        teamListSort.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
-        for (Team team : teamListSort) {
+
+        TeamList teamListSort = new TeamList(teamHashMap);
+        teamListSort.sortTeamByNewCreatedAt();
+
+        if (filter.equals("All")) teamListSort.filterByAll();
+        else if (filter.equals("Owner")) teamListSort.filterByRole(filter);
+        else if (filter.equals("Leader")) teamListSort.filterByRole(filter);
+        else if (filter.equals("Member")) teamListSort.filterByRole(filter);
+        // else if (filter.equals("Favorite")) teamListSort.filterByFavorite(); todo : add favorite
+
+        for (Team team : teamListSort.getTeams()) {
             if (!team.getEventID().equals(event.getEventID())) continue;
             try {
                 FXMLLoader teamBoxLoader1 = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box-1.fxml"));
@@ -81,11 +89,15 @@ public class SelectTeamController {
                     teamBox2CheckBox.setSelected(true);
                     teamBoxComponent = teamBoxLoader2.load();
                 }
-                Label teamID = (Label) teamBoxComponent.getChildren().get(0);
-                Label teamName = (Label)teamBoxComponent.getChildren().get(5);
+                Label teamID = (Label) teamBoxComponent.getChildren().get(1);
+                Label teamName = (Label)teamBoxComponent.getChildren().get(6);
+                ImageView roleImageView = (ImageView) teamBoxComponent.getChildren().get(7);
+                AnchorPane memberShipAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(12);
+                Label roleLabel = (Label) memberShipAnchorPane.getChildren().get(2);
                 teamID.setText(team.getTeamID());
                 teamName.setText(team.getTeamName());
-                teamBoxComponent.setUserData(event);
+                roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
+                roleLabel.setText(team.getRole());
                 if (column == 4) {
                     column = 0;
                     row++;
@@ -101,7 +113,7 @@ public class SelectTeamController {
     @FXML
     private void onMyEventClick(){
         try {
-            FXRouter.goTo("my-event");
+            FXRouter.goTo("my-event", user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -110,7 +122,7 @@ public class SelectTeamController {
     @FXML
     private void onTeamClick(){
         try {
-            FXRouter.goTo("select-team");
+            FXRouter.goTo("select-team", user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -134,7 +146,12 @@ public class SelectTeamController {
 
     }
 
-    private void initMenu() throws IndexOutOfBoundsException {
+    @FXML private void onShowFilterMenuClick() {
+        filterMenuComboBox.show();
+    }
+
+    private void initMenu() {
+        switchViewAnchorPane.setVisible(false);
         String menu[] = {"Manage Teams", "Switch View"};
 
         settingMenuComboBox.getItems().addAll(menu);
@@ -142,7 +159,21 @@ public class SelectTeamController {
             if (newValue == null) return;
             showBlock((String) newValue);
         });
-        switchViewAnchorPane.setVisible(false);
+
+        String filter[] = {"All", "Favorite", "Owner", "Leader", "Member"};
+
+        filterMenuComboBox.getItems().addAll(filter);
+        filterMenuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            if (newValue == null) return;
+            filterTeam((String) newValue);
+        });
+    }
+
+    private void filterTeam(String selectFilter) {
+        filter = selectFilter;
+        teamContainer.getChildren().clear();
+        teamBoxView(teamBox);
+        filterMenuComboBox.getSelectionModel().clearSelection();
     }
 
     private void showBlock(String select) {
