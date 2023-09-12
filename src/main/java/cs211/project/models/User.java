@@ -58,7 +58,6 @@ public class User {
     }
 
 
-
     public String getUserId() {
         return userId;
     }
@@ -132,7 +131,6 @@ public class User {
         this.admin = admin;
     }
 
-
     public void setLastedLogin(String lastedLogin) {
         this.lastedLogin = lastedLogin;
     }
@@ -141,32 +139,13 @@ public class User {
         this.imagePath = imagePath;
     }
 
-    public void joinEvent(Event event){
-        if(event.getEventName().equals("")){
-            this.events.add(event);
-        }
-    }
-
     public void updateProfile(String displayName, String contactNumber, String bio) {
         this.displayName = displayName;
         this.contactNumber = contactNumber;
         this.bio = bio;
     }
 
-    public String generateRandomText(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
 
-        Random random = new Random();
-
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-
-        return randomText.toString();
-    }
 
 }
 

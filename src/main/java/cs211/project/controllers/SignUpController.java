@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 
 public class SignUpController {
@@ -117,48 +118,37 @@ public class SignUpController {
 
     }
 
-
     private String generateRegisterDate(){
         LocalDate currentDate = LocalDate.now();
         String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return formattedDate;
     }
 
+    public String generateRandomText(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder randomText = new StringBuilder();
 
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            randomText.append(randomChar);
+        }
+
+        return randomText.toString();
+    }
     private String generateUserID() {
 
-        final int MAX_ID_LENGTH = 16;
-        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
 
-        // formatted date & time now
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+        String id = "user-";
+        int ranInt = random.nextInt(100000);
+        String ranText = generateRandomText(3);
 
-        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyMMdd"));
-        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("hhmmss"));
+        id = id + ranText + ranInt;
 
-        // create UID by using local time&date
-        StringBuilder numericText = new StringBuilder();
-        for (char c : username.toCharArray()) {
-            int numericValue = Character.getNumericValue(c);
-            if (numericValue != -1) {
-                numericText.append(numericValue);
-            } else {
-                numericText.append(c);
-            }
-        }
-        // maximum length is 16
-        int totalLength = formattedDate.length() + formattedTime.length() + numericText.length();
-        if (totalLength > MAX_ID_LENGTH) {
-            int excessLength = totalLength - MAX_ID_LENGTH;
-            numericText.delete(numericText.length() - excessLength, numericText.length());
-        }
-        sb.append(formattedDate);
-        sb.append(formattedTime);
-        sb.append(numericText);
-
-        return sb.toString();
-
+        return id;
     }
 
     private void setPassword(String password){
@@ -461,8 +451,6 @@ public class SignUpController {
 
         }
     }
-
-
 
     private void loadImage() {
         Image upComingBackground = new Image(getClass().getResource("/images/backgrounds/login/sign_event_bg1.png").toString());

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventAnchorPane" prefHeight="140.0" prefWidth="1052.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventComponentController">
+<AnchorPane fx:id="eventAnchorPane" prefHeight="140.0" prefWidth="902.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventComponentController">
    <children>
       <VBox alignment="CENTER" layoutX="35.0" layoutY="11.0">
          <children>
@@ -112,7 +112,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="895.0" layoutY="46.0" prefHeight="50.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="750.0" layoutY="50.0" prefHeight="50.0">
          <children>
             <Button fx:id="staffButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onStaffAction" prefHeight="38.0" prefWidth="60.0" style="-fx-background-color: FFF95E;" styleClass="button-component" text="Staff">
                <HBox.margin>
@@ -121,12 +121,12 @@
             </Button>
             <Button fx:id="editButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: DB73FF;" styleClass="button-component" text="Edit">
                <HBox.margin>
-                  <Insets left="5.0" />
+                  <Insets />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="663.0" layoutY="46.0" prefHeight="50.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="550.0" layoutY="50.0" prefHeight="50.0">
          <children>
             <Button fx:id="viewjoinButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onJoinViewAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: #51D946;" styleClass="button-component" text="button" />
             <Button fx:id="leaveButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDeleteLeaveAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: #FF5656;" styleClass="button-component" text="Leave">
