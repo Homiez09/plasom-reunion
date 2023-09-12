@@ -23,6 +23,7 @@
       <AnchorPane fx:id="selectTeamAnchorPane">
          <children>
             <ComboBox fx:id="settingMenuComboBox" layoutX="878.0" layoutY="106.0" prefWidth="179.0" styleClass="setting-select-team-dropdown" />
+            <ComboBox fx:id="filterMenuComboBox" layoutX="671.0" layoutY="106.0" prefWidth="179.0" styleClass="setting-select-team-dropdown" />
             <Label fx:id="myEventLabel" alignment="CENTER" layoutX="29.0" layoutY="90.0" lineSpacing="2.0" onMouseClicked="#onMyEventClick" prefHeight="32.0" prefWidth="119.0" text="my event" textFill="#413b3b">
                <font>
                   <Font name="FreesiaUPC" size="20.0" />
@@ -113,7 +114,7 @@
                   <Image url="@../../../images/icons/select-team/create_icon.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sortImageView" fitHeight="25.0" fitWidth="28.0" layoutX="823.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sortImageView" fitHeight="25.0" fitWidth="28.0" layoutX="823.0" layoutY="109.0" onMouseClicked="#onShowFilterMenuClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/icons/select-team/sort_icon.png" />
                </image>

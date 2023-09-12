@@ -13,6 +13,7 @@
 
 <AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBox1Controller">
    <children>
+      <ComboBox fx:id="menuDropDown" layoutX="32.0" layoutY="-9.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
       <Label fx:id="teamIdLabel" layoutX="50.0" layoutY="50.0" text="Label" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="228.0" stroke="BLACK" strokeType="INSIDE" styleClass="team-box-shape" width="228.0">
          <fill>
@@ -75,7 +76,7 @@
                   <Font size="8.0" />
                </font>
             </Label>
-            <Label contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
+            <Label fx:id="roleLabel" contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
                <styleClass>
                   <String fx:value="font" />
                   <String fx:value="center-label" />
@@ -132,6 +133,5 @@
             </Label>
          </children>
       </AnchorPane>
-      <ComboBox fx:id="menuDropDown" layoutX="32.0" layoutY="-9.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
    </children>
 </AnchorPane>
