@@ -1,9 +1,12 @@
 package cs211.project.controllers;
 
+import at.favre.lib.crypto.bcrypt.BCryptFormatter;
 import cs211.project.models.Team;
 import cs211.project.models.User;
+import cs211.project.models.Event;
 import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
+import cs211.project.services.JoinTeamMap;
 import cs211.project.services.LoadNavbarComponent;
 import cs211.project.services.TeamListDataSource;
 import javafx.fxml.FXML;
@@ -17,14 +20,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Shape;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class SelectTeamController {
     @FXML private AnchorPane navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane;
@@ -41,6 +41,7 @@ public class SelectTeamController {
     private User user = (User) FXRouter.getData();
     private Event event = (Event) FXRouter.getData2();
     private TeamList teamList;
+    private HashMap<String, Team> teamHashMap;
 
     @FXML
     private void initialize() {
@@ -48,6 +49,10 @@ public class SelectTeamController {
 
         TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         teamList = datasource.readData();
+        teamList.getTeamOfEvent(event);
+
+        JoinTeamMap datasourceJoinTeamMap = new JoinTeamMap(user, teamList);
+        teamHashMap = datasourceJoinTeamMap.readData();
         teamBox = "teamBox1";
         teamBoxView(teamBox);
 
@@ -58,9 +63,10 @@ public class SelectTeamController {
 
     private void teamBoxView(String teamBox){
         int row = 0, column = 0;
-
-        teamList.sortTeamByNewCreatedAt();
-        for (Team team : teamList.getTeams()) {
+        ArrayList<Team> teamListSort = new ArrayList<>(teamHashMap.values());
+        teamListSort.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
+        for (Team team : teamListSort) {
+            if (!team.getEventID().equals(event.getEventID())) continue;
             try {
                 FXMLLoader teamBoxLoader1 = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box-1.fxml"));
                 FXMLLoader teamBoxLoader2 = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box-2.fxml"));
@@ -75,8 +81,11 @@ public class SelectTeamController {
                     teamBox2CheckBox.setSelected(true);
                     teamBoxComponent = teamBoxLoader2.load();
                 }
-                Label teamName = (Label)teamBoxComponent.getChildren().get(4);
+                Label teamID = (Label) teamBoxComponent.getChildren().get(0);
+                Label teamName = (Label)teamBoxComponent.getChildren().get(5);
+                teamID.setText(team.getTeamID());
                 teamName.setText(team.getTeamName());
+                teamBoxComponent.setUserData(event);
                 if (column == 4) {
                     column = 0;
                     row++;
@@ -125,18 +134,18 @@ public class SelectTeamController {
 
     }
 
-    private void initMenu() {
+    private void initMenu() throws IndexOutOfBoundsException {
         String menu[] = {"Manage Teams", "Switch View"};
 
         settingMenuComboBox.getItems().addAll(menu);
         settingMenuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            if (newValue == null) return;
             showBlock((String) newValue);
         });
         switchViewAnchorPane.setVisible(false);
     }
 
     private void showBlock(String select) {
-        System.out.println(select);
         switch (select) {
             case "Manage Teams":
                 break;
@@ -144,9 +153,11 @@ public class SelectTeamController {
                 switchViewAnchorPane.setVisible(true);
                 selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
                 selectTeamAnchorPane.setDisable(true);
+                break;
         }
+        // this code will show warning, but it's work (IndexOutOfBoundsException) [todo : fix this warning]
+        settingMenuComboBox.getSelectionModel().clearSelection();
     }
-
     @FXML
     private void onTeamBox1CheckBoxClick() {
         if (teamBox1CheckBox.isSelected()) {

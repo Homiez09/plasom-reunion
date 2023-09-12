@@ -2,6 +2,8 @@ package cs211.project.models.collections;
 
 import cs211.project.models.Event;
 import cs211.project.models.Team;
+import cs211.project.models.User;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,8 +84,16 @@ public class TeamList {
                 teamOfEvent.add(team);
             }
         }
-
         return teamOfEvent;
+    }
+
+    public HashMap<String, Team> teamHashMap() {
+        HashMap<String, Team> teamHashMapTemp= new HashMap<>();
+        for (Team team: teams) {
+            teamHashMapTemp.put(team.getTeamID(), team);
+        }
+
+        return teamHashMapTemp;
     }
 
     public void sortTeamByNewCreatedAt() { // from new to old
