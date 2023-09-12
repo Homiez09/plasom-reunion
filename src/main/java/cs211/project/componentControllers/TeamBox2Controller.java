@@ -48,7 +48,7 @@ public class TeamBox2Controller {
         bookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png"));
         Image activeIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/active_icon.png"));
         activeImageView.setImage(activeIcon);
-        Image roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/role/member.png"));
+        Image roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/role/Member.png"));
         roleImageView.setImage(roleIcon);
         Image faceIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/face_icon.png"));
         faceImageView.setImage(faceIcon);
