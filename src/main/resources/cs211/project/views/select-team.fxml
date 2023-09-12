@@ -98,7 +98,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button alignment="CENTER_RIGHT" layoutX="937.0" layoutY="99.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="168.0" text="Create Team">
+            <Button alignment="CENTER_RIGHT" layoutX="937.0" layoutY="99.0" mnemonicParsing="false" onAction="#onCreateTeamButtonClick" prefHeight="45.0" prefWidth="168.0" text="Create Team">
                <padding>
                   <Insets right="14.0" />
                </padding>
