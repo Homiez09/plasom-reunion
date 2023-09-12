@@ -1,6 +1,5 @@
 package cs211.project.componentControllers;
 
-import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
@@ -19,7 +18,7 @@ import java.io.IOException;
 public class TeamBox1Controller {
 
     @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
-    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel;
+    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel, roleLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
@@ -109,8 +108,6 @@ public class TeamBox1Controller {
         bookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png"));
         Image activeIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/active_icon.png"));
         activeImageView.setImage(activeIcon);
-        Image roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/role/member.png"));
-        roleImageView.setImage(roleIcon);
         Image faceIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/face_icon.png"));
         faceImageView.setImage(faceIcon);
         Image peopleIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/people_icon.png"));
