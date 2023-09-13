@@ -7,6 +7,8 @@ import cs211.project.services.Datasource;
 import cs211.project.services.EventListDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 //import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -43,7 +46,7 @@ public class CreateEventController {
             eventStartMinuteSpinner,eventEndMinuteSpinner,activityStartMinuteSpinner,activityEndMinuteSpinner;
     private Event thisEvent = (Event) FXRouter.getData2();
     private String newEventImagePath;
-    private User user = (User) FXRouter.getData();
+    private final User user = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     @FXML  void initialize() {
@@ -55,13 +58,18 @@ public class CreateEventController {
         setSpinner(eventEndHourSpinner,23);
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
-        setSpinner(activityStartHourSpinner,24);
-        setSpinner(activityEndHourSpinner,24);
+        setSpinner(activityStartHourSpinner,23);
+        setSpinner(activityEndHourSpinner,23);
         setSpinner(activityStartMinuteSpinner,59);
         setSpinner(activityEndMinuteSpinner,59);
 
+
+
+
         eventTagChoiceBox.getItems().addAll("Art","Music","Sport");
+        CheckDate();
         setPageHeader();
+
     }
     @FXML protected void handleUploadButton(ActionEvent event) {
         FileChooser chooser = new FileChooser();
@@ -136,7 +144,10 @@ public class CreateEventController {
             String eventDescriptionString = eventDescriptionTextArea.getText();
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
-
+            System.out.println(newEventImagePath);
+            if (newEventImagePath==null){
+                newEventImagePath = "/images/events/event-default.png";
+            }
             if (!numMemberString.equals("")){
                 int numMember = Integer.parseInt(numMemberString);
                 thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,
@@ -164,8 +175,7 @@ public class CreateEventController {
         int Minute = minute.getValue();
         LocalTime Time = LocalTime.of(Hour, Minute);
         LocalDateTime DateTime = DatePick.atTime(Time);
-        String Date = DateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        return Date;
+        return DateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
     }
     @FXML protected void onAddActivityButtonClick() {
@@ -192,5 +202,41 @@ public class CreateEventController {
             // add to team list
             //thisEvent.getTeams().addTeam();
         }
+    }
+    private void CheckDate() {
+        SettingCheckDate(eventStartDatePick);
+        SettingCheckDate(eventEndDatePick);
+        SettingCheckDate(activityStartDatePick);
+        SettingCheckDate(activityEndDatePick);
+
+    }
+    private void SettingCheckDate(DatePicker datePicker){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Date Error");
+        alert.setHeaderText("Invalid Date Format");
+        datePicker.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean lostFocus, Boolean onFocus) {
+
+                if(!onFocus && !datePicker.getEditor().getText().isEmpty()){
+                    try {
+                        LocalDate selectedDate = datePicker.getValue();
+                        LocalDate currentDate = LocalDate.now();
+
+                        if (selectedDate.isBefore(currentDate)) {
+                            // ถ้าวันที่ที่ผู้ใช้เลือกน้อยกว่าวันปัจจุบัน
+                            // คุณสามารถทำการแจ้งเตือนหรือทำการแก้ไขค่าใน eventStartDatePick ตามที่คุณต้องการ
+                            alert.showAndWait();
+                            datePicker.setValue(null);
+                            datePicker.getEditor().setText("");
+                        }
+                    } catch (Exception e) {
+                        alert.showAndWait();
+                        datePicker.setValue(null);
+                        datePicker.getEditor().setText("");
+                    }
+                }
+            }
+        });
     }
 }

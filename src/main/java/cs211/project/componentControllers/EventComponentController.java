@@ -102,12 +102,12 @@ public class EventComponentController {
             if (fileToDelete.exists()) {
 
                 if (fileToDelete.delete()) {
-                    System.out.println("ลบไฟล์สำเร็จ");
+                    System.out.println("Succes Delete");
                 } else {
-                    System.out.println("ไม่สามารถลบไฟล์ได้");
+                    System.out.println("Cant Delete");
                 }
             } else {
-                System.out.println("ไฟล์ไม่มีอยู่");
+                System.out.println("Not Found");
             }
             // ลบไฟล์
             eventListDatasource.writeData(eventList);
