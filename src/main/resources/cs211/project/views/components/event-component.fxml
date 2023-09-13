@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventAnchorPane" prefHeight="140.0" prefWidth="800.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventComponentController">
+<AnchorPane fx:id="eventAnchorPane" prefHeight="140.0" prefWidth="1052.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventComponentController">
    <children>
       <VBox alignment="CENTER" layoutX="35.0" layoutY="11.0">
          <children>
@@ -30,53 +30,55 @@
             </ImageView>
          </children>
       </VBox>
-      <VBox layoutX="182.0" layoutY="5.0">
+      <Label fx:id="eventnameLabel" layoutX="180.0" layoutY="10.0" styleClass="font-component-head" text="eventnameLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="180.0" layoutY="60.0" prefHeight="25.0" prefWidth="150.0">
          <children>
-            <Label fx:id="eventnameLabel" styleClass="font-component-head" text="eventnameLabel">
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/eventcomponent/clock%20start.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="startdateLabel" styleClass="font-component-subhead" text="startdateLabel">
                <font>
-                  <Font size="24.0" />
+                  <Font size="18.0" />
                </font>
                <padding>
                   <Insets left="10.0" />
                </padding>
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
             </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="150.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../images/eventcomponent/clock.jpg" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label fx:id="startdateLabel" styleClass="font-component-subhead" text="startdateLabel">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Label fx:id="enddateLabel" prefHeight="18.0" prefWidth="150.0" styleClass="font-component-subhead" text="enddateLabel">
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="180.0" layoutY="90.0" prefHeight="25.0" prefWidth="150.0">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/eventcomponent/clock%20end.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="enddateLabel" styleClass="font-component-subhead" text="enddateLabel">
                <font>
                   <Font size="18.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="35.0" />
-               </VBox.margin>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
          </children>
-      </VBox>
-      <HBox alignment="CENTER_LEFT" layoutX="367.0" layoutY="58.0">
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="370.0" layoutY="60.0">
          <children>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -93,8 +95,24 @@
             </Label>
          </children>
       </HBox>
-      <Button fx:id="viewjoinButton" contentDisplay="CENTER" layoutX="550.0" layoutY="51.0" mnemonicParsing="false" onAction="#onButtonAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: FFF95E;" styleClass="button-component" text="button" />
-      <HBox alignment="CENTER_RIGHT" layoutX="655.0" layoutY="44.0" prefHeight="50.0">
+      <HBox alignment="CENTER_LEFT" layoutX="370.0" layoutY="90.0">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/eventcomponent/tag.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="tagLabel" styleClass="font-component-subhead" text="tagLabel">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="895.0" layoutY="46.0" prefHeight="50.0">
          <children>
             <Button fx:id="staffButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onStaffAction" prefHeight="38.0" prefWidth="60.0" style="-fx-background-color: FFF95E;" styleClass="button-component" text="Staff">
                <HBox.margin>
@@ -102,6 +120,16 @@
                </HBox.margin>
             </Button>
             <Button fx:id="editButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: DB73FF;" styleClass="button-component" text="Edit">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="663.0" layoutY="46.0" prefHeight="50.0">
+         <children>
+            <Button fx:id="viewjoinButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onJoinViewAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: #51D946;" styleClass="button-component" text="button" />
+            <Button fx:id="leaveButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDeleteLeaveAction" prefHeight="38.0" prefWidth="61.0" style="-fx-background-color: #FF5656;" styleClass="button-component" text="Leave">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>

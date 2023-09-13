@@ -55,10 +55,18 @@ public class EventList {
         }
         return null;
     }
+    public void removeEvent(Event event){
+        for (Event delete : events) {
+            if (delete.getEventID().equals(event.getEventID())) {
+                events.remove(event);
+            }
+        }
+    }
 
     public ArrayList<Event> getEvents() {
         return events;
     }
+
 
 
 }
