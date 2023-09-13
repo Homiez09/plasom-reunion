@@ -32,11 +32,20 @@ public class EventTileController {
             }
             eventTileImageView.setImage(image);
         }
+
     }
 
-    @FXML protected void onEventTileClick() {
+    @FXML public void onEventTileClick() {
         try {
             FXRouter.goTo("event",currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML public void onEventTileClick(Event event) {
+        try {
+            FXRouter.goTo("event",currentUser,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
