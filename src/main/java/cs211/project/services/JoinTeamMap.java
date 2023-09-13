@@ -12,9 +12,6 @@ import java.util.*;
 public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
     private String directoryName = "data";
     private String fileName = "join-team.csv";
-    User user;
-    HashMap<String, Team> teamHashMapGlobal;
-
     public JoinTeamMap() {
         checkFileIsExisted();
     }
@@ -65,6 +62,8 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
 
         try {
             while ((line = buffer.readLine()) != null) {
+                if (line.equals("")) continue;
+
                 String[] data = line.split(",");
                 String username = data[0];
                 String teamID = data[1];
@@ -86,6 +85,47 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                     teamList.addTeam(team);
                     hashMap.put(username, teamList);
                 }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return hashMap;
+    }
+
+    public HashMap<String, Team> readTeamData() {
+        HashMap<String, Team> hashMap = new HashMap<>();
+
+        TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+        HashMap<String, Team> teamHashMap = teamListDataSource.readData().teamHashMap();
+
+        String filePath = directoryName + File.separator + fileName;
+
+        File file = new File(filePath);
+
+        FileInputStream fileInputStream = null;
+
+        try {
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        InputStreamReader inputStreamReader = new InputStreamReader(
+                fileInputStream,
+                StandardCharsets.UTF_8
+        );
+
+        BufferedReader buffer = new BufferedReader(inputStreamReader);
+
+        String line = "";
+
+        try {
+            while ((line = buffer.readLine()) != null) {
+                String[] data = line.split(",");
+                String teamID = data[1];
+
+                hashMap.put(teamID, teamHashMap.get(teamID));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -131,5 +171,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                 throw new RuntimeException(e);
             }
         }
+
+
     }
 }
