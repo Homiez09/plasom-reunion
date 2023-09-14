@@ -101,19 +101,14 @@ public class EventComponentController {
     public void onDeleteLeaveAction(ActionEvent actionEvent) {
         if (event.getEventHost().equals(currentUser.getUsername())) {
             eventList.getEvents().remove(eventList.findEvent(event.getEventID()));
-            teamList.getTeams().removeIf(team -> team.getEventID().equals(event.getEventID()));
+            teamList.getTeams().removeIf(team -> team.getEventID().equals(event.getEventID())); // ลบทีมใน team-list.csv
 
-            for (String username : teamHashMapGlobal.keySet()) {
-                System.out.println(username);
-                System.out.println(teamHashMapGlobal.get(username).getTeams().get(0).getTeamID());
-                ArrayList<Team> teamList = teamHashMapGlobal.get(username).getTeams();
-                teamList.removeIf(team -> team.getEventID().equals(event.getEventID()));
-                TeamList teamListTemp = new TeamList(teamList);
-                teamHashMap.put(username, teamListTemp);
+            // ลบ user join team ใน join-team.csv
+            for (String username : teamHashMapGlobal.keySet()) { // ตามจำนวนคนใน team
+                TeamList teamList = new TeamList(teamHashMapGlobal.get(username).getTeams());
+                teamList.removeTeamByEvent(event);
+                teamHashMap.put(username, teamList); // ยัด teamList ที่ลบ team ในแต่ละ user เข้าไปใน teamHashMap
             }
-
-            joinTeamMap.writeData(teamHashMap);
-            teamListDataSource.writeData(teamList);
 
             // สร้าง path
             String folderPath = event.getEventImagePath();
@@ -129,8 +124,11 @@ public class EventComponentController {
             } else {
                 System.out.println("ไฟล์ไม่มีอยู่");
             }
+            
             // ลบไฟล์
             eventListDatasource.writeData(eventList);
+            joinTeamMap.writeData(teamHashMap);
+            teamListDataSource.writeData(teamList);
 
             try {
                 FXRouter.goTo("event-list", currentUser);

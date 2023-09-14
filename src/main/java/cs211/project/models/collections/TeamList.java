@@ -35,6 +35,14 @@ public class TeamList {
         return null;
     }
 
+    public void removeTeamByEvent(Event event) {
+        teams.removeIf(team -> team.getEventID().equals(event.getEventID()));
+    }
+
+    public void removeTeam(String teamID) {
+        teams.removeIf(team -> team.getTeamID().equals(teamID));
+    }
+
     public void addTeam(Team team) {
         teams.add(team);
     }

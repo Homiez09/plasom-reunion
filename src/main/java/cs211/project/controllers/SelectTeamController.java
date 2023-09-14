@@ -175,6 +175,11 @@ public class SelectTeamController {
             joinTeamMap.writeData(teamHashMap);
         }
 
+        try {
+            FXRouter.goTo("select-team", user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadIconImage(){
