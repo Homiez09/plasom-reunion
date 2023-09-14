@@ -40,6 +40,7 @@ public class SelectTeamController {
     private User user = (User) FXRouter.getData();
     private Event event = (Event) FXRouter.getData2();
     private TeamList teamList;
+    JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamHashMap;
 
     @FXML
@@ -50,8 +51,6 @@ public class SelectTeamController {
         teamList = datasource.readData();
         teamList.getTeamOfEvent(event);
 
-        JoinTeamMap joinTeamMap = new JoinTeamMap();
-        teamHashMap = joinTeamMap.readData();
 
         teamBox = "teamBox1";
         teamBoxView(teamBox);
@@ -62,17 +61,22 @@ public class SelectTeamController {
     }
 
     private void teamBoxView(String teamBox) {
-        System.out.println(filter);
+        teamHashMap = joinTeamMap.readData();
         int row = 0, column = 0;
 
-        TeamList teamListSort = (teamHashMap.get(user.getUsername()) != null) ? teamHashMap.get(user.getUsername()) : new TeamList();
+        TeamList teamListSort = (teamHashMap.get(user.getUsername()) != null) ? new TeamList(teamHashMap.get(user.getUsername())) : new TeamList();
+
         if (teamListSort != null) teamListSort.sortTeamByNewCreatedAt();
 
-        if (filter.equals("Favorite")) teamListSort.filterByBookmark();
-        else if (filter.equals("Owner")) teamListSort.filterByRole(filter);
-        else if (filter.equals("Leader")) teamListSort.filterByRole(filter);
-        else if (filter.equals("Member")) teamListSort.filterByRole(filter);
-        else teamListSort.filterByAll();
+        if (filter.equals("Favorite")) {
+            teamListSort.filterByBookmark();
+        }
+        else if (filter.equals("Owner") || filter.equals("Leader") || filter.equals("Member")) {
+            teamListSort.filterByRole(filter);
+        } else {
+            teamListSort.filterByAll();
+            System.out.println("filter by all");
+        }
 
         for (Team team : teamListSort.getTeams()) {
             if (!team.getEventID().equals(event.getEventID())) continue;
@@ -197,7 +201,6 @@ public class SelectTeamController {
 
     @FXML private void onShowSettingMenuClick() {
         settingMenuComboBox.show();
-
     }
 
     @FXML private void onShowFilterMenuClick() {
@@ -214,9 +217,8 @@ public class SelectTeamController {
             showBlock((String) newValue);
         });
 
-        String filter[] = {"All", "Favorite", "Owner", "Leader", "Member"};
-
-        filterMenuComboBox.getItems().addAll(filter);
+        String filters[] = {"All", "Favorite", "Owner", "Leader", "Member"};
+        filterMenuComboBox.getItems().addAll(filters);
         filterMenuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             if (newValue == null) return;
             filterTeam((String) newValue);

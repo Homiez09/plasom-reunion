@@ -124,7 +124,7 @@ public class EventComponentController {
             } else {
                 System.out.println("ไฟล์ไม่มีอยู่");
             }
-            
+
             // ลบไฟล์
             eventListDatasource.writeData(eventList);
             joinTeamMap.writeData(teamHashMap);

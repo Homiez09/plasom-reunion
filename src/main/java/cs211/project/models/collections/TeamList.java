@@ -22,6 +22,13 @@ public class TeamList {
         }
     }
 
+    public TeamList(TeamList teamList) {
+        teams = new ArrayList<>();
+        for (Team team: teamList.getTeams()) {
+            teams.add(team);
+        }
+    }
+
     public TeamList(ArrayList<Team> teams) {
         this.teams = teams;
     }
@@ -29,6 +36,15 @@ public class TeamList {
     public Team findTeamByName(String teamName) {
         for (Team team: teams) {
             if (team.isName(teamName)) {
+                return team;
+            }
+        }
+        return null;
+    }
+
+    public Team findTeamByID(String teamID) {
+        for (Team team: teams) {
+            if (team.getTeamID().equals(teamID)) {
                 return team;
             }
         }
@@ -98,6 +114,29 @@ public class TeamList {
         }
     }
 
+    public void sortTeamByNewCreatedAt() { // from new to old
+        teams.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
+    }
+
+    public void sortTeamByOldCreatedAt() { // from old to new
+        teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
+    }
+
+    public void filterByAll() {
+        if (teams == null) return;
+        return;
+    }
+
+    public void filterByRole(String role) {
+        if (teams == null) return;
+        teams.removeIf(team -> !team.getRole().equals(role));
+    }
+
+    public void filterByBookmark() {
+        if (teams == null) return;
+        teams.removeIf(team -> !team.isBookmarked());
+    }
+
     // find teamlist by event id and user correct
     public ArrayList<Team> getTeamOfEvent(Event event) {
         String eventID = event.getEventID();
@@ -117,26 +156,6 @@ public class TeamList {
         }
 
         return teamHashMapTemp;
-    }
-
-    public void sortTeamByNewCreatedAt() { // from new to old
-        teams.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
-    }
-
-    public void sortTeamByOldCreatedAt() { // from old to new
-        teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
-    }
-
-    public void filterByAll() {
-        return;
-    }
-
-    public void filterByRole(String role) {
-        teams.removeIf(team -> !team.getRole().equals(role));
-    }
-
-    public void filterByBookmark() {
-        teams.removeIf(team -> !team.isBookmarked());
     }
 
     public ArrayList<Team> getTeams() {
