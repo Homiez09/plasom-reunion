@@ -1,12 +1,12 @@
-event-bWO39572,OwlVi,Event 1,,null,16/09/2023 10:00,16/09/2023 20:00,test,test,0,234,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-uWP47737,t1,Event 2,,null,22/09/2023 12:00,22/09/2023 14:00,test,test,3,123,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-CEJ25756,t1,Event 3,,null,22/09/2023 12:00,22/09/2023 14:00,test,test,5,123,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-nXW87699,t1,Event 4,,null,22/09/2023 15:00,23/09/2023 16:00,test,test,5,1234,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-zPp4027,t2,Event 1,,null,30/09/2023 12:00,30/09/2023 14:00,test,test,7,123,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-yah27812,t2,Event 2,,null,23/09/2023 14:00,23/09/2023 16:00,test,test,7,123,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-GUI70097,t2,Event 3,,null,22/09/2023 13:00,22/09/2023 15:00,test,test,8,123,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-KHO24442,OwlVi,Event 2,,null,21/09/2023 14:00,21/09/2023 16:00,test,test,9,123,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-gGC89981,OwlVi,Valorant Music,,Music,15/09/2023 13:00,15/09/2023 15:00,Music,BKK,0,1000,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-ByN72059,t1,Taiwan Art,,Art,15/09/2023 11:00,16/09/2023 17:00,BingCilling,BingCilling,0,-1,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-jfx87435,t1,123,,Sport,02/09/2023 12:00,02/09/2023 15:00,123,123,0,-1,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
-event-HhS70278,t1,test,,Music,02/09/2023 10:00,02/09/2023 10:00,test,test,0,-1,cs211.project.models.collections.ActivityList@6207fec9,cs211.project.models.collections.TeamList@57edd92b
+event-bWO39572,OwlVi,Event 1,,null,16/09/2023 10:00,16/09/2023 20:00,test,test,0,200
+event-uWP47737,t1,Event 2,,null,22/09/2023 12:00,22/09/2023 14:00,test,test,3,150
+event-CEJ25756,t1,Event 3,,null,22/09/2023 12:00,22/09/2023 14:00,test,test,5,120
+event-nXW87699,t1,Event 4,,null,22/09/2023 15:00,23/09/2023 16:00,test,test,5,100
+event-zPp4027,t2,Event 1,,null,30/09/2023 12:00,30/09/2023 14:00,test,test,7,50
+event-yah27812,t2,Event 2,,null,23/09/2023 14:00,23/09/2023 16:00,test,test,7,20
+event-GUI70097,t2,Event 3,,null,22/09/2023 13:00,22/09/2023 15:00,test,test,8,30
+event-KHO24442,OwlVi,Event 2,,null,21/09/2023 14:00,21/09/2023 16:00,test,test,9,123
+event-gGC89981,OwlVi,Valorant Music,,Music,15/09/2023 13:00,15/09/2023 15:00,Music,BKK,0,1000
+event-ByN72059,t1,Taiwan Art,,Art,15/09/2023 11:00,16/09/2023 17:00,BingCilling,BingCilling,0,-1
+event-jfx87435,t1,123,,Sport,02/09/2023 12:00,02/09/2023 15:00,123,123,0,-1
+event-HhS70278,t1,test,,Music,02/09/2023 10:00,02/09/2023 10:00,test,test,0,-1

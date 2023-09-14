@@ -67,9 +67,7 @@ public class Event {
                  String eventDescription,
                  String eventLocation,
                  int member,
-                 int slotMember,
-                 ActivityList activities,
-                 TeamList teams) {
+                 int slotMember) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
@@ -81,8 +79,10 @@ public class Event {
         this.member = member;
         this.slotMember = slotMember;
         this.eventHost = eventHost;
-        this.activities = activities;
-        this.teams = teams;}
+}
+
+
+
     public String getEventID() {return eventID;}
     public String getEventHost() {return eventHost;}
     public String getEventName() {return eventName;}
@@ -116,6 +116,15 @@ public class Event {
         return id;
     }
     public boolean isFull(){return slotMember == member;}
+    public boolean upComming(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
+        LocalDateTime currentTime = LocalDateTime.now();
+        if (!eventDate.isBefore(currentTime) && !eventDate.isAfter(currentTime.plusDays(20))) {
+            return true;
+        }
+        return false;
+    }
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -149,9 +158,8 @@ public class Event {
                 +   eventDescription + ','
                 +   eventLocation + ','
                 +   member + ','
-                +   slotMember + ','
-                +   activities + ','
-                +   teams;
+                +   slotMember ;
+
     }
 }
 
