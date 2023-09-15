@@ -23,7 +23,7 @@
 -fx-border-radius: 18px;
 -fx-border-color: black;
 -fx-background-radius: 20px;
--fx-border-width: 3px;
+-fx-border-width: thin ;
 }
 .font-component-head{
     -fx-font-size: 18;
@@ -39,15 +39,39 @@
     -fx-border-color: #000;
     -fx-font-family: Leelawadee;
 }
-.event-component{
-    -fx-background-color: #FFF5E5 ;
-    -fx-background-radius: 15 ;
-
-
-}
-.list-view-event{
+.event-component {
     -fx-background-color: #FFF5E5;
-    -fx-background-radius: 15 ;
+    -fx-background-radius: 15;
+    -fx-opacity: 1;
+    -fx-animated: myAim;
+}
+
+.event-component:hover {
+    animation: fade 1s;
+}
+
+@keyframes myAnim {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+.list-view {
+    -fx-background-color: #FFF5E5;
+    -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-border-color: #FFF5E5;
+    -fx-control-inner-background: #FFA500; /* สีพื้นหลังสำหรับ ListView */
+    -fx-opacity: 1;
+    -fx-horizontal-grid-lines-visible: true;
+    -fx-vertical-grid-lines-visible: true;
+
 }

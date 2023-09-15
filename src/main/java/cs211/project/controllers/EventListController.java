@@ -4,6 +4,7 @@ import cs211.project.componentControllers.EventComponentController;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 
 import java.io.IOException;
@@ -73,15 +75,20 @@ public class EventListController {
 
                     if (event.getEventHost().equals(currentUser.getUsername())) {
                         hosteventListView.getItems().add(eventAnchorPaneComponent);
+                        onAnimateComponent(eventAnchorPaneComponent);
                     } else if (eventSet.contains(event.getEventID()) && userMap.containsKey(currentUser.getUsername())) {
                         myeventsListView.getItems().add(eventAnchorPaneComponent);
+                        onAnimateComponent(eventAnchorPaneComponent);
                     }else {
                         if (!event.isEnd()){
                             eventsListView.getItems().add(eventAnchorPaneComponent);
+                            onAnimateComponent(eventAnchorPaneComponent);
                         }else {
                             historyeventListView.getItems().add(eventAnchorPaneComponent);
+                            onAnimateComponent(eventAnchorPaneComponent);
                         }
                     }
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -145,6 +152,23 @@ public class EventListController {
         hosteventListView.setVisible(false);
         myeventsListView.setVisible(false);
         historyeventListView.setVisible(true);
+    }
+    private void onAnimateComponent(AnchorPane anchorPane) {
+        ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), anchorPane);
+        scaleIn.setToX(1.1);
+        scaleIn.setToY(1.1);
+
+        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(0.2), anchorPane);
+        scaleOut.setToX(1);
+        scaleOut.setToY(1);
+
+        anchorPane.setOnMouseEntered(event -> {
+            scaleIn.play();
+        });
+
+        anchorPane.setOnMouseExited(event -> {
+            scaleOut.play();
+        });
     }
 
 }

@@ -38,10 +38,10 @@
                               </Pane>
                               <Pane prefHeight="565.0" prefWidth="1052.0">
                                  <children>
-                                    <ListView fx:id="historyeventListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" styleClass="list-view-event" />
-                                    <ListView fx:id="myeventsListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" styleClass="list-view-event" />
-                                    <ListView fx:id="hosteventListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" styleClass="list-view-event" />
-                                    <ListView fx:id="eventsListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" styleClass="list-view-event" />
+                                    <ListView fx:id="historyeventListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" styleClass="list-view" />
+                                    <ListView fx:id="myeventsListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" styleClass="list-view" />
+                                    <ListView fx:id="hosteventListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" styleClass="list-view" />
+                                    <ListView fx:id="eventsListView" layoutY="10.0" prefHeight="550.0" prefWidth="1052.0" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="10.0" />

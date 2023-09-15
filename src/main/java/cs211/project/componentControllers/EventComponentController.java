@@ -3,6 +3,7 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 
 import java.io.File;
@@ -46,7 +48,6 @@ public class EventComponentController {
         this.userMap = mapDatasource.readData();
     }
 
-
     public void onStaffAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("select-team", currentUser);
@@ -55,7 +56,6 @@ public class EventComponentController {
         }
 
     }
-
     public void onEditAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("create-event", currentUser);
@@ -163,7 +163,7 @@ public class EventComponentController {
             editButton.setVisible(true);
         }
         if(!event.getEventImagePath().isEmpty()){
-            image = new Image("file:"+event.getEventImagePath(),300,300,true,true);
+            image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
         }
         eventImageView.setImage(image);
         eventnameLabel.setText(event.getEventName());
