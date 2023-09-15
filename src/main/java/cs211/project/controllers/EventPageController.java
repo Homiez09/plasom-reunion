@@ -1,11 +1,10 @@
 package cs211.project.controllers;
 
 import cs211.project.models.Event;
-import cs211.project.models.EventActivity;
+import cs211.project.models.Activity;
 import cs211.project.models.User;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -18,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class EventPageController {
@@ -29,7 +27,7 @@ public class EventPageController {
     @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel,eventInformationLabel;
     @FXML private VBox teamApplyBox;
     @FXML private ImageView eventImageView;
-    @FXML private TableView<EventActivity> eventActivityTableView;
+    @FXML private TableView<Activity> eventActivityTableView;
     private Image image;
     @FXML private void initialize() {
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -77,13 +75,13 @@ public class EventPageController {
         }
         eventImageView.setImage(image);
 
-        TableColumn<EventActivity,String> nameColumn = new TableColumn<>("Activity name");
+        TableColumn<Activity,String> nameColumn = new TableColumn<>("Activity name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn<EventActivity,String> startTimeColumn = new TableColumn<>("Activity start");
+        TableColumn<Activity,String> startTimeColumn = new TableColumn<>("Activity start");
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        TableColumn<EventActivity,String> endTimeColumn = new TableColumn<>("Activity end");
+        TableColumn<Activity,String> endTimeColumn = new TableColumn<>("Activity end");
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-        TableColumn<EventActivity,String> descriptionColumn = new TableColumn<>("Description");
+        TableColumn<Activity,String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         eventActivityTableView.getColumns().clear();
         eventActivityTableView.getColumns().add(nameColumn);
@@ -96,7 +94,7 @@ public class EventPageController {
         endTimeColumn.setPrefWidth(150);
         descriptionColumn.prefWidthProperty().bind(eventActivityTableView.widthProperty().subtract(nameColumn.widthProperty())
                 .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()));
-        for (EventActivity activity: event.getActivities().getActivities()) {
+        for (Activity activity: event.getActivities().getActivities()) {
             eventActivityTableView.getItems().add(activity);
         }
     }
