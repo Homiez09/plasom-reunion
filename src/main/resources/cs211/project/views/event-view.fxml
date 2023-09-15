@@ -31,12 +31,12 @@
                                     <Font name="Leelawadee" size="12.0" />
                                  </font>
                               </Button>
-                              <ImageView fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0" />
+                              <ImageView fx:id="eventImageView" fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0" />
                               <VBox prefHeight="400.0" spacing="25.0" AnchorPane.leftAnchor="500.0">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="30.0">
                                        <children>
-                                          <Label text="eventNameLabel">
+                                          <Label fx:id="eventNameLabel" text="eventNameLabel">
                                              <font>
                                                 <Font name="Leelawadee Bold" size="36.0" />
                                              </font>
@@ -93,7 +93,7 @@
                                     </HBox>
                                     <Label fx:id="eventTagLabel" text="eventTagLabel" />
                                     <Button mnemonicParsing="false" styleClass="page-button" text="Add to Calendar" />
-                                    <VBox alignment="CENTER" prefWidth="200.0" spacing="10.0" styleClass="staff-apply-box">
+                                    <VBox fx:id="teamApplyBox" alignment="CENTER" prefWidth="200.0" spacing="10.0" styleClass="staff-apply-box">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This event is open for staff application!">
                                              <font>
@@ -135,7 +135,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0">
                                        <children>
-                                          <TableView layoutX="152.0" layoutY="14.0" prefWidth="800.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+                                          <TableView fx:id="eventActivityTableView" layoutX="152.0" layoutY="14.0" prefWidth="800.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
                                             <columns>
                                               <TableColumn prefWidth="100.0" text="C1" />
                                               <TableColumn prefWidth="-1.0" text="C2" />

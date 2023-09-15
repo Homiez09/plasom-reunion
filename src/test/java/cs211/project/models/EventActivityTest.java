@@ -12,11 +12,8 @@ class EventActivityTest {
 
     @Test
     @DisplayName("timeToString test")
-    public void testTimetoString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime start = LocalDateTime.parse("20/11/2023 08:00",formatter);
-        LocalDateTime end = LocalDateTime.parse("20/11/2023 09:30",formatter);
-        EventActivity activity = new EventActivity("event id 001","test name","test description",start,end);
-        assertEquals("20/11/2023 09:30",activity.timeToString(activity.getEndTime()));
+    public void testTimeToString() {
+        EventActivity activity = new EventActivity("event id 001","test name","test description","20/11/2023 08:00","20/11/2023 09:30");
+        assertEquals("20/11/2023 09:30",activity.getEndTime());
     }
 }

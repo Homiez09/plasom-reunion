@@ -11,7 +11,7 @@ public class ActivityList {
     public ActivityList() { activities = new ArrayList<>(); }
 
 
-    public void addActivity(String eventId, String activityName, String activityDescription,LocalDateTime ActivityStart, LocalDateTime ActivityEnd) {
+    public void addActivity(String eventId, String activityName, String activityDescription,String ActivityStart, String ActivityEnd) {
         activityName = activityName.trim();
         if (!activityName.equals("")) {
             activities.add(new EventActivity(eventId,activityName,activityDescription,ActivityStart,ActivityEnd));

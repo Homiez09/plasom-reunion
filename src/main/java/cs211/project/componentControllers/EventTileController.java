@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -15,12 +16,14 @@ public class EventTileController {
     @FXML
     Label eventNameLabel,eventDateLabel,eventPlaceLabel;
     private User currentUser = (User) FXRouter.getData();
+    private Event event;
     private Image image;
     @FXML private void initialize() {
 
     }
 
     public void showEventTile(Event event) {
+        this.event = event;
         String imgpath = "/images/events/event-default.png";
         image = new Image(getClass().getResourceAsStream(imgpath),300,300,false,false);
         if (event!=null) {
@@ -32,11 +35,16 @@ public class EventTileController {
             }
             eventTileImageView.setImage(image);
         }
+
     }
 
-    @FXML protected void onEventTileClick() {
+    @FXML public void onEventTileClick(Event event) {
+
+    }
+
+    public void onEventTileClick(MouseEvent mouseEvent) {
         try {
-            FXRouter.goTo("event",currentUser);
+            FXRouter.goTo("event",currentUser,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
