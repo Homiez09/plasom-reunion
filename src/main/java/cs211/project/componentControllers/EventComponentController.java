@@ -85,7 +85,7 @@ public class EventComponentController {
             eventListDatasource.writeData(eventList);
             mapDatasource.writeData(userMap);
             try {
-                FXRouter.goTo("event-list", currentUser);
+                FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -113,7 +113,7 @@ public class EventComponentController {
             eventListDatasource.writeData(eventList);
 
             try {
-                FXRouter.goTo("event-list", currentUser);
+                FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -161,6 +161,12 @@ public class EventComponentController {
             viewjoinButton.setVisible(true);
             staffButton.setVisible(true);
             editButton.setVisible(true);
+        }
+        if (event.isEnd()){
+            viewjoinButton.setVisible(false);
+            leaveButton.setVisible(false);
+            staffButton.setVisible(false);
+            editButton.setVisible(false);
         }
         if(!event.getEventImagePath().isEmpty()){
             image = new Image("file:"+event.getEventImagePath(),200,200,true,true);

@@ -18,6 +18,7 @@
 -fx-background-radius: 10px;
 -fx-border-width: 2px;
 }
+
 .staff-apply-box{
 -fx-background-color: linear-gradient(#FFBB6A, #FF9900);
 -fx-border-radius: 18px;
@@ -25,20 +26,24 @@
 -fx-background-radius: 20px;
 -fx-border-width: thin ;
 }
+
 .font-component-head{
     -fx-font-size: 18;
     -fx-font-family: Leelawadee;
 }
+
 .font-component-subhead{
     -fx-font-size: 14;
     -fx-font-family: Leelawadee;
 }
+
 .button-component{
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-border-color: #000;
     -fx-font-family: Leelawadee;
 }
+
 .event-component {
     -fx-background-color: #FFF5E5;
     -fx-background-radius: 15;
@@ -64,15 +69,17 @@
         transform: scale(0.5);
     }
 }
+
 .list-view {
-    -fx-background-color: #FFF5E5;
+    -fx-background-color:transparent;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-border-color: #FFF5E5;
-    -fx-control-inner-background: #FFA500; /* สีพื้นหลังสำหรับ ListView */
+    -fx-control-inner-background: #F9F6F7; /* สีพื้นหลังสำหรับ ListView */
     -fx-opacity: 1;
     -fx-horizontal-grid-lines-visible: true;
     -fx-vertical-grid-lines-visible: true;
+
 
 }
 
@@ -133,4 +140,11 @@
 
 .scroll-pane > .corner {
     -fx-background-color: transparent;
+}
+
+.choice-box{
+    -fx-background-color:transparent;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 15px;
+
 }

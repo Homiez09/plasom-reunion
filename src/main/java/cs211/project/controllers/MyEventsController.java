@@ -5,17 +5,24 @@ import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
 import javafx.animation.ScaleTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,33 +35,54 @@ public class MyEventsController {
     @FXML
     ListView eventsListView,hosteventListView, myeventsListView,historyeventListView;
     @FXML
-    Button showallButton,hosteventButton,myeventButton, historyButton;
+    Button hosteventButton,myeventButton, historyButton;
+    @FXML
+    ChoiceBox sortChoiceBox;
+    @FXML
+    ImageView sortIamgeView;
+    private boolean ascending = true;
     private User currentUser ;
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
     private UserEventMap mapDatasource ;
     private HashMap<String, Set<String>> userMap;
     private Set<String> eventSet;
+    private ObservableList<Event> observableEventList;
+
 
     @FXML
     public void initialize() {
         this.currentUser = (User) FXRouter.getData();
         eventDatasource = new EventListDataSource("data","event-list.csv");
         eventList = eventDatasource.readData();
+        eventLabel.setText("My Events");
+        sortChoiceBox.setValue("Name");
+        sortChoiceBox.setItems(FXCollections.observableArrayList(
+                "Name",
+                "Date",
+                "Member",
+                "Tag"
+        ));
 
         this.userMap = new HashMap<>();
         this.eventSet = new HashSet<>();
 
-        showallButton.setVisible(false);
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
-        showList(eventList);
 
+        observableEventList = FXCollections.observableArrayList(eventList.getEvents());
+
+
+
+
+
+
+        showList(eventList);
     }
 
     public void showList(EventList eventList) {
 
-        eventsListView.getItems().clear();
-        hosteventListView.getItems().clear();
+
+
         myeventsListView.getItems().clear();
         historyeventListView.getItems().clear();
 
@@ -66,22 +94,16 @@ public class MyEventsController {
         }
 
         if(eventList != null){
-            for (Event event : eventList.getEvents()) {
+            for (Event event : observableEventList) {
                 try {
                     FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
                     AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
                     EventComponentController eventComponent = eventComponentLoader.getController();
                     eventComponent.setEventData(event);
 
-                    if (event.getEventHost().equals(currentUser.getUsername())) {
-                        hosteventListView.getItems().add(eventAnchorPaneComponent);
-                        onAnimateComponent(eventAnchorPaneComponent);
-                    } else if (eventSet.contains(event.getEventID()) && userMap.containsKey(currentUser.getUsername())) {
-                        myeventsListView.getItems().add(eventAnchorPaneComponent);
-                        onAnimateComponent(eventAnchorPaneComponent);
-                    }else {
+                    if (eventSet.contains(event.getEventID()) && userMap.containsKey(currentUser.getUsername()) ) {
                         if (!event.isEnd()){
-                            eventsListView.getItems().add(eventAnchorPaneComponent);
+                            myeventsListView.getItems().add(eventAnchorPaneComponent);
                             onAnimateComponent(eventAnchorPaneComponent);
                         }else {
                             historyeventListView.getItems().add(eventAnchorPaneComponent);
@@ -109,17 +131,6 @@ public class MyEventsController {
             throw new RuntimeException(e);
         }
     }
-    public void onShowAllButton(ActionEvent actionEvent) {
-        showallButton.setVisible(false);
-        hosteventButton.setVisible(true);
-        myeventButton.setVisible(true);
-        historyButton.setVisible(true);
-        eventLabel.setText("Show All");
-        eventsListView.setVisible(true);
-        hosteventListView.setVisible(false);
-        myeventsListView.setVisible(false);
-        historyeventListView.setVisible(false);
-    }
     public void onHostEventsAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("host-events",currentUser);
@@ -128,24 +139,16 @@ public class MyEventsController {
         }
     }
     public void onMyEventsAction(ActionEvent actionEvent) {
-        showallButton.setVisible(true);
-        hosteventButton.setVisible(true);
         myeventButton.setVisible(false);
         historyButton.setVisible(true);
         eventLabel.setText("My Events");
-        eventsListView.setVisible(false);
-        hosteventListView.setVisible(false);
         myeventsListView.setVisible(true);
         historyeventListView.setVisible(false);
     }
     public void onHistorysAction(ActionEvent actionEvent) {
-        showallButton.setVisible(true);
-        hosteventButton.setVisible(true);
         myeventButton.setVisible(true);
         historyButton.setVisible(false);
         eventLabel.setText("History Events");
-        eventsListView.setVisible(false);
-        hosteventListView.setVisible(false);
         myeventsListView.setVisible(false);
         historyeventListView.setVisible(true);
     }
@@ -167,4 +170,59 @@ public class MyEventsController {
         });
     }
 
+    private void sortAndShowEvents(EventList eventList, Comparator<Event> comparator) {
+        observableEventList.sort(comparator);
+        showList(eventList);
+    }
+
+    public void onSortClick(MouseEvent mouseEvent) {
+        sortChoiceBox.setOnAction(event -> {
+            Comparator<Event> dataComparator = getEventComparator(sortChoiceBox.getValue().toString(), ascending);
+            sortAndShowEvents(eventList, dataComparator);
+
+        });
+    }
+
+    private Comparator<Event> getEventComparator(String sortOption, boolean ascending) {
+        Comparator<Event> comparator = null;
+
+        switch (sortOption) {
+            case "Name":
+                comparator = Comparator.comparing(Event::getEventName);
+                break;
+            case "Date":
+                comparator = Comparator.comparing(Event::getEventDateStart);
+                break;
+            case "Member":
+                comparator = Comparator.comparingInt(Event::getMember);
+                break;
+            case "Tag":
+                comparator = Comparator.comparing(Event::getEventTag);
+                break;
+            default:
+                // Handle other cases if needed
+                break;
+        }
+
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+
+        return comparator;
+    }
+
+    public void onClickAscenDecen(MouseEvent mouseEvent) {
+        // Invert the ascending flag
+        ascending = !ascending;
+        Comparator<Event> dataComparator = getEventComparator(sortChoiceBox.getValue().toString(), ascending);
+        sortAndShowEvents(eventList, dataComparator);
+
+
+
+
+        // Update the sort icon
+        String imgPath = ascending ? "/images/hostevent/sort-ascending.png" : "/images/hostevent/sort-descending.png";
+        sortIamgeView.setImage(new Image(getClass().getResourceAsStream(imgPath)));
+
+    }
 }
