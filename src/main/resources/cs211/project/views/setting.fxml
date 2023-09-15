@@ -5,11 +5,12 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -92,53 +93,55 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="loginPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false">
+            <Pane fx:id="loginPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css">
                <children>
-                  <Line endX="722.0" layoutX="34.0" layoutY="264.0" style="-fx-fill: #BFBFBF;" />
-                  <Label layoutX="60.0" layoutY="22.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Login &amp; Security" textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="88.5" layoutY="88.5" styleClass="fontText" stylesheets="@../../../css/setting.css" text="reset password">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="newPasswordField" layoutX="132.0" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="new password" styleClass="font" />
-                  <PasswordField fx:id="renewPasswordField" layoutX="392.25" layoutY="140.25" prefHeight="30.0" prefWidth="214.0" promptText="re-new password" styleClass="font" />
-                  <PasswordField fx:id="oldPasswordField" layoutX="228.0" layoutY="193.5" prefHeight="30.0" prefWidth="214.0" promptText="old password" styleClass="font" />
-                  <Button layoutX="473.0" layoutY="196.0" mnemonicParsing="false" style="-fx-background-color: #4CAF50; -fx-background-radius: 7.5;" styleClass="fontText" stylesheets="@../../../css/setting.css" text="OK" textAlignment="CENTER" />
-                  <Label fx:id="settingLabel1" layoutX="88.5" layoutY="279.75" styleClass="fontText" stylesheets="@../../../css/setting.css" text="active status" textAlignment="CENTER">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="settingLabel11" layoutX="194.0" layoutY="323.0" styleClass="fontText" stylesheets="@../../../css/setting.css" text="private account" textAlignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Pane layoutX="116.0" layoutY="317.0">
+                  <VBox layoutX="49.0" layoutY="59.0">
                      <children>
-                        <ImageView fx:id="offImageView">
-                           <image>
-                              <Image url="@../../../images/icons/setting/switch-bodyOff.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="onImageView" visible="false">
-                           <image>
-                              <Image url="@../../../images/icons/setting/switch-bodyOn.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="switchImageView" fitHeight="29.0" fitWidth="29.0">
-                           <image>
-                              <Image url="@../../../images/icons/setting/Switch.png" />
-                           </image>
-                        </ImageView>
-                        <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#onToggleButton" prefHeight="29.0" prefWidth="61.0" />
+                        <AnchorPane fx:id="passwordAnchorPane" prefHeight="300.0" prefWidth="600.0" />
+                        <Separator opacity="0.0" prefHeight="26.0" prefWidth="700.0" />
+                        <HBox visible="false">
+                           <children>
+                              <Label fx:id="settingLabel1" styleClass="fontText" stylesheets="@../../../css/setting.css" text="Active status" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Separator opacity="0.0" prefHeight="14.0" prefWidth="700.0" visible="false" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" visible="false">
+                           <children>
+                              <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="50.0" />
+                              <Pane>
+                                 <children>
+                                    <ImageView fx:id="offImageView">
+                                       <image>
+                                          <Image url="@../../../images/icons/setting/switch-bodyOff.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="onImageView" visible="false">
+                                       <image>
+                                          <Image url="@../../../images/icons/setting/switch-bodyOn.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="switchImageView" fitHeight="29.0" fitWidth="29.0">
+                                       <image>
+                                          <Image url="@../../../images/icons/setting/Switch.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#onToggleButton" prefHeight="29.0" prefWidth="61.0" />
+                                 </children>
+                              </Pane>
+                              <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="15.0" />
+                              <Label fx:id="settingLabel11" prefHeight="20.0" styleClass="fontText" stylesheets="@../../../css/setting.css" text="private account" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
-                  </Pane>
+                  </VBox>
                </children>
             </Pane>
             <Pane fx:id="mainPane" accessibleRole="TOGGLE_BUTTON" layoutX="335.0" layoutY="120.0" prefHeight="591.75" prefWidth="798.0" styleClass="bgPane" stylesheets="@../../../css/setting.css" visible="false" />
