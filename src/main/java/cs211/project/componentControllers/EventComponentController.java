@@ -3,7 +3,6 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 
 
 import java.io.File;
@@ -35,17 +33,22 @@ public class EventComponentController {
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     private UserEventMap mapDatasource ;
-    private HashMap<String, Set<String>> userMap;
-    private Set<String> eventSet;
+    private HashMap<String, Set<String>> hashMap; // Collect EventID
+    private Set<String> hashSet;// Collect User
     private Event event;
 
     @FXML
     public void initialize() {
         this.eventListDatasource = new EventListDataSource("data","event-list.csv");
         this.eventList = eventListDatasource.readData();
-        this.userMap = new HashMap<>();
+        this.hashMap = new HashMap<>();
         this.mapDatasource = new UserEventMap("data", "join-event.csv");
-        this.userMap = mapDatasource.readData();
+        this.hashMap = mapDatasource.readData();
+
+
+
+
+
     }
 
     public void onStaffAction(ActionEvent actionEvent) {
@@ -65,13 +68,13 @@ public class EventComponentController {
     }
     public void onJoinViewAction(ActionEvent actionEvent){
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (userMap.containsKey(currentUser.getUsername())) {
-            eventSet = userMap.get(currentUser.getUsername());
+        if (hashMap.containsKey(event.getEventID())) {
+            hashSet = hashMap.get(event.getEventID());
         }else {
-            eventSet = new HashSet<>();
+            hashSet = new HashSet<>();
         }
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (eventSet.contains(event.getEventID())||currentUser.getUsername().equals(event.getEventHost())){
+        if (hashSet.contains(currentUser.getUsername())|| currentUser.getUsername().equals(event.getEventHost())){
             try {
                 FXRouter.goTo("event",currentUser,event);
             } catch (IOException e) {
@@ -79,11 +82,11 @@ public class EventComponentController {
             }
         }else {
             eventList.findEvent(event.getEventID()).addMember();
-            eventSet.add(event.getEventID());
-            userMap.put(currentUser.getUsername(), eventSet);
+            hashSet.add(currentUser.getUsername());
+            hashMap.put(event.getEventID(), hashSet);
 
             eventListDatasource.writeData(eventList);
-            mapDatasource.writeData(userMap);
+            mapDatasource.writeData(hashMap);
             try {
                 FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
@@ -118,15 +121,15 @@ public class EventComponentController {
                 throw new RuntimeException(e);
             }
         }else {
-            if (userMap.containsKey(currentUser.getUsername())) {
-                eventSet = userMap.get(currentUser.getUsername());
+            if (hashMap.containsKey(currentUser.getUsername())) {
+                hashSet = hashMap.get(currentUser.getUsername());
             }
             eventList.findEvent(event.getEventID()).delMember();
-            eventSet.remove(event.getEventID());
-            userMap.put(currentUser.getUsername(),eventSet);
+            hashSet.remove(event.getEventID());
+            hashMap.put(currentUser.getUsername(), hashSet);
 
             eventListDatasource.writeData(eventList);
-            mapDatasource.writeData(userMap);
+            mapDatasource.writeData(hashMap);
             try {
                 FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
@@ -138,18 +141,18 @@ public class EventComponentController {
         this.event = event;
         String imgpath = "/images/events/event-default.png";
         Image image = new Image(getClass().getResourceAsStream(imgpath),200,200,true,true);
-        userMap = new HashMap<>();
+        hashMap = new HashMap<>();
         mapDatasource = new UserEventMap("data", "join-event.csv");
-        userMap = mapDatasource.readData();
+        hashMap = mapDatasource.readData();
 
-        if (userMap.containsKey(currentUser.getUsername())) {
-            eventSet = userMap.get(currentUser.getUsername());
+        if (hashMap.containsKey(currentUser.getUsername())) {
+            hashSet = hashMap.get(currentUser.getUsername());
         }else {
-            eventSet = new HashSet<>();
+            hashSet = new HashSet<>();
         }
         buttonVisible(!event.isEnd());
             //In Event
-        if (eventSet.contains(event.getEventID())|| currentUser.getUsername().equals(event.getEventHost())){
+        if (hashSet.contains(event.getEventID())|| currentUser.getUsername().equals(event.getEventHost())){
             viewjoinButton.setText("View");
             leaveButton.setVisible(true);
         }else {// Join Event

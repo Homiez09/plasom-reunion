@@ -45,16 +45,16 @@ public class MyEventsController {
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
     private UserEventMap mapDatasource ;
-    private HashMap<String, Set<String>> userMap;
-    private Set<String> eventSet;
+    private HashMap<String, Set<String>> hashMap;
+    private Set<String> hashSet;
     private ObservableList<Event> observableEventList;
 
 
     @FXML
     public void initialize() {
         this.currentUser = (User) FXRouter.getData();
-        eventDatasource = new EventListDataSource("data","event-list.csv");
-        eventList = eventDatasource.readData();
+        this.eventDatasource = new EventListDataSource("data","event-list.csv");
+        this.eventList = eventDatasource.readData();
         eventLabel.setText("My Events");
         sortChoiceBox.setValue("Name");
         sortChoiceBox.setItems(FXCollections.observableArrayList(
@@ -64,8 +64,8 @@ public class MyEventsController {
                 "Tag"
         ));
 
-        this.userMap = new HashMap<>();
-        this.eventSet = new HashSet<>();
+        this.hashMap = new HashMap<>();
+        this.hashSet = new HashSet<>();
 
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
 
@@ -81,27 +81,26 @@ public class MyEventsController {
 
     public void showList(EventList eventList) {
 
-
-
         myeventsListView.getItems().clear();
         historyeventListView.getItems().clear();
 
         this.mapDatasource = new UserEventMap("data", "join-event.csv");
-        this.userMap = mapDatasource.readData();
+        this.hashMap = mapDatasource.readData();
 
-        if (userMap.containsKey(currentUser.getUsername())) {
-            this.eventSet = userMap.get(currentUser.getUsername());
-        }
+
 
         if(eventList != null){
             for (Event event : observableEventList) {
+                if (hashMap.containsKey(event.getEventID())) {
+                    hashSet = hashMap.get(event.getEventID());
+                }
                 try {
                     FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-component.fxml"));
                     AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
                     EventComponentController eventComponent = eventComponentLoader.getController();
                     eventComponent.setEventData(event);
 
-                    if (eventSet.contains(event.getEventID()) && userMap.containsKey(currentUser.getUsername()) ) {
+                    if (hashSet.contains(currentUser.getUsername()) && hashMap.containsKey(event.getEventID()) ) {
                         if (!event.isEnd()){
                             myeventsListView.getItems().add(eventAnchorPaneComponent);
                             onAnimateComponent(eventAnchorPaneComponent);
