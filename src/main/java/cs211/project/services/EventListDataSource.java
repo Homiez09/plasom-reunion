@@ -82,9 +82,10 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventLocation = data[8].trim();
                 int member = Integer.parseInt(data[9].trim());
                 int slotmember = Integer.parseInt(data[10].trim());
+                String timeStamp = data[11].trim();
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember);
+                                        eventDescription, eventLocation, member, slotmember,timeStamp);
 
 
                 // เพิ่มข้อมูลลงใน list

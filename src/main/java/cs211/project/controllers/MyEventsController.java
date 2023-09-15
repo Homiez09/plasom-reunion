@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EventListController {
+public class MyEventsController {
     @FXML
     AnchorPane navbarAnchorPane;
     @FXML
@@ -125,7 +125,7 @@ public class EventListController {
         hosteventButton.setVisible(false);
         myeventButton.setVisible(true);
         historyButton.setVisible(true);
-        eventLabel.setText("Host Events");
+
         eventsListView.setVisible(false);
         hosteventListView.setVisible(true);
         myeventsListView.setVisible(false);

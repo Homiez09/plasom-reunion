@@ -34,14 +34,14 @@ public class EventList {
     public void addEvent(String eventId, String eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
-                         int member, int slotMember) {
+                         int member, int slotMember,String timeStamp) {
         eventId = eventId.trim();
         eventName = eventName.trim();
         eventHost = eventHost.trim();
         Event exist = findEvent(eventId);
         if (exist == null &&!eventName.equals("") && !eventHost.equals("")){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
-                                    eventLocation,member,slotMember));
+                                    eventLocation,member,slotMember,timeStamp));
         }
     }
 

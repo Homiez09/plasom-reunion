@@ -145,9 +145,6 @@ public class CreateEventController {
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
             System.out.println(newEventImagePath);
-            if (newEventImagePath==null){
-                newEventImagePath = "/images/events/event-default.png";
-            }
             if (!numMemberString.equals("")){
                 int numMember = Integer.parseInt(numMemberString);
                 thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,
@@ -164,7 +161,7 @@ public class CreateEventController {
             eventListDatasource.writeData(eventList);
         }
         try {
-            FXRouter.goTo("event-list");
+            FXRouter.goTo("my-events");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

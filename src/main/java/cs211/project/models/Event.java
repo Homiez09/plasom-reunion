@@ -12,6 +12,7 @@ public class Event {
     private String eventTag,eventDateStart, eventDateEnd;
     private String eventDescription, eventLocation;
     private int member = 0 ,slotMember;
+    private final String timestamp;
     private ActivityList activities;
     private TeamList teams;
     public Event(String eventName,
@@ -33,6 +34,7 @@ public class Event {
         this.eventLocation = eventLocation;
         this.member = 0;
         this.slotMember = -1;
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
     public Event(String eventName,
@@ -55,6 +57,7 @@ public class Event {
         this.eventLocation = eventLocation;
         this.member = 0;
         this.slotMember = slotMember;
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
     }
 
     public Event(String eventID,
@@ -67,7 +70,8 @@ public class Event {
                  String eventDescription,
                  String eventLocation,
                  int member,
-                 int slotMember) {
+                 int slotMember,
+                 String timestamp) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
@@ -79,6 +83,7 @@ public class Event {
         this.member = member;
         this.slotMember = slotMember;
         this.eventHost = eventHost;
+        this.timestamp =timestamp;
 }
 
 
@@ -96,6 +101,8 @@ public class Event {
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivities() { return activities; }
     public TeamList getTeams() { return teams; }
+    public String getTimestamp() {return timestamp;}
+
     public void changeDateStart(String newDate){this.eventDateStart = newDate;}
     public void changeDateEnd(String newDate){this.eventDateEnd = newDate;}
     public void changeName(String newName){this.eventName = newName;}
@@ -158,7 +165,8 @@ public class Event {
                 +   eventDescription + ','
                 +   eventLocation + ','
                 +   member + ','
-                +   slotMember ;
+                +   slotMember +','
+                +   timestamp;
 
     }
 }
