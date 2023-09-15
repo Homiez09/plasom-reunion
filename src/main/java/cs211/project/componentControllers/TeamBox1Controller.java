@@ -2,9 +2,9 @@ package cs211.project.componentControllers;
 
 import cs211.project.models.Team;
 import cs211.project.models.User;
-import cs211.project.models.collections.UserList;
+import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserListDataSource;
+import cs211.project.services.JoinTeamMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -14,23 +14,23 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class TeamBox1Controller {
-
     @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
     @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
     private User user = (User) FXRouter.getData();
-    private UserList userList;
-
     private boolean bookmarked = false, initBookMarkCheck = false;
-    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
+
+    JoinTeamMap joinTeamMap = new JoinTeamMap();
+    HashMap<String, TeamList> teamListHashMap;
+    TeamList teamList;
+
 
     @FXML private void initialize() {
-        userList = datasource.readData();
-
         initMenu();
         loadIcon();
 
@@ -40,12 +40,21 @@ public class TeamBox1Controller {
 
     @FXML
     private void onBookMarkClick(){
+        teamListHashMap = joinTeamMap.readData();
+        teamList = teamListHashMap.get(user.getUsername());
+        Team team = teamList.findTeamByID(teamIdLabel.getText());
+
         if (bookmarked) {
             bookMarkImageView.setImage(unBookMarkIcon);
         } else {
             bookMarkImageView.setImage(bookMarkIcon);
+
         }
         bookmarked = !bookmarked;
+
+        team.setBookmarked(bookmarked);
+        joinTeamMap.writeData(teamListHashMap);
+        initBookmark();
     }
     @FXML
     private void onRoleEntered(MouseEvent event){
@@ -114,18 +123,16 @@ public class TeamBox1Controller {
         initBookMarkCheck = true;
     }
 
-    private void goTo(String page) throws IOException {
+    protected void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
-                //print user data
-                System.out.println(teamIdLabel.getText());
-                System.out.println(bookmarkLabel.getText());
+                //todo : go to  manage team page
                 break;
             case "Delete Team":
-                //todo : do something
+                //todo : owner delete team
                 break;
             case "Leave Team":
-                //todo : do something
+                //todo : user leave team
                 break;
         }
         menuDropDown.getSelectionModel().clearSelection();
