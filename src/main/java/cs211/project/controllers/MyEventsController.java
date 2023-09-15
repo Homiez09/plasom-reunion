@@ -121,15 +121,11 @@ public class MyEventsController {
         historyeventListView.setVisible(false);
     }
     public void onHostEventsAction(ActionEvent actionEvent) {
-        showallButton.setVisible(true);
-        hosteventButton.setVisible(false);
-        myeventButton.setVisible(true);
-        historyButton.setVisible(true);
-
-        eventsListView.setVisible(false);
-        hosteventListView.setVisible(true);
-        myeventsListView.setVisible(false);
-        historyeventListView.setVisible(false);
+        try {
+            FXRouter.goTo("host-events",currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void onMyEventsAction(ActionEvent actionEvent) {
         showallButton.setVisible(true);

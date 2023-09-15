@@ -128,7 +128,7 @@ public class EventComponentController {
             eventListDatasource.writeData(eventList);
             mapDatasource.writeData(userMap);
             try {
-                FXRouter.goTo("event-list", currentUser);
+                FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

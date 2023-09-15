@@ -2,6 +2,8 @@ package cs211.project.models;
 
 import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.TeamList;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +15,9 @@ public class Event {
     private String eventDescription, eventLocation;
     private int member = 0 ,slotMember;
     private final String timestamp;
+    private boolean joinEvent = false,joinTeam = false;
+    private BooleanProperty isSelected ;
+
     private ActivityList activities;
     private TeamList teams;
     public Event(String eventName,
@@ -35,6 +40,7 @@ public class Event {
         this.member = 0;
         this.slotMember = -1;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        this.isSelected = new SimpleBooleanProperty(false);
     }
 
     public Event(String eventName,
@@ -57,6 +63,7 @@ public class Event {
         this.eventLocation = eventLocation;
         this.member = 0;
         this.slotMember = slotMember;
+        this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
     }
 
@@ -84,7 +91,9 @@ public class Event {
         this.slotMember = slotMember;
         this.eventHost = eventHost;
         this.timestamp =timestamp;
-}
+        this.isSelected = new SimpleBooleanProperty(false);
+
+    }
 
 
 
@@ -102,6 +111,8 @@ public class Event {
     public ActivityList getActivities() { return activities; }
     public TeamList getTeams() { return teams; }
     public String getTimestamp() {return timestamp;}
+    public boolean isJoinEvent() {return joinEvent;}
+    public boolean isJoinTeam() {return joinTeam;}
 
     public void changeDateStart(String newDate){this.eventDateStart = newDate;}
     public void changeDateEnd(String newDate){this.eventDateEnd = newDate;}
@@ -168,6 +179,14 @@ public class Event {
                 +   slotMember +','
                 +   timestamp;
 
+    }
+
+    public boolean isSelected() {
+        return isSelected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return isSelected;
     }
 }
 

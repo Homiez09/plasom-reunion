@@ -70,7 +70,7 @@ public class SelectTeamController {
     @FXML
     private void onMyEventClick(){
         try {
-            FXRouter.goTo("my-event");
+            FXRouter.goTo("host.css-events");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

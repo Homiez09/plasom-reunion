@@ -51,8 +51,8 @@ public class SignInController {
     void initialize() {
         datasource = new UserListDataSource("data", "user-list.csv");
         userList = datasource.readData();
-
-
+        usernameTextField.setText("OwlVi");
+        passwordField.setText("Manza1150!");
         loadImage();
         showImage(page);
         maxPage = calculateMaxPage();
