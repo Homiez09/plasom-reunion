@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,8 +30,11 @@ public class EventComponentController {
     @FXML
     Button staffButton,editButton,viewjoinButton,leaveButton;
     private User currentUser = (User) FXRouter.getData();
-    private Datasource<UserList> userListDatasource;
-    private UserList userList;
+    private TeamListDataSource teamListDataSource;
+    private TeamList teamList;
+    private JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private HashMap<String, TeamList> teamHashMapGlobal = joinTeamMap.readData();
+    HashMap<String, TeamList> teamHashMap = new HashMap<>();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     private UserEventMap mapDatasource ;
@@ -44,12 +49,14 @@ public class EventComponentController {
         this.userMap = new HashMap<>();
         this.mapDatasource = new UserEventMap("data", "join-event.csv");
         this.userMap = mapDatasource.readData();
+        this.teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+        this.teamList = teamListDataSource.readData();
     }
 
 
     public void onStaffAction(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("select-team", currentUser);
+            FXRouter.goTo("select-team", currentUser, event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -92,9 +99,17 @@ public class EventComponentController {
         }
     }
     public void onDeleteLeaveAction(ActionEvent actionEvent) {
-
-        if (event.getEventHost().equals(currentUser.getUsername())){
+        if (event.getEventHost().equals(currentUser.getUsername())) {
             eventList.getEvents().remove(eventList.findEvent(event.getEventID()));
+            teamList.getTeams().removeIf(team -> team.getEventID().equals(event.getEventID())); // ลบทีมใน team-list.csv
+
+            // ลบ user join team ใน join-team.csv
+            for (String username : teamHashMapGlobal.keySet()) { // ตามจำนวนคนใน team
+                TeamList teamList = new TeamList(teamHashMapGlobal.get(username).getTeams());
+                teamList.removeTeamByEvent(event);
+                teamHashMap.put(username, teamList); // ยัด teamList ที่ลบ team ในแต่ละ user เข้าไปใน teamHashMap
+            }
+
             // สร้าง path
             String folderPath = event.getEventImagePath();
             File fileToDelete = new File(folderPath);
@@ -109,24 +124,28 @@ public class EventComponentController {
             } else {
                 System.out.println("ไฟล์ไม่มีอยู่");
             }
+
             // ลบไฟล์
             eventListDatasource.writeData(eventList);
+            joinTeamMap.writeData(teamHashMap);
+            teamListDataSource.writeData(teamList);
 
             try {
                 FXRouter.goTo("event-list", currentUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }else {
+        } else {
             if (userMap.containsKey(currentUser.getUsername())) {
                 eventSet = userMap.get(currentUser.getUsername());
             }
             eventList.findEvent(event.getEventID()).delMember();
             eventSet.remove(event.getEventID());
-            userMap.put(currentUser.getUsername(),eventSet);
+            userMap.put(currentUser.getUsername(), eventSet);
 
             eventListDatasource.writeData(eventList);
             mapDatasource.writeData(userMap);
+
             try {
                 FXRouter.goTo("event-list", currentUser);
             } catch (IOException e) {

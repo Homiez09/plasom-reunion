@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBox2Controller">
+   <children>
+      <ComboBox fx:id="menuDropDown" layoutX="37.0" layoutY="3.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
+      <Label fx:id="teamIdLabel" layoutX="60.0" layoutY="60.0" text="Label" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="228.0" stroke="BLACK" strokeType="INSIDE" styleClass="team-box-shape" width="228.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.8625592417061612" startX="1.0" startY="0.33175355450236965">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9647058844566345" green="0.95686274766922" blue="0.9333333373069763" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9607843160629272" green="0.9411764740943909" blue="0.8941176533699036" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fx:id="faceImageView" fitHeight="72.0" fitWidth="72.0" layoutX="78.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/icons/team-box/face_icon.png" />
+         </image></ImageView>
+      <ImageView fx:id="manageTeamImageView" fitHeight="4.8" fitWidth="21.16" layoutX="191.0" layoutY="13.0" onMouseClicked="#onMenuDropDownComponentClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/icons/team-box/dot_icon.png" />
+         </image></ImageView>
+      <ImageView fx:id="bookMarkImageView" fitHeight="30.0" fitWidth="25.0" layoutX="190.0" layoutY="25.0" onMouseClicked="#onBookMarkClick" onMouseEntered="#onBookMarkEntered" onMouseExited="#onBookMarkExited" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/icons/team-box/bookmark/bookmark_icon.png" />
+         </image></ImageView>
+      <Label fx:id="teamNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="149.0" prefHeight="23.0" prefWidth="228.0" text="teamNameLabel">
+         <styleClass>
+            <String fx:value="font" />
+            <String fx:value="text-lg" />
+            <String fx:value="center-label" />
+            <String fx:value="color-gray" />
+         </styleClass>
+      </Label>
+      <ImageView fx:id="roleImageView" fitHeight="30.0" fitWidth="30.0" layoutX="16.0" layoutY="14.0" onMouseEntered="#onRoleEntered" onMouseExited="#onRoleExited" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/icons/team-box/role/Owner.png" />
+         </image></ImageView>
+      <ImageView fx:id="peopleImageView" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/icons/team-box/people_icon.png" />
+         </image></ImageView>
+      <Label alignment="CENTER" layoutX="171.0" layoutY="203.0" prefHeight="10.0" prefWidth="40.0" text="online">
+         <styleClass>
+            <String fx:value="font" />
+            <String fx:value="text-xs" />
+            <String fx:value="center-label" />
+            <String fx:value="color-gray" />
+         </styleClass>
+      </Label>
+      <Label fx:id="numActiveLabel" alignment="CENTER_RIGHT" layoutX="154.0" layoutY="203.0" prefHeight="10.0" prefWidth="21.0" text="111">
+         <styleClass>
+            <String fx:value="font" />
+            <String fx:value="text-xs" />
+            <String fx:value="center-label" />
+            <String fx:value="color-gray" />
+         </styleClass>
+      </Label>
+      <ImageView fx:id="activeImageView" fitHeight="4.0" fitWidth="4.0" layoutX="147.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/icons/team-box/active_icon.png" />
+         </image></ImageView>
+      <AnchorPane fx:id="memberShipAnchorPane" layoutX="51.0" layoutY="20.0" prefHeight="26.0" prefWidth="166.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="19.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="membership-message-box" width="139.0" />
+            <Label contentDisplay="RIGHT" layoutX="13.0" layoutY="2.0" prefHeight="15.0" prefWidth="77.0" text="Membership :">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="29.0" layoutY="182.0" prefHeight="15.0" prefWidth="72.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="19.0" layoutX="7.0" layoutY="20.0" opacity="0.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="membership-message-box" width="128.0" />
+            <Label contentDisplay="RIGHT" layoutX="43.0" layoutY="8.0" opacity="0.0" prefHeight="15.0" prefWidth="77.0" text="Participants :">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="13.0" layoutY="16.0" prefHeight="15.0" prefWidth="22.0" text="10">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+            </Label>
+            <Label alignment="CENTER" layoutX="33.0" layoutY="14.0" prefHeight="16.0" prefWidth="10.0" text="/">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+            </Label>
+            <Label contentDisplay="RIGHT" layoutX="42.0" layoutY="16.0" prefHeight="15.0" prefWidth="32.0" text="15">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="center-label" />
+                  <String fx:value="color-gray" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label fx:id="bookmarkLabel" opacity="0.0" />
+   </children>
+</AnchorPane>
