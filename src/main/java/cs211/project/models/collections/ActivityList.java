@@ -1,12 +1,11 @@
 package cs211.project.models.collections;
 
-import cs211.project.models.EventActivity;
+import cs211.project.models.Activity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ActivityList {
-    private ArrayList<EventActivity> activities;
+    private ArrayList<Activity> activities;
 
     public ActivityList() { activities = new ArrayList<>(); }
 
@@ -14,19 +13,19 @@ public class ActivityList {
     public void addActivity(String eventId, String activityName, String activityDescription,String ActivityStart, String ActivityEnd) {
         activityName = activityName.trim();
         if (!activityName.equals("")) {
-            activities.add(new EventActivity(eventId,activityName,activityDescription,ActivityStart,ActivityEnd));
+            activities.add(new Activity(eventId,activityName,activityDescription,ActivityStart,ActivityEnd));
         }
     }
 
-    public EventActivity findActivity(String eventId){
-        for (EventActivity activity:activities) {
+    public Activity findActivity(String eventId){
+        for (Activity activity:activities) {
             if (activity.getEventID().equals(eventId)){
                 return activity;
             }
         }
         return null;
     }
-    public ArrayList<EventActivity> getActivities() {
+    public ArrayList<Activity> getActivities() {
         return activities;
     }
 }
