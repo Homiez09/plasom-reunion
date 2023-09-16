@@ -141,12 +141,12 @@ public class EventComponentController {
                 throw new RuntimeException(e);
             }
         }else {
-            if (hashMap.containsKey(currentUser.getUsername())) {
-                hashSet = hashMap.get(currentUser.getUsername());
+            if (hashMap.containsKey(event.getEventID())) {
+                hashSet = hashMap.get(event.getEventID());
             }
             eventList.findEvent(event.getEventID()).delMember();
-            hashSet.remove(event.getEventID());
-            hashMap.put(currentUser.getUsername(), hashSet);
+            hashSet.remove(currentUser.getUsername());
+            hashMap.put(event.getEventID(), hashSet);
 
             eventListDatasource.writeData(eventList);
             mapDatasource.writeData(hashMap);
@@ -165,14 +165,14 @@ public class EventComponentController {
         mapDatasource = new UserEventMap("data", "join-event.csv");
         hashMap = mapDatasource.readData();
 
-        if (hashMap.containsKey(currentUser.getUsername())) {
-            hashSet = hashMap.get(currentUser.getUsername());
+        if (hashMap.containsKey(event.getEventID())) {
+            hashSet = hashMap.get(event.getEventID());
         }else {
             hashSet = new HashSet<>();
         }
         buttonVisible(!event.isEnd());
             //In Event
-        if (hashSet.contains(event.getEventID())|| currentUser.getUsername().equals(event.getEventHost())){
+        if (hashSet.contains(currentUser.getUsername()) && hashMap.containsKey(event.getEventID())){
             viewjoinButton.setText("View");
             leaveButton.setVisible(true);
         }else {// Join Event
