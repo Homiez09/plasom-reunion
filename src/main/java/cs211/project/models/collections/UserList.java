@@ -22,7 +22,9 @@ public class UserList {
     }
 
     public User findDisplayName(String displayName) {
+        System.out.println(displayName);
         for (User exist: users) {
+            System.out.println();
             if (exist.isDisplayName(displayName)) {
                 return exist;
             }
@@ -30,22 +32,12 @@ public class UserList {
         return null;
     }
 
-    public User findUserId(String userId) {
-        for (User exist: users) {
-            if (exist.isId(userId)) {
-                return exist;
-            }
-        }
-        return null;
-    }
-
-
-    public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, String bio){
+    public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, boolean showContactNumber, String bio){
         username = username.trim();
         password = password.trim();
         User newUser = findUsername(username);
         if(newUser == null){
-            users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, bio));
+            users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin,showContactNumber, bio));
         }
     }
 
@@ -65,10 +57,17 @@ public class UserList {
     }
 
 
-    public void updateUserProfile(String username, String displayName, String contactNumber, String bio) {
+    public void updateUserProfile(String username, String displayName, String contactNumber, String bio, String newImagePath) {
         User exist = findUsername(username);
         if (exist != null) {
-            exist.updateProfile(displayName, contactNumber, bio);
+            exist.updateProfile(displayName, contactNumber, bio, newImagePath);
+        }
+    }
+
+    public void updateUserShowContact(String username, boolean showContactNumber){
+        User exist = findUsername(username);
+        if(exist != null){
+            exist.setShowContact(showContactNumber);
         }
     }
 

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class User {
-    private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber;
+    private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath;
     private String  registerDate, userId;
-    private boolean admin, status;
+    private boolean admin, status, showContact;
     private ArrayList<Event> events = new ArrayList<>();
 
 
 
-    public User( String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, String bio) {
+    public User( String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin,boolean showContact, String bio) {
         this.username = username;
         this.displayName = displayName;
         this.userId = userId;
@@ -29,6 +29,7 @@ public class User {
         this.lastedLogin = lastedLogin;
         this.bio = bio;
         this.imagePath = imagePath;
+        this.showContact = showContact;
     }
 
 
@@ -99,39 +100,35 @@ public class User {
         return contactNumber;
     }
 
+
+    public boolean isShowContact() {
+        return showContact;
+    }
+
+    public void setShowContact(boolean showContact) {
+        this.showContact = showContact;
+    }
+
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getNewImagePath() {
+        return newImagePath;
     }
 
     public ArrayList<Event> getEvents() {
         return this.events;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setNewImagePath(String newImagePath) {
+        this.newImagePath = newImagePath;
     }
-
-
-    public void setRegisterDate(String registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
 
     public void setLastedLogin(String lastedLogin) {
         this.lastedLogin = lastedLogin;
@@ -147,10 +144,11 @@ public class User {
         }
     }
 
-    public void updateProfile(String displayName, String contactNumber, String bio) {
+    public void updateProfile(String displayName, String contactNumber, String bio, String newImagePath) {
         this.displayName = displayName;
         this.contactNumber = contactNumber;
         this.bio = bio;
+        setImagePath(newImagePath);
     }
 
     public String generateRandomText(int length) {

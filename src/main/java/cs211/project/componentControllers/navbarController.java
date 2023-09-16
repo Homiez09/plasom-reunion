@@ -22,7 +22,7 @@ public class navbarController {
     private UserList userList;
 
     @FXML private void initialize() {
-        userList = datasource.readData();
+
 
         String menu[] = {"profile", "setting", "logout"};
 
@@ -47,6 +47,7 @@ public class navbarController {
                 FXRouter.goTo("setting", user);
                 break;
             case "logout":
+                userList = datasource.readData();
                 userList.logout(user);
                 datasource.writeData(userList);
                 System.out.println(user.getStatus());
@@ -68,8 +69,14 @@ public class navbarController {
     }
 
     private void showProfile() {
-        String path = (user != null) ? user.getImagePath() : "/images/profile/sign-in/sign-in-avatar.png";
-        profileImageView.setImage(new Image(getClass().getResourceAsStream(path), 1280, 1280, false, false));
+        boolean defaultImageCheck = false;
+        String path = (user != null) ? user.getImagePath() : "x/images/profile/sign-in/sign-in-avatar.png";
+        if (path.startsWith("x")) {
+            path = path.substring(1);
+            defaultImageCheck = true;
+        }
+
+        profileImageView.setImage(new Image((defaultImageCheck) ? getClass().getResource(path).toString() : "file:" + path, 1280, 1280, false, false));
         new CreateProfileCircle(profileImageView, 28);
     }
 }

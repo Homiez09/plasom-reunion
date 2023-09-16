@@ -104,6 +104,11 @@ public final class FXRouter {
         loadNewRoute(route);
     }
 
+    public static void sendData(String routeLabel, Object data1) throws IOException {
+        RouteScene route = (RouteScene)routes.get(routeLabel);
+        route.data1 = data1;
+    }
+
     private static void loadNewRoute(RouteScene route) throws IOException {
         currentRoute = route;
         String scenePath = "/" + route.scenePath;
