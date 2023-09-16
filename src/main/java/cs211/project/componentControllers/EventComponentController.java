@@ -38,20 +38,26 @@ public class EventComponentController {
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     private UserEventMap mapDatasource ;
-    private HashMap<String, Set<String>> userMap;
-    private Set<String> eventSet;
+    private HashMap<String, Set<String>> hashMap; // Collect EventID
+    private Set<String> hashSet;// Collect User
     private Event event;
 
     @FXML
     public void initialize() {
         this.eventListDatasource = new EventListDataSource("data","event-list.csv");
         this.eventList = eventListDatasource.readData();
-        this.userMap = new HashMap<>();
+        this.hashMap = new HashMap<>();
         this.mapDatasource = new UserEventMap("data", "join-event.csv");
-        this.userMap = mapDatasource.readData();
+        this.hashMap = mapDatasource.readData();
+
         this.teamListDataSource = new TeamListDataSource("data", "team-list.csv");
         this.teamList = teamListDataSource.readData();
     }
+
+
+
+
+
 
 
     public void onStaffAction(ActionEvent actionEvent) {
@@ -62,7 +68,6 @@ public class EventComponentController {
         }
 
     }
-
     public void onEditAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("create-event", currentUser);
@@ -72,13 +77,13 @@ public class EventComponentController {
     }
     public void onJoinViewAction(ActionEvent actionEvent){
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (userMap.containsKey(currentUser.getUsername())) {
-            eventSet = userMap.get(currentUser.getUsername());
+        if (hashMap.containsKey(event.getEventID())) {
+            hashSet = hashMap.get(event.getEventID());
         }else {
-            eventSet = new HashSet<>();
+            hashSet = new HashSet<>();
         }
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (eventSet.contains(event.getEventID())||currentUser.getUsername().equals(event.getEventHost())){
+        if (hashSet.contains(currentUser.getUsername())|| currentUser.getUsername().equals(event.getEventHost())){
             try {
                 FXRouter.goTo("event",currentUser,event);
             } catch (IOException e) {
@@ -86,13 +91,13 @@ public class EventComponentController {
             }
         }else {
             eventList.findEvent(event.getEventID()).addMember();
-            eventSet.add(event.getEventID());
-            userMap.put(currentUser.getUsername(), eventSet);
+            hashSet.add(currentUser.getUsername());
+            hashMap.put(event.getEventID(), hashSet);
 
             eventListDatasource.writeData(eventList);
-            mapDatasource.writeData(userMap);
+            mapDatasource.writeData(hashMap);
             try {
-                FXRouter.goTo("event-list", currentUser);
+                FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -117,12 +122,12 @@ public class EventComponentController {
             if (fileToDelete.exists()) {
 
                 if (fileToDelete.delete()) {
-                    System.out.println("ลบไฟล์สำเร็จ");
+                    System.out.println("Succes Delete");
                 } else {
-                    System.out.println("ไม่สามารถลบไฟล์ได้");
+                    System.out.println("Cant Delete");
                 }
             } else {
-                System.out.println("ไฟล์ไม่มีอยู่");
+                System.out.println("Not Found");
             }
 
             // ลบไฟล์
@@ -131,23 +136,22 @@ public class EventComponentController {
             teamListDataSource.writeData(teamList);
 
             try {
-                FXRouter.goTo("event-list", currentUser);
+                FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            if (userMap.containsKey(currentUser.getUsername())) {
-                eventSet = userMap.get(currentUser.getUsername());
+        }else {
+            if (hashMap.containsKey(event.getEventID())) {
+                hashSet = hashMap.get(event.getEventID());
             }
             eventList.findEvent(event.getEventID()).delMember();
-            eventSet.remove(event.getEventID());
-            userMap.put(currentUser.getUsername(), eventSet);
+            hashSet.remove(currentUser.getUsername());
+            hashMap.put(event.getEventID(), hashSet);
 
             eventListDatasource.writeData(eventList);
-            mapDatasource.writeData(userMap);
-
+            mapDatasource.writeData(hashMap);
             try {
-                FXRouter.goTo("event-list", currentUser);
+                FXRouter.goTo("my-events", currentUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -157,18 +161,18 @@ public class EventComponentController {
         this.event = event;
         String imgpath = "/images/events/event-default.png";
         Image image = new Image(getClass().getResourceAsStream(imgpath),200,200,true,true);
-        userMap = new HashMap<>();
+        hashMap = new HashMap<>();
         mapDatasource = new UserEventMap("data", "join-event.csv");
-        userMap = mapDatasource.readData();
+        hashMap = mapDatasource.readData();
 
-        if (userMap.containsKey(currentUser.getUsername())) {
-            eventSet = userMap.get(currentUser.getUsername());
+        if (hashMap.containsKey(event.getEventID())) {
+            hashSet = hashMap.get(event.getEventID());
         }else {
-            eventSet = new HashSet<>();
+            hashSet = new HashSet<>();
         }
         buttonVisible(!event.isEnd());
             //In Event
-        if (eventSet.contains(event.getEventID())|| currentUser.getUsername().equals(event.getEventHost())){
+        if (hashSet.contains(currentUser.getUsername()) && hashMap.containsKey(event.getEventID())){
             viewjoinButton.setText("View");
             leaveButton.setVisible(true);
         }else {// Join Event
@@ -181,8 +185,14 @@ public class EventComponentController {
             staffButton.setVisible(true);
             editButton.setVisible(true);
         }
+        if (event.isEnd()){
+            viewjoinButton.setVisible(false);
+            leaveButton.setVisible(false);
+            staffButton.setVisible(false);
+            editButton.setVisible(false);
+        }
         if(!event.getEventImagePath().isEmpty()){
-            image = new Image("file:"+event.getEventImagePath(),300,300,true,true);
+            image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
         }
         eventImageView.setImage(image);
         eventnameLabel.setText(event.getEventName());

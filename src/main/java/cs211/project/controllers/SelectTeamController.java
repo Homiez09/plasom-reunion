@@ -139,7 +139,7 @@ public class SelectTeamController {
     @FXML
     private void onMyEventClick(){
         try {
-            FXRouter.goTo("my-event", user);
+            FXRouter.goTo("host-events", user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

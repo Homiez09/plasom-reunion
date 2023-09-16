@@ -34,16 +34,14 @@ public class EventList {
     public void addEvent(String eventId, String eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
-                         int member, int slotMember,
-                         ActivityList activities,
-                         TeamList teams) {
+                         int member, int slotMember,String timeStamp) {
         eventId = eventId.trim();
         eventName = eventName.trim();
         eventHost = eventHost.trim();
         Event exist = findEvent(eventId);
         if (exist == null &&!eventName.equals("") && !eventHost.equals("")){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
-                                    eventLocation,member,slotMember,activities,teams));
+                                    eventLocation,member,slotMember,timeStamp));
         }
     }
 
@@ -55,18 +53,10 @@ public class EventList {
         }
         return null;
     }
-    public void removeEvent(Event event){
-        for (Event delete : events) {
-            if (delete.getEventID().equals(event.getEventID())) {
-                events.remove(event);
-            }
-        }
-    }
 
     public ArrayList<Event> getEvents() {
         return events;
     }
-
 
 
 }

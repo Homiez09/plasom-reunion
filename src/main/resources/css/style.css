@@ -93,11 +93,11 @@
     -fx-font-family: Leelawadee;
 }
 
-/*.arrow-button {*/
-/*    -fx-font-size: 60;*/
-/*    -fx-font-weight: 700;*/
-/*    -fx-background-color: transparent;*/
-/*}*/
+.arrow-button {
+    -fx-font-size: 60;
+    -fx-font-weight: 700;
+    -fx-background-color: transparent;
+}
 
 .arrow-circle-button {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 3);

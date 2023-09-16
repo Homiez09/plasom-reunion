@@ -57,8 +57,8 @@ public class SignInController {
         datasource = new UserListDataSource("data", "user-list.csv");
         userList = datasource.readData();
 
-        eventHandleEnter();
 
+        eventHandleEnter();
         loadImage();
         showImage(page);
         maxPage = calculateMaxPage();

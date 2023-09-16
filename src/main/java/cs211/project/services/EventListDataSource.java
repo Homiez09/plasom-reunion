@@ -38,14 +38,6 @@ public class EventListDataSource implements Datasource<EventList> {
 
     @Override
     public EventList readData() {
-        eventList = new EventList();
-
-        activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
-        activityList = activityListDatasource.readData();
-
-        teamListDatasource = new TeamListDataSource("data", "team-list.csv");
-        teamList = teamListDatasource.readData();
-
         String filePath = directoryName + File.separator + fileName;
 
         File file = new File(filePath);
@@ -68,6 +60,7 @@ public class EventListDataSource implements Datasource<EventList> {
 
         String line = "";
         try {
+            eventList = new EventList();
             // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด
             while ( (line = buffer.readLine()) != null ){
                 // ถ้าเป็นบรรทัดว่าง ให้ข้าม
@@ -89,12 +82,10 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventLocation = data[8].trim();
                 int member = Integer.parseInt(data[9].trim());
                 int slotmember = Integer.parseInt(data[10].trim());
-
-                ActivityList activities = activityList;
-                TeamList teams = teamList;
+                String timeStamp = data[11].trim();
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember, activities, teams);
+                                        eventDescription, eventLocation, member, slotmember,timeStamp);
 
 
                 // เพิ่มข้อมูลลงใน list
