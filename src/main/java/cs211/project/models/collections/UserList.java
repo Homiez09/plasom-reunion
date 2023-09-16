@@ -22,7 +22,6 @@ public class UserList {
     }
 
     public User findDisplayName(String displayName) {
-        System.out.println(displayName);
         for (User exist: users) {
             System.out.println();
             if (exist.isDisplayName(displayName)) {
@@ -31,6 +30,16 @@ public class UserList {
         }
         return null;
     }
+
+    public User findUserId(String userId) {
+        for (User exist: users) {
+            if (exist.isDisplayName(userId)) {
+                return exist;
+            }
+        }
+        return null;
+    }
+
 
     public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, boolean showContactNumber, String bio){
         username = username.trim();
