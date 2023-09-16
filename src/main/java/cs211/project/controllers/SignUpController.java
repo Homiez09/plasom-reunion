@@ -100,7 +100,7 @@ public class SignUpController {
         findDisplayNameValidate = false;
         if(validateConfirmation()){
             setPassword(password);
-            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,false,"");
+            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,false);
             userList.getUsers().add(user);
             try {
                 datasource.writeData(userList);
@@ -184,7 +184,7 @@ public class SignUpController {
 
     private String generateRegisterDate(){
         LocalDate currentDate = LocalDate.now();
-        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         return formattedDate;
     }
 
@@ -207,7 +207,7 @@ public class SignUpController {
         Random random = new Random();
 
         String id = "user-";
-        int ranInt = random.nextInt(100000);
+        int ranInt = random.nextInt(1000000);
         String ranText = generateRandomText(3);
 
         id = id + ranText + ranInt;

@@ -7,6 +7,7 @@ import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class UserListDataSource implements Datasource<UserList> {
     private String directoryName;
@@ -59,28 +60,51 @@ public class UserListDataSource implements Datasource<UserList> {
 
         String line = "";
         try {
+
             // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด
             while ( (line = buffer.readLine()) != null ){
                 // ถ้าเป็นบรรทัดว่าง ให้ข้าม
                 if (line.equals("")) continue;
 
                 // แยกสตริงด้วย ,
-                String[] data = line.split(", DISPLAY-NAME : |, PASSWORD : |, USERNAME : |, CONTACT_NUMBER : |, REGISTER_DATE : |, LASTED_LOGIN : |, IMAGE_PATH : |, STATUS : |, ADMIN : |, SHOW_CONTACT : |, BIO : |, EVENT :");
+                String[] data = line.split(", ");
+                for (int i = 0; i < data.length; i++) {
+                    System.out.println("Index " + i + ": " + data[i]);
+                }
+                String userId = data[0];
+                String displayName = data[1].substring("DISPLAY-NAME :".length()).trim();
+                String username = data[2].substring("USERNAME : ".length()).trim();
+                String password = data[3].substring("PASSWORD : ".length()).trim();
+                String contactNumber = data[4].substring("CONTACT_NUMBER : ".length()).trim();
+                String registerDate = data[5].substring("REGISTER_DATE : ".length()).trim();
+                String lastedLogin = data[6].substring("LASTED_LOGIN : ".length()).trim();
+                String imagePath = data[7].substring("IMAGE_PATH : ".length()).trim();
+                boolean status = Boolean.parseBoolean(data[8].substring("STATUS : ".length()));
+                boolean admin = Boolean.parseBoolean(data[9].substring("ADMIN : ".length()));
+                boolean showContactNumber = Boolean.parseBoolean(data[10].substring("SHOW_CONTACT : ".length()));
+                String bio = data[11].substring("BIO :".length()).trim();
+                System.out.println(displayName);
+                System.out.println(username);
+                System.out.println(password);
+                System.out.println(contactNumber);
+                System.out.println(registerDate);
+                System.out.println(lastedLogin);
+                System.out.println(imagePath);
+                System.out.println(bio);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-                String userId = data[0];
-                String displayName = data[1].trim();
-                String username = data[2].trim();
-                String password = data[3].trim();
-                String imagePath = data[7];
-                String registerDate = data[5];
-                String contactNumber = data[4];
-                String lastedLogin = data[6];
-                String bio = data[11];
-                boolean showContactNumber = Boolean.parseBoolean(data[10]);
-                boolean status = Boolean.parseBoolean(data[8]);
-                boolean admin = Boolean.parseBoolean(data[9]);
-
+//                String userId = data[0].trim();
+//                String displayName = data[1].trim();
+//                String username = data[2].trim();
+//                String password = data[3].trim();
+//                String registerDate = data[5];
+//                String contactNumber = data[4];
+//                String lastedLogin = data[6];
+//                String imagePath = data[7];
+//                boolean status = Boolean.parseBoolean(data[8]);
+//                boolean admin = Boolean.parseBoolean(data[9]);
+//                boolean showContactNumber = Boolean.parseBoolean(data[10]);
+//                String bio = data[11];
                 userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, showContactNumber, bio);
 
             }

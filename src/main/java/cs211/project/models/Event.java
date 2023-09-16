@@ -126,7 +126,7 @@ public class Event {
         Random random = new Random();
 
         String id = "event-";
-        int ranInt = random.nextInt(100000);
+        int ranInt = random.nextInt(1000000);
         String ranText = generateRandomText();
 
         id = id + ranText + ranInt;
