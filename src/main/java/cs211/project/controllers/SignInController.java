@@ -119,7 +119,7 @@ public class SignInController {
                 if (user.isAdmin()) {
                     FXRouter.goTo("admin-dashboard", user);
                 } else {
-                    FXRouter.goTo("user-profile", user);
+                    FXRouter.goTo("home", user);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
