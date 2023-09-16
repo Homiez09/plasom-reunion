@@ -1,14 +1,13 @@
 package cs211.project.models;
-import java.time.LocalDateTime;
 
-public class EventActivity {
+public class Activity {
     private String name,eventID,startTime,endTime;
     private String description;
 
     // Constructors
 
 
-    public EventActivity(String eventId, String activityName, String activityDescription,String activityStart, String activityEnd) {
+    public Activity(String eventId, String activityName, String activityDescription, String activityStart, String activityEnd) {
         this.eventID =eventId;
         this.name =activityName;
         this.description = activityDescription;

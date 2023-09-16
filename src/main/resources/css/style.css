@@ -23,8 +23,12 @@
 .weight-semi-bold{-fx-font-weight: 600}
 .weight-bold{-fx-font-weight: 700;}
 
-
-
+.color-gray{
+    -fx-text-fill: #585858;
+}
+.color-black{
+    -fx-text-fill: #413B3B;
+}
 
 /* for login page */
 /* for background */
@@ -83,11 +87,11 @@
     -fx-font-family: Leelawadee;
 }
 
-.arrow-button {
-    -fx-font-size: 60;
-    -fx-font-weight: 700;
-    -fx-background-color: transparent;
-}
+/*.arrow-button {*/
+/*    -fx-font-size: 60;*/
+/*    -fx-font-weight: 700;*/
+/*    -fx-background-color: transparent;*/
+/*}*/
 
 .arrow-circle-button {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 3);
@@ -388,5 +392,68 @@ Text, Label {
     -fx-border-width: 2;
     -fx-stroke-width: 10;
     -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+}
+
+.setting-select-team-dropdown {
+    -fx-background-color: transparent;
+    -fx-pref-width: 179;
+}
+
+.setting-select-team-dropdown .arrow {
+    -fx-background-color: transparent;
+}
+
+
+.setting-select-team-dropdown .list-view {
+    -fx-padding: 14 4 14 5;
+    -fx-spacing: 5;
+    -fx-background-color: #F6F4EE;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.setting-select-team-dropdown .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 18;
+    -fx-border-radius: 5;
+    -fx-text-fill: #413B3B;
+    -fx-alignment: center;
+}
+
+.setting-select-team-dropdown .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+.switch-view{
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 5, 0.2, 0, 0);
+    -fx-arc-height: 15;
+    -fx-arc-width: 15;
+}
+
+/* check box for switch view*/
+.check-box {
+    -fx-text-fill:  #413B3B;
+}
+.check-box .box {
+    -fx-background-color: #DCDCDD;
+    -fx-background-radius: 4;
+}
+.check-box:selected .mark {
+    -fx-background-color: #F5F3ED;
+}
+.check-box:selected .box {
+    -fx-background-color: #FF922E;
+    -fx-text-fill: #413B3B;
+}
+
+.membership-message-box{
+    -fx-arc-height: 2;
+    -fx-arc-width: 2;
+    -fx-font-size: 10;
+    -fx-text-fill: #585858;
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 4, 0.5, 0, 1);
 
 }

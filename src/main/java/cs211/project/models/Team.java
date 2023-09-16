@@ -9,33 +9,39 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Team implements Comparable<Team> {
-    private String teamID, teamName, teamDescription, teamImagePath, createdAt;
+    private String teamID, teamName, teamDescription, teamImagePath, createdAt, eventID;
     private int maxSlotTeamMember;
+    private boolean isBookmarked;
     private UserList memberList;
+    private String role;
 
-    public Team (String teamName, int maxSlotTeamMember) {
+    public Team (String eventID, String teamName, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
         this.teamName = teamName;
+        this.teamDescription = "";
+        this.teamImagePath = "";
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss:SSS"));
+        this.eventID = eventID;
+        this.isBookmarked = false;
     }
 
-    public Team (String teamName, int maxSlotTeamMember, String teamDescription) {
-        this(teamName, maxSlotTeamMember);
+    public Team (String eventID, String teamName, int maxSlotTeamMember, String teamDescription) {
+        this(eventID, teamName, maxSlotTeamMember);
         this.teamDescription = teamDescription;
     }
 
-    public Team (String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath) {
-        this(teamName, maxSlotTeamMember, teamDescription);
+    public Team (String eventID, String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath) {
+        this(eventID, teamName, maxSlotTeamMember, teamDescription);
         this.teamImagePath = teamImagePath;
     }
 
-    public Team (String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath, UserList memberList) {
-        this(teamName, maxSlotTeamMember, teamDescription, teamImagePath);
+    public Team (String eventID, String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath, UserList memberList) {
+        this(eventID, teamName, maxSlotTeamMember, teamDescription, teamImagePath);
         this.memberList = memberList;
     }
 
-    public Team (String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember, String createdAt) {
+    public Team (String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember, String createdAt, String eventID) {
         // this constructor is used when loading from database
         this.teamID = teamID;
         this.teamName = teamName;
@@ -43,6 +49,7 @@ public class Team implements Comparable<Team> {
         this.teamImagePath = teamImagePath;
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = createdAt;
+        this.eventID = eventID;
     }
 
     private String generateTeamID() {
@@ -100,6 +107,12 @@ public class Team implements Comparable<Team> {
         return createdAt;
     }
 
+    public String getRole() { return role; }
+
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
@@ -114,6 +127,14 @@ public class Team implements Comparable<Team> {
 
     public void setMaxSlotTeamMember(int maxSlotTeamMember) {
         this.maxSlotTeamMember = maxSlotTeamMember;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        this.isBookmarked = bookmarked;
     }
 
     public void AddMemberToTeam(/* todo: param require */) {
@@ -138,10 +159,26 @@ public class Team implements Comparable<Team> {
 
         return randomText.toString();
     }
+
+    public String getEventID() {
+        return eventID;
+    }
+
     @Override
     public int compareTo(Team team) {
         int s = Integer.parseInt(this.createdAt.replace("|", "").replace(":", "").replace("-", ""));
         int t = Integer.parseInt(team.getCreatedAt().replace("|", "").replace(":", "").replace("-", ""));
         return (int)t - s;
+    }
+
+    @Override
+    public String toString() {
+        return teamID + ","
+                + teamName + ","
+                + teamDescription + ","
+                + teamImagePath + ","
+                + maxSlotTeamMember + ","
+                + createdAt + ","
+                + eventID;
     }
 }

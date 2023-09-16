@@ -13,192 +13,219 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
-   <AnchorPane layoutY="75.0" prefHeight="693.0" prefWidth="1152.0" styleClass="bgProfile1">
-      <children>
-        <ScrollPane fitToWidth="true" prefHeight="693.0" prefWidth="1152.0" vvalue="1.0">
-            <content>
-                <VBox alignment="CENTER" prefHeight="1525.0" styleClass="bg">
-                    <children>
-                        <Separator opacity="0.0" prefHeight="30.0" />
-                        <HBox alignment="CENTER" prefHeight="300.0">
-                            <children>
-                                <VBox alignment="CENTER" prefHeight="300.0" prefWidth="250.0">
-                                    <children>
-                                        <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../images/home/event1.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                </VBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="75.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&lt;" textAlignment="CENTER">
-                                            <font>
-                                                <Font name="System Bold" size="24.0" />
-                                            </font>
-                                        </Button>
-                                    </children>
-                                </VBox>
-                                <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0">
-                                    <children>
-                                        <ImageView fitHeight="250.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../images/home/event1.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                </VBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="75.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
-                                            <font>
-                                                <Font name="System Bold" size="24.0" />
-                                            </font>
-                                        </Button>
-                                    </children>
-                                </VBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0">
-                                    <children>
-                                        <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../images/home/event1.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                </VBox>
-                            </children>
-                     </HBox>
-                        <VBox prefHeight="525.0">
-                            <children>
-                                <HBox alignment="CENTER_LEFT" prefHeight="75.0">
-                                    <children>
-                                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                        <Label text="Upcoming Events">
-                                            <font>
-                                                <Font name="Leelawadee UI Bold" size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </HBox>
-                                <HBox alignment="TOP_CENTER" prefHeight="450.0">
-                                    <children>
-                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                    <children>
-                                       <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&lt;" textAlignment="CENTER">
-                                          <font>
-                                             <Font name="System Bold" size="24.0" />
-                                          </font>
-                                       </Button>
-                                    </children>
-                                    <HBox.margin>
-                                       <Insets left="5.0" />
-                                    </HBox.margin>
-                                 </VBox>
-                                 <AnchorPane fx:id="upEventTileAnchorPane1" prefHeight="35.0" prefWidth="250.0">
-                                    <HBox.margin>
-                                       <Insets left="3.0" right="3.0" />
-                                    </HBox.margin></AnchorPane>
-                                 <AnchorPane fx:id="upEventTileAnchorPane2" prefHeight="400.0" prefWidth="250.0">
-                                    <HBox.margin>
-                                       <Insets left="7.0" right="7.0" />
-                                    </HBox.margin></AnchorPane>
-                                 <AnchorPane fx:id="upEventTileAnchorPane3" prefHeight="400.0" prefWidth="250.0">
-                                    <HBox.margin>
-                                       <Insets left="3.0" right="3.0" />
-                                    </HBox.margin></AnchorPane>
-                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
-                                                    <font>
-                                                        <Font name="System Bold" size="24.0" />
-                                                    </font>
-                                                </Button>
-                                            </children>
-                                    <HBox.margin>
-                                       <Insets right="5.0" />
-                                    </HBox.margin>
-                                        </VBox>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets />
-                                    </VBox.margin>
-                                </HBox>
-                            </children>
-                        </VBox>
-                        <Separator opacity="0.0" prefHeight="30.0" />
-                        <VBox alignment="CENTER" prefHeight="525.0">
-                            <children>
-                                <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="200.0">
-                                    <children>
-                                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                        <Label text="New Events">
-                                            <font>
-                                                <Font name="Leelawadee UI Bold" size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </HBox>
-                                <HBox alignment="CENTER" prefHeight="450.0">
-                                    <children>
-                                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&lt;" textAlignment="CENTER">
-                                                    <font>
-                                                        <Font name="System Bold" size="24.0" />
-                                                    </font>
-                                                </Button>
-                                            </children>
-                                    <HBox.margin>
-                                       <Insets left="5.0" />
-                                    </HBox.margin>
-                                        </VBox>
-                                 <AnchorPane fx:id="newEventTileAnchorPane1" prefHeight="400.0" prefWidth="250.0">
-                                    <HBox.margin>
-                                       <Insets left="3.0" right="3.0" />
-                                    </HBox.margin></AnchorPane>
-                                 <AnchorPane fx:id="newEventTileAnchorPane2" prefHeight="400.0" prefWidth="250.0">
-                                    <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
-                                    </HBox.margin></AnchorPane>
-                                 <AnchorPane fx:id="newEventTileAnchorPane3" prefHeight="400.0" prefWidth="250.0">
-                                    <HBox.margin>
-                                       <Insets left="3.0" right="3.0" />
-                                    </HBox.margin></AnchorPane>
-                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                    <children>
-                                       <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
-                                          <font>
-                                             <Font name="System Bold" size="24.0" />
-                                          </font>
-                                       </Button>
-                                    </children>
-                                    <HBox.margin>
-                                       <Insets right="5.0" />
-                                    </HBox.margin>
-                                 </VBox>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets />
-                                    </VBox.margin>
-                                </HBox>
-                            </children>
-                        </VBox>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="115.0">
-                            <children>
-                                <VBox alignment="BOTTOM_CENTER" prefHeight="115.0">
-                                    <children>
-                                        <HBox prefHeight="20.0" prefWidth="1137.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
-                                        <HBox prefHeight="50.0" styleClass="outer-bottom-tab" stylesheets="@../../../css/home.css" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
-               </VBox>
-            </content>
-        </ScrollPane>
-      </children>
-   </AnchorPane>
-<AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
+    <AnchorPane layoutY="75.0" prefHeight="693.0" prefWidth="1152.0" styleClass="bgProfile1">
+        <children>
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="693.0" prefWidth="1152.0" vbarPolicy="NEVER" vvalue="1.0">
+                <content>
+                    <VBox alignment="CENTER" prefHeight="1525.0" styleClass="bg">
+                        <children>
+                            <Separator opacity="0.0" prefHeight="30.0" />
+                            <HBox alignment="CENTER" prefHeight="300.0">
+                                <children>
+                                    <VBox alignment="CENTER" prefHeight="300.0" prefWidth="250.0">
+                                        <children>
+                                            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../images/home/event1.png" />
+                                                </image>
+                                            </ImageView>
+                                        </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="75.0">
+                                        <children>
+                                            <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&lt;" textAlignment="CENTER">
+                                                <font>
+                                                    <Font name="System Bold" size="24.0" />
+                                                </font>
+                                            </Button>
+                                        </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0">
+                                        <children>
+                                            <ImageView fitHeight="250.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../images/home/event1.png" />
+                                                </image>
+                                            </ImageView>
+                                        </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="75.0">
+                                        <children>
+                                            <Button mnemonicParsing="false" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
+                                                <font>
+                                                    <Font name="System Bold" size="24.0" />
+                                                </font>
+                                            </Button>
+                                        </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0">
+                                        <children>
+                                            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../../../images/home/event1.png" />
+                                                </image>
+                                            </ImageView>
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                            <VBox alignment="CENTER" prefHeight="525.0">
+                                <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="75.0">
+                                        <children>
+                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                            <Label prefHeight="75.0" styleClass="h1" text="Upcoming Events">
+                                                <font>
+                                                    <Font size="18.0" />
+                                                </font>
+                                            </Label>
+                                        </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="450.0">
+                                        <children>
+                                            <VBox alignment="CENTER" prefHeight="200.0">
+                                                <children>
+                                                    <Button fx:id="upLeftButton" mnemonicParsing="false" onAction="#onUpLeftButton" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&lt;" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                        </font>
+                                                    </Button>
+                                                </children>
+                                            </VBox>
+                                            <ScrollPane fx:id="upEventScrollPane" hbarPolicy="NEVER" hmax="0.0" prefHeight="485.0" prefWidth="1000.0" styleClass="bg" vbarPolicy="NEVER" vmax="0.0">
+                                                <content>
+                                                    <HBox alignment="CENTER" fillHeight="false" prefHeight="450.0" prefWidth="1000.0" styleClass="bg">
+                                                        <children>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                            <AnchorPane fx:id="upLeftAnchorPane" prefHeight="400.0" prefWidth="250.0">
+                                                                <HBox.margin>
+                                                                    <Insets />
+                                                                </HBox.margin>
+                                                            </AnchorPane>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                            <AnchorPane fx:id="upCenterAnchorPane" prefHeight="400.0" prefWidth="250.0">
+                                                                <HBox.margin>
+                                                                    <Insets />
+                                                                </HBox.margin>
+                                                            </AnchorPane>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                            <AnchorPane fx:id="upRightAnchorPane" prefHeight="400.0" prefWidth="250.0">
+                                                                <HBox.margin>
+                                                                    <Insets />
+                                                                </HBox.margin>
+                                                            </AnchorPane>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                        </children>
+                                                    </HBox>
+                                                </content>
+                                                <padding>
+                                                    <Insets top="20.0" />
+                                                </padding>
+                                            </ScrollPane>
+                                            <VBox alignment="CENTER" prefHeight="200.0">
+                                                <children>
+                                                    <Button fx:id="upRightButton" mnemonicParsing="false" onAction="#onUpRightButton" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                        </font>
+                                                    </Button>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                    </HBox>
+                                </children>
+                            </VBox>
+                            <Separator opacity="0.0" prefHeight="30.0" />
+                            <VBox alignment="CENTER" prefHeight="550.0" prefWidth="1137.0">
+                                <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1137.0">
+                                        <children>
+                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                            <Label styleClass="h1" text="New Events">
+                                                <font>
+                                                    <Font name="Leelawadee UI Bold" size="24.0" />
+                                                </font>
+                                            </Label>
+                                        </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" minWidth="1136.0" prefHeight="485.0" prefWidth="1137.0">
+                                        <children>
+                                            <VBox alignment="CENTER" prefHeight="200.0">
+                                                <children>
+                                                    <Button fx:id="newLeftButton" mnemonicParsing="false" onAction="#onNewLeftButton" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&lt;" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                        </font>
+                                                    </Button>
+                                                </children>
+                                                <HBox.margin>
+                                                    <Insets />
+                                                </HBox.margin>
+                                            </VBox>
+                                            <ScrollPane fx:id="newEventScrollPane" hbarPolicy="NEVER" hmax="0.0" prefHeight="485.0" prefWidth="1000.0" styleClass="bg" vbarPolicy="NEVER" vmax="0.0">
+                                                <content>
+                                                    <HBox alignment="CENTER" fillHeight="false" prefHeight="480.0" prefWidth="1000.0" styleClass="bg">
+                                                        <children>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                            <AnchorPane fx:id="newLeftAnchorPane" prefHeight="400.0" prefWidth="250.0">
+                                                                <HBox.margin>
+                                                                    <Insets />
+                                                                </HBox.margin>
+                                                            </AnchorPane>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                            <AnchorPane fx:id="newCenterAnchorPane" prefHeight="400.0" prefWidth="250.0">
+                                                                <HBox.margin>
+                                                                    <Insets />
+                                                                </HBox.margin>
+                                                            </AnchorPane>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                            <AnchorPane fx:id="newRightAnchorPane" prefHeight="400.0" prefWidth="250.0">
+                                                                <HBox.margin>
+                                                                    <Insets />
+                                                                </HBox.margin>
+                                                            </AnchorPane>
+                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                                        </children>
+                                                    </HBox>
+                                                </content>
+                                            </ScrollPane>
+                                            <VBox alignment="CENTER" prefHeight="200.0">
+                                                <children>
+                                                    <Button fx:id="newRightButton" mnemonicParsing="false" onAction="#onNewRightButton" style="-fx-background-radius: 3em; -fx-min-height: 50px; -fx-min-width: 50px; -fx-max-height: 50px; -fx-max-width: 50px;" text="&gt;" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font name="System Bold" size="24.0" />
+                                                        </font>
+                                                    </Button>
+                                                </children>
+                                                <HBox.margin>
+                                                    <Insets right="5.0" />
+                                                </HBox.margin>
+                                            </VBox>
+                                        </children>
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                    </HBox>
+                                </children>
+                            </VBox>
+                            <HBox alignment="BOTTOM_CENTER" prefHeight="115.0">
+                                <children>
+                                    <VBox alignment="BOTTOM_CENTER" prefHeight="111.0" prefWidth="1200.0">
+                                        <children>
+                                            <HBox prefHeight="20.0" prefWidth="1137.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
+                                            <HBox alignment="CENTER" prefHeight="50.0" styleClass="outer-bottom-tab" stylesheets="@../../../css/home.css" />
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </children>
+    </AnchorPane>
+    <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
 </AnchorPane>
