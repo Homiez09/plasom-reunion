@@ -5,6 +5,7 @@ import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserListDataSource;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -49,9 +52,13 @@ public class SignUpController {
 
     private String password, confirmPassword, displayName, username;
     private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false, findDisplayNameValidate = false;
-
     UserListDataSource datasource ;
     UserList userList ;
+
+    protected User user, findUsername, findDisplayName;
+    protected String path;
+    protected char firstUsernameChar;
+
     @FXML
     void initialize() {
         datasource = new UserListDataSource("data","user-list.csv");
@@ -69,17 +76,31 @@ public class SignUpController {
         updateVisibleButton();
 
         errorLabel.setVisible(false);
-
+        eventHandleEnter();
     }
 
+    private void eventHandleEnter(){
+        EventHandler<KeyEvent> enterEventHandler = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    onSignInClick();
+                }
+            }
+        };
+        displayNameTextfield.setOnKeyPressed(enterEventHandler);
+        usernameTextField.setOnKeyPressed(enterEventHandler);
+        passwordField.setOnKeyPressed(enterEventHandler);
+        showPasswordTextField.setOnKeyPressed(enterEventHandler);
+    }
 
-    public void onCreateAccountButton() {
+    @FXML private void onCreateAccountButton() {
         errorLabel.setVisible(false);
         findUsernameValidate = false;
         findDisplayNameValidate = false;
         if(validateConfirmation()){
             setPassword(password);
-            User user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,"");
+            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,false,"");
             userList.getUsers().add(user);
             try {
                 datasource.writeData(userList);
@@ -117,6 +138,49 @@ public class SignUpController {
         }
 
     }
+    @FXML private void onVisiblePasswordClick() {
+        if (visiblePasswordImageView.getImage() == hidePasswordImage) {
+            setTextFieldPasswordVisible(true);
+            visiblePasswordImageView.setImage(showPasswordImage);
+        } else {
+            setTextFieldPasswordVisible(false);
+            visiblePasswordImageView.setImage(hidePasswordImage);
+
+        }
+    }
+    private void updateVisibleButton() {
+        backButton.setVisible(page > 0);
+        backCircle.setVisible(page > 0);
+        nextButton.setVisible(page != maxPage);
+        nextCircle.setVisible(page != maxPage);
+    }
+    @FXML private void onNextButtonClick() {
+        if (page < maxPage) {
+            page++;
+        }
+        showImage(page);
+    }
+    @FXML private void onBackButtonClick() {
+        if (page > 0) {
+            page--;
+        }
+        showImage(page);
+    }
+    @FXML private void onBackClick() {
+        try {
+            FXRouter.goTo("welcome");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML private void onSignInClick() {
+        try {
+            FXRouter.goTo("sign-in");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private String generateRegisterDate(){
         LocalDate currentDate = LocalDate.now();
@@ -147,7 +211,6 @@ public class SignUpController {
         String ranText = generateRandomText(3);
 
         id = id + ranText + ranInt;
-
         return id;
     }
 
@@ -157,15 +220,18 @@ public class SignUpController {
 
     private String generateAvatar(){
         int randomAvatar = (int)(Math.random()*10);
-        return "/images/profile/default-avatar/default" + randomAvatar + ".png";
+        path = "x/images/profile/default-avatar/default" + randomAvatar + ".png";
+        return path;
     }
 
+
+
     private boolean validateConfirmation(){
-        User findUsername = userList.findUsername(username);
+        findUsername = userList.findUsername(username);
         if(findUsername != null){
             findUsernameValidate = true;
         }
-        User findDisplayName = userList.findDisplayName(displayName);
+        findDisplayName = userList.findDisplayName(displayName);
         if(findDisplayName != null){
             findDisplayNameValidate = true;
         }
@@ -173,16 +239,15 @@ public class SignUpController {
         username = usernameTextField.getText();
         password = passwordField.getText();
         confirmPassword = confirmPasswordField.getText();
-        if (usernameRequirement && displayNameRequirement && !displayName.isEmpty() && !username.isEmpty() && !findUsernameValidate) {
+        if (usernameRequirement && displayNameRequirement && !displayName.isEmpty() && !username.isEmpty() && !findDisplayNameValidate && !findUsernameValidate) {
             return (password.equals(confirmPassword) && passwordMatching);
+        }else{
+            return false;
         }
-        return false;
-    }
 
+    }
     private void checkUsernameRequirement() {
         boolean isValid = true, hasFirstAlphabetic;
-        char firstUsernameChar ;
-
         username = usernameTextField.getText();
         if (!username.isEmpty()){
             firstUsernameChar = username.charAt(0);
@@ -206,11 +271,9 @@ public class SignUpController {
             usernameRequirement = false;
         }
     }
-
     private void checkPasswordRequirement() {
         boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasSpecialCharacter = false , hasFitLength = false;
         String specialCharacters = "!@#$";
-
         if(password.length() >= 8 && password.length() <= 20){
             hasFitLength = true;
         }
@@ -230,7 +293,6 @@ public class SignUpController {
         passwordLowerCaseReq.setStyle(hasLowerCase ? setColorTextFill("green") : setColorTextFill("red"));
         passwordNumReq.setStyle(hasDigit ? setColorTextFill("green") : setColorTextFill("red"));
         passwordSpecialReq.setStyle(hasSpecialCharacter ? setColorTextFill("green") : setColorTextFill("red"));
-
         if(hasFitLength && hasLowerCase && hasDigit && hasUpperCase && hasSpecialCharacter){
             passwordMatching = true;
             showRequirementPassword(false);
@@ -257,7 +319,6 @@ public class SignUpController {
 
         }
     }
-
     private void showRequirementPassword(boolean require){
         passwordRequireBoxLabel.setVisible(require);
         passwordRequireBox.setVisible(require);
@@ -268,7 +329,6 @@ public class SignUpController {
         passwordSpecialReq.setVisible(require);
         passwordNumReq.setVisible(require);
     }
-
     private void showFocusRequirementName() {
         displayNameReq.setVisible(false);
         displayNameTextfield.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -293,7 +353,6 @@ public class SignUpController {
             }
         });
     }
-
     private void showFocusRequirementsPassword() {
         showRequirementPassword(false);
         passwordField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -329,30 +388,25 @@ public class SignUpController {
         }
 
     }
-
     public void onKeyUsername(){
         username = usernameTextField.getText();
         checkUsernameRequirement();
     }
-
     public void onKeyHidePassword() {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
         checkPasswordRequirement();
     }
-
     public void onKeyShowPassword() {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
         checkPasswordRequirement();
     }
-
     public void onKeyHideConfirmPassword() {
         confirmPassword = confirmPasswordField.getText();
         showConfirmPasswordTextField.setText(confirmPassword);
         checkPasswordRequirement();
     }
-
     public void onKeyShowConfirmPassword() {
         confirmPassword = showConfirmPasswordTextField.getText();
         confirmPasswordField.setText(confirmPassword);
@@ -363,8 +417,6 @@ public class SignUpController {
         showPasswordTextField.setVisible(visible);
         showConfirmPasswordTextField.setVisible(visible);
     }
-
-
     private void maximumLengthField(){
         displayNameTextfield.textProperty().addListener((observableValue, oldValue , newValue) -> {
             if(newValue.length() > maxDisplayNameLimit){
@@ -410,7 +462,6 @@ public class SignUpController {
         }
         return color;
     }
-
     private String setColorTextFill(String color){
         switch (color) {
             case "black" -> color = "-fx-text-fill: #413b3b";
@@ -419,7 +470,6 @@ public class SignUpController {
         }
         return color;
     }
-
     private void setBorderPasswordTextFieldColorRequirement(boolean value) {
         if(value){
             passwordField.setStyle(setColorBorderTextField("black"));
@@ -429,7 +479,6 @@ public class SignUpController {
             showPasswordTextField.setStyle(setColorBorderTextField("red"));
         }
     }
-
     private void setBorderConfirmPasswordTextFieldColorRequirement(boolean value) {
         if(value){
             confirmPasswordField.setStyle(setColorBorderTextField("black"));
@@ -437,18 +486,6 @@ public class SignUpController {
         }else{
             confirmPasswordField.setStyle(setColorBorderTextField("red"));
             showConfirmPasswordTextField.setStyle(setColorBorderTextField("red"));
-        }
-    }
-
-    @FXML
-    private void onVisiblePasswordClick() {
-        if (visiblePasswordImageView.getImage() == hidePasswordImage) {
-            setTextFieldPasswordVisible(true);
-            visiblePasswordImageView.setImage(showPasswordImage);
-        } else {
-            setTextFieldPasswordVisible(false);
-            visiblePasswordImageView.setImage(hidePasswordImage);
-
         }
     }
 
@@ -473,13 +510,11 @@ public class SignUpController {
 
         visiblePasswordImageView.setImage(hidePasswordImage);
     }
-
     private void showImage(int pageNumber) {
         Image image = new Image(getClass().getResource("/images/login/event" + pageNumber + "_test.jpg").toString());
         upComingEventsImageView.setImage(image);
         updateVisibleButton();
     }
-
     private int calculateMaxPage() {
         int countImage = 0;
         while (true) {
@@ -493,44 +528,4 @@ public class SignUpController {
         return countImage - 1;
     }
 
-    private void updateVisibleButton() {
-        backButton.setVisible(page > 0);
-        backCircle.setVisible(page > 0);
-        nextButton.setVisible(page != maxPage);
-        nextCircle.setVisible(page != maxPage);
-    }
-
-    @FXML
-    protected void onNextButtonClick() {
-        if (page < maxPage) {
-            page++;
-        }
-        showImage(page);
-    }
-
-    @FXML
-    protected void onBackButtonClick() {
-        if (page > 0) {
-            page--;
-        }
-        showImage(page);
-    }
-
-    @FXML
-    protected void onBackClick() {
-        try {
-            FXRouter.goTo("welcome");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    protected void onSignInClick() {
-        try {
-            FXRouter.goTo("sign-in");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

@@ -65,7 +65,7 @@ public class UserListDataSource implements Datasource<UserList> {
                 if (line.equals("")) continue;
 
                 // แยกสตริงด้วย ,
-                String[] data = line.split(",");
+                String[] data = line.split(", DISPLAY-NAME : |, PASSWORD : |, USERNAME : |, CONTACT_NUMBER : |, REGISTER_DATE : |, LASTED_LOGIN : |, IMAGE_PATH : |, STATUS : |, ADMIN : |, SHOW_CONTACT : |, BIO : |, EVENT :");
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
                 String userId = data[0];
@@ -76,11 +76,12 @@ public class UserListDataSource implements Datasource<UserList> {
                 String registerDate = data[5];
                 String contactNumber = data[4];
                 String lastedLogin = data[6];
-                String bio = data[10];
+                String bio = data[11];
+                boolean showContactNumber = Boolean.parseBoolean(data[10]);
                 boolean status = Boolean.parseBoolean(data[8]);
                 boolean admin = Boolean.parseBoolean(data[9]);
 
-                userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, bio);
+                userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, showContactNumber, bio);
 
             }
         } catch (IOException e) {
@@ -115,18 +116,20 @@ public class UserListDataSource implements Datasource<UserList> {
 
             for (User user : data.getUsers()) {
 
-                String line = user.getUserId() + ","
-                        + user.getDisplayName() + ","
-                        + user.getUsername() + ","
-                        + user.getPassword() + ","
-                        + user.getContactNumber() + ","
-                        + user.getRegisterDate() + ","
-                        + user.getLastedLogin() + ","
-                        + user.getImagePath() + ","
-                        + user.getStatus() + ","
-                        + user.isAdmin() + ","
-                        + user.getBio() + ","
-                        + user.getEvents();
+                String line =   user.getUserId() + ", DISPLAY-NAME : "
+                        + user.getDisplayName() + ", USERNAME : "
+                        + user.getUsername() + ", PASSWORD : "
+                        + user.getPassword() + ", CONTACT_NUMBER : "
+                        + user.getContactNumber() + ", REGISTER_DATE : "
+                        + user.getRegisterDate() + ", LASTED_LOGIN : "
+                        + user.getLastedLogin() + ", IMAGE_PATH : "
+                        + user.getImagePath() + ", STATUS : "
+                        + user.getStatus() + ", ADMIN : "
+                        + user.isAdmin() + ", SHOW_CONTACT : "
+                        + user.isShowContact() + ", BIO : "
+                        + user.getBio() ;
+
+
 
                 buffer.append(line);
                 buffer.append("\n");

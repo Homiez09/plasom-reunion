@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="defaultProfileAnchorPane" onMouseEntered="#onDefaultProfileEntered" onMouseExited="#onDefaultProfileExit" prefHeight="150.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.AvatarProfileController">
+   <children>
+      <Circle fx:id="hoverAvatarProfile" fill="#ff9900" layoutX="55.0" layoutY="55.0" radius="59.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <ImageView fx:id="avatarProfileImageView" fitHeight="110.0" fitWidth="110.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/profile/default-avatar/default7.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="currentAvatarAnchorPane" prefHeight="116.0" prefWidth="115.0">
+         <children>
+            <Circle fill="#403b3b70" layoutX="55.0" layoutY="55.0" radius="55.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <ImageView fitHeight="49.0" fitWidth="49.0" layoutX="30.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons/user-profile/check_box.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="avatarIdLabel" layoutX="40.0" layoutY="89.0" opacity="0.0" text="Label" />
+            <Label fx:id="selectLabel" layoutX="50.0" layoutY="99.0" opacity="0.0" text="Label" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
