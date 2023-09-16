@@ -15,3 +15,28 @@
 -fx-background-color: #F9F6F7;
 -fx-background-radius: 20px;
 }
+.font{
+ -fx-font-family: Leelawadee;
+ -fx-font-size: 18;
+}
+.h1{
+ -fx-font-size: 24;
+ -fx-font-style: Bold;
+ -fx-font-family: Leelawadee;
+
+}
+.list-view {
+ -fx-background-color: #FFF5E5;
+ -fx-background-radius: 15;
+ -fx-border-radius: 15;
+ -fx-border-color: #FFF5E5;
+ -fx-control-inner-background: #FFF5E5; /* สีพื้นหลังสำหรับ ListView */
+ -fx-opacity: 1;
+ -fx-horizontal-grid-lines-visible: true;
+ -fx-vertical-grid-lines-visible: true;
+}
+
+.list-view .list-cell {
+ -fx-background-color: #FFF5E5; /* สีพื้นหลังของรายการใน ListView */
+ -fx-text-fill: #000000; /* สีข้อความของรายการใน ListView */
+}

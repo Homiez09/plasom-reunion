@@ -1,12 +1,10 @@
 package cs211.project.services;
 
-import cs211.project.models.EventActivity;
+import cs211.project.models.Activity;
 import cs211.project.models.collections.ActivityList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class ActivityListDataSource implements Datasource<ActivityList>{
     private String directoryName;
@@ -74,11 +72,8 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
                 String activityEnd = data[4].trim();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                LocalDateTime parsedActivityStart = LocalDateTime.parse(activityStart, formatter);
-                LocalDateTime parsedActivityEnd = LocalDateTime.parse(activityEnd,formatter);
 
-                activities.addActivity(eventID,activityName,activityDescription,parsedActivityStart,parsedActivityEnd);
+                activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd);
 
                 // เพิ่มข้อมูลลงใน list
             }
@@ -111,7 +106,7 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
         try {
             // สร้าง csv
 
-            for (EventActivity activity : data.getActivities()) {
+            for (Activity activity : data.getActivities()) {
                 String line = activity.toString();
 
                 buffer.append(line);

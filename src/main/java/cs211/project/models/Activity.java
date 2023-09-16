@@ -1,16 +1,13 @@
 package cs211.project.models;
-import java.time.LocalDateTime;
 
-public class EventActivity {
-    private String name,eventID;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+public class Activity {
+    private String name,eventID,startTime,endTime;
     private String description;
 
     // Constructors
 
 
-    public EventActivity(String eventId, String activityName, String activityDescription,LocalDateTime activityStart, LocalDateTime activityEnd) {
+    public Activity(String eventId, String activityName, String activityDescription, String activityStart, String activityEnd) {
         this.eventID =eventId;
         this.name =activityName;
         this.description = activityDescription;
@@ -39,29 +36,20 @@ public class EventActivity {
         this.description = "\""+description+"\"";
     }
 
-    public LocalDateTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
-    }
-
-    public  String timeToString(LocalDateTime time) {
-        String day = String.format("%02d",time.getDayOfMonth());
-        String month = String.format("%02d",time.getMonthValue());
-        String year = String.format("%04d",time.getYear());
-        String hour = String.format("%02d",time.getHour());
-        String minute = String.format("%02d",time.getMinute());
-        return day+"/"+month+"/"+year+" "+hour+":"+minute;
     }
 
     public String getEventID() {
@@ -73,8 +61,8 @@ public class EventActivity {
         return    eventID + ','
                 + name + ",\""
                 + description + "\","
-                + timeToString(startTime) + ','
-                + timeToString(endTime) ;
+                + startTime + ','
+                + endTime ;
     }
 }
 

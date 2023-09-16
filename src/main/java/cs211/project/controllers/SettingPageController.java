@@ -19,13 +19,11 @@ import java.io.IOException;
 
 public class SettingPageController {
     @FXML
-    AnchorPane navbarAnchorPane;
+    AnchorPane navbarAnchorPane,passwordAnchorPane;
     @FXML
     Pane mainPane,loginPane,themePane,privacyPane,contactPane;
     @FXML
     ImageView offImageView,onImageView,switchImageView;
-    @FXML
-    PasswordField newPasswordField,renewPasswordField,oldPasswordField;
     @FXML
     ToggleButton toggleButton;
     @FXML
@@ -38,6 +36,8 @@ public class SettingPageController {
         hidePane();
         loginPane.setVisible(true);
         new LoadNavbarComponent(user, navbarAnchorPane);
+        LoadChangePassword(passwordAnchorPane);
+
     }
 
     public void hidePane(){
@@ -46,7 +46,15 @@ public class SettingPageController {
         privacyPane.setVisible(false);
         contactPane.setVisible(false);
     }
-
+    private void LoadChangePassword(AnchorPane passwordAnchorPane) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/changepass.fxml"));
+        try {
+            AnchorPane load = fxmlLoader.load();
+            passwordAnchorPane.getChildren().add(load);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // login page
     public void onLoginButton(ActionEvent actionEvent) {
@@ -118,11 +126,11 @@ public class SettingPageController {
         }
     }
 
+
     public void onLightAction(ActionEvent actionEvent) {
 
 
     }
-
     public void onDarkAction(ActionEvent actionEvent) {
 
 
