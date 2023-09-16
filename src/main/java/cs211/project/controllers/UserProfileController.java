@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class UserProfileController {
     @FXML private ImageView userUploadAvatarImageView, deviceProfileButtonImageView, contactIconProfileImageView, avatarChangeView, ellipseIconImageView, frameIconImageView, avatarProfileImageView, visiblePasswordImageView, displayNameIconImageView, contactIconImageView, passwordIconImageView, defaultAvatarImageView, deviceAvatarImageView;
-    @FXML private AnchorPane hoverShowContactAnchorPane, hoverAvatarChangeAnchorPane, navbarAnchorPane, changeAvatarAnchorPane, defaultAvatarAnchorPane, deviceAvatarAnchorPane;
+    @FXML private AnchorPane profileAnchorPane, hoverShowContactAnchorPane, hoverAvatarChangeAnchorPane, navbarAnchorPane, changeAvatarAnchorPane, defaultAvatarAnchorPane, deviceAvatarAnchorPane;
     @FXML private TextField displayNameTextField, showPasswordTextField, contactNumberTextField;
     @FXML private TextArea bioTextArea;
     @FXML private PasswordField passwordField;
@@ -287,9 +288,13 @@ public class UserProfileController {
         datasource.writeData(userList);
     }
     @FXML private void onBackClick(){
+        profileAnchorPane.setDisable(false);
+        profileAnchorPane.setEffect(null);
         changeAvatarAnchorPane.setVisible(false);
     }
     @FXML private void onAvatarChangeViewClick(){
+        profileAnchorPane.setDisable(true);
+        profileAnchorPane.setEffect(new BoxBlur(6, 5, 2));
         changeAvatarAnchorPane.setVisible(true);
     }
     @FXML private void onDefaultAvatarClick(){
