@@ -1,14 +1,4 @@
-event-bWO39572,OwlVi,Event 1,images/events/event-default.png,null,16/09/2023 10:00,16/09/2023 20:00,test,test,2,234,cs211.project.models.collections.ActivityList@4cf317fc
-event-HBf76356,t1,Event 1,images/events/event-default.png,null,16/09/2023 10:00,16/09/2023 20:00,test,test,2,234,cs211.project.models.collections.ActivityList@4cf317fc
-event-uWP47737,t1,Event 2,images/events/2023-09-11_1694443572760.png,null,22/09/2023 12:00,22/09/2023 14:00,test,test,3,123,cs211.project.models.collections.ActivityList@4cf317fc
-event-CEJ25756,t1,Event 3,images/events/event-default.png,null,22/09/2023 12:00,22/09/2023 14:00,test,test,4,123,cs211.project.models.collections.ActivityList@4cf317fc
-event-nXW87699,t1,Event 4,images/events/event-default.png,null,22/09/2023 15:00,23/09/2023 16:00,test,test,5,1234,cs211.project.models.collections.ActivityList@4cf317fc
-event-zPp4027,t2,Event 1,images/events/event-default.png,null,30/09/2023 12:00,30/09/2023 14:00,test,test,6,123,cs211.project.models.collections.ActivityList@4cf317fc
-event-yah27812,t2,Event 2,images/events/event-default.png,null,23/09/2023 14:00,23/09/2023 16:00,test,test,7,123,cs211.project.models.collections.ActivityList@4cf317fc
-event-GUI70097,t2,Event 3,images/events/event-default.png,null,22/09/2023 13:00,22/09/2023 15:00,test,test,8,123,cs211.project.models.collections.ActivityList@4cf317fc
-event-KHO24442,OwlVi,Event 2,images/events/event-default.png,null,21/09/2023 14:00,21/09/2023 16:00,test,test,9,123,cs211.project.models.collections.ActivityList@4cf317fc
-event-gGC8998,OwlVi,Valorant Music,images/events/event-default.png,Music,15/09/2023 13:00,15/09/2023 15:00,Music,BKK,0,1000,cs211.project.models.collections.ActivityList@4cf317fc
-event-ByN72059,t1,Taiwan Art,images/events/event-default.png,Art,15/09/2023 11:00,16/09/2023 17:00,BingCilling,BingCilling,0,-1,cs211.project.models.collections.ActivityList@4cf317fc
-event-VJv8305,HomieZ09,fdfdfdfd2323,null,Sport,15/09/2023 00:00,16/09/2023 00:00,,,0,-1,cs211.project.models.collections.ActivityList@4cf317fc
-event-nyE745991,prpswa_,we,null,Sport,18/09/2023 00:00,21/09/2023 00:00,,dfd,0,23,17/09/2023 18:35:46
-event-Aea73969,prpswa_,dfdf,null,Sport,21/09/2023 00:00,30/09/2023 00:00,,,0,-1,17-09-2023 18:55:32
+event-YPZ614793,OwlVi,Event 1,null,Art,22/09/2023 12:00,22/09/2023 17:00,,SomeWhae,0,-1,18-09-2023 04:54:20
+event-iSR585298,OwlVi,Event 2,images/events/2023-09-18_1694987864937.png,Music,22/09/2023 10:00,23/09/2023 12:00,,Mairu,0,-1,18-09-2023 04:57:50
+event-dYe301987,OwlVi,Event 3,images/events/2023-09-18_1694987898917.png,Sport,23/09/2023 10:00,24/09/2023 13:00,,Esport,0,-1,18-09-2023 04:58:20
+event-XTZ768461,OwlVi,Event 4 ( no path img),null,Art,30/09/2023 00:00,30/09/2023 00:00,,no,0,-1,18-09-2023 05:03:45

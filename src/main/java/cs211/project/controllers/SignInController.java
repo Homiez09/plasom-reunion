@@ -60,6 +60,8 @@ public class SignInController {
         datasource = new UserListDataSource("data", "user-list.csv");
 
         userList = datasource.readData();
+        usernameTextField.setText("OwlVi");
+        passwordField.setText("Manza1150!");
         eventHandleEnter();
         loadImage();
         showImage(page);

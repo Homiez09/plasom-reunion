@@ -34,18 +34,27 @@ public class HomeController {
         eventList = datasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
         updateButtonState();
-        //if newEvent
-        if (eventList != null && !eventList.getEvents().isEmpty()) {
-            loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew);
-            loadCurrentEventTile(newCenterAnchorPane,eventList.getEvents().get(currnetIndexOfNew));
-            loadNextEventTile(newRightAnchorPane,currnetIndexOfNew);
+
+        try {
+            //if newEvent
+            if (eventList != null && !eventList.getEvents().isEmpty() && currnetIndexOfNew >= 1) {
+                loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew);
+                loadCurrentEventTile(newCenterAnchorPane,eventList.getEvents().get(currnetIndexOfNew));
+                loadNextEventTile(newRightAnchorPane,currnetIndexOfNew);
+            }
+            //if upcomingEvent
+            if (eventList != null && !eventList.getEvents().isEmpty() && currnetIndexOfNew >= 1) {
+                loadOldEventTile(upLeftAnchorPane,currentIndexOfUp);
+                loadCurrentEventTile(upCenterAnchorPane,eventList.getEvents().get(currentIndexOfUp));
+                loadNextEventTile(upRightAnchorPane,currentIndexOfUp);
+            }
+        }catch (IndexOutOfBoundsException e){
+            throw new RuntimeException(e);
         }
-        //if upcomingEvent
-        if (eventList != null && !eventList.getEvents().isEmpty()) {
-            loadOldEventTile(upLeftAnchorPane,currentIndexOfUp);
-            loadCurrentEventTile(upCenterAnchorPane,eventList.getEvents().get(currentIndexOfUp));
-            loadNextEventTile(upRightAnchorPane,currentIndexOfUp);
-        }
+
+
+
+
     }
 
 
