@@ -5,6 +5,7 @@ import cs211.project.models.collections.UserList;
 import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
 
+import cs211.project.services.ImagePathFormat;
 import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -69,14 +70,8 @@ public class navbarController {
     }
 
     private void showProfile() {
-        boolean defaultImageCheck = false;
-        String path = (user != null) ? user.getImagePath() : "x/images/profile/sign-in/sign-in-avatar.png";
-        if (path.startsWith("x")) {
-            path = path.substring(1);
-            defaultImageCheck = true;
-        }
-
-        profileImageView.setImage(new Image((defaultImageCheck) ? getClass().getResource(path).toString() : "file:" + path, 1280, 1280, false, false));
+        ImagePathFormat path = new ImagePathFormat(user.getImagePath());
+        profileImageView.setImage(new Image(path.toString(), 1280, 1280, false, false));
         new CreateProfileCircle(profileImageView, 28);
     }
 }

@@ -3,10 +3,7 @@ package cs211.project.controllers;
 import cs211.project.componentControllers.AvatarProfileController;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
-import cs211.project.services.CreateProfileCircle;
-import cs211.project.services.FXRouter;
-import cs211.project.services.LoadNavbarComponent;
-import cs211.project.services.UserListDataSource;
+import cs211.project.services.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -616,12 +613,9 @@ public class UserProfileController {
 
         boolean defaultImageCheck = false;
         String path = user.getNewImagePath() == null ? user.getImagePath() : user.getNewImagePath();
-        if (path.startsWith("x")) {
-            path = path.substring(1);
-            defaultImageCheck = true;
-        }
+        ImagePathFormat pathFormat = new ImagePathFormat(path);
 
-        Image profileIcon = new Image((defaultImageCheck) ? getClass().getResource(path).toString() : "file:" + path, 1280, 1280, false, false);
+        Image profileIcon = new Image(pathFormat.toString(), 1280, 1280, false, false);
         avatarProfileImageView.setImage(profileIcon);
         userUploadAvatarImageView.setImage(profileIcon);
         new CreateProfileCircle(avatarProfileImageView, 71);
