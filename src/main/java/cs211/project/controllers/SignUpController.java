@@ -203,13 +203,10 @@ public class SignUpController {
         return randomText.toString();
     }
     private String generateUserID() {
-
         Random random = new Random();
-
         String id = "user-";
         int ranInt = random.nextInt(1000000);
         String ranText = generateRandomText(3);
-
         id = id + ranText + ranInt;
         return id;
     }
