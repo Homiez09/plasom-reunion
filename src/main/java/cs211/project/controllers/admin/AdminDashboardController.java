@@ -1,6 +1,7 @@
 package cs211.project.controllers.admin;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.value.ObservableValue;
@@ -22,7 +23,7 @@ public class AdminDashboardController {
     @FXML private TableView userTableView;
     @FXML private ImageView profileImageView;
     @FXML private ProgressBar eventProgressBar;
-    @FXML private Label onlineLabel, offlineLabel, eventLabel;
+    @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel;
     @FXML private TableColumn<User, String> idTableCol, profileTableCol, usernameTableCol, nameTableCol, lastLoginTableCol;
     @FXML private TableColumn<User, Boolean> statusTableCol;
     @FXML private AnchorPane changePasswordAnchorPane;
@@ -39,6 +40,7 @@ public class AdminDashboardController {
 
         LoadChangePasswordComponent();
         showProfile();
+        showEventProgressBarAndEventLabel();
         showOnlineUserLabel();
         showOfflineUserLabel();
         showUserTable();
@@ -147,7 +149,16 @@ public class AdminDashboardController {
     }
 
     private void showEventProgressBarAndEventLabel() {
-
+        EventList eventList = new EventListDataSource("data","event-list.csv").readData();
+//        int sizeTotalEvent = eventList.getSizeTotalEvent();
+//        int sizeCompletedEvent = eventList.getSizeCompletedEvent();
+        int sizeTotalEvent = 25;
+        int sizeCompletedEvent = 12;
+        double percent = (double) sizeCompletedEvent / sizeTotalEvent * 100;
+        eventLabel.setText(String.valueOf(sizeCompletedEvent));
+        System.out.println(percent);
+        eventProgressBar.setProgress(percent/100);
+        percentLabel.setText(String.valueOf(percent) + "%");
     }
 
     private void ButtonSelectGraphic(int page) { // Change button graphic when selected

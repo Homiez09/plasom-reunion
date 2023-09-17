@@ -106,9 +106,14 @@
                                        </image>
                                     </ImageView>
                                     <ProgressBar fx:id="eventProgressBar" layoutX="114.0" layoutY="71.0" prefHeight="12.0" prefWidth="200.0" progress="0.0" />
-                                    <HBox alignment="CENTER_RIGHT" layoutX="274.0" layoutY="54.0" prefHeight="14.0" prefWidth="38.0">
+                                    <HBox alignment="CENTER_RIGHT" layoutX="182.0" layoutY="54.0" prefHeight="15.0" prefWidth="130.0">
                                        <children>
-                                          <Label text="0%" />
+                                          <Label fx:id="percentLabel" text="0%" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" layoutX="114.0" layoutY="55.0" prefHeight="15.0" prefWidth="95.0">
+                                       <children>
+                                          <Label fx:id="totalLabel" prefWidth="58.0" text="Total: 25" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -133,7 +138,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="810.0">
                      <children>
-                        <AnchorPane fx:id="changePasswordAnchorPane" layoutX="66.0" layoutY="48.0" prefHeight="200.0" prefWidth="537.0" />
+                        <AnchorPane fx:id="changePasswordAnchorPane" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
               </content>
