@@ -22,8 +22,8 @@
    <children>
       <AnchorPane fx:id="selectTeamAnchorPane">
          <children>
-            <ComboBox fx:id="settingMenuComboBox" layoutX="878.0" layoutY="106.0" prefWidth="179.0" styleClass="setting-select-team-dropdown" />
-            <ComboBox fx:id="filterMenuComboBox" layoutX="823.0" layoutY="106.0" prefWidth="179.0" styleClass="setting-select-team-dropdown" />
+            <ComboBox fx:id="settingMenuComboBox" layoutX="877.0" layoutY="69.0" prefWidth="179.0" styleClass="setting-select-team-dropdown" />
+            <ComboBox fx:id="filterMenuComboBox" layoutX="823.0" layoutY="69.0" prefWidth="179.0" styleClass="setting-select-team-dropdown" />
             <Label fx:id="myEventLabel" alignment="CENTER" layoutX="29.0" layoutY="90.0" lineSpacing="2.0" onMouseClicked="#onMyEventClick" prefHeight="32.0" prefWidth="119.0" text="my event" textFill="#413b3b">
                <font>
                   <Font name="FreesiaUPC" size="20.0" />
