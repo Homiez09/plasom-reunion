@@ -1,6 +1,5 @@
 package cs211.project.services;
 
-import cs211.project.models.User;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
@@ -19,7 +18,7 @@ public class CreateProfileCircle {
         profileImageView.setClip(getProfileCircle(profileImageView, radius));
     }
 
-    private Circle getProfileCircle(ImageView profileImageView, double radius) {
+    public static Circle getProfileCircle(ImageView profileImageView, double radius) {
         Circle circle = new Circle(radius);
         circle.setCenterX(profileImageView.getFitWidth() / 2);
         circle.setCenterY(profileImageView.getFitHeight() / 2);
