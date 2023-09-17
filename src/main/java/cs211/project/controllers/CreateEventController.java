@@ -36,14 +36,11 @@ public class CreateEventController {
     @FXML private Label headCreateEventLabel;
     @FXML private ChoiceBox<String> eventTagChoiceBox;
     @FXML private ImageView uploadImageView;
-    @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField,
-            teamNameTextField,teamMemberCapTextField,activityNameTextField;
-    @FXML private TextArea eventDescriptionTextArea,activityDescriptionTextArea;
-    @FXML private DatePicker eventStartDatePick,eventEndDatePick,activityStartDatePick,activityEndDatePick;
-    @FXML private TableView<String> createTeamTableView,createActivityTableView;
+    @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField;
+    @FXML private TextArea eventDescriptionTextArea;
+    @FXML private DatePicker eventStartDatePick,eventEndDatePick;
     @FXML
-    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner,activityStartHourSpinner,activityEndHourSpinner,
-            eventStartMinuteSpinner,eventEndMinuteSpinner,activityStartMinuteSpinner,activityEndMinuteSpinner;
+    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     private Event thisEvent = (Event) FXRouter.getData2();
     private String newEventImagePath;
     private final User user = (User) FXRouter.getData();
@@ -58,15 +55,8 @@ public class CreateEventController {
         setSpinner(eventEndHourSpinner,23);
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
-        setSpinner(activityStartHourSpinner,23);
-        setSpinner(activityEndHourSpinner,23);
-        setSpinner(activityStartMinuteSpinner,59);
-        setSpinner(activityEndMinuteSpinner,59);
 
-
-
-
-        eventTagChoiceBox.getItems().addAll("Art","Music","Sport");
+        eventTagChoiceBox.getItems().addAll("Art","Education","Food & Drink","Music","Performance","Seminar","Sport");
         CheckDate();
         setPageHeader();
 
@@ -120,7 +110,7 @@ public class CreateEventController {
     @FXML protected void onBackButtonClick() {
         if (thisEvent == null) {
             try {
-                FXRouter.goTo("event",user);
+                FXRouter.goTo("my-events",user);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -132,6 +122,7 @@ public class CreateEventController {
             }
         }
     }
+
     @FXML protected void onSubmitBasicInformationClick() {
         eventListDatasource = new EventListDataSource("data","event-list.csv");
         eventList = eventListDatasource.readData();
@@ -175,37 +166,10 @@ public class CreateEventController {
         return DateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
     }
-    @FXML protected void onAddActivityButtonClick() {
-        if (thisEvent != null) {
-            eventListDatasource = new EventListDataSource("data","event-list.csv");
-            eventList = eventListDatasource.readData();
 
-            String activityNameString = activityNameTextField.getText().trim();
-            String activityDescriptionString = activityDescriptionTextArea.getText().trim();
-            String startDateTime = formatTime(activityStartDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
-            String endDateTime = formatTime(activityEndDatePick,activityEndHourSpinner,activityEndMinuteSpinner);
-            // add to activity list
-//            thisEvent.getActivities().addActivity(activityNameString,activityDescriptionString,startDateTime,endDateTime);
-
-
-//            thisEvent.getActivities().addActivity(thisEvent.getEventID(),activityNameString,activityDescriptionString,startDateTime,endDateTime);
-        }
-    }
-    @FXML protected void onAddTeamButtonClick() {
-        if (thisEvent != null) {
-            String teamNameString = teamNameTextField.getText().trim();
-            String teamCapString = teamMemberCapTextField.getText().trim();
-            int numTeamMember = Integer.parseInt(teamCapString);
-            // add to team list
-            //thisEvent.getTeams().addTeam();
-        }
-    }
     private void CheckDate() {
         SettingCheckDate(eventStartDatePick);
         SettingCheckDate(eventEndDatePick);
-        SettingCheckDate(activityStartDatePick);
-        SettingCheckDate(activityEndDatePick);
-
     }
     private void SettingCheckDate(DatePicker datePicker){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
