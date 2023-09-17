@@ -41,6 +41,7 @@ public class Event {
         this.slotMember = -1;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         this.isSelected = new SimpleBooleanProperty(false);
+        this.activities = new ActivityList();
     }
 
     public Event(String eventName,
@@ -65,6 +66,7 @@ public class Event {
         this.slotMember = slotMember;
         this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        this.activities = new ActivityList();
     }
 
     public Event(String eventID,
@@ -92,6 +94,7 @@ public class Event {
         this.eventHost = eventHost;
         this.timestamp =timestamp;
         this.isSelected = new SimpleBooleanProperty(false);
+        this.activities = new ActivityList();
 
     }
 
