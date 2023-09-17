@@ -18,7 +18,10 @@ import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 public class SignInController {
 
@@ -173,11 +176,13 @@ public class SignInController {
         }
     }
 
-    private String generateLastedLogin(){
-        LocalDate currentDate = LocalDate.now();
-        formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    private String generateLastedLogin() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        String formattedDate = currentDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(Locale.US));
         return formattedDate;
     }
+
+
     private String setColorBorderTextField(String color){
         switch (color) {
             case "red" -> color = "-fx-border-color: red";
@@ -224,11 +229,11 @@ public class SignInController {
         nextCircle.setVisible(page != maxPage);
     }
 
-    public void onKeyHidePassword() {
+    @FXML private void onKeyHidePassword() {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
     }
-    public void onKeyShowPassword() {
+    @FXML private void onKeyShowPassword() {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
     }

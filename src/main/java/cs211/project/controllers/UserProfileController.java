@@ -139,6 +139,11 @@ public class UserProfileController {
             if (newValue.length() > MAX_BIO_LIMIT) {
                 bioTextArea.setText(oldValue);
             }
+            bioTextArea.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    bioTextArea.setText(oldValue);
+                }
+            });
         });
 
         passwordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -153,7 +158,7 @@ public class UserProfileController {
             }
         });
     }
-    public void setRequirementLabel(){
+    private void setRequirementLabel(){
         displayNameReq.setVisible(false);
         contactNumberReq.setVisible(false);
         passwordReq.setVisible(false);
@@ -235,7 +240,7 @@ public class UserProfileController {
     }
 
     @FXML private void onContactEntered(){
-        if(contactCheckBox.isSelected()){
+        if(contactCheckBox.isSelected() && user.getContactNumber() != null ){
             hoverShowContactAnchorPane.setVisible(true);
             user.setShowContact(true);
         }else{
@@ -386,7 +391,7 @@ public class UserProfileController {
             visiblePasswordImageView.setImage(hidePasswordImage);
         }
     }
-    @FXML public void onSaveButtonClick() {
+    @FXML private void onSaveButtonClick() {
         validateData();
         if (isValid) {
             contactCheckBox.setVisible(true);
@@ -665,6 +670,7 @@ public class UserProfileController {
             onShowDeviceAvatar();
         }
     }
+
     private void defaultAvatarContainerProfile() {
         for (int i = 0; i < 10; i++) {
             String defaultAvatarProfilePath = "/images/profile/default-avatar/default" + i + ".png";

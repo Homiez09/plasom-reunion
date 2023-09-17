@@ -84,7 +84,7 @@ public class SignUpController {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
-                    onSignInClick();
+                    onCreateAccountButton();
                 }
             }
         };
@@ -92,6 +92,8 @@ public class SignUpController {
         usernameTextField.setOnKeyPressed(enterEventHandler);
         passwordField.setOnKeyPressed(enterEventHandler);
         showPasswordTextField.setOnKeyPressed(enterEventHandler);
+        showConfirmPasswordTextField.setOnKeyPressed(enterEventHandler);
+        confirmPasswordField.setOnKeyPressed(enterEventHandler);
     }
 
     @FXML private void onCreateAccountButton() {
@@ -100,7 +102,7 @@ public class SignUpController {
         findDisplayNameValidate = false;
         if(validateConfirmation()){
             setPassword(password);
-            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,false);
+            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,false,"");
             userList.getUsers().add(user);
             try {
                 datasource.writeData(userList);
@@ -188,7 +190,7 @@ public class SignUpController {
         return formattedDate;
     }
 
-    public String generateRandomText(int length) {
+    private String generateRandomText(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder randomText = new StringBuilder();
 
@@ -203,10 +205,13 @@ public class SignUpController {
         return randomText.toString();
     }
     private String generateUserID() {
+
         Random random = new Random();
+
         String id = "user-";
         int ranInt = random.nextInt(1000000);
         String ranText = generateRandomText(3);
+
         id = id + ranText + ranInt;
         return id;
     }
@@ -373,7 +378,7 @@ public class SignUpController {
     }
 
 
-    public void onKeyDisplayName() {
+    @FXML private void onKeyDisplayName() {
         displayName = displayNameTextfield.getText();
         if(!displayName.isEmpty()){
             displayNameReq.setStyle(setColorTextFill("black"));
@@ -385,36 +390,36 @@ public class SignUpController {
         }
 
     }
-    public void onKeyUsername(){
+    @FXML private void onKeyUsername(){
         username = usernameTextField.getText();
         checkUsernameRequirement();
     }
-    public void onKeyHidePassword() {
+    @FXML private void onKeyHidePassword() {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
         checkPasswordRequirement();
     }
-    public void onKeyShowPassword() {
+    @FXML private void onKeyShowPassword() {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
         checkPasswordRequirement();
     }
-    public void onKeyHideConfirmPassword() {
+    @FXML private void onKeyHideConfirmPassword() {
         confirmPassword = confirmPasswordField.getText();
         showConfirmPasswordTextField.setText(confirmPassword);
         checkPasswordRequirement();
     }
-    public void onKeyShowConfirmPassword() {
+    @FXML private void onKeyShowConfirmPassword() {
         confirmPassword = showConfirmPasswordTextField.getText();
         confirmPasswordField.setText(confirmPassword);
         checkPasswordRequirement();
     }
 
-    private void setTextFieldPasswordVisible(boolean visible){
+    @FXML private void setTextFieldPasswordVisible(boolean visible){
         showPasswordTextField.setVisible(visible);
         showConfirmPasswordTextField.setVisible(visible);
     }
-    private void maximumLengthField(){
+    @FXML private void maximumLengthField(){
         displayNameTextfield.textProperty().addListener((observableValue, oldValue , newValue) -> {
             if(newValue.length() > maxDisplayNameLimit){
                 displayNameTextfield.setText(oldValue);

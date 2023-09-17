@@ -15,7 +15,7 @@ public class AvatarProfileController {
     UserList userList ;
 
     @FXML private ImageView avatarProfileImageView;
-    @FXML public AnchorPane currentAvatarAnchorPane;
+    @FXML protected AnchorPane currentAvatarAnchorPane;
     @FXML private Shape hoverAvatarProfile;
 
     @FXML private void initialize() throws IOException {
