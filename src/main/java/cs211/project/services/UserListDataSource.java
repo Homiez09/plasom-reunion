@@ -64,9 +64,9 @@ public class UserListDataSource implements Datasource<UserList> {
             while ( (line = buffer.readLine()) != null ){
                 // ถ้าเป็นบรรทัดว่าง ให้ข้าม
                 if (line.equals("")) continue;
-
                 // แยกสตริงด้วย
-                String[] data = line.split(", DISPLAY-NAME : |, PASSWORD : |, USERNAME : |, CONTACT_NUMBER : |, REGISTER_DATE : |, LASTED_LOGIN : |, IMAGE_PATH : |, STATUS : |, ADMIN : |, SHOW_CONTACT : |, BIO : ");
+                String[] data = line.split(", DISPLAY-NAME : |, PASSWORD : |, USERNAME : |, CONTACT_NUMBER : |, REGISTER_DATE : |, LASTED_LOGIN : |, IMAGE_PATH : |, STATUS : |, ADMIN : |, SHOW_CONTACT : |, BIO :");
+
                 String userId = data[0];
                 String displayName = data[1].trim();
                 String username = data[2].trim();
@@ -81,6 +81,7 @@ public class UserListDataSource implements Datasource<UserList> {
                 boolean admin = Boolean.parseBoolean(data[9]);
 
                 userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, showContactNumber, bio);
+
 
             }
         } catch (IOException e) {
@@ -114,7 +115,6 @@ public class UserListDataSource implements Datasource<UserList> {
             // สร้าง csv
 
             for (User user : data.getUsers()) {
-
                 String line =   user.getUserId() + ", DISPLAY-NAME : "
                         + user.getDisplayName() + ", USERNAME : "
                         + user.getUsername() + ", PASSWORD : "
@@ -126,7 +126,7 @@ public class UserListDataSource implements Datasource<UserList> {
                         + user.getStatus() + ", ADMIN : "
                         + user.isAdmin() + ", SHOW_CONTACT : "
                         + user.isShowContact() + ", BIO : "
-                        + user.getBio() ;
+                        + user.getBio();
                 buffer.append(line);
                 buffer.append("\n");
             }

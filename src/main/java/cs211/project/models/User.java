@@ -13,7 +13,7 @@ public class User {
     private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath;
     private String  registerDate, userId;
     private boolean admin, status, showContact;
-    private ArrayList<Event> events = new ArrayList<>();
+
 
     public User(String userId, String displayName, String username, String password, String contactNumber,
                 String registerDate, String lastedLogin, String imagePath,
@@ -27,9 +27,9 @@ public class User {
         this.admin = admin;
         this.registerDate = registerDate;
         this.lastedLogin = lastedLogin;
-        this.bio = bio;
         this.imagePath = imagePath;
         this.showContact = showContact;
+        this.bio = bio;
     }
 
 
@@ -116,9 +116,6 @@ public class User {
         return newImagePath;
     }
 
-    public ArrayList<Event> getEvents() {
-        return this.events;
-    }
 
     public void setPassword(String password) {
         this.password = password;
