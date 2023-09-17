@@ -41,6 +41,15 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="menu2" mnemonicParsing="false" onAction="#onMenuTwoClick" prefHeight="32.0" prefWidth="262.0" text="Setting">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/admin-sidebar/cog.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                   <Button mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="32.0" prefWidth="262.0" text="Logout">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -106,16 +115,29 @@
                               </Pane>
                            </children>
                         </HBox>
-                        <TableView fx:id="userTableView" layoutX="36.0" layoutY="179.0" prefHeight="479.0" prefWidth="766.0" styleClass="log-user-table">
+                        <TableView fx:id="userTableView" layoutX="36.0" layoutY="179.0" prefHeight="479.0" prefWidth="782.0" styleClass="log-user-table">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="idTableCol" prefWidth="125.5999755859375" text="ID" />
+                            <TableColumn fx:id="profileTableCol" prefWidth="56.0" resizable="false" text="Profile" />
+                              <TableColumn fx:id="usernameTableCol" prefWidth="152.79998779296875" text="Username" />
+                              <TableColumn fx:id="nameTableCol" prefWidth="246.4000244140625" text="Name" />
+                              <TableColumn fx:id="statusTableCol" prefWidth="58.4000244140625" text="Status" />
+                              <TableColumn fx:id="lastLoginTableCol" prefWidth="119.20001220703125" sortType="DESCENDING" text="LastLogin" />
                           </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab fx:id="menu2Tab" text="setting">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="810.0">
+                     <children>
+                        <AnchorPane fx:id="changePasswordAnchorPane" layoutX="66.0" layoutY="48.0" prefHeight="200.0" prefWidth="537.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <AnchorPane layoutX="314.0" prefHeight="75.0" prefWidth="838.0" styleClass="Nav">
