@@ -17,23 +17,6 @@ public class User {
 
     public User(String userId, String displayName, String username, String password, String contactNumber,
                 String registerDate, String lastedLogin, String imagePath,
-                boolean status, boolean admin, boolean showContact) {
-        this.username = username;
-        this.displayName = displayName;
-        this.password = password;
-        this.lastedLogin = lastedLogin;
-        this.imagePath = imagePath;
-        this.contactNumber = contactNumber;
-        this.registerDate = registerDate;
-        this.userId = userId;
-        this.bio ="";
-        this.admin = admin;
-        this.status = status;
-        this.showContact = showContact;
-    }
-
-    public User(String userId, String displayName, String username, String password, String contactNumber,
-                String registerDate, String lastedLogin, String imagePath,
                 boolean status, boolean admin, boolean showContact, String bio) {
         this.username = username;
         this.displayName = displayName;

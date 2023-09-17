@@ -17,8 +17,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class TeamBox1Controller {
-    @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
-    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel;
+    @FXML private ImageView  peopleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
+    @FXML private Label  teamIdLabel, bookmarkLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
@@ -86,14 +86,12 @@ public class TeamBox1Controller {
         }
     }
 
-    @FXML
-    private void onParticipantsEntered(MouseEvent event){
+    @FXML private void onParticipantsEntered(MouseEvent event){
         participantsAnchorPane.setVisible(true);
         memberShipAnchorPane.setVisible(false);
     }
 
-    @FXML
-    private void onParticipantsExited(MouseEvent event){
+    @FXML private void onParticipantsExited(MouseEvent event){
         participantsAnchorPane.setVisible(false);
     }
 
