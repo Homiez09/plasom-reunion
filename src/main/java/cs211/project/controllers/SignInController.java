@@ -58,9 +58,8 @@ public class SignInController {
     @FXML
     void initialize() {
         datasource = new UserListDataSource("data", "user-list.csv");
+
         userList = datasource.readData();
-
-
         eventHandleEnter();
         loadImage();
         showImage(page);
@@ -176,12 +175,11 @@ public class SignInController {
         }
     }
 
-    private String generateLastedLogin() {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        String formattedDate = currentDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(Locale.US));
+    private String generateLastedLogin(){
+        LocalDateTime currentDate = LocalDateTime.now();
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yy-MM-dd : hh:mm:ss").withLocale(Locale.US));
         return formattedDate;
     }
-
 
     private String setColorBorderTextField(String color){
         switch (color) {
