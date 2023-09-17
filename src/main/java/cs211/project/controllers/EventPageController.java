@@ -3,6 +3,9 @@ package cs211.project.controllers;
 import cs211.project.models.Event;
 import cs211.project.models.Activity;
 import cs211.project.models.User;
+import cs211.project.models.collections.ActivityList;
+import cs211.project.services.ActivityListDataSource;
+import cs211.project.services.Datasource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
 import javafx.fxml.FXML;
@@ -27,9 +30,14 @@ public class EventPageController {
     @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel,eventInformationLabel;
     @FXML private VBox teamApplyBox;
     @FXML private ImageView eventImageView;
+    private Datasource<ActivityList> eventActivityDatasource;
+    private ActivityList activityList;
     @FXML private TableView<Activity> eventActivityTableView;
     private Image image;
     @FXML private void initialize() {
+        this.eventActivityDatasource = new ActivityListDataSource("data","activity-list.csv");
+        this.activityList = eventActivityDatasource.readData();
+
         new LoadNavbarComponent(user, navbarAnchorPane);
         showEventData();
         staffApplicationAnchorPane.setVisible(false);
@@ -94,8 +102,11 @@ public class EventPageController {
         endTimeColumn.setPrefWidth(150);
         descriptionColumn.prefWidthProperty().bind(eventActivityTableView.widthProperty().subtract(nameColumn.widthProperty())
                 .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()));
-        for (Activity activity: event.getActivities().getActivities()) {
-            eventActivityTableView.getItems().add(activity);
+        for (Activity activity: activityList.getActivities()) {
+            if (event.getEventID().equals(activity.getEventID())) {
+                eventActivityTableView.getItems().add(activity);
+            }
+
         }
     }
 

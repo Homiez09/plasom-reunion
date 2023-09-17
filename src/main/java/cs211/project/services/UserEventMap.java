@@ -65,14 +65,14 @@ public class UserEventMap implements Datasource<HashMap<String,Set<String>>>{
                 if (line.equals("")) continue;
 
                     String[] data = line.split(",");
-                    String user = data[0].trim();
+                    String event = data[0].trim();
 
                     if (!hashMap.containsKey(data[0].trim())) {
                         eventSet = new HashSet<>();
                     }
                     eventSet.add(data[1].trim());
 
-                    hashMap.put(user,eventSet);
+                    hashMap.put(event ,eventSet);
 
             }
         } catch (IOException e) {
@@ -104,10 +104,10 @@ public class UserEventMap implements Datasource<HashMap<String,Set<String>>>{
         try {
             for (Map.Entry<String, Set<String>> entry : data.entrySet()) {
 
-                String user = entry.getKey();
-                Set<String> eventList = entry.getValue();
-                for (String eventID:eventList){
-                    String line = user + "," + eventID;
+                String eventID = entry.getKey();
+                Set<String> userList = entry.getValue();
+                for (String user:userList){
+                    String line = eventID + "," + user;
                     buffer.write(line);
                     buffer.newLine();
                 }

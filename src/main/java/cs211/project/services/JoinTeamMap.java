@@ -67,7 +67,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                 String[] data = line.split(",");
                 String username = data[0];
                 String teamID = data[1];
-                String role = data[2];
+                String role = data[2].trim();
                 boolean isBookmarked = Boolean.parseBoolean(data[3]);
 
                 if (hashMap.containsKey(username)) {

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -16,6 +17,7 @@ public class EventTileController {
     @FXML
     Label eventNameLabel,eventDateLabel,eventPlaceLabel,eventMemberLabel;
     private User currentUser = (User) FXRouter.getData();
+    private Event event;
     private Image image;
     private  Event thisEvent;
     @FXML private void initialize() {
@@ -41,6 +43,7 @@ public class EventTileController {
             eventTileImageView.setImage(image);
         }
     }
+
 
     @FXML protected void onEventTileClick() {
         try {

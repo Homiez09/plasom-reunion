@@ -15,9 +15,26 @@ public class User {
     private boolean admin, status, showContact;
     private ArrayList<Event> events = new ArrayList<>();
 
+    public User(String userId, String displayName, String username, String password, String contactNumber,
+                String registerDate, String lastedLogin, String imagePath,
+                boolean status, boolean admin, boolean showContact) {
+        this.username = username;
+        this.displayName = displayName;
+        this.password = password;
+        this.lastedLogin = lastedLogin;
+        this.imagePath = imagePath;
+        this.contactNumber = contactNumber;
+        this.registerDate = registerDate;
+        this.userId = userId;
+        this.bio ="";
+        this.admin = admin;
+        this.status = status;
+        this.showContact = showContact;
+    }
 
-
-    public User( String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin,boolean showContact, String bio) {
+    public User(String userId, String displayName, String username, String password, String contactNumber,
+                String registerDate, String lastedLogin, String imagePath,
+                boolean status, boolean admin, boolean showContact, String bio) {
         this.username = username;
         this.displayName = displayName;
         this.userId = userId;
@@ -57,7 +74,6 @@ public class User {
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), this.password);
         return result.verified;
     }
-
 
 
     public String getUserId() {
@@ -121,13 +137,24 @@ public class User {
         return this.events;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
 
     public void setNewImagePath(String newImagePath) {
         this.newImagePath = newImagePath;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public void setLastedLogin(String lastedLogin) {
@@ -138,12 +165,6 @@ public class User {
         this.imagePath = imagePath;
     }
 
-    public void joinEvent(Event event){
-        if(event.getEventName().equals("")){
-            this.events.add(event);
-        }
-    }
-
     public void updateProfile(String displayName, String contactNumber, String bio, String newImagePath) {
         this.displayName = displayName;
         this.contactNumber = contactNumber;
@@ -151,20 +172,7 @@ public class User {
         setImagePath(newImagePath);
     }
 
-    public String generateRandomText(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
 
-        Random random = new Random();
-
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-
-        return randomText.toString();
-    }
 
 }
 

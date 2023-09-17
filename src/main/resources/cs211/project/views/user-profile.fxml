@@ -87,7 +87,7 @@
                         </Label>
                         <ImageView fx:id="contactIconProfileImageView" fitHeight="43.0" fitWidth="43.0" layoutX="50.0" layoutY="83.0" onMouseEntered="#onContactEntered" onMouseExited="#onContactExited" pickOnBounds="true" preserveRatio="true" styleClass="image-change-effect" />
                         <Circle fill="#ff9e22" layoutX="236.0" layoutY="195.0" radius="75.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9e22" height="30.0" layoutX="149.0" layoutY="535.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 10; -fx-arc-width: 10;" width="150.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9e22" height="30.0" layoutX="160.0" layoutY="538.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 10; -fx-arc-width: 10;" width="143.0" />
                         <ImageView fx:id="frameIconImageView" fitHeight="64.0" fitWidth="387.0" layoutX="38.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="ellipseIconImageView" fitHeight="168.0" fitWidth="137.0" layoutX="196.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="avatarProfileImageView" fitHeight="142.0" fitWidth="142.0" layoutX="165.0" layoutY="124.0" onMouseEntered="#onHoverAvatarChangeEntered" onMouseExited="#onHoverAvatarChangeExited" pickOnBounds="true" preserveRatio="true">
@@ -155,21 +155,21 @@
                         <ImageView fx:id="displayNameIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="521.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="contactIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="521.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="passwordIconImageView" fitHeight="20.0" fitWidth="20.0" layoutX="521.0" layoutY="549.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label alignment="CENTER" layoutX="149.0" layoutY="535.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="24.0" text="#" textFill="WHITE">
+                        <Label alignment="CENTER" layoutX="170.0" layoutY="537.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="24.0" text="#" textFill="WHITE">
                            <styleClass>
                               <String fx:value="text-ms" />
                               <String fx:value="weight-medium" />
                               <String fx:value="font" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="idLabel" layoutX="862.0" layoutY="99.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="182.0" text="4931444444444444">
+                        <Label fx:id="idLabel" layoutX="861.0" layoutY="98.0" lineSpacing="1.0" prefHeight="32.0" prefWidth="158.0" text="user-dev270346">
                            <styleClass>
                               <String fx:value="text-xl" />
                               <String fx:value="weight-medium" />
                               <String fx:value="font" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="idProfileLabel" alignment="CENTER" layoutX="168.0" layoutY="535.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="123.0" text="4931444444444444" textFill="WHITE">
+                        <Label fx:id="idProfileLabel" alignment="CENTER" layoutX="175.0" layoutY="537.0" lineSpacing="1.0" prefHeight="29.0" prefWidth="127.0" text="user-dev270346" textFill="WHITE">
                            <styleClass>
                               <String fx:value="text-ms" />
                               <String fx:value="weight-medium" />
@@ -256,25 +256,6 @@
                                     <String fx:value="weight-medium" />
                                  </styleClass>
                               </Label>
-                              <AnchorPane fx:id="hoverShowContactAnchorPane" layoutX="-72.0" layoutY="-43.0" prefHeight="47.0" prefWidth="285.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="35.0" layoutX="5.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="show-information-box" width="143.0" />
-                                    <Label alignment="CENTER" layoutX="8.0" layoutY="6.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="36.0" text="Tel :">
-                                       <styleClass>
-                                          <String fx:value="text-base" />
-                                          <String fx:value="weight-medium" />
-                                          <String fx:value="font" />
-                                       </styleClass>
-                                    </Label>
-                                    <Label fx:id="contactProfileLabel" alignment="CENTER" layoutX="40.0" layoutY="7.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="106.0" text="0642936357">
-                                       <styleClass>
-                                          <String fx:value="text-base" />
-                                          <String fx:value="weight-medium" />
-                                          <String fx:value="font" />
-                                       </styleClass>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
                            </children>
                         </AnchorPane>
                         <ImageView fx:id="avatarChangeView" fitHeight="30.0" fitWidth="30.0" layoutX="172.0" layoutY="237.0" onMouseClicked="#onAvatarChangeViewClick" onMouseEntered="#onHoverAvatarChangeEntered" onMouseExited="#onHoverAvatarChangeExited" pickOnBounds="true" preserveRatio="true" styleClass="image-change-effect" />
@@ -287,12 +268,31 @@
                         </Label>
                      </children>
                   </AnchorPane>
+                  <AnchorPane fx:id="hoverShowContactAnchorPane" layoutX="126.0" layoutY="123.0" prefHeight="43.0" prefWidth="298.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="35.0" layoutX="5.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="show-information-box" width="143.0" />
+                        <Label alignment="CENTER" layoutX="8.0" layoutY="6.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="36.0" text="Tel :">
+                           <styleClass>
+                              <String fx:value="text-base" />
+                              <String fx:value="weight-medium" />
+                              <String fx:value="font" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="contactProfileLabel" alignment="CENTER" layoutX="40.0" layoutY="7.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="106.0" text="0642936357">
+                           <styleClass>
+                              <String fx:value="text-base" />
+                              <String fx:value="weight-medium" />
+                              <String fx:value="font" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="changeAvatarAnchorPane" layoutX="203.0" layoutY="122.0" prefHeight="436.0" prefWidth="776.0">
+      <AnchorPane fx:id="changeAvatarAnchorPane" layoutX="203.0" layoutY="122.0" prefHeight="436.0" prefWidth="776.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="538.0" stroke="#f6f4ee00" strokeType="INSIDE" styleClass="bgProfile2" width="776.0" />
             <Line endX="612.5" endY="-1.0" layoutX="96.0" layoutY="167.0" startX="-32.6" startY="-1.0" stroke="#403a3a" strokeWidth="2.0" />
