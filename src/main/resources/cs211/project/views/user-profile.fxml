@@ -256,31 +256,31 @@
                                     <String fx:value="weight-medium" />
                                  </styleClass>
                               </Label>
-                              <AnchorPane fx:id="hoverShowContactAnchorPane" layoutX="-72.0" layoutY="-43.0" prefHeight="47.0" prefWidth="285.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="35.0" layoutX="5.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="show-information-box" width="143.0" />
-                                    <Label alignment="CENTER" layoutX="8.0" layoutY="6.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="36.0" text="Tel :">
-                                       <styleClass>
-                                          <String fx:value="text-base" />
-                                          <String fx:value="weight-medium" />
-                                          <String fx:value="font" />
-                                       </styleClass>
-                                    </Label>
-                                    <Label fx:id="contactProfileLabel" alignment="CENTER" layoutX="40.0" layoutY="7.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="106.0" text="0642936357">
-                                       <styleClass>
-                                          <String fx:value="text-base" />
-                                          <String fx:value="weight-medium" />
-                                          <String fx:value="font" />
-                                       </styleClass>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
                            </children>
                         </AnchorPane>
                         <ImageView fx:id="avatarChangeView" fitHeight="30.0" fitWidth="30.0" layoutX="172.0" layoutY="237.0" onMouseClicked="#onAvatarChangeViewClick" onMouseEntered="#onHoverAvatarChangeEntered" onMouseExited="#onHoverAvatarChangeExited" pickOnBounds="true" preserveRatio="true" styleClass="image-change-effect" />
                         <Label layoutX="594.0" layoutY="99.0" lineSpacing="1.0" prefHeight="31.0" prefWidth="22.0" text="\@">
                            <styleClass>
                               <String fx:value="text-xl" />
+                              <String fx:value="weight-medium" />
+                              <String fx:value="font" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="hoverShowContactAnchorPane" layoutX="126.0" layoutY="123.0" prefHeight="43.0" prefWidth="298.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9d396" height="35.0" layoutX="5.0" layoutY="5.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="show-information-box" width="143.0" />
+                        <Label alignment="CENTER" layoutX="8.0" layoutY="6.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="36.0" text="Tel :">
+                           <styleClass>
+                              <String fx:value="text-base" />
+                              <String fx:value="weight-medium" />
+                              <String fx:value="font" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="contactProfileLabel" alignment="CENTER" layoutX="40.0" layoutY="7.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="106.0" text="0642936357">
+                           <styleClass>
+                              <String fx:value="text-base" />
                               <String fx:value="weight-medium" />
                               <String fx:value="font" />
                            </styleClass>
