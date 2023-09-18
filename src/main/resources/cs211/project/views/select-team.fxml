@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -170,6 +172,64 @@
                   <String fx:value="text-lg" />
                </styleClass>
             </CheckBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="switchViewAnchorPane1" layoutX="119.0" layoutY="156.0" prefHeight="542.0" prefWidth="913.0" style="-fx-background-color: #F6F4EE;">
+         <children>
+            <Label fx:id="backLabel1" layoutX="32.0" layoutY="27.0" lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="24.0" prefWidth="111.0" text="&lt; back" textFill="#413b3b">
+               <font>
+                  <Font name="FreesiaUPC" size="20.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="spacing1" />
+                  <String fx:value="font" />
+                  <String fx:value="next-page" />
+                  <String fx:value="next-page-bar" />
+                  <String fx:value="next-page-shadow" />
+                  <String fx:value="text-xl" />
+               </styleClass>
+            </Label>
+            <Line endX="705.0" endY="0.5" fill="#403a3a" layoutX="140.0" layoutY="108.0" startX="-74.8" startY="0.5" stroke="#403a3a" />
+            <HBox alignment="CENTER_LEFT" layoutX="66.0" layoutY="70.0" prefHeight="38.0" prefWidth="781.0" spacing="40.0" style="-fx-background-color: #F6F4EE;">
+               <children>
+                  <Label lineSpacing="2.0" prefHeight="38.0" prefWidth="136.0" text="Manage Team" textFill="#858585">
+                     <font>
+                        <Font name="FreesiaUPC" size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="spacing1" />
+                        <String fx:value="weight-bold" />
+                        <String fx:value="font" />
+                        <String fx:value="text-xl" />
+                     </styleClass>
+                  </Label>
+                  <Label lineSpacing="2.0" prefHeight="38.0" prefWidth="151.0" text="Pending Invites" textFill="#858585">
+                     <font>
+                        <Font name="FreesiaUPC" size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="spacing1" />
+                        <String fx:value="weight-bold" />
+                        <String fx:value="font" />
+                        <String fx:value="text-xl" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </HBox>
+            <TabPane fx:id="mainTab" layoutX="65.0" layoutY="77.0" prefHeight="435.0" prefWidth="782.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tab1" text="manage_team">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                <Tab fx:id="tab2" text="pending_invites">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </AnchorPane>
    </children>
