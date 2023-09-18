@@ -240,7 +240,7 @@ public class UserProfileController {
     }
 
     @FXML private void onContactEntered(){
-        if(contactCheckBox.isSelected() && user.getContactNumber() != null ){
+        if(contactCheckBox.isSelected() && user.getContactNumber().length()>0){
             hoverShowContactAnchorPane.setVisible(true);
             user.setShowContact(true);
         }else{
