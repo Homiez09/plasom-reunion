@@ -102,7 +102,7 @@ public class SignUpController {
         findDisplayNameValidate = false;
         if(validateConfirmation()){
             setPassword(password);
-            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(), false, false,false,"");
+            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(),"", false, false,false);
             userList.getUsers().add(user);
             try {
                 datasource.writeData(userList);

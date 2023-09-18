@@ -40,12 +40,12 @@ public class UserList {
     }
 
 
-    public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, boolean status, boolean admin, boolean showContactNumber, String bio){
+    public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, String bio, boolean status, boolean admin, boolean showContactNumber){
         username = username.trim();
         password = password.trim();
         User newUser = findUsername(username);
         if(newUser == null){
-            users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin,showContactNumber, bio));
+            users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, bio, status, admin,showContactNumber));
         }
     }
 
