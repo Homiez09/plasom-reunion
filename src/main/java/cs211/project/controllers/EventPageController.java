@@ -18,6 +18,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -27,6 +29,7 @@ public class EventPageController {
     Event event = (Event) FXRouter.getData2();
     @FXML
     private AnchorPane navbarAnchorPane,staffApplicationAnchorPane;
+    @FXML private StackPane imageStackPane;
     @FXML private Button editEventButton;
     @FXML private Text eventInformationText;
     @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel;
@@ -85,6 +88,12 @@ public class EventPageController {
             e.printStackTrace();
         }
         eventImageView.setImage(image);
+        eventImageView.setFitWidth(300);
+        eventImageView.setFitHeight(350);
+        eventImageView.setPreserveRatio(true);
+        Region transparentBackground = new Region();
+        transparentBackground.setStyle("-fx-background-color: transparent;");
+        imageStackPane.getChildren().addAll(transparentBackground);
 
         TableColumn<Activity,String> nameColumn = new TableColumn<>("Activity name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

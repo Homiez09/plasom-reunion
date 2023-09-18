@@ -162,7 +162,10 @@
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" layoutX="38.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="38.0" />
+                              <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" layoutX="38.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="40.0">
+                                 <image>
+                                    <Image url="@../../../images/home/event2.png" />
+                                 </image></ImageView>
                               <Text fill="RED" layoutX="360.79998779296875" layoutY="13.3984375" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose .jpg, .jpeg or .png image file." AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="265.0">
                                  <font>
                                     <Font name="Leelawadee" size="14.0" />
