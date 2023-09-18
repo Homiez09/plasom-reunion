@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -27,7 +28,8 @@ public class EventPageController {
     @FXML
     private AnchorPane navbarAnchorPane,staffApplicationAnchorPane;
     @FXML private Button editEventButton;
-    @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel,eventInformationLabel;
+    @FXML private Text eventInformationText;
+    @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel;
     @FXML private VBox teamApplyBox;
     @FXML private ImageView eventImageView;
     private Datasource<ActivityList> eventActivityDatasource;
@@ -41,7 +43,7 @@ public class EventPageController {
         new LoadNavbarComponent(user, navbarAnchorPane);
         showEventData();
         staffApplicationAnchorPane.setVisible(false);
-        if (user != null && user.getUsername().equals(event.getEventHost())) { //should be user ID
+        if (user != null && user.getUserId().equals(event.getEventHost())) {
             editEventButton.setVisible(true);
         } else {
             editEventButton.setVisible(false);
@@ -74,7 +76,8 @@ public class EventPageController {
         eventNameLabel.setText(event.getEventName());
         eventDateLabel.setText(date);
         eventLocationLabel.setText(event.getEventLocation());
-        eventInformationLabel.setText(event.getEventDescription());
+        eventInformationText.setText(event.getEventDescription());
+        eventInformationText.setWrappingWidth(568);
         image = new Image(getClass().getResource("/images/events/event-default.png").toString());
         try {
             image = new Image("file:"+event.getEventImagePath(),true);

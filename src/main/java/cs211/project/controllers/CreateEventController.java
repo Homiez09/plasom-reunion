@@ -130,11 +130,11 @@ public class CreateEventController {
         eventList = eventListDatasource.readData();
         if (thisEvent == null) {
             String eventNameString = eventNameTextField.getText().trim();
-            String eventHost = user.getUsername();
+            String eventHost = user.getUserId();
             String eventTag = eventTagChoiceBox.getValue();
             String startDate = formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner);
             String endDate = formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner);
-            String eventDescriptionString = eventDescriptionTextArea.getText();
+            String eventDescriptionString = eventDescriptionTextArea.getText().replace("\n","\\n");
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
             System.out.println(newEventImagePath);
@@ -154,8 +154,7 @@ public class CreateEventController {
             eventListDatasource.writeData(eventList);
         } else {
             eventList.findEvent(thisEvent.getEventID()).changeName(eventNameTextField.getText());
-            //thisEvent.changeName(eventNameTextField.getText());
-            eventList.findEvent(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText());
+            eventList.findEvent(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText().replace("\n","\\n"));
             eventList.findEvent(thisEvent.getEventID()).changeSlotMember(Integer.parseInt(eventCapTextField.getText()));
             eventList.findEvent(thisEvent.getEventID()).changeDateStart(formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
             eventList.findEvent(thisEvent.getEventID()).changeDateEnd(formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));

@@ -18,7 +18,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventPageController">
    <children>
-      <ScrollPane layoutY="75.0" AnchorPane.topAnchor="75.0">
+      <ScrollPane hbarPolicy="NEVER" layoutY="75.0" AnchorPane.topAnchor="75.0">
          <content>
             <AnchorPane prefHeight="693.0" prefWidth="1152.0" styleClass="bg">
                <children>
@@ -120,15 +120,18 @@
                           <tabs>
                             <Tab text="Event info">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0">
+                                    <VBox>
                                        <children>
-                                          <Label fx:id="eventInformationLabel" layoutX="96.0" layoutY="61.0" text="eventInformationLabel" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
+                                          <Text fx:id="eventInformationText" strokeType="OUTSIDE" strokeWidth="0.0" text="eventInformationText">
                                              <font>
                                                 <Font name="Leelawadee" size="14.0" />
                                              </font>
-                                          </Label>
+                                             <VBox.margin>
+                                                <Insets left="100.0" top="70.0" />
+                                             </VBox.margin>
+                                          </Text>
                                        </children>
-                                    </AnchorPane>
+                                    </VBox>
                               </content>
                             </Tab>
                             <Tab text="Event Schedule">
