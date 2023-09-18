@@ -17,6 +17,12 @@ public class ActivityList {
         }
     }
 
+    public void addActivity(Activity activity) {
+        if (activity != null) {
+            activities.add(activity);
+        }
+    }
+
     public Activity findActivity(String eventId){
         for (Activity activity:activities) {
             if (activity.getEventID().equals(eventId)){
