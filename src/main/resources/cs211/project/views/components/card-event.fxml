@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="250.0" prefWidth="290.0" styleClass="card-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardEventController">
+   <children>
+      <ImageView fx:id="eventImage" fitHeight="130.0" fitWidth="130.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="eventnameLabel" alignment="CENTER" layoutX="145.0" layoutY="14.0" prefHeight="25.0" prefWidth="130.0" text="eventLabel" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true" />
+      <Button fx:id="joinEventButton" layoutX="55.0" layoutY="201.0" mnemonicParsing="false" onAction="#onJoinEventAcition" prefWidth="44.0" text="Join">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button fx:id="joinStaffButton" layoutX="178.0" layoutY="201.0" mnemonicParsing="false" onAction="#onJoinStaffButton" prefWidth="65.0" text="Join Staff">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Label fx:id="dateLabel" layoutX="25.0" layoutY="153.0" text="dateLabel" />
+      <Label fx:id="memberLabel" layoutX="23.0" layoutY="173.0" text="memberLabel" />
+      <Label fx:id="descriptionLabel" alignment="TOP_CENTER" graphicTextGap="0.0" layoutX="145.0" layoutY="39.0" prefHeight="150.0" prefWidth="130.0" text="Description" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+   </children>
+   <effect>
+      <DropShadow blurType="GAUSSIAN" height="41.52" radius="20.26" width="41.52" />
+   </effect>
+</AnchorPane>

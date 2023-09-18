@@ -10,7 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Event {
-    private String eventID, eventHost, eventName, eventImagePath;
+    private final String eventID;
+    private final String eventHost;
+    private String eventName;
+    private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
     private String eventDescription, eventLocation;
     private int member = 0 ,slotMember;
@@ -181,9 +184,6 @@ public class Event {
 
     }
 
-    public boolean isSelected() {
-        return isSelected.get();
-    }
 
     public BooleanProperty selectedProperty() {
         return isSelected;

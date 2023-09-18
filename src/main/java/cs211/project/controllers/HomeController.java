@@ -173,4 +173,12 @@ public class HomeController {
     }
     //-------------Animate Zoom for any AnchorPane-------------\\
 
+    public void onClickButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("event-list",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

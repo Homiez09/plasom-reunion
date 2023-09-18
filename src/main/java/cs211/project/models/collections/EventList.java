@@ -53,6 +53,16 @@ public class EventList {
         }
         return null;
     }
+    public int getSizeTotalEvent(){return events.size();}
+    public int getSizeCompletedEvent(){
+        int count = 0;
+        for (Event event:events) {
+            if (event.isEnd()) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     public ArrayList<Event> getEvents() {
         return events;
