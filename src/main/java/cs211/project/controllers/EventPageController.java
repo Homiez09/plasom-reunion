@@ -41,7 +41,7 @@ public class EventPageController {
         new LoadNavbarComponent(user, navbarAnchorPane);
         showEventData();
         staffApplicationAnchorPane.setVisible(false);
-        if (user != null && user.getUserId() == event.getEventHost()) {
+        if (user != null && user.getUsername().equals(event.getEventHost())) { //should be user ID
             editEventButton.setVisible(true);
         } else {
             editEventButton.setVisible(false);

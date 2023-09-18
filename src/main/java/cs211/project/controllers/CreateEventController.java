@@ -42,7 +42,7 @@ public class CreateEventController {
     @FXML
     private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     private Event thisEvent = (Event) FXRouter.getData2();
-    private String newEventImagePath;
+    private String newEventImagePath = null;
     private final User user = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
@@ -50,7 +50,6 @@ public class CreateEventController {
         eventListDatasource = new EventListDataSource("data","event-list.csv");
         eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
-
         setSpinner(eventStartHourSpinner,23);
         setSpinner(eventEndHourSpinner,23);
         setSpinner(eventStartMinuteSpinner,59);
@@ -59,6 +58,9 @@ public class CreateEventController {
         eventTagChoiceBox.getItems().addAll("Art","Education","Food & Drink","Music","Performance","Seminar","Sport");
         CheckDate();
         setPageHeader();
+        if (thisEvent != null) {
+            showEventDetail(thisEvent);
+        }
 
     }
     @FXML protected void handleUploadButton(ActionEvent event) {
@@ -150,13 +152,45 @@ public class CreateEventController {
 
             eventList.getEvents().add(thisEvent);
             eventListDatasource.writeData(eventList);
+        } else {
+            eventList.findEvent(thisEvent.getEventID()).changeName(eventNameTextField.getText());
+            //thisEvent.changeName(eventNameTextField.getText());
+            eventList.findEvent(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText());
+            eventList.findEvent(thisEvent.getEventID()).changeSlotMember(Integer.parseInt(eventCapTextField.getText()));
+            eventList.findEvent(thisEvent.getEventID()).changeDateStart(formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
+            eventList.findEvent(thisEvent.getEventID()).changeDateEnd(formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
+            eventList.findEvent(thisEvent.getEventID()).changeTag(eventTagChoiceBox.getValue());
+            if (newEventImagePath != null) {
+                eventList.findEvent(thisEvent.getEventID()).changeEventImagePath(newEventImagePath);
+            }
+            eventListDatasource.writeData(eventList);
         }
+
         try {
-            FXRouter.goTo("my-events");
+            FXRouter.goTo("my-events",user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private void showEventDetail(Event event) {
+        eventNameTextField.setText(event.getEventName());
+        eventLocationTextField.setText(event.getEventLocation());
+        eventTagChoiceBox.setValue(event.getEventTag());
+        eventDescriptionTextArea.setText(event.getEventDescription());
+        eventCapTextField.setText(Integer.toString(event.getSlotMember()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime eventStartDateTime = LocalDateTime.parse(event.getEventDateStart(),formatter);
+        LocalDateTime eventEndDateTime = LocalDateTime.parse(event.getEventDateEnd(),formatter);
+        eventStartDatePick.setValue(eventStartDateTime.toLocalDate());
+        eventStartHourSpinner.getValueFactory().setValue(eventStartDateTime.getHour());
+        eventStartMinuteSpinner.getValueFactory().setValue(eventStartDateTime.getMinute());
+        eventEndDatePick.setValue(eventEndDateTime.toLocalDate());
+        eventEndHourSpinner.getValueFactory().setValue(eventEndDateTime.getHour());
+        eventEndMinuteSpinner.getValueFactory().setValue(eventEndDateTime.getMinute());
+        uploadImageView.setImage(new Image("file:"+event.getEventImagePath(),300,300,true,true));
+    }
+
     private String formatTime(DatePicker datePicker,Spinner<Integer> hour,Spinner<Integer> minute){
         LocalDate DatePick = datePicker.getValue();
         int Hour = hour.getValue();

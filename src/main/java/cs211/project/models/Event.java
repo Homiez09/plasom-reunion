@@ -122,6 +122,8 @@ public class Event {
     public void changeName(String newName){this.eventName = newName;}
     public void changeDescription(String newDescription){this.eventDescription = newDescription;}
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
+    public void changeTag(String newTag) {this.eventTag = newTag;}
+    public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
     public void addMember(){if(!isFull())this.member++;}
     public void delMember(){if(member >0) this.member--;}
 
