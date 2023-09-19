@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBox2Controller">
+<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamboxControllers.TeamBox2Controller">
    <children>
       <ComboBox fx:id="menuDropDown" layoutX="37.0" layoutY="3.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
       <Label fx:id="teamIdLabel" layoutX="60.0" layoutY="60.0" text="Label" />
