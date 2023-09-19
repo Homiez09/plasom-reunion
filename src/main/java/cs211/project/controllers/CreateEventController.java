@@ -36,16 +36,13 @@ public class CreateEventController {
     @FXML private Label headCreateEventLabel;
     @FXML private ChoiceBox<String> eventTagChoiceBox;
     @FXML private ImageView uploadImageView;
-    @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField,
-            teamNameTextField,teamMemberCapTextField,activityNameTextField;
-    @FXML private TextArea eventDescriptionTextArea,activityDescriptionTextArea;
-    @FXML private DatePicker eventStartDatePick,eventEndDatePick,activityStartDatePick,activityEndDatePick;
-    @FXML private TableView<String> createTeamTableView,createActivityTableView;
+    @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField;
+    @FXML private TextArea eventDescriptionTextArea;
+    @FXML private DatePicker eventStartDatePick,eventEndDatePick;
     @FXML
-    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner,activityStartHourSpinner,activityEndHourSpinner,
-            eventStartMinuteSpinner,eventEndMinuteSpinner,activityStartMinuteSpinner,activityEndMinuteSpinner;
+    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     private Event thisEvent = (Event) FXRouter.getData2();
-    private String newEventImagePath;
+    private String newEventImagePath = null;
     private final User user = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
@@ -53,22 +50,17 @@ public class CreateEventController {
         eventListDatasource = new EventListDataSource("data","event-list.csv");
         eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
-
         setSpinner(eventStartHourSpinner,23);
         setSpinner(eventEndHourSpinner,23);
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
-        setSpinner(activityStartHourSpinner,23);
-        setSpinner(activityEndHourSpinner,23);
-        setSpinner(activityStartMinuteSpinner,59);
-        setSpinner(activityEndMinuteSpinner,59);
 
-
-
-
-        eventTagChoiceBox.getItems().addAll("Art","Music","Sport");
+        eventTagChoiceBox.getItems().addAll("Art","Education","Food & Drink","Music","Performance","Seminar","Sport");
         CheckDate();
         setPageHeader();
+        if (thisEvent != null) {
+            showEventDetail(thisEvent);
+        }
 
     }
     @FXML protected void handleUploadButton(ActionEvent event) {
@@ -120,7 +112,7 @@ public class CreateEventController {
     @FXML protected void onBackButtonClick() {
         if (thisEvent == null) {
             try {
-                FXRouter.goTo("event",user);
+                FXRouter.goTo("my-events",user);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -132,16 +124,17 @@ public class CreateEventController {
             }
         }
     }
+
     @FXML protected void onSubmitBasicInformationClick() {
         eventListDatasource = new EventListDataSource("data","event-list.csv");
         eventList = eventListDatasource.readData();
         if (thisEvent == null) {
             String eventNameString = eventNameTextField.getText().trim();
-            String eventHost = user.getUsername();
+            String eventHost = user.getUserId();
             String eventTag = eventTagChoiceBox.getValue();
             String startDate = formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner);
             String endDate = formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner);
-            String eventDescriptionString = eventDescriptionTextArea.getText();
+            String eventDescriptionString = eventDescriptionTextArea.getText().replace("\n","\\n");
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
             System.out.println(newEventImagePath);
@@ -159,13 +152,44 @@ public class CreateEventController {
 
             eventList.getEvents().add(thisEvent);
             eventListDatasource.writeData(eventList);
+        } else {
+            eventList.findEvent(thisEvent.getEventID()).changeName(eventNameTextField.getText());
+            eventList.findEvent(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText().replace("\n","\\n"));
+            eventList.findEvent(thisEvent.getEventID()).changeSlotMember(Integer.parseInt(eventCapTextField.getText()));
+            eventList.findEvent(thisEvent.getEventID()).changeDateStart(formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
+            eventList.findEvent(thisEvent.getEventID()).changeDateEnd(formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
+            eventList.findEvent(thisEvent.getEventID()).changeTag(eventTagChoiceBox.getValue());
+            if (newEventImagePath != null) {
+                eventList.findEvent(thisEvent.getEventID()).changeEventImagePath(newEventImagePath);
+            }
+            eventListDatasource.writeData(eventList);
         }
+
         try {
-            FXRouter.goTo("my-events");
+            FXRouter.goTo("my-events",user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private void showEventDetail(Event event) {
+        eventNameTextField.setText(event.getEventName());
+        eventLocationTextField.setText(event.getEventLocation());
+        eventTagChoiceBox.setValue(event.getEventTag());
+        eventDescriptionTextArea.setText(event.getEventDescription());
+        eventCapTextField.setText(Integer.toString(event.getSlotMember()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime eventStartDateTime = LocalDateTime.parse(event.getEventDateStart(),formatter);
+        LocalDateTime eventEndDateTime = LocalDateTime.parse(event.getEventDateEnd(),formatter);
+        eventStartDatePick.setValue(eventStartDateTime.toLocalDate());
+        eventStartHourSpinner.getValueFactory().setValue(eventStartDateTime.getHour());
+        eventStartMinuteSpinner.getValueFactory().setValue(eventStartDateTime.getMinute());
+        eventEndDatePick.setValue(eventEndDateTime.toLocalDate());
+        eventEndHourSpinner.getValueFactory().setValue(eventEndDateTime.getHour());
+        eventEndMinuteSpinner.getValueFactory().setValue(eventEndDateTime.getMinute());
+        uploadImageView.setImage(new Image("file:"+event.getEventImagePath(),300,300,true,true));
+    }
+
     private String formatTime(DatePicker datePicker,Spinner<Integer> hour,Spinner<Integer> minute){
         LocalDate DatePick = datePicker.getValue();
         int Hour = hour.getValue();
@@ -175,37 +199,10 @@ public class CreateEventController {
         return DateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
     }
-    @FXML protected void onAddActivityButtonClick() {
-        if (thisEvent != null) {
-            eventListDatasource = new EventListDataSource("data","event-list.csv");
-            eventList = eventListDatasource.readData();
 
-            String activityNameString = activityNameTextField.getText().trim();
-            String activityDescriptionString = activityDescriptionTextArea.getText().trim();
-            String startDateTime = formatTime(activityStartDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
-            String endDateTime = formatTime(activityEndDatePick,activityEndHourSpinner,activityEndMinuteSpinner);
-            // add to activity list
-//            thisEvent.getActivities().addActivity(activityNameString,activityDescriptionString,startDateTime,endDateTime);
-
-
-//            thisEvent.getActivities().addActivity(thisEvent.getEventID(),activityNameString,activityDescriptionString,startDateTime,endDateTime);
-        }
-    }
-    @FXML protected void onAddTeamButtonClick() {
-        if (thisEvent != null) {
-            String teamNameString = teamNameTextField.getText().trim();
-            String teamCapString = teamMemberCapTextField.getText().trim();
-            int numTeamMember = Integer.parseInt(teamCapString);
-            // add to team list
-            //thisEvent.getTeams().addTeam();
-        }
-    }
     private void CheckDate() {
         SettingCheckDate(eventStartDatePick);
         SettingCheckDate(eventEndDatePick);
-        SettingCheckDate(activityStartDatePick);
-        SettingCheckDate(activityEndDatePick);
-
     }
     private void SettingCheckDate(DatePicker datePicker){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
