@@ -40,6 +40,7 @@ public class EventListController {
     private User currentUser = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
+    private LoadCardEventComponent loadCardEventComponent;
 
     private int currentIndexOfUp = 0;
     @FXML
@@ -47,9 +48,12 @@ public class EventListController {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         this.eventListDatasource = new EventListDataSource("data", "event-list.csv");
         this.eventList = eventListDatasource.readData();
-        setMainListView(eventList);
-        ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getEvents());
 
+
+
+        setMainListView(eventList);
+
+        ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getEvents());
         // สร้าง EventList ใหม่
         EventList filteredEventList = new EventList();
 
@@ -97,36 +101,19 @@ public class EventListController {
                 separator.setPrefWidth(34.0);
 
                 AnchorPane anchorPane = new AnchorPane();
-                loadCardEvent(anchorPane, event);
+                new LoadCardEventComponent(anchorPane,event);
                 hbox.getChildren().add(separator);
                 hbox.getChildren().add(anchorPane);
+
             }
         } catch (IndexOutOfBoundsException e) {
             throw new RuntimeException(e);
         }
     }
 
-
-    private void loadCardEvent(AnchorPane anchorPane,Event event){
-        try {
-            FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/card-event.fxml"));
-            AnchorPane load = eventTileLoader.load();
-            CardEventController cardEventController = eventTileLoader.getController();
-            cardEventController.setEvent(event);
-
-            anchorPane.getChildren().setAll(load);
-            AnimateComponent(load);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-
     //fliter
     public void onAllClick(ActionEvent actionEvent) {
-        setMainListView(eventList);
+        setMainListView(eventListDatasource.readData());
         searchbarTextField.setText("");
     }
 
@@ -178,19 +165,6 @@ public class EventListController {
             throw new RuntimeException(e);
         }
     }
-    //-------------Animate Zoom for any AnchorPane-------------\\
-    private void AnimateComponent(AnchorPane anchorPane) {
-        ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleIn.setToX(1.1);
-        scaleIn.setToY(1.1);
-        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleOut.setToX(1);
-        scaleOut.setToY(1);
-        anchorPane.setOnMouseEntered(event -> {scaleIn.play();});
-        anchorPane.setOnMouseExited(event -> {scaleOut.play();});
-    }
 
-
-    //-------------Animate Zoom for any AnchorPane-------------\\
 
 }
