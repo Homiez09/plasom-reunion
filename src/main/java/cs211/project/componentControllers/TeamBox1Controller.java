@@ -24,7 +24,6 @@ public class TeamBox1Controller {
     private Image unBookMarkIcon, bookMarkIcon;
     private User user = (User) FXRouter.getData();
     private boolean bookmarked = false, initBookMarkCheck = false;
-
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap;
     TeamList teamList;
@@ -48,7 +47,6 @@ public class TeamBox1Controller {
             bookMarkImageView.setImage(unBookMarkIcon);
         } else {
             bookMarkImageView.setImage(bookMarkIcon);
-
         }
         bookmarked = !bookmarked;
 
