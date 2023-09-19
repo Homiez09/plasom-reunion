@@ -73,6 +73,8 @@ public class SignInController {
 
         errorLabel.setVisible(false);
 
+        usernameTextField.setText("mingmmie");
+        passwordField.setText("@14700Ta06");
     }
 
     private void eventHandleEnter(){
