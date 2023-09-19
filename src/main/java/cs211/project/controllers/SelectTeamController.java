@@ -21,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,6 +35,7 @@ public class SelectTeamController {
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
     @FXML private Label menu1Label, menu2Label;
+    @FXML private Shape selectMenu1, selectMenu2;
     private String filter = "All";
     private String teamBox ;
     private User user = (User) FXRouter.getData();
@@ -326,17 +329,27 @@ public class SelectTeamController {
     }
 
     private void manageTeamSelectMenuGraphic(int page) {
-        // todo : select menu (spacing underline correctly)
-        String selectColor = "-fx-text-fill: #413B3B;  -fx-underline: true;";
+        initManageTeamSelectMenuGraphic();
+        String selectColor = "-fx-text-fill: #413B3B;";
         switch (page) {
             case 1:
                 menu1Label.setStyle(selectColor);
-                //set gap between label with underline
+                selectMenu1.setVisible(true);
 
                 break;
             case 2:
+                menu2Label.setStyle(selectColor);
+                selectMenu2.setVisible(true);
                 break;
         }
+    }
+
+    private void initManageTeamSelectMenuGraphic() {
+        String style = "";
+        menu1Label.setStyle(style);
+        selectMenu1.setVisible(false);
+        menu2Label.setStyle(style);
+        selectMenu2.setVisible(false);
     }
 }
 
