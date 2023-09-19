@@ -6,10 +6,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -44,7 +41,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <ScrollPane prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg">
               <content>
                   <VBox prefWidth="1000.0" spacing="15.0" styleClass="inbox-bg">
                      <children>
@@ -165,13 +162,16 @@
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" layoutX="38.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="38.0" />
-                              <Text fill="RED" layoutX="360.79998779296875" layoutY="13.3984375" strokeType="OUTSIDE" strokeWidth="0.0" text="Image guideline" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="200.0">
+                              <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" layoutX="38.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="40.0">
+                                 <image>
+                                    <Image url="@../../../images/home/event2.png" />
+                                 </image></ImageView>
+                              <Text fill="RED" layoutX="360.79998779296875" layoutY="13.3984375" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose .jpg, .jpeg or .png image file." AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="265.0">
                                  <font>
                                     <Font name="Leelawadee" size="14.0" />
                                  </font>
                               </Text>
-                              <Button layoutX="570.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleUploadButton" styleClass="page-button" stylesheets="@../../../css/event.css" text="Upload" AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="226.0">
+                              <Button layoutX="570.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleUploadButton" styleClass="page-button" stylesheets="@../../../css/event.css" text="Upload" AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="225.0">
                                  <font>
                                     <Font name="Leelawadee" size="12.0" />
                                  </font>
@@ -186,133 +186,6 @@
                               <Insets left="900.0" right="25.0" />
                            </VBox.margin>
                         </Button>
-                        <Separator />
-                        <Text layoutX="35.0" layoutY="856.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create activity">
-                           <font>
-                              <Font name="Leelawadee Bold" size="24.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="25.0" />
-                           </VBox.margin>
-                        </Text>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutY="17.2265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity name" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="activityNameTextField" layoutX="112.80000305175781" prefWidth="400.0" styleClass="text-field-bg" AnchorPane.leftAnchor="200.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutX="20.0" layoutY="27.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity description" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextArea fx:id="activityDescriptionTextArea" layoutX="172.8000030517578" layoutY="10.399999618530273" prefHeight="200.0" prefWidth="600.0" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <DatePicker fx:id="activityStartDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
-                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" AnchorPane.leftAnchor="420.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Spinner fx:id="activityStartHourSpinner" layoutX="519.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
-                              <Text layoutX="620.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Spinner fx:id="activityStartMinuteSpinner" layoutX="632.0" layoutY="1.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <DatePicker fx:id="activityEndDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
-                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="End time" AnchorPane.leftAnchor="420.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Spinner fx:id="activityEndHourSpinner" layoutX="519.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
-                              <Text layoutX="620.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Spinner fx:id="activityEndMinuteSpinner" layoutX="632.0" layoutY="1.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
-                              <Button mnemonicParsing="false" onAction="#onAddActivityButtonClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="Add activity" AnchorPane.rightAnchor="100.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="12.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                        <TableView fx:id="createActivityTableView">
-                          <columns>
-                            <TableColumn prefWidth="125.0" text="Activity name" />
-                            <TableColumn prefWidth="100.0" text="start time" />
-                              <TableColumn prefWidth="100.0" text="end time" />
-                              <TableColumn prefWidth="550.0" text="description" />
-                          </columns>
-                           <VBox.margin>
-                              <Insets left="40.0" right="40.0" />
-                           </VBox.margin>
-                        </TableView>
-                        <Separator />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create team(optional)">
-                           <font>
-                              <Font name="Leelawadee Bold" size="24.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="25.0" />
-                           </VBox.margin>
-                        </Text>
-                        <HBox alignment="TOP_CENTER" spacing="20.0">
-                           <padding>
-                              <Insets left="20.0" right="20.0" />
-                           </padding>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Team name">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="teamNameTextField" prefWidth="350.0" styleClass="text-field-bg" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Team member limit">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="teamMemberCapTextField" prefWidth="100.0" styleClass="text-field-bg" />
-                              <Button mnemonicParsing="false" onAction="#onAddTeamButtonClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="Add team" />
-                           </children>
-                        </HBox>
-                        <TableView fx:id="createTeamTableView">
-                          <columns>
-                            <TableColumn prefWidth="700.0" text="Team name" />
-                            <TableColumn prefWidth="175.0" text="Team member limit" />
-                          </columns>
-                           <VBox.margin>
-                              <Insets left="40.0" right="40.0" />
-                           </VBox.margin>
-                        </TableView>
                      </children>
                   </VBox>
               </content>

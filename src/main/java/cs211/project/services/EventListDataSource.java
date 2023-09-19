@@ -67,7 +67,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 if (line.equals("")) continue;
 
                 // แยกสตริงด้วย ,
-                String[] data = line.split(",");
+                String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
 
@@ -78,7 +78,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventTag = data[4].trim();
                 String eventStart = data[5].trim();
                 String eventEnd = data[6].trim();
-                String eventDescription = data[7].trim();
+                String eventDescription = data[7].trim().replace("\\n","\n");
                 String eventLocation = data[8].trim();
                 int member = Integer.parseInt(data[9].trim());
                 int slotmember = Integer.parseInt(data[10].trim());

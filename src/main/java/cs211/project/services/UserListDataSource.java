@@ -64,9 +64,9 @@ public class UserListDataSource implements Datasource<UserList> {
             while ( (line = buffer.readLine()) != null ){
                 // ถ้าเป็นบรรทัดว่าง ให้ข้าม
                 if (line.equals("")) continue;
-                // แยกสตริงด้วย
-                String[] data = line.split(", DISPLAY-NAME : |, PASSWORD : |, USERNAME : |, CONTACT_NUMBER : |, REGISTER_DATE : |, LASTED_LOGIN : |, IMAGE_PATH : |, STATUS : |, ADMIN : |, SHOW_CONTACT : |, BIO :");
 
+                // แยกสตริงด้วย
+                String[] data = line.split(",DISPLAY-NAME :|,PASSWORD :|,USERNAME :|,CONTACT-NUMBER :|,REGISTER-DATE :|,LASTED-LOGIN :|,IMAGE-PATH :|,BIO :|,STATUS :|,ADMIN :|,SHOW-CONTACT :");
                 String userId = data[0];
                 String displayName = data[1].trim();
                 String username = data[2].trim();
@@ -75,12 +75,11 @@ public class UserListDataSource implements Datasource<UserList> {
                 String registerDate = data[5];
                 String contactNumber = data[4];
                 String lastedLogin = data[6];
-                String bio = data[11];
-                boolean showContactNumber = Boolean.parseBoolean(data[10]);
-                boolean status = Boolean.parseBoolean(data[8]);
-                boolean admin = Boolean.parseBoolean(data[9]);
-
-                userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, status, admin, showContactNumber, bio);
+                String bio = data[8];
+                boolean showContactNumber = Boolean.parseBoolean(data[11]);
+                boolean status = Boolean.parseBoolean(data[9]);
+                boolean admin = Boolean.parseBoolean(data[10].trim());
+                userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, bio, status, admin, showContactNumber);
 
 
             }
@@ -115,18 +114,18 @@ public class UserListDataSource implements Datasource<UserList> {
             // สร้าง csv
 
             for (User user : data.getUsers()) {
-                String line =   user.getUserId() + ", DISPLAY-NAME : "
-                        + user.getDisplayName() + ", USERNAME : "
-                        + user.getUsername() + ", PASSWORD : "
-                        + user.getPassword() + ", CONTACT_NUMBER : "
-                        + user.getContactNumber() + ", REGISTER_DATE : "
-                        + user.getRegisterDate() + ", LASTED_LOGIN : "
-                        + user.getLastedLogin() + ", IMAGE_PATH : "
-                        + user.getImagePath() + ", STATUS : "
-                        + user.getStatus() + ", ADMIN : "
-                        + user.isAdmin() + ", SHOW_CONTACT : "
-                        + user.isShowContact() + ", BIO : "
-                        + user.getBio();
+                String line =   user.getUserId() + ",DISPLAY-NAME :"
+                        + user.getDisplayName() + ",USERNAME :"
+                        + user.getUsername() + ",PASSWORD :"
+                        + user.getPassword() + ",CONTACT-NUMBER :"
+                        + user.getContactNumber() + ",REGISTER-DATE :"
+                        + user.getRegisterDate() + ",LASTED-LOGIN :"
+                        + user.getLastedLogin() + ",IMAGE-PATH :"
+                        + user.getImagePath() + ",BIO :"
+                        + user.getBio() + ",STATUS :"
+                        + user.getStatus() + ",ADMIN :"
+                        + user.isAdmin() + ",SHOW-CONTACT :"
+                        + user.isShowContact();
                 buffer.append(line);
                 buffer.append("\n");
             }

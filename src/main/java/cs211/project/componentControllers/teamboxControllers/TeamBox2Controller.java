@@ -1,4 +1,4 @@
-package cs211.project.componentControllers;
+package cs211.project.componentControllers.teamboxControllers;
 
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -16,9 +16,10 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class TeamBox1Controller {
-    @FXML private ImageView  peopleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
-    @FXML private Label  teamIdLabel, bookmarkLabel;
+public class TeamBox2Controller {
+
+    @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
+    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
@@ -27,14 +28,11 @@ public class TeamBox1Controller {
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap;
     TeamList teamList;
-
-
     @FXML private void initialize() {
         initMenu();
         loadIcon();
 
         memberShipAnchorPane.setVisible(false);
-        participantsAnchorPane.setVisible(false);
     }
 
     @FXML
@@ -47,6 +45,7 @@ public class TeamBox1Controller {
             bookMarkImageView.setImage(unBookMarkIcon);
         } else {
             bookMarkImageView.setImage(bookMarkIcon);
+
         }
         bookmarked = !bookmarked;
 
@@ -57,7 +56,6 @@ public class TeamBox1Controller {
     @FXML
     private void onRoleEntered(MouseEvent event){
         memberShipAnchorPane.setVisible(true);
-        participantsAnchorPane.setVisible(false);
     }
 
     @FXML
@@ -82,15 +80,6 @@ public class TeamBox1Controller {
         } else {
             bookMarkImageView.setImage(unBookMarkIcon);
         }
-    }
-
-    @FXML private void onParticipantsEntered(MouseEvent event){
-        participantsAnchorPane.setVisible(true);
-        memberShipAnchorPane.setVisible(false);
-    }
-
-    @FXML private void onParticipantsExited(MouseEvent event){
-        participantsAnchorPane.setVisible(false);
     }
 
     @FXML
@@ -119,16 +108,18 @@ public class TeamBox1Controller {
         initBookMarkCheck = true;
     }
 
-    protected void goTo(String page) throws IOException {
+    private void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
-                //todo : go to  manage team page
+                //print user data
+                System.out.println(teamIdLabel.getText());
+                System.out.println(bookmarkLabel.getText());
                 break;
             case "Delete Team":
-                //todo : owner delete team
+                //todo : do something
                 break;
             case "Leave Team":
-                //todo : user leave team
+                //todo : do something
                 break;
         }
         menuDropDown.getSelectionModel().clearSelection();
@@ -148,4 +139,5 @@ public class TeamBox1Controller {
 
         bookMarkImageView.setImage(unBookMarkIcon);
     }
+
 }

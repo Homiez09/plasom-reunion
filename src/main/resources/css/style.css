@@ -531,3 +531,8 @@ Text, Label {
     -fx-font: Leelawadee;
     -fx-font-weight: 700;
 }
+/* for team page */
+.sidebar-black{
+    -fx-text-fill: #4D4746;
+    -fx-effect:  dropshadow(gaussian, #C7C7C7, 10, 0.2, 0, 0);
+}

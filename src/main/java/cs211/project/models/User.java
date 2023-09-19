@@ -16,8 +16,8 @@ public class User {
 
 
     public User(String userId, String displayName, String username, String password, String contactNumber,
-                String registerDate, String lastedLogin, String imagePath,
-                boolean status, boolean admin, boolean showContact, String bio) {
+                String registerDate, String lastedLogin, String imagePath, String bio,
+                boolean status, boolean admin, boolean showContact) {
         this.username = username;
         this.displayName = displayName;
         this.userId = userId;
