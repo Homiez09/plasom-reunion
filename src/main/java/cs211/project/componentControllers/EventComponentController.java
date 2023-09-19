@@ -110,9 +110,9 @@ public class EventComponentController {
 
             // ลบ user join team ใน join-team.csv
             for (String username : teamHashMapGlobal.keySet()) { // ตามจำนวนคนใน team
-                TeamList teamList = new TeamList(teamHashMapGlobal.get(username).getTeams());
-                teamList.removeTeamByEvent(event);
-                teamHashMap.put(username, teamList); // ยัด teamList ที่ลบ team ในแต่ละ user เข้าไปใน teamHashMap
+                    TeamList teamList = new TeamList(teamHashMapGlobal.get(username).getTeams());
+                    teamList.removeTeamByEvent(event);
+                    teamHashMap.put(username, teamList); // ยัด teamList ที่ลบ team ในแต่ละ user เข้าไปใน teamHashMap
             }
 
             // สร้าง path
