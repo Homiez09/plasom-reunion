@@ -1,0 +1,9 @@
+/* styles.css */
+/* Hide both vertical and horizontal scrollbars */
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 1;
+}

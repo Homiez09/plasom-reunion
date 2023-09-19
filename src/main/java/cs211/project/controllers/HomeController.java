@@ -175,7 +175,7 @@ public class HomeController {
 
     public void onClickButton(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("event-list",user);
+            FXRouter.goTo("all-events",user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -31,6 +31,9 @@ public class EventList {
                                     eventDescription,eventLocation,slotMember));
         }
     }
+    public void addEvent(Event event) {
+        events.add(event);
+    }
     public void addEvent(String eventId, String eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
@@ -67,6 +70,7 @@ public class EventList {
     public ArrayList<Event> getEvents() {
         return events;
     }
+
 
 
 }
