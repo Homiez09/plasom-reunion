@@ -1,4 +1,4 @@
-package cs211.project.componentControllers;
+package cs211.project.componentControllers.teamboxControllers;
 
 import cs211.project.models.Team;
 import cs211.project.models.User;
