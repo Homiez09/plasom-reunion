@@ -276,7 +276,7 @@ ProgressBar {
     -fx-alignment: center;
 }
 
-.table-view .column-header-background {
+.manage-team-table .column-header-background {
     -fx-background-color: transparent;
 }
 

@@ -4,6 +4,10 @@
     -fx-font-family: Leelawadee;
 }
 
+* {
+    -fx-font-family: Leelawadee;
+}
+
 .text-xs{-fx-font-style-size: 12;}
 .text-ms{-fx-font-size: 14;}
 .text-base{-fx-font-size: 16;}
@@ -170,6 +174,10 @@ Text, Label {
 
 .h3 {
     -fx-font-size: 25;
+}
+
+.h4 {
+    -fx-font-size: 16;
 }
 
 .bold700 {
@@ -509,5 +517,17 @@ Text, Label {
     -fx-font-size: 10;
     -fx-text-fill: #585858;
     -fx-effect:  dropshadow(gaussian, #D7CFC3, 4, 0.5, 0, 1);
+}
 
+.manage-team {
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 5, 0.2, 0, 0);
+    -fx-arc-height: 15;
+    -fx-arc-width: 15;
+    -fx-background-radius: 10;
+}
+
+.select-bar-manage-team Label {
+    -fx-font-size: 16;
+    -fx-font: Leelawadee;
+    -fx-font-weight: 700;
 }
