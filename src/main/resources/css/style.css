@@ -511,3 +511,10 @@ Text, Label {
     -fx-effect:  dropshadow(gaussian, #D7CFC3, 4, 0.5, 0, 1);
 
 }
+
+
+/* for team page */
+.sidebar-black{
+    -fx-text-fill: #4D4746;
+    -fx-effect:  dropshadow(gaussian, #C7C7C7, 10, 0.2, 0, 0);
+}

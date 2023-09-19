@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamboxControllers.TeamBox2Controller">
+<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamboxControllers.TeamBox2Controller">
    <children>
       <ComboBox fx:id="menuDropDown" layoutX="37.0" layoutY="3.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
       <Label fx:id="teamIdLabel" layoutX="60.0" layoutY="60.0" text="Label" />
@@ -36,15 +36,15 @@
       </Rectangle>
       <ImageView fx:id="faceImageView" fitHeight="72.0" fitWidth="72.0" layoutX="78.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/icons/team-box/face_icon.png" />
+            <Image url="@../../../../../images/icons/team-box/face_icon.png" />
          </image></ImageView>
       <ImageView fx:id="manageTeamImageView" fitHeight="4.8" fitWidth="21.16" layoutX="191.0" layoutY="13.0" onMouseClicked="#onMenuDropDownComponentClick" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/icons/team-box/dot_icon.png" />
+            <Image url="@../../../../../images/icons/team-box/dot_icon.png" />
          </image></ImageView>
       <ImageView fx:id="bookMarkImageView" fitHeight="30.0" fitWidth="25.0" layoutX="190.0" layoutY="25.0" onMouseClicked="#onBookMarkClick" onMouseEntered="#onBookMarkEntered" onMouseExited="#onBookMarkExited" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/icons/team-box/bookmark/bookmark_icon.png" />
+            <Image url="@../../../../../images/icons/team-box/bookmark/bookmark_icon.png" />
          </image></ImageView>
       <Label fx:id="teamNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="149.0" prefHeight="23.0" prefWidth="228.0" text="teamNameLabel">
          <styleClass>
@@ -56,11 +56,11 @@
       </Label>
       <ImageView fx:id="roleImageView" fitHeight="30.0" fitWidth="30.0" layoutX="16.0" layoutY="14.0" onMouseEntered="#onRoleEntered" onMouseExited="#onRoleExited" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/icons/team-box/role/Owner.png" />
+            <Image url="@../../../../../images/icons/team-box/role/Owner.png" />
          </image></ImageView>
       <ImageView fx:id="peopleImageView" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/icons/team-box/people_icon.png" />
+            <Image url="@../../../../../images/icons/team-box/people_icon.png" />
          </image></ImageView>
       <Label alignment="CENTER" layoutX="171.0" layoutY="203.0" prefHeight="10.0" prefWidth="40.0" text="online">
          <styleClass>
@@ -80,7 +80,7 @@
       </Label>
       <ImageView fx:id="activeImageView" fitHeight="4.0" fitWidth="4.0" layoutX="147.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/icons/team-box/active_icon.png" />
+            <Image url="@../../../../../images/icons/team-box/active_icon.png" />
          </image></ImageView>
       <AnchorPane fx:id="memberShipAnchorPane" layoutX="51.0" layoutY="20.0" prefHeight="26.0" prefWidth="166.0">
          <children>

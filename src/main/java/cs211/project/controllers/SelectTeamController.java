@@ -1,7 +1,5 @@
 package cs211.project.controllers;
 
-import at.favre.lib.crypto.bcrypt.BCryptFormatter;
-import cs211.project.componentControllers.TeamBox1Controller;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -22,9 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SelectTeamController {
@@ -81,8 +77,8 @@ public class SelectTeamController {
         for (Team team : teamListSort.getTeams()) {
             if (!team.getEventID().equals(event.getEventID())) continue;
             try {
-                FXMLLoader teamBoxLoader1 = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box-1.fxml"));
-                FXMLLoader teamBoxLoader2 = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box-2.fxml"));
+                FXMLLoader teamBoxLoader1 = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box/team-box-1.fxml"));
+                FXMLLoader teamBoxLoader2 = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box/team-box-2.fxml"));
 
                 AnchorPane teamBoxComponent;
                 if ("teamBox1".equals(teamBox)) {
