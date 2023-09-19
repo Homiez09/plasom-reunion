@@ -74,6 +74,7 @@ public class SignInController {
         updateVisibleButton();
 
         errorLabel.setVisible(false);
+
     }
 
     private void eventHandleEnter(){

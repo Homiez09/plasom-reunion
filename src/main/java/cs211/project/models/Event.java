@@ -44,6 +44,7 @@ public class Event {
         this.slotMember = -1;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         this.isSelected = new SimpleBooleanProperty(false);
+        this.activities = new ActivityList();
     }
 
     public Event(String eventName,
@@ -68,6 +69,7 @@ public class Event {
         this.slotMember = slotMember;
         this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        this.activities = new ActivityList();
     }
 
     public Event(String eventID,
@@ -95,6 +97,7 @@ public class Event {
         this.eventHost = eventHost;
         this.timestamp =timestamp;
         this.isSelected = new SimpleBooleanProperty(false);
+        this.activities = new ActivityList();
 
     }
 
@@ -122,6 +125,8 @@ public class Event {
     public void changeName(String newName){this.eventName = newName;}
     public void changeDescription(String newDescription){this.eventDescription = newDescription;}
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
+    public void changeTag(String newTag) {this.eventTag = newTag;}
+    public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
     public void addMember(){if(!isFull())this.member++;}
     public void delMember(){if(member >0) this.member--;}
 

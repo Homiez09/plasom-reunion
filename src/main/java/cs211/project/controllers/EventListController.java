@@ -61,6 +61,7 @@ public class EventListController {
                 // ถ้าไม่มีการค้นหาให้แสดงทุก Event
                 filteredEventList.getEvents().addAll(observableEventList);
             } else {
+
                 // คัดกรอง Event และเพิ่มเฉพาะ Event ที่ตรงกับคำค้นหา
                 for (Event event : observableEventList) {
                     if (event.getEventName().toLowerCase().contains(filter)) {

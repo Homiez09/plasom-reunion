@@ -9,15 +9,17 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
 public class EventTileController {
     @FXML private ImageView eventTileImageView;
+    @FXML private StackPane imageStackPane;
     @FXML
     Label eventNameLabel,eventDateLabel,eventPlaceLabel,eventMemberLabel;
     private User currentUser = (User) FXRouter.getData();
-    private Event event;
     private Image image;
     private  Event thisEvent;
     @FXML private void initialize() {
@@ -42,6 +44,13 @@ public class EventTileController {
                 image = new Image(getClass().getResourceAsStream(imgpath),300,300,false,false);
             }
             eventTileImageView.setImage(image);
+            eventTileImageView.setFitWidth(150);
+            eventTileImageView.setFitHeight(150);
+            eventTileImageView.setPreserveRatio(true);
+            Region transparentBackground = new Region();
+            transparentBackground.setStyle("-fx-background-color: transparent;");
+            imageStackPane.getChildren().addAll(transparentBackground);
+
         }
     }
 

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="sideBarAnchorPane" prefHeight="768.0" prefWidth="162.0" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.sideBarControllers.SideBarTeamController">
+   <children>
+      <AnchorPane layoutX="22.0" layoutY="213.0" onMouseClicked="#onDashBoardClick" onMouseEntered="#onDashBoardEntered" onMouseExited="#onDashBoardExit" prefHeight="21.0" prefWidth="96.0">
+         <children>
+            <Circle fx:id="hoverDashBoardShape" centerY="2.2" fill="#4d4746" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <ImageView fx:id="dashBoardImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="dashBoardLabel" alignment="CENTER" layoutX="-6.0" layoutY="60.0" prefHeight="9.0" prefWidth="102.0" text="DASHBOARD">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="sidebar-black" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="21.0" layoutY="292.0" onMouseClicked="#onHomeClick" onMouseEntered="#onHomeEntered" onMouseExited="#onHomeExit">
+         <children>
+            <Circle fx:id="hoverHomeShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.4218009478672986">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="1.0" green="0.48627451062202454" blue="0.03921568766236305" opacity="0.8299999833106995" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.9647058844566345" green="0.7254902124404907" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fx:id="homeImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="homeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="63.0" prefHeight="3.0" prefWidth="94.0" text="HOME">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="sidebar-black" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="21.0" layoutY="375.0" onMouseClicked="#onActivityClick" onMouseEntered="#onActivityEntered" onMouseExited="#onActivityExit">
+         <children>
+            <Circle fx:id="hoverActivityShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.4218009478672986">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fx:id="activityImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="activityLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="64.0" prefHeight="9.0" prefWidth="95.0" text="ACTIVITY">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="sidebar-black" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="21.0" layoutY="461.0" onMouseEntered="#onTeamChatEntered" onMouseExited="#onTeamChatExit">
+         <children>
+            <Circle fx:id="hoverTeamChatShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.4218009478672986">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="1.0" green="0.48627451062202454" blue="0.03921568766236305" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.9647058844566345" green="0.7254902124404907" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fx:id="teamChatImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="teamChatLabel" alignment="CENTER" layoutX="-9.0" layoutY="64.0" prefHeight="15.0" prefWidth="107.0" text="TEAM CHAT">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="sidebar-black" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="21.0" layoutY="549.0" onMouseClicked="#onManageTeamClick" onMouseEntered="#onManageTeamEntered" onMouseExited="#onManageTeamExit">
+         <children>
+            <Circle fx:id="hoverManageTeamShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="0.4218009478672986">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <ImageView fx:id="manageTeamImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="manageTeamLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-13.0" layoutY="65.0" prefHeight="9.0" prefWidth="115.0" text="MANAGE TEAM">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+                  <String fx:value="sidebar-black" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="26.0" layoutY="710.0">
+         <children>
+            <Label contentDisplay="CENTER" layoutX="32.0" layoutY="8.0" prefHeight="21.0" prefWidth="78.0" text="leave team">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-base" />
+                  <String fx:value="shadow" />
+                  <String fx:value="next-page-shadow" />
+               </styleClass>
+            </Label>
+            <ImageView fitHeight="28.0" fitWidth="35.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/icons/team/side-bar/leave_team.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="21.0" layoutY="93.0">
+         <children>
+            <Label contentDisplay="CENTER" onMouseClicked="#onAllTeamsBackClick" prefHeight="21.0" prefWidth="85.0" text="&lt; all teams">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-base" />
+                  <String fx:value="next-page-shadow" />
+               </styleClass>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="82.0" prefHeight="21.0" prefWidth="58.0" text="&lt; team">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-base" />
+                  <String fx:value="next-page-shadow" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
