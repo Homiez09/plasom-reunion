@@ -28,8 +28,7 @@ public class EventTileController {
 
     public void showEventTile(Event event) {
         thisEvent = event;
-        String imgpath = "/images/events/event-default.png";
-        image = new Image(getClass().getResourceAsStream(imgpath),300,300,false,false);
+
         if (event!=null) {
             eventNameLabel.setText(event.getEventName());
             eventDateLabel.setText(event.getEventDateStart());
@@ -39,8 +38,10 @@ public class EventTileController {
             }else {
                 eventMemberLabel.setText(event.getMember() + "/" + event.getSlotMember());
             }
-            if(!event.getEventImagePath().isEmpty()){
-                image = new Image("file:"+event.getEventImagePath(),300,300,true,true);
+            image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
+            if(event.getEventImagePath().equals("null")){
+                String imgpath = "/images/events/event-default.png";
+                image = new Image(getClass().getResourceAsStream(imgpath),300,300,false,false);
             }
             eventTileImageView.setImage(image);
             eventTileImageView.setFitWidth(150);

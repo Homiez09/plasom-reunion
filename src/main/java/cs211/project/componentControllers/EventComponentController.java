@@ -159,8 +159,7 @@ public class EventComponentController {
     }
     public void setEventData(Event event) {
         this.event = event;
-        String imgpath = "/images/events/event-default.png";
-        Image image = new Image(getClass().getResourceAsStream(imgpath),200,200,true,true);
+
         hashMap = new HashMap<>();
         mapDatasource = new UserEventMap("data", "join-event.csv");
         hashMap = mapDatasource.readData();
@@ -191,8 +190,10 @@ public class EventComponentController {
             staffButton.setVisible(false);
             editButton.setVisible(false);
         }
-        if(!event.getEventImagePath().isEmpty()){
-            image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
+        Image image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
+        if(event.getEventImagePath().equals("null")){
+            String imgpath = "/images/events/event-default.png";
+            image = new Image(getClass().getResourceAsStream(imgpath),200,200,false,false);
         }
         eventImageView.setImage(image);
         eventnameLabel.setText(event.getEventName());

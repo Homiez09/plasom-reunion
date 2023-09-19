@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" stylesheets="@../../../css/all-events.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventListController">
+   <children>
+      <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0">
+
+</AnchorPane>
+      <VBox alignment="CENTER" prefHeight="690.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="1152.0">
+               <children>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="100.0" />
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="130.0" text="Events">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="1152.0">
+               <children>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="79.0" />
+                  <Button mnemonicParsing="false" onAction="#onAllClick" text="All" />
+                  <Separator orientation="VERTICAL" prefHeight="30.0" prefWidth="30.0" />
+                  <Button mnemonicParsing="false" onAction="#onNewClick" text="New" />
+                  <Separator orientation="VERTICAL" prefHeight="30.0" prefWidth="30.0" />
+                  <Button mnemonicParsing="false" onAction="#onUpClick" text="Upcoming" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="128.0" />
+               </children>
+            </HBox>
+            <Separator opacity="0.0" prefHeight="3.0" prefWidth="200.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="1152.0">
+               <children>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="63.0" />
+                  <Button mnemonicParsing="false" text="Category" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
+                  <Button mnemonicParsing="false" text="Liked" visible="false" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
+                  <Button mnemonicParsing="false" text="Owner" visible="false" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
+                  <Button mnemonicParsing="false" text="Member" visible="false" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
+                  <Button mnemonicParsing="false" text="Staff" visible="false" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="25.0" />
+                  <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="430.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="120.0" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/hostevent/sort.png" />
+                     </image>
+                  </ImageView>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="10.0" />
+                  <Button mnemonicParsing="false" onAction="#onCreateClick" prefHeight="25.0" prefWidth="100.0" text="+ Create Event" />
+               </children>
+            </HBox>
+            <Separator opacity="0.0" prefHeight="3.0" prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="565.0" prefWidth="1152.0">
+               <children>
+                  <ListView fx:id="mainListView" cache="true" prefHeight="576.0" prefWidth="1052.0" styleClass="scroll-bar">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></ListView>
+               </children>
+            </HBox>
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

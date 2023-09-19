@@ -31,6 +31,9 @@ public class EventList {
                                     eventDescription,eventLocation,slotMember));
         }
     }
+    public void addEvent(Event event) {
+        events.add(event);
+    }
     public void addEvent(String eventId, String eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
@@ -53,10 +56,21 @@ public class EventList {
         }
         return null;
     }
+    public int getSizeTotalEvent(){return events.size();}
+    public int getSizeCompletedEvent(){
+        int count = 0;
+        for (Event event:events) {
+            if (event.isEnd()) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     public ArrayList<Event> getEvents() {
         return events;
     }
+
 
 
 }

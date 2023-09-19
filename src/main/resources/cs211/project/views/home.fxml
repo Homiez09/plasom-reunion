@@ -15,7 +15,7 @@
 <AnchorPane maxHeight="-Infinity" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
     <AnchorPane layoutY="75.0" prefHeight="693.0" prefWidth="1152.0" styleClass="bgProfile1">
         <children>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="693.0" prefWidth="1152.0" vbarPolicy="NEVER" vvalue="1.0">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="693.0" prefWidth="1152.0" vbarPolicy="NEVER">
                 <content>
                     <VBox alignment="CENTER" prefHeight="1525.0" styleClass="bg">
                         <children>
@@ -29,6 +29,7 @@
                                                     <Image url="@../../../images/home/event1.png" />
                                                 </image>
                                             </ImageView>
+                                 <Button mnemonicParsing="false" onAction="#onClickButton" text="แปะเฉย ๆ" />
                                         </children>
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="75.0">

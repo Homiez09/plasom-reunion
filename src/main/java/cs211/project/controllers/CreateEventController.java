@@ -137,14 +137,14 @@ public class CreateEventController {
             String eventDescriptionString = eventDescriptionTextArea.getText().replace("\n","\\n");
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
-            System.out.println(newEventImagePath);
+            String eventImagePath = newEventImagePath;
             if (!numMemberString.equals("")){
                 int numMember = Integer.parseInt(numMemberString);
-                thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,
+                thisEvent = new Event(  eventNameString,eventHost,eventImagePath,
                         eventTag,startDate,endDate,
                         eventDescriptionString,eventLocationString,numMember);
             }else {
-                thisEvent = new Event(  eventNameString,eventHost,newEventImagePath,
+                thisEvent = new Event(  eventNameString,eventHost,eventImagePath,
                         eventTag,startDate,endDate,
                         eventDescriptionString,eventLocationString);
             }
