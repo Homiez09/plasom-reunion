@@ -3,30 +3,29 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="card-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardEventController">
+<AnchorPane cache="true" styleClass="card-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardEventController">
    <children>
       <VBox alignment="CENTER">
          <children>
             <Separator opacity="0.0" prefHeight="5.0" />
             <HBox alignment="CENTER">
                <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="16.0" />
-                  <ImageView fx:id="eventImage" fitHeight="260.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
+                  <ImageView fx:id="eventImage" fitHeight="260.0" fitWidth="210.0" pickOnBounds="true">
                      <viewport>
                         <Rectangle2D height="260.0" width="210.0" />
                      </viewport>
                   </ImageView>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="16.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
                </children>
             </HBox>
-            <Separator opacity="0.0" prefHeight="8.0" />
+            <Separator opacity="0.0" prefHeight="5.0" />
             <HBox>
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
@@ -37,7 +36,7 @@
                   </Label>
                </children>
             </HBox>
-            <Separator opacity="0.0" prefHeight="10.0" />
+            <Separator opacity="0.0" prefHeight="5.0" />
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
@@ -59,7 +58,4 @@
          </children>
       </VBox>
    </children>
-   <effect>
-      <DropShadow blurType="GAUSSIAN" height="41.52" radius="20.26" width="41.52" />
-   </effect>
 </AnchorPane>
