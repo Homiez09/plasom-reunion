@@ -1,10 +1,12 @@
 package cs211.project.componentControllers.teamboxControllers;
 
+import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
+import cs211.project.services.TeamListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -24,6 +26,7 @@ public class TeamBox2Controller {
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
     private User user = (User) FXRouter.getData();
+    private Event event = (Event) FXRouter.getData2();
     private boolean bookmarked = false, initBookMarkCheck = false;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap;
@@ -108,21 +111,38 @@ public class TeamBox2Controller {
         initBookMarkCheck = true;
     }
 
-    private void goTo(String page) throws IOException {
+    protected void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
-                //print user data
-                System.out.println(teamIdLabel.getText());
-                System.out.println(bookmarkLabel.getText());
+                //todo : go to  manage team page
                 break;
             case "Delete Team":
-                //todo : do something
+                leaveTeam();
+                deleteTeam();
                 break;
             case "Leave Team":
-                //todo : do something
+                leaveTeam();
                 break;
         }
         menuDropDown.getSelectionModel().clearSelection();
+        FXRouter.goTo("select-team", user, event);
+    }
+    private void deleteTeam(){
+        TeamListDataSource dataSource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = dataSource.readData();
+        teamList.removeTeam(teamIdLabel.getText());
+        dataSource.writeData(teamList);
+    }
+
+    private void leaveTeam(){
+        teamListHashMap = joinTeamMap.readData();
+        HashMap<String, TeamList> teamHashMap = new HashMap<>();
+        for (String username : teamListHashMap.keySet()){
+            TeamList teamList = new TeamList(teamListHashMap.get(username));
+            if (username.equals(user.getUsername())) {
+                teamList.removeTeam(teamIdLabel.getText());
+            }teamHashMap.put(username, teamList);
+        }joinTeamMap.writeData(teamHashMap);
     }
 
     private void loadIcon() {

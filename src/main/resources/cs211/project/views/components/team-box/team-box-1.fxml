@@ -34,8 +34,8 @@
          </fill>
       </Rectangle>
       <ImageView fx:id="faceImageView" fitHeight="72.0" fitWidth="72.0" layoutX="82.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="manageTeamImageView" fitHeight="4.8" fitWidth="21.16" layoutX="191.0" layoutY="13.0" onMouseClicked="#onMenuDropDownComponentClick" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="bookMarkImageView" fitHeight="30.0" fitWidth="25.0" layoutX="190.0" layoutY="25.0" onMouseClicked="#onBookMarkClick" onMouseEntered="#onBookMarkEntered" onMouseExited="#onBookMarkExited" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="manageTeamImageView" fitHeight="4.8" fitWidth="21.16" layoutX="191.0" layoutY="14.0" onMouseClicked="#onMenuDropDownComponentClick" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bookMarkImageView" fitHeight="30.0" fitWidth="25.0" layoutX="190.0" layoutY="28.0" onMouseClicked="#onBookMarkClick" onMouseEntered="#onBookMarkEntered" onMouseExited="#onBookMarkExited" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="teamNameLabel" alignment="CENTER" layoutX="9.0" layoutY="134.0" prefHeight="23.0" prefWidth="214.0" text="teamNameLabel">
          <styleClass>
             <String fx:value="font" />
