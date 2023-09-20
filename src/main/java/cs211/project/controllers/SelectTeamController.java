@@ -1,5 +1,7 @@
 package cs211.project.controllers;
 
+import cs211.project.componentControllers.AvatarProfileController;
+import cs211.project.componentControllers.CreateTeamController;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -26,7 +28,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class SelectTeamController {
-    @FXML private AnchorPane navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane;
+    @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
 
     @FXML private ImageView settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
@@ -45,6 +47,7 @@ public class SelectTeamController {
         teamBox = "teamBox1";
 
         initMenu();
+        initCreateTeamPage();
 
         teamBoxView(teamBox);
         manageTeamSelectMenuGraphic(1);
@@ -75,35 +78,12 @@ public class SelectTeamController {
 
     @FXML
     private void onCreateTeamButtonClick() {
-        // todo : create team
-        // test create team
-        TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
-        JoinTeamMap joinTeamMap = new JoinTeamMap();
-        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
-        // check key exist
-        if (teamHashMap.containsKey(user.getUsername())) {
-            TeamList teamList = teamHashMap.get(user.getUsername());
-            Team team = new Team(event.getEventID(), "Team-12", 5);
-            team.setRole("Owner");
-            teamList.addTeam(team);
-            datasource.writeData(teamList);
-            joinTeamMap.writeData(teamHashMap);
-        } else {
-            teamHashMap.put(user.getUsername(), new TeamList());
-            TeamList teamList = teamHashMap.get(user.getUsername());
-            Team team = new Team(event.getEventID(), "Team-1d1", 5);
-            team.setRole("Owner");
-            teamList.addTeam(team);
-            datasource.writeData(teamList);
-            joinTeamMap.writeData(teamHashMap);
-        }
+        createTeamAnchorPane.setVisible(true);
+        selectTeamAnchorPane.setDisable(false);
+        selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
 
-        try {
-            FXRouter.goTo("select-team", user);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
+
 
     @FXML private void onShowSettingMenuClick() {
         settingMenuComboBox.show();
@@ -148,6 +128,19 @@ public class SelectTeamController {
         manageTeamsAnchorPane.setVisible(false);
         teamBoxView(teamBox);
 //        teamBoxListView();
+    }
+
+    private void initCreateTeamPage(){
+        FXMLLoader createTeamAnchorPaneLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-team.fxml"));
+        try {
+            AnchorPane createTeamAnchorPaneComponent = createTeamAnchorPaneLoader.load();
+            createTeamAnchorPane.getChildren().add(createTeamAnchorPaneComponent);
+            createTeamAnchorPane.setVisible(false);
+            selectTeamAnchorPane.setDisable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void teamBoxView(String teamBox) {
