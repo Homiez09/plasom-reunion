@@ -319,13 +319,13 @@
                         <Font name="Agency FB" size="12.0" />
                      </font>
                      <styleClass>
-                        <String fx:value="arrow-button" />
+                        <String fx:value="upcoming-button" />
                         <String fx:value="arrow-circle-button" />
                      </styleClass>
                   </Button>
                   <Button fx:id="nextButton" layoutX="390.0" layoutY="122.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="43.0" prefWidth="109.0" text="&gt;" textFill="#00000099">
                      <styleClass>
-                        <String fx:value="arrow-button" />
+                        <String fx:value="upcoming-button" />
                         <String fx:value="arrow-circle-button" />
                      </styleClass>
                   </Button>
