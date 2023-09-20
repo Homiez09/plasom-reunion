@@ -7,11 +7,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 public class Event {
     private final String eventID;
-    private final String eventHostName;
+    private User eventHostUser;
     private String eventName;
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
@@ -24,7 +25,7 @@ public class Event {
     private ActivityList activities;
     private TeamList teams;
     public Event(String eventName,
-                 String eventHostName,
+                 User eventHostUser,
                  String eventImagePath,
                  String eventTag,
                  String eventDateStart,
@@ -33,7 +34,7 @@ public class Event {
                  String eventLocation) {
         this.eventID = generateEventID();
         this.eventName = eventName;
-        this.eventHostName = eventHostName;
+        this.eventHostUser = eventHostUser;
         this.eventImagePath = eventImagePath;
         this.eventTag = eventTag;
         this.eventDateStart = eventDateStart;
@@ -45,10 +46,12 @@ public class Event {
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         this.isSelected = new SimpleBooleanProperty(false);
         this.activities = new ActivityList();
+        this.joinEvent = true;
+        this.joinTeam = true;
     }
 
     public Event(String eventName,
-                 String eventHostName,
+                 User eventHostUser,
                  String eventImagePath,
                  String eventTag,
                  String eventDateStart,
@@ -57,7 +60,7 @@ public class Event {
                  String eventLocation,
                  int slotMember) {
         this.eventID = generateEventID();
-        this.eventHostName = eventHostName;
+        this.eventHostUser = eventHostUser;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
         this.eventTag = eventTag;
@@ -70,10 +73,12 @@ public class Event {
         this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         this.activities = new ActivityList();
+        this.joinEvent = true;
+        this.joinTeam = true;
     }
 
     public Event(String eventID,
-                 String eventHostName,
+                 User eventHostUser,
                  String eventName,
                  String eventImagePath,
                  String eventTag,
@@ -83,7 +88,9 @@ public class Event {
                  String eventLocation,
                  int member,
                  int slotMember,
-                 String timestamp) {
+                 String timestamp,
+                 boolean joinEvent,
+                 boolean joinTeam) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
@@ -94,17 +101,17 @@ public class Event {
         this.eventLocation = eventLocation;
         this.member = member;
         this.slotMember = slotMember;
-        this.eventHostName = eventHostName;
+        this.eventHostUser = eventHostUser;
         this.timestamp =timestamp;
-        this.isSelected = new SimpleBooleanProperty(false);
         this.activities = new ActivityList();
-
+        this.joinEvent = joinEvent;
+        this.joinTeam = joinTeam;
     }
 
 
 
     public String getEventID() {return eventID;}
-    public String getEventHostName() {return eventHostName;}
+    public User getEventHostUser() {return eventHostUser;}
     public String getEventName() {return eventName;}
     public String getEventImagePath() {return eventImagePath;}
     public String getEventTag() {return eventTag;}
@@ -130,6 +137,7 @@ public class Event {
     public void addMember(){if(!isFull())this.member++;}
     public void delMember(){if(member >0) this.member--;}
 
+
     private String generateEventID() {
         Random random = new Random();
 
@@ -142,7 +150,7 @@ public class Event {
         return id;
     }
     public boolean isFull(){return slotMember == member;}
-    public boolean upComming(){
+    public boolean isUpComming(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
@@ -151,6 +159,23 @@ public class Event {
         }
         return false;
     }
+
+    public boolean isNewEvent() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        // แปลงสตริงวันที่และเวลาเป็น LocalDateTime
+        LocalDateTime eventStartDate = LocalDateTime.parse(eventDateStart, formatter);
+        LocalDateTime timeStamp = LocalDateTime.parse(timestamp,formatter);
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        // คำนวณความต่างของวันระหว่างวันที่เริ่มต้นของอีเวนต์กับวันปัจจุบัน
+        long timeStartDiff = ChronoUnit.DAYS.between(eventStartDate, currentTime);
+        long timeStampDiff = ChronoUnit.DAYS.between(timeStamp, currentTime);
+
+        // ตรวจสอบว่า Time Stamp ไม่เกิน 7 วันและวันเริ่มต้นไม่เกิน 7 วัน
+        return (timeStartDiff <= 7 && timeStampDiff <= 7 );
+    }
+
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -159,6 +184,11 @@ public class Event {
 
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
+
+    public boolean isHostEvent(String currentUserId) {
+        return eventHostUser.getUserId().equals(currentUserId);
+    }
+
     private String generateRandomText() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder randomText = new StringBuilder();
@@ -175,7 +205,7 @@ public class Event {
     @Override
     public String toString() {
         return      eventID + ','
-                + eventHostName + ','
+                +   eventHostUser.getUserId() + ','
                 +   eventName + ','
                 +   eventImagePath + ','
                 +   eventTag + ','
@@ -185,13 +215,11 @@ public class Event {
                 +   eventLocation + ','
                 +   member + ','
                 +   slotMember +','
-                +   timestamp;
+                +   timestamp+','
+                +   joinEvent+','
+                +   joinTeam;
 
     }
 
-
-    public BooleanProperty selectedProperty() {
-        return isSelected;
-    }
 }
 

@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,13 +19,13 @@ import java.util.Set;
 
 public class CardMyEventController {
     @FXML
-    Label eventNameLabel,startDateLabel,enddateLabel, memberCountLabel,tagLabel;
+    Label eventNameLabel,startDateLabel,locationLabel, memberCountLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
     @FXML
     ImageView eventImageView;
     @FXML
     AnchorPane eventAnchorPane;
     @FXML
-    Button staffButton,editButton,viewjoinButton,leaveButton;
+    Button forStaffButton,manageEventButton,leaveEventButton;
     private User currentUser = (User) FXRouter.getData();
     private TeamListDataSource teamListDataSource;
     private TeamList teamList;
@@ -35,7 +34,7 @@ public class CardMyEventController {
     HashMap<String, TeamList> teamHashMap = new HashMap<>();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
-    private UserEventMap mapDatasource ;
+    private JoinEventMap mapDatasource ;
     private HashMap<String, Set<String>> hashMap; // Collect EventID
     private Set<String> hashSet;// Collect User
     private Event event;
@@ -45,34 +44,14 @@ public class CardMyEventController {
         this.eventListDatasource = new EventListDataSource("data","event-list.csv");
         this.eventList = eventListDatasource.readData();
         this.hashMap = new HashMap<>();
-        this.mapDatasource = new UserEventMap("data", "join-event.csv");
+        this.mapDatasource = new JoinEventMap("data", "join-event.csv");
         this.hashMap = mapDatasource.readData();
-
         this.teamListDataSource = new TeamListDataSource("data", "team-list.csv");
         this.teamList = teamListDataSource.readData();
+        buttonVisible(true);
     }
 
 
-
-
-
-
-
-    public void onStaffAction(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("select-team", currentUser, event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-    public void onEditAction(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("create-event", currentUser);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public void onJoinViewAction(ActionEvent actionEvent){
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
         if (hashMap.containsKey(event.getEventID())) {
@@ -81,7 +60,7 @@ public class CardMyEventController {
             hashSet = new HashSet<>();
         }
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (hashSet.contains(currentUser.getUsername())|| currentUser.getUsername().equals(event.getEventHostName())){
+        if (hashSet.contains(currentUser.getUserId()) || currentUser.getUserId().equals(event.getEventHostUser())){
             try {
                 FXRouter.goTo("event",currentUser,event);
             } catch (IOException e) {
@@ -89,7 +68,7 @@ public class CardMyEventController {
             }
         }else {
             eventList.findEvent(event.getEventID()).addMember();
-            hashSet.add(currentUser.getUsername());
+            hashSet.add(currentUser.getUserId());
             hashMap.put(event.getEventID(), hashSet);
 
             eventListDatasource.writeData(eventList);
@@ -101,65 +80,30 @@ public class CardMyEventController {
             }
         }
     }
-    public void onDeleteLeaveAction(ActionEvent actionEvent) {
-        if (event.getEventHostName().equals(currentUser.getUsername())) {
-            eventList.getEvents().remove(eventList.findEvent(event.getEventID()));
-            teamList.getTeams().removeIf(team -> team.getEventID().equals(event.getEventID())); // ลบทีมใน team-list.csv
-
-            // ลบ user join team ใน join-team.csv
-            for (String username : teamHashMapGlobal.keySet()) { // ตามจำนวนคนใน team
-                    TeamList teamList = new TeamList(teamHashMapGlobal.get(username).getTeams());
-                    teamList.removeTeamByEvent(event);
-                    teamHashMap.put(username, teamList); // ยัด teamList ที่ลบ team ในแต่ละ user เข้าไปใน teamHashMap
-            }
-
-            // สร้าง path
-            String folderPath = event.getEventImagePath();
-            File fileToDelete = new File(folderPath);
-            // ลบไฟล์
-            if (fileToDelete.exists()) {
-
-                if (fileToDelete.delete()) {
-                    System.out.println("Succes Delete");
-                } else {
-                    System.out.println("Cant Delete");
-                }
-            } else {
-                System.out.println("Not Found");
-            }
-
-            // ลบไฟล์
-            eventListDatasource.writeData(eventList);
-            joinTeamMap.writeData(teamHashMap);
-            teamListDataSource.writeData(teamList);
-
-            try {
-                FXRouter.goTo("my-events", currentUser);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            if (hashMap.containsKey(event.getEventID())) {
-                hashSet = hashMap.get(event.getEventID());
-            }
-            eventList.findEvent(event.getEventID()).delMember();
-            hashSet.remove(currentUser.getUsername());
-            hashMap.put(event.getEventID(), hashSet);
-
-            eventListDatasource.writeData(eventList);
-            mapDatasource.writeData(hashMap);
-            try {
-                FXRouter.goTo("my-events", currentUser);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+    public void onLeaveEventButton(ActionEvent actionEvent) {
+        
+        if (hashMap.containsKey(event.getEventID())) {
+            hashSet = hashMap.get(event.getEventID());
         }
+        eventList.findEvent(event.getEventID()).delMember();
+        hashSet.remove(currentUser.getUserId());
+        hashMap.put(event.getEventID(), hashSet);
+
+        eventListDatasource.writeData(eventList);
+        mapDatasource.writeData(hashMap);
+        try {
+            FXRouter.goTo("my-events", currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
     public void setEvent(Event event) {
         this.event = event;
 
         hashMap = new HashMap<>();
-        mapDatasource = new UserEventMap("data", "join-event.csv");
+        mapDatasource = new JoinEventMap("data", "join-event.csv");
         hashMap = mapDatasource.readData();
 
         if (hashMap.containsKey(event.getEventID())) {
@@ -169,6 +113,13 @@ public class CardMyEventController {
         }
 
         buttonVisible(!event.isEnd());
+        if (event.isHostEvent(currentUser.getUserId())){
+
+            leaveEventButton.setVisible(false);
+        } else if (hashSet.contains(currentUser.getUserId())) {
+            forStaffButton.setVisible(false);
+            manageEventButton.setVisible(false);
+        }
 
         Image image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
         if(event.getEventImagePath().equals("null")){
@@ -177,8 +128,12 @@ public class CardMyEventController {
         }
         eventImageView.setImage(image);
         eventNameLabel.setText(event.getEventName());
-        // Date
         startDateLabel.setText(event.getEventDateStart());
+        locationLabel.setText(event.getEventLocation());
+        hostUserNameLabel.setText(event.getEventHostUser().getUsername());
+        hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
+        String descrip = event.getEventDescription().replaceAll("\n", " ");
+        descriptionLabel.setText(descrip);
         if (event.getSlotMember() == -1) {
             memberCountLabel.setText(event.getMember()+"");
         }else {
@@ -186,9 +141,65 @@ public class CardMyEventController {
         }
 
     }
-    public void buttonVisible(Boolean is){
 
+    public void buttonVisible(Boolean is){
+        forStaffButton.setVisible(is);
+        manageEventButton.setVisible(is);
+        leaveEventButton.setVisible(is);
     }
 
+    public void onForStaffButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("select-team", currentUser, event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public void onManageEventButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("create-event",currentUser,event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ลบ Event
+//            if (event.getEventHostName().equals(currentUser.getUsername())) {
+//        eventList.getEvents().remove(eventList.findEvent(event.getEventID()));
+//        teamList.getTeams().removeIf(team -> team.getEventID().equals(event.getEventID())); // ลบทีมใน team-list.csv
+//
+//        // ลบ user join team ใน join-team.csv
+//        for (String username : teamHashMapGlobal.keySet()) { // ตามจำนวนคนใน team
+//            TeamList teamList = new TeamList(teamHashMapGlobal.get(username).getTeams());
+//            teamList.removeTeamByEvent(event);
+//            teamHashMap.put(username, teamList); // ยัด teamList ที่ลบ team ในแต่ละ user เข้าไปใน teamHashMap
+//        }
+//
+//        // สร้าง path
+//        String folderPath = event.getEventImagePath();
+//        File fileToDelete = new File(folderPath);
+//        // ลบไฟล์
+//        if (fileToDelete.exists()) {
+//
+//            if (fileToDelete.delete()) {
+//                System.out.println("Succes Delete");
+//            } else {
+//                System.out.println("Cant Delete");
+//            }
+//        } else {
+//            System.out.println("Not Found");
+//        }
+//
+//        // ลบไฟล์
+//        eventListDatasource.writeData(eventList);
+//        joinTeamMap.writeData(teamHashMap);
+//        teamListDataSource.writeData(teamList);
+//
+//        try {
+//            FXRouter.goTo("my-events", currentUser);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

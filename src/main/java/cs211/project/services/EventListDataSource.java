@@ -9,11 +9,9 @@ import java.nio.charset.StandardCharsets;
 public class EventListDataSource implements Datasource<EventList> {
     private String directoryName;
     private String fileName;
-    private Datasource<ActivityList> activityListDatasource;
-    private Datasource<TeamList> teamListDatasource;
+    private Datasource<UserList> userListDatasource;
     private EventList eventList;
-    private ActivityList activityList;
-    private TeamList teamList;
+    private UserList userList;
     public EventListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
@@ -38,6 +36,9 @@ public class EventListDataSource implements Datasource<EventList> {
 
     @Override
     public EventList readData() {
+        userListDatasource = new UserListDataSource("data","user-list.csv");
+        userList = userListDatasource.readData();
+
         String filePath = directoryName + File.separator + fileName;
 
         File file = new File(filePath);
@@ -72,20 +73,22 @@ public class EventListDataSource implements Datasource<EventList> {
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
 
                 String eventId = data[0].trim();
-                String eventHost = data[1].trim();
+                User eventHost = userList.findUserId(data[1].trim());
                 String eventName = data[2].trim();
                 String imagePath = data[3].trim();
                 String eventTag = data[4].trim();
                 String eventStart = data[5].trim();
                 String eventEnd = data[6].trim();
-                String eventDescription = data[7].trim().replace("\\n","\n");
+                String eventDescription = data[7].trim().replace("\n", "");
                 String eventLocation = data[8].trim();
                 int member = Integer.parseInt(data[9].trim());
                 int slotmember = Integer.parseInt(data[10].trim());
                 String timeStamp = data[11].trim();
+                boolean joinEvent = Boolean.parseBoolean(data[12].trim());
+                boolean joinTeam = Boolean.parseBoolean(data[13].trim());
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember,timeStamp);
+                                        eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam);
 
 
                 // เพิ่มข้อมูลลงใน list

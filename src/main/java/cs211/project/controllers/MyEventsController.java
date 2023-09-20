@@ -33,7 +33,7 @@ public class MyEventsController {
     @FXML
     ListView mainListView;
     @FXML
-    Button upcommingButton,completeButton, onOwnerButton,memberButton,staffButton;
+    Button upcomingButton,completeButton, onOwnerButton,memberButton,staffButton;
     @FXML
     ChoiceBox sortChoiceBox;
     @FXML
@@ -43,10 +43,13 @@ public class MyEventsController {
     ;
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
-    private UserEventMap mapDatasource ;
+    private EventList showlist;
+    private JoinEventMap mapDatasource ;
     private HashMap<String, Set<String>> hashMap;
     private Set<String> hashSet;
     private ObservableList<Event> observableEventList;
+
+
 
 
     @FXML
@@ -54,32 +57,23 @@ public class MyEventsController {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         this.eventDatasource = new EventListDataSource("data","event-list.csv");
         this.eventList = eventDatasource.readData();
-        eventLabel.setText("My Events");
 
-        this.hashMap = new HashMap<>();
-        this.hashSet = new HashSet<>();
 
         observableEventList = FXCollections.observableArrayList(eventList.getEvents());
 
-        setMainListView(eventList);
+        setMainListView(filterEvent(eventList,"Member"));
     }
 
 
     public void  setMainListView(EventList eventList){
         mainListView.getItems().clear();
-        this.mapDatasource = new UserEventMap("data", "join-event.csv");
-        this.hashMap = mapDatasource.readData();
-        this.hashSet = new HashSet<>();
 
         if (eventList != null){
             for (Event event:eventList.getEvents()){
-                if (hashMap.containsKey(event.getEventID())){
-                    hashSet = hashMap.get(event.getEventID());
-                }
-                AnchorPane anchorPane = new AnchorPane();
-                new LoadCardEventComponent(anchorPane,event,"card-my-event");
+                    AnchorPane anchorPane = new AnchorPane();
+                    new LoadCardEventComponent(anchorPane,event,"card-my-event");
+                    mainListView.getItems().add(anchorPane);
 
-                mainListView.getItems().add(anchorPane);
             }
         }
 
@@ -137,27 +131,6 @@ public class MyEventsController {
     }
     public void onHostEventsAction(ActionEvent actionEvent) {
 
-    }
-    public void onHistorysAction(ActionEvent actionEvent) {
-
-    }
-
-    private void onAnimateComponent(AnchorPane anchorPane) {
-        ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleIn.setToX(1.1);
-        scaleIn.setToY(1.1);
-
-        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleOut.setToX(1);
-        scaleOut.setToY(1);
-
-        anchorPane.setOnMouseEntered(event -> {
-            scaleIn.play();
-        });
-
-        anchorPane.setOnMouseExited(event -> {
-            scaleOut.play();
-        });
     }
 
     private void sortAndShowEvents(EventList eventList, Comparator<Event> comparator) {
@@ -226,23 +199,97 @@ public class MyEventsController {
 
     }
 
-    public void upcommingButtonAction(ActionEvent actionEvent) {
+    public void onUpComingButtonAction(ActionEvent actionEvent) {
+        showlist =  filterEvent(eventList,"Complete");
+        setMainListView(showlist);
+
+
     }
 
     public void onCompleteAction(ActionEvent actionEvent) {
+        showlist =  filterEvent(eventList,"Complete");
+        setMainListView(showlist);
+
     }
 
     public void onMemberAction(ActionEvent actionEvent) {
+        showlist =  filterEvent(eventList,"Member");
+        setMainListView(showlist);
+
     }
 
-    public void onOwnerEvent(ActionEvent actionEvent) {
+    public void onOwnerEventAction(ActionEvent actionEvent) {
+        showlist =  filterEvent(eventList,"Owner");
+        setMainListView(showlist);
+
+
+
     }
 
 
-    public void onstaffAction(ActionEvent actionEvent) {
+    public void onStaffAction(ActionEvent actionEvent) {
+        showlist =  filterEvent(eventList,"Staff");
+        setMainListView(showlist);
+
     }
 
     public void onManageEventButton(ActionEvent actionEvent) {
     }
+
+    private EventList filterEvent(EventList eventList,String type){
+        EventList filterlist = new EventList();
+        this.mapDatasource = new JoinEventMap("data", "join-event.csv");
+        this.hashMap = mapDatasource.readData();
+
+
+
+        switch (type){
+            case "Upcomming":
+                for (Event event:eventList.getEvents()) {
+                    hashSet = hashMap.get(event.getEventID());
+                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
+                    if (event.isUpComming() && hashSet.contains(currentUser.getUserId())){
+                        filterlist.addEvent(event);
+                    }
+                }
+                break;
+            case "Complete":
+                for (Event event:eventList.getEvents()) {
+                    hashSet = hashMap.get(event.getEventID());
+                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
+                    if (event.isEnd() && hashSet.contains(currentUser.getUserId())){
+                        filterlist.addEvent(event);
+                    }
+                }
+                break;
+            case "Owner":
+                for (Event event:eventList.getEvents()) {
+                    if (event.isHostEvent(currentUser.getUserId()) && !event.isEnd()){
+                        filterlist.addEvent(event);
+                    }
+                }
+                break;
+            case "Member":
+                for (Event event:eventList.getEvents()) {
+                    hashSet = hashMap.get(event.getEventID());
+                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
+                    if (!event.isEnd() && hashSet.contains(currentUser.getUserId())){
+                        filterlist.addEvent(event);
+                    }
+                }
+                break;
+            case "Staff":
+                for (Event event:eventList.getEvents()) {
+                    hashSet = hashMap.get(event.getEventID());
+                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
+                    if (event.isJoinTeam()){
+                        filterlist.addEvent(event);
+                    }
+                }
+                break;
+        }
+        return filterlist;
+    }
+
 }
 

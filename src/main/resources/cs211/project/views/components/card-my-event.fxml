@@ -110,11 +110,11 @@
                         <Separator opacity="0.0" orientation="VERTICAL" />
                         <VBox>
                            <children>
-                              <Label text="\@mingmmie">
+                              <Label fx:id="hostUserNameLabel" text="\@mingmmie">
                                  <font>
                                     <Font size="14.0" />
                                  </font></Label>
-                              <Label fx:id="hostUsernameLabel" text="PINKPPANTHER">
+                              <Label fx:id="hostDisplayNameLabel" text="PINKPPANTHER">
                                  <font>
                                     <Font size="14.0" />
                                  </font></Label>

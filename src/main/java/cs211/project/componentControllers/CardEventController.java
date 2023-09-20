@@ -32,24 +32,22 @@ public class CardEventController {
 
 
     }
-    public void setEvent(Event data){
+    public void setEvent(Event data) {
         this.event = data;
-        System.out.println(event.getEventHostName());
-        userHost = userList.findUsername(event.getEventHostName());
-        eventNameLabel.setText(event.getEventName());
-        if (userHost!=null) {
-            hostUsernameLabel.setText(userHost.getUsername());
-            hostNameLabel.setText(userHost.getDisplayName());
+        if (event != null) {
+            eventNameLabel.setText(event.getEventName());
+            hostUsernameLabel.setText(event.getEventHostUser().getUsername());
+            hostNameLabel.setText(event.getEventHostUser().getDisplayName());
+
+
+
+            Image image = new Image("file:" + event.getEventImagePath(), 200, 200, true, true);
+            if (event.getEventImagePath().equals("null")) {
+                String imgpath = "/images/events/event-default.png";
+                image = new Image(getClass().getResourceAsStream(imgpath), 200, 200, false, false);
+            }
+            eventImage.setImage(image);
         }
-
-
-        Image image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
-        if(event.getEventImagePath().equals("null")){
-            String imgpath = "/images/events/event-default.png";
-            image = new Image(getClass().getResourceAsStream(imgpath),200,200,false,false);
-        }
-        eventImage.setImage(image);
-
     }
     public void onJoinEventAcition(ActionEvent actionEvent) {
     }
