@@ -83,7 +83,7 @@ public class SelectTeamController {
         // check key exist
         if (teamHashMap.containsKey(user.getUsername())) {
             TeamList teamList = teamHashMap.get(user.getUsername());
-            Team team = new Team(event.getEventID(), "Team-12", 5);
+            Team team = new Team(event.getEventID(), "Team child" + 1, "2023-7-22.09:00:00", "2023-8-22.09:00:00" , 5, "This is fake team");
             team.setRole("Owner");
             teamList.addTeam(team);
             datasource.writeData(teamList);
@@ -91,7 +91,7 @@ public class SelectTeamController {
         } else {
             teamHashMap.put(user.getUsername(), new TeamList());
             TeamList teamList = teamHashMap.get(user.getUsername());
-            Team team = new Team(event.getEventID(), "Team-1d1", 5);
+            Team team = new Team(event.getEventID(), "Team child" + 1, "2023-7-22.09:00:00", "2023-8-22.09:00:00" , 5, "This is fake team");
             team.setRole("Owner");
             teamList.addTeam(team);
             datasource.writeData(teamList);
@@ -165,7 +165,6 @@ public class SelectTeamController {
             teamListSort.filterByRole(filter);
         } else {
             teamListSort.filterByAll();
-            System.out.println("filter by all");
         }
 
         for (Team team : teamListSort.getTeams()) {
