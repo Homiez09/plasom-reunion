@@ -1,10 +1,14 @@
 package cs211.project.componentControllers;
 
+import cs211.project.models.Event;
+import cs211.project.models.User;
+import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -43,6 +47,8 @@ public class CreateTeamController {
 
     private final int MAX_TEAM_NAME_LIMIT = 30, MAX_DESCRIPTION_LIMIT = 280;
 
+    User user = (User) FXRouter.getData();
+    Event event = (Event) FXRouter.getData2();
 
     @FXML
     private void initialize() {
@@ -64,6 +70,10 @@ public class CreateTeamController {
     private void numMemberRequire(){
         numMemberSpin = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,1000000000);
         numMemberSpinner.setValueFactory(numMemberSpin);
+    }
+
+    @FXML private void onCancelButtonClick() throws IOException {
+        FXRouter.goTo("select-team", user, event);
     }
 
     @FXML private void onContinueButtonClick(){

@@ -95,7 +95,7 @@
                         <Font size="5.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cancelButton" layoutX="28.0" layoutY="410.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="90.0" text="Cancel" textFill="WHITE">
+                  <Button fx:id="cancelButton" layoutX="28.0" layoutY="410.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="37.0" prefWidth="90.0" text="Cancel" textFill="WHITE">
                      <styleClass>
                         <String fx:value="weight-medium" />
                         <String fx:value="text-ms" />
