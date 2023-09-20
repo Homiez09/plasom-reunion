@@ -22,7 +22,7 @@ class TeamListDataSourceTest {
 //        HashMap<String, ArrayList<Team>> teamHashMap = joinTeamMap.readData();
 
         for (int i = 50; i < 55; i++) {
-            teamList.addTeam("event-KHO24442", "Team " + i, 5);
+            teamList.addTeam("event-KHO24442", "Team " + i, "2023-7-22.09:00:00", "2023-8-22.09:00:00" , 5, "This is fake team");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

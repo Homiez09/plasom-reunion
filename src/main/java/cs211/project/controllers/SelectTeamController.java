@@ -1,5 +1,7 @@
 package cs211.project.controllers;
 
+import cs211.project.componentControllers.AvatarProfileController;
+import cs211.project.componentControllers.CreateTeamController;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -21,18 +23,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class SelectTeamController {
-    @FXML private AnchorPane navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane;
+    @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
 
     @FXML private ImageView settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
     @FXML private Label menu1Label, menu2Label;
+    @FXML private Shape selectMenu1, selectMenu2;
     private String filter = "All";
     private String teamBox ;
     private User user = (User) FXRouter.getData();
@@ -40,11 +44,14 @@ public class SelectTeamController {
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamHashMap;
 
+    Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
+    Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
     @FXML
     private void initialize() {
         teamBox = "teamBox1";
 
         initMenu();
+        initCreateTeamPage();
 
         teamBoxView(teamBox);
         manageTeamSelectMenuGraphic(1);
@@ -75,35 +82,11 @@ public class SelectTeamController {
 
     @FXML
     private void onCreateTeamButtonClick() {
-        // todo : create team
-        // test create team
-        TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
-        JoinTeamMap joinTeamMap = new JoinTeamMap();
-        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
-        // check key exist
-        if (teamHashMap.containsKey(user.getUsername())) {
-            TeamList teamList = teamHashMap.get(user.getUsername());
-            Team team = new Team(event.getEventID(), "Team-12", 5);
-            team.setRole("Owner");
-            teamList.addTeam(team);
-            datasource.writeData(teamList);
-            joinTeamMap.writeData(teamHashMap);
-        } else {
-            teamHashMap.put(user.getUsername(), new TeamList());
-            TeamList teamList = teamHashMap.get(user.getUsername());
-            Team team = new Team(event.getEventID(), "Team-1d1", 5);
-            team.setRole("Owner");
-            teamList.addTeam(team);
-            datasource.writeData(teamList);
-            joinTeamMap.writeData(teamHashMap);
-        }
-
-        try {
-            FXRouter.goTo("select-team", user);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        createTeamAnchorPane.setVisible(true);
+        selectTeamAnchorPane.setDisable(false);
+        selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
     }
+
 
     @FXML private void onShowSettingMenuClick() {
         settingMenuComboBox.show();
@@ -147,7 +130,29 @@ public class SelectTeamController {
         switchViewAnchorPane.setVisible(false);
         manageTeamsAnchorPane.setVisible(false);
         teamBoxView(teamBox);
-//        teamBoxListView();
+    }
+
+    @FXML
+    protected void onSettingEntered() {
+        settingImageView.setImage(settingHover);
+    }
+
+    @FXML
+    protected void onSettingExited() {
+        settingImageView.setImage(setting);
+    }
+
+    private void initCreateTeamPage(){
+        FXMLLoader createTeamAnchorPaneLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-team.fxml"));
+        try {
+            AnchorPane createTeamAnchorPaneComponent = createTeamAnchorPaneLoader.load();
+            createTeamAnchorPane.getChildren().add(createTeamAnchorPaneComponent);
+            createTeamAnchorPane.setVisible(false);
+            selectTeamAnchorPane.setDisable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void teamBoxView(String teamBox) {
@@ -165,7 +170,6 @@ public class SelectTeamController {
             teamListSort.filterByRole(filter);
         } else {
             teamListSort.filterByAll();
-            System.out.println("filter by all");
         }
 
         for (Team team : teamListSort.getTeams()) {
@@ -326,17 +330,27 @@ public class SelectTeamController {
     }
 
     private void manageTeamSelectMenuGraphic(int page) {
-        // todo : select menu (spacing underline correctly)
-        String selectColor = "-fx-text-fill: #413B3B;  -fx-underline: true;";
+        initManageTeamSelectMenuGraphic();
+        String selectColor = "-fx-text-fill: #413B3B;";
         switch (page) {
             case 1:
                 menu1Label.setStyle(selectColor);
-                //set gap between label with underline
+                selectMenu1.setVisible(true);
 
                 break;
             case 2:
+                menu2Label.setStyle(selectColor);
+                selectMenu2.setVisible(true);
                 break;
         }
+    }
+
+    private void initManageTeamSelectMenuGraphic() {
+        String style = "";
+        menu1Label.setStyle(style);
+        selectMenu1.setVisible(false);
+        menu2Label.setStyle(style);
+        selectMenu2.setVisible(false);
     }
 }
 

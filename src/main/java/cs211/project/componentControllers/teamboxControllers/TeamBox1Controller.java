@@ -1,10 +1,13 @@
 package cs211.project.componentControllers.teamboxControllers;
 
+import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
+import cs211.project.services.TeamListDataSource;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -12,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +27,7 @@ public class TeamBox1Controller {
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
     private User user = (User) FXRouter.getData();
+    private Event event = (Event) FXRouter.getData2();
     private boolean bookmarked = false, initBookMarkCheck = false;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap;
@@ -125,13 +130,32 @@ public class TeamBox1Controller {
                 //todo : go to  manage team page
                 break;
             case "Delete Team":
-                //todo : owner delete team
+                leaveTeam();
+                deleteTeam();
                 break;
             case "Leave Team":
-                //todo : user leave team
+                leaveTeam();
                 break;
         }
         menuDropDown.getSelectionModel().clearSelection();
+        FXRouter.goTo("select-team", user, event);
+    }
+    private void deleteTeam(){
+        TeamListDataSource dataSource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = dataSource.readData();
+        teamList.removeTeam(teamIdLabel.getText());
+        dataSource.writeData(teamList);
+    }
+
+    private void leaveTeam(){
+        teamListHashMap = joinTeamMap.readData();
+        HashMap<String, TeamList> teamHashMap = new HashMap<>();
+        for (String username : teamListHashMap.keySet()){
+            TeamList teamList = new TeamList(teamListHashMap.get(username));
+            if (username.equals(user.getUsername())) {
+                teamList.removeTeam(teamIdLabel.getText());
+            }teamHashMap.put(username, teamList);
+        }joinTeamMap.writeData(teamHashMap);
     }
 
     private void loadIcon() {
@@ -145,7 +169,19 @@ public class TeamBox1Controller {
         peopleImageView.setImage(peopleIcon);
         Image manageIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/dot_icon.png"));
         manageTeamImageView.setImage(manageIcon);
+        AnimateImageView(manageTeamImageView);
 
         bookMarkImageView.setImage(unBookMarkIcon);
+    }
+
+    private void AnimateImageView(ImageView imageView) {
+        ScaleTransition hoverImageView = new ScaleTransition(Duration.seconds(0.01), imageView);
+        hoverImageView.setToX(1.2);
+        hoverImageView.setToY(1.2);
+        ScaleTransition defaultImageView = new ScaleTransition(Duration.seconds(0.01), imageView);
+        defaultImageView.setToX(1);
+        defaultImageView.setToY(1);
+        imageView.setOnMouseEntered(event -> {hoverImageView.play();});
+        imageView.setOnMouseExited(event -> {defaultImageView.play();});
     }
 }
