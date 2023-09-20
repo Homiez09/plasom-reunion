@@ -21,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -43,6 +42,8 @@ public class SelectTeamController {
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamHashMap;
 
+    Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
+    Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
     @FXML
     private void initialize() {
         teamBox = "teamBox1";
@@ -150,7 +151,16 @@ public class SelectTeamController {
         switchViewAnchorPane.setVisible(false);
         manageTeamsAnchorPane.setVisible(false);
         teamBoxView(teamBox);
-//        teamBoxListView();
+    }
+
+    @FXML
+    protected void onSettingEntered() {
+        settingImageView.setImage(settingHover);
+    }
+
+    @FXML
+    protected void onSettingExited() {
+        settingImageView.setImage(setting);
     }
 
     private void teamBoxView(String teamBox) {
