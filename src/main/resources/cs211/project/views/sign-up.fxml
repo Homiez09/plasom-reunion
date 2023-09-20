@@ -324,14 +324,14 @@
                         <Font name="Agency FB" size="12.0" />
                      </font>
                      <styleClass>
-                        <String fx:value="arrow-button" />
+                        <String fx:value="arrow-upcoming-button" />
                         <String fx:value="arrow-circle-button" />
                      </styleClass>
                   </Button>
                   <Rectangle fx:id="passwordRequireBox" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="120.0" layoutX="-107.0" layoutY="201.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="5.0" styleClass="condition-box" width="418.0" />
                   <Button fx:id="nextButton" layoutX="390.0" layoutY="122.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="52.0" prefWidth="102.0" text="&gt;" textFill="#00000099">
                      <styleClass>
-                        <String fx:value="arrow-button" />
+                        <String fx:value="arrow-upcoming-button" />
                         <String fx:value="arrow-circle-button" />
                      </styleClass>
                   </Button>
