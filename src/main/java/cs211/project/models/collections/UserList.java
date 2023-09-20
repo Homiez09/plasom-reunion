@@ -32,7 +32,7 @@ public class UserList {
 
     public User findUserId(String userId) {
         for (User exist: users) {
-            if (exist.isDisplayName(userId)) {
+            if (exist.isId(userId)) {
                 return exist;
             }
         }
