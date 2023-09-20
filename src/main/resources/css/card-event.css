@@ -1,7 +1,9 @@
 .card-event{
     -fx-background-color:  #F6F4EE;
-    -fx-background-radius: 20px 20px 0px 0px;
+    -fx-background-radius: 20px 20px 20px 20px;
 }
-.card-event-image{
 
+.card-my-event{
+    -fx-background-color:  #F6F4EE;
+    -fx-background-radius: 20px 20px 20px 20px;
 }

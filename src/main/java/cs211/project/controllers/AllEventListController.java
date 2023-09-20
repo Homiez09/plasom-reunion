@@ -1,36 +1,27 @@
 package cs211.project.controllers;
 
-import cs211.project.componentControllers.CardEventController;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
 
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 
-public class EventListController {
+public class AllEventListController {
     @FXML
     AnchorPane navbarAnchorPane;
     @FXML
@@ -40,9 +31,6 @@ public class EventListController {
     private User currentUser = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
-    private LoadCardEventComponent loadCardEventComponent;
-
-    private int currentIndexOfUp = 0;
     @FXML
     private void initialize() {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
@@ -80,6 +68,11 @@ public class EventListController {
     }
 
 
+    private void initCategory(){
+        ComboBox box = new ComboBox();
+        String category[] = {"Art","Education","Food & Drink","Music","Performance","Seminar","Sport"};
+        box.getItems().addAll(category);
+    }
     private void setMainListView(EventList eventList){
         mainListView.getItems().clear();
         int i ;
@@ -156,7 +149,6 @@ public class EventListController {
         setMainListView(eventList);
         searchbarTextField.setText("");
     }
-
 
     public void onCreateClick(ActionEvent actionEvent) {
         try {

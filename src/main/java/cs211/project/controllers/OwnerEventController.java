@@ -23,7 +23,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 
-public class HostEventController {
+public class OwnerEventController {
     @FXML
     private AnchorPane navbarAnchorPane;
     @FXML
@@ -62,13 +62,10 @@ public class HostEventController {
         if(eventList != null){
             ObservableList<Event> hostEventList = FXCollections.observableArrayList();
             for (Event event:eventList.getEvents()) {
-                if (event.getEventHostName().equals(currentUser.getUsername())){
+                if (event.getEventHostUser().equals(currentUser.getUsername())){
                     hostEventList.add(event);
                 }
             }
-
-            selectColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().selectedProperty());
-
 
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
             startColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateStart"));

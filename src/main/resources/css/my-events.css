@@ -1,0 +1,38 @@
+/* CSS สำหรับ ListView */
+.event-list .list-view{
+    -fx-content-display: center ;
+    -fx-background-color: #F9F6F7CC; /* สีพื้นหลังของ ListView */
+    -fx-border-color: #F9F6F7CC;
+}
+
+/* CSS สำหรับ ListCell (เซลล์รายการ) */
+.event-list .list-cell {
+    -fx-background-color: transparent; /* สีพื้นหลังของเซลล์ */
+    -fx-tile-alignment: right;
+    -fx-text-alignment: right;
+    -fx-padding: 10px 10px 10px 10px; /* ระยะห่างภายในเซลล์ */
+}
+.event-list .list-view:selected{
+
+}
+
+
+/* CSS สำหรับเมื่อเลื่อนเมาส์เหนือเซลล์ */
+.event-list .list-cell:hover{
+    -fx-background-color: transparent; /* สีพื้นหลังเมื่อเลื่อนเมาส์เหนือเซลล์ */
+}
+/* CSS สำหรับปิดสกอบาร์*/
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 1;
+}
+
+/* Backgourd*/
+.bg-color-main{
+    -fx-border-color: #FFF4E2;
+    -fx-background-color: #FFF4E2;
+
+}
