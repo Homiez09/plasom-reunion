@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="50.0" prefWidth="785.0" style="-fx-background-color: #F5E7D1;" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBoxListController">
    <children>
-      <Label fx:id="teamNameLabel" layoutX="24.0" layoutY="14.0" prefHeight="22.0" prefWidth="177.0" text="กดกดกกดกดกดกดกดกดกดกดกดก">
+      <Label fx:id="teamNameLabel" layoutX="24.0" layoutY="13.0" prefHeight="22.0" prefWidth="177.0" text="กดกดกกดกดกดกดกดกดกดกดกดก">
          <font>
             <Font size="16.0" />
          </font>
@@ -18,7 +18,7 @@
             <String fx:value="h4" />
          </styleClass>
       </Label>
-      <HBox alignment="CENTER" layoutX="226.0" layoutY="11.0" prefHeight="15.0" prefWidth="118.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="226.0" layoutY="10.0" prefHeight="15.0" prefWidth="118.0" spacing="10.0">
          <children>
             <ImageView fitHeight="28.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
             <Label text="Owner" />
