@@ -196,7 +196,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="secondPage">
+      <AnchorPane fx:id="secondPage" visible="false">
          <children>
             <AnchorPane prefHeight="470.0" prefWidth="470.0" stylesheets="@../../../../css/style.css">
                <children>
