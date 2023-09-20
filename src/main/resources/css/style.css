@@ -528,7 +528,6 @@ Text, Label {
 
 .select-bar-manage-team Label {
     -fx-font-size: 16;
-    -fx-font: Leelawadee;
     -fx-font-weight: 700;
 }
 /* for team page */
