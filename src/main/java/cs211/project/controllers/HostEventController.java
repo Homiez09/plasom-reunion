@@ -62,7 +62,7 @@ public class HostEventController {
         if(eventList != null){
             ObservableList<Event> hostEventList = FXCollections.observableArrayList();
             for (Event event:eventList.getEvents()) {
-                if (event.getEventHost().equals(currentUser.getUsername())){
+                if (event.getEventHostName().equals(currentUser.getUsername())){
                     hostEventList.add(event);
                 }
             }

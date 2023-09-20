@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class CardMyEventController {
     @FXML
-    Label eventnameLabel,startdateLabel,enddateLabel,memberLabel,tagLabel;
+    Label eventNameLabel,startDateLabel,enddateLabel, memberCountLabel,tagLabel;
     @FXML
     ImageView eventImageView;
     @FXML
@@ -81,7 +81,7 @@ public class CardMyEventController {
             hashSet = new HashSet<>();
         }
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (hashSet.contains(currentUser.getUsername())|| currentUser.getUsername().equals(event.getEventHost())){
+        if (hashSet.contains(currentUser.getUsername())|| currentUser.getUsername().equals(event.getEventHostName())){
             try {
                 FXRouter.goTo("event",currentUser,event);
             } catch (IOException e) {
@@ -102,7 +102,7 @@ public class CardMyEventController {
         }
     }
     public void onDeleteLeaveAction(ActionEvent actionEvent) {
-        if (event.getEventHost().equals(currentUser.getUsername())) {
+        if (event.getEventHostName().equals(currentUser.getUsername())) {
             eventList.getEvents().remove(eventList.findEvent(event.getEventID()));
             teamList.getTeams().removeIf(team -> team.getEventID().equals(event.getEventID())); // ลบทีมใน team-list.csv
 
@@ -167,49 +167,27 @@ public class CardMyEventController {
         }else {
             hashSet = new HashSet<>();
         }
+
         buttonVisible(!event.isEnd());
-            //In Event
-        if (hashSet.contains(currentUser.getUsername()) && hashMap.containsKey(event.getEventID())){
-            viewjoinButton.setText("View");
-            leaveButton.setVisible(true);
-        }else {// Join Event
-            viewjoinButton.setText("Join");
-            leaveButton.setVisible(false);
-        }// As Host Event
-        if (event.getEventHost().equals(currentUser.getUsername())){
-            leaveButton.setText("Delete");
-            viewjoinButton.setVisible(true);
-            staffButton.setVisible(true);
-            editButton.setVisible(true);
-        }
-        if (event.isEnd()){
-            viewjoinButton.setVisible(false);
-            leaveButton.setVisible(false);
-            staffButton.setVisible(false);
-            editButton.setVisible(false);
-        }
+
         Image image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
         if(event.getEventImagePath().equals("null")){
             String imgpath = "/images/events/event-default.png";
             image = new Image(getClass().getResourceAsStream(imgpath),200,200,false,false);
         }
         eventImageView.setImage(image);
-        eventnameLabel.setText(event.getEventName());
+        eventNameLabel.setText(event.getEventName());
         // Date
-        startdateLabel.setText(event.getEventDateStart());
-        enddateLabel.setText(event.getEventDateEnd());
+        startDateLabel.setText(event.getEventDateStart());
         if (event.getSlotMember() == -1) {
-            memberLabel.setText(event.getMember()+"");
+            memberCountLabel.setText(event.getMember()+"");
         }else {
-            memberLabel.setText(event.getMember() + "/" + event.getSlotMember());
+            memberCountLabel.setText(event.getMember() + "/" + event.getSlotMember());
         }
-        tagLabel.setText(event.getEventTag());
+
     }
     public void buttonVisible(Boolean is){
-        staffButton.setVisible(is);
-        editButton.setVisible(is);
-        viewjoinButton.setVisible(is);
-        leaveButton.setVisible(is);
+
     }
 
 

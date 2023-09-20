@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Event {
     private final String eventID;
-    private final String eventHost;
+    private final String eventHostName;
     private String eventName;
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
@@ -24,7 +24,7 @@ public class Event {
     private ActivityList activities;
     private TeamList teams;
     public Event(String eventName,
-                 String eventHost,
+                 String eventHostName,
                  String eventImagePath,
                  String eventTag,
                  String eventDateStart,
@@ -33,7 +33,7 @@ public class Event {
                  String eventLocation) {
         this.eventID = generateEventID();
         this.eventName = eventName;
-        this.eventHost = eventHost;
+        this.eventHostName = eventHostName;
         this.eventImagePath = eventImagePath;
         this.eventTag = eventTag;
         this.eventDateStart = eventDateStart;
@@ -48,7 +48,7 @@ public class Event {
     }
 
     public Event(String eventName,
-                 String eventHost,
+                 String eventHostName,
                  String eventImagePath,
                  String eventTag,
                  String eventDateStart,
@@ -57,7 +57,7 @@ public class Event {
                  String eventLocation,
                  int slotMember) {
         this.eventID = generateEventID();
-        this.eventHost = eventHost;
+        this.eventHostName = eventHostName;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
         this.eventTag = eventTag;
@@ -73,7 +73,7 @@ public class Event {
     }
 
     public Event(String eventID,
-                 String eventHost,
+                 String eventHostName,
                  String eventName,
                  String eventImagePath,
                  String eventTag,
@@ -94,7 +94,7 @@ public class Event {
         this.eventLocation = eventLocation;
         this.member = member;
         this.slotMember = slotMember;
-        this.eventHost = eventHost;
+        this.eventHostName = eventHostName;
         this.timestamp =timestamp;
         this.isSelected = new SimpleBooleanProperty(false);
         this.activities = new ActivityList();
@@ -104,7 +104,7 @@ public class Event {
 
 
     public String getEventID() {return eventID;}
-    public String getEventHost() {return eventHost;}
+    public String getEventHostName() {return eventHostName;}
     public String getEventName() {return eventName;}
     public String getEventImagePath() {return eventImagePath;}
     public String getEventTag() {return eventTag;}
@@ -175,7 +175,7 @@ public class Event {
     @Override
     public String toString() {
         return      eventID + ','
-                +   eventHost + ','
+                + eventHostName + ','
                 +   eventName + ','
                 +   eventImagePath + ','
                 +   eventTag + ','

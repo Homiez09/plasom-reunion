@@ -83,10 +83,10 @@ public class EventListController {
     private void setMainListView(EventList eventList){
         mainListView.getItems().clear();
         int i ;
-        for (i = 0 ; i < eventList.getEvents().size(); i+=3 ) {
+        for (i = 0 ; i < eventList.getEvents().size(); i+=4 ) {
             HBox box = new HBox();
             box.setAlignment(Pos.CENTER_LEFT);
-            loadEventList(box, eventList.getEvents().subList(i, Math.min(eventList.getEvents().size(), i + 3)));
+            loadEventList(box, eventList.getEvents().subList(i, Math.min(eventList.getEvents().size(), i + 4)));
             mainListView.getItems().add(box);
 
         }
@@ -98,7 +98,7 @@ public class EventListController {
                 Separator separator = new Separator();
                 separator.setOrientation(Orientation.VERTICAL);
                 separator.setOpacity(0.0);
-                separator.setPrefWidth(34.0);
+                separator.setPrefWidth(28.0);
 
                 AnchorPane anchorPane = new AnchorPane();
                 new LoadCardEventComponent(anchorPane,event,"card-event");
