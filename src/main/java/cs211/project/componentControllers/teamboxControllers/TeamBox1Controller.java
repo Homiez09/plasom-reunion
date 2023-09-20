@@ -7,6 +7,7 @@ import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
 import cs211.project.services.TeamListDataSource;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -167,7 +169,19 @@ public class TeamBox1Controller {
         peopleImageView.setImage(peopleIcon);
         Image manageIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/dot_icon.png"));
         manageTeamImageView.setImage(manageIcon);
+        AnimateImageView(manageTeamImageView);
 
         bookMarkImageView.setImage(unBookMarkIcon);
+    }
+
+    private void AnimateImageView(ImageView imageView) {
+        ScaleTransition hoverImageView = new ScaleTransition(Duration.seconds(0.01), imageView);
+        hoverImageView.setToX(1.2);
+        hoverImageView.setToY(1.2);
+        ScaleTransition defaultImageView = new ScaleTransition(Duration.seconds(0.01), imageView);
+        defaultImageView.setToX(1);
+        defaultImageView.setToY(1);
+        imageView.setOnMouseEntered(event -> {hoverImageView.play();});
+        imageView.setOnMouseExited(event -> {defaultImageView.play();});
     }
 }
