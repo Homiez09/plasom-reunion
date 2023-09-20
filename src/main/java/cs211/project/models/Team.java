@@ -64,14 +64,14 @@ public class Team implements Comparable<Team> {
     public String formatTimestampToString(String timestamp) { // param require team.getStartDate() or team.getEndDate()
         long time = Long.parseLong(timestamp);
         Date date = new Date(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH:mm");
         String formattedDate = sdf.format(date);
         return formattedDate; // if you want for get date and time pattern yyyy-MM-dd.HH:mm:ss (split with .)
     }
 
     private String formatStringToTimestamp(String date) {
         String data[] = date.split("[\\-\\.\\:]");
-        LocalDateTime futureDate = LocalDateTime.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3]), Integer.parseInt(data[4]), Integer.parseInt(data[5])); // Year, Month, Day, Hour, Minute, Second
+        LocalDateTime futureDate = LocalDateTime.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3]), Integer.parseInt(data[4])); // Year, Month, Day, Hour, Minute
         Instant instant = futureDate.toInstant(ZoneOffset.UTC);
         long timestamp = instant.toEpochMilli();
         return String.valueOf(timestamp);
