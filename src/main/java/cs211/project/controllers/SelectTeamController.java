@@ -81,7 +81,6 @@ public class SelectTeamController {
         createTeamAnchorPane.setVisible(true);
         selectTeamAnchorPane.setDisable(false);
         selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
-
     }
 
 
@@ -158,7 +157,6 @@ public class SelectTeamController {
             teamListSort.filterByRole(filter);
         } else {
             teamListSort.filterByAll();
-            System.out.println("filter by all");
         }
 
         for (Team team : teamListSort.getTeams()) {
