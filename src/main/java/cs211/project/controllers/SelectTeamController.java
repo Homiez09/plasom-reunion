@@ -75,7 +75,7 @@ public class SelectTeamController {
 
     @FXML
     private void onCreateTeamButtonClick() {
-        // todo : create team
+        // todo : create team (DELETE CODE BELOW)
         // test create team
         TeamListDataSource datasource = new TeamListDataSource("data", "team-list.csv");
         JoinTeamMap joinTeamMap = new JoinTeamMap();
