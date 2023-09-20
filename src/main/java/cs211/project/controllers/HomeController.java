@@ -166,10 +166,10 @@ public class HomeController {
     private void updateButtonState() {
         // ตรวจสอบสถานะของปุ่ม "Left" และ "Right" แล้วอัปเดต
         newLeftButton.setDisable(currnetIndexOfNew == 1);
-        newRightButton.setDisable(currnetIndexOfNew == eventList.getEvents().size() - 1);
+        newRightButton.setDisable(currnetIndexOfNew == eventList.getEvents().size()-2);
 
         upLeftButton.setDisable(currentIndexOfUp == 1);
-        upRightButton.setDisable(currentIndexOfUp == eventList.getEvents().size() - 1);
+        upRightButton.setDisable(currentIndexOfUp == eventList.getEvents().size()-2);
     }
 
     //-------------Animate Zoom for any AnchorPane-------------\\

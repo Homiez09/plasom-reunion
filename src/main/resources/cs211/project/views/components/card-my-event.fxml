@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventAnchorPane" prefHeight="140.0" prefWidth="952.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventComponentController">
+<AnchorPane fx:id="eventAnchorPane" prefHeight="140.0" prefWidth="952.0" styleClass="event-component" stylesheets="@../../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardMyEventController">
    <children>
       <Pane layoutX="49.0">
          <children>

@@ -14,13 +14,11 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EventComponentController {
+public class CardMyEventController {
     @FXML
     Label eventnameLabel,startdateLabel,enddateLabel,memberLabel,tagLabel;
     @FXML
@@ -157,7 +155,7 @@ public class EventComponentController {
             }
         }
     }
-    public void setEventData(Event event) {
+    public void setEvent(Event event) {
         this.event = event;
 
         hashMap = new HashMap<>();

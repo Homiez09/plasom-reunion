@@ -101,7 +101,7 @@ public class EventListController {
                 separator.setPrefWidth(34.0);
 
                 AnchorPane anchorPane = new AnchorPane();
-                new LoadCardEventComponent(anchorPane,event);
+                new LoadCardEventComponent(anchorPane,event,"card-event");
                 hbox.getChildren().add(separator);
                 hbox.getChildren().add(anchorPane);
 
