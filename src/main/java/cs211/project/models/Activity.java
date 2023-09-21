@@ -10,7 +10,10 @@ public class Activity {
     public Activity(String eventId, String activityName, String activityDescription, String activityStart, String activityEnd) {
         this.eventID =eventId;
         this.name =activityName;
-        this.description = activityDescription;
+        if (activityDescription.charAt(0) == '"' && activityDescription.charAt(activityDescription.length()-1) == '"') {
+            this.description = activityDescription;
+        } else {
+        this.description = "\"" + activityDescription + "\"";}
         this.startTime = activityStart;
         this.endTime = activityEnd;
     }
@@ -59,8 +62,8 @@ public class Activity {
     @Override
     public String toString() {
         return    eventID + ','
-                + name + ",\""
-                + description + "\","
+                + name + ","
+                + description + ","
                 + startTime + ','
                 + endTime ;
     }

@@ -32,7 +32,7 @@ public class EventPageController {
     @FXML
     private AnchorPane navbarAnchorPane,staffApplicationAnchorPane;
     @FXML private StackPane imageStackPane;
-    @FXML private Button editEventButton, joinEventButton;
+    @FXML private Button editEventButton, joinEventButton,editActivityButton;
     @FXML private Text eventInformationText;
     @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel,eventTagLabel,currentParticipantsLabel;
     @FXML private VBox teamApplyBox;
@@ -79,6 +79,13 @@ public class EventPageController {
         }
     }
 
+    @FXML protected void onEditActivityButtonClick() {
+        try {
+            FXRouter.goTo("edit-activity",user,event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void showEventData() {
         String date = event.getEventDateStart()+" - " + event.getEventDateEnd();
         eventNameLabel.setText(event.getEventName());
@@ -128,8 +135,8 @@ public class EventPageController {
             if (event.getEventID().equals(activity.getEventID())) {
                 eventActivityTableView.getItems().add(activity);
             }
-
         }
+        eventActivityTableView.setFixedCellSize(40);
     }
 
     @FXML protected void onApplyStaffButtonClick() {
@@ -187,7 +194,7 @@ public class EventPageController {
         }else {
             set = new HashSet<>();
         }
-        if (set.contains(user.getUserId())|| event.getEventHostUser().getUserId().equals(user.getUserId())){
+        if (user == null || set.contains(user.getUserId())|| event.getEventHostUser().getUserId().equals(user.getUserId())){
             joinEventButton.setVisible(false);
         }else {
             joinEventButton.setVisible(true);
