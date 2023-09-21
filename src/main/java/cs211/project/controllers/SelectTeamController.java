@@ -65,7 +65,7 @@ public class SelectTeamController {
     @FXML
     private void onMyEventClick(){
         try {
-            FXRouter.goTo("host-events", user);
+            FXRouter.goTo("my-events", user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
