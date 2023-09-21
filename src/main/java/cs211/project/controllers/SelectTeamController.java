@@ -29,9 +29,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class SelectTeamController {
-    @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane;
+    @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane, manageTeamAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
-
     @FXML private ImageView settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
@@ -52,6 +51,7 @@ public class SelectTeamController {
 
         initMenu();
         initCreateTeamPage();
+        initManageTeam();
 
         teamBoxView(teamBox);
         manageTeamSelectMenuGraphic(1);
@@ -153,6 +153,18 @@ public class SelectTeamController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void initManageTeam() {
+        FXMLLoader manageTeamAnchorPaneLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/manage-team/manage-team.fxml"));
+        try {
+            AnchorPane manageTeamAnchorPaneComponent = manageTeamAnchorPaneLoader.load();
+            manageTeamAnchorPane.getChildren().add(manageTeamAnchorPaneComponent);
+            manageTeamAnchorPane.setVisible(false);
+            selectTeamAnchorPane.setDisable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void teamBoxView(String teamBox) {
@@ -271,6 +283,11 @@ public class SelectTeamController {
         filterMenuComboBox.getSelectionModel().clearSelection();
     }
 
+    public void showManageTeam() {
+        this.manageTeamAnchorPane.setVisible(true);
+        this.selectTeamAnchorPane.setDisable(false);
+    }
+
     private void showBlock(String select) {
         switch (select) {
             case "Manage Teams":
@@ -290,7 +307,7 @@ public class SelectTeamController {
     }
 
     private void loadTeamBoxComponent(Team team, int col, int row) {
-        FXMLLoader teamBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box-list.fxml"));
+        FXMLLoader teamBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/manage-teams/team-box-list.fxml"));
         AnchorPane teamBoxComponent;
         if (team != null) {
             try {
