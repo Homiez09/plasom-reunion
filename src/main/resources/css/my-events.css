@@ -1,25 +1,28 @@
 .set-Display{
     -fx-content-display: center;
 }
-
 /* CSS สำหรับ ListView */
-.event-list .list-view{
-    -fx-content-display: center ;
-    -fx-background-color: #F9F6F7CC; /* สีพื้นหลังของ ListView */
-    -fx-border-color: #F9F6F7CC;
+.event-list .list-view {
+    -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลังของ ListView */
+    -fx-border-color: transparent;
 }
 
 /* CSS สำหรับ ListCell (เซลล์รายการ) */
 .event-list .list-cell {
     -fx-background-color: transparent; /* สีพื้นหลังของเซลล์ */
-    -fx-tile-alignment: right;
-    -fx-text-alignment: right;
     -fx-padding: 10px 10px 10px 10px; /* ระยะห่างภายในเซลล์ */
 }
+
+/* CSS สำหรับเมื่อเลือกเซลล์ */
 .event-list .list-cell:selected {
-     -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลัง */
-     -fx-text-fill: black; /* กำหนดสีข้อความ */
- }
+    -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลังเมื่อเลือก */
+    -fx-text-fill: #000000; /* กำหนดสีข้อความ */
+}
+.event-list .list-cell:focused {
+    -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลังเมื่อเลือก */
+    -fx-text-fill: #000000; /* กำหนดสีข้อความ */
+}
+
 
 
 

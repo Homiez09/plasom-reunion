@@ -187,7 +187,7 @@ public class EventPageController {
         }else {
             set = new HashSet<>();
         }
-        if (set.contains(user.getUserId())){
+        if (set.contains(user.getUserId())|| event.getEventHostUser().getUserId().equals(user.getUserId())){
             joinEventButton.setVisible(false);
         }else {
             joinEventButton.setVisible(true);

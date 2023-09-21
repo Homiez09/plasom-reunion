@@ -72,6 +72,7 @@ public class MyEventsController {
 
     public void  setMainListView(EventList eventList){
         mainListView.getItems().clear();
+        mainListView.getStyleClass().add("event-list");
 
         if (eventList != null){
             for (Event event:eventList.getEvents()){
@@ -231,7 +232,6 @@ public class MyEventsController {
                         hashSet = new HashSet<>();
                     }
                     if (hashSet.contains(currentUser.getUserId()) && !event.isEnd()){
-                        System.out.println(event.getEventID());
                         filterlist.addEvent(event);
                     }
 

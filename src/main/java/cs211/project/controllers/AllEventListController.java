@@ -77,6 +77,7 @@ public class AllEventListController {
 
     private void setMainListView(EventList eventList){
         mainListView.getItems().clear();
+        mainListView.getStyleClass().add("event-list");
 
         for (int i = 0 ; i < eventList.getEvents().size(); i+=4 ) {
             HBox box = new HBox();
