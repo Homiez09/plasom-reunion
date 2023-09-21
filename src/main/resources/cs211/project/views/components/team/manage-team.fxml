@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="manageTeamsAnchorPane" prefHeight="542.0" prefWidth="913.0" style="-fx-background-color: #F6F4EE;" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamController">
+   <children>
+      <Label fx:id="backLabel" layoutX="32.0" layoutY="27.0" lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="24.0" prefWidth="111.0" text="&lt; back" textFill="#413b3b">
+         <font>
+            <Font name="FreesiaUPC" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="spacing1" />
+            <String fx:value="font" />
+            <String fx:value="next-page" />
+            <String fx:value="next-page-bar" />
+            <String fx:value="next-page-shadow" />
+            <String fx:value="text-xl" />
+         </styleClass>
+      </Label>
+      <Line endX="705.0" endY="0.5" fill="#403a3a" layoutX="140.0" layoutY="108.0" startX="-74.8" startY="0.5" stroke="#403a3a" strokeWidth="2.0" />
+      <AnchorPane layoutX="66.0" layoutY="109.0" prefHeight="399.0" prefWidth="782.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="12.0" prefHeight="24.0" prefWidth="758.0">
+               <children>
+                  <Label layoutX="126.0" styleClass="text-base" text="Name" />
+                  <Label layoutX="340.0" styleClass="text-base" text="Membership" />
+                  <Label layoutX="569.0" styleClass="text-base" text="Status" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <ScrollPane layoutX="60.0" layoutY="161.0" prefHeight="360.0" prefWidth="786.0">
+         <content>
+            <AnchorPane prefHeight="402.0" prefWidth="771.0" style="-fx-background-color: #F6F4EE;">
+               <children>
+                  <GridPane fx:id="memberContainer" prefHeight="66.0" prefWidth="98.0">
+                     <columnConstraints>
+                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+         <styleClass>
+            <String fx:value="selected-team-background" />
+            <String fx:value="scroll-bar" />
+            <String fx:value="scroll-pane" />
+         </styleClass>
+      </ScrollPane>
+      <AnchorPane layoutX="66.0" layoutY="60.0" prefHeight="48.0" prefWidth="185.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="12.0" text="Members">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-lg" />
+                  <String fx:value="weight-bold" />
+               </styleClass>
+            </Label>
+            <Line fx:id="selectMenu111" endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-70.0" layoutY="-58.0" startX="272.0" startY="104.0" stroke="#ff9900" strokeWidth="3.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="270.0" layoutY="60.0" prefHeight="48.0" prefWidth="185.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="12.0" text="Pending Invites">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-lg" />
+                  <String fx:value="weight-bold" />
+               </styleClass>
+            </Label>
+            <Line fx:id="selectMenu1111" endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-69.0" layoutY="-58.0" startX="272.0" startY="104.0" stroke="#ff9900" strokeWidth="3.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="476.0" layoutY="60.0" prefHeight="48.0" prefWidth="185.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="12.0" text="Pending Invites">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-lg" />
+                  <String fx:value="weight-bold" />
+               </styleClass>
+            </Label>
+            <Line fx:id="selectMenu11111" endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-70.0" layoutY="-58.0" startX="272.0" startY="104.0" stroke="#ff9900" strokeWidth="3.0" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="teamID" text="teamID" />
+   </children>
+</AnchorPane>

@@ -131,13 +131,9 @@ public class TeamBox1Controller {
     protected void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
-                FXMLLoader selectTeamLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/select-team.fxml"));
-                Parent root = (Parent) selectTeamLoader.load();
-                SelectTeamController selectTeamController = (SelectTeamController) selectTeamLoader.getController();
-                // todo : write code here
+                // todo : manage team
                 break;
             case "Delete Team":
-                leaveTeam();
                 deleteTeam();
                 break;
             case "Leave Team":
@@ -148,6 +144,7 @@ public class TeamBox1Controller {
         FXRouter.goTo("select-team", user, event);
     }
     private void deleteTeam(){
+        leaveTeam();
         TeamListDataSource dataSource = new TeamListDataSource("data","team-list.csv");
         TeamList teamList = dataSource.readData();
         teamList.removeTeam(teamIdLabel.getText());

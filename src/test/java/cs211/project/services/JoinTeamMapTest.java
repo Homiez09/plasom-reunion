@@ -3,6 +3,7 @@ package cs211.project.services;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
+import cs211.project.models.collections.UserList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,6 +20,20 @@ class JoinTeamMapTest {
             System.out.println(key);
             for (Team team: hashMap.get(key).getTeams()) {
                 System.out.println(team.getTeamName());
+            }
+        }
+    }
+
+    @Test
+    void roleReadData() {
+        JoinTeamMap joinTeamMap = new JoinTeamMap();
+        HashMap<String, UserList> hashMap = joinTeamMap.roleReadData();
+
+        for (String key: hashMap.keySet()) {
+            System.out.println(key);
+            for (User user: hashMap.get(key).getUsers()) {
+                System.out.println(user.getUsername());
+                System.out.println(user.getRole());
             }
         }
     }

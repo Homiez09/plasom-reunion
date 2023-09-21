@@ -210,25 +210,21 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                 String role = data[2].trim();
                 boolean isBookmarked = Boolean.parseBoolean(data[3]);
 
-
-                if (hashMap.containsKey(username)) {
-                    UserList userList = hashMap.get(username);
-                    User user = userHashMap.get(teamID);
+                if (hashMap.containsKey(teamID)) {
+                    UserList userList = hashMap.get(teamID);
+                    User user = userHashMap.get(username);
                     user.setRole(role);
                     user.setBookmarked(isBookmarked);
-                    user.setTeamJoined(teamID);
                     userList.addUser(user);
                     hashMap.put(teamID, userList);
                 } else {
                     UserList userList = new UserList();
-                    User user = userHashMap.get(teamID);
+                    User user = userHashMap.get(username);
                     user.setRole(role);
                     user.setBookmarked(isBookmarked);
-                    user.setTeamJoined(teamID);
                     userList.addUser(user);
                     hashMap.put(teamID, userList);
                 }
-
 
             }
         } catch (IOException e) {

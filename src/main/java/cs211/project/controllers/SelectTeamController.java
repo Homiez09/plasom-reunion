@@ -160,7 +160,7 @@ public class SelectTeamController {
         try {
             AnchorPane manageTeamAnchorPaneComponent = manageTeamAnchorPaneLoader.load();
             manageTeamAnchorPane.getChildren().add(manageTeamAnchorPaneComponent);
-            manageTeamAnchorPane.setVisible(false);
+            manageTeamAnchorPane.setVisible(true);
             selectTeamAnchorPane.setDisable(false);
         } catch (IOException e) {
             throw new RuntimeException(e);

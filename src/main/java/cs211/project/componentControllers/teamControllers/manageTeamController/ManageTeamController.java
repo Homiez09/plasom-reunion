@@ -1,5 +1,6 @@
 package cs211.project.componentControllers.teamControllers.manageTeamController;
 
+import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
@@ -19,8 +20,8 @@ import java.util.HashMap;
 
 public class ManageTeamController {
     private User user = (User) FXRouter.getData();
-
-    GridPane memberContainer;
+    private Event event = (Event) FXRouter.getData2();
+    @FXML private GridPane memberContainer;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, UserList> userListHashMap;
     UserList userList;
@@ -34,7 +35,7 @@ public class ManageTeamController {
         userListHashMap = joinTeamMap.roleReadData();
         userList = userListHashMap.get(user.getTeamJoined());
         for (int i = 0; i < userList.getUsers().size(); i++) {
-
+            System.out.println(i);
             loadManageTeamComponent(userList.getUsers().get(i), 0, i);
         }
 
@@ -75,4 +76,6 @@ public class ManageTeamController {
 
         memberContainer.add(manageTeamComponent, col, row);
     }
+
+    @FXML private void onBackClick() {}
 }
