@@ -62,14 +62,14 @@
       </VBox>
       <HBox alignment="CENTER">
          <children>
-            <ListView fx:id="mainListView" cache="true" cacheHint="SPEED" fixedCellSize="300.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="580.0" prefWidth="1032.0" stylesheets="@../../../css/my-events.css" HBox.hgrow="NEVER">
+            <ListView fx:id="mainListView" cache="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="580.0" prefWidth="1032.0" stylesheets="@../../../css/my-events.css" HBox.hgrow="NEVER">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <styleClass>
-                  <String fx:value="scroll-bar" />
-                  <String fx:value="event-list" />
                   <String fx:value="bg-color-main" />
+                  <String fx:value="scroll-bar-List" />
+                  <String fx:value="event-list" />
                </styleClass></ListView>
          </children>
       </HBox>

@@ -39,7 +39,7 @@ public class AllEventListController {
 
 
 
-//        setMainListView(eventList);
+        setMainListView(eventList);
 
         ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getEvents());
         // สร้าง EventList ใหม่
@@ -62,8 +62,7 @@ public class AllEventListController {
                 }
             }
 
-            // เรียกใช้เมธอดที่คุณต้องการในกรณีที่ EventList มีการเปลี่ยนแปลง
-//            setMainListView(filteredEventList);
+            setMainListView(filteredEventList);
         });
     }
 
@@ -75,6 +74,7 @@ public class AllEventListController {
     }
     private void setMainListView(EventList eventList){
         mainListView.getItems().clear();
+        mainListView.setSelectionModel(null);
         int i ;
         for (i = 0 ; i < eventList.getEvents().size(); i+=4 ) {
             HBox box = new HBox();

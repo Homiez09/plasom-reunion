@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -72,10 +74,21 @@
             <Separator opacity="0.0" prefHeight="3.0" prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="565.0" prefWidth="1152.0">
                <children>
-                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="562.0" prefWidth="1052.0" vbarPolicy="ALWAYS" />
+                  <ListView fx:id="mainListView" cache="true" cacheHint="SPEED" prefHeight="562.0" prefWidth="1100.0" stylesheets="@../../../css/my-events.css" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                     <styleClass>
+                        <String fx:value="scroll-bar-List" />
+                        <String fx:value="event-list" />
+                        <String fx:value="bg-color-main" />
+                     </styleClass></ListView>
                </children>
             </HBox>
-            <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="200.0" />
          </children>
       </VBox>
    </children>

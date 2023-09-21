@@ -67,7 +67,7 @@ public class MyEventsController {
 
     public void  setMainListView(EventList eventList){
         mainListView.getItems().clear();
-
+        mainListView.setSelectionModel(null);
         if (eventList != null){
             for (Event event:eventList.getEvents()){
                     AnchorPane anchorPane = new AnchorPane();

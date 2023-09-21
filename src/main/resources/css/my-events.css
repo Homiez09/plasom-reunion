@@ -12,9 +12,6 @@
     -fx-text-alignment: right;
     -fx-padding: 10px 10px 10px 10px; /* ระยะห่างภายในเซลล์ */
 }
-.event-list .list-view:selected{
-
-}
 
 
 /* CSS สำหรับเมื่อเลื่อนเมาส์เหนือเซลล์ */
@@ -22,12 +19,17 @@
     -fx-background-color: transparent; /* สีพื้นหลังเมื่อเลื่อนเมาส์เหนือเซลล์ */
 }
 /* CSS สำหรับปิดสกอบาร์*/
-.list-view .scroll-bar:vertical,
-.list-view .scroll-bar:horizontal {
+.scroll-bar-hide .scroll-bar:vertical,
+.scroll-bar-hide .scroll-bar:horizontal {
     -fx-opacity: 0;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-padding: 1;
+    -fx-padding: 0;
+}
+.scroll-bar-List .scroll-bar:vertical,
+.scroll-bar-List .scroll-bar:horizontal{
+    -fx-background-color: #F6F4EE;
+    -fx-border-color: #F6F4EE;
 }
 
 /* Backgourd*/
