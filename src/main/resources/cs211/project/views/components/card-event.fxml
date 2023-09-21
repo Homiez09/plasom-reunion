@@ -41,7 +41,7 @@
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="6.0" />
-                  <ImageView fx:id="userImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <viewport>
                         <Rectangle2D height="30.0" width="30.0" />
                      </viewport>

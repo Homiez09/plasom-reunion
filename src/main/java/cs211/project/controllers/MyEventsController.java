@@ -3,20 +3,18 @@ package cs211.project.controllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
+import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
 
 import java.io.IOException;
@@ -33,14 +31,15 @@ public class MyEventsController {
     @FXML
     ListView mainListView;
     @FXML
-    Button upcomingButton,completeButton, onOwnerButton,memberButton,staffButton;
+    Button upcomingButton,completeButton,ownerButton,memberButton,staffButton;
     @FXML
     ChoiceBox sortChoiceBox;
     @FXML
     ImageView sortIamgeView;
+    @FXML
+    Separator popupTest;
     private boolean ascending = true;
     private User currentUser = (User) FXRouter.getData();
-    ;
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
     private EventList showlist;
@@ -54,20 +53,25 @@ public class MyEventsController {
 
     @FXML
     public void initialize() {
+        // กำหนดโหมดการเลือกเป็น MULTIPLE เพื่อป้องกันการเลือก
+        mainListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // กำหนดค่าคุณสมบัติ selectionModel เป็น null เพื่อป้องกันการเลือก
+        mainListView.setSelectionModel(null);
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         this.eventDatasource = new EventListDataSource("data","event-list.csv");
         this.eventList = eventDatasource.readData();
 
 
         observableEventList = FXCollections.observableArrayList(eventList.getEvents());
-
+        mainListView.setPlaceholder(new Label("No Events"));
         setMainListView(filterEvent(eventList,"Member"));
     }
 
 
     public void  setMainListView(EventList eventList){
         mainListView.getItems().clear();
-        mainListView.setSelectionModel(null);
+
         if (eventList != null){
             for (Event event:eventList.getEvents()){
                     AnchorPane anchorPane = new AnchorPane();
@@ -79,42 +83,6 @@ public class MyEventsController {
 
     }
 
-//    public void showList(EventList eventList) {
-//
-//        myeventsListView.getItems().clear();
-//        historyeventListView.getItems().clear();
-//
-
-//
-//
-//
-//        if(eventList != null){
-//            for (Event event : observableEventList) {
-//                if (hashMap.containsKey(event.getEventID())) {
-//                    hashSet = hashMap.get(event.getEventID());
-//                }
-//                try {
-//                    FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/card-my-event.fxml"));
-//                    AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
-//                    EventComponentController eventComponent = eventComponentLoader.getController();
-//                    eventComponent.setEventData(event);
-//
-//                    if (hashSet.contains(currentUser.getUsername()) && hashMap.containsKey(event.getEventID()) ) {
-//                        if (!event.isEnd()){
-//                            myeventsListView.getItems().add(eventAnchorPaneComponent);
-//                            onAnimateComponent(eventAnchorPaneComponent);
-//                        }else {
-//                            historyeventListView.getItems().add(eventAnchorPaneComponent);
-//                            onAnimateComponent(eventAnchorPaneComponent);
-//                        }
-//                    }
-//
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//    }
     public void onBackAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("home",currentUser);
@@ -122,6 +90,7 @@ public class MyEventsController {
             throw new RuntimeException(e);
         }
     }
+
     public void onCreateAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("create-event",currentUser);
@@ -234,6 +203,32 @@ public class MyEventsController {
     }
 
     public void onManageEventButton(ActionEvent actionEvent) {
+        Popup popup = new Popup();
+        VBox popupContent = new VBox();
+        popupContent.setStyle("-fx-background-color: #F6F4EE;");
+        // กำหนดปุ่มปิดป๊อปอัพ
+
+
+
+        // แสดงรายการและปุ่มปิดในป๊อปอัพ
+        VBox box = new VBox();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/owner-events.fxml"));
+            VBox loaded = loader.load();
+            OwnerEventController ownerEventController = loader.getController();
+            ownerEventController.setDataPopup(popup);
+            ownerEventController.setDataUser(currentUser);
+            box.getChildren().setAll(loaded);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        popupContent.getChildren().add(box);
+
+        // กำหนดเนื้อหาในป๊อปอัพ
+        popup.getContent().addAll(popupContent);
+
+        // กำหนดตำแหน่งและแสดงป๊อปอัพ
+        popup.show(navbarAnchorPane.getScene().getWindow());
     }
 
     private EventList filterEvent(EventList eventList,String type){

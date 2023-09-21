@@ -106,7 +106,7 @@
                   <HBox alignment="CENTER_LEFT">
                      <children>
                         <Separator opacity="0.0" orientation="VERTICAL" />
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="profileImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         <Separator opacity="0.0" orientation="VERTICAL" />
                         <VBox>
                            <children>
@@ -138,7 +138,7 @@
                            </font>
                         </Button>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="20.0" />
-                        <Button fx:id="manageEventButton" mnemonicParsing="false" onAction="#onManageEventButton" text="manage event">
+                        <Button fx:id="manageEventButton" mnemonicParsing="false" onAction="#onManageEventButton" text="manage user">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

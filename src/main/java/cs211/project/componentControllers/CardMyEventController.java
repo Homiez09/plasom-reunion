@@ -21,7 +21,7 @@ public class CardMyEventController {
     @FXML
     Label eventNameLabel,startDateLabel,locationLabel, memberCountLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
     @FXML
-    ImageView eventImageView;
+    ImageView eventImageView,profileImageView;
     @FXML
     AnchorPane eventAnchorPane;
     @FXML
@@ -130,6 +130,11 @@ public class CardMyEventController {
         eventNameLabel.setText(event.getEventName());
         startDateLabel.setText(event.getEventDateStart());
         locationLabel.setText(event.getEventLocation());
+
+        ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());
+        profileImageView.setImage(new Image(pathFormat.toString(), 30, 30, false, false));
+        new CreateProfileCircle(profileImageView, 32);
+
         hostUserNameLabel.setText(event.getEventHostUser().getUsername());
         hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
         String descrip = event.getEventDescription().replaceAll("\n", " ");
