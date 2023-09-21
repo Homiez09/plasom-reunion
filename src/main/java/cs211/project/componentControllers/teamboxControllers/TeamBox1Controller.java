@@ -1,5 +1,7 @@
 package cs211.project.componentControllers.teamboxControllers;
 
+import cs211.project.componentControllers.AvatarProfileController;
+import cs211.project.controllers.SelectTeamController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -9,6 +11,8 @@ import cs211.project.services.JoinTeamMap;
 import cs211.project.services.TeamListDataSource;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -127,7 +131,10 @@ public class TeamBox1Controller {
     protected void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
-                //todo : go to  manage team page
+                FXMLLoader selectTeamLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/select-team.fxml"));
+                Parent root = (Parent) selectTeamLoader.load();
+                SelectTeamController selectTeamController = (SelectTeamController) selectTeamLoader.getController();
+                // todo : write code here
                 break;
             case "Delete Team":
                 leaveTeam();
