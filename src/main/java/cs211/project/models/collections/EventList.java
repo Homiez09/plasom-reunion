@@ -1,30 +1,33 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.Event;
+import cs211.project.models.Team;
 import cs211.project.models.User;
-import cs211.project.services.Datasource;
-import javafx.event.EventType;
+import cs211.project.services.*;
 
 import java.util.*;
 
 public class EventList {
     private ArrayList<Event> events;
-    private Datasource<EventList> datasource;
-    private EventList eventList;
+    private JoinEventMap eventMapData;
+    private HashMap<String,Set<String>> eventHashMap;
+    private Set<String> eventSet;
+    private Datasource<TeamList> teamListDatasource;
+    private TeamList teamList;
     public EventList() {
         events = new ArrayList<>();
     }
-    public void addEvent(String eventName, User eventHost, String eventImagePath, String eventTag, String eventDateStart, String eventDateEnd,
-                         String eventDescription, String eventLocation) {
+    public void createEvent(String eventName, User eventHost, String eventImagePath, String eventTag, String eventDateStart, String eventDateEnd,
+                            String eventDescription, String eventLocation) {
         eventName = eventName.trim();
         if (!eventName.equals("") && eventHost != null){
             events.add(new Event(eventName,eventHost,eventImagePath,eventTag,
                                 eventDateStart,eventDateEnd,eventDescription,eventLocation));
         }
     }
-    public void addEvent(String eventName, User eventHost, String eventImagePath,
-                         String eventTag, String eventDateStart, String eventDateEnd,
-                         String eventDescription, String eventLocation, int slotMember) {
+    public void createEvent(String eventName, User eventHost, String eventImagePath,
+                            String eventTag, String eventDateStart, String eventDateEnd,
+                            String eventDescription, String eventLocation, int slotMember) {
         eventName = eventName.trim();
 
         if (!eventName.equals("") && eventHost != null) {
@@ -57,7 +60,31 @@ public class EventList {
         }
         return null;
     }
+    public void setTeamData(String eventID){
+        teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        teamList = teamListDatasource.readData();
 
+        TeamList temp = new TeamList();
+        for (Team team:teamList.getTeams()) {
+            if (team.getEventID().equals(eventID)){
+                temp.addTeam(team);
+            }
+        }
+        findEvent(eventID).setTeamList(temp);
+    }
+    public void setMemberData(){
+        this.eventMapData = new JoinEventMap();
+        this.eventHashMap = eventMapData.readData();
+        eventSet = new HashSet<>();
+
+        for (Event event:events) {
+            if (eventHashMap.containsKey(event.getEventID())){
+                eventSet = eventHashMap.get(event.getEventID());
+                event.setMember(eventSet.size());
+            }
+
+        }
+    }
 
     public int getSizeTotalEvent(){return events.size();}
     public int getSizeCompletedEvent(){
@@ -73,6 +100,76 @@ public class EventList {
     public ArrayList<Event> getEvents() {
         return events;
     }
+    public EventList suffleEvent(EventList eventList){
+        EventList list = new EventList();
+        Collections.shuffle(events);
+        list.getEvents().addAll(eventList.getEvents());
+
+        return list;
+    }
+
+    public EventList sortNewEvent(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getTimestamp);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+
+    public EventList sortUpcoming(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventDateStart);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+
+    public EventList sortByName(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventName);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+    public EventList sortById(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventID);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+    public EventList sortByMember(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getMember);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+    public EventList sortByTag(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+    public EventList getOwner(EventList eventList,User user){
+        EventList list = new EventList();
+        if (user!=null) {
+            for (Event event : eventList.events) {
+                if (event.getEventHostUser().getUserId().equals(user.getUserId())) {
+                    list.addEvent(event);
+                }
+            }
+        }
+        return list;
+    }
+
 
 
 

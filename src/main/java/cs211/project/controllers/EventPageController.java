@@ -4,10 +4,9 @@ import cs211.project.models.Event;
 import cs211.project.models.Activity;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
-import cs211.project.services.ActivityListDataSource;
-import cs211.project.services.Datasource;
-import cs211.project.services.FXRouter;
-import cs211.project.services.LoadNavbarComponent;
+import cs211.project.models.collections.EventList;
+import cs211.project.services.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -24,41 +23,47 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EventPageController {
     Event event = (Event) FXRouter.getData2();
     @FXML
     private AnchorPane navbarAnchorPane,staffApplicationAnchorPane;
     @FXML private StackPane imageStackPane;
-    @FXML private Button editEventButton;
+    @FXML private Button editEventButton, joinEventButton;
     @FXML private Text eventInformationText;
-    @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel;
+    @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel,eventTagLabel,currentParticipantsLabel;
     @FXML private VBox teamApplyBox;
     @FXML private ImageView eventImageView;
-    private Datasource<ActivityList> eventActivityDatasource;
-    private ActivityList activityList;
     @FXML private TableView<Activity> eventActivityTableView;
+    private Datasource<ActivityList> eventActivityDatasource;
+    private Datasource<EventList> eventDatasource;
+    private EventList eventList;
+    private ActivityList activityList;
+
     private Image image;
+    private HashMap<String , Set<String>> hashMap;
+    private JoinEventMap joinEventMap;
+    private Set<String> set;
+    private User user = (User) FXRouter.getData();
+
     @FXML private void initialize() {
         this.eventActivityDatasource = new ActivityListDataSource("data","activity-list.csv");
         this.activityList = eventActivityDatasource.readData();
+        this.eventDatasource = new EventListDataSource();
+        this.eventList = eventDatasource.readData();
+        this.joinEventMap = new JoinEventMap();
+        this.hashMap = joinEventMap.readData();
 
         new LoadNavbarComponent(user, navbarAnchorPane);
+        initButton();
         showEventData();
         staffApplicationAnchorPane.setVisible(false);
-        if (user != null && user.getUserId().equals(event.getEventHostUser())) {
-            editEventButton.setVisible(true);
-        } else {
-            editEventButton.setVisible(false);
-        }
-        if (event.getTeams() != null) {
-            teamApplyBox.setVisible(true);
-        } else {
-            teamApplyBox.setVisible(false);
-        }
+
     }
 
-    private User user = (User) FXRouter.getData();
     @FXML protected void onEditButtonClick() {
         try {
             FXRouter.goTo("create-event", user,event);
@@ -81,11 +86,16 @@ public class EventPageController {
         eventLocationLabel.setText(event.getEventLocation());
         eventInformationText.setText(event.getEventDescription());
         eventInformationText.setWrappingWidth(568);
-        image = new Image(getClass().getResource("/images/events/event-default.png").toString());
-        try {
-            image = new Image("file:"+event.getEventImagePath(),true);
-        }catch (Exception e){
-            e.printStackTrace();
+        eventTagLabel.setText(event.getEventTag());
+        if (event.getSlotMember() == -1) {
+            currentParticipantsLabel.setText(event.getMember()+"");
+        }else {
+            currentParticipantsLabel.setText(event.getMember() + "/" + event.getSlotMember());
+        }
+        Image image = new Image("file:" + event.getEventImagePath(), 300, 350, false, false);
+        if (event.getEventImagePath().equals("null")) {
+            String imgpath = "/images/events/event-default.png";
+            image = new Image(getClass().getResourceAsStream(imgpath), 300, 350, false, false);
         }
         eventImageView.setImage(image);
         eventImageView.setFitWidth(300);
@@ -132,6 +142,60 @@ public class EventPageController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    public void onJoinEventAcition(ActionEvent actionEvent) {
+
+
+        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+        if (hashMap.containsKey(event.getEventID())) {
+            set = hashMap.get(event.getEventID());
+        }else {
+            set = new HashSet<>();
+        }
+        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+        if (set.contains(user.getUserId()) || user.getUserId().equals(event.getEventHostUser().getUserId())){
+            try {
+                FXRouter.goTo("event",user,event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            eventList.findEvent(event.getEventID()).addMember();
+            set.add(user.getUserId());
+            hashMap.put(event.getEventID(), set);
+
+            eventDatasource.writeData(eventList);
+            joinEventMap.writeData(hashMap);
+            try {
+                FXRouter.goTo("my-events", user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void initButton(){
+        if (user != null && user.getUserId().equals(event.getEventHostUser().getUserId())) {
+            editEventButton.setVisible(true);
+        } else {
+            editEventButton.setVisible(false);
+        }
+        if (hashMap.containsKey(event.getEventID())) {
+            set = hashMap.get(event.getEventID());
+        }else {
+            set = new HashSet<>();
+        }
+        if (set.contains(user.getUserId())|| event.getEventHostUser().getUserId().equals(user.getUserId())){
+            joinEventButton.setVisible(false);
+        }else {
+            joinEventButton.setVisible(true);
+        }
+        if (event.getTeamList() != null) {
+            teamApplyBox.setVisible(true);
+        } else {
+            teamApplyBox.setVisible(false);
         }
     }
 }

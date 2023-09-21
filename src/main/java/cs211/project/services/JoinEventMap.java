@@ -5,16 +5,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class JoinEventMap implements Datasource<HashMap<String,Set<String>>>{
-    private String directoryName;
-    private String fileName;
-    private Set<String> eventSet;
+    private String directoryName = "data";
+    private String fileName = "join-event.csv";
+    private Set<String> set;
     private HashMap<String,Set<String>> hashMap;
-
-    public JoinEventMap(String directoryName, String fileName) {
-        this.directoryName = directoryName;
-        this.fileName = fileName;
+    public JoinEventMap(){
         checkFileIsExisted();
     }
+
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -34,7 +32,7 @@ public class JoinEventMap implements Datasource<HashMap<String,Set<String>>>{
     @Override
     public HashMap<String, Set<String>> readData() {
         hashMap = new HashMap<>();
-        eventSet = new HashSet<>();
+        set = new HashSet<>();
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -66,11 +64,14 @@ public class JoinEventMap implements Datasource<HashMap<String,Set<String>>>{
                     String event = data[0].trim();
 
                     if (!hashMap.containsKey(event)) {
-                        eventSet = new HashSet<>();
+                        set = new HashSet<>();
+                    }else {
+                        set = hashMap.get(event);
                     }
-                    eventSet.add(data[1].trim());
 
-                    hashMap.put(event ,eventSet);
+                    set.add(data[1].trim());
+
+                    hashMap.put(event , set);
 
             }
         } catch (IOException e) {

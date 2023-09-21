@@ -89,15 +89,10 @@
                                                 <Font name="Leelawadee" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="participantLimitLabel" text="participantLimitLabel">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
                                        </children>
                                     </HBox>
                                     <Label fx:id="eventTagLabel" text="eventTagLabel" />
-                                    <Button mnemonicParsing="false" styleClass="page-button" text="Add to Calendar" />
+                                    <Button fx:id="joinEventButton" mnemonicParsing="false" onAction="#onJoinEventAcition" styleClass="page-button" text="Add to Calendar" />
                                     <VBox fx:id="teamApplyBox" alignment="CENTER" prefWidth="200.0" spacing="10.0" styleClass="staff-apply-box">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This event is open for staff application!">

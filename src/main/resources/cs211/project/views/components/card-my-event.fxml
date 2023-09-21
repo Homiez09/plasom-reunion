@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventAnchorPane" cache="true" styleClass="card-my-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardMyEventController">
+<AnchorPane fx:id="eventAnchorPane" cache="true" onMouseClicked="#onClickCard" styleClass="card-my-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardMyEventController">
    <opaqueInsets>
       <Insets bottom="5.0" top="5.0" />
    </opaqueInsets>
@@ -30,7 +30,7 @@
                   <Insets />
                </HBox.margin>
                <children>
-                  <ImageView fx:id="eventImageView" depthTest="DISABLE" fitHeight="240.0" fitWidth="230.0" pickOnBounds="true">
+                  <ImageView fx:id="eventImageView" cache="true" cacheHint="QUALITY" depthTest="DISABLE" fitHeight="240.0" fitWidth="230.0" pickOnBounds="true">
                      <viewport>
                         <Rectangle2D height="240.0" width="230.0" />
                      </viewport>
@@ -106,7 +106,7 @@
                   <HBox alignment="CENTER_LEFT">
                      <children>
                         <Separator opacity="0.0" orientation="VERTICAL" />
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="profileImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         <Separator opacity="0.0" orientation="VERTICAL" />
                         <VBox>
                            <children>
@@ -124,7 +124,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="249.0" />
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="232.0" />
                         <Button fx:id="forStaffButton" mnemonicParsing="false" onAction="#onForStaffButton" text="staff">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -137,8 +137,8 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="20.0" />
-                        <Button fx:id="manageEventButton" mnemonicParsing="false" onAction="#onManageEventButton" text="manage event">
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="28.0" />
+                        <Button fx:id="manageEventButton" mnemonicParsing="false" onAction="#onManageEventButton" text="manage user">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -147,7 +147,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="20.0" />
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="28.0" />
                         <Button fx:id="leaveEventButton" mnemonicParsing="false" onAction="#onLeaveEventButton" text="leave event">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">

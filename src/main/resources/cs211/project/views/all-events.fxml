@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" styleClass="bg-color-main" stylesheets="@../../../css/my-events.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.AllEventListController">
+<VBox alignment="CENTER" stylesheets="@../../../css/my-events.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.AllEventListController">
    <children>
       <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0">
 
@@ -62,7 +62,7 @@
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="25.0" />
                   <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="430.0" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="120.0" />
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="sortImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/hostevent/sort.png" />
                      </image>
@@ -82,8 +82,9 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                      <styleClass>
-                        <String fx:value="scroll-bar" />
+                        <String fx:value="scroll-bar-List" />
                         <String fx:value="event-list" />
+                        <String fx:value="list-cell" />
                         <String fx:value="bg-color-main" />
                      </styleClass></ListView>
                </children>
@@ -92,4 +93,8 @@
          </children>
       </VBox>
    </children>
+   <styleClass>
+      <String fx:value="bg-color-main" />
+      <String fx:value="set-Display" />
+   </styleClass>
 </VBox>

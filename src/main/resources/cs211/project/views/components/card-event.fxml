@@ -3,13 +3,14 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane cache="true" styleClass="card-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardEventController">
+<AnchorPane cache="true" onMouseClicked="#onClickCard" styleClass="card-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardEventController">
    <children>
       <VBox alignment="CENTER">
          <children>
@@ -17,7 +18,7 @@
             <HBox alignment="CENTER">
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
-                  <ImageView fx:id="eventImage" fitHeight="260.0" fitWidth="210.0" pickOnBounds="true">
+                  <ImageView fx:id="eventImage" cache="true" cacheHint="QUALITY" fitHeight="250.0" fitWidth="220.0" pickOnBounds="true">
                      <viewport>
                         <Rectangle2D height="260.0" width="210.0" />
                      </viewport>
@@ -25,7 +26,6 @@
                   <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
                </children>
             </HBox>
-            <Separator opacity="0.0" prefHeight="5.0" />
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
@@ -39,19 +39,32 @@
             <Separator opacity="0.0" prefHeight="5.0" />
             <HBox alignment="CENTER_LEFT">
                <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
-                  <ImageView fx:id="userImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="3.0" />
+                  <ImageView fx:id="profileImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <viewport>
                         <Rectangle2D height="30.0" width="30.0" />
                      </viewport>
                   </ImageView>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
-                  <VBox>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="3.0" />
+                  <VBox prefHeight="34.0" prefWidth="103.0">
                      <children>
-                        <Label fx:id="hostUsernameLabel" prefHeight="20.0" prefWidth="175.0" text="\@mingmmie" />
-                        <Label fx:id="hostNameLabel" prefHeight="20.0" prefWidth="175.0" text="PINKPPANTHER" />
+                        <Label fx:id="hostUsernameLabel" text="\@mingmmie" />
+                        <Label fx:id="hostNameLabel" text="PINKPPANTHER" />
                      </children>
                   </VBox>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="3.0" />
+                  <Label fx:id="memberCountLabel" text="10/15">
+                     <graphic>
+                        <ImageView fx:id="calendaImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/events/user-group.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
             <Separator opacity="0.0" prefHeight="5.0" />

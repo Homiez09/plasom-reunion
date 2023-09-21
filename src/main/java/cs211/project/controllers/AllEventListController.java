@@ -15,10 +15,6 @@ import javafx.scene.layout.HBox;
 
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Comparator;
 import java.util.List;
 
 public class AllEventListController {
@@ -34,12 +30,12 @@ public class AllEventListController {
     @FXML
     private void initialize() {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
-        this.eventListDatasource = new EventListDataSource("data", "event-list.csv");
+        this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
 
 
 
-        setMainListView(eventList);
+        setMainListView(eventList.suffleEvent(eventList));
 
         ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getEvents());
         // สร้าง EventList ใหม่
@@ -62,7 +58,6 @@ public class AllEventListController {
                 }
             }
 
-            // เรียกใช้เมธอดที่คุณต้องการในกรณีที่ EventList มีการเปลี่ยนแปลง
             setMainListView(filteredEventList);
         });
     }
@@ -73,10 +68,18 @@ public class AllEventListController {
         String category[] = {"Art","Education","Food & Drink","Music","Performance","Seminar","Sport"};
         box.getItems().addAll(category);
     }
+
+    private void initSort(){
+        ComboBox box = new ComboBox();
+        String sort[] = {"Name","Start","Member","End"};
+        box.getItems().addAll(sort);
+    }
+
     private void setMainListView(EventList eventList){
         mainListView.getItems().clear();
-        int i ;
-        for (i = 0 ; i < eventList.getEvents().size(); i+=4 ) {
+        mainListView.getStyleClass().add("event-list");
+
+        for (int i = 0 ; i < eventList.getEvents().size(); i+=4 ) {
             HBox box = new HBox();
             box.setAlignment(Pos.CENTER_LEFT);
             loadEventList(box, eventList.getEvents().subList(i, Math.min(eventList.getEvents().size(), i + 4)));
@@ -91,7 +94,7 @@ public class AllEventListController {
                 Separator separator = new Separator();
                 separator.setOrientation(Orientation.VERTICAL);
                 separator.setOpacity(0.0);
-                separator.setPrefWidth(28.0);
+                separator.setPrefWidth(24.0);
 
                 AnchorPane anchorPane = new AnchorPane();
                 new LoadCardEventComponent(anchorPane,event,"card-event");
@@ -106,46 +109,22 @@ public class AllEventListController {
 
     //fliter
     public void onAllClick(ActionEvent actionEvent) {
-        setMainListView(eventListDatasource.readData());
+        eventList = eventList.suffleEvent(eventList);
+
+        setMainListView(eventList);
         searchbarTextField.setText("");
     }
 
     public void onNewClick(ActionEvent actionEvent) {
-        Comparator<Event> comparator = Comparator.comparing(Event::getTimestamp);
-        eventList.getEvents().sort(comparator);
+        eventList = eventList.sortNewEvent(eventList);
+
         setMainListView(eventList);
         searchbarTextField.setText("");
     }
 
     public void onUpClick(ActionEvent actionEvent) {
-        Comparator<Event> comparator = (event1, event2) -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        eventList = eventList.sortUpcoming(eventList);
 
-            // แปลงสตริงวันที่และเวลาเป็น LocalDateTime
-            LocalDateTime eventDate1 = LocalDateTime.parse(event1.getEventDateStart(), formatter);
-            LocalDateTime eventDate2 = LocalDateTime.parse(event2.getEventDateStart(), formatter);
-
-            LocalDateTime currentDate = LocalDateTime.now();
-
-            // คำนวณความต่างของวันระหว่างวันปัจจุบันกับวันเริ่มต้นของ Event
-            long daysDifference1 = ChronoUnit.DAYS.between(eventDate1, currentDate);
-            long daysDifference2 = ChronoUnit.DAYS.between(eventDate2, currentDate);
-
-            // ถ้าวันเริ่มต้นมากกว่า 21 วัน ให้ Event 1 อยู่อันดับแรก
-            if (daysDifference1 > 21 && daysDifference2 <= 21) {
-                return -1;
-            }
-            // ถ้าวันเริ่มต้นมากกว่า 21 วัน ให้ Event 2 อยู่อันดับแรก
-            else if (daysDifference1 <= 21 && daysDifference2 > 21) {
-                return 1;
-            }
-            // ในกรณีอื่น ๆ ให้เรียงตามวันเริ่มต้นแบบปกติ
-            else {
-                return eventDate1.compareTo(eventDate2);
-            }
-        };
-
-        eventList.getEvents().sort(comparator);
         setMainListView(eventList);
         searchbarTextField.setText("");
     }
