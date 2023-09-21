@@ -211,7 +211,7 @@ public class Event {
                 +   eventTag + ','
                 +   eventDateStart + ','
                 +   eventDateEnd + ','
-                +   eventDescription + ','
+                +   eventDescription.replaceAll("\n"," ") + ','
                 +   eventLocation + ','
                 +   member + ','
                 +   slotMember +','

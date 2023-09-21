@@ -3,7 +3,6 @@ package cs211.project.models.collections;
 import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.services.Datasource;
-import javafx.event.EventType;
 
 import java.util.*;
 
@@ -14,17 +13,17 @@ public class EventList {
     public EventList() {
         events = new ArrayList<>();
     }
-    public void addEvent(String eventName, User eventHost, String eventImagePath, String eventTag, String eventDateStart, String eventDateEnd,
-                         String eventDescription, String eventLocation) {
+    public void createEvent(String eventName, User eventHost, String eventImagePath, String eventTag, String eventDateStart, String eventDateEnd,
+                            String eventDescription, String eventLocation) {
         eventName = eventName.trim();
         if (!eventName.equals("") && eventHost != null){
             events.add(new Event(eventName,eventHost,eventImagePath,eventTag,
                                 eventDateStart,eventDateEnd,eventDescription,eventLocation));
         }
     }
-    public void addEvent(String eventName, User eventHost, String eventImagePath,
-                         String eventTag, String eventDateStart, String eventDateEnd,
-                         String eventDescription, String eventLocation, int slotMember) {
+    public void createEvent(String eventName, User eventHost, String eventImagePath,
+                            String eventTag, String eventDateStart, String eventDateEnd,
+                            String eventDescription, String eventLocation, int slotMember) {
         eventName = eventName.trim();
 
         if (!eventName.equals("") && eventHost != null) {

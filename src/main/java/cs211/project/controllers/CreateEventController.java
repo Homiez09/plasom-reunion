@@ -134,23 +134,23 @@ public class CreateEventController {
             String eventTag = eventTagChoiceBox.getValue();
             String startDate = formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner);
             String endDate = formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner);
-            String eventDescriptionString = eventDescriptionTextArea.getText().replace("\n","\\n");
+            String eventDescriptionString = eventDescriptionTextArea.getText().replaceAll("\n"," ");
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
             String eventImagePath = newEventImagePath;
+
             if (!numMemberString.equals("")){
+
                 int numMember = Integer.parseInt(numMemberString);
-                thisEvent = new Event(  eventNameString,eventHost,eventImagePath,
-                        eventTag,startDate,endDate,
-                        eventDescriptionString,eventLocationString,numMember);
+                eventList.createEvent(  eventNameString,eventHost,eventImagePath,
+                                        eventTag,startDate,endDate,eventDescriptionString,
+                                        eventLocationString,numMember);
             }else {
-                thisEvent = new Event(  eventNameString,eventHost,eventImagePath,
-                        eventTag,startDate,endDate,
-                        eventDescriptionString,eventLocationString);
+                eventList.createEvent(  eventNameString,eventHost,eventImagePath,
+                                        eventTag,startDate,endDate,
+                                        eventDescriptionString,eventLocationString);
             }
             //add event
-
-            eventList.getEvents().add(thisEvent);
             eventListDatasource.writeData(eventList);
         } else {
             eventList.findEvent(thisEvent.getEventID()).changeName(eventNameTextField.getText());
