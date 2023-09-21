@@ -129,7 +129,7 @@ public class MyEventsController {
     }
 
     public void onUpComingButtonAction(ActionEvent actionEvent) {
-        showlist =  filterEvent(eventList,"Complete");
+        showlist =  filterEvent(eventList,"Upcoming");
         setMainListView(showlist);
 
 
