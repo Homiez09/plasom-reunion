@@ -1,6 +1,7 @@
 package cs211.project.services;
 
 import cs211.project.componentControllers.CardEventController;
+import cs211.project.componentControllers.CardMyEventController;
 import cs211.project.models.Event;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
@@ -10,18 +11,35 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class LoadCardEventComponent {
-    public LoadCardEventComponent(AnchorPane anchorPane, Event event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/card-event.fxml"));
-            AnchorPane loaded = loader.load();
-            CardEventController cardEventController = loader.getController();
-            cardEventController.setEvent(event);
+    public LoadCardEventComponent(AnchorPane anchorPane, Event event,String card){
+        switch (card){
+            case "card-event":
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/card-event.fxml"));
+                    AnchorPane loaded = loader.load();
+                    CardEventController cardload = loader.getController();
+                    cardload.setEvent(event);
 
-            anchorPane.getChildren().setAll(loaded);
-            AnimateComponent(loaded);
+                    anchorPane.getChildren().setAll(loaded);
+                    AnimateComponent(loaded);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "card-my-event":
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/card-my-event.fxml"));
+                    AnchorPane loaded = loader.load();
+                    CardMyEventController cardload = loader.getController();
+                    cardload.setEvent(event);
+
+                    anchorPane.getChildren().setAll(loaded);
+                    AnimateComponent(loaded);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
         }
     }
 

@@ -1,18 +1,16 @@
 package cs211.project.services;
 
-import cs211.project.models.*;
-import cs211.project.models.collections.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class UserEventMap implements Datasource<HashMap<String,Set<String>>>{
+public class JoinEventMap implements Datasource<HashMap<String,Set<String>>>{
     private String directoryName;
     private String fileName;
     private Set<String> eventSet;
     private HashMap<String,Set<String>> hashMap;
 
-    public UserEventMap(String directoryName, String fileName) {
+    public JoinEventMap(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -67,7 +65,7 @@ public class UserEventMap implements Datasource<HashMap<String,Set<String>>>{
                     String[] data = line.split(",");
                     String event = data[0].trim();
 
-                    if (!hashMap.containsKey(data[0].trim())) {
+                    if (!hashMap.containsKey(event)) {
                         eventSet = new HashSet<>();
                     }
                     eventSet.add(data[1].trim());

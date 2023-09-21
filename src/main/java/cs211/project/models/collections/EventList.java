@@ -1,7 +1,9 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.Event;
+import cs211.project.models.User;
 import cs211.project.services.Datasource;
+import javafx.event.EventType;
 
 import java.util.*;
 
@@ -12,21 +14,20 @@ public class EventList {
     public EventList() {
         events = new ArrayList<>();
     }
-    public void addEvent(String eventName, String eventHost, String eventImagePath,String eventTag, String eventDateStart, String eventDateEnd,
+    public void addEvent(String eventName, User eventHost, String eventImagePath, String eventTag, String eventDateStart, String eventDateEnd,
                          String eventDescription, String eventLocation) {
         eventName = eventName.trim();
-        eventHost = eventHost.trim();
-        if (!eventName.equals("") && !eventHost.equals("")){
+        if (!eventName.equals("") && eventHost != null){
             events.add(new Event(eventName,eventHost,eventImagePath,eventTag,
                                 eventDateStart,eventDateEnd,eventDescription,eventLocation));
         }
     }
-    public void addEvent(String eventName, String eventHost, String eventImagePath,
+    public void addEvent(String eventName, User eventHost, String eventImagePath,
                          String eventTag, String eventDateStart, String eventDateEnd,
                          String eventDescription, String eventLocation, int slotMember) {
         eventName = eventName.trim();
-        eventHost = eventHost.trim();
-        if (!eventName.equals("")&& !eventHost.equals("")) {
+
+        if (!eventName.equals("") && eventHost != null) {
             events.add(new Event(   eventName,eventHost, eventImagePath,eventTag, eventDateStart, eventDateEnd,
                                     eventDescription,eventLocation,slotMember));
         }
@@ -34,17 +35,17 @@ public class EventList {
     public void addEvent(Event event) {
         events.add(event);
     }
-    public void addEvent(String eventId, String eventHost, String eventName, String imagePath,
+    public void addEvent(String eventId, User eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
-                         int member, int slotMember,String timeStamp) {
+                         int member, int slotMember,String timeStamp,boolean joinEvent,boolean joinTeam) {
         eventId = eventId.trim();
         eventName = eventName.trim();
-        eventHost = eventHost.trim();
+
         Event exist = findEvent(eventId);
-        if (exist == null &&!eventName.equals("") && !eventHost.equals("")){
+        if (exist == null &&!eventName.equals("") && eventHost != null){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
-                                    eventLocation,member,slotMember,timeStamp));
+                                    eventLocation,member,slotMember,timeStamp,joinEvent,joinTeam));
         }
     }
 
@@ -56,6 +57,8 @@ public class EventList {
         }
         return null;
     }
+
+
     public int getSizeTotalEvent(){return events.size();}
     public int getSizeCompletedEvent(){
         int count = 0;

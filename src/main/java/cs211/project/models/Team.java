@@ -2,54 +2,79 @@ package cs211.project.models;
 
 import cs211.project.models.collections.UserList;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Instant;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class Team implements Comparable<Team> {
-    private String teamID, teamName, teamDescription, teamImagePath, createdAt, eventID;
+    private String teamID, teamName, teamDescription, createdAt, eventID, startDate, endDate;
     private int maxSlotTeamMember;
     private boolean isBookmarked;
     private UserList memberList;
     private String role;
 
-    public Team (String eventID, String teamName, int maxSlotTeamMember) {
+    public Team (String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
         this.teamName = teamName;
         this.teamDescription = "";
-        this.teamImagePath = "";
+        this.startDate = formatStringToTimestamp(startDate);
+        this.endDate = formatStringToTimestamp(endDate);
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss:SSS"));
         this.eventID = eventID;
         this.isBookmarked = false;
     }
 
-    public Team (String eventID, String teamName, int maxSlotTeamMember, String teamDescription) {
-        this(eventID, teamName, maxSlotTeamMember);
+    public Team (String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription) {
+        this(eventID, teamName, startDate, endDate, maxSlotTeamMember);
         this.teamDescription = teamDescription;
     }
 
-    public Team (String eventID, String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath) {
-        this(eventID, teamName, maxSlotTeamMember, teamDescription);
-        this.teamImagePath = teamImagePath;
-    }
 
-    public Team (String eventID, String teamName, int maxSlotTeamMember, String teamDescription, String teamImagePath, UserList memberList) {
-        this(eventID, teamName, maxSlotTeamMember, teamDescription, teamImagePath);
+    public Team (String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription, UserList memberList) {
+        this(eventID, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
         this.memberList = memberList;
     }
 
-    public Team (String teamID, String teamName, String teamDescription, String teamImagePath, int maxSlotTeamMember, String createdAt, String eventID) {
+    public Team (String teamID, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID) {
         // this constructor is used when loading from database
         this.teamID = teamID;
         this.teamName = teamName;
         this.teamDescription = teamDescription;
-        this.teamImagePath = teamImagePath;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = createdAt;
         this.eventID = eventID;
+    }
+
+    public void AddMemberToTeam(/* todo: param require */) {
+        // todo: add member to team
+    }
+
+    // go to test file to see how to use this method
+    public String formatTimestampToString(String timestamp) { // param require team.getStartDate() or team.getEndDate()
+        long time = Long.parseLong(timestamp);
+        Date date = new Date(time);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH:mm");
+        String formattedDate = sdf.format(date);
+        return formattedDate; // if you want for get date and time pattern yyyy-MM-dd.HH:mm:ss (split with .)
+    }
+
+    private String formatStringToTimestamp(String date) {
+        String data[] = date.split("[\\-\\.\\:]");
+        LocalDateTime futureDate = LocalDateTime.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3]), Integer.parseInt(data[4])); // Year, Month, Day, Hour, Minute
+        Instant instant = futureDate.toInstant(ZoneOffset.UTC);
+        long timestamp = instant.toEpochMilli();
+        return String.valueOf(timestamp);
     }
 
     private String generateTeamID() {
@@ -91,10 +116,6 @@ public class Team implements Comparable<Team> {
         return teamDescription;
     }
 
-    public String getTeamImagePath() {
-        return teamImagePath;
-    }
-
     public int getMaxSlotTeamMember() {
         return maxSlotTeamMember;
     }
@@ -109,9 +130,26 @@ public class Team implements Comparable<Team> {
 
     public String getRole() { return role; }
 
+    public String getEventID() {
+        return eventID;
+    }
+
+    public String getStartDate() { // return timestamp (millisecond)
+        return startDate;
+    }
+
+    public String getEndDate() { // return timestamp (millisecond)
+        return endDate;
+    }
+
     public boolean isBookmarked() {
         return isBookmarked;
     }
+
+    public boolean isName(String teamName) {
+        return this.teamName.equals(teamName);
+    }
+
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
@@ -119,10 +157,6 @@ public class Team implements Comparable<Team> {
 
     public void setTeamDescription(String teamDescription) {
         this.teamDescription = teamDescription;
-    }
-
-    public void setTeamImagePath(String teamImagePath) {
-        this.teamImagePath = teamImagePath;
     }
 
     public void setMaxSlotTeamMember(int maxSlotTeamMember) {
@@ -137,32 +171,13 @@ public class Team implements Comparable<Team> {
         this.isBookmarked = bookmarked;
     }
 
-    public void AddMemberToTeam(/* todo: param require */) {
-        // todo: add member to team
+    public void setStartDate(String startDate) { // format : yyyy-MM-dd.HH:mm:ss
+        this.startDate = formatStringToTimestamp(startDate);
     }
 
-    public boolean isName(String teamName) {
-        return this.teamName.equals(teamName);
-    }
-
-    public String generateRandomText(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
-
-        Random random = new Random();
-
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-
-        return randomText.toString();
-    }
-
-    public String getEventID() {
-        return eventID;
-    }
+   public void setEndDate(String endDate) { // format : yyyy-MM-dd.HH:mm:ss
+        this.endDate = formatStringToTimestamp(endDate);
+   }
 
     @Override
     public int compareTo(Team team) {
@@ -176,7 +191,8 @@ public class Team implements Comparable<Team> {
         return teamID + ","
                 + teamName + ","
                 + teamDescription + ","
-                + teamImagePath + ","
+                + startDate + ","
+                + endDate + ","
                 + maxSlotTeamMember + ","
                 + createdAt + ","
                 + eventID;
