@@ -23,9 +23,14 @@ public class ActivityList {
         }
     }
 
-    public Activity findActivity(String eventId){
+    public void removeActivity(Activity activity) {
+        if (activity != null) {
+            activities.remove(activity);
+        }
+    }
+    public Activity findActivity(String eventId,String name){
         for (Activity activity:activities) {
-            if (activity.getEventID().equals(eventId)){
+            if (activity.getEventID().equals(eventId) && activity.getName().equals(name)){
                 return activity;
             }
         }

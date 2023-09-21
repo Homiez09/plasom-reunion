@@ -30,7 +30,7 @@ public class EventPageController {
     @FXML
     private AnchorPane navbarAnchorPane,staffApplicationAnchorPane;
     @FXML private StackPane imageStackPane;
-    @FXML private Button editEventButton;
+    @FXML private Button editEventButton,editActivityButton;
     @FXML private Text eventInformationText;
     @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel;
     @FXML private VBox teamApplyBox;
@@ -48,8 +48,10 @@ public class EventPageController {
         staffApplicationAnchorPane.setVisible(false);
         if (user != null && user.getUserId().equals(event.getEventHost())) {
             editEventButton.setVisible(true);
+            editEventButton.setVisible(true);
         } else {
             editEventButton.setVisible(false);
+            editActivityButton.setVisible(true);
         }
         if (event.getTeams() != null) {
             teamApplyBox.setVisible(true);
@@ -74,6 +76,13 @@ public class EventPageController {
         }
     }
 
+    @FXML protected void onEditActivityButtonClick() {
+        try {
+            FXRouter.goTo("edit-activity",user,event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void showEventData() {
         String date = event.getEventDateStart()+" - " + event.getEventDateEnd();
         eventNameLabel.setText(event.getEventName());
@@ -118,8 +127,8 @@ public class EventPageController {
             if (event.getEventID().equals(activity.getEventID())) {
                 eventActivityTableView.getItems().add(activity);
             }
-
         }
+        eventActivityTableView.setFixedCellSize(40);
     }
 
     @FXML protected void onApplyStaffButtonClick() {
