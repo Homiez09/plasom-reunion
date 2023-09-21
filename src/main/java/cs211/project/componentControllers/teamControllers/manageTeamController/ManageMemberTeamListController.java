@@ -22,6 +22,7 @@ public class ManageMemberTeamListController {
 
     @FXML private ImageView roleImageView, statusImageView, menuImageView;
     @FXML private Label nameLabel, roleLabel, statusLabel, menuLabel;
+    @FXML private ComboBox menuComboBox;
     protected Image roleIcon, statusIcon, menuIcon;
 
     JoinTeamMap joinTeamMap = new JoinTeamMap();
