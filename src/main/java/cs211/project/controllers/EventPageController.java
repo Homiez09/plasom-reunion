@@ -145,6 +145,8 @@ public class EventPageController {
             FXMLLoader staffApplicationLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/member-application.fxml"));
             try {
                 AnchorPane staffApplicationWindow = staffApplicationLoader.load();
+                MemberApplicationController memberApplicationController = staffApplicationLoader.getController();
+                memberApplicationController.loadData(event);
                 staffApplicationAnchorPane.getChildren().add(staffApplicationWindow);
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -8,6 +8,9 @@
 .outer-bottom-tab{
  -fx-background-color:  #FF971D;
 }
+.top-banner{
+-fx-background-color: linear-gradient(to right,#FF971D, #F9F6F7);
+}
 /*event tile*/
 .tile-bg{
 -fx-border-radius: 20px;
