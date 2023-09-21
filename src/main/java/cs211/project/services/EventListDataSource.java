@@ -7,12 +7,12 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class EventListDataSource implements Datasource<EventList> {
-    private String directoryName;
-    private String fileName;
+    private String directoryName = "data";
+    private String fileName = "event-list.csv";
     private Datasource<UserList> userListDatasource;
     private EventList eventList;
     private UserList userList;
-    public EventListDataSource(String directoryName, String fileName) {
+    public EventListDataSource() {
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -89,7 +89,8 @@ public class EventListDataSource implements Datasource<EventList> {
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
                                         eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam);
-
+                eventList.setMemberData();
+                eventList.setTeamData(eventId);
 
                 // เพิ่มข้อมูลลงใน list
             }

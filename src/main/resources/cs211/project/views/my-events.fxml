@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="768.0" prefWidth="1152.0" styleClass="bg-color-main" stylesheets="@../../../css/my-events.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.MyEventsController">
+<VBox alignment="TOP_CENTER" prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/my-events.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.MyEventsController">
    <children>
       <AnchorPane fx:id="navbarAnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" prefWidth="1152.0" />
       <Separator opacity="0.0" prefHeight="10.0" prefWidth="200.0" />
@@ -30,7 +30,7 @@
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="53.0" prefWidth="670.0" />
                   <HBox fx:id="manageEventButton" alignment="CENTER_LEFT">
                      <children>
-                        <Button fx:id="manageEventButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onManageEventButton" styleClass="cancel-profile-button" text="Manage Event" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onManageEventButton" styleClass="cancel-profile-button" text="Manage Event" />
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="15.0" />
                         <Button fx:id="createAction" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create Event" />
                      </children>
@@ -70,8 +70,13 @@
                   <String fx:value="bg-color-main" />
                   <String fx:value="scroll-bar-List" />
                   <String fx:value="event-list" />
+                  <String fx:value="list-cell" />
                </styleClass></ListView>
          </children>
       </HBox>
    </children>
+   <styleClass>
+      <String fx:value="bg-color-main" />
+      <String fx:value="set-Display" />
+   </styleClass>
 </VBox>

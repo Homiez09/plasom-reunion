@@ -1,3 +1,7 @@
+.set-Display{
+    -fx-content-display: center;
+}
+
 /* CSS สำหรับ ListView */
 .event-list .list-view{
     -fx-content-display: center ;
@@ -12,6 +16,11 @@
     -fx-text-alignment: right;
     -fx-padding: 10px 10px 10px 10px; /* ระยะห่างภายในเซลล์ */
 }
+.event-list .list-cell:selected {
+     -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลัง */
+     -fx-text-fill: black; /* กำหนดสีข้อความ */
+ }
+
 
 
 /* CSS สำหรับเมื่อเลื่อนเมาส์เหนือเซลล์ */

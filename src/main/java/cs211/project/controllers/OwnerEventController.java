@@ -16,24 +16,26 @@ public class OwnerEventController {
     TableView TableEvent;
     @FXML
     Button backButton;
+    @FXML
     Popup popup;
-    Datasource<EventList> datasource;
-    User currentuser;
-    EventList eventList;
-    Event event;
+    private Datasource<EventList> datasource;
+    private User currentuser;
+    private EventList eventList;
+    private Event event;
 
 
     @FXML
     public void initialize(){
         backButton.setOnAction(e -> popup.hide());
-        this.datasource = new EventListDataSource("data","event-list.csv");
+        this.datasource = new EventListDataSource();
         this.eventList = datasource.readData();
-        showTable(eventList);
+
 
     }
 
     private void showTable(EventList eventList) {
         // กำหนด column
+        TableEvent.setPlaceholder(new Label("No Event"));
 
         TableColumn<Event, String> eventName = new TableColumn<>("Event Name");
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
@@ -63,10 +65,11 @@ public class OwnerEventController {
         // ใส่ข้อมูลทั้งหมดไปแสดงใน TableView
         TableEvent.getItems().addAll(eventList.getEvents());
     }
-    public void setDataPopup(Popup popup) {
-        this.popup = popup;
-    }
-    public void setDataUser(User user){
+    public void setDataPopup(Popup popup,User user) {
         this.currentuser = user;
+        this.popup = popup;
+
+        showTable(eventList.getOwner(eventList,currentuser));
     }
+
 }

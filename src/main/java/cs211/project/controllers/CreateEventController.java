@@ -47,7 +47,7 @@ public class CreateEventController {
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     @FXML  void initialize() {
-        this.eventListDatasource = new EventListDataSource("data","event-list.csv");
+        this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
         setSpinner(eventStartHourSpinner,23);
@@ -126,7 +126,7 @@ public class CreateEventController {
     }
 
     @FXML protected void onSubmitBasicInformationClick() {
-        eventListDatasource = new EventListDataSource("data","event-list.csv");
+        eventListDatasource = new EventListDataSource();
         eventList = eventListDatasource.readData();
         if (thisEvent == null) {
             String eventNameString = eventNameTextField.getText().trim();

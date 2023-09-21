@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,24 +47,24 @@ public class MyEventsController {
     private JoinEventMap mapDatasource ;
     private HashMap<String, Set<String>> hashMap;
     private Set<String> hashSet;
-    private ObservableList<Event> observableEventList;
-
-
-
+    JoinTeamMap joinTeamMap ;
+    TeamListDataSource teamListDataSource ;
+    TeamList teamList;
+    HashMap<String, TeamList> teamListHashMap;
 
     @FXML
     public void initialize() {
-        // กำหนดโหมดการเลือกเป็น MULTIPLE เพื่อป้องกันการเลือก
-        mainListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        // กำหนดค่าคุณสมบัติ selectionModel เป็น null เพื่อป้องกันการเลือก
-        mainListView.setSelectionModel(null);
+
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
-        this.eventDatasource = new EventListDataSource("data","event-list.csv");
+
+        this.eventDatasource = new EventListDataSource();
         this.eventList = eventDatasource.readData();
+        this.teamListDataSource = new TeamListDataSource("data","team-list.csv");
+        this.teamList = teamListDataSource.readData();
+        joinTeamMap = new JoinTeamMap();
+        this.teamListHashMap = joinTeamMap.readData();
 
-
-        observableEventList = FXCollections.observableArrayList(eventList.getEvents());
         mainListView.setPlaceholder(new Label("No Events"));
         setMainListView(filterEvent(eventList,"Member"));
     }
@@ -75,7 +76,14 @@ public class MyEventsController {
         if (eventList != null){
             for (Event event:eventList.getEvents()){
                     AnchorPane anchorPane = new AnchorPane();
+                    Separator separator = new Separator();
                     new LoadCardEventComponent(anchorPane,event,"card-my-event");
+
+                    separator.setOrientation(Orientation.VERTICAL);
+                    separator.setOpacity(0.0);
+                    separator.setPrefWidth(24.0);
+
+                    mainListView.getItems().add(separator);
                     mainListView.getItems().add(anchorPane);
 
             }
@@ -98,39 +106,10 @@ public class MyEventsController {
             throw new RuntimeException(e);
         }
     }
-    public void onHostEventsAction(ActionEvent actionEvent) {
-
-    }
-
-    private void sortAndShowEvents(EventList eventList, Comparator<Event> comparator) {
-        observableEventList.sort(comparator);
-    }
-
-    public void onSortClick(MouseEvent mouseEvent) {
-        sortChoiceBox.setOnAction(event -> {
-            Comparator<Event> dataComparator = getEventComparator(sortChoiceBox.getValue().toString(), ascending);
-            sortAndShowEvents(eventList, dataComparator);
-
-        });
-    }
-
-    private Comparator<Event> getEventComparator(String sortOption, boolean ascending) {
-        Comparator<Event> comparator = null;
-
-
-
-        if (!ascending) {
-            comparator = comparator.reversed();
-        }
-
-        return comparator;
-    }
 
     public void onClickAscenDecen(MouseEvent mouseEvent) {
         // Invert the ascending flag
         ascending = !ascending;
-        Comparator<Event> dataComparator = getEventComparator(sortChoiceBox.getValue().toString(), ascending);
-        sortAndShowEvents(eventList, dataComparator);
 
         // Update the sort icon
         String imgPath = ascending ? "/images/hostevent/sort-ascending.png" : "/images/hostevent/sort-descending.png";
@@ -139,31 +118,11 @@ public class MyEventsController {
     }
 
     private void initSortCheckBox(){
+        ComboBox box = new ComboBox();
         String sortList[] = {"Name","Date","Member","Tag"};
-
-
-
+        box.getItems().addAll(sortList);
     }
-    private Comparator<Event> setSortChoiceBox(String sortOption){
-        Comparator<Event> comparator= null;
-        switch (sortOption) {
-            case "Name":
-                comparator = Comparator.comparing(Event::getEventName);
-                break;
-            case "Date":
-                comparator = Comparator.comparing(Event::getEventDateStart);
-                break;
-            case "Member":
-                comparator = Comparator.comparingInt(Event::getMember);
-                break;
-            case "Tag":
-                comparator = Comparator.comparing(Event::getEventTag);
-                break;
-            default:
-                break;
-        }
-     return comparator;
-    }
+
     private void setSearchBar(){
 
     }
@@ -206,43 +165,40 @@ public class MyEventsController {
         Popup popup = new Popup();
         VBox popupContent = new VBox();
         popupContent.setStyle("-fx-background-color: #F6F4EE;");
-        // กำหนดปุ่มปิดป๊อปอัพ
 
-
-
-        // แสดงรายการและปุ่มปิดในป๊อปอัพ
         VBox box = new VBox();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/owner-events.fxml"));
             VBox loaded = loader.load();
             OwnerEventController ownerEventController = loader.getController();
-            ownerEventController.setDataPopup(popup);
-            ownerEventController.setDataUser(currentUser);
+            ownerEventController.setDataPopup(popup,currentUser);
             box.getChildren().setAll(loaded);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         popupContent.getChildren().add(box);
 
-        // กำหนดเนื้อหาในป๊อปอัพ
         popup.getContent().addAll(popupContent);
 
-        // กำหนดตำแหน่งและแสดงป๊อปอัพ
         popup.show(navbarAnchorPane.getScene().getWindow());
     }
 
     private EventList filterEvent(EventList eventList,String type){
         EventList filterlist = new EventList();
-        this.mapDatasource = new JoinEventMap("data", "join-event.csv");
+        this.mapDatasource = new JoinEventMap();
         this.hashMap = mapDatasource.readData();
+        this.hashSet = new HashSet<>();
 
 
 
         switch (type){
             case "Upcomming":
                 for (Event event:eventList.getEvents()) {
-                    hashSet = hashMap.get(event.getEventID());
-                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
+                    if (hashMap.containsKey(event.getEventID())){
+                        hashSet = hashMap.get(event.getEventID());
+                    }else {
+                        hashSet = new HashSet<>();
+                    }
                     if (event.isUpComming() && hashSet.contains(currentUser.getUserId())){
                         filterlist.addEvent(event);
                     }
@@ -250,39 +206,50 @@ public class MyEventsController {
                 break;
             case "Complete":
                 for (Event event:eventList.getEvents()) {
-                    hashSet = hashMap.get(event.getEventID());
-                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
-                    if (event.isEnd() && hashSet.contains(currentUser.getUserId())){
+                    if (hashMap.containsKey(event.getEventID())){
+                        hashSet = hashMap.get(event.getEventID());
+                    }else {
+                        hashSet = new HashSet<>();
+                    }
+                    if (hashSet.contains(currentUser.getUserId()) && event.isEnd()){
                         filterlist.addEvent(event);
                     }
                 }
                 break;
             case "Owner":
                 for (Event event:eventList.getEvents()) {
-                    if (event.isHostEvent(currentUser.getUserId()) && !event.isEnd()){
+                    if (event.isHostEvent(currentUser.getUserId()) ){
                         filterlist.addEvent(event);
                     }
                 }
                 break;
             case "Member":
                 for (Event event:eventList.getEvents()) {
-                    hashSet = hashMap.get(event.getEventID());
-                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
-                    if (!event.isEnd() && hashSet.contains(currentUser.getUserId())){
+                    if (hashMap.containsKey(event.getEventID())){
+                        hashSet = hashMap.get(event.getEventID());
+                    }else {
+                        hashSet = new HashSet<>();
+                    }
+                    if (hashSet.contains(currentUser.getUserId()) && !event.isEnd()){
+                        System.out.println(event.getEventID());
                         filterlist.addEvent(event);
                     }
+
                 }
                 break;
             case "Staff":
                 for (Event event:eventList.getEvents()) {
                     hashSet = hashMap.get(event.getEventID());
                     if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
-                    if (event.isJoinTeam()){
+                    if (event.isHostEvent(currentUser.getUserId()) && teamListHashMap.containsKey(currentUser.getUsername())){
                         filterlist.addEvent(event);
                     }
                 }
                 break;
+
         }
+
+
         return filterlist;
     }
 
