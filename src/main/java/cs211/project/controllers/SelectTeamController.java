@@ -1,6 +1,7 @@
 package cs211.project.controllers;
 
 import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamController;
+import cs211.project.componentControllers.teamboxControllers.TeamBox1Controller;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -224,6 +225,7 @@ public class SelectTeamController {
 
                 menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
                     if (newValue == null) return;
+                    TeamBox1Controller teamBox1Controller = teamBoxLoader1.getController();
                     if (newValue.equals("Manage Team")) {
                         manageTeamSelectMenuGraphic(1);
 
@@ -234,6 +236,12 @@ public class SelectTeamController {
 
                         initManageTeam();
                         showManageTeam();
+                    }
+
+                    try {
+                        teamBox1Controller.goTo((String) newValue);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 });
 
@@ -252,14 +260,14 @@ public class SelectTeamController {
                     row++;
                 }
 
-                teamBoxComponent.setOnMouseClicked(e -> {
-                    try {
-                        FXRouter.goTo("team", user, event, team); // todo : If you are developer, You don't forget to change routeLabel link to your page and "getData, getData2, getData3" by "User, Event, Team"
-                    // todo : If you have back button link to select-team --> FXRouter.goTO("select-team", user, event)
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
+//                teamBoxComponent.setOnMouseClicked(e -> {
+//                    try {
+//                        FXRouter.goTo("team", user, event, team); // todo : If you are developer, You don't forget to change routeLabel link to your page and "getData, getData2, getData3" by "User, Event, Team"
+//                    // todo : If you have back button link to select-team --> FXRouter.goTO("select-team", user, event)
+//                    } catch (IOException ex) {
+//                        throw new RuntimeException(ex);
+//                    }
+//                });
 
                 GridPane.setMargin(teamBoxComponent,new Insets(18,18,37,33));
 

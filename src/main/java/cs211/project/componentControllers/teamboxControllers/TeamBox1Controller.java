@@ -128,7 +128,7 @@ public class TeamBox1Controller {
         initBookMarkCheck = true;
     }
 
-    protected void goTo(String page) throws IOException {
+    public void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
                 // todo : manage team
