@@ -3,6 +3,7 @@ module cs211.project.cs211661project {
     requires javafx.fxml;
     requires java.desktop;
     requires bcrypt;
+    requires java.sql;
 
 
     opens cs211.project.cs211661project to javafx.fxml;
@@ -22,4 +23,23 @@ module cs211.project.cs211661project {
 
     exports cs211.project.models.collections;
     opens cs211.project.models.collections to javafx.base;
+    exports cs211.project.componentControllers.teamboxControllers;
+    opens cs211.project.componentControllers.teamboxControllers to javafx.fxml;
+
+    exports cs211.project.controllers.team;
+    opens cs211.project.controllers.team to javafx.fxml;
+
+    exports cs211.project.componentControllers.sideBarControllers;
+    opens cs211.project.componentControllers.sideBarControllers to javafx.fxml;
+
+    exports cs211.project.componentControllers.teamControllers.manageTeamsController;
+    opens cs211.project.componentControllers.teamControllers.manageTeamsController to javafx.fxml;
+
+    exports cs211.project.componentControllers.teamControllers.manageTeamController;
+    opens cs211.project.componentControllers.teamControllers.manageTeamController to javafx.fxml;
+
+    exports cs211.project.componentControllers.teamControllers.menu;
+    opens cs211.project.componentControllers.teamControllers.menu to javafx.fxml;
+
+
 }

@@ -1,0 +1,21 @@
+
+
+.table-view{
+    -fx-font-family: Leelawadee;
+}
+.indexed-cell{
+    -fx-text-alignment: Center;
+}
+.table-view.indexed-cell{
+}
+.table-view{
+    -fx-background-color:  #F9F6F7;
+    -fx-border-radius: 9px;
+    -fx-border-color: #F9F6F7;
+    -fx-background-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-tile-alignment: Center;
+    -fx-alignment: Center;
+    -fx-text-alignment: Center;
+
+}

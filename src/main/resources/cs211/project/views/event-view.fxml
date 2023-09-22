@@ -12,13 +12,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventPageController">
    <children>
-      <ScrollPane layoutY="75.0" AnchorPane.topAnchor="75.0">
+      <ScrollPane hbarPolicy="NEVER" layoutY="75.0" AnchorPane.topAnchor="75.0">
          <content>
             <AnchorPane prefHeight="693.0" prefWidth="1152.0" styleClass="bg">
                <children>
@@ -31,12 +32,16 @@
                                     <Font name="Leelawadee" size="12.0" />
                                  </font>
                               </Button>
-                              <ImageView fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0" />
+                              <StackPane fx:id="imageStackPane" layoutX="100.0" layoutY="20.0" prefHeight="350.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <ImageView fx:id="eventImageView" fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </StackPane>
                               <VBox prefHeight="400.0" spacing="25.0" AnchorPane.leftAnchor="500.0">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="30.0">
                                        <children>
-                                          <Label text="eventNameLabel">
+                                          <Label fx:id="eventNameLabel" text="eventNameLabel">
                                              <font>
                                                 <Font name="Leelawadee Bold" size="36.0" />
                                              </font>
@@ -48,7 +53,7 @@
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/event/calendar.png" />
+                                                <Image url="@../../../images/events/calendar.png" />
                                              </image>
                                           </ImageView>
                                           <Label fx:id="eventDateLabel" text="eventDateLabel">
@@ -62,7 +67,7 @@
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/event/pin.png" />
+                                                <Image url="@../../../images/events/pin.png" />
                                              </image>
                                           </ImageView>
                                           <Label fx:id="eventLocationLabel" text="eventLocationLabel">
@@ -76,7 +81,7 @@
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/event/person.png" />
+                                                <Image url="@../../../images/events/person.png" />
                                              </image>
                                           </ImageView>
                                           <Label fx:id="currentParticipantsLabel" text="currentParticipantsLabel">
@@ -84,16 +89,11 @@
                                                 <Font name="Leelawadee" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="participantLimitLabel" text="participantLimitLabel">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
                                        </children>
                                     </HBox>
                                     <Label fx:id="eventTagLabel" text="eventTagLabel" />
-                                    <Button mnemonicParsing="false" styleClass="page-button" text="Add to Calendar" />
-                                    <VBox alignment="CENTER" prefWidth="200.0" spacing="10.0" styleClass="staff-apply-box">
+                                    <Button fx:id="joinEventButton" mnemonicParsing="false" onAction="#onJoinEventAcition" styleClass="page-button" text="Add to Calendar" />
+                                    <VBox fx:id="teamApplyBox" alignment="CENTER" prefWidth="200.0" spacing="10.0" styleClass="staff-apply-box">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This event is open for staff application!">
                                              <font>
@@ -120,27 +120,38 @@
                           <tabs>
                             <Tab text="Event info">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0">
+                                    <VBox>
                                        <children>
-                                          <Label fx:id="eventInformationLabel" layoutX="96.0" layoutY="61.0" text="eventInformationLabel" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
+                                          <Text fx:id="eventInformationText" strokeType="OUTSIDE" strokeWidth="0.0" text="eventInformationText">
                                              <font>
                                                 <Font name="Leelawadee" size="14.0" />
                                              </font>
-                                          </Label>
+                                             <VBox.margin>
+                                                <Insets left="100.0" top="70.0" />
+                                             </VBox.margin>
+                                          </Text>
                                        </children>
-                                    </AnchorPane>
+                                    </VBox>
                               </content>
                             </Tab>
                             <Tab text="Event Schedule">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0">
                                        <children>
-                                          <TableView layoutX="152.0" layoutY="14.0" prefWidth="800.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
-                                            <columns>
-                                              <TableColumn prefWidth="100.0" text="C1" />
-                                              <TableColumn prefWidth="-1.0" text="C2" />
-                                            </columns>
-                                          </TableView>
+                                          <VBox alignment="TOP_RIGHT" layoutX="100.0" layoutY="14.0" spacing="15.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                                             <children>
+                                                <Button fx:id="editActivityButton" mnemonicParsing="false" onAction="#onEditActivityButtonClick" styleClass="page-button" text="Manage activity">
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin></Button>
+                                                <TableView fx:id="eventActivityTableView" prefWidth="952.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="100.0" text="C1" />
+                                                    <TableColumn prefWidth="-1.0" text="C2" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                               </content>

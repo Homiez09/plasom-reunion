@@ -1,3 +1,10 @@
+* {
+    /* variable for css */
+
+    color-primary: #FF9900;
+    color-secondary: #FFE4B8;
+}
+
 Text, Label {
     -fx-font-family: Leelawadee;
 }
@@ -62,7 +69,7 @@ Text, Label {
 
 /* components */
 .Nav {
-    -fx-background-color: #FF9900;
+    -fx-background-color: color-primary;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 2, 0, 0, 0);
 }
 
@@ -92,45 +99,38 @@ Text, Label {
 }
 
 .toggle-menu {
-    -fx-background-radius: 10;
-    -fx-background-color: #F5F3EE;
-}
-
-.toggle-menu > VBox {
-    -fx-border-width: 0.6;
-    -fx-border-style: solid;
-    -fx-border-radius: 10;
-    -fx-border-color: #494949;
-}
-
-.toggle-menu > VBox > .items {
-    -fx-padding: 12 0 12 0;
+    -fx-font-size: 16;
     -fx-background-color: transparent;
-    -fx-border-color: #494949;
+}
+
+.toggle-menu .list-cell {
+    -fx-background-color: transparent;
     -fx-font-family: Leelawadee;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
     -fx-font-size: 19;
-    -fx-font-weight: 700;
-    -fx-border-width: 0 0 0.6 0;
-    -fx-border-style: solid;
-    -fx-text-fill: #413b3b;
+    -fx-text-fill: #666666;
+    -fx-alignment: center;
 }
 
-.toggle-menu > VBox > .items:hover {
-    -fx-background-color: #ffa527;
-    /*-fx-effect: dropshadow(three-pass-box, rgba(238, 148, 16, 0.74), 2, 0, 0, 0);*/
+.toggle-menu .list-cell:hover {
+    -fx-background-color: #FFE4B8;
+    -fx-text-fill: #666666;
 }
 
-.toggle-menu > VBox > HBox {
-    -fx-background-color: #F5F3EE;
-    -fx-background-radius: 0 0 10 10;
+.toggle-menu .list-view {
+    -fx-border-color: linear-gradient(#353535, #494949);
+    -fx-border-width: 0.5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
-.toggle-menu > VBox > .text-primary {
-    -fx-text-fill: #413b3b;
+.toggle-menu .arrow {
+    -fx-background-color: transparent;
 }
 
-.toggle-menu > VBox > .text-danger {
-    -fx-text-fill: #c22f2f;
+.toggle-menu .arrow-button {
+    -fx-font-size: 0;
 }
 
 .top-bar-items {
@@ -141,7 +141,7 @@ Text, Label {
 }
 
 .top-bar-items:hover {
-    -fx-background-color: #FF9900;
+    -fx-background-color: color-primary;
 }
 
 .admin-bg {
@@ -150,10 +150,6 @@ Text, Label {
 
 .admin-body {
     -fx-background-color: #FFF5E5;
-}
-
-.admin-body > TableView {
-    -fx-background-radius: 0 10 10 0;
 }
 
 .admin-sidebar-bg {
@@ -224,11 +220,11 @@ Text, Label {
 
 .box-primary {
     -fx-background-radius: 10;
-    -fx-background-color: linear-gradient(from 0px 0px to 17px 0px, #FF9900 0%, #FF9900 36.84%, #FFFFFF 36.84%, #FFFFFF 100%);
+    -fx-background-color: linear-gradient(from 0px 0px to 17px 0px, color-primary 0%, color-primary 36.84%, #FFFFFF 36.84%, #FFFFFF 100%);
 }
 
 .box-primary > Text{
-    -fx-fill: #FF9900;
+    -fx-fill: color-primary;
     -fx-font-weight: 700;
 }
 
@@ -251,5 +247,85 @@ Text, Label {
 
 ProgressBar {
     -fx-text-box-border: #666666;
-    -fx-accent: #FF9900;
+    -fx-accent: color-primary;
+}
+
+.log-user-table {
+    -fx-cursor: hand;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: transparent;
+    -fx-background-color: #FFF5E5;
+}
+
+.log-user-table .filler {
+    -fx-background-color: transparent;
+}
+
+.log-user-table .column-header{
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: #FFE4B8;
+}
+
+.log-user-table .column-header:empty{
+    -fx-background-color: transparent;
+}
+
+.log-user-table .column-header .label{
+    -fx-alignment: center;
+}
+
+.manage-team-table .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.log-user-table:empty {
+    -fx-background-color: transparent;
+}
+
+.log-user-table .cell{
+    -fx-cell-size: 35;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #666666;
+}
+
+.log-user-table .cell:hover {
+    -fx-background-color: #FFE4B8;
+    -fx-background-radius: 10;
+}
+
+.log-user-table .cell:selected {
+    -fx-background-color: #FFE4B8;
+    -fx-background-radius: 10;
+}
+
+.log-user-table:filled {
+    -fx-background-color: transparent;
+}
+
+.log-user-table .increment-button ,.log-user-table .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 1em;
+
+}
+
+.log-user-table .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.log-user-table .scroll-bar:horizontal .track,
+.log-user-table .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.log-user-table .scroll-bar:horizontal .thumb,
+.log-user-table .scroll-bar:vertical .thumb {
+    -fx-background-color:#FFE4B8;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 10;
+    -fx-border-radius:10;
 }

@@ -2,8 +2,13 @@ package cs211.project.controllers;
 
 import cs211.project.models.User;
 import cs211.project.models.Event;
+import cs211.project.models.collections.EventList;
+import cs211.project.services.Datasource;
+import cs211.project.services.EventListDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 //import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -22,40 +27,42 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
     @FXML private Label headCreateEventLabel;
     @FXML private ChoiceBox<String> eventTagChoiceBox;
-    @FXML private ImageView eventImageView;
-    @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField,
-            teamNameTextField,teamMemberCapTextField,activityNameTextField;
-    @FXML private TextArea eventDescriptionTextArea,activityDescriptionTextArea;
-    @FXML private DatePicker eventStartDatePick,eventEndDatePick,activityStartDatePick,activityEndDatePick;
-    @FXML private TableView<String> createTeamTableView,createActivityTableView;
+    @FXML private ImageView uploadImageView;
+    @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField;
+    @FXML private TextArea eventDescriptionTextArea;
+    @FXML private DatePicker eventStartDatePick,eventEndDatePick;
     @FXML
-    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner,activityStartHourSpinner,activityEndHourSpinner,
-            eventStartMinuteSpinner,eventEndMinuteSpinner,activityStartMinuteSpinner,activityEndMinuteSpinner;
+    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     private Event thisEvent = (Event) FXRouter.getData2();
-    private String newEventImagePath;
-    private User user = (User) FXRouter.getData();
+    private String newEventImagePath = null;
+    private final User user = (User) FXRouter.getData();
+    private Datasource<EventList> eventListDatasource;
+    private EventList eventList;
     @FXML  void initialize() {
+        this.eventListDatasource = new EventListDataSource();
+        this.eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
-
-        setSpinner(eventStartHourSpinner,24);
-        setSpinner(eventEndHourSpinner,24);
+        setSpinner(eventStartHourSpinner,23);
+        setSpinner(eventEndHourSpinner,23);
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
-        setSpinner(activityStartHourSpinner,24);
-        setSpinner(activityEndHourSpinner,24);
-        setSpinner(activityStartMinuteSpinner,59);
-        setSpinner(activityEndMinuteSpinner,59);
 
-        eventTagChoiceBox.getItems().addAll("Art","Music","Sport");
+        eventTagChoiceBox.getItems().addAll("Art","Education","Food & Drink","Music","Performance","Seminar","Sport");
+        CheckDate();
         setPageHeader();
-    }
+        if (thisEvent != null) {
+            showEventDetail(thisEvent);
+        }
 
+    }
     @FXML protected void handleUploadButton(ActionEvent event) {
         FileChooser chooser = new FileChooser();
         // SET FILECHOOSER INITIAL DIRECTORY
@@ -68,7 +75,7 @@ public class CreateEventController {
         if (file != null){
             try {
                 // CREATE FOLDER IF NOT EXIST
-                File destDir = new File("images");
+                File destDir = new File("images/events");
                 if (!destDir.exists()) destDir.mkdirs();
                 // RENAME FILE
                 String[] fileSplit = file.getName().split("\\.");
@@ -80,10 +87,12 @@ public class CreateEventController {
                 // COPY WITH FLAG REPLACE FILE IF FILE IS EXIST
                 Files.copy(file.toPath(), target, StandardCopyOption.REPLACE_EXISTING );
                 // SET NEW FILE PATH TO IMAGE
-                eventImageView.setImage(new Image(target.toUri().toString()));
-                this.newEventImagePath = destDir+"/"+filename;
+                uploadImageView.setImage(new Image(target.toUri().toString()));
+                this.newEventImagePath = destDir.toString().replace("\\", "/") + "/" + filename;
+
+
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException();
             }
         }
     }
@@ -100,11 +109,10 @@ public class CreateEventController {
             headCreateEventLabel.setText("Edit event");
         }
     }
-
     @FXML protected void onBackButtonClick() {
         if (thisEvent == null) {
             try {
-                FXRouter.goTo("event",user);
+                FXRouter.goTo("my-events",user);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -118,43 +126,111 @@ public class CreateEventController {
     }
 
     @FXML protected void onSubmitBasicInformationClick() {
+        eventListDatasource = new EventListDataSource();
+        eventList = eventListDatasource.readData();
         if (thisEvent == null) {
             String eventNameString = eventNameTextField.getText().trim();
-            String startDate = eventStartDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            String endDate = eventEndDatePick.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            String eventDescriptionString = eventDescriptionTextArea.getText();
+            User eventHost = user;
+            String eventTag = eventTagChoiceBox.getValue();
+            String startDate = formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner);
+            String endDate = formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner);
+            String eventDescriptionString = eventDescriptionTextArea.getText().replaceAll("\n"," ");
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
-            int numMember = Integer.parseInt(numMemberString);
+            String eventImagePath = newEventImagePath;
+
+            if (!numMemberString.equals("")){
+
+                int numMember = Integer.parseInt(numMemberString);
+                eventList.createEvent(  eventNameString,eventHost,eventImagePath,
+                                        eventTag,startDate,endDate,eventDescriptionString,
+                                        eventLocationString,numMember);
+            }else {
+                eventList.createEvent(  eventNameString,eventHost,eventImagePath,
+                                        eventTag,startDate,endDate,
+                                        eventDescriptionString,eventLocationString);
+            }
             //add event
-            thisEvent = new Event(eventNameString,newEventImagePath,startDate,endDate,
-                    eventDescriptionString,eventLocationString,numMember);
+            eventListDatasource.writeData(eventList);
+        } else {
+            eventList.findEvent(thisEvent.getEventID()).changeName(eventNameTextField.getText());
+            eventList.findEvent(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText().replace("\n","\\n"));
+            eventList.findEvent(thisEvent.getEventID()).changeSlotMember(Integer.parseInt(eventCapTextField.getText()));
+            eventList.findEvent(thisEvent.getEventID()).changeDateStart(formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
+            eventList.findEvent(thisEvent.getEventID()).changeDateEnd(formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
+            eventList.findEvent(thisEvent.getEventID()).changeTag(eventTagChoiceBox.getValue());
+            if (newEventImagePath != null) {
+                eventList.findEvent(thisEvent.getEventID()).changeEventImagePath(newEventImagePath);
+            }
+            eventListDatasource.writeData(eventList);
+        }
+
+        try {
+            FXRouter.goTo("my-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    @FXML protected void onAddActivityButtonClick() {
-        if (thisEvent == null) {
-            String activityNameString = activityNameTextField.getText().trim();
-            String activityDescriptionString = activityDescriptionTextArea.getText().trim();
-            LocalDate activityStartDate = activityStartDatePick.getValue();
-            LocalDate activityEndDate = activityEndDatePick.getValue();
-            int activityStartHour = activityStartHourSpinner.getValue();
-            int activityEndHour = activityEndHourSpinner.getValue();
-            int activityStartMinute = activityStartMinuteSpinner.getValue();
-            int activityEndMinute = activityEndMinuteSpinner.getValue();
-            LocalDateTime startDateTime = activityStartDate.atTime(activityStartHour,activityStartMinute);
-            LocalDateTime endDateTime = activityEndDate.atTime(activityEndHour,activityEndMinute);
-            // add to activity list
-            thisEvent.getActivities().addActivity(activityNameString,activityDescriptionString,startDateTime,endDateTime);
-        }
+    private void showEventDetail(Event event) {
+        eventNameTextField.setText(event.getEventName());
+        eventLocationTextField.setText(event.getEventLocation());
+        eventTagChoiceBox.setValue(event.getEventTag());
+        eventDescriptionTextArea.setText(event.getEventDescription());
+        eventCapTextField.setText(Integer.toString(event.getSlotMember()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime eventStartDateTime = LocalDateTime.parse(event.getEventDateStart(),formatter);
+        LocalDateTime eventEndDateTime = LocalDateTime.parse(event.getEventDateEnd(),formatter);
+        eventStartDatePick.setValue(eventStartDateTime.toLocalDate());
+        eventStartHourSpinner.getValueFactory().setValue(eventStartDateTime.getHour());
+        eventStartMinuteSpinner.getValueFactory().setValue(eventStartDateTime.getMinute());
+        eventEndDatePick.setValue(eventEndDateTime.toLocalDate());
+        eventEndHourSpinner.getValueFactory().setValue(eventEndDateTime.getHour());
+        eventEndMinuteSpinner.getValueFactory().setValue(eventEndDateTime.getMinute());
+        uploadImageView.setImage(new Image("file:"+event.getEventImagePath(),300,300,true,true));
     }
-    @FXML protected void onAddTeamButtonClick() {
-        if (thisEvent == null) {
-            String teamNameString = teamNameTextField.getText().trim();
-            String teamCapString = teamMemberCapTextField.getText().trim();
-            int numTeamMember = Integer.parseInt(teamCapString);
-            // add to team list
-            //thisEvent.getTeams().addTeam();
-        }
+
+    private String formatTime(DatePicker datePicker,Spinner<Integer> hour,Spinner<Integer> minute){
+        LocalDate DatePick = datePicker.getValue();
+        int Hour = hour.getValue();
+        int Minute = minute.getValue();
+        LocalTime Time = LocalTime.of(Hour, Minute);
+        LocalDateTime DateTime = DatePick.atTime(Time);
+        return DateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+    }
+
+    private void CheckDate() {
+        SettingCheckDate(eventStartDatePick);
+        SettingCheckDate(eventEndDatePick);
+    }
+    private void SettingCheckDate(DatePicker datePicker){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Date Error");
+        alert.setHeaderText("Invalid Date Format");
+        datePicker.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean lostFocus, Boolean onFocus) {
+
+                if(!onFocus && !datePicker.getEditor().getText().isEmpty()){
+                    try {
+                        LocalDate selectedDate = datePicker.getValue();
+                        LocalDate currentDate = LocalDate.now();
+
+                        if (selectedDate.isBefore(currentDate)) {
+                            // ถ้าวันที่ที่ผู้ใช้เลือกน้อยกว่าวันปัจจุบัน
+                            // คุณสามารถทำการแจ้งเตือนหรือทำการแก้ไขค่าใน eventStartDatePick ตามที่คุณต้องการ
+                            alert.showAndWait();
+                            datePicker.setValue(null);
+                            datePicker.getEditor().setText("");
+                        }
+                    } catch (Exception e) {
+                        alert.showAndWait();
+                        datePicker.setValue(null);
+                        datePicker.getEditor().setText("");
+                    }
+                }
+            }
+        });
     }
 }
