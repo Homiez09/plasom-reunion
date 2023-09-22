@@ -47,6 +47,7 @@ public class MyEventsController {
     private JoinEventMap mapDatasource ;
     private HashMap<String, Set<String>> hashMap;
     private Set<String> hashSet;
+    private EventList currentList;
     JoinTeamMap joinTeamMap ;
     TeamListDataSource teamListDataSource ;
     TeamList teamList;
@@ -54,7 +55,7 @@ public class MyEventsController {
 
     @FXML
     public void initialize() {
-
+        initSortCheckBox();
 
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
 
@@ -119,9 +120,9 @@ public class MyEventsController {
     }
 
     private void initSortCheckBox(){
-        ComboBox box = new ComboBox();
         String sortList[] = {"Name","Date","Member","Tag"};
-        box.getItems().addAll(sortList);
+        sortChoiceBox.getItems().addAll(sortList);
+        sortChoiceBox.setValue("Name");
     }
 
     private void setSearchBar(){
@@ -131,6 +132,39 @@ public class MyEventsController {
     public void onUpComingButtonAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Upcoming");
         setMainListView(showlist);
+        sortBox(showlist);
+        this.currentList = showlist;
+
+
+    }
+    public void sortBox(EventList eventList){
+        sortChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, o, option) -> {
+            EventList list = new EventList();
+            if (option != null) {
+                String selectedOption = option.toString();
+                switch (selectedOption) {
+                    case "Name":
+                        list = eventList.sortByName(eventList);
+                        setMainListView(list);
+                        break;
+                    case "Date":
+                        list = eventList.sortUpcoming(eventList);
+                        setMainListView(list);
+                        break;
+                    case "Member":
+                        list = eventList.sortByMember(eventList);
+                        setMainListView(list);
+                        break;
+                    case "Tag":
+                        list = eventList.sortByTag(eventList);
+                        setMainListView(list);
+                        break;
+                    default:
+                        // กรณีไม่มีตัวเลือกที่ตรงกับ case ใด ๆ
+                        break;
+                }
+            }
+        });
 
 
     }
@@ -138,27 +172,32 @@ public class MyEventsController {
     public void onCompleteAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Complete");
         setMainListView(showlist);
+        this.currentList = showlist;
+        sortBox(showlist);
 
     }
 
     public void onMemberAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Member");
         setMainListView(showlist);
-
+        this.currentList = showlist;
+        sortBox(showlist);
     }
 
     public void onOwnerEventAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Owner");
         setMainListView(showlist);
-
+        this.currentList = showlist;
+        sortBox(showlist);
 
 
     }
 
-
     public void onStaffAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Staff");
         setMainListView(showlist);
+        this.currentList = showlist;
+        sortBox(showlist);
 
     }
 

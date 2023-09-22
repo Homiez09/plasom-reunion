@@ -146,7 +146,7 @@ public class EventPageController {
             try {
                 AnchorPane staffApplicationWindow = staffApplicationLoader.load();
                 MemberApplicationController memberApplicationController = staffApplicationLoader.getController();
-                memberApplicationController.loadData(event);
+                memberApplicationController.loadData(event,user);
                 staffApplicationAnchorPane.getChildren().add(staffApplicationWindow);
             } catch (IOException e) {
                 throw new RuntimeException(e);

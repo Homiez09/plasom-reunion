@@ -147,7 +147,7 @@ public class EventList {
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
         Collections.sort(list.getEvents(),comparing);
-
+        Collections.reverse(list.getEvents());
         return list;
     }
     public EventList sortByTag(EventList eventList){

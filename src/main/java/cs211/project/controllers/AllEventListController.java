@@ -32,7 +32,8 @@ public class AllEventListController {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
-
+        initCategory();
+        initSort();
 
 
         setMainListView(eventList.suffleEvent(eventList));

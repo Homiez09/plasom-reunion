@@ -54,7 +54,7 @@
                   <Separator />
                   <Label alignment="CENTER" prefHeight="25.0" prefWidth="51.0" text="Sort By" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="15.0" />
-                  <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="70.0" />
+                  <ChoiceBox fx:id="sortChoiceBox" prefHeight="25.0" prefWidth="70.0" />
                </children>
             </HBox>
             <Separator fx:id="popupTest" opacity="0.0" prefHeight="25.0" prefWidth="1152.0" />
