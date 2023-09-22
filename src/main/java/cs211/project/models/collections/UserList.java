@@ -1,9 +1,10 @@
 package cs211.project.models.collections;
 
-import cs211.project.models.Event;
+import cs211.project.models.Team;
 import cs211.project.models.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserList {
     private ArrayList<User> users;
@@ -13,22 +14,47 @@ public class UserList {
     }
 
     public User findUsername(String username) {
-        for (User user: users) {
-            if (user.isUserName(username)) {
-                return user;
+        for (User exist: users) {
+            if (exist.isUserName(username)) {
+                return exist;
             }
         }
         return null;
     }
 
-    public void addUser(String displayName, String username, String password){
+    public User findDisplayName(String displayName) {
+        for (User exist: users) {
+            System.out.println();
+            if (exist.isDisplayName(displayName)) {
+                return exist;
+            }
+        }
+        return null;
+    }
+
+    public User findUserId(String userId) {
+        for (User exist: users) {
+            if (exist.isId(userId)) {
+                return exist;
+            }
+        }
+        return null;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+    }
+
+
+    public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, String bio, boolean status, boolean admin, boolean showContactNumber){
         username = username.trim();
         password = password.trim();
-        User exist = findUsername(username);
-        if(exist == null){
-            users.add(new User(displayName, username, password));
+        User newUser = findUsername(username);
+        if(newUser == null){
+            users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, bio, status, admin,showContactNumber));
         }
     }
+
 
     public User login(String username, String password){
         for(User exist: users){
@@ -37,6 +63,56 @@ public class UserList {
             }
         }
         return null;
+    }
+
+    public void logout(User oldUser) {
+        User newUser = findUsername(oldUser.getUsername());
+        newUser.setStatus(false);
+    }
+
+
+    public void updateUserProfile(String username, String displayName, String contactNumber, String bio, String newImagePath) {
+        User exist = findUsername(username);
+        if (exist != null) {
+            exist.updateProfile(displayName, contactNumber, bio, newImagePath);
+        }
+    }
+
+    public void updateUserShowContact(String username, boolean showContactNumber){
+        User exist = findUsername(username);
+        if(exist != null){
+            exist.setShowContact(showContactNumber);
+        }
+    }
+
+
+    public ArrayList<User> getNotAdminUsers() {
+        ArrayList<User> notAdminUsers = new ArrayList<>();
+        for (User exist: users) {
+            if (!exist.isAdmin()) {
+                notAdminUsers.add(exist);
+            }
+        }
+        return notAdminUsers;
+    }
+
+    public ArrayList<User> getOnlineUsers() {
+        ArrayList<User> onlineUsers = new ArrayList<>();
+        for (User exist: users) {
+            if (exist.getStatus() && !exist.isAdmin()) {
+                onlineUsers.add(exist);
+            }
+        }
+        return onlineUsers;
+    }
+
+    public HashMap<String, User> userHashMap() {
+        HashMap<String, User> userHashMapTemp= new HashMap<>();
+        for (User user: users) {
+            userHashMapTemp.put(user.getUsername(), user);
+        }
+
+        return userHashMapTemp;
     }
 
     public ArrayList<User> getUsers() {

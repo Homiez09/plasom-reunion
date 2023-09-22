@@ -1,60 +1,77 @@
 package cs211.project.componentControllers;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.FXRouter;
 
+import cs211.project.services.ImagePathFormat;
+import cs211.project.services.UserListDataSource;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 public class navbarController {
     @FXML private ImageView profileImageView;
-    @FXML private Pane toggleProfilePane;
-
+    @FXML private ComboBox<String> toggleComboBox;
     private User user = (User) FXRouter.getData();
+
+    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
+    private UserList userList;
+
     @FXML private void initialize() {
-        toggleProfilePane.setVisible(false);
+
+
+        String menu[] = {"profile", "setting", "logout"};
+
+        toggleComboBox.getItems().addAll(menu);
+        toggleComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            try {
+                goTo(newValue);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         showProfile();
     }
 
-    private void showProfile() {
-        String path = (user != null) ? user.getImagePath() : "/images/profile/sign-in/sign-in-avatar.png";
-        profileImageView.setImage(new Image(getClass().getResourceAsStream(path), 1280, 1280, false, false));
-        new CreateProfileCircle(profileImageView, 28);
-    }
-
-    @FXML protected void onToggleProfileMenuClick() {
-        if (toggleProfilePane.isVisible()) {
-            toggleProfilePane.setVisible(false);
-        } else {
-            toggleProfilePane.setVisible(true);
+    private void goTo(String page) throws IOException {
+        switch(page) {
+            case "profile":
+                FXRouter.goTo("user-profile", user);
+                break;
+            case "setting":
+                FXRouter.goTo("setting", user);
+                break;
+            case "logout":
+                userList = datasource.readData();
+                userList.logout(user);
+                datasource.writeData(userList);
+                System.out.println(user.getStatus());
+                FXRouter.goTo("welcome");
+                break;
         }
-    }
-
-    @FXML protected void onProfileButtonClick() throws IOException {
-        FXRouter.goTo("user-profile", user);
-    }
-    @FXML protected void onSettingButtonClick() throws IOException {
-        FXRouter.goTo("setting", user);
     }
 
     @FXML protected void onHomeButtonClick() throws IOException {
         FXRouter.goTo("home", user);
     }
 
-    @FXML protected void onLogOutButtonClick() throws IOException {
-        FXRouter.goTo("welcome");
+    @FXML public void onEventsButton() throws IOException {
+        FXRouter.goTo("my-events", user);
     }
 
-    @FXML protected void onAdminButtonClick() throws IOException {
-        FXRouter.goTo("admin-dashboard");
+    @FXML protected void onToggleProfileMenuClick() {
+        toggleComboBox.show();
     }
 
-    @FXML public void onMyEventsButton() throws IOException {
-        FXRouter.goTo("my-event", user);
+    private void showProfile() {
+        ImagePathFormat path = new ImagePathFormat(user.getImagePath());
+        profileImageView.setImage(new Image(path.toString(), 1280, 1280, false, false));
+        new CreateProfileCircle(profileImageView, 28);
     }
 }

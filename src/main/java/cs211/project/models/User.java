@@ -7,36 +7,52 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class User {
-    private String  username,displayName, password, status, lastedLogin, imagePath, bio, contactNumber;
-    private final String role, registerDate, userid;
-    private ImageView avatar; // เอาไว้ return ค่าไปให้ TableView แสดงรูปภาพในหน้า AdminDashboard
-    private ArrayList<Event> events = new ArrayList<>();
+    private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath;
+    private String  registerDate, userId, role, teamJoined;
+
+    private boolean bookmark;
+    private boolean admin, status, showContact;
 
 
-    public User(String username){
+    public User(String userId, String displayName, String username, String password, String contactNumber,
+                String registerDate, String lastedLogin, String imagePath, String bio,
+                boolean status, boolean admin, boolean showContact) {
         this.username = username;
-        password = null;
-        this.role = "user";
-        this.userid = generateUserID();
-        this.registerDate = generateRegisterDate();
-    }
-    public User(String displayName, String username, String password) {
-        this(username);
         this.displayName = displayName;
-        setPassword(password);
-        this.status = "offline";
-        this.bio = "";
-        this.imagePath = generateAvatar();
-        this.contactNumber = "";
-        this.avatar = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
+        this.userId = userId;
+        this.password = password;
+        this.contactNumber = contactNumber;
+        this.status = status;
+        this.admin = admin;
+        this.registerDate = registerDate;
+        this.lastedLogin = lastedLogin;
+        this.imagePath = imagePath;
+        this.showContact = showContact;
+        this.bio = bio;
     }
 
+
+    public boolean isAdmin(){
+        return this.admin;
+    }
     public boolean isUserName(String username){
         // to check user verified
         return this.username.equals(username);
     }
+
+    public boolean isDisplayName(String displayName){
+        // to check display name verified
+        return this.displayName.equals(displayName);
+    }
+
+    public boolean isId(String userId){
+        // to check user ID verified
+        return this.userId.equals(userId);
+    }
+
 
     public boolean validatePassword(String password){
         // to check result verified
@@ -44,55 +60,9 @@ public class User {
         return result.verified;
     }
 
-    private String generateAvatar(){
-        int randomAvatar = (int)(Math.random()*10);
-        return "/images/profile/default-avatar/default" + randomAvatar + ".png";
-    }
 
-    private String generateRegisterDate(){
-        LocalDate currentDate = LocalDate.now();
-        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return formattedDate;
-    }
-
-    private String generateUserID() {
-
-        final int MAX_ID_LENGTH = 16;
-        StringBuilder sb = new StringBuilder();
-
-        // formatted date & time now
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-
-        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyMMdd"));
-        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("hhmmss"));
-
-        // create UID by using local time&date
-        StringBuilder numericText = new StringBuilder();
-        for (char c : username.toCharArray()) {
-            int numericValue = Character.getNumericValue(c);
-            if (numericValue != -1) {
-                numericText.append(numericValue);
-            } else {
-                numericText.append(c);
-            }
-        }
-        // maximum length is 16
-        int totalLength = formattedDate.length() + formattedTime.length() + numericText.length();
-        if (totalLength > MAX_ID_LENGTH) {
-            int excessLength = totalLength - MAX_ID_LENGTH;
-            numericText.delete(numericText.length() - excessLength, numericText.length());
-        }
-        sb.append(formattedDate);
-        sb.append(formattedTime);
-        sb.append(numericText);
-
-        return sb.toString();
-
-    }
-
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
     public String getDisplayName() {
@@ -107,15 +77,11 @@ public class User {
         return password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public String getBio() {
         return bio;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -135,32 +101,65 @@ public class User {
         return contactNumber;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public String getRole() {
+        return role;
     }
 
-    public void setStatus(String status) {
+    public boolean isBookmarked() {
+        return bookmark;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setBookmarked(boolean bookmark) {
+        this.bookmark = bookmark;
+    }
+
+    public String getTeamJoined() {
+        return teamJoined;
+    }
+
+    public void setTeamJoined(String teamID) {
+        this.teamJoined = teamID;
+    }
+
+    public boolean isShowContact() {
+        return showContact;
+    }
+
+    public void setShowContact(boolean showContact) {
+        this.showContact = showContact;
+    }
+
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
-    public ArrayList<Event> getEvents() {
-        return this.events;
+    public String getNewImagePath() {
+        return newImagePath;
     }
 
-    public void setPassword(String password){
-        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setNewImagePath(String newImagePath) {
+        this.newImagePath = newImagePath;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
     }
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
-    public void setAvatar(ImageView avatar) {
-        this.avatar = avatar;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public void setLastedLogin(String lastedLogin) {
@@ -171,16 +170,13 @@ public class User {
         this.imagePath = imagePath;
     }
 
-    public void joinEvent(Event event){
-        if(event.getEventName().equals("")){
-            this.events.add(event);
-        }
+    public void updateProfile(String displayName, String contactNumber, String bio, String newImagePath) {
+        this.displayName = displayName;
+        this.contactNumber = contactNumber;
+        this.bio = bio;
+        setImagePath(newImagePath);
     }
-    public ImageView getAvatar(){
-        this.avatar.setFitWidth(35);
-        this.avatar.setFitHeight(35);
-        return avatar;
-    }
+
 
 
 }

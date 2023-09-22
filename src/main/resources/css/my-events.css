@@ -1,0 +1,52 @@
+.set-Display{
+    -fx-content-display: center;
+}
+/* CSS สำหรับ ListView */
+.event-list .list-view {
+    -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลังของ ListView */
+    -fx-border-color: transparent;
+}
+
+/* CSS สำหรับ ListCell (เซลล์รายการ) */
+.event-list .list-cell {
+    -fx-background-color: transparent; /* สีพื้นหลังของเซลล์ */
+    -fx-padding: 10px 10px 10px 10px; /* ระยะห่างภายในเซลล์ */
+}
+
+/* CSS สำหรับเมื่อเลือกเซลล์ */
+.event-list .list-cell:selected {
+    -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลังเมื่อเลือก */
+    -fx-text-fill: #000000; /* กำหนดสีข้อความ */
+}
+.event-list .list-cell:focused {
+    -fx-background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลังเมื่อเลือก */
+    -fx-text-fill: #000000; /* กำหนดสีข้อความ */
+}
+
+
+
+
+/* CSS สำหรับเมื่อเลื่อนเมาส์เหนือเซลล์ */
+.event-list .list-cell:hover{
+    -fx-background-color: transparent; /* สีพื้นหลังเมื่อเลื่อนเมาส์เหนือเซลล์ */
+}
+/* CSS สำหรับปิดสกอบาร์*/
+.scroll-bar-hide .scroll-bar:vertical,
+.scroll-bar-hide .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+.scroll-bar-List .scroll-bar:vertical,
+.scroll-bar-List .scroll-bar:horizontal{
+    -fx-background-color: #F6F4EE;
+    -fx-border-color: #F6F4EE;
+}
+
+/* Backgourd*/
+.bg-color-main{
+    -fx-border-color: #FFF4E2;
+    -fx-background-color: #FFF4E2;
+
+}

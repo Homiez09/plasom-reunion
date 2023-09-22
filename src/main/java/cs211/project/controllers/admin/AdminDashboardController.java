@@ -1,35 +1,48 @@
 package cs211.project.controllers.admin;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class AdminDashboardController {
     @FXML private TabPane mainTab;
-    @FXML private Tab menu1Tab;
-    @FXML private Button menu1;
+    @FXML private Tab menu1Tab, menu2Tab;
+    @FXML private Button menu1, menu2;
     @FXML private TableView userTableView;
     @FXML private ImageView profileImageView;
     @FXML private ProgressBar eventProgressBar;
+    @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel;
+    @FXML private TableColumn<User, String> idTableCol, profileTableCol, usernameTableCol, nameTableCol, lastLoginTableCol;
+    @FXML private TableColumn<User, Boolean> statusTableCol;
+    @FXML private AnchorPane changePasswordAnchorPane;
 
+    private User user = (User) FXRouter.getData();
+    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
     private UserList userList;
 
     @FXML private void initialize() {
-        UserDataSourceHardCode datasource = new UserDataSourceHardCode();
         userList = datasource.readData();
 
-        profileImageView.setImage(new Image(getClass().getResourceAsStream("/images/profile/default-avatar/default0.png"), 1280, 1280, false, false));
         new CreateProfileCircle(profileImageView, 28);
         new BlockArrowKeyFromTabPane(mainTab);
 
+        LoadChangePasswordComponent();
+        showProfile();
+        showEventProgressBarAndEventLabel();
+        showOnlineUserLabel();
+        showOfflineUserLabel();
         showUserTable();
         ButtonSelectGraphic(1);
     }
@@ -39,53 +52,138 @@ public class AdminDashboardController {
         ButtonSelectGraphic(1);
     }
 
+    @FXML protected void onMenuTwoClick() {
+        mainTab.getSelectionModel().select(menu2Tab);
+        ButtonSelectGraphic(2);
+    }
+
     @FXML protected void onLogoutButtonClick() {
         try {
+            userList = datasource.readData();
+            userList.logout(user);
+            datasource.writeData(userList);
             FXRouter.goTo("welcome");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private void LoadChangePasswordComponent() {
+        FXMLLoader navbarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/changepass.fxml"));
+        try {
+            AnchorPane changePassComponent = navbarComponentLoader.load();
+            changePasswordAnchorPane.getChildren().add(changePassComponent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void showUserTable() {
-        TableColumn<User, String> idCol = new TableColumn<>("ID");
-        idCol.setCellValueFactory(new PropertyValueFactory<>("userid"));
+        idTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
-        TableColumn<User, ImageView> profileCol = new TableColumn<>("Profile");
-        profileCol.setCellValueFactory(new PropertyValueFactory<>("avatar"));
+        profileTableCol.setCellValueFactory(new PropertyValueFactory<>("imagePath"));
 
-        TableColumn<User, String> usernameCol = new TableColumn<>("Username");
-        usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        profileTableCol.setCellFactory(column -> {
+            return new TableCell<User, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
 
-        TableColumn<User, String> nameCol = new TableColumn<>("Name");
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("displayName"));
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        ImagePathFormat pathFormat = new ImagePathFormat(item);
+                        ImageView avatar = new ImageView(new Image(pathFormat.toString(), 1280, 1280, false, false));
 
-        TableColumn<User, String> statusCol = new TableColumn<>("Status");
-        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+                        avatar.setFitWidth(35);
+                        avatar.setFitHeight(35);
 
-        TableColumn<User, String> lastLoginCol = new TableColumn<>("Last Login");
-        lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastedLogin"));
+                        avatar.setClip(CreateProfileCircle.getProfileCircle(avatar, 17));
+
+                        setGraphic(avatar);
+                    }
+                }
+            };
+        });
+
+        usernameTableCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+        nameTableCol.setCellValueFactory(new PropertyValueFactory<>("displayName"));
+
+        statusTableCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        statusTableCol.setCellFactory(column -> {
+            return new TableCell<User, Boolean>() {
+                @Override
+                protected void updateItem(Boolean item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        setText(item ? "Online" : "Offline");
+                    }
+                }
+            };
+        });
+
+        lastLoginTableCol.setCellValueFactory(new PropertyValueFactory<>("lastedLogin"));
 
         userTableView.getColumns().clear();
-        userTableView.getColumns().addAll(idCol, profileCol, usernameCol, nameCol, statusCol, lastLoginCol);
+        userTableView.getColumns().addAll(idTableCol, profileTableCol, usernameTableCol, nameTableCol, statusTableCol, lastLoginTableCol);
         userTableView.getItems().clear();
-        userTableView.getItems().addAll(userList.getUsers());
+        userTableView.getItems().addAll(userList.getNotAdminUsers());
+        userTableView.getSortOrder().add(lastLoginTableCol);
+    }
 
+    private void showOnlineUserLabel() {
+        int online = userList.getOnlineUsers().size();
+        onlineLabel.setText(String.valueOf(online));
+    }
+
+    private void showOfflineUserLabel() {
+        int offline = userList.getNotAdminUsers().size() - userList.getOnlineUsers().size();
+        offlineLabel.setText(String.valueOf(offline));
+    }
+
+    private void showEventProgressBarAndEventLabel() {
+        EventList eventList = new EventListDataSource().readData();
+        int sizeTotalEvent = eventList.getSizeTotalEvent();
+        int sizeCompletedEvent = eventList.getSizeCompletedEvent();
+//        int sizeTotalEvent = 25;
+//        int sizeCompletedEvent = 12;
+        double percent = (double) sizeCompletedEvent / sizeTotalEvent * 100;
+        eventLabel.setText(String.valueOf(sizeCompletedEvent));
+        System.out.println(percent);
+        eventProgressBar.setProgress(percent/100);
+        percentLabel.setText(String.valueOf(percent) + "%");
     }
 
     private void ButtonSelectGraphic(int page) { // Change button graphic when selected
         ResetSelectGraphic();
+        String style = "-fx-background-color: #FFE4B8";
         switch(page) {
             case 1:
-                menu1.setStyle("-fx-background-color: #FFE4B8");
+                menu1.setStyle(style);
+                break;
+            case 2:
+                menu2.setStyle(style);
                 break;
             default:
-                ResetSelectGraphic();
-                menu1.setStyle("-fx-background-color: #FFE4B8");
                 break;
         }
     }
     private void ResetSelectGraphic() { // Reset all button to default
-        menu1.setStyle("-fx-background-color: transparent");
+        String style = "";
+        menu1.setStyle(style);
+        menu2.setStyle(style);
     }
 
+    private void showProfile() {
+        ImagePathFormat pathFormat = new ImagePathFormat(user.getImagePath());
+        profileImageView.setImage(new Image(pathFormat.toString(), 1280, 1280, false, false));
+        new CreateProfileCircle(profileImageView, 28);
+    }
 }

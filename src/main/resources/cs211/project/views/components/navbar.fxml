@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainNavbarAnchorPane" prefHeight="171.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
+<AnchorPane fx:id="mainNavbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarController">
    <children>
+      <ComboBox fx:id="toggleComboBox" layoutX="956.0" layoutY="39.0" prefWidth="150.0" styleClass="toggle-menu" />
       <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
          <children>
             <TextField fx:id="searchBoxTextField" layoutX="156.0" layoutY="20.0" prefHeight="36.0" prefWidth="399.0" promptText="Searching..." styleClass="search-box">
@@ -38,9 +35,8 @@
             </ImageView>
             <HBox alignment="TOP_RIGHT" layoutX="661.0" prefHeight="75.0" prefWidth="354.0" styleClass="container">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onAdminButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Admin" textFill="#413b3b" />
                   <Button mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Home" textFill="#413b3b" />
-                  <Button mnemonicParsing="false" onAction="#onMyEventsButton" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
+                  <Button mnemonicParsing="false" onAction="#onEventsButton" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="My Events" textFill="#413b3b" />
                </children>
             </HBox>
             <Circle fill="#ffa527" layoutX="1075.0" layoutY="38.0" radius="30.0" stroke="#ffa527" strokeType="INSIDE">
@@ -62,41 +58,5 @@
       </ImageView>
       <Line endX="100.0" startX="-100.0" />
       <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="814.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
-      <Line endX="80.300048828125" endY="-68.39999389648438" layoutX="706.0" layoutY="126.0" startX="80.300048828125" startY="-106.79998779296875" />
-      <Pane fx:id="toggleProfilePane" layoutX="838.0" layoutY="17.0" prefHeight="151.0" prefWidth="206.0" styleClass="toggle-menu">
-         <children>
-            <VBox fx:id="toggleMenu" layoutY="1.0" prefHeight="151.0" prefWidth="206.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#onProfileButtonClick" prefHeight="26.0" prefWidth="214.0" text="Profile">
-                     <styleClass>
-                        <String fx:value="items" />
-                        <String fx:value="text-primary" />
-                     </styleClass>
-                  </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSettingButtonClick" prefHeight="26.0" prefWidth="214.0" text="Setting">
-                     <styleClass>
-                        <String fx:value="items" />
-                        <String fx:value="text-primary" />
-                     </styleClass>
-                  </Button>
-                  <Button layoutX="10.0" layoutY="52.0" mnemonicParsing="false" onAction="#onLogOutButtonClick" prefHeight="26.0" prefWidth="214.0" text="Logout">
-                     <styleClass>
-                        <String fx:value="items" />
-                        <String fx:value="text-danger" />
-                     </styleClass>
-                  </Button>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="16.0" prefWidth="206.0" style="-fx-alignment: center;" styleClass="bold700" text="12/2/2000 - 19:00">
-                           <font>
-                              <Font name="Leelawadee" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </Pane>
    </children>
 </AnchorPane>

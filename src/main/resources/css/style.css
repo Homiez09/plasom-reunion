@@ -4,6 +4,11 @@
     -fx-font-family: Leelawadee;
 }
 
+* {
+    -fx-font-family: Leelawadee;
+}
+
+.text-xxs{-fx-font-style-size: 8;}
 .text-xs{-fx-font-style-size: 12;}
 .text-ms{-fx-font-size: 14;}
 .text-base{-fx-font-size: 16;}
@@ -23,8 +28,18 @@
 .weight-semi-bold{-fx-font-weight: 600}
 .weight-bold{-fx-font-weight: 700;}
 
-
-
+.color-gray{
+    -fx-text-fill: #585858;
+}
+.color-black{
+    -fx-text-fill: #413B3B;
+}
+.color-gray{
+    -fx-text-fill: #666668;
+}
+.color-red{
+    -fx-text-fill: #ff1515;
+}
 
 /* for login page */
 /* for background */
@@ -63,13 +78,7 @@
     -fx-font-size: 17;
 
 }
-
 /* button */
-.orange-button:hover{
-    -fx-background-color : linear-gradient(to left,  #FFC75A 5.37%, #FFAC60 52.40%, #F7973E 91.98%);
-    -fx-background-radius: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
-}
 
 .orange-button{
     -fx-background-color : linear-gradient(to left, #FF9839 20.10%, #FF922E 53.96%, #F97800 91.98%);
@@ -77,13 +86,25 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
 }
 
-.text-orange-button{
+.orange-button:hover{
+    -fx-background-color : linear-gradient(to left,  #FFC75A 5.37%, #FFAC60 52.40%, #F7973E 91.98%);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
+}
+
+.orange-button:pressed{
+    -fx-background-color : linear-gradient(to left,  #F8D391 5.37%, #FFCEA0 52.40%, #FFB875 91.98%);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
+}
+
+.text-orange-button {
     -fx-font-size: 27;
     -fx-font-weight: 700;
     -fx-font-family: Leelawadee;
 }
 
-.arrow-button {
+.arrow-upcoming-button {
     -fx-font-size: 60;
     -fx-font-weight: 700;
     -fx-background-color: transparent;
@@ -98,15 +119,19 @@
 }
 
 /* check box*/
+.check-box {
+    -fx-text-fill:  #BFBFBF;
+}
 .check-box .box {
-    -fx-background-color: #FF922E;
-    -fx-background-radius: 3;
+    -fx-background-color: #DCDCDD;
+    -fx-background-radius: 4;
 }
 .check-box:selected .mark {
     -fx-background-color: #F5F3ED;
 }
 .check-box:selected .box {
     -fx-background-color: #FF922E;
+    -fx-text-fill: #413B3B;
 }
 
 /* for click button */
@@ -156,6 +181,10 @@ Text, Label {
 
 .h3 {
     -fx-font-size: 25;
+}
+
+.h4 {
+    -fx-font-size: 16;
 }
 
 .bold700 {
@@ -291,7 +320,12 @@ Text, Label {
     -fx-padding: 10 15 16 18;
     -fx-wrap-text: true;
 
+}
 
+.profile-text-area .scroll-pane{
+    -fx-background-color: transparent;
+    -fx-background-radius:  11;
+    -fx-border-radius: 11;
 
 }
 
@@ -308,6 +342,12 @@ Text, Label {
 
 .edit-profile-button:hover {
     -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.edit-profile-button:pressed {
+    -fx-background-color: linear-gradient(to left, #FFB875 45.96%, #F8D391  70.98% );
     -fx-background-radius: 12;
     -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
@@ -330,12 +370,49 @@ Text, Label {
     -fx-text-fill: #BFBFBF;
 }
 
+.cancel-profile-button:pressed{
+    -fx-background-color: transparent;
+    -fx-border-radius: 12;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
 .image-change-effect:hover{
     -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
 
 .description-profile-text{
     -fx-text-fill: #8f6e6e;
+}
+
+.change-avatar-background{
+    -fx-background-color: transparent;
+}
+
+.upload-image-button{
+    -fx-background-color: #FFB761;
+    -fx-border-color: transparent;
+    -fx-text-fill: #F5F3ED;
+    -fx-background-radius: 15;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.upload-image-button:hover{
+    -fx-background-color: #F7F3EE;
+    -fx-border-color: transparent;
+    -fx-background-radius: 15;
+    -fx-text-fill: #F4B352;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.show-information-box{
+    -fx-background-color: #F9D396;
+    -fx-background-radius: 2;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
 
 /* end for user-profile page */
@@ -384,5 +461,250 @@ Text, Label {
     -fx-border-width: 2;
     -fx-stroke-width: 10;
     -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
-
 }
+
+.setting-select-team-dropdown {
+    -fx-background-color: transparent;
+    -fx-pref-width: 179;
+}
+
+.setting-select-team-dropdown .arrow {
+    -fx-background-color: transparent;
+}
+
+
+.setting-select-team-dropdown .list-view {
+    -fx-padding: 14 4 14 5;
+    -fx-spacing: 5;
+    -fx-background-color: #F6F4EE;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.setting-select-team-dropdown .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 18;
+    -fx-border-radius: 5;
+    -fx-text-fill: #413B3B;
+    -fx-alignment: center;
+}
+
+.setting-select-team-dropdown .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+.switch-view{
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 5, 0.2, 0, 0);
+    -fx-arc-height: 15;
+    -fx-arc-width: 15;
+}
+
+/* check box for switch view*/
+.check-box {
+    -fx-text-fill:  #413B3B;
+}
+.check-box .box {
+    -fx-background-color: #DCDCDD;
+    -fx-background-radius: 4;
+}
+.check-box:selected .mark {
+    -fx-background-color: #F5F3ED;
+}
+.check-box:selected .box {
+    -fx-background-color: #FF922E;
+    -fx-text-fill: #413B3B;
+}
+
+.membership-message-box{
+    -fx-arc-height: 2;
+    -fx-arc-width: 2;
+    -fx-font-size: 10;
+    -fx-text-fill: #585858;
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 4, 0.5, 0, 1);
+}
+
+.manage-team {
+    -fx-effect:  dropshadow(gaussian, #D7CFC3, 5, 0.2, 0, 0);
+    -fx-arc-height: 15;
+    -fx-arc-width: 15;
+    -fx-background-radius: 10;
+}
+
+.select-bar-manage-team Label {
+    -fx-font-size: 16;
+    -fx-font-weight: 700;
+}
+/* for team page */
+.sidebar-black{
+    -fx-text-fill: #4D4746;
+    -fx-effect:  dropshadow(gaussian, #C7C7C7, 10, 0.2, 0, 0);
+}
+
+.create-team-box{
+    -fx-background-radius: 10;
+    -fx-background-color: #F6F4EE;
+    -fx-border-radius: 10;
+    -fx-border-color: #4D4746;
+    -fx-stroke-width: 5;
+}
+
+.create-text-field{
+    -fx-background-color: white;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 1;-fx-padding: 0 0 0 25;
+}
+
+.edit-create-button {
+    -fx-background-color: linear-gradient(to left, #FF922E 45.96%, #FF9E22 70.98%);
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.edit-create-button:hover {
+    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.edit-create-button:pressed {
+    -fx-background-color: linear-gradient(to left, #FFB875 45.96%, #F8D391  70.98% );
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.cancel-create-button{
+    -fx-background-color: transparent;
+    -fx-border-radius: 7;
+    -fx-border-color: #FF922E;
+    -fx-border-width: 1.5;
+    -fx-text-fill: #FF922E;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.cancel-create-button:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 7;
+    -fx-border-color: #BFBFBF;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-text-fill: #BFBFBF;
+}
+
+.cancel-create-button:pressed{
+    -fx-background-color: transparent;
+    -fx-border-radius: 7;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
+.create-team-spinner {
+    -fx-border-color: #4D4746;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: #F5F3ED;
+    -fx-primary-color: #4D4746;
+    -fx-secondary-color: #F90;
+    -fx-focus-color: #4D4746;
+}
+
+.create-team-spinner .text-field {
+    -fx-font-size : 12;
+    -fx-text-fill: #4D4746;
+    -fx-border-radius: 10;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+    -fx-background-color: white;
+    -fx-primary-color: #4D4746;
+    -fx-secondary-color: #F90;
+    -fx-focus-color: #4D4746;
+}
+.spinner .increment-arrow-button {
+    -fx-background-color: #4D4746;
+    -fx-background-radius: 0 10 0 0;
+}
+
+.spinner .decrement-arrow-button {
+    -fx-background-color: #4D4746;
+    -fx-background-radius: 0 0 10 0;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #f90;
+}
+.spinner .increment-arrow-button:hover:pressed,
+.spinner .decrement-arrow-button:hover:pressed,
+.spinner .increment-arrow-button:pressed,
+.spinner .decrement-arrow-button:pressed {
+    -fx-background-color: -fx-secondary-color;
+}
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: white;
+}
+
+
+.create-team-choice-box {
+    -fx-border-color: #4D4746;
+    -fx-border-radius: 10;
+    -fx-background-color: #F5F3ED;
+    -fx-background-radius: 10;
+}
+
+.create-team-choice-box .label {
+    -fx-text-fill: #4D4746;
+}
+
+.create-team-choice-box:hover {
+    -fx-background-color: white;
+}
+
+.create-team-choice-box:pressed {
+    -fx-background-color: #F5F3ED;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-radius: 10;
+    -fx-background-color: #f90;
+}
+
+.description-create-team{
+    -fx-background-color: white;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 17;
+    -fx-padding: 10 15 16 15;
+    -fx-wrap-text: true;
+}
+.description-create-team .content{
+    -fx-background-color: white;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 17;
+    -fx-padding: 3 5 5 5;
+    -fx-wrap-text: true;
+}
+
+/* for team page */
+.bg-transparent{
+    -fx-background-color: transparent;
+}
+
+.menu-background-check-box{
+    -fx-background-radius: 5;
+    -fx-background-color: #F6F4EE;
+}
+
+.menu-role-check-box{
+    -fx-background-color: transparent;
+}
+
