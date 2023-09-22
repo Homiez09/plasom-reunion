@@ -28,10 +28,15 @@ module cs211.project.cs211661project {
 
     exports cs211.project.controllers.team;
     opens cs211.project.controllers.team to javafx.fxml;
+
     exports cs211.project.componentControllers.sideBarControllers;
     opens cs211.project.componentControllers.sideBarControllers to javafx.fxml;
+
     exports cs211.project.componentControllers.teamControllers.manageTeamsController;
     opens cs211.project.componentControllers.teamControllers.manageTeamsController to javafx.fxml;
+
+    exports cs211.project.componentControllers.teamControllers.manageTeamController;
+    opens cs211.project.componentControllers.teamControllers.manageTeamController to javafx.fxml;
 
 
 }
