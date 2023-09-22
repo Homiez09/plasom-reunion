@@ -11,7 +11,9 @@ import java.util.Random;
 
 public class User {
     private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath;
-    private String  registerDate, userId;
+    private String  registerDate, userId, role, teamJoined;
+
+    private boolean bookmark;
     private boolean admin, status, showContact;
 
 
@@ -99,6 +101,29 @@ public class User {
         return contactNumber;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public boolean isBookmarked() {
+        return bookmark;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setBookmarked(boolean bookmark) {
+        this.bookmark = bookmark;
+    }
+
+    public String getTeamJoined() {
+        return teamJoined;
+    }
+
+    public void setTeamJoined(String teamID) {
+        this.teamJoined = teamID;
+    }
 
     public boolean isShowContact() {
         return showContact;

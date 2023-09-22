@@ -1,4 +1,4 @@
-package cs211.project.componentControllers;
+package cs211.project.componentControllers.teamControllers.manageTeamsController;
 
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.HashMap;
 
-public class TeamBoxListController {
+public class ManageTeamsListController {
     private User user = (User) FXRouter.getData();
     private boolean bookmarked = false, initBookMarkCheck = false;
     private boolean mouseEntered = false;
@@ -27,7 +27,7 @@ public class TeamBoxListController {
 
     @FXML
     private void initialize() {
-        unBookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/unbookmark_icon.png"));
+        unBookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/un_bookmark_icon.png"));
         bookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png"));
     }
 

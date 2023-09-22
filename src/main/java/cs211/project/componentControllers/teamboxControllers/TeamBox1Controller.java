@@ -1,5 +1,7 @@
 package cs211.project.componentControllers.teamboxControllers;
 
+import cs211.project.componentControllers.AvatarProfileController;
+import cs211.project.controllers.SelectTeamController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -9,6 +11,8 @@ import cs211.project.services.JoinTeamMap;
 import cs211.project.services.TeamListDataSource;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -35,7 +39,7 @@ public class TeamBox1Controller {
 
 
     @FXML private void initialize() {
-        initMenu();
+        //initMenu();
         loadIcon();
 
         memberShipAnchorPane.setVisible(false);
@@ -127,10 +131,9 @@ public class TeamBox1Controller {
     protected void goTo(String page) throws IOException {
         switch(page) {
             case "Manage Team":
-                //todo : go to  manage team page
+                // todo : manage team
                 break;
             case "Delete Team":
-                leaveTeam();
                 deleteTeam();
                 break;
             case "Leave Team":
@@ -141,6 +144,7 @@ public class TeamBox1Controller {
         FXRouter.goTo("select-team", user, event);
     }
     private void deleteTeam(){
+        leaveTeam();
         TeamListDataSource dataSource = new TeamListDataSource("data","team-list.csv");
         TeamList teamList = dataSource.readData();
         teamList.removeTeam(teamIdLabel.getText());
@@ -159,7 +163,7 @@ public class TeamBox1Controller {
     }
 
     private void loadIcon() {
-        unBookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/unbookmark_icon.png"));
+        unBookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/un_bookmark_icon.png"));
         bookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png"));
         Image activeIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/active_icon.png"));
         activeImageView.setImage(activeIcon);

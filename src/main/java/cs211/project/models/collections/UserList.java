@@ -1,8 +1,10 @@
 package cs211.project.models.collections;
 
+import cs211.project.models.Team;
 import cs211.project.models.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserList {
     private ArrayList<User> users;
@@ -37,6 +39,10 @@ public class UserList {
             }
         }
         return null;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
     }
 
 
@@ -100,6 +106,14 @@ public class UserList {
         return onlineUsers;
     }
 
+    public HashMap<String, User> userHashMap() {
+        HashMap<String, User> userHashMapTemp= new HashMap<>();
+        for (User user: users) {
+            userHashMapTemp.put(user.getUsername(), user);
+        }
+
+        return userHashMapTemp;
+    }
 
     public ArrayList<User> getUsers() {
         return users;

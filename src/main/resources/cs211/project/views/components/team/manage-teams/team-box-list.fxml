@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="50.0" prefWidth="785.0" style="-fx-background-color: #F5E7D1;" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.TeamBoxListController">
+<AnchorPane prefHeight="50.0" prefWidth="785.0" style="-fx-background-color: #F5E7D1;" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.manageTeamsController.ManageTeamsListController">
    <children>
       <Label fx:id="teamNameLabel" layoutX="24.0" layoutY="13.0" prefHeight="22.0" prefWidth="177.0" text="กดกดกกดกดกดกดกดกดกดกดกดก">
          <font>

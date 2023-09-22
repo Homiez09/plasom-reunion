@@ -1,7 +1,6 @@
 package cs211.project.controllers;
 
-import cs211.project.componentControllers.AvatarProfileController;
-import cs211.project.componentControllers.CreateTeamController;
+import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamController;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -9,7 +8,6 @@ import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
 import cs211.project.services.LoadNavbarComponent;
-import cs211.project.services.TeamListDataSource;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -29,9 +27,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class SelectTeamController {
-    @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane;
+    @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane, manageTeamAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
-
     @FXML private ImageView settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
@@ -46,12 +43,14 @@ public class SelectTeamController {
 
     Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
     Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
+    String teamSelectedComponentID = "";
     @FXML
     private void initialize() {
         teamBox = "teamBox1";
 
         initMenu();
         initCreateTeamPage();
+        manageTeamAnchorPane.setVisible(false);
 
         teamBoxView(teamBox);
         manageTeamSelectMenuGraphic(1);
@@ -122,7 +121,7 @@ public class SelectTeamController {
 
     @FXML
     private void onBackClick(){
-        // Don't chnage;
+        // Don't change;
         selectTeamAnchorPane.setEffect(null);
         selectTeamAnchorPane.setDisable(false);
 
@@ -134,6 +133,7 @@ public class SelectTeamController {
 
     @FXML
     protected void onSettingEntered() {
+        System.out.println(teamSelectedComponentID);
         settingImageView.setImage(settingHover);
     }
 
@@ -153,6 +153,20 @@ public class SelectTeamController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void initManageTeam() {
+        FXMLLoader manageTeamAnchorPaneLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/manage-team/manage-team.fxml"));
+        try {
+            AnchorPane manageTeamAnchorPaneComponent = manageTeamAnchorPaneLoader.load();
+            manageTeamAnchorPane.getChildren().add(manageTeamAnchorPaneComponent);
+            ManageTeamController manageTeamController = manageTeamAnchorPaneLoader.getController();
+            manageTeamController.showUserList(teamSelectedComponentID);
+            manageTeamAnchorPane.setVisible(false);
+            selectTeamAnchorPane.setDisable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void teamBoxView(String teamBox) {
@@ -208,11 +222,26 @@ public class SelectTeamController {
                     menuDropDown.getItems().addAll("Manage Team", "Leave Team");
                 }
 
+                menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+                    if (newValue == null) return;
+                    if (newValue.equals("Manage Team")) {
+                        manageTeamSelectMenuGraphic(1);
+
+                        manageTeamAnchorPane.setVisible(true);
+                        selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
+                        selectTeamAnchorPane.setDisable(true);
+                        teamSelectedComponentID = team.getTeamID();
+
+                        initManageTeam();
+                        showManageTeam();
+                    }
+                });
+
                 if (team.isBookmarked()) {
                     bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png")));
                     bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
                 } else {
-                    bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/unbookmark_icon.png")));
+                    bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/un_bookmark_icon.png")));
                     bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
                 }
 
@@ -249,9 +278,9 @@ public class SelectTeamController {
         sortImageView.setImage(sortIcon);
         Image createTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
         createTeamImageView.setImage(createTeamIcon);
-        Image teamBox1 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/teambox_1.png"));
+        Image teamBox1 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_1.png"));
         teamBox1ImageView.setImage(teamBox1);
-        Image teamBox2 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/teambox_2.png"));
+        Image teamBox2 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_2.png"));
         teamBox2ImageView.setImage(teamBox2);
     }
 
@@ -281,6 +310,11 @@ public class SelectTeamController {
         filterMenuComboBox.getSelectionModel().clearSelection();
     }
 
+    public void showManageTeam() {
+        this.manageTeamAnchorPane.setVisible(true);
+        this.selectTeamAnchorPane.setDisable(false);
+    }
+
     private void showBlock(String select) {
         switch (select) {
             case "Manage Teams":
@@ -300,7 +334,7 @@ public class SelectTeamController {
     }
 
     private void loadTeamBoxComponent(Team team, int col, int row) {
-        FXMLLoader teamBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team-box-list.fxml"));
+        FXMLLoader teamBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/manage-teams/team-box-list.fxml"));
         AnchorPane teamBoxComponent;
         if (team != null) {
             try {
@@ -324,7 +358,7 @@ public class SelectTeamController {
                 bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
                 teamIdLabel.setText(team.getTeamID());
 
-                String bookmark = team.isBookmarked() ? "bookmark_icon" : "unbookmark_icon";
+                String bookmark = team.isBookmarked() ? "bookmark_icon" : "un_bookmark_icon";
                 bookmarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/" + bookmark +".png")));
                 menuImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/dot_icon.png")));
             } catch (IOException e) {
