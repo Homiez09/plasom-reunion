@@ -34,7 +34,7 @@ public class HomeController {
 
     @FXML
     private void initialize() {
-        datasource = new EventListDataSource("data", "event-list.csv");
+        datasource = new EventListDataSource();
         eventList = datasource.readData();
         activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
         activityList = activityListDatasource.readData();

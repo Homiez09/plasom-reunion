@@ -149,7 +149,7 @@ public class AdminDashboardController {
     }
 
     private void showEventProgressBarAndEventLabel() {
-        EventList eventList = new EventListDataSource("data","event-list.csv").readData();
+        EventList eventList = new EventListDataSource().readData();
 //        int sizeTotalEvent = eventList.getSizeTotalEvent();
 //        int sizeCompletedEvent = eventList.getSizeCompletedEvent();
         int sizeTotalEvent = 25;

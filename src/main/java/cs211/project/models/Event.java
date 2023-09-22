@@ -23,7 +23,7 @@ public class Event {
     private BooleanProperty isSelected ;
 
     private ActivityList activities;
-    private TeamList teams;
+    private TeamList teamList;
     public Event(String eventName,
                  User eventHostUser,
                  String eventImagePath,
@@ -122,7 +122,7 @@ public class Event {
     public int getMember() {return member;}
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivities() { return activities; }
-    public TeamList getTeams() { return teams; }
+    public TeamList getTeamList() { return teamList; }
     public String getTimestamp() {return timestamp;}
     public boolean isJoinEvent() {return joinEvent;}
     public boolean isJoinTeam() {return joinTeam;}
@@ -134,6 +134,12 @@ public class Event {
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
     public void changeTag(String newTag) {this.eventTag = newTag;}
     public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
+    public void setMember(int n){
+        this.member = n;
+    }
+    public void setTeamList(TeamList teamList){
+        this.teamList = teamList;
+    }
     public void addMember(){if(!isFull())this.member++;}
     public void delMember(){if(member >0) this.member--;}
 
@@ -176,6 +182,7 @@ public class Event {
         return (timeStartDiff <= 7 && timeStampDiff <= 7 );
     }
 
+
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -211,7 +218,7 @@ public class Event {
                 +   eventTag + ','
                 +   eventDateStart + ','
                 +   eventDateEnd + ','
-                +   eventDescription + ','
+                +   eventDescription.replaceAll("\n"," ") + ','
                 +   eventLocation + ','
                 +   member + ','
                 +   slotMember +','

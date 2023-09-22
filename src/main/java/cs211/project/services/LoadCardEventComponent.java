@@ -1,7 +1,6 @@
 package cs211.project.services;
 
-import cs211.project.componentControllers.CardEventController;
-import cs211.project.componentControllers.CardMyEventController;
+import cs211.project.componentControllers.*;
 import cs211.project.models.Event;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
@@ -21,7 +22,7 @@ public class CardMyEventController {
     @FXML
     Label eventNameLabel,startDateLabel,locationLabel, memberCountLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
     @FXML
-    ImageView eventImageView;
+    ImageView eventImageView,profileImageView;
     @FXML
     AnchorPane eventAnchorPane;
     @FXML
@@ -41,10 +42,10 @@ public class CardMyEventController {
 
     @FXML
     public void initialize() {
-        this.eventListDatasource = new EventListDataSource("data","event-list.csv");
+        this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         this.hashMap = new HashMap<>();
-        this.mapDatasource = new JoinEventMap("data", "join-event.csv");
+        this.mapDatasource = new JoinEventMap();
         this.hashMap = mapDatasource.readData();
         this.teamListDataSource = new TeamListDataSource("data", "team-list.csv");
         this.teamList = teamListDataSource.readData();
@@ -103,7 +104,7 @@ public class CardMyEventController {
         this.event = event;
 
         hashMap = new HashMap<>();
-        mapDatasource = new JoinEventMap("data", "join-event.csv");
+        mapDatasource = new JoinEventMap();
         hashMap = mapDatasource.readData();
 
         if (hashMap.containsKey(event.getEventID())) {
@@ -121,7 +122,7 @@ public class CardMyEventController {
             manageEventButton.setVisible(false);
         }
 
-        Image image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
+        Image image = new Image("file:" + event.getEventImagePath(), 200, 200, false, false);
         if(event.getEventImagePath().equals("null")){
             String imgpath = "/images/events/event-default.png";
             image = new Image(getClass().getResourceAsStream(imgpath),200,200,false,false);
@@ -130,6 +131,11 @@ public class CardMyEventController {
         eventNameLabel.setText(event.getEventName());
         startDateLabel.setText(event.getEventDateStart());
         locationLabel.setText(event.getEventLocation());
+
+        ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());
+        profileImageView.setImage(new Image(pathFormat.toString(), 30, 30, false, false));
+        new CreateProfileCircle(profileImageView, 32);
+
         hostUserNameLabel.setText(event.getEventHostUser().getUsername());
         hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
         String descrip = event.getEventDescription().replaceAll("\n", " ");
@@ -164,6 +170,14 @@ public class CardMyEventController {
         }
     }
 
+    public void onClickCard(MouseEvent mouseEvent) {
+        try {
+            FXRouter.goTo("event",currentUser,event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     // ลบ Event
 //            if (event.getEventHostName().equals(currentUser.getUsername())) {
 //        eventList.getEvents().remove(eventList.findEvent(event.getEventID()));

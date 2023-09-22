@@ -3,20 +3,19 @@ package cs211.project.controllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
+import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
 
 import java.io.IOException;
@@ -33,45 +32,59 @@ public class MyEventsController {
     @FXML
     ListView mainListView;
     @FXML
-    Button upcomingButton,completeButton, onOwnerButton,memberButton,staffButton;
+    Button upcomingButton,completeButton,ownerButton,memberButton,staffButton;
     @FXML
     ChoiceBox sortChoiceBox;
     @FXML
     ImageView sortIamgeView;
+    @FXML
+    Separator popupTest;
     private boolean ascending = true;
     private User currentUser = (User) FXRouter.getData();
-    ;
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
     private EventList showlist;
     private JoinEventMap mapDatasource ;
     private HashMap<String, Set<String>> hashMap;
     private Set<String> hashSet;
-    private ObservableList<Event> observableEventList;
-
-
-
+    JoinTeamMap joinTeamMap ;
+    TeamListDataSource teamListDataSource ;
+    TeamList teamList;
+    HashMap<String, TeamList> teamListHashMap;
 
     @FXML
     public void initialize() {
+
+
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
-        this.eventDatasource = new EventListDataSource("data","event-list.csv");
+
+        this.eventDatasource = new EventListDataSource();
         this.eventList = eventDatasource.readData();
+        this.teamListDataSource = new TeamListDataSource("data","team-list.csv");
+        this.teamList = teamListDataSource.readData();
+        joinTeamMap = new JoinTeamMap();
+        this.teamListHashMap = joinTeamMap.readData();
 
-
-        observableEventList = FXCollections.observableArrayList(eventList.getEvents());
-
+        mainListView.setPlaceholder(new Label("No Events"));
         setMainListView(filterEvent(eventList,"Member"));
     }
 
 
     public void  setMainListView(EventList eventList){
         mainListView.getItems().clear();
+        mainListView.getStyleClass().add("event-list");
 
         if (eventList != null){
             for (Event event:eventList.getEvents()){
                     AnchorPane anchorPane = new AnchorPane();
+                    Separator separator = new Separator();
                     new LoadCardEventComponent(anchorPane,event,"card-my-event");
+
+                    separator.setOrientation(Orientation.VERTICAL);
+                    separator.setOpacity(0.0);
+                    separator.setPrefWidth(24.0);
+
+                    mainListView.getItems().add(separator);
                     mainListView.getItems().add(anchorPane);
 
             }
@@ -79,42 +92,6 @@ public class MyEventsController {
 
     }
 
-//    public void showList(EventList eventList) {
-//
-//        myeventsListView.getItems().clear();
-//        historyeventListView.getItems().clear();
-//
-
-//
-//
-//
-//        if(eventList != null){
-//            for (Event event : observableEventList) {
-//                if (hashMap.containsKey(event.getEventID())) {
-//                    hashSet = hashMap.get(event.getEventID());
-//                }
-//                try {
-//                    FXMLLoader eventComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/card-my-event.fxml"));
-//                    AnchorPane eventAnchorPaneComponent = eventComponentLoader.load();
-//                    EventComponentController eventComponent = eventComponentLoader.getController();
-//                    eventComponent.setEventData(event);
-//
-//                    if (hashSet.contains(currentUser.getUsername()) && hashMap.containsKey(event.getEventID()) ) {
-//                        if (!event.isEnd()){
-//                            myeventsListView.getItems().add(eventAnchorPaneComponent);
-//                            onAnimateComponent(eventAnchorPaneComponent);
-//                        }else {
-//                            historyeventListView.getItems().add(eventAnchorPaneComponent);
-//                            onAnimateComponent(eventAnchorPaneComponent);
-//                        }
-//                    }
-//
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//    }
     public void onBackAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("home",currentUser);
@@ -122,6 +99,7 @@ public class MyEventsController {
             throw new RuntimeException(e);
         }
     }
+
     public void onCreateAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("create-event",currentUser);
@@ -129,39 +107,10 @@ public class MyEventsController {
             throw new RuntimeException(e);
         }
     }
-    public void onHostEventsAction(ActionEvent actionEvent) {
-
-    }
-
-    private void sortAndShowEvents(EventList eventList, Comparator<Event> comparator) {
-        observableEventList.sort(comparator);
-    }
-
-    public void onSortClick(MouseEvent mouseEvent) {
-        sortChoiceBox.setOnAction(event -> {
-            Comparator<Event> dataComparator = getEventComparator(sortChoiceBox.getValue().toString(), ascending);
-            sortAndShowEvents(eventList, dataComparator);
-
-        });
-    }
-
-    private Comparator<Event> getEventComparator(String sortOption, boolean ascending) {
-        Comparator<Event> comparator = null;
-
-
-
-        if (!ascending) {
-            comparator = comparator.reversed();
-        }
-
-        return comparator;
-    }
 
     public void onClickAscenDecen(MouseEvent mouseEvent) {
         // Invert the ascending flag
         ascending = !ascending;
-        Comparator<Event> dataComparator = getEventComparator(sortChoiceBox.getValue().toString(), ascending);
-        sortAndShowEvents(eventList, dataComparator);
 
         // Update the sort icon
         String imgPath = ascending ? "/images/hostevent/sort-ascending.png" : "/images/hostevent/sort-descending.png";
@@ -170,37 +119,17 @@ public class MyEventsController {
     }
 
     private void initSortCheckBox(){
+        ComboBox box = new ComboBox();
         String sortList[] = {"Name","Date","Member","Tag"};
-
-
-
+        box.getItems().addAll(sortList);
     }
-    private Comparator<Event> setSortChoiceBox(String sortOption){
-        Comparator<Event> comparator= null;
-        switch (sortOption) {
-            case "Name":
-                comparator = Comparator.comparing(Event::getEventName);
-                break;
-            case "Date":
-                comparator = Comparator.comparing(Event::getEventDateStart);
-                break;
-            case "Member":
-                comparator = Comparator.comparingInt(Event::getMember);
-                break;
-            case "Tag":
-                comparator = Comparator.comparing(Event::getEventTag);
-                break;
-            default:
-                break;
-        }
-     return comparator;
-    }
+
     private void setSearchBar(){
 
     }
 
     public void onUpComingButtonAction(ActionEvent actionEvent) {
-        showlist =  filterEvent(eventList,"Complete");
+        showlist =  filterEvent(eventList,"Upcoming");
         setMainListView(showlist);
 
 
@@ -234,20 +163,43 @@ public class MyEventsController {
     }
 
     public void onManageEventButton(ActionEvent actionEvent) {
+        Popup popup = new Popup();
+        VBox popupContent = new VBox();
+        popupContent.setStyle("-fx-background-color: #F6F4EE;");
+
+        VBox box = new VBox();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/owner-events.fxml"));
+            VBox loaded = loader.load();
+            OwnerEventController ownerEventController = loader.getController();
+            ownerEventController.setDataPopup(popup,currentUser);
+            box.getChildren().setAll(loaded);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        popupContent.getChildren().add(box);
+
+        popup.getContent().addAll(popupContent);
+
+        popup.show(navbarAnchorPane.getScene().getWindow());
     }
 
     private EventList filterEvent(EventList eventList,String type){
         EventList filterlist = new EventList();
-        this.mapDatasource = new JoinEventMap("data", "join-event.csv");
+        this.mapDatasource = new JoinEventMap();
         this.hashMap = mapDatasource.readData();
+        this.hashSet = new HashSet<>();
 
 
 
         switch (type){
             case "Upcomming":
                 for (Event event:eventList.getEvents()) {
-                    hashSet = hashMap.get(event.getEventID());
-                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
+                    if (hashMap.containsKey(event.getEventID())){
+                        hashSet = hashMap.get(event.getEventID());
+                    }else {
+                        hashSet = new HashSet<>();
+                    }
                     if (event.isUpComming() && hashSet.contains(currentUser.getUserId())){
                         filterlist.addEvent(event);
                     }
@@ -255,39 +207,49 @@ public class MyEventsController {
                 break;
             case "Complete":
                 for (Event event:eventList.getEvents()) {
-                    hashSet = hashMap.get(event.getEventID());
-                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
-                    if (event.isEnd() && hashSet.contains(currentUser.getUserId())){
+                    if (hashMap.containsKey(event.getEventID())){
+                        hashSet = hashMap.get(event.getEventID());
+                    }else {
+                        hashSet = new HashSet<>();
+                    }
+                    if (hashSet.contains(currentUser.getUserId()) && event.isEnd()){
                         filterlist.addEvent(event);
                     }
                 }
                 break;
             case "Owner":
                 for (Event event:eventList.getEvents()) {
-                    if (event.isHostEvent(currentUser.getUserId()) && !event.isEnd()){
+                    if (event.isHostEvent(currentUser.getUserId()) ){
                         filterlist.addEvent(event);
                     }
                 }
                 break;
             case "Member":
                 for (Event event:eventList.getEvents()) {
-                    hashSet = hashMap.get(event.getEventID());
-                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
-                    if (!event.isEnd() && hashSet.contains(currentUser.getUserId())){
+                    if (hashMap.containsKey(event.getEventID())){
+                        hashSet = hashMap.get(event.getEventID());
+                    }else {
+                        hashSet = new HashSet<>();
+                    }
+                    if (hashSet.contains(currentUser.getUserId()) && !event.isEnd()){
                         filterlist.addEvent(event);
                     }
+
                 }
                 break;
             case "Staff":
                 for (Event event:eventList.getEvents()) {
                     hashSet = hashMap.get(event.getEventID());
                     if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
-                    if (event.isJoinTeam()){
+                    if (event.isHostEvent(currentUser.getUserId()) && teamListHashMap.containsKey(currentUser.getUsername())){
                         filterlist.addEvent(event);
                     }
                 }
                 break;
+
         }
+
+
         return filterlist;
     }
 
