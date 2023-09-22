@@ -39,7 +39,7 @@ public class TeamBox1Controller {
 
 
     @FXML private void initialize() {
-        initMenu();
+        //initMenu();
         loadIcon();
 
         memberShipAnchorPane.setVisible(false);
@@ -163,7 +163,7 @@ public class TeamBox1Controller {
     }
 
     private void loadIcon() {
-        unBookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/unbookmark_icon.png"));
+        unBookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/un_bookmark_icon.png"));
         bookMarkIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png"));
         Image activeIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/active_icon.png"));
         activeImageView.setImage(activeIcon);
