@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="50.0" prefWidth="785.0" style="-fx-background-color: #F5E7D1;" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.manageTeamController.ManageMemberTeamListController">
    <children>
-      <Label fx:id="nameLabel" layoutX="45.0" layoutY="15.0" prefHeight="23.0" prefWidth="240.0" text="hhhhhhhhhhhhhhhhhhhhhhh">
+      <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="15.0" prefHeight="23.0" prefWidth="240.0" text="hhhhhhhhhhhhhhhhhhhhhhh">
          <font>
             <Font size="16.0" />
          </font>
@@ -19,14 +19,10 @@
             <String fx:value="color-black" />
          </styleClass>
       </Label>
-      <AnchorPane layoutX="381.0" layoutY="14.0">
+      <AnchorPane layoutX="333.0" layoutY="14.0">
          <children>
-            <ImageView fx:id="roleImageView" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../images/icons/team-box/role/Owner.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="roleLabel" layoutX="30.0" layoutY="1.0" prefHeight="23.0" prefWidth="69.0" text="member">
+            <ImageView fx:id="roleImageView" fitHeight="27.0" fitWidth="27.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="roleLabel" layoutX="24.0" layoutY="1.0" prefHeight="23.0" prefWidth="69.0" text="member">
                <font>
                   <Font size="16.0" />
                </font>
@@ -38,13 +34,13 @@
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fx:id="menuImageView" fitHeight="5.0" fitWidth="22.0" layoutX="734.0" layoutY="25.0">
+      <ImageView fx:id="menuImageView" fitHeight="5.0" fitWidth="22.0" layoutX="712.0" layoutY="25.0">
          <image>
             <Image url="@../../../../../../images/icons/team-box/dot_icon.png" />
          </image></ImageView>
       <Label fx:id="bookmarkLabel" layoutX="80.0" layoutY="17.0" opacity="0.0" text="bookmark" />
       <Label fx:id="teamIdLabel" layoutX="80.0" layoutY="25.0" opacity="0.0" text="id" />
-      <Label fx:id="statusLabel" layoutX="578.0" layoutY="15.0" prefHeight="22.0" prefWidth="54.0" text="online">
+      <Label fx:id="statusLabel" layoutX="575.0" layoutY="16.0" prefHeight="22.0" prefWidth="54.0" text="online">
          <font>
             <Font size="16.0" />
          </font>
@@ -54,10 +50,8 @@
             <String fx:value="color-black" />
          </styleClass>
       </Label>
-      <ImageView fx:id="statusImageView" fitHeight="10.0" fitWidth="10.0" layoutX="564.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../images/icons/team-box/active_icon.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="statusImageView" fitHeight="10.0" fitWidth="10.0" layoutX="561.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane layoutX="758.0" layoutY="12.0" prefHeight="27.0" prefWidth="27.0" />
+      <AnchorPane layoutX="453.0" layoutY="33.0" prefHeight="23.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
