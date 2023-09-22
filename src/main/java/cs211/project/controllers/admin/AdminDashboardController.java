@@ -150,10 +150,10 @@ public class AdminDashboardController {
 
     private void showEventProgressBarAndEventLabel() {
         EventList eventList = new EventListDataSource().readData();
-//        int sizeTotalEvent = eventList.getSizeTotalEvent();
-//        int sizeCompletedEvent = eventList.getSizeCompletedEvent();
-        int sizeTotalEvent = 25;
-        int sizeCompletedEvent = 12;
+        int sizeTotalEvent = eventList.getSizeTotalEvent();
+        int sizeCompletedEvent = eventList.getSizeCompletedEvent();
+//        int sizeTotalEvent = 25;
+//        int sizeCompletedEvent = 12;
         double percent = (double) sizeCompletedEvent / sizeTotalEvent * 100;
         eventLabel.setText(String.valueOf(sizeCompletedEvent));
         System.out.println(percent);
