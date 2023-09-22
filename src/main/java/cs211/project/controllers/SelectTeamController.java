@@ -1,6 +1,7 @@
 package cs211.project.controllers;
 
 import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamController;
+import cs211.project.componentControllers.teamboxControllers.TeamBox1Controller;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -233,9 +234,28 @@ public class SelectTeamController {
                         selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
                         selectTeamAnchorPane.setDisable(true);
                         teamSelectedComponentID = team.getTeamID();
-
                         initManageTeam();
                         showManageTeam();
+                        return;
+                    }
+                    TeamBox1Controller teamBox1Controller = teamBoxLoader1.getController();
+                    if (newValue.equals("Delete Team")) {
+                        try {
+                            teamBox1Controller.goTo("Delete Team");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        try {
+                            teamBox1Controller.goTo("Leave Team");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else if (newValue.equals("Leave Team")) {
+                        try {
+                            teamBox1Controller.goTo("Leave Team");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
 
