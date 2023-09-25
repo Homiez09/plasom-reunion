@@ -1,5 +1,7 @@
 package cs211.project.models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Activity {
@@ -54,6 +56,7 @@ public class Activity {
 
         return id;
     }
+
     // Getters and Setters
     public String getName() {
         return name;
