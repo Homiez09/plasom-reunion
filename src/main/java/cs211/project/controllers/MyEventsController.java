@@ -3,8 +3,6 @@ package cs211.project.controllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +17,6 @@ import javafx.stage.Popup;
 
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,14 +41,14 @@ public class MyEventsController {
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
     private EventList showlist;
-    private JoinEventMap mapDatasource ;
-    private HashMap<String, Set<String>> hashMap;
-    private Set<String> hashSet;
-    private EventList currentList;
-    JoinTeamMap joinTeamMap ;
-    TeamListDataSource teamListDataSource ;
-    TeamList teamList;
-    HashMap<String, TeamList> teamListHashMap;
+    private JoinEventMap joinEventMap;
+
+    private HashMap<String, Set<String>> eventMap;
+    private Set<String> userSet;
+    private JoinTeamMap joinTeamMap ;
+    private TeamListDataSource teamListDataSource ;
+    private TeamList teamList;
+    private HashMap<String, TeamList> teamListHashMap;
 
     @FXML
     public void initialize() {
@@ -63,8 +60,7 @@ public class MyEventsController {
         this.eventList = eventDatasource.readData();
         this.teamListDataSource = new TeamListDataSource("data","team-list.csv");
         this.teamList = teamListDataSource.readData();
-        joinTeamMap = new JoinTeamMap();
-        this.teamListHashMap = joinTeamMap.readData();
+
 
         mainListView.setPlaceholder(new Label("No Events"));
         setMainListView(filterEvent(eventList,"Member"));
@@ -133,7 +129,7 @@ public class MyEventsController {
         showlist =  filterEvent(eventList,"Upcoming");
         setMainListView(showlist);
         sortBox(showlist);
-        this.currentList = showlist;
+
 
 
     }
@@ -172,7 +168,6 @@ public class MyEventsController {
     public void onCompleteAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Complete");
         setMainListView(showlist);
-        this.currentList = showlist;
         sortBox(showlist);
 
     }
@@ -180,14 +175,13 @@ public class MyEventsController {
     public void onMemberAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Member");
         setMainListView(showlist);
-        this.currentList = showlist;
         sortBox(showlist);
     }
 
     public void onOwnerEventAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Owner");
         setMainListView(showlist);
-        this.currentList = showlist;
+
         sortBox(showlist);
 
 
@@ -196,7 +190,7 @@ public class MyEventsController {
     public void onStaffAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Staff");
         setMainListView(showlist);
-        this.currentList = showlist;
+
         sortBox(showlist);
 
     }
@@ -225,33 +219,41 @@ public class MyEventsController {
 
     private EventList filterEvent(EventList eventList,String type){
         EventList filterlist = new EventList();
-        this.mapDatasource = new JoinEventMap();
-        this.hashMap = mapDatasource.readData();
-        this.hashSet = new HashSet<>();
+        this.joinEventMap = new JoinEventMap();
+        this.eventMap = joinEventMap.readData();
+
+
+        this.joinTeamMap = new JoinTeamMap();
+        this.teamListHashMap = joinTeamMap.readData();
+        if (teamListHashMap.containsKey(currentUser.getUsername())){
+            this.teamList = teamListHashMap.get(currentUser.getUsername());
+        }else {
+            teamList = new TeamList();
+        }
 
 
 
         switch (type){
             case "Upcomming":
                 for (Event event:eventList.getEvents()) {
-                    if (hashMap.containsKey(event.getEventID())){
-                        hashSet = hashMap.get(event.getEventID());
+                    if (eventMap.containsKey(event.getEventID())){
+                        userSet = eventMap.get(event.getEventID());
                     }else {
-                        hashSet = new HashSet<>();
+                        userSet = new HashSet<>();
                     }
-                    if (event.isUpComming() && hashSet.contains(currentUser.getUserId())){
+                    if (event.isUpComming() && userSet.contains(currentUser.getUserId())){
                         filterlist.addEvent(event);
                     }
                 }
                 break;
             case "Complete":
                 for (Event event:eventList.getEvents()) {
-                    if (hashMap.containsKey(event.getEventID())){
-                        hashSet = hashMap.get(event.getEventID());
+                    if (eventMap.containsKey(event.getEventID())){
+                        userSet = eventMap.get(event.getEventID());
                     }else {
-                        hashSet = new HashSet<>();
+                        userSet = new HashSet<>();
                     }
-                    if (hashSet.contains(currentUser.getUserId()) && event.isEnd()){
+                    if (userSet.contains(currentUser.getUserId()) && event.isEnd() || event.isHostEvent(currentUser.getUserId()) && event.isEnd()){
                         filterlist.addEvent(event);
                     }
                 }
@@ -265,12 +267,12 @@ public class MyEventsController {
                 break;
             case "Member":
                 for (Event event:eventList.getEvents()) {
-                    if (hashMap.containsKey(event.getEventID())){
-                        hashSet = hashMap.get(event.getEventID());
+                    if (eventMap.containsKey(event.getEventID())){
+                        userSet = eventMap.get(event.getEventID());
                     }else {
-                        hashSet = new HashSet<>();
+                        userSet = new HashSet<>();
                     }
-                    if (hashSet.contains(currentUser.getUserId()) && !event.isEnd()){
+                    if (userSet.contains(currentUser.getUserId()) && !event.isEnd()){
                         filterlist.addEvent(event);
                     }
 
@@ -278,10 +280,17 @@ public class MyEventsController {
                 break;
             case "Staff":
                 for (Event event:eventList.getEvents()) {
-                    hashSet = hashMap.get(event.getEventID());
-                    if (!hashMap.containsKey(event.getEventID())){ hashSet = new HashSet<>();}
-                    if (event.isHostEvent(currentUser.getUserId()) && teamListHashMap.containsKey(currentUser.getUsername())){
-                        filterlist.addEvent(event);
+                    if (eventMap.containsKey(event.getEventID())){
+                        userSet = eventMap.get(event.getEventID());
+                    }else {
+                        userSet = new HashSet<>();
+                    }
+                    for (Team team:teamList.getTeams()) {
+                        if (team.getEventID().equals(event.getEventID())) {
+                            filterlist.addEvent(event);
+                            System.out.println("Test");
+                            break;
+                        }
                     }
                 }
                 break;
