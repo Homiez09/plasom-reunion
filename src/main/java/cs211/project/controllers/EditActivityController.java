@@ -34,7 +34,7 @@ public class EditActivityController {
                         AnchorPane editActivityPage = createActivityLoader.load();
                         editActivityAnchorPane.getChildren().add(editActivityPage);
                         CreateActivityController createActivityController = createActivityLoader.getController();
-                        createActivityController.init(user,event,newValue.getEventID(),newValue.getName());
+                        createActivityController.init(user,event,newValue.getActivityID());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

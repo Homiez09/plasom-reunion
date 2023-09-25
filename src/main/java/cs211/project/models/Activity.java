@@ -1,7 +1,9 @@
 package cs211.project.models;
 
+import java.util.Random;
+
 public class Activity {
-    private String name,eventID,startTime,endTime;
+    private String name,eventID,startTime,endTime,activityID;
     private String description;
 
     // Constructors
@@ -16,11 +18,41 @@ public class Activity {
         this.description = "\"" + activityDescription + "\"";}
         this.startTime = activityStart;
         this.endTime = activityEnd;
+        this.activityID = generateActivityID();
     }
-
+    public Activity(String eventId, String activityName, String activityDescription, String activityStart, String activityEnd,String activityID) {
+        this.eventID =eventId;
+        this.name =activityName;
+        if (activityDescription.charAt(0) == '"' && activityDescription.charAt(activityDescription.length()-1) == '"') {
+            this.description = activityDescription;
+        } else {
+            this.description = "\"" + activityDescription + "\"";}
+        this.startTime = activityStart;
+        this.endTime = activityEnd;
+        this.activityID = activityID;
+    }
     public String removeQuote(String text) {
         text = text.substring(1, text.length() - 1);
         return text;
+    }
+    public String generateActivityID() {
+        Random random = new Random();
+
+        String id = "act-";
+        int randomInt = random.nextInt(1000000);
+
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder randomText = new StringBuilder();
+
+        for (int i = 0; i < 3; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            randomText.append(randomChar);
+        }
+
+        id = id + randomText + randomInt;
+
+        return id;
     }
     // Getters and Setters
     public String getName() {
@@ -58,6 +90,7 @@ public class Activity {
     public String getEventID() {
         return eventID;
     }
+    public String getActivityID() {return activityID;}
 
     @Override
     public String toString() {
@@ -65,7 +98,8 @@ public class Activity {
                 + name + ","
                 + description + ","
                 + startTime + ','
-                + endTime ;
+                + endTime  + ","
+                + activityID;
     }
 }
 

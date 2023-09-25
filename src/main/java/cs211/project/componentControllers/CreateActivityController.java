@@ -30,15 +30,18 @@ public class CreateActivityController {
     private ActivityList activityList;
     private String oldName;
 
+    public void init(User user,Event event,String activityID ) {
+        this.user = user;
+        this.event = event;
+        this.activity = activityList.findActivity(activityID);
+        showActivity();
+        deleteButton.setVisible(true);
+        oldName = activity.getName();
+    }
     public void init(User user,Event event) {
         this.user = user;
         this.event = event;
         this.activity = null;
-    }
-    public void init(User user,Event event,String eventID,String name) {
-        this.user = user;
-        this.event = event;
-        activity = activityList.findActivity(eventID,name);
     }
     @FXML
     public void initialize() {
@@ -48,12 +51,9 @@ public class CreateActivityController {
         setSpinner(activityEndHourSpinner,23);
         setSpinner(activityStartMinuteSpinner,59);
         setSpinner(activityEndMinuteSpinner,59);
-        if (activity != null) {
-            showActivity();
-            deleteButton.setVisible(true);
-            oldName = activity.getName();
-        } else {deleteButton.setVisible(false);}
+        deleteButton.setVisible(false);
     }
+
     @FXML protected void onBackClick() {
         try {
             FXRouter.goTo("edit-activity",user,event);
@@ -62,8 +62,8 @@ public class CreateActivityController {
         }
     }
     @FXML protected void onDeleteButton() {
-        activityList.removeActivity(activity);
-        event.getActivities().removeActivity(activity);
+        activityList.removeActivity(activity.getActivityID());
+        event.getActivities().removeActivity(activity.getActivityID());
         activityListDatasource.writeData(activityList);
         try {
             FXRouter.goTo("edit-activity",user,event);
@@ -80,10 +80,10 @@ public class CreateActivityController {
             event.getActivities().addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
             activityList.addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
         } else {
-            activityList.findActivity(event.getEventID(),oldName).setDescription(activityDescription);
-            activityList.findActivity(event.getEventID(),oldName).setStartTime(activityStart);
-            activityList.findActivity(event.getEventID(),oldName).setEndTime(activityEnd);
-            activityList.findActivity(event.getEventID(),oldName).setName(activityName);
+            activityList.findActivity(activity.getActivityID()).setDescription(activityDescription);
+            activityList.findActivity(activity.getActivityID()).setStartTime(activityStart);
+            activityList.findActivity(activity.getActivityID()).setEndTime(activityEnd);
+            activityList.findActivity(activity.getActivityID()).setName(activityName);
         }
         activityListDatasource.writeData(activityList);
         try {

@@ -72,8 +72,9 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
                 String activityEnd = data[4].trim();
+                String activityID = data[5].trim();
 
-                activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd);
+                activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd,activityID);
 
                 // เพิ่มข้อมูลลงใน list
             }

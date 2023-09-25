@@ -10,10 +10,16 @@ public class ActivityList {
     public ActivityList() { activities = new ArrayList<>(); }
 
 
-    public void addActivity(String eventId, String activityName, String activityDescription,String ActivityStart, String ActivityEnd) {
+    public void addActivity(String eventId, String activityName, String activityDescription,String activityStart, String activityEnd) {
         activityName = activityName.trim();
         if (!activityName.equals("")) {
-            activities.add(new Activity(eventId,activityName,activityDescription,ActivityStart,ActivityEnd));
+            activities.add(new Activity(eventId,activityName,activityDescription,activityStart,activityEnd));
+        }
+    }
+    public void addActivity(String eventId, String activityName, String activityDescription,String activityStart, String activityEnd,String activityID) {
+        activityName = activityName.trim();
+        if (!activityName.equals("")) {
+            activities.add(new Activity(eventId,activityName,activityDescription,activityStart,activityEnd,activityID));
         }
     }
 
@@ -23,14 +29,14 @@ public class ActivityList {
         }
     }
 
-    public void removeActivity(Activity activity) {
-        if (activity != null) {
-            activities.remove(activity);
+    public void removeActivity(String activityID) {
+        if (activityID != null) {
+            activities.remove(findActivity(activityID));
         }
     }
-    public Activity findActivity(String eventId,String name){
+    public Activity findActivity(String activityID){
         for (Activity activity:activities) {
-            if (activity.getEventID().equals(eventId) && activity.getName().equals(name)){
+            if (activity.getActivityID().equals(activityID) ){
                 return activity;
             }
         }
