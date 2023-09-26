@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AllEventListController {
     @FXML AnchorPane navbarAnchorPane;
@@ -38,7 +40,12 @@ public class AllEventListController {
 
 
         setMainListView(eventList.suffleEvent(eventList));
-        getByCategory();
+        if (categoryComboBox.getValue() == null){
+            getBySearchbar(eventList);
+        }
+        getByCategory(eventList);
+
+
 
 
 
@@ -49,8 +56,8 @@ public class AllEventListController {
 
     }
 
-    private void getByCategory(){
-        ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getEvents());
+    private void getByCategory(EventList ListEvent){
+        ObservableList<Event> observableEventList = FXCollections.observableArrayList(ListEvent.getEvents());
         EventList filteredEventList = new EventList();
 
         categoryComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldTag, newTag) -> {
@@ -67,8 +74,11 @@ public class AllEventListController {
                 filteredEventList.getEvents().addAll(observableEventList);
             }
             getBySearchbar(filteredEventList);
-            // 2. อัพเดตหน้า UI หรือทำสิ่งอื่น ๆ ตามที่คุณต้องการ
-            setMainListView(filteredEventList);
+            if (searchbarTextField.getText().isEmpty()){
+                setMainListView(filteredEventList);
+            }
+
+
         });
 
     }
@@ -113,6 +123,7 @@ public class AllEventListController {
         String sort[] = {"Name","Start","Member","End"};
 
     }
+/*
 
     private void setMainListView(EventList eventList){
         mainListView.getItems().clear();
@@ -146,27 +157,71 @@ public class AllEventListController {
             throw new RuntimeException(e);
         }
     }
+*/
+
+    private void setMainListView(EventList eventList) {
+        mainListView.getItems().clear();
+        mainListView.getStyleClass().add("event-list");
+
+        List<HBox> eventBoxes = IntStream.range(0, eventList.getEvents().size())
+                .boxed()
+                .collect(Collectors.groupingBy(i -> i / 4))
+                .values()
+                .stream()
+                .map(indices -> {
+                    HBox box = new HBox();
+                    box.setAlignment(Pos.CENTER_LEFT);
+                    loadEventList(box, indices.stream()
+                            .map(eventList.getEvents()::get)
+                            .collect(Collectors.toList()));
+                    return box;
+                })
+                .collect(Collectors.toList());
+
+        mainListView.getItems().addAll(eventBoxes);
+    }
+
+    private void loadEventList(HBox hbox, List<Event> events) {
+        events.forEach(event -> {
+            Separator separator = new Separator();
+            separator.setOrientation(Orientation.VERTICAL);
+            separator.setOpacity(0.0);
+            separator.setPrefWidth(24.0);
+
+            AnchorPane anchorPane = new AnchorPane();
+            new LoadCardEventComponent(anchorPane, event, "card-event");
+            hbox.getChildren().addAll(separator, anchorPane);
+        });
+    }
+
 
     //fliter
     public void onAllClick(ActionEvent actionEvent) {
         eventList = eventList.suffleEvent(eventList);
-
         setMainListView(eventList);
-        searchbarTextField.setText("");
+        if (categoryComboBox.getValue()!= null) {
+            getByCategory(eventList);
+        }
+        categoryComboBox.setValue("");
+
     }
 
     public void onNewClick(ActionEvent actionEvent) {
         eventList = eventList.sortNewEvent(eventList);
-
         setMainListView(eventList);
-        searchbarTextField.setText("");
+        if (categoryComboBox.getValue()!= null) {
+            getByCategory(eventList);
+        }
+        categoryComboBox.setValue("");
     }
 
     public void onUpClick(ActionEvent actionEvent) {
         eventList = eventList.sortUpcoming(eventList);
-
         setMainListView(eventList);
-        searchbarTextField.setText("");
+        if (categoryComboBox.getValue()!= null) {
+            getByCategory(eventList);
+        }
+        categoryComboBox.setValue("");
     }
 
     public void onCreateClick(ActionEvent actionEvent) {
@@ -180,6 +235,7 @@ public class AllEventListController {
 
     public void onCategory(ActionEvent actionEvent) {
         categoryComboBox.show();
+        searchbarTextField.setText("");
     }
 
     public void onClickTagLabel(MouseEvent mouseEvent) {
