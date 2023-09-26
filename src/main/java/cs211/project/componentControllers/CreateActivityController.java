@@ -4,7 +4,6 @@ import cs211.project.models.Activity;
 import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
-import cs211.project.models.collections.EventList;
 import cs211.project.services.ActivityListDataSource;
 import cs211.project.services.Datasource;
 import cs211.project.services.FXRouter;
@@ -66,7 +65,7 @@ public class CreateActivityController {
     }
     @FXML protected void onDeleteButton() {
         activityList.removeActivity(activity.getActivityID());
-        event.getActivities().removeActivity(activity.getActivityID());
+        event.getActivityList().removeActivity(activity.getActivityID());
         activityListDatasource.writeData(activityList);
         try {
             FXRouter.goTo("edit-activity",user,event);
@@ -90,7 +89,7 @@ public class CreateActivityController {
                 return;}
         }
         if (activity == null) {
-            event.getActivities().addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
+            event.getActivityList().addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
             activityList.addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
         } else {
             activityList.findActivity(activity.getActivityID()).setDescription(activityDescription);

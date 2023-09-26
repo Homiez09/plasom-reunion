@@ -63,7 +63,7 @@ public class EditActivityController {
         endTimeColumn.setPrefWidth(150);
         descriptionColumn.prefWidthProperty().bind(editActivityTableview.widthProperty().subtract(nameColumn.widthProperty())
                 .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()));
-        for (Activity activity: event.getActivities().getActivities()) {
+        for (Activity activity: event.getActivityList().getActivities()) {
             if (event.getEventID().equals(activity.getEventID())) {
                 editActivityTableview.getItems().add(activity);
             }

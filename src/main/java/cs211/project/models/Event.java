@@ -121,7 +121,7 @@ public class Event {
     public int getSlotMember() {return slotMember;}
     public int getMember() {return member;}
     public String getEventLocation() { return eventLocation; }
-    public ActivityList getActivities() { return activities; }
+    public ActivityList getActivityList() { return activities; }
     public TeamList getTeamList() { return teamList; }
     public String getTimestamp() {return timestamp;}
     public boolean isJoinEvent() {return joinEvent;}
@@ -140,6 +140,7 @@ public class Event {
     public void setTeamList(TeamList teamList){
         this.teamList = teamList;
     }
+    public void setActivity(ActivityList activityList) {this.activities = activityList;}
     public void addMember(){if(!isFull())this.member++;}
     public void delMember(){if(member >0) this.member--;}
 
@@ -227,6 +228,7 @@ public class Event {
                 +   joinTeam;
 
     }
+
 
 }
 

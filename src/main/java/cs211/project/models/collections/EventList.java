@@ -1,5 +1,6 @@
 package cs211.project.models.collections;
 
+import cs211.project.models.Activity;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -10,10 +11,7 @@ import java.util.*;
 public class EventList {
     private ArrayList<Event> events;
     private JoinEventMap eventMapData;
-    private HashMap<String,Set<String>> eventHashMap;
-    private Set<String> eventSet;
-    private Datasource<TeamList> teamListDatasource;
-    private TeamList teamList;
+
     public EventList() {
         events = new ArrayList<>();
     }
@@ -61,8 +59,8 @@ public class EventList {
         return null;
     }
     public void setTeamData(String eventID){
-        teamListDatasource = new TeamListDataSource("data","team-list.csv");
-        teamList = teamListDatasource.readData();
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
 
         TeamList temp = new TeamList();
         for (Team team:teamList.getTeams()) {
@@ -73,9 +71,9 @@ public class EventList {
         findEvent(eventID).setTeamList(temp);
     }
     public void setMemberData(){
-        this.eventMapData = new JoinEventMap();
-        this.eventHashMap = eventMapData.readData();
-        eventSet = new HashSet<>();
+        JoinEventMap eventMapData = new JoinEventMap();
+        HashMap<String,Set<String>> eventHashMap = eventMapData.readData();
+        Set<String> eventSet ;
 
         for (Event event:events) {
             if (eventHashMap.containsKey(event.getEventID())){
@@ -83,6 +81,16 @@ public class EventList {
                 event.setMember(eventSet.size());
             }
 
+        }
+    }
+    public void setActivityData(String eventId) {
+        Datasource<ActivityList> activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
+        ActivityList activityList = activityListDatasource.readData();
+
+        for (Activity activity:activityList.getActivities()){
+            if (activity.getEventID().equals(eventId)){
+                findEvent(eventId).getActivityList().addActivity(activity);
+            }
         }
     }
 
@@ -169,7 +177,6 @@ public class EventList {
         }
         return list;
     }
-
 
 
 

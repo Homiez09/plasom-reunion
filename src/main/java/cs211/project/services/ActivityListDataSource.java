@@ -67,12 +67,12 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-                String eventID = data[0].trim();
+                String eventID = data[5].trim();
                 String activityName = data[1].trim();
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
                 String activityEnd = data[4].trim();
-                String activityID = data[5].trim();
+                String activityID = data[0].trim();
 
                 activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd,activityID);
 

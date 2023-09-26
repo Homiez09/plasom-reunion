@@ -31,8 +31,7 @@ public class CardMyEventController {
     private TeamListDataSource teamListDataSource;
     private TeamList teamList;
     private JoinTeamMap joinTeamMap = new JoinTeamMap();
-    private HashMap<String, TeamList> teamHashMapGlobal = joinTeamMap.readData();
-    HashMap<String, TeamList> teamHashMap = new HashMap<>();
+    private HashMap<String, TeamList> teamHashMap = new HashMap<>();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     private JoinEventMap mapDatasource ;
@@ -171,10 +170,24 @@ public class CardMyEventController {
     }
 
     public void onClickCard(MouseEvent mouseEvent) {
-        try {
-            FXRouter.goTo("event",currentUser,event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        this.joinTeamMap = new JoinTeamMap();
+        this.teamHashMap = joinTeamMap.readData();
+
+
+
+        if (!teamHashMap.keySet().contains(currentUser.getUsername())){
+
+            try {
+                FXRouter.goTo("event",currentUser,event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            try {
+                FXRouter.goTo("select-team",currentUser,event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }

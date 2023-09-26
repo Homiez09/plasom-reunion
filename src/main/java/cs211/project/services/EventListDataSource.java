@@ -91,6 +91,7 @@ public class EventListDataSource implements Datasource<EventList> {
                                         eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam);
                 eventList.setMemberData();
                 eventList.setTeamData(eventId);
+                eventList.setActivityData(eventId);
 
                 // เพิ่มข้อมูลลงใน list
             }
