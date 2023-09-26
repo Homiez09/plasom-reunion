@@ -90,7 +90,7 @@ public class TeamList {
         teams.add(team);
     }
 
-    public void sortTeamByNewCreatedAt() { // from new to old
+    public void sortTeamByNewCreatedAt() { // from new to old (Default)
         teams.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
     }
 

@@ -1,11 +1,13 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Event;
+import cs211.project.models.*;
 import cs211.project.models.Team;
 import cs211.project.models.User;
-import cs211.project.models.collections.TeamList;
+import cs211.project.models.collections.*;
 import cs211.project.services.FXRouter;
-import cs211.project.services.JoinTeamMap;
+import cs211.project.services.*;
+
+import cs211.project.services.TeamListDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
@@ -13,13 +15,19 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class MemberApplicationController {
+    TeamListDataSource datasource;
+    TeamList teamList;
+    User user = (User) FXRouter.getData();
+    Event event = (Event) FXRouter.getData2();
+    JoinTeamMap joinTeamMap = new JoinTeamMap();
+    TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+
+    private String teamName;
 
     @FXML private ChoiceBox<String> teamChoiceBox;
     private User currentUser;
     private Event currentEvent;
-    private JoinTeamMap joinTeamMap;
     private HashMap<String,TeamList> teamListHashMap;
-    private TeamList teamList;
     private TeamList joinTeam;
     @FXML private void initialize() {}
     @FXML protected void onBackButtonClick() {
@@ -38,26 +46,30 @@ public class MemberApplicationController {
         }
     }
     @FXML protected void onConfirmTeamButtonClick() {
-        this.joinTeamMap = new JoinTeamMap();
-        this.teamListHashMap = joinTeamMap.readData();
-        this.teamList = currentEvent.getTeamList();
-        this.joinTeam = new TeamList();
-        for (Team team:teamList.getTeams()) {
-
-            if (teamChoiceBox.getItems().equals(team.getTeamName())){
-                joinTeam.getTeams().add(team);
-                break;
-            }
-
-        }
-        teamListHashMap.put(currentUser.getUsername(),joinTeam);
-        joinTeamMap.writeData(teamListHashMap);
 
 
         try {
-            FXRouter.goTo("select-team",currentUser, currentEvent);
+            FXRouter.goTo("select-team", currentUser, currentEvent);
+            HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
+            teamName = teamChoiceBox.getValue();
+            TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+            TeamList teamList = teamListDataSource.readData();
+            Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
+            team.setRole("Member");
+            if (teamListHashMap.get(user.getUsername()) == null) {
+                teamListHashMap.put(user.getUsername(), new TeamList());
+                teamListHashMap.get(user.getUsername()).getTeams().add(team);
+            }
+            teamListHashMap.get(user.getUsername()).getTeams().add(team);
+            joinTeamMap.writeData(teamListHashMap);
+            try {
+                FXRouter.goTo("select-team", user, event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }

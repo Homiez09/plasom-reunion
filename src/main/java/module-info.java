@@ -23,6 +23,7 @@ module cs211.project.cs211661project {
 
     exports cs211.project.models.collections;
     opens cs211.project.models.collections to javafx.base;
+
     exports cs211.project.componentControllers.teamboxControllers;
     opens cs211.project.componentControllers.teamboxControllers to javafx.fxml;
 
@@ -37,6 +38,9 @@ module cs211.project.cs211661project {
 
     exports cs211.project.componentControllers.teamControllers.manageTeamController;
     opens cs211.project.componentControllers.teamControllers.manageTeamController to javafx.fxml;
+
+    exports cs211.project.componentControllers.teamControllers.menu;
+    opens cs211.project.componentControllers.teamControllers.menu to javafx.fxml;
 
 
 }

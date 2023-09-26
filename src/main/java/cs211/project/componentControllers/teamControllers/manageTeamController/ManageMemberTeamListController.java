@@ -42,4 +42,7 @@ public class ManageMemberTeamListController {
         statusImageView.setImage(statusIcon);
         menuImageView.setImage(menuIcon);
     }
+
+
+
 }

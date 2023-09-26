@@ -109,6 +109,7 @@ public class CreateTeamController {
         numMemberSpin = new SpinnerValueFactory.IntegerSpinnerValueFactory(2,1000000000);
         numMemberSpinner.setValueFactory(numMemberSpin);
     }
+
     private void validateDateTime() {
         startDateChoiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (startDateChoiceBox.getValue().equals("PM")) {
