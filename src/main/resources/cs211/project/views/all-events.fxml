@@ -52,16 +52,9 @@
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="63.0" />
                   <Button mnemonicParsing="false" text="Category" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
-                  <Button mnemonicParsing="false" text="Liked" visible="false" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
-                  <Button mnemonicParsing="false" text="Owner" visible="false" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
-                  <Button mnemonicParsing="false" text="Member" visible="false" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="12.0" />
-                  <Button mnemonicParsing="false" text="Staff" visible="false" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="25.0" />
-                  <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="430.0" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="120.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="190.0" />
+                  <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="500.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="120.0" />
                   <ImageView fx:id="sortImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/hostevent/sort.png" />

@@ -161,8 +161,6 @@ public class MyEventsController {
                 }
             }
         });
-
-
     }
 
     public void onCompleteAction(ActionEvent actionEvent) {
@@ -181,18 +179,13 @@ public class MyEventsController {
     public void onOwnerEventAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Owner");
         setMainListView(showlist);
-
         sortBox(showlist);
-
-
     }
 
     public void onStaffAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Staff");
         setMainListView(showlist);
-
         sortBox(showlist);
-
     }
 
     public void onManageEventButton(ActionEvent actionEvent) {
@@ -260,7 +253,7 @@ public class MyEventsController {
                 break;
             case "Owner":
                 for (Event event:eventList.getEvents()) {
-                    if (event.isHostEvent(currentUser.getUserId()) ){
+                    if (event.isHostEvent(currentUser.getUserId()) && !event.isEnd() ){
                         filterlist.addEvent(event);
                     }
                 }

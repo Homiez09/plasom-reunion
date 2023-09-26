@@ -100,6 +100,7 @@ public class CardMyEventController {
 
     }
     public void setEvent(Event event) {
+
         this.event = event;
 
         hashMap = new HashMap<>();
