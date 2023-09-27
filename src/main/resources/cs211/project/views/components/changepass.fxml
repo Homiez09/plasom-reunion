@@ -132,7 +132,7 @@
                   </Button>
                   <ImageView fx:id="visibleCurrentPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="474.0" layoutY="36.0" onMouseClicked="#onVisibleCurrentPasswordClick" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="visibleNewPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="474.0" layoutY="107.0" onMouseClicked="#onVisibleNewPasswordClick" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="errorLabel" layoutX="127.0" layoutY="229.0" lineSpacing="1.0" prefHeight="21.0" prefWidth="464.0" text="Wrong password, Please try again." textFill="#f50606">
+                  <Label fx:id="errorLabel" layoutX="127.0" layoutY="229.0" lineSpacing="1.0" prefHeight="21.0" prefWidth="464.0" textFill="#f50606">
                      <styleClass>
                         <String fx:value="text-ms" />
                         <String fx:value="weight-base" />

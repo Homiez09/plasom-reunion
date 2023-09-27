@@ -147,6 +147,7 @@ public class ChangePassController {
 
         passwordReq.setVisible(false);
         errorLabel.setVisible(false);
+        errorLabel.setText("Wrong password, Please try again.");
     }
     private void loadVisibleImageInit() {
         visibleIcon = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
