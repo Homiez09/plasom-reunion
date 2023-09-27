@@ -704,7 +704,39 @@ Text, Label {
     -fx-background-color: #F6F4EE;
 }
 
-.menu-role-check-box{
+.menu-role-check-box {
     -fx-background-color: transparent;
+}
+
+
+/* for reset password page */
+.reset-password-text-field{
+    -fx-background-color: #F5F3ED;
+    -fx-border-color: #000000;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 11;
+    -fx-font-size: 18;
+    -fx-opacity: 1;-fx-padding: 0 0 0 35;
+}
+
+.reset-password-button {
+    -fx-background-color: #EFA44F;
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.reset-password-button:hover {
+    -fx-background-color: #FCB361;
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.reset-password-button:pressed {
+    -fx-background-color: #FFBF78;
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
 

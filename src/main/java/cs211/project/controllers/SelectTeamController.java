@@ -134,7 +134,6 @@ public class SelectTeamController {
 
     @FXML
     protected void onSettingEntered() {
-        System.out.println(teamSelectedComponentID);
         settingImageView.setImage(settingHover);
     }
 
