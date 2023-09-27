@@ -24,7 +24,6 @@ public class UserList {
 
     public User findDisplayName(String displayName) {
         for (User exist: users) {
-            System.out.println();
             if (exist.isDisplayName(displayName)) {
                 return exist;
             }
