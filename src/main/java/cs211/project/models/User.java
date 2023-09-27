@@ -118,7 +118,7 @@ public class User {
 
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
 
     public void setNewImagePath(String newImagePath) {
