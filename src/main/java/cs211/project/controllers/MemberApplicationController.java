@@ -42,13 +42,13 @@ public class MemberApplicationController {
     @FXML protected void onConfirmTeamButtonClick() {
         HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
         teamName = teamChoiceBox.getValue();
+
         TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
         TeamList teamList = teamListDataSource.readData();
         Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
         team.setRole("Member");
         if(teamListHashMap.get(user.getUsername()) == null) {
             teamListHashMap.put(user.getUsername(), new TeamList());
-            teamListHashMap.get(user.getUsername()).getTeams().add(team);
         }
         teamListHashMap.get(user.getUsername()).getTeams().add(team);
         joinTeamMap.writeData(teamListHashMap);
