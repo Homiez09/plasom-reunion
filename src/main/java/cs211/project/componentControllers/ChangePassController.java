@@ -1,154 +1,350 @@
 package cs211.project.componentControllers;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
-import cs211.project.services.Datasource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserListDataSource;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.stage.Modality;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class ChangePassController {
-    @FXML
-    Label currentErrorLabel,newErrorLabel,reNewErrorLabel;
-    @FXML
-    PasswordField currentPasswordField, newPasswordField, reNewPasswordField;
-    private Datasource<UserList> userListDatasource;
-    private UserList userList;
-    private User currentUser;
 
-    @FXML
-    public void initialize() {
-        this.currentUser = (User) FXRouter.getData();
-        this.userListDatasource = new UserListDataSource("data", "user-list.csv");
-        this.userList = userListDatasource.readData();
-        hideErrorLabel();
+    @FXML private PasswordField currentPasswordField, newPasswordField, reNewPasswordField;
 
-        currentPasswordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            validateCurrentPassword(newValue);
-            currentErrorLabel.setVisible(!newValue.isEmpty());
-        });
+    @FXML private TextField currentPasswordTextField, newPasswordTextField, reNewPasswordTextField;
 
-        newPasswordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            validateNewPassword(newValue);
-            newErrorLabel.setVisible(!newValue.isEmpty());
+    @FXML private Label errorLabel, passwordLengthReq, passwordLowerCaseReq, passwordNumReq, passwordSpecialReq, passwordUpperCaseReq;
 
-        });
+    @FXML private ImageView newPasswordCheckImageView, reNewPasswordCheckImageView, visibleCurrentPasswordImageView, visibleNewPasswordImageView, visibleReNewPasswordImageView;
 
-        reNewPasswordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            validateReNewPassword(newValue);
-            reNewErrorLabel.setVisible(!newValue.isEmpty());
+    @FXML private AnchorPane passwordReq;
 
-        });
+    private final int maxPasswordLimit = 27;
+    private String currentPassword = "" , newPassword = "", reNewPassword = "";
+    private boolean passwordMatching;
+    private Image visibleIcon, inVisibleIcon;
+    protected Image checkBoxPasswordImage;
 
-    }
+    private final User user = (User) FXRouter.getData();
+    UserListDataSource datasource;
+    UserList userList;
 
+    @FXML private void initialize() {
+        datasource = new UserListDataSource("data", "user-list.csv");
+        userList = datasource.readData();
 
-    private void validateCurrentPassword(String value) {
-        // เช็ครหัสผ่านเดิมที่ผู้ใช้ป้อน
-        boolean isValid = checkPassword();
-        if (!isValid && !value.isEmpty()) {
-            currentErrorLabel.setText("รหัสผ่านปัจจุบันไม่ถูกต้อง");
-        } else {
-            currentErrorLabel.setText("");
-        }
-    }
+        textFieldAndImageViewInit();
+        loadVisibleImageInit();
+        maximumLengthField();
 
-    private void validateNewPassword(String value) {
-        // เช็ครหัสผ่านใหม่ที่ผู้ใช้ป้อน
-        if (value.length() < 8 && !value.isEmpty()) {
-            newErrorLabel.setText("รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร");
-        } else {
-            newErrorLabel.setText("");
-        }
-    }
+        showFocusRequirementsPassword();
 
-    private void validateReNewPassword(String value) {
-        // เช็ครหัสผ่านใหม่อีกครั้งที่ผู้ใช้ป้อน
-        if (!value.equals(newPasswordField.getText()) && !value.isEmpty()) {
-            reNewErrorLabel.setText("รหัสผ่านใหม่ไม่ตรงกับรหัสผ่านใหม่อีกครั้ง");
-        } else {
-            reNewErrorLabel.setText("");
-        }
-    }
-    private boolean checkPassword() {
-        return BCrypt.verifyer().verify(currentPasswordField.getText().toCharArray(), currentUser.getPassword()).verified;
-    }
-    private boolean checkNewPassword(){
-        String newpass = newPasswordField.getText();
-        String renewpass = reNewPasswordField.getText();
-    return newpass.equals(renewpass);
-    }
-    private String setPassword(String password) {
-        return BCrypt.withDefaults().hashToString(12, password.toCharArray());
-    }
-
-    private void setNewPassword(User user) {
-        String newpass = newPasswordField.getText();
-        user.setPassword(setPassword(newpass));
+        eventHandleEnter();
 
     }
 
-    private boolean samePassword(){
-        if (currentPasswordField.getText().equals(newPasswordField.getText())&& !currentPasswordField.getText().isEmpty()){
-            newPasswordField.setText("");
-            reNewPasswordField.setText("");
-            return false;
-        }
-        return true;
-    }
-    public void onCancelAction(ActionEvent actionEvent) {
-        currentPasswordField.setText("");
-        newPasswordField.setText("");
-        reNewPasswordField.setText("");
-    }
-
-    public void onChangeAction(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        if (!samePassword()) {
-            if (checkNewPassword()) {
-                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                confirmationAlert.setTitle("ยืนยันการเปลี่ยนรหัสผ่าน");
-                confirmationAlert.setHeaderText(null);
-                confirmationAlert.setContentText("คุณต้องการเปลี่ยนรหัสผ่านของคุณใช่หรือไม่?");
-
-                // เราจะใช้ lambda expression เพื่อตรวจสอบผลลัพธ์ที่ผู้ใช้เลือก
-                confirmationAlert.initModality(Modality.APPLICATION_MODAL);
-                confirmationAlert.initOwner(currentPasswordField.getScene().getWindow());
-
-                confirmationAlert.showAndWait().ifPresent(response -> {
-                    if (response == ButtonType.OK && checkPassword()) {
-                        Alert alertinfo = new Alert(Alert.AlertType.INFORMATION);
-                        alertinfo.setContentText("Success");
-                        User user = userList.findUserId(currentUser.getUserId());
-                        setNewPassword(user);
-                        userListDatasource.writeData(userList);
-                        alertinfo.showAndWait();
-                    }
-
-                });
-            }else {
-                alert.setTitle("Password not correct");
-                alert.setContentText("Try Again");
-                alert.showAndWait();
+    private void eventHandleEnter(){
+        EventHandler<KeyEvent> enterEventHandler = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    onResetPasswordClick();
+                }
             }
-        }else {
-            alert.setTitle("Using Same Password");
-            alert.setContentText("Try Use New Password");
-            alert.showAndWait();
+        };
+        currentPasswordField.setOnKeyPressed(enterEventHandler);
+        currentPasswordTextField.setOnKeyPressed(enterEventHandler);
+
+        reNewPasswordField.setOnKeyPressed(enterEventHandler);
+        reNewPasswordTextField.setOnKeyPressed(enterEventHandler);
+
+        newPasswordField.setOnKeyPressed(enterEventHandler);
+        newPasswordTextField.setOnKeyPressed(enterEventHandler);
+    }
+
+
+    @FXML private void onResetPasswordClick(){
+        checkPasswordRequirement();
+        getPassword();
+        if(user.validatePassword(currentPassword) && passwordMatching){
+            userList.resetPassword(user.getUsername(),newPassword);
+            User userUpdate = userList.findUsername(user.getUsername());
+            datasource.writeData(userList);
+            try {
+                FXRouter.goTo("setting", userUpdate);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            errorLabel.setVisible(true);
+            resetErrorLabel();
         }
     }
-    private void hideErrorLabel(){
-        currentErrorLabel.setVisible(false);
-        reNewErrorLabel.setVisible(false);
-        newErrorLabel.setVisible(false);
+
+    @FXML private void onVisibleCurrentPasswordClick(MouseEvent event) {
+        getPassword();
+        if (currentPasswordField.isVisible()) {
+            currentPasswordTextField.setText(currentPassword);
+            currentPasswordField.setVisible(false);
+            currentPasswordTextField.setVisible(true);
+            visibleCurrentPasswordImageView.setImage(inVisibleIcon);
+        } else {
+            currentPasswordField.setText(currentPassword);
+            currentPasswordField.setVisible(true);
+            currentPasswordTextField.setVisible(false);
+            visibleCurrentPasswordImageView.setImage(visibleIcon);
+        }
+    }
+    @FXML private void onVisibleNewPasswordClick(MouseEvent event) {
+        getPassword();
+        if (newPasswordField.isVisible()) {
+            newPasswordTextField.setText(newPassword);
+            newPasswordField.setVisible(false);
+            newPasswordTextField.setVisible(true);
+            visibleNewPasswordImageView.setImage(inVisibleIcon);
+        } else {
+            newPasswordField.setText(newPassword);
+            newPasswordField.setVisible(true);
+            newPasswordTextField.setVisible(false);
+            visibleNewPasswordImageView.setImage(visibleIcon);
+        }
+    }
+    @FXML private void onVisibleReNewPasswordClick(MouseEvent event) {
+        getPassword();
+        if (reNewPasswordField.isVisible()) {
+            reNewPasswordTextField.setText(reNewPassword);
+            reNewPasswordField.setVisible(false);
+            reNewPasswordTextField.setVisible(true);
+            visibleReNewPasswordImageView.setImage(inVisibleIcon);
+        } else {
+            reNewPassword = reNewPasswordTextField.getText();
+            reNewPasswordField.setText(reNewPassword);
+            reNewPasswordField.setVisible(true);
+            reNewPasswordTextField.setVisible(false);
+            visibleReNewPasswordImageView.setImage(visibleIcon);
+        }
+    }
+
+
+    private void textFieldAndImageViewInit() {
+        currentPasswordTextField.setVisible(false);
+        newPasswordTextField.setVisible(false);
+        reNewPasswordTextField.setVisible(false);
+
+        newPasswordCheckImageView.setVisible(false);
+        reNewPasswordCheckImageView.setVisible(false);
+
+        passwordReq.setVisible(false);
+        errorLabel.setVisible(false);
+    }
+    private void loadVisibleImageInit() {
+        visibleIcon = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
+        inVisibleIcon = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
+        checkBoxPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/checkbox_password.png"));
+
+        newPasswordCheckImageView.setImage(checkBoxPasswordImage);
+        reNewPasswordCheckImageView.setImage(checkBoxPasswordImage);
+
+        visibleCurrentPasswordImageView.setImage(visibleIcon);
+        visibleNewPasswordImageView.setImage(visibleIcon);
+        visibleReNewPasswordImageView.setImage(visibleIcon);
+    }
+    private void maximumLengthField() {
+        currentPasswordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > maxPasswordLimit) {
+                currentPasswordField.setText(oldValue);
+            }
+        }));
+        currentPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > maxPasswordLimit) {
+                currentPasswordTextField.setText(oldValue);
+            }
+        }));
+
+
+        newPasswordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > maxPasswordLimit) {
+                newPasswordField.setText(oldValue);
+            }
+        }));
+
+        newPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > maxPasswordLimit) {
+                newPasswordTextField.setText(oldValue);
+            }
+        }));
+
+
+        reNewPasswordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > maxPasswordLimit) {
+                reNewPasswordField.setText(oldValue);
+            }
+        }));
+
+        reNewPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue.length() > maxPasswordLimit) {
+                reNewPasswordTextField.setText(oldValue);
+            }
+        }));
+    }
+
+
+
+    private void getPassword(){
+        if (currentPasswordField.isVisible()) {
+            currentPassword = currentPasswordField.getText();
+        } else {
+            currentPassword = currentPasswordTextField.getText();
+        }
+
+        if (newPasswordField.isVisible()) {
+            newPassword = newPasswordField.getText();
+        } else {
+            newPassword = newPasswordTextField.getText();
+        }
+
+        if (reNewPasswordField.isVisible()) {
+            reNewPassword = reNewPasswordField.getText();
+        } else {
+            reNewPassword = reNewPasswordTextField.getText();
+        }
+
+
+    }
+
+    private void showFocusRequirementsPassword() {
+        passwordReq.setVisible(false);
+        newPasswordField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue) {
+                showFocusRequirementsPassword();
+            }
+        });
+
+        newPasswordField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue) {
+                showFocusRequirementsPassword();
+            }
+        });
+
+        reNewPasswordField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue) {
+                showFocusRequirementsPassword();
+            }
+        });
+
+        reNewPasswordField.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue) {
+                showFocusRequirementsPassword();
+            }
+        });
+    }
+    private void checkPasswordRequirement() {
+        passwordMatching = false;
+        boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasSpecialCharacter = false, hasFitLength = false;
+        String specialCharacters = "!@#$";
+        if (newPassword.length() >= 8 && newPassword.length() <= 20) {
+            hasFitLength = true;
+        }
+        for (char p : newPassword.toCharArray()) {
+            if (Character.isUpperCase(p)) {
+                hasUpperCase = true;
+            } else if (Character.isLowerCase(p)) {
+                hasLowerCase = true;
+            } else if (Character.isDigit(p)) {
+                hasDigit = true;
+            } else if (specialCharacters.contains(String.valueOf(p))) {
+                hasSpecialCharacter = true;
+            }
+        }
+        passwordLengthReq.setStyle(hasFitLength ? setColorTextFill("green") : setColorTextFill("red"));
+        passwordUpperCaseReq.setStyle(hasUpperCase ? setColorTextFill("green") : setColorTextFill("red"));
+        passwordLowerCaseReq.setStyle(hasLowerCase ? setColorTextFill("green") : setColorTextFill("red"));
+        passwordNumReq.setStyle(hasDigit ? setColorTextFill("green") : setColorTextFill("red"));
+        passwordSpecialReq.setStyle(hasSpecialCharacter ? setColorTextFill("green") : setColorTextFill("red"));
+
+        if (hasFitLength && hasLowerCase && hasDigit && hasUpperCase && hasSpecialCharacter) {
+            newPasswordCheckImageView.setVisible(true);
+            passwordReq.setVisible(false);
+            if(reNewPassword.equals(newPassword)){
+                passwordMatching = true;
+                reNewPasswordCheckImageView.setVisible(true);
+            }else{
+                passwordMatching = false;
+                reNewPasswordCheckImageView.setVisible(false);
+            }
+
+        }else{
+            newPasswordCheckImageView.setVisible(false);
+            passwordReq.setVisible(true);
+        }
+    }
+
+
+    @FXML private void onKeyHidePassword() {
+        getPassword();
+        checkPasswordRequirement();
+    }
+    @FXML
+    private void onKeyShowPassword() {
+        getPassword();
+        checkPasswordRequirement();
+    }
+
+
+
+    private void resetErrorLabel(){
+        currentPasswordTextField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                errorLabel.setVisible(false);
+            }
+        });
+        currentPasswordField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                errorLabel.setVisible(false);
+            }
+        });
+
+
+        newPasswordTextField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                errorLabel.setVisible(false);
+            }
+        });
+        newPasswordField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                errorLabel.setVisible(false);
+            }
+        });
+
+
+        reNewPasswordTextField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                errorLabel.setVisible(false);
+            }
+        });
+        reNewPasswordField.textProperty().addListener((observableValue, oldValue , newValue) -> {
+            if(!newValue.equals(oldValue) ){
+                errorLabel.setVisible(false);
+            }
+        });
+    }
+    private String setColorTextFill(String color){
+        switch (color) {
+            case "black" -> color = "-fx-text-fill: #413b3b";
+            case "red" -> color = "-fx-text-fill: red";
+            case "green" -> color = "-fx-text-fill: green";
+        }
+        return color;
     }
 }
