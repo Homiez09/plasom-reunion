@@ -64,6 +64,13 @@ public class UserList {
         newUser.setStatus(false);
     }
 
+    public void resetPassword(String username, String newPassword){
+        User exist = findUsername(username);
+        if(exist != null){
+            exist.setPassword(newPassword);
+        }
+    }
+
 
     public void updateUserProfile(String username, String displayName, String contactNumber, String bio, String newImagePath) {
         User exist = findUsername(username);
@@ -78,6 +85,7 @@ public class UserList {
             exist.setShowContact(showContactNumber);
         }
     }
+
 
 
     public ArrayList<User> getNotAdminUsers() {
