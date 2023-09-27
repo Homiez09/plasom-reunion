@@ -273,7 +273,7 @@ public class CreateTeamController {
         checkTeamNameReq();
         if(teamNameRequirement) {
             HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
-            Team team = new Team(event.getEventID(), teamNameTextField.getText(), startDateFormat, endDateFormat, numMemberSpinner.getValue(), descriptionTextArea.getText());
+            Team team = new Team(event.getEventID(), user,teamNameTextField.getText(), startDateFormat, endDateFormat, numMemberSpinner.getValue(), descriptionTextArea.getText());
             team.setRole("Owner");
             if (teamListHashMap.containsKey(user.getUsername())) {
                 TeamList teamList = new TeamList(teamListHashMap.get(user.getUsername()));

@@ -72,21 +72,21 @@ public class TeamList {
         teams.add(team);
     }
 
-    public void addTeam(String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription){
+    public void addTeam(String eventID, User teamHostUser,String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription){
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
         Team exist = findTeamByName(teamName);
         if(exist == null){
-            Team team = new Team (eventID, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
+            Team team = new Team (eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
             teams.add(team);
         }
     }
 
-    public void addTeam(String teamID, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID){
+    public void addTeam(String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID){
         // load from file
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
-        Team team = new Team (teamID, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
+        Team team = new Team (teamID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
         teams.add(team);
     }
 

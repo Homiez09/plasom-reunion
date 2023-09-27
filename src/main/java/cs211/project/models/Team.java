@@ -1,28 +1,30 @@
 package cs211.project.models;
 
 import cs211.project.models.collections.UserList;
+import cs211.project.services.UserListDataSource;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Instant;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Random;
 
 public class Team implements Comparable<Team> {
     private String teamID, teamName, teamDescription, createdAt, eventID, startDate, endDate;
     private int maxSlotTeamMember;
     private boolean isBookmarked;
-    private UserList memberList;
+    private UserList memberList = new UserList();
     private String role;
+    private User teamHostUser;
+    private UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
+    private UserList userList = userListDataSource.readData();
 
-    public Team (String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember) {
+    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
+        this.teamHostUser = teamHostUser;
         this.teamName = teamName;
         this.teamDescription = "";
         this.startDate = formatStringToTimestamp(startDate);
@@ -33,20 +35,21 @@ public class Team implements Comparable<Team> {
         this.isBookmarked = false;
     }
 
-    public Team (String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription) {
-        this(eventID, teamName, startDate, endDate, maxSlotTeamMember);
+    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription) {
+        this(eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember);
         this.teamDescription = teamDescription;
     }
 
 
-    public Team (String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription, UserList memberList) {
-        this(eventID, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
+    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription, UserList memberList) {
+        this(eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
         this.memberList = memberList;
     }
 
-    public Team (String teamID, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID) {
+    public Team (String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID) {
         // this constructor is used when loading from database
         this.teamID = teamID;
+        this.teamHostUser = teamHostUser;
         this.teamName = teamName;
         this.teamDescription = teamDescription;
         this.startDate = startDate;
@@ -56,8 +59,14 @@ public class Team implements Comparable<Team> {
         this.eventID = eventID;
     }
 
-    public void AddMemberToTeam(/* todo: param require */) {
-        // todo: add member to team
+    public boolean addMemberToMemberList(String username) {
+        User userExist = memberList.findUsername(username); // check user is exist in member list
+        if (userExist == null) {
+            User user = userList.findUsername(username);
+            memberList.addUser(user);
+            return true;
+        };
+        return false;
     }
 
     // go to test file to see how to use this method
@@ -102,6 +111,16 @@ public class Team implements Comparable<Team> {
         }
 
         return result;
+    }
+
+    public UserList getMemberOnline() {
+        UserList userList = new UserList();
+        for (User user : memberList.getUsers()) {
+            if (user.getStatus()) {
+                userList.addUser(user);
+            }
+        }
+        return userList;
     }
 
     public String getTeamID() {
@@ -189,6 +208,7 @@ public class Team implements Comparable<Team> {
     @Override
     public String toString() {
         return teamID + ","
+                + teamHostUser.getUserId() + ","
                 + teamName + ","
                 + teamDescription + ","
                 + startDate + ","
