@@ -6,12 +6,13 @@ import cs211.project.models.collections.UserList;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
-public class Event {
+public class Event implements Comparable<Event>{
     private final String eventID;
     private User eventHostUser;
     private String eventName;
@@ -206,6 +207,8 @@ public class Event {
         }
         return randomText.toString();
     }
+
+
     @Override
     public String toString() {
         return      eventID + ','
@@ -225,5 +228,9 @@ public class Event {
     }
 
 
+    @Override
+    public int compareTo(Event o) {
+        return eventName.compareTo(o.eventName);
+    }
 }
 

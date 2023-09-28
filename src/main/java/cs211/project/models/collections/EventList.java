@@ -71,6 +71,9 @@ public class EventList {
         return count;
     }
 
+    public void sort(){
+        Collections.sort(events);
+    }
 
     public EventList suffleEvent(EventList eventList){
         EventList list = new EventList();

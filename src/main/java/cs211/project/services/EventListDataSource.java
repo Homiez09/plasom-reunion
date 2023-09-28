@@ -137,9 +137,10 @@ public class EventListDataSource implements Datasource<EventList> {
                 StandardCharsets.UTF_8
         );
         BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
-
+        data.sort();
         try {
             // สร้าง csv
+
             for (Event event : data.getEvents()) {
                 String line = event.toString();
 

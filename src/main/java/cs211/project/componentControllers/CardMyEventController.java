@@ -123,11 +123,9 @@ public class CardMyEventController {
             leaveEventButton.setVisible(false);
         }
 
-        for (Team team:teamList.getTeamOfEvent(event)) {
-            if (teamHashMap.containsKey(currentUser.getUsername()) && team.getEventID().equals(event.getEventID()) && !event.isHostEvent(currentUser.getUserId())){
+        if (teamHashMap.containsKey(currentUser.getUsername()) && teamList.getTeamOfEvent(event) != null && !event.isHostEvent(currentUser.getUserId())){
                 leaveEventButton.setVisible(false);
                 manageEventButton.setVisible(false);
-            }
         }
 
         if (event.isHaveUser(currentUser)) {
