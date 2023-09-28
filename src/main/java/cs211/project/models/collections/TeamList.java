@@ -3,6 +3,7 @@ package cs211.project.models.collections;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
+import cs211.project.services.JoinTeamMap;
 
 
 import java.util.ArrayList;
@@ -61,7 +62,14 @@ public class TeamList {
     }
 
     public void removeTeamByEvent(Event event) {
-        teams.removeIf(team -> team.getEventID().equals(event.getEventID()));
+        teams.removeIf(team -> {
+            JoinTeamMap joinTeamMap = new JoinTeamMap();
+            HashMap<String, UserList> hashMap = joinTeamMap.roleReadData();
+            hashMap.remove(team.getTeamID());
+            joinTeamMap.roleWriteData(hashMap);
+            return team.getEventID().equals(event.getEventID());
+        });
+
     }
 
     public void removeTeam(String teamID) {
