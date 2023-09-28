@@ -1,6 +1,8 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.Activity;
+import cs211.project.models.Event;
+import cs211.project.models.Team;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,15 @@ public class ActivityList {
     }
     public ArrayList<Activity> getActivities() {
         return activities;
+    }
+    public ArrayList<Activity> getActivityOfEvent(String eventID) {
+        ArrayList<Activity> activityOfEvent = new ArrayList<>();
+        for (Activity activity : activities) {
+            if (activity.getEventID().equals(eventID)) {
+                activityOfEvent.add(activity);
+            }
+        }
+        return activityOfEvent;
     }
 }
 
