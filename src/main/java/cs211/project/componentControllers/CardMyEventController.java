@@ -176,7 +176,7 @@ public class CardMyEventController {
 
 
 
-        if (!teamHashMap.keySet().contains(currentUser.getUsername())){
+        if (!teamHashMap.containsKey(currentUser.getUsername())){
 
             try {
                 FXRouter.goTo("event",currentUser,event);
@@ -192,42 +192,4 @@ public class CardMyEventController {
         }
 
     }
-    // ลบ Event
-//            if (event.getEventHostName().equals(currentUser.getUsername())) {
-//        eventList.getEvents().remove(eventList.findEvent(event.getEventID()));
-//        teamList.getTeams().removeIf(team -> team.getEventID().equals(event.getEventID())); // ลบทีมใน team-list.csv
-//
-//        // ลบ user join team ใน join-team.csv
-//        for (String username : teamHashMapGlobal.keySet()) { // ตามจำนวนคนใน team
-//            TeamList teamList = new TeamList(teamHashMapGlobal.get(username).getTeams());
-//            teamList.removeTeamByEvent(event);
-//            teamHashMap.put(username, teamList); // ยัด teamList ที่ลบ team ในแต่ละ user เข้าไปใน teamHashMap
-//        }
-//
-//        // สร้าง path
-//        String folderPath = event.getEventImagePath();
-//        File fileToDelete = new File(folderPath);
-//        // ลบไฟล์
-//        if (fileToDelete.exists()) {
-//
-//            if (fileToDelete.delete()) {
-//                System.out.println("Succes Delete");
-//            } else {
-//                System.out.println("Cant Delete");
-//            }
-//        } else {
-//            System.out.println("Not Found");
-//        }
-//
-//        // ลบไฟล์
-//        eventListDatasource.writeData(eventList);
-//        joinTeamMap.writeData(teamHashMap);
-//        teamListDataSource.writeData(teamList);
-//
-//        try {
-//            FXRouter.goTo("my-events", currentUser);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

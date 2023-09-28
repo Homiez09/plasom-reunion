@@ -105,9 +105,7 @@ public class EventList {
         return count;
     }
 
-    public ArrayList<Event> getEvents() {
-        return events;
-    }
+
     public EventList suffleEvent(EventList eventList){
         EventList list = new EventList();
         Collections.shuffle(events);
@@ -166,16 +164,15 @@ public class EventList {
 
         return list;
     }
-    public EventList getOwner(EventList eventList,User user){
-        EventList list = new EventList();
+    public ArrayList<Event> getEvents() {
+        return events;
+    }
+
+    public ArrayList<Event> getOwner(User user){
         if (user!=null) {
-            for (Event event : eventList.events) {
-                if (event.getEventHostUser().getUserId().equals(user.getUserId())) {
-                    list.addEvent(event);
-                }
-            }
+            events.removeIf(event -> !event.getEventHostUser().getUserId().equals(user.getUserId()));
         }
-        return list;
+        return events;
     }
 
 

@@ -1,5 +1,6 @@
 package cs211.project.controllers;
 
+import cs211.project.componentControllers.OwnerEventController;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
@@ -191,11 +192,15 @@ public class MyEventsController {
     public void onManageEventButton(ActionEvent actionEvent) {
         Popup popup = new Popup();
         VBox popupContent = new VBox();
+        //----------set up---------------\\
         popupContent.setStyle("-fx-background-color: #F6F4EE;");
+        popup.setAutoHide(true);
+
+        //----------set up---------------\\
 
         VBox box = new VBox();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/owner-events.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/owner-events.fxml"));
             VBox loaded = loader.load();
             OwnerEventController ownerEventController = loader.getController();
             ownerEventController.setDataPopup(popup,currentUser);
@@ -206,6 +211,7 @@ public class MyEventsController {
         popupContent.getChildren().add(box);
 
         popup.getContent().addAll(popupContent);
+
 
         popup.show(navbarAnchorPane.getScene().getWindow());
     }

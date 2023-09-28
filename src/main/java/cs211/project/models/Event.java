@@ -21,7 +21,6 @@ public class Event {
     private final String timestamp;
     private boolean joinEvent = false,joinTeam = false;
     private BooleanProperty isSelected ;
-
     private ActivityList activities;
     private TeamList teamList;
     public Event(String eventName,
