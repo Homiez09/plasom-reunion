@@ -5,15 +5,17 @@ import cs211.project.models.collections.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EventListDataSource implements Datasource<EventList> {
-    private String directoryName = "data";
-    private String fileName = "event-list.csv";
+    private final String directoryName = "data";
+    private final String fileName = "event-list.csv";
     private EventList eventList;
+    private JoinEventMap eventMapData ;
 
     public EventListDataSource() {
-        this.directoryName = directoryName;
-        this.fileName = fileName;
         checkFileIsExisted();
     }
     // ตรวจสอบว่ามีไฟล์ให้อ่านหรือไม่ ถ้าไม่มีให้สร้างไฟล์เปล่า
@@ -93,29 +95,23 @@ public class EventListDataSource implements Datasource<EventList> {
                 boolean joinEvent = Boolean.parseBoolean(data[12].trim());
                 boolean joinTeam = Boolean.parseBoolean(data[13].trim());
 
-                for (Team team:teamList.getTeams()) {
-                    if (team.getEventID().equals(eventId)){
-                        eventList.findEvent(eventId).getTeamList().addTeam(team);
-                    }
-                }
 
-                for (User user:userList.getUsers()) {
-                }
-
-                for (Activity activity:activityList.getActivities()){
-                    if (activity.getEventID().equals(eventId)){
-                        eventList.findEvent(eventId).getActivityList().addActivity(activity);
-                    }
-                }
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
                                         eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam
                                         );
-                eventList.setMemberData();
+                for (Team team:teamList.getTeamOfEvent(eventList.findEvent(eventId))) {
+                    eventList.findEvent(eventId).getTeamList().addTeam(team);
+                }
+                for (Activity activity : activityList.getActivities()){
+                    System.out.println(activity.getEventID());
+                    eventList.findEvent(eventId).getActivityList().addActivity(activity);
+                }
 
-                eventList.setUserData(eventId);
+                for (User user: userList.getUserOfEvent(eventList.findEvent(eventId))){
+                    eventList.findEvent(eventId).getUserList().addUser(user);
+                }
 
-                // เพิ่มข้อมูลลงใน list
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

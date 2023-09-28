@@ -1,10 +1,13 @@
 package cs211.project.models.collections;
 
+import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
+import cs211.project.services.JoinEventMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class UserList {
     private ArrayList<User> users;
@@ -121,6 +124,23 @@ public class UserList {
 
         return userHashMapTemp;
     }
+    public ArrayList<User> getUserOfEvent(Event event) {
+        String eventID = event.getEventID();
+        ArrayList<User> userList = new ArrayList<>();
+        HashMap<String, Set<String>> joinEventMap = new JoinEventMap().readData();
+        Set<String> setUser = joinEventMap.get(eventID);
+
+        if (setUser != null) {
+            for (String userID : setUser) {
+                if (joinEventMap.containsKey(eventID)){
+                    userList.add(findUserId(userID));
+                }
+            }
+        }
+
+        return userList;
+    }
+
 
     public ArrayList<User> getUsers() {
         return users;

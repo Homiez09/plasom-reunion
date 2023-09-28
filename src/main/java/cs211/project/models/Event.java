@@ -47,6 +47,8 @@ public class Event {
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         this.isSelected = new SimpleBooleanProperty(false);
         this.activities = new ActivityList();
+        this.teamList = new TeamList();
+        this.userList = new UserList();
         this.joinEvent = true;
         this.joinTeam = true;
     }
@@ -74,6 +76,8 @@ public class Event {
         this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         this.activities = new ActivityList();
+        this.teamList = new TeamList();
+        this.userList = new UserList();
         this.joinEvent = true;
         this.joinTeam = true;
     }
@@ -104,6 +108,9 @@ public class Event {
         this.slotMember = slotMember;
         this.eventHostUser = eventHostUser;
         this.timestamp =timestamp;
+        this.activities = new ActivityList();
+        this.teamList = new TeamList();
+        this.userList = new UserList();
         this.joinEvent = joinEvent;
         this.joinTeam = joinTeam;
     }

@@ -1,6 +1,7 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.Activity;
+import cs211.project.models.Event;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,9 @@ public class ActivityList {
             }
         }
         return null;
+    }
+    public ArrayList<Activity> getActivitiesOfEvent(Event event){
+        return activities;
     }
     public ArrayList<Activity> getActivities() {
         return activities;

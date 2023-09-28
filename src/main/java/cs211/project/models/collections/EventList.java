@@ -61,24 +61,6 @@ public class EventList {
         return null;
     }
 
-    public void setMemberData(){
-
-    }
-    public void setActivityData(String eventId) {
-
-    }
-    public void setUserData(String eventId) {
-        JoinEventMap eventMapData = new JoinEventMap();
-        HashMap<String,Set<String>> eventHashMap = eventMapData.readData();
-        Set<String> eventSet ;
-        for (Event event:events) {
-            if (eventHashMap.containsKey(event.getEventID())){
-                eventSet = eventHashMap.get(event.getEventID());
-            }
-
-        }
-
-    }
 
     public int getSizeTotalEvent(){return events.size();}
     public int getSizeCompletedEvent(){
