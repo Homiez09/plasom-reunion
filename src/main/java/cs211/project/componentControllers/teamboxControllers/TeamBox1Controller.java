@@ -107,17 +107,6 @@ public class TeamBox1Controller {
         menuDropDown.show();
     }
 
-    private void initMenu() {
-        menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
-            if (newValue == null) return;
-            try {
-                goTo((String) newValue);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
-
     private void initBookmark() {
         if (initBookMarkCheck) return;
         if (bookmarkLabel.getText().equals("true")) {

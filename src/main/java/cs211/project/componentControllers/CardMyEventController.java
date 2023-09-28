@@ -67,7 +67,7 @@ public class CardMyEventController {
                 throw new RuntimeException(e);
             }
         }else {
-            eventList.findEvent(event.getEventID()).addMember();
+
             hashSet.add(currentUser.getUserId());
             hashMap.put(event.getEventID(), hashSet);
 
@@ -85,7 +85,7 @@ public class CardMyEventController {
         if (hashMap.containsKey(event.getEventID())) {
             hashSet = hashMap.get(event.getEventID());
         }
-        eventList.findEvent(event.getEventID()).delMember();
+
         hashSet.remove(currentUser.getUserId());
         hashMap.put(event.getEventID(), hashSet);
 
@@ -141,9 +141,9 @@ public class CardMyEventController {
         String descrip = event.getEventDescription().replaceAll("\n", " ");
         descriptionLabel.setText(descrip);
         if (event.getSlotMember() == -1) {
-            memberCountLabel.setText(event.getMember()+"");
+            memberCountLabel.setText(event.getUserInEvent()+"");
         }else {
-            memberCountLabel.setText(event.getMember() + "/" + event.getSlotMember());
+            memberCountLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
         }
 
     }

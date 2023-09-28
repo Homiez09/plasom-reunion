@@ -34,7 +34,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
     }
 
     @Override
-    public HashMap<String, TeamList> readData() {
+    public HashMap<String, TeamList> readData() { // key: username, value: TeamList
         HashMap<String, TeamList> hashMap = new HashMap<>();
 
         TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
@@ -75,6 +75,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                     TeamList teamList = hashMap.get(username);
                     Team team = teamHashMap.get(teamID);
                     team.setRole(role);
+                    team.addMemberToMemberList(username, role);
                     team.setBookmarked(isBookmarked);
                     teamList.addTeam(team);
                     hashMap.put(username, teamList);
@@ -82,6 +83,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                     TeamList teamList = new TeamList();
                     Team team = teamHashMap.get(teamID);
                     team.setRole(role);
+                    team.addMemberToMemberList(username, role);
                     team.setBookmarked(isBookmarked);
                     teamList.addTeam(team);
                     hashMap.put(username, teamList);
@@ -117,7 +119,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
             for (String username : data.keySet()) {
                 ArrayList<Team> teamArrayList = data.get(username).getTeams();
                 for (Team team : teamArrayList) {
-                    buffer.write(username + "," + team.getTeamID() + "," + team.getRole() + "," + team.isBookmarked());
+                    buffer.write(username + "," + team.getTeamID() + "," +team.getRole() + "," + team.isBookmarked());
                     buffer.newLine();
                 }
             }

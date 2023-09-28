@@ -89,16 +89,15 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventEnd = data[6].trim();
                 String eventDescription = data[7].trim().replace("\n", "");
                 String eventLocation = data[8].trim();
-                int member = Integer.parseInt(data[9].trim());
-                int slotmember = Integer.parseInt(data[10].trim());
-                String timeStamp = data[11].trim();
-                boolean joinEvent = Boolean.parseBoolean(data[12].trim());
-                boolean joinTeam = Boolean.parseBoolean(data[13].trim());
+                int slotmember = Integer.parseInt(data[9].trim());
+                String timeStamp = data[10].trim();
+                boolean joinEvent = Boolean.parseBoolean(data[11].trim());
+                boolean joinTeam = Boolean.parseBoolean(data[12].trim());
 
 
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam
+                                        eventDescription, eventLocation, slotmember,timeStamp,joinEvent,joinTeam
                                         );
                 for (Team team:teamList.getTeamOfEvent(eventList.findEvent(eventId))) {
                     eventList.findEvent(eventId).getTeamList().addTeam(team);

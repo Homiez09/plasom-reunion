@@ -1,8 +1,6 @@
 package cs211.project.models.collections;
 
-import cs211.project.models.Activity;
 import cs211.project.models.Event;
-import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.services.*;
 
@@ -41,14 +39,14 @@ public class EventList {
     public void addEvent(String eventId, User eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
-                         int member, int slotMember,String timeStamp,boolean joinEvent,boolean joinTeam) {
+                         int slotMember,String timeStamp,boolean joinEvent,boolean joinTeam) {
         eventId = eventId.trim();
         eventName = eventName.trim();
 
         Event exist = findEvent(eventId);
         if (exist == null &&!eventName.equals("") && eventHost != null){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
-                                    eventLocation,member,slotMember,timeStamp,joinEvent,joinTeam));
+                                    eventLocation,slotMember,timeStamp,joinEvent,joinTeam));
         }
     }
 
@@ -117,7 +115,7 @@ public class EventList {
         return list;
     }
     public EventList sortByMember(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getMember);
+        Comparator<Event> comparing = Comparator.comparing(Event::getUserInEvent);
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
         Collections.sort(list.getEvents(),comparing);

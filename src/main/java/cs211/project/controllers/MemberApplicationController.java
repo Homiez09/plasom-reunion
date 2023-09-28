@@ -37,24 +37,46 @@ public class MemberApplicationController {
             throw new RuntimeException(e);
         }
     }
-    public void loadData(Event event, User user ) {
-        this.currentUser = user;
-        this.currentEvent = event;
 
+    public void loadData(Event event) {
+        // todo: ให้โชว์แต่ team ที่สามารถเข้าร่ววมได้ (team.isFull, team ที่เข้าร่วมแล้ว จะไม่โชว์)
         for (Team team : event.getTeamList().getTeams()) {
             teamChoiceBox.getItems().add(team.getTeamName());
         }
     }
     @FXML protected void onConfirmTeamButtonClick() {
 
+        HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
+        teamName = teamChoiceBox.getValue();
 
+        TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+        TeamList teamList = teamListDataSource.readData();
+
+
+        Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
+        if (team.isFull()) {
+            System.out.println("Team is full");
+            return;
+        }
+        team.setRole("Member");
+        if(teamListHashMap.get(user.getUsername()) == null) {
+            teamListHashMap.put(user.getUsername(), new TeamList());
+        }
+        for (Team teamCheck : teamListHashMap.get(user.getUsername()).getTeams()) {
+            if (teamCheck.getEventID().equals(event.getEventID())) {
+                System.out.println("Already join this event");
+                return;
+            }
+        }
+        teamListHashMap.get(user.getUsername()).getTeams().add(team);
+        joinTeamMap.writeData(teamListHashMap);
         try {
             FXRouter.goTo("select-team", currentUser, currentEvent);
-            HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
+            teamListHashMap = joinTeamMap.readData();
             teamName = teamChoiceBox.getValue();
-            TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
-            TeamList teamList = teamListDataSource.readData();
-            Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
+            teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+            teamList = teamListDataSource.readData();
+            team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
             team.setRole("Member");
             if (teamListHashMap.get(user.getUsername()) == null) {
                 teamListHashMap.put(user.getUsername(), new TeamList());

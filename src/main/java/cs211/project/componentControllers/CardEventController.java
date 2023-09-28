@@ -43,9 +43,9 @@ public class CardEventController {
             hostNameLabel.setText(event.getEventHostUser().getDisplayName());
 
             if (event.getSlotMember() == -1) {
-                memberCountLabel.setText(event.getMember()+"");
+                memberCountLabel.setText(event.getUserInEvent()+"");
             }else {
-                memberCountLabel.setText(event.getMember() + "/" + event.getSlotMember());
+                memberCountLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
             }
 
             ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());

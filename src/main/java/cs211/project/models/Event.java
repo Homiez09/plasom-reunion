@@ -18,7 +18,7 @@ public class Event {
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
     private String eventDescription, eventLocation;
-    private int member = 0 ,slotMember;
+    private int slotMember;
     private final String timestamp;
     private boolean joinEvent = false,joinTeam = false;
     private BooleanProperty isSelected ;
@@ -42,7 +42,6 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
-        this.member = 0;
         this.slotMember = -1;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         this.isSelected = new SimpleBooleanProperty(false);
@@ -71,7 +70,6 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
-        this.member = 0;
         this.slotMember = slotMember;
         this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
@@ -91,7 +89,6 @@ public class Event {
                  String eventDateEnd,
                  String eventDescription,
                  String eventLocation,
-                 int member,
                  int slotMember,
                  String timestamp,
                  boolean joinEvent,
@@ -104,7 +101,6 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
-        this.member = member;
         this.slotMember = slotMember;
         this.eventHostUser = eventHostUser;
         this.timestamp =timestamp;
@@ -126,7 +122,7 @@ public class Event {
     public String getEventDateEnd() {return eventDateEnd;}
     public String getEventDescription() {return eventDescription;}
     public int getSlotMember() {return slotMember;}
-    public int getMember() {return member;}
+    public int getUserInEvent() {return userList.getUsers().size();}
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivityList() { return activities; }
     public TeamList getTeamList() { return teamList; }
@@ -142,16 +138,14 @@ public class Event {
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
     public void changeTag(String newTag) {this.eventTag = newTag;}
     public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
-    public void setMember(int n){
-        this.member = n;
-    }
     public void setTeamList(TeamList teamList){
         this.teamList = teamList;
     }
     public void setActivity(ActivityList activityList) {this.activities = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
-    public void addMember(){if(!isFull())this.member++;}
-    public void delMember(){if(member >0) this.member--;}
+    public boolean isFull(){return slotMember == userList.getUsers().size();}
+//    public void addMember(){if(!isFull())this.member++;}
+//    public void delMember(){if(member >0) this.member--;}
 
 
     private String generateEventID() {
@@ -165,7 +159,6 @@ public class Event {
 
         return id;
     }
-    public boolean isFull(){return slotMember == member;}
     public boolean isUpComming(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
@@ -230,7 +223,7 @@ public class Event {
                 +   eventDateEnd + ','
                 +   eventDescription.replaceAll("\n"," ") + ','
                 +   eventLocation + ','
-                +   member + ','
+                +   getUserList().getUsers().size() + ','
                 +   slotMember +','
                 +   timestamp+','
                 +   joinEvent+','

@@ -95,9 +95,9 @@ public class EventPageController {
         eventInformationText.setWrappingWidth(568);
         eventTagLabel.setText(event.getEventTag());
         if (event.getSlotMember() == -1) {
-            currentParticipantsLabel.setText(event.getMember()+"");
+            currentParticipantsLabel.setText(event.getUserInEvent()+"");
         }else {
-            currentParticipantsLabel.setText(event.getMember() + "/" + event.getSlotMember());
+            currentParticipantsLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
         }
         Image image = new Image("file:" + event.getEventImagePath(), 300, 350, false, false);
         if (event.getEventImagePath().equals("null")) {
@@ -146,7 +146,7 @@ public class EventPageController {
             try {
                 AnchorPane staffApplicationWindow = staffApplicationLoader.load();
                 MemberApplicationController memberApplicationController = staffApplicationLoader.getController();
-                memberApplicationController.loadData(event,user);
+                memberApplicationController.loadData(event);
                 staffApplicationAnchorPane.getChildren().add(staffApplicationWindow);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -171,7 +171,7 @@ public class EventPageController {
                 throw new RuntimeException(e);
             }
         }else {
-            eventList.findEvent(event.getEventID()).addMember();
+
             set.add(user.getUserId());
             hashMap.put(event.getEventID(), set);
 

@@ -209,14 +209,21 @@ public class SelectTeamController {
                 Label teamName = (Label)teamBoxComponent.getChildren().get(6);
                 ImageView bookMarkImageView = (ImageView) teamBoxComponent.getChildren().get(5);
                 ImageView roleImageView = (ImageView) teamBoxComponent.getChildren().get(7);
-                AnchorPane memberShipAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(12);
-                ComboBox menuDropDown = (ComboBox) teamBoxComponent.getChildren().get(0);
+                AnchorPane memberShipAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(10);
                 Label roleLabel = (Label) memberShipAnchorPane.getChildren().get(2);
-                Label bookmarkLabel = (Label) teamBoxComponent.getChildren().get(14);
+                ComboBox menuDropDown = (ComboBox) teamBoxComponent.getChildren().get(0);
+                HBox onlineHBox = (HBox) teamBoxComponent.getChildren().get(9);
+                Label onlineLabel = (Label) onlineHBox.getChildren().get(1);
+                AnchorPane participantAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(11);
+                HBox participantHBox = (HBox) participantAnchorPane.getChildren().get(2);
+                Label participantsLabel = (Label) participantHBox.getChildren().get(0);
+                Label bookmarkLabel = (Label) teamBoxComponent.getChildren().get(12);
 
                 teamID.setText(team.getTeamID());
                 teamName.setText(team.getTeamName());
                 roleLabel.setText(team.getRole());
+                onlineLabel.setText(String.valueOf(team.getMemberOnline().getUsers().size()));
+                participantsLabel.setText(String.valueOf(team.getMemberList().getUsers().size())+" / "+team.getMaxSlotTeamMember());
 
                 if (team.getRole().equals("Owner")) {
                     menuDropDown.getItems().addAll("Manage Team", "Delete Team");
@@ -358,7 +365,7 @@ public class SelectTeamController {
                 role.setText(team.getRole());
                 roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
                 role.setText(team.getRole());
-                people.setText(String.valueOf(2));
+                people.setText(String.valueOf(team.getMemberList().getUsers().size())+ " / " + String.valueOf(team.getMaxSlotTeamMember()));
                 bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
                 teamIdLabel.setText(team.getTeamID());
 
