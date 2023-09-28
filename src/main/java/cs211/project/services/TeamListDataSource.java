@@ -15,8 +15,8 @@ public class TeamListDataSource implements Datasource<TeamList> {
     private TeamList teamList;
     private UserList userList;
     private UserListDataSource userListDataSource;
-    private JoinTeamMap joinTeamMap;
-    private HashMap<String, UserList> joinTeamMapHashMap;
+    private JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private HashMap<String, UserList> joinTeamMapHashMap = new HashMap<>();
 
 
     public TeamListDataSource(String directoryName, String fileName) {

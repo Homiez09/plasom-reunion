@@ -65,7 +65,18 @@ public class Team implements Comparable<Team> {
             User user = userList.findUsername(username);
             memberList.addUser(user);
             return true;
-        };
+        }
+        return false;
+    }
+
+    public boolean addMemberToMemberList(String username, String role) {
+        User userExist = memberList.findUsername(username); // check user is exist in member list
+        if (userExist == null) {
+            User user = userList.findUsername(username);
+            user.setRole(role);
+            memberList.addUser(user);
+            return true;
+        }
         return false;
     }
 
@@ -121,6 +132,10 @@ public class Team implements Comparable<Team> {
             }
         }
         return userList;
+    }
+
+    public boolean isFull() {
+        return memberList.getUsers().size() >= maxSlotTeamMember; // return true if full
     }
 
     public String getTeamID() {
