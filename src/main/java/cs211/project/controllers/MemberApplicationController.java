@@ -35,6 +35,7 @@ public class MemberApplicationController {
         }
     }
     public void loadData(Event event) {
+        // todo: ให้โชว์แต่ team ที่สามารถเข้าร่ววมได้ (team.isFull, team ที่เข้าร่วมแล้ว จะไม่โชว์)
         for (Team team : event.getTeamList().getTeams()) {
             teamChoiceBox.getItems().add(team.getTeamName());
         }
@@ -42,13 +43,25 @@ public class MemberApplicationController {
     @FXML protected void onConfirmTeamButtonClick() {
         HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
         teamName = teamChoiceBox.getValue();
+
         TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
         TeamList teamList = teamListDataSource.readData();
+
+
         Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
+        if (team.isFull()) {
+            System.out.println("Team is full");
+            return;
+        }
         team.setRole("Member");
         if(teamListHashMap.get(user.getUsername()) == null) {
             teamListHashMap.put(user.getUsername(), new TeamList());
-            teamListHashMap.get(user.getUsername()).getTeams().add(team);
+        }
+        for (Team teamCheck : teamListHashMap.get(user.getUsername()).getTeams()) {
+            if (teamCheck.getTeamID().equals(team.getTeamName())) {
+                System.out.println("Already join this team");
+                return;
+            }
         }
         teamListHashMap.get(user.getUsername()).getTeams().add(team);
         joinTeamMap.writeData(teamListHashMap);
