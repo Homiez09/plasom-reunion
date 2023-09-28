@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.UserListEventController">
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.UsersEventController">
    <children>
       <AnchorPane>
          <children>
@@ -30,7 +30,7 @@
                   <HBox>
                      <children>
                         <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefWidth="25.0" style="-fx-border-color: #FFFFF;" />
-                        <Label fx:id="eventNameLabel" alignment="CENTER" text="Users " textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                        <Label alignment="CENTER" text="Users " textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -57,7 +57,7 @@
                      </children>
                   </HBox>
                   <Separator prefHeight="16.0" />
-                  <TableView fx:id="TableEvent">
+                  <TableView fx:id="TableUsers">
                      <columns>
                         <TableColumn fx:id="checkboxColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" sortable="false" text="Select" />
                         <TableColumn fx:id="profileColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" sortable="false" text="Profile" />

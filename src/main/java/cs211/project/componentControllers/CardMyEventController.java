@@ -5,12 +5,15 @@ import cs211.project.models.collections.*;
 import cs211.project.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
 
 import java.io.IOException;
@@ -178,11 +181,30 @@ public class CardMyEventController {
     }
 
     public void onManageEventButton(ActionEvent actionEvent) {
+        Popup popup = new Popup();
+        VBox popupContent = new VBox();
+        //----------set up---------------\\
+        popupContent.setStyle("-fx-background-color: #F6F4EE;");
+        popup.setAutoHide(true);
+
+        //----------set up---------------\\
+
+        VBox box = new VBox();
         try {
-            FXRouter.goTo("create-event",currentUser,event);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/users-event.fxml"));
+            VBox loaded = loader.load();
+            UsersEventController usersEventController = loader.getController();
+            usersEventController.setDataPopup(popup,event);
+            box.getChildren().setAll(loaded);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        popupContent.getChildren().add(box);
+
+        popup.getContent().addAll(popupContent);
+
+
+        popup.show(manageEventButton.getScene().getWindow());
     }
 
     public void onClickCard(MouseEvent mouseEvent) {

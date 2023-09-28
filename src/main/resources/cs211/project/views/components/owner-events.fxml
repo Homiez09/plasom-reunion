@@ -29,7 +29,7 @@
                      </children>
                   </HBox>
                   <Separator prefHeight="16.0" />
-                  <TableView fx:id="TableEvent" prefHeight="500.0" prefWidth="730.0">
+                  <TableView fx:id="TableEvents" prefHeight="500.0" prefWidth="730.0">
                      <columns>
                         <TableColumn fx:id="eventNameColumn" editable="false" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" sortable="false" text="Event Name" />
                         <TableColumn fx:id="startDateColumn" editable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" sortable="false" text="Start" />

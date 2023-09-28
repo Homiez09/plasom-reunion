@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class OwnerEventController {
     @FXML
-    TableView TableEvent;
+    TableView TableEvents;
     @FXML
     TableColumn<Event,String> eventNameColumn;
     @FXML
@@ -64,7 +64,7 @@ public class OwnerEventController {
 
     private void showTable(ObservableList<Event> observableList) {
         // กำหนด column
-        TableEvent.setPlaceholder(new Label("No Event"));
+        TableEvents.setPlaceholder(new Label("No Event"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateStart"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateEnd"));
@@ -109,7 +109,14 @@ public class OwnerEventController {
             }
         });
 
-        TableEvent.setItems(observableList);
+        eventNameColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(eventNameColumn));
+        startDateColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(startDateColumn));
+        endDateColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(endDateColumn));
+        memberColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(memberColumn));
+        statusColumn.setCellFactory(column ->new TableCellCenter<>().CellAsBoolean(statusColumn));
+
+
+        TableEvents.setItems(observableList);
 
     }
 
@@ -156,7 +163,7 @@ public class OwnerEventController {
                         eventListDatasource.writeData(eventList);
                         teamList.removeTeamByEvent(eventToModify);
                         joinEventMap.writeData(deleteEvent);
-                        TableEvent.refresh();
+                        TableEvents.refresh();
                         break;
                 }
             }
