@@ -190,6 +190,11 @@ public class Team implements Comparable<Team> {
         this.isBookmarked = bookmarked;
     }
 
+    public void setMemberList(UserList userList) {
+        if (userList == null) return;
+        this.memberList = userList;
+    }
+
     public void setStartDate(String startDate) { // format : yyyy-MM-dd.HH:mm:ss
         this.startDate = formatStringToTimestamp(startDate);
     }

@@ -7,6 +7,7 @@ import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 public class TeamListDataSource implements Datasource<TeamList> {
     private String directoryName;
@@ -14,6 +15,9 @@ public class TeamListDataSource implements Datasource<TeamList> {
     private TeamList teamList;
     private UserList userList;
     private UserListDataSource userListDataSource;
+    private JoinTeamMap joinTeamMap;
+    private HashMap<String, UserList> joinTeamMapHashMap;
+
 
     public TeamListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
@@ -44,6 +48,8 @@ public class TeamListDataSource implements Datasource<TeamList> {
 
         userListDataSource = new UserListDataSource("data","user-list.csv");
         userList = userListDataSource.readData();
+
+        joinTeamMapHashMap = joinTeamMap.roleReadData();
 
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
@@ -77,7 +83,9 @@ public class TeamListDataSource implements Datasource<TeamList> {
                 String createdAt = data[7];
                 String eventID = data[8];
 
-                teamList.addTeam(teamID, teamHostUser,teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
+                Team team = new Team(teamID, teamHostUser,teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
+                team.setMemberList(joinTeamMapHashMap.get(teamID)); // if not found, it will be null
+                teamList.addTeam(team);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
