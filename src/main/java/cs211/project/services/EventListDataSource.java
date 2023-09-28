@@ -9,9 +9,8 @@ import java.nio.charset.StandardCharsets;
 public class EventListDataSource implements Datasource<EventList> {
     private String directoryName = "data";
     private String fileName = "event-list.csv";
-    private Datasource<UserList> userListDatasource;
     private EventList eventList;
-    private UserList userList;
+
     public EventListDataSource() {
         this.directoryName = directoryName;
         this.fileName = fileName;
@@ -36,8 +35,15 @@ public class EventListDataSource implements Datasource<EventList> {
 
     @Override
     public EventList readData() {
-        userListDatasource = new UserListDataSource("data","user-list.csv");
-        userList = userListDatasource.readData();
+        Datasource<UserList> userListDatasource = new UserListDataSource("data","user-list.csv");
+        UserList userList = userListDatasource.readData();
+
+        Datasource<ActivityList> activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
+        ActivityList activityList = activityListDatasource.readData();
+
+
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -87,11 +93,27 @@ public class EventListDataSource implements Datasource<EventList> {
                 boolean joinEvent = Boolean.parseBoolean(data[12].trim());
                 boolean joinTeam = Boolean.parseBoolean(data[13].trim());
 
+                for (Team team:teamList.getTeams()) {
+                    if (team.getEventID().equals(eventId)){
+                        eventList.findEvent(eventId).getTeamList().addTeam(team);
+                    }
+                }
+
+                for (User user:userList.getUsers()) {
+                }
+
+                for (Activity activity:activityList.getActivities()){
+                    if (activity.getEventID().equals(eventId)){
+                        eventList.findEvent(eventId).getActivityList().addActivity(activity);
+                    }
+                }
+
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam);
+                                        eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam
+                                        );
                 eventList.setMemberData();
-                eventList.setTeamData(eventId);
-                eventList.setActivityData(eventId);
+
+                eventList.setUserData(eventId);
 
                 // เพิ่มข้อมูลลงใน list
             }

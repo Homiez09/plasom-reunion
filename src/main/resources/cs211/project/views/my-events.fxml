@@ -40,7 +40,7 @@
             <HBox styleClass="bgProfile1">
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="98.0" />
-                  <Button fx:id="upcomingButton" mnemonicParsing="false" onAction="#onUpComingButtonAction" text="Upcoming" />
+                  <Button fx:id="upcomingButton" mnemonicParsing="false" onAction="#onAllAction" text="All" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefWidth="18.0" />
                   <Button fx:id="completeButton" mnemonicParsing="false" onAction="#onCompleteAction" text="Complete" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefWidth="18.0" />

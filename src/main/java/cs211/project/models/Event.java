@@ -2,6 +2,7 @@ package cs211.project.models;
 
 import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.TeamList;
+import cs211.project.models.collections.UserList;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
@@ -23,6 +24,7 @@ public class Event {
     private BooleanProperty isSelected ;
     private ActivityList activities;
     private TeamList teamList;
+    private UserList userList;
     public Event(String eventName,
                  User eventHostUser,
                  String eventImagePath,
@@ -75,7 +77,7 @@ public class Event {
         this.joinEvent = true;
         this.joinTeam = true;
     }
-
+    //---------------- Read CSV ----------------\\
     public Event(String eventID,
                  User eventHostUser,
                  String eventName,
@@ -102,7 +104,6 @@ public class Event {
         this.slotMember = slotMember;
         this.eventHostUser = eventHostUser;
         this.timestamp =timestamp;
-        this.activities = new ActivityList();
         this.joinEvent = joinEvent;
         this.joinTeam = joinTeam;
     }
@@ -122,6 +123,7 @@ public class Event {
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivityList() { return activities; }
     public TeamList getTeamList() { return teamList; }
+    public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
     public boolean isJoinEvent() {return joinEvent;}
     public boolean isJoinTeam() {return joinTeam;}
@@ -140,6 +142,7 @@ public class Event {
         this.teamList = teamList;
     }
     public void setActivity(ActivityList activityList) {this.activities = activityList;}
+    public void setUserList(UserList userList){ this.userList = userList;}
     public void addMember(){if(!isFull())this.member++;}
     public void delMember(){if(member >0) this.member--;}
 

@@ -4,6 +4,9 @@ import cs211.project.componentControllers.OwnerEventController;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MyEventsController {
+public class MyEventsController  {
     @FXML
     AnchorPane navbarAnchorPane;
     @FXML
@@ -43,6 +46,7 @@ public class MyEventsController {
     private EventList eventList;
     private EventList showlist;
     private JoinEventMap joinEventMap;
+    private ObservableList<Event> observableList;
 
     private HashMap<String, Set<String>> eventMap;
     private Set<String> userSet;
@@ -61,19 +65,24 @@ public class MyEventsController {
         this.eventList = eventDatasource.readData();
         this.teamListDataSource = new TeamListDataSource("data","team-list.csv");
         this.teamList = teamListDataSource.readData();
+        observableList = FXCollections.observableArrayList(eventList.getEvents());
 
+        setMainListView(observableList);
 
-        mainListView.setPlaceholder(new Label("No Events"));
-        setMainListView(filterEvent(eventList,"Member"));
     }
 
 
-    public void  setMainListView(EventList eventList){
+
+    public void update(){
+
+    }
+    public void  setMainListView(ObservableList<Event> observableList){
         mainListView.getItems().clear();
         mainListView.getStyleClass().add("event-list");
 
-        if (eventList != null){
-            for (Event event:eventList.getEvents()){
+
+        if (observableList != null){
+            for (Event event:observableList){
                     AnchorPane anchorPane = new AnchorPane();
                     Separator separator = new Separator();
                     new LoadCardEventComponent(anchorPane,event,"card-my-event");
@@ -126,67 +135,29 @@ public class MyEventsController {
 
     }
 
-    public void onUpComingButtonAction(ActionEvent actionEvent) {
-        showlist =  filterEvent(eventList,"Upcoming");
-        setMainListView(showlist);
-        sortBox(showlist);
+    public void onAllAction(ActionEvent actionEvent) {
+        observableList.setAll(eventList.getEvents()); // ใช้ setAll เพื่ออัปเดตรายการใน observableList
+        setMainListView(observableList);
 
-
-
-    }
-    public void sortBox(EventList eventList){
-        sortChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, o, option) -> {
-            EventList list = new EventList();
-            if (option != null) {
-                String selectedOption = option.toString();
-                switch (selectedOption) {
-                    case "Name":
-                        list = eventList.sortByName(eventList);
-                        setMainListView(list);
-                        break;
-                    case "Date":
-                        list = eventList.sortUpcoming(eventList);
-                        setMainListView(list);
-                        break;
-                    case "Member":
-                        list = eventList.sortByMember(eventList);
-                        setMainListView(list);
-                        break;
-                    case "Tag":
-                        list = eventList.sortByTag(eventList);
-                        setMainListView(list);
-                        break;
-                    default:
-                        // กรณีไม่มีตัวเลือกที่ตรงกับ case ใด ๆ
-                        break;
-                }
-            }
-        });
     }
 
     public void onCompleteAction(ActionEvent actionEvent) {
-        showlist =  filterEvent(eventList,"Complete");
-        setMainListView(showlist);
-        sortBox(showlist);
-
+        observableList.setAll(eventList.getComplete(currentUser)); // ใช้ setAll เพื่ออัปเดตรายการใน observableList
+        setMainListView(observableList);
     }
 
     public void onMemberAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Member");
-        setMainListView(showlist);
-        sortBox(showlist);
     }
 
     public void onOwnerEventAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Owner");
-        setMainListView(showlist);
-        sortBox(showlist);
+
     }
 
     public void onStaffAction(ActionEvent actionEvent) {
         showlist =  filterEvent(eventList,"Staff");
-        setMainListView(showlist);
-        sortBox(showlist);
+
     }
 
     public void onManageEventButton(ActionEvent actionEvent) {
@@ -214,6 +185,36 @@ public class MyEventsController {
 
 
         popup.show(navbarAnchorPane.getScene().getWindow());
+    }
+
+    public void sortBox(EventList eventList){
+        sortChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, o, option) -> {
+            EventList list = new EventList();
+            if (option != null) {
+                String selectedOption = option.toString();
+                switch (selectedOption) {
+                    case "Name":
+                        list = eventList.sortByName(eventList);
+
+                        break;
+                    case "Date":
+                        list = eventList.sortUpcoming(eventList);
+
+                        break;
+                    case "Member":
+                        list = eventList.sortByMember(eventList);
+
+                        break;
+                    case "Tag":
+                        list = eventList.sortByTag(eventList);
+
+                        break;
+                    default:
+                        // กรณีไม่มีตัวเลือกที่ตรงกับ case ใด ๆ
+                        break;
+                }
+            }
+        });
     }
 
     private EventList filterEvent(EventList eventList,String type){
