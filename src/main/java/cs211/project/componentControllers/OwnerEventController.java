@@ -4,6 +4,7 @@ import cs211.project.models.*;
 import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.TeamList;
 import cs211.project.services.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class OwnerEventController {
     @FXML
     TableColumn<Event,String> endDateColumn;
     @FXML
-    TableColumn<Event,Integer> memberColumn;
+    TableColumn<Event,String> memberColumn;
     @FXML
     TableColumn<Event,Boolean> statusColumn;
     @FXML
@@ -42,14 +43,24 @@ public class OwnerEventController {
     private User currentUser;
     private EventList eventList;
     private TeamList teamList;
-    private Event event;
-    private JoinTeamMap joinTeamMap;
-    private HashMap<String,TeamList> teamHashMap;
-    private HashMap<String,TeamList> teamHashMapGlobal;
-
 
     @FXML
     public void initialize() {}
+    public void setDataPopup(Popup popup,User user) {
+        backButton.setOnAction(e -> popup.hide());
+        this.eventListDatasource = new EventListDataSource();
+        this.eventList = eventListDatasource.readData();
+        this.teamListDatasource = new TeamListDataSource("data", "team-list.csv");
+        this.teamList = teamListDatasource.readData();
+        this.joinEventMap = new JoinEventMap();
+        this.currentUser = user;
+        this.popup = popup;
+
+
+        ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getOwner(currentUser));
+        showTable(observableEventList);
+
+    }
 
     private void showTable(ObservableList<Event> observableList) {
         // กำหนด column
@@ -57,7 +68,9 @@ public class OwnerEventController {
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateStart"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateEnd"));
-        memberColumn.setCellValueFactory(new PropertyValueFactory<>("member"));
+        memberColumn.setCellValueFactory(cellData -> {
+            return new SimpleStringProperty(cellData.getValue().getUserList().getUsers().size()+"");
+        });
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("joinEvent"));
         buttonColumn.setCellFactory(param -> new TableCell<>() {
             private final ComboBox<String> comboBox = new ComboBox<>();
@@ -97,20 +110,6 @@ public class OwnerEventController {
         });
 
         TableEvent.setItems(observableList);
-
-    }
-    public void setDataPopup(Popup popup,User user) {
-        backButton.setOnAction(e -> popup.hide());
-        this.eventListDatasource = new EventListDataSource();
-        this.eventList = eventListDatasource.readData();
-        this.teamListDatasource = new TeamListDataSource("data", "team-list.csv");
-        this.joinEventMap = new JoinEventMap();
-        this.currentUser = user;
-        this.popup = popup;
-
-
-        ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getOwner(currentUser));
-        showTable(observableEventList);
 
     }
 
@@ -155,6 +154,7 @@ public class OwnerEventController {
                         }
                         observableList.remove(eventToModify);
                         eventListDatasource.writeData(eventList);
+                        teamList.removeTeamByEvent(eventToModify);
                         joinEventMap.writeData(deleteEvent);
                         TableEvent.refresh();
                         break;

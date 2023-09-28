@@ -173,7 +173,7 @@ public class SelectTeamController {
         teamHashMap = joinTeamMap.readData();
         int row = 0, column = 0, row2 = 0;
 
-        TeamList teamListSort = (teamHashMap.get(user.getUsername()) != null) ? new TeamList(teamHashMap.get(user.getUsername())) : new TeamList();
+        TeamList teamListSort = (teamHashMap.containsKey(user.getUsername())) ? new TeamList(teamHashMap.get(user.getUsername())) : new TeamList();
 
         if (teamListSort != null) teamListSort.sortTeamByNewCreatedAt();
 

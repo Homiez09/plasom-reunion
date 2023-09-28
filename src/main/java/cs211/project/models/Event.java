@@ -111,8 +111,6 @@ public class Event {
         this.joinTeam = joinTeam;
     }
 
-
-
     public String getEventID() {return eventID;}
     public User getEventHostUser() {return eventHostUser;}
     public String getEventName() {return eventName;}
@@ -128,9 +126,9 @@ public class Event {
     public TeamList getTeamList() { return teamList; }
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
+
     public boolean isJoinEvent() {return joinEvent;}
     public boolean isJoinTeam() {return joinTeam;}
-
     public void changeDateStart(String newDate){this.eventDateStart = newDate;}
     public void changeDateEnd(String newDate){this.eventDateEnd = newDate;}
     public void changeName(String newName){this.eventName = newName;}
@@ -144,9 +142,6 @@ public class Event {
     public void setActivity(ActivityList activityList) {this.activities = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
     public boolean isFull(){return slotMember == userList.getUsers().size();}
-//    public void addMember(){if(!isFull())this.member++;}
-//    public void delMember(){if(member >0) this.member--;}
-
 
     private String generateEventID() {
         Random random = new Random();
@@ -168,7 +163,6 @@ public class Event {
         }
         return false;
     }
-
     public boolean isNewEvent() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -184,8 +178,6 @@ public class Event {
         // ตรวจสอบว่า Time Stamp ไม่เกิน 7 วันและวันเริ่มต้นไม่เกิน 7 วัน
         return (timeStartDiff <= 7 && timeStampDiff <= 7 );
     }
-
-
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -194,11 +186,13 @@ public class Event {
 
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
-
     public boolean isHostEvent(String currentUserId) {
         return eventHostUser.getUserId().equals(currentUserId);
     }
-
+    public boolean isHaveUser(User user){
+        User finduser = userList.findUserId(user.getUserId());
+        return finduser != null;
+    }
     private String generateRandomText() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder randomText = new StringBuilder();
@@ -223,7 +217,6 @@ public class Event {
                 +   eventDateEnd + ','
                 +   eventDescription.replaceAll("\n"," ") + ','
                 +   eventLocation + ','
-                +   getUserList().getUsers().size() + ','
                 +   slotMember +','
                 +   timestamp+','
                 +   joinEvent+','
