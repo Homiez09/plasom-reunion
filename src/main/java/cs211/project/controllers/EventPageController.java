@@ -99,10 +99,10 @@ public class EventPageController {
         }else {
             currentParticipantsLabel.setText(event.getMember() + "/" + event.getSlotMember());
         }
-        Image image = new Image("file:" + event.getEventImagePath(), 300, 350, false, false);
+        Image image = new Image("file:" + event.getEventImagePath(), 300, 350, true, false);
         if (event.getEventImagePath().equals("null")) {
             String imgpath = "/images/events/event-default.png";
-            image = new Image(getClass().getResourceAsStream(imgpath), 300, 350, false, false);
+            image = new Image(getClass().getResourceAsStream(imgpath), 300, 350, true, false);
         }
         eventImageView.setImage(image);
         eventImageView.setFitWidth(300);
