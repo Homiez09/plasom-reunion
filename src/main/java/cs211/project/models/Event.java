@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Event implements Comparable<Event>{
     private final String eventID;
-    private User eventHostUser;
+    private final User eventHostUser;
     private String eventName;
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
