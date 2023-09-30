@@ -141,13 +141,9 @@ public class TeamBox1Controller {
     }
 
     private void leaveTeam(){
-        teamListHashMap = joinTeamMap.readData();
-        HashMap<String, TeamList> teamHashMap = new HashMap<>();
-        for (String username : teamListHashMap.keySet()){
-            TeamList teamList = new TeamList(teamListHashMap.get(username));
-            if (username.equals(user.getUsername())) {
-                teamList.removeTeam(teamIdLabel.getText());
-            }teamHashMap.put(username, teamList);
+        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
+        if (teamHashMap.containsKey(user.getUsername())) {
+            teamHashMap.get(user.getUsername()).removeTeam(teamIdLabel.getText());
         }joinTeamMap.writeData(teamHashMap);
     }
 
