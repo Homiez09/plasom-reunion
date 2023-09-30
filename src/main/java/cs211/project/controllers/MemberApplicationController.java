@@ -58,7 +58,7 @@ public class MemberApplicationController {
             teamListHashMap.put(user.getUsername(), new TeamList());
         }
         for (Team teamCheck : teamListHashMap.get(user.getUsername()).getTeams()) {
-            if (teamCheck.getTeamID().equals(team.getTeamName())) {
+            if (teamCheck.getTeamID().equals(team.getTeamID())) {
                 System.out.println("Already join this team");
                 return;
             }
