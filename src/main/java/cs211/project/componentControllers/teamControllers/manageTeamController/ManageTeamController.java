@@ -77,6 +77,7 @@ public class ManageTeamController {
                 statusImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/login/status/" + statusLabel.getText() + "_active.png")));
 
                 String[] menuOwnerItems = {"Promote to Leader", "Kick", "Ban"};
+                String[] menuLeaderItems = {"Kick", "Ban"};
                 String[] menuMemberItems = {"Leave Team"};
 
 

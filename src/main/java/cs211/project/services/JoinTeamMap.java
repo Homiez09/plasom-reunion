@@ -63,7 +63,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
         try {
             while ((line = buffer.readLine()) != null) {
                 if (line.equals("")) continue;
-
+                HashMap<String, Team> teamHashMap = teamListDataSource.readData().teamHashMap();
                 String[] data = line.split(",");
                 String username = data[0];
                 String teamID = data[1];
@@ -71,8 +71,6 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                 boolean isBookmarked = Boolean.parseBoolean(data[3]);
 
                 if (hashMap.containsKey(username)) {
-                    HashMap<String, Team> teamHashMap = teamListDataSource.readData().teamHashMap();
-
                     TeamList teamList = hashMap.get(username);
                     Team team = teamHashMap.get(teamID);
                     team.setRole(role);
@@ -80,8 +78,6 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
                     teamList.addTeam(team);
                     hashMap.put(username, teamList);
                 } else {
-                    HashMap<String, Team> teamHashMap = teamListDataSource.readData().teamHashMap();
-
                     TeamList teamList = new TeamList();
                     Team team = teamHashMap.get(teamID);
                     team.setRole(role);
@@ -180,7 +176,6 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
         HashMap<String, UserList> hashMap = new HashMap<>();
 
         UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
-        HashMap<String, User> userHashMap = userListDataSource.readData().userHashMap(); // key : username, value : User
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -206,6 +201,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
         try {
             while ((line = buffer.readLine()) != null) {
                 if (line.equals("")) continue;
+                HashMap<String, User> userHashMap = userListDataSource.readData().userHashMap();
 
                 String[] data = line.split(",");
                 String username = data[0];
