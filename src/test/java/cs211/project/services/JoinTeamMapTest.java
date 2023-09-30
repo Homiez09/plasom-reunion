@@ -17,9 +17,8 @@ class JoinTeamMapTest {
         HashMap<String, TeamList> hashMap = joinTeamMap.readData();
 
         for (String key: hashMap.keySet()) {
-            System.out.println(key);
             for (Team team: hashMap.get(key).getTeams()) {
-                System.out.println(team.getTeamName());
+                System.out.println(key + " " + team.getTeamName() + " " + team.getRole());
             }
         }
     }
