@@ -1,8 +1,10 @@
 package cs211.project.componentControllers.teamControllers.manageTeamController;
 
 import cs211.project.models.Event;
+import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
 import javafx.fxml.FXML;
@@ -21,7 +23,7 @@ public class ManageMemberTeamListController {
     private Event event = (Event) FXRouter.getData2();
 
     @FXML private ImageView roleImageView, statusImageView, menuImageView;
-    @FXML private Label nameLabel, roleLabel, statusLabel, menuLabel;
+    @FXML private Label nameLabel, roleLabel, statusLabel, menuLabel, userIdLabel;
     @FXML private ComboBox menuComboBox;
     protected Image roleIcon, statusIcon, menuIcon;
 
@@ -43,6 +45,31 @@ public class ManageMemberTeamListController {
         menuImageView.setImage(menuIcon);
     }
 
+    public void goTo(String page, String teamID) throws IOException {
+        switch(page) {
+            case "Promote to Leader":
+                // todo : manage team
+                break;
+            case "Leave Team":
 
+            case "Kick":
+                kickUser(teamID);
+                break;
+            case "Ban":
+                banUser(teamID);
+                break;
+        }
+        menuComboBox.getSelectionModel().clearSelection();
+    }
 
+    public void kickUser(String teamID) {
+        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
+        if (teamHashMap.containsKey(userIdLabel.getText())) {
+            teamHashMap.get(userIdLabel.getText()).removeTeam(teamID);
+        }joinTeamMap.writeData(teamHashMap);
+    }
+
+    public void banUser(String teamID) {
+        kickUser(teamID);
+    }
 }
