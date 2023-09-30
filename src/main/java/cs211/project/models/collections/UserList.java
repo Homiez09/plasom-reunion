@@ -54,6 +54,12 @@ public class UserList {
         }
     }
 
+    public boolean removeUser(User user) {
+        if (user == null) return false;
+        users.remove(user);
+        return true;
+    }
+
 
     public User login(String username, String password){
         for(User exist: users){
@@ -63,6 +69,7 @@ public class UserList {
         }
         return null;
     }
+
 
     public void logout(User oldUser) {
         User newUser = findUsername(oldUser.getUsername());
