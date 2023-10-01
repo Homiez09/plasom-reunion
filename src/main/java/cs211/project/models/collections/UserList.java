@@ -6,6 +6,8 @@ import cs211.project.models.User;
 import cs211.project.services.JoinEventMap;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -57,6 +59,12 @@ public class UserList {
         }
     }
 
+    public boolean removeUser(User user) {
+        if (user == null) return false;
+        users.remove(user);
+        return true;
+    }
+
 
     public User login(String username, String password){
         for(User exist: users){
@@ -66,6 +74,7 @@ public class UserList {
         }
         return null;
     }
+
 
     public void logout(User oldUser) {
         User newUser = findUsername(oldUser.getUsername());
@@ -116,6 +125,30 @@ public class UserList {
         return onlineUsers;
     }
 
+    public void promoteToLeader(String userID) {
+        User userLeader = getLeader();
+        if (userLeader != null) userLeader.setRole("Member");
+
+        User user = findUserId(userID);
+        user.setRole("Leader");
+
+    }
+
+    public void promoteToMember(String userID) {
+        User user = findUserId(userID);
+        user.setRole("Member");
+
+    }
+
+    public User getLeader() {
+        for (User user : users) {
+            if (user.getRole().equals("Leader")) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public HashMap<String, User> userHashMap() {
         HashMap<String, User> userHashMapTemp= new HashMap<>();
         for (User user: users) {
@@ -145,5 +178,17 @@ public class UserList {
 
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    public void sort(){
+        Collections.sort(users);
+    }
+
+    public void sort(Comparator<User> cmp){
+        Collections.sort(users, cmp);
+    }
+
+    public void reverse(Comparator<User> cmp){
+        Collections.reverse(users);
     }
 }

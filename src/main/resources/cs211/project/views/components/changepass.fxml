@@ -20,8 +20,8 @@
             <Separator opacity="0.0" prefHeight="10.0" prefWidth="600.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="780.0">
                <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="126.0" />
-                  <Label contentDisplay="CENTER" prefHeight="37.0" prefWidth="237.0" text="Reset-Password">
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="54.0" prefWidth="68.0" />
+                  <Label contentDisplay="CENTER" prefHeight="37.0" prefWidth="296.0" text="Reset-Password">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -34,48 +34,48 @@
                   </Label>
                </children>
             </HBox>
-            <AnchorPane prefHeight="392.0" prefWidth="958.0">
+            <AnchorPane prefHeight="392.0" prefWidth="855.0">
                <children>
-                  <AnchorPane fx:id="passwordReq" layoutX="136.0" layoutY="95.0" prefWidth="406.0">
+                  <AnchorPane fx:id="passwordReq" layoutX="83.0" layoutY="93.0" prefHeight="134.0" prefWidth="518.0" visible="false">
                      <children>
                         <Rectangle fx:id="passwordRequireBoxLabel" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="43.0" layoutX="412.04937744140625" layoutY="6.339508056640625" rotate="57.0" stroke="#fff5f500" strokeType="INSIDE" styleClass="condition-box" width="44.0" x="-22.0" />
-                        <Rectangle fx:id="passwordRequireBox" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="134.0" layoutX="398.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="5.0" styleClass="condition-box" width="406.0" />
-                        <Label alignment="TOP_LEFT" layoutX="418.0" layoutY="19.0" lineSpacing="1.0" prefHeight="115.0" prefWidth="449.0" text="Password Requirements:&#10;      •  &#10;      •  &#10;      •  &#10;      •  &#10;      •  ">
+                        <Rectangle fx:id="passwordRequireBox" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="134.0" layoutX="398.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="5.0" styleClass="condition-box" width="309.0" />
+                        <Label alignment="TOP_LEFT" layoutX="404.0" layoutY="12.0" lineSpacing="1.0" prefHeight="115.0" prefWidth="303.0" text="Password Requirements:&#10;      •  &#10;      •  &#10;      •  &#10;      •  &#10;      &#10;      • ">
                            <styleClass>
                               <String fx:value="condition-box-text" />
                               <String fx:value="font" />
                               <String fx:value="text-s" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="passwordLengthReq" alignment="TOP_LEFT" layoutX="450.0" layoutY="36.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Length must be 8 to 20 characters.">
+                        <Label fx:id="passwordLengthReq" alignment="TOP_LEFT" layoutX="434.0" layoutY="28.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="260.0" text="Length must be 8 to 20 characters.">
                            <styleClass>
                               <String fx:value="condition-box-text" />
                               <String fx:value="font" />
                               <String fx:value="text-xs" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="passwordUpperCaseReq" alignment="TOP_LEFT" layoutX="450.0" layoutY="51.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one uppercase letter (A-Z).">
+                        <Label fx:id="passwordUpperCaseReq" alignment="TOP_LEFT" layoutX="434.0" layoutY="43.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="260.0" text="Must include at least one uppercase letter (A-Z).">
                            <styleClass>
                               <String fx:value="condition-box-text" />
                               <String fx:value="font" />
                               <String fx:value="text-xs" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="passwordLowerCaseReq" alignment="TOP_LEFT" layoutX="450.0" layoutY="69.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one lowercase letter (a-z).">
+                        <Label fx:id="passwordLowerCaseReq" alignment="TOP_LEFT" layoutX="434.0" layoutY="62.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="260.0" text="Must include at least one lowercase letter (a-z).">
                            <styleClass>
                               <String fx:value="condition-box-text" />
                               <String fx:value="font" />
                               <String fx:value="text-xs" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="passwordSpecialReq" alignment="TOP_LEFT" layoutX="450.0" layoutY="84.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one special character from the set: !, @, #, $.">
+                        <Label fx:id="passwordSpecialReq" alignment="TOP_LEFT" layoutX="434.0" layoutY="77.0" lineSpacing="1.0" prefHeight="37.0" prefWidth="267.0" text="Must include at least one special character from the set: !, @, #, $.">
                            <styleClass>
                               <String fx:value="condition-box-text" />
                               <String fx:value="font" />
                               <String fx:value="text-xs" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="passwordNumReq" alignment="TOP_LEFT" layoutX="450.0" layoutY="100.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one numeric digit (0-9).">
+                        <Label fx:id="passwordNumReq" alignment="TOP_LEFT" layoutX="434.0" layoutY="107.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="260.0" text="Must include at least one numeric digit (0-9).">
                            <styleClass>
                               <String fx:value="condition-box-text" />
                               <String fx:value="font" />
@@ -84,45 +84,45 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <ImageView fx:id="newPasswordCheckImageView" fitHeight="24.0" fitWidth="28.0" layoutX="520.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="reNewPasswordCheckImageView" fitHeight="24.0" fitWidth="28.0" layoutX="520.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
-                  <PasswordField fx:id="reNewPasswordField" layoutX="127.0" layoutY="171.0" onKeyReleased="#onKeyHidePassword" prefHeight="47.0" prefWidth="385.0" promptText="re-new password">
+                  <ImageView fx:id="newPasswordCheckImageView" fitHeight="24.0" fitWidth="28.0" layoutX="470.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="reNewPasswordCheckImageView" fitHeight="24.0" fitWidth="28.0" layoutX="470.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" />
+                  <PasswordField fx:id="reNewPasswordField" layoutX="75.0" layoutY="169.0" onKeyReleased="#onKeyHidePassword" prefHeight="47.0" prefWidth="385.0" promptText="re-new password">
                      <styleClass>
                         <String fx:value="reset-password-text-field" />
                         <String fx:value="font" />
                      </styleClass>
                   </PasswordField>
-                  <PasswordField fx:id="newPasswordField" layoutX="127.0" layoutY="95.0" onKeyReleased="#onKeyHidePassword" prefHeight="47.0" prefWidth="385.0" promptText="new password">
+                  <PasswordField fx:id="newPasswordField" layoutX="75.0" layoutY="93.0" onKeyReleased="#onKeyHidePassword" prefHeight="47.0" prefWidth="385.0" promptText="new password">
                      <styleClass>
                         <String fx:value="reset-password-text-field" />
                         <String fx:value="font" />
                      </styleClass>
                   </PasswordField>
-                  <PasswordField fx:id="currentPasswordField" layoutX="127.0" layoutY="24.0" prefHeight="47.0" prefWidth="385.0" promptText="current password">
+                  <PasswordField fx:id="currentPasswordField" layoutX="75.0" layoutY="22.0" prefHeight="47.0" prefWidth="385.0" promptText="current password">
                      <styleClass>
                         <String fx:value="reset-password-text-field" />
                         <String fx:value="font" />
                      </styleClass>
                   </PasswordField>
-                  <TextField fx:id="currentPasswordTextField" layoutX="127.0" layoutY="24.0" prefHeight="47.0" prefWidth="385.0" promptText="current password">
+                  <TextField fx:id="currentPasswordTextField" layoutX="75.0" layoutY="22.0" prefHeight="47.0" prefWidth="385.0" promptText="current password">
                      <styleClass>
                         <String fx:value="reset-password-text-field" />
                         <String fx:value="font" />
                      </styleClass>
                   </TextField>
-                  <TextField fx:id="newPasswordTextField" layoutX="127.0" layoutY="95.0" onKeyTyped="#onKeyShowPassword" prefHeight="47.0" prefWidth="385.0" promptText="new password">
+                  <TextField fx:id="newPasswordTextField" layoutX="75.0" layoutY="93.0" onKeyTyped="#onKeyShowPassword" prefHeight="47.0" prefWidth="385.0" promptText="new password">
                      <styleClass>
                         <String fx:value="reset-password-text-field" />
                         <String fx:value="font" />
                      </styleClass>
                   </TextField>
-                  <TextField fx:id="reNewPasswordTextField" layoutX="127.0" layoutY="171.0" onKeyTyped="#onKeyShowPassword" prefHeight="47.0" prefWidth="385.0" promptText="re-new password">
+                  <TextField fx:id="reNewPasswordTextField" layoutX="75.0" layoutY="169.0" onKeyTyped="#onKeyShowPassword" prefHeight="47.0" prefWidth="385.0" promptText="re-new password">
                      <styleClass>
                         <String fx:value="reset-password-text-field" />
                         <String fx:value="font" />
                      </styleClass>
                   </TextField>
-                  <Button fx:id="resetPasswordButton" alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" layoutY="256.0" mnemonicParsing="false" onAction="#onResetPasswordClick" prefHeight="47.0" prefWidth="195.0" text="Reset Password" textFill="WHITE">
+                  <Button fx:id="resetPasswordButton" alignment="CENTER" contentDisplay="CENTER" layoutX="170.0" layoutY="250.0" mnemonicParsing="false" onAction="#onResetPasswordClick" prefHeight="47.0" prefWidth="195.0" text="Reset Password" textFill="WHITE">
                      <styleClass>
                         <String fx:value="font" />
                         <String fx:value="weight-bold" />
@@ -130,8 +130,8 @@
                         <String fx:value="reset-password-button" />
                      </styleClass>
                   </Button>
-                  <ImageView fx:id="visibleCurrentPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="474.0" layoutY="36.0" onMouseClicked="#onVisibleCurrentPasswordClick" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="visibleNewPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="474.0" layoutY="107.0" onMouseClicked="#onVisibleNewPasswordClick" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="visibleCurrentPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="422.0" layoutY="34.0" onMouseClicked="#onVisibleCurrentPasswordClick" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="visibleNewPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="422.0" layoutY="105.0" onMouseClicked="#onVisibleNewPasswordClick" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="errorLabel" layoutX="127.0" layoutY="229.0" lineSpacing="1.0" prefHeight="21.0" prefWidth="464.0" textFill="#f50606">
                      <styleClass>
                         <String fx:value="text-ms" />
@@ -139,7 +139,7 @@
                         <String fx:value="font" />
                      </styleClass>
                   </Label>
-                  <ImageView fx:id="visibleReNewPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="474.0" layoutY="183.0" onMouseClicked="#onVisibleReNewPasswordClick" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="visibleReNewPasswordImageView" fitHeight="24.0" fitWidth="28.0" layoutX="422.0" layoutY="181.0" onMouseClicked="#onVisibleReNewPasswordClick" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>

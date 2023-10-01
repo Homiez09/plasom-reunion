@@ -80,6 +80,15 @@ public class Team implements Comparable<Team> {
         return false;
     }
 
+    public boolean removeMember(User user) {
+        User userExist = memberList.findUsername(user.getUsername());
+        if (userExist == null) {
+            memberList.removeUser(user);
+            return true;
+        }
+        return false;
+    }
+
     // go to test file to see how to use this method
     public String formatTimestampToString(String timestamp) { // param require team.getStartDate() or team.getEndDate()
         long time = Long.parseLong(timestamp);
@@ -168,6 +177,9 @@ public class Team implements Comparable<Team> {
         return eventID;
     }
 
+    public User getTeamHostUser() {
+        return teamHostUser;
+    }
     public String getStartDate() { // return timestamp (millisecond)
         return startDate;
     }
