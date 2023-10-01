@@ -740,3 +740,9 @@ Text, Label {
     -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
 
+/* for user card-profile */
+.user-card-bg{
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+}
+

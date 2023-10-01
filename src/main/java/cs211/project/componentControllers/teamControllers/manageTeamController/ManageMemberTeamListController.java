@@ -1,35 +1,27 @@
 package cs211.project.componentControllers.teamControllers.manageTeamController;
 
-import cs211.project.models.Event;
-import cs211.project.models.Team;
-import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
-import cs211.project.services.FXRouter;
+import cs211.project.services.BanTeamMap;
 import cs211.project.services.JoinTeamMap;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ManageMemberTeamListController {
-    private User user = (User) FXRouter.getData();
-    private Event event = (Event) FXRouter.getData2();
 
     @FXML private ImageView roleImageView, statusImageView, menuImageView;
-    @FXML private Label nameLabel, roleLabel, statusLabel, menuLabel, userIdLabel;
+    @FXML private Label userIdLabel;
     @FXML private ComboBox menuComboBox;
     protected Image roleIcon, statusIcon, menuIcon;
-
     JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, TeamList> teamListHashMap;
-    TeamList teamList;
 
     @FXML private void initialize() {
         loadImageInit();
@@ -45,21 +37,29 @@ public class ManageMemberTeamListController {
         menuImageView.setImage(menuIcon);
     }
 
-    public void goTo(String page, String teamID) throws IOException {
-        switch(page) {
-            case "Promote to Leader":
-                // todo : manage team
-                break;
-            case "Leave Team":
-
-            case "Kick":
-                kickUser(teamID);
-                break;
-            case "Ban":
-                banUser(teamID);
-                break;
+    public void goTo(String page, String teamID, String userID) throws IOException {
+        switch (page) {
+            case "Promote to Leader" -> promoteToLeader(teamID, userID);
+            case "Promote to Member" -> promoteToMember(teamID, userID);
+            case "Leave Team", "Kick" -> kickUser(teamID);
+            case "Ban" -> banUser(teamID, userID);
         }
         menuComboBox.getSelectionModel().clearSelection();
+    }
+
+    public void goTo(String page, String teamID) throws IOException {
+        goTo(page, teamID, null);
+    }
+
+    public void promoteToLeader(String teamID, String userID){
+        HashMap<String, UserList> userHashMap = joinTeamMap.roleReadData();
+        userHashMap.get(teamID).promoteToLeader(userID);
+        joinTeamMap.roleWriteData(userHashMap);
+    }
+    public void promoteToMember(String teamID, String userID){
+        HashMap<String, UserList> userHashMap = joinTeamMap.roleReadData();
+        userHashMap.get(teamID).promoteToMember(userID);
+        joinTeamMap.roleWriteData(userHashMap);
     }
 
     public void kickUser(String teamID) {
@@ -68,8 +68,20 @@ public class ManageMemberTeamListController {
             teamHashMap.get(userIdLabel.getText()).removeTeam(teamID);
         }joinTeamMap.writeData(teamHashMap);
     }
-
-    public void banUser(String teamID) {
+    public void banUser(String teamID, String userID){
         kickUser(teamID);
+        BanTeamMap banHashMap = new BanTeamMap();
+        HashMap<String, Set<String>> banTeamHashMap = banHashMap.readData();
+        Set<String> set;
+
+        if (!banTeamHashMap.containsKey(teamID)) {
+            set = new HashSet<>();
+        } else {
+            set = banTeamHashMap.get(teamID);
+        }
+        set.add(userID);
+
+        if (!banTeamHashMap.containsKey(teamID)) banTeamHashMap.put(teamID, set);
+        banHashMap.writeData(banTeamHashMap);
     }
 }

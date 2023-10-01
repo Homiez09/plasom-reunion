@@ -4,6 +4,8 @@ import cs211.project.models.Team;
 import cs211.project.models.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class UserList {
@@ -120,6 +122,30 @@ public class UserList {
         return onlineUsers;
     }
 
+    public void promoteToLeader(String userID) {
+        User userLeader = getLeader();
+        if (userLeader != null) userLeader.setRole("Member");
+
+        User user = findUserId(userID);
+        user.setRole("Leader");
+
+    }
+
+    public void promoteToMember(String userID) {
+        User user = findUserId(userID);
+        user.setRole("Member");
+
+    }
+
+    public User getLeader() {
+        for (User user : users) {
+            if (user.getRole().equals("Leader")) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public HashMap<String, User> userHashMap() {
         HashMap<String, User> userHashMapTemp= new HashMap<>();
         for (User user: users) {
@@ -131,5 +157,17 @@ public class UserList {
 
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    public void sort(){
+        Collections.sort(users);
+    }
+
+    public void sort(Comparator<User> cmp){
+        Collections.sort(users, cmp);
+    }
+
+    public void reverse(Comparator<User> cmp){
+        Collections.reverse(users);
     }
 }
