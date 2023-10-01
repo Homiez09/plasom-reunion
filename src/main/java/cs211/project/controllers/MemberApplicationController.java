@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class MemberApplicationController {
-    TeamListDataSource datasource;
-    TeamList teamList;
     User user = (User) FXRouter.getData();
     Event event = (Event) FXRouter.getData2();
     JoinTeamMap joinTeamMap = new JoinTeamMap();
@@ -49,6 +47,10 @@ public class MemberApplicationController {
 
 
         Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
+        if (user.isBanFromTeam(team.getTeamID())) {
+            System.out.println("You are banned from this team");
+            return;
+        }
         if (team.isFull()) {
             System.out.println("Team is full");
             return;
@@ -71,6 +73,4 @@ public class MemberApplicationController {
             throw new RuntimeException(e);
         }
     }
-
-
 }

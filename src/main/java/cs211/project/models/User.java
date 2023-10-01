@@ -1,21 +1,21 @@
 package cs211.project.models;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Random;
+import cs211.project.services.BanTeamMap;
 
-public class User {
+import java.util.*;
+
+public class User implements Comparable<User>{
     private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath;
     private String  registerDate, userId, role, teamJoined;
 
     private boolean bookmark;
     private boolean admin, status, showContact;
 
+    @Override
+    public int compareTo(User user) {
+        return this.getUsername().compareTo(user.getUsername());
+    }
 
     public User(String userId, String displayName, String username, String password, String contactNumber,
                 String registerDate, String lastedLogin, String imagePath, String bio,
@@ -177,8 +177,12 @@ public class User {
         setImagePath(newImagePath);
     }
 
-
-
+    public boolean isBanFromTeam(String teamId) {
+        BanTeamMap banTeamMap = new BanTeamMap();
+        HashMap<String, Set<String>> banTeamHashMap = banTeamMap.readData();
+        if (!banTeamHashMap.containsKey(teamId)) return false;
+        else return banTeamHashMap.get(teamId).contains(userId);
+    }
 }
 
 
