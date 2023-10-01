@@ -11,6 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,7 +19,9 @@ import javafx.scene.layout.TilePane;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 
@@ -36,7 +39,7 @@ public class AllEventListController {
     private ObservableList<Event> eventObservableList;
     private EventList eventList;
     private int currentPage = 1;
-    private int itemsPerPage = 8;
+    private final int itemsPerPage = 8;
     private Predicate<Event> selectedPredicate = null;
     private FilteredList<Event> size;
 
@@ -44,13 +47,14 @@ public class AllEventListController {
     private void initialize() {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         setupPage();
-
-
-        getByCategory();
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getEventName);
+        eventObservableList.sort(eventComparator);
         loadData(currentPage,selectedPredicate);
+        getByCategory();
+        getBySearch();
 
     }
-    private void setupPage(){
+    private void setupPage() {
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         this.eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
@@ -60,19 +64,24 @@ public class AllEventListController {
     }
 
 
+
     private void loadData(int page,Predicate<Event> selectedPredicate) {
-        scrollPane.setVvalue(0.0);
         FilteredList<Event> filteredList = new FilteredList<>(eventObservableList,selectedPredicate);
         int startIndex = (page - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, filteredList.size());
 
         for (int i = startIndex; i < endIndex; i++) {
             Event event = filteredList.get(i);
-            AnchorPane anchorPane = new AnchorPane();
-            anchorPane.setUserData(event);
-            new LoadCardEventComponent(anchorPane, event, "card-event");
-            tilePaneMain.getChildren().add(anchorPane);
+            if (tilePaneMain.lookup(event.getEventID())==null) {
+                AnchorPane anchorPane = new AnchorPane();
+                anchorPane.setUserData(event);
+                anchorPane.setId(event.getEventID());
+                new LoadCardEventComponent(anchorPane, event, "card-event");
+                tilePaneMain.getChildren().add(anchorPane);
+            }
         }
+
+
 
     }
 
@@ -87,26 +96,25 @@ public class AllEventListController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double value = newValue.doubleValue();
-                if (value >= 0.8) {
-                    if (tilePaneMain.getChildren().size()/8 == currentPage) {
+                if (value >= 0.9 && tilePaneMain.getChildren().size()/8 == currentPage) {
                         loadMore();
-                    }
                 }
             }
         });
-
     }
     private void removeNode(Predicate<Event> selectedPredicate) {
-        // สร้าง FilteredList โดยใช้ Predicate
-        // ลบโหนดที่ไม่ตรงกับการกรองออกจาก TilePane
-        tilePaneMain.getChildren().removeIf(node -> {
+        FilteredList<Event> filteredList = eventObservableList.filtered(selectedPredicate);
+
+        List<Node> nodesToRemove = new ArrayList<>();
+        tilePaneMain.getChildren().forEach(node -> {
             if (node instanceof AnchorPane anchorPane) {
                 Event event = (Event) anchorPane.getUserData();
-                return !eventObservableList.filtered(selectedPredicate).contains(event); // ซ่อนโหนดที่ไม่ตรงกับ filteredList
+                if (!filteredList.contains(event)) {
+                    nodesToRemove.add(node);
+                }
             }
-            return false;
         });
-
+        tilePaneMain.getChildren().removeAll(nodesToRemove);
     }
 
     private void getByCategory(){
@@ -143,44 +151,37 @@ public class AllEventListController {
                         break;
                     default:
                         break;
-
                 }
-                size = new FilteredList<>(eventObservableList);
-
             currentPage = 1;
             removeNode(selectedPredicate);
             if (oldTag != null) {
                 loadData(currentPage,selectedPredicate);
-
             }
-
-
         });
-
     }
 
-    private void getBySearch(Predicate<Event> selectedPredicate ) {
+    private void getBySearch() {
         searchbarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            // สร้าง Predicate ใหม่เพื่อค้นหาตามข้อความที่ผู้ใช้ป้อน
+            String searchText = newValue.toLowerCase().trim();
             Predicate<Event> searchPredicate = event -> {
                 if (newValue == null || newValue.isEmpty()) {
-
-                    return true;
+                    return true; // แสดงทั้งหมดเมื่อค้นหาว่าง
                 }
-                String searchText = newValue.toLowerCase().trim();
-
-                return event.getEventName().toLowerCase().contains(searchText) ||
-                        event.getEventDescription().toLowerCase().contains(searchText);
+                return event.getEventName().toLowerCase().contains(searchText);
             };
 
-            // ลบโหนดที่ไม่ตรงกับเงื่อนไขค้นหาออกจาก TilePane
-            removeNode(searchPredicate);
-            if (oldValue != null) {
-
+            // ในการโหลดข้อมูลใหม่ให้ใช้ combinedPredicate แทน selectedPredicate
+            Predicate<Event> combinedPredicate = searchPredicate;
+            if (categoryComboBox.getValue() != null && !categoryComboBox.getValue().isEmpty()) {
+                combinedPredicate = combinedPredicate.and(selectedPredicate);
             }
 
+            tilePaneMain.getChildren().clear();
+            currentPage = 1;
+            loadData(currentPage, combinedPredicate);
         });
     }
+
 
     private void initCategory(){
         String category[] = {"Art","Education","Food & Drink","Music","Performance","Seminar","Sport"};
@@ -190,36 +191,30 @@ public class AllEventListController {
 
     private void initSort(){
         String sort[] = {"Name","Start","Member","End"};
-
     }
 
     public void onAllClick(ActionEvent actionEvent) {
-        tilePaneMain.getChildren().clear();
-        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
-        currentPage = 1;
+        reset();
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getEventName);
+        eventObservableList.sort(eventComparator);
         loadData(currentPage,selectedPredicate);
-        categoryButton.setText("Category");
 
 
     }
 
     public void onNewClick(ActionEvent actionEvent) {
-        currentPage = 1;
-        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
-        Comparator<Event> eventComparator = Comparator.comparing(Event::getTimestampAsDate);
+        reset();
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getTimestamp);
         eventObservableList.sort(eventComparator);
-        tilePaneMain.getChildren().clear();
         loadData(currentPage,selectedPredicate);
 
 
     }
 
     public void onUpClick(ActionEvent actionEvent) {
-        currentPage = 1;
-        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
+        reset();
         Comparator<Event> eventComparator = Comparator.comparing(Event::getEventDateEnd);
         eventObservableList.sort(eventComparator);
-        tilePaneMain.getChildren().clear();
         loadData(currentPage,selectedPredicate);
     }
 
@@ -237,13 +232,13 @@ public class AllEventListController {
         searchbarTextField.setText("");
     }
 
-
-
-    public void onScroll(ScrollEvent scrollEvent) {
-
+    public void reset() {
+        currentPage = 1;
+        scrollPane.setVvalue(0.0);
+        tilePaneMain.getChildren().clear();
+        selectedPredicate = null;
+        categoryComboBox.setValue("");
+        categoryButton.setText("Category");
     }
 
-    public void onScrollFinished(ScrollEvent scrollEvent) {
-
-    }
 }

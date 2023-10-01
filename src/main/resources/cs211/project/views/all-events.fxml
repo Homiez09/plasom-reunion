@@ -79,7 +79,7 @@
             <Separator opacity="0.0" prefHeight="3.0" prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="565.0" prefWidth="1152.0">
                <children>
-                  <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" onScroll="#onScroll" onScrollFinished="#onScrollFinished" vbarPolicy="ALWAYS">
+                  <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
                      <content>
                         <TilePane fx:id="tilePaneMain" hgap="30.0" prefColumns="4" prefHeight="560.0" prefRows="1" prefTileHeight="276.0" prefTileWidth="220.0" prefWidth="1052.0" vgap="30.0">
                            <opaqueInsets>
