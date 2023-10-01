@@ -127,6 +127,12 @@ public class Event implements Comparable<Event>{
     public TeamList getTeamList() { return teamList; }
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
+    public LocalDateTime getTimestampAsDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        return  LocalDateTime.parse(timestamp, formatter);
+
+    }
 
     public boolean isJoinEvent() {return joinEvent;}
     public boolean isJoinTeam() {return joinTeam;}
@@ -159,26 +165,22 @@ public class Event implements Comparable<Event>{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
-        if (!eventDate.isBefore(currentTime) && !eventDate.isAfter(currentTime.plusDays(20))) {
-            return true;
-        }
-        return false;
+        return !eventDate.isBefore(currentTime) && !eventDate.isAfter(currentTime.plusDays(7));
     }
     public boolean isNewEvent() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-        // แปลงสตริงวันที่และเวลาเป็น LocalDateTime
-        LocalDateTime eventStartDate = LocalDateTime.parse(eventDateStart, formatter);
-        LocalDateTime timeStamp = LocalDateTime.parse(timestamp,formatter);
+        // แปลงสตริง timestamp เป็น LocalDateTime
+        LocalDateTime timeStamp = LocalDateTime.parse(timestamp, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
 
-        // คำนวณความต่างของวันระหว่างวันที่เริ่มต้นของอีเวนต์กับวันปัจจุบัน
-        long timeStartDiff = ChronoUnit.DAYS.between(eventStartDate, currentTime);
+        // คำนวณความต่างของวันระหว่าง timestamp กับวันปัจจุบัน
         long timeStampDiff = ChronoUnit.DAYS.between(timeStamp, currentTime);
 
-        // ตรวจสอบว่า Time Stamp ไม่เกิน 7 วันและวันเริ่มต้นไม่เกิน 7 วัน
-        return (timeStartDiff <= 7 && timeStampDiff <= 7 );
+        // ตรวจสอบว่า timestamp ไม่เกิน 7 วัน
+        return timeStampDiff <= 7;
     }
+
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
 

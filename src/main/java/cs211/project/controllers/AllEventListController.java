@@ -3,79 +3,155 @@ package cs211.project.controllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
+
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
 
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Comparator;
+import java.util.function.Predicate;
+
+
 
 public class AllEventListController {
     @FXML AnchorPane navbarAnchorPane;
-    @FXML ListView mainListView;
+    @FXML TilePane tilePaneMain;
     @FXML TextField searchbarTextField;
-    @FXML ComboBox categoryComboBox;
-    @FXML Label tagComboBox;
+    @FXML ComboBox<String> categoryComboBox;
+    @FXML ScrollPane scrollPane;
+    @FXML Button categoryButton;
     //---------------------------------------------------
     private User currentUser = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
+    private ObservableList<Event> eventObservableList;
     private EventList eventList;
+    private int currentPage = 1;
+    private int itemsPerPage = 8;
+    private Predicate<Event> selectedPredicate = null;
+    private FilteredList<Event> size;
+
     @FXML
     private void initialize() {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
+        setupPage();
+
+
+        getByCategory();
+        loadData(currentPage,selectedPredicate);
+
+    }
+    private void setupPage(){
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
+        this.eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
         initCategory();
         initSort();
+        setupScrollBar();
+    }
 
 
-        setMainListView(eventList.suffleEvent(eventList));
-        if (categoryComboBox.getValue() == null){
-            getBySearchbar(eventList);
+    private void loadData(int page,Predicate<Event> selectedPredicate) {
+        scrollPane.setVvalue(0.0);
+        FilteredList<Event> filteredList = new FilteredList<>(eventObservableList,selectedPredicate);
+        int startIndex = (page - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, filteredList.size());
+
+        for (int i = startIndex; i < endIndex; i++) {
+            Event event = filteredList.get(i);
+            AnchorPane anchorPane = new AnchorPane();
+            anchorPane.setUserData(event);
+            new LoadCardEventComponent(anchorPane, event, "card-event");
+            tilePaneMain.getChildren().add(anchorPane);
         }
-        getByCategory(eventList);
-
-
-
-
-
-
-
-
-
 
     }
 
-    private void getByCategory(EventList ListEvent){
-        ObservableList<Event> observableEventList = FXCollections.observableArrayList(ListEvent.getEvents());
-        EventList filteredEventList = new EventList();
+    @FXML
+    private void loadMore() {
+        currentPage++;
+        loadData(currentPage,selectedPredicate);
+    }
 
+    private void setupScrollBar(){
+        scrollPane.vvalueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double value = newValue.doubleValue();
+                if (value >= 0.8) {
+                    if (tilePaneMain.getChildren().size()/8 == currentPage) {
+                        loadMore();
+                    }
+                }
+            }
+        });
+
+    }
+    private void removeNode(Predicate<Event> selectedPredicate) {
+        // สร้าง FilteredList โดยใช้ Predicate
+        // ลบโหนดที่ไม่ตรงกับการกรองออกจาก TilePane
+        tilePaneMain.getChildren().removeIf(node -> {
+            if (node instanceof AnchorPane anchorPane) {
+                Event event = (Event) anchorPane.getUserData();
+                return !eventObservableList.filtered(selectedPredicate).contains(event); // ซ่อนโหนดที่ไม่ตรงกับ filteredList
+            }
+            return false;
+        });
+
+    }
+
+    private void getByCategory(){
         categoryComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldTag, newTag) -> {
-            filteredEventList.getEvents().clear(); // ล้าง EventList ในทุกครั้งที่มีการเลือก Tag ใหม่
+            selectedPredicate = null;
+                switch (newTag.toString()) {
+                    case "Art":
+                        categoryButton.setText("Art");
+                        selectedPredicate = event -> event.getEventTag().contains("Art");
+                        break;
+                    case "Education":
+                        categoryButton.setText("Education");
+                        selectedPredicate = event -> event.getEventTag().contains("Education");
+                        break;
+                    case "Food & Drink":
+                        categoryButton.setText("Food & Drink");
+                        selectedPredicate = event -> event.getEventTag().contains("Food & Drink");
+                        break;
+                    case "Music":
+                        categoryButton.setText("Music");
+                        selectedPredicate = event -> event.getEventTag().contains("Music");
+                        break;
+                    case "Performance":
+                        categoryButton.setText("Performance");
+                        selectedPredicate = event -> event.getEventTag().contains("Performance");
+                        break;
+                    case "Seminar":
+                        categoryButton.setText("Seminar");
+                        selectedPredicate = event -> event.getEventTag().contains("Seminar");
+                        break;
+                    case "Sport":
+                        categoryButton.setText("Sport");
+                        selectedPredicate = event -> event.getEventTag().contains("Sport");
+                        break;
+                    default:
+                        break;
 
-            if (newTag != null) {
-                updateUI();
-                for (Event event : observableEventList) {
-                    if (event.getEventTag().contains(newTag.toString())) {
-                        filteredEventList.addEvent(event);
-                    }
                 }
-            } else {
-                filteredEventList.getEvents().addAll(observableEventList);
-            }
-            getBySearchbar(filteredEventList);
-            if (searchbarTextField.getText().isEmpty()){
-                setMainListView(filteredEventList);
+                size = new FilteredList<>(eventObservableList);
+
+            currentPage = 1;
+            removeNode(selectedPredicate);
+            if (oldTag != null) {
+                loadData(currentPage,selectedPredicate);
+
             }
 
 
@@ -83,145 +159,68 @@ public class AllEventListController {
 
     }
 
-    private void getBySearchbar(EventList ListSearch){
-        ObservableList<Event> observableEventList = FXCollections.observableArrayList(ListSearch.getEvents());
-        EventList filteredEventList = new EventList();
-
+    private void getBySearch(Predicate<Event> selectedPredicate ) {
         searchbarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String filter = newValue.toLowerCase();
-            filteredEventList.getEvents().clear();
+            // สร้าง Predicate ใหม่เพื่อค้นหาตามข้อความที่ผู้ใช้ป้อน
+            Predicate<Event> searchPredicate = event -> {
+                if (newValue == null || newValue.isEmpty()) {
 
-            if (filter == null || filter.isEmpty()) {
-                // ถ้าไม่มีการค้นหาให้แสดงทุก Event โดยไม่คำนึงถึง Tag
-                filteredEventList.getEvents().addAll(observableEventList);
-            } else {
-                // คัดกรอง Event และเพิ่มเฉพาะ Event ที่ตรงกับคำค้นหา (ชื่อเหตุการณ์)
-                for (Event event : observableEventList) {
-                    if (event.getEventName().toLowerCase().contains(filter)) {
-                        filteredEventList.addEvent(event);
-                    }
+                    return true;
                 }
-            }
-            setMainListView(filteredEventList);
-        });
-    }
+                String searchText = newValue.toLowerCase().trim();
 
-    private void updateUI(){
-        if (categoryComboBox.getValue() != null) {
-            tagComboBox.setText(categoryComboBox.getValue().toString());
-        }
+                return event.getEventName().toLowerCase().contains(searchText) ||
+                        event.getEventDescription().toLowerCase().contains(searchText);
+            };
+
+            // ลบโหนดที่ไม่ตรงกับเงื่อนไขค้นหาออกจาก TilePane
+            removeNode(searchPredicate);
+            if (oldValue != null) {
+
+            }
+
+        });
     }
 
     private void initCategory(){
         String category[] = {"Art","Education","Food & Drink","Music","Performance","Seminar","Sport"};
         categoryComboBox.getItems().addAll(category);
-        tagComboBox.setText("");
-        updateUI();
+
     }
 
     private void initSort(){
         String sort[] = {"Name","Start","Member","End"};
 
     }
-/*
 
-    private void setMainListView(EventList eventList){
-        mainListView.getItems().clear();
-        mainListView.getStyleClass().add("event-list");
-
-        for (int i = 0 ; i < eventList.getEvents().size(); i+=4 ) {
-            HBox box = new HBox();
-            box.setAlignment(Pos.CENTER_LEFT);
-            loadEventList(box, eventList.getEvents().subList(i, Math.min(eventList.getEvents().size(), i + 4)));
-            mainListView.getItems().add(box);
-
-        }
-
-    }
-
-    private void loadEventList(HBox hbox, List<Event> events) {
-        try {
-            for (Event event : events) {
-                Separator separator = new Separator();
-                separator.setOrientation(Orientation.VERTICAL);
-                separator.setOpacity(0.0);
-                separator.setPrefWidth(24.0);
-
-                AnchorPane anchorPane = new AnchorPane();
-                new LoadCardEventComponent(anchorPane,event,"card-event");
-                hbox.getChildren().add(separator);
-                hbox.getChildren().add(anchorPane);
-
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new RuntimeException(e);
-        }
-    }
-*/
-
-    private void setMainListView(EventList eventList) {
-        mainListView.getItems().clear();
-        mainListView.getStyleClass().add("event-list");
-
-        List<HBox> eventBoxes = IntStream.range(0, eventList.getEvents().size())
-                .boxed()
-                .collect(Collectors.groupingBy(i -> i / 4))
-                .values()
-                .stream()
-                .map(indices -> {
-                    HBox box = new HBox();
-                    box.setAlignment(Pos.CENTER_LEFT);
-                    loadEventList(box, indices.stream()
-                            .map(eventList.getEvents()::get)
-                            .collect(Collectors.toList()));
-                    return box;
-                })
-                .collect(Collectors.toList());
-
-        mainListView.getItems().addAll(eventBoxes);
-    }
-
-    private void loadEventList(HBox hbox, List<Event> events) {
-        events.forEach(event -> {
-            Separator separator = new Separator();
-            separator.setOrientation(Orientation.VERTICAL);
-            separator.setOpacity(0.0);
-            separator.setPrefWidth(24.0);
-
-            AnchorPane anchorPane = new AnchorPane();
-            new LoadCardEventComponent(anchorPane, event, "card-event");
-            hbox.getChildren().addAll(separator, anchorPane);
-        });
-    }
-
-
-    //fliter
     public void onAllClick(ActionEvent actionEvent) {
-        eventList = eventList.suffleEvent(eventList);
-        setMainListView(eventList);
-        if (categoryComboBox.getValue()!= null) {
-            getByCategory(eventList);
-        }
-        categoryComboBox.setValue("");
+        tilePaneMain.getChildren().clear();
+        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
+        currentPage = 1;
+        loadData(currentPage,selectedPredicate);
+        categoryButton.setText("Category");
+
 
     }
 
     public void onNewClick(ActionEvent actionEvent) {
-        eventList = eventList.sortNewEvent(eventList);
-        setMainListView(eventList);
-        if (categoryComboBox.getValue()!= null) {
-            getByCategory(eventList);
-        }
-        categoryComboBox.setValue("");
+        currentPage = 1;
+        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getTimestampAsDate);
+        eventObservableList.sort(eventComparator);
+        tilePaneMain.getChildren().clear();
+        loadData(currentPage,selectedPredicate);
+
+
     }
 
     public void onUpClick(ActionEvent actionEvent) {
-        eventList = eventList.sortUpcoming(eventList);
-        setMainListView(eventList);
-        if (categoryComboBox.getValue()!= null) {
-            getByCategory(eventList);
-        }
-        categoryComboBox.setValue("");
+        currentPage = 1;
+        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getEventDateEnd);
+        eventObservableList.sort(eventComparator);
+        tilePaneMain.getChildren().clear();
+        loadData(currentPage,selectedPredicate);
     }
 
     public void onCreateClick(ActionEvent actionEvent) {
@@ -238,8 +237,13 @@ public class AllEventListController {
         searchbarTextField.setText("");
     }
 
-    public void onClickTagLabel(MouseEvent mouseEvent) {
-        tagComboBox.setText("");
-        categoryComboBox.setValue("");
+
+
+    public void onScroll(ScrollEvent scrollEvent) {
+
+    }
+
+    public void onScrollFinished(ScrollEvent scrollEvent) {
+
     }
 }
