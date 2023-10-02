@@ -23,7 +23,7 @@ public class AdminDashboardController {
     @FXML private TableView userTableView;
     @FXML private ImageView profileImageView;
     @FXML private ProgressBar eventProgressBar;
-    @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel;
+    @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel, totalLabel;
     @FXML private TableColumn<User, String> idTableCol, profileTableCol, usernameTableCol, nameTableCol, lastLoginTableCol;
     @FXML private TableColumn<User, Boolean> statusTableCol;
     @FXML private AnchorPane changePasswordAnchorPane;
@@ -154,7 +154,7 @@ public class AdminDashboardController {
         int sizeCompletedEvent = eventList.getSizeCompletedEvent();
         double percent = (double) sizeCompletedEvent / sizeTotalEvent * 100;
         eventLabel.setText(String.valueOf(sizeCompletedEvent));
-        System.out.println(percent);
+        totalLabel.setText("Total: " + String.valueOf(sizeTotalEvent));
         eventProgressBar.setProgress(percent/100);
         percentLabel.setText(String.valueOf(percent) + "%");
     }
