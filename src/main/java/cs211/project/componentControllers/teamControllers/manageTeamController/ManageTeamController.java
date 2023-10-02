@@ -7,7 +7,7 @@ import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
-import cs211.project.services.team.LoadUserCardProfileComponent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -47,7 +47,6 @@ public class ManageTeamController {
 
     public void showUserList(String teamID) {
         memberContainer.getChildren().clear();
-
         if (hashMap.isEmpty()) return;
         UserList memberList = hashMap.get(teamID);
         for (User user : memberList.getUsers()) {
@@ -60,7 +59,7 @@ public class ManageTeamController {
 
     private void loadManageTeamComponent(User user, int col, int row, String teamID) {
         Team team = teamList.findTeamByID(teamID);
-        FXMLLoader manageTeamLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/manage-team/manage-member-team-list.fxml"));
+        FXMLLoader manageTeamLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/manage-team/manage-member-team-list-1.fxml"));
         AnchorPane manageTeamComponent;
         if (user != null) {
             try {
@@ -106,12 +105,14 @@ public class ManageTeamController {
                     if (newValue.equals("Promote to Leader")) {
                         try {
                             manageMemberTeamListController.goTo((String) newValue, teamID, user.getUserId());
+                            showUserList(teamID);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     } else if(newValue.equals("Promote to Member")) {
                         try {
                             manageMemberTeamListController.goTo((String) newValue, teamID, user.getUserId());
+                            showUserList(teamID);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
