@@ -5,7 +5,7 @@ import cs211.project.models.Activity;
 import java.util.ArrayList;
 
 public class ActivityList {
-    private ArrayList<Activity> activities;
+    protected ArrayList<Activity> activities;
 
     public ActivityList() { activities = new ArrayList<>(); }
 
