@@ -55,7 +55,7 @@ public class CreateEventController {
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
 
-        eventTagChoiceBox.getItems().addAll("Art","Education","Food & Drink","Music","Performance","Seminar","Sport");
+        eventTagChoiceBox.getItems().addAll("Animal","Art","Business","Conference","Education","Food & Drink","Music","Performance","Sport","Workshop");
         CheckDate();
         setPageHeader();
         if (thisEvent != null) {
