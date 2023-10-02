@@ -109,7 +109,7 @@ public final class FXRouter {
         RouteScene route = (RouteScene)routes.get(routeLabel);
         route.data1 = data1;
         route.data2 = data2;
-        route.data2 = data3;
+        route.data3 = data3;
         loadNewRoute(route);
     }
 
