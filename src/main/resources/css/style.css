@@ -746,3 +746,10 @@ Text, Label {
     -fx-border-radius: 9;
 }
 
+/* for team manage page */
+.manage-team-corner-radius{
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+
+}
+
