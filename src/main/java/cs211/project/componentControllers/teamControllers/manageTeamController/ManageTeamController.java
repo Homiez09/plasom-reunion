@@ -80,7 +80,6 @@ public class ManageTeamController {
                 String[] menuLeaderItems = {"Kick", "Ban"};
                 String[] menuMemberItems = {"Leave Team"};
 
-
                 menuComboBox.getItems().addAll((this.user.getUserId().equals(team.getTeamHostUser().getUserId())) ? menuOwnerItems : menuMemberItems);
 
                 menuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
