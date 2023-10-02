@@ -10,8 +10,6 @@ import java.nio.charset.StandardCharsets;
 public class ActivityTeamListDataSource implements Datasource<ActivityTeamList>{
     protected String directoryName;
     protected String fileName;
-    private Datasource<ActivityList> datasource;
-    private ActivityList activityList;
 
     public ActivityTeamListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
