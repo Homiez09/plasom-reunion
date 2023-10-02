@@ -49,5 +49,14 @@ public class ActivityList {
     public ArrayList<Activity> getActivities() {
         return activities;
     }
+    public ArrayList<Activity> getActivityOfEvent(String eventID) {
+        ArrayList<Activity> activityOfEvent = new ArrayList<>();
+        for (Activity activity : activities) {
+            if (activity.getEventID().equals(eventID)) {
+                activityOfEvent.add(activity);
+            }
+        }
+        return activityOfEvent;
+    }
 }
 
