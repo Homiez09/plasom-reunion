@@ -109,7 +109,7 @@ public class MyEventsController  {
 
     public void onCreateAction(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("create-event",currentUser);
+            FXRouter.goTo("create-event",currentUser,null);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -11,6 +11,59 @@
 .top-banner{
 -fx-background-color: linear-gradient(to right,#FF971D, #F9F6F7);
 }
+.tile-button{
+-fx-font-family: Consolas;
+-fx-font-weight: bold;
+-fx-font-size: 24;
+-fx-text-fill: #201f1d;
+-fx-background-radius: 3em;
+-fx-min-height: 55px;
+-fx-min-width: 55px;
+-fx-max-height: 55px;
+-fx-max-width: 55px;
+-fx-background-color: #F9F6F7;
+-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0, 0, 0);
+}
+.tile-button :hover {
+-fx-font-size: 20;
+-fx-font-weight: bold;
+-fx-text-fill: #7b7a77;
+-fx-background-color: #FFFFFF;
+-fx-opacity: 50%;
+}
+.cat-button {
+-fx-border-color : black;
+-fx-border-radius : 2em;
+-fx-background-radius: 2em;
+-fx-background-color: transparent;
+}
+.cat-button .label{
+-fx-text-fill: #413B3B;
+}
+.cat-button .menu-item {
+-fx-background-color: #FFF5E5;
+-fx-border-color: #413B3B;
+-fx-border-opacity: 40%;
+}
+.cat-button .menu-item .label{
+-fx-text-fill: #413B3B;
+}
+.cat-button:hover{
+-fx-background-color: linear-gradient(#413B3B, #40382D);
+}
+.cat-button:hover .label{
+-fx-text-fill: #FFF5E5;
+}
+.cat-button .menu-item:hover {
+-fx-background-color: #FFE8D6;
+}
+.cat-button .context-menu {
+-fx-background-color: transparent;
+}
+.explore:hover {
+-fx-underline: true;
+-fx-opacity:50%;
+}
 /*event tile*/
 .tile-bg{
 -fx-border-radius: 20px;
@@ -25,7 +78,7 @@
 .h1{
  -fx-font-size: 24;
  -fx-font-family: Leelawadee;
-
+ -fx-font-weight: bold;
 }
 .list-view {
  -fx-background-color: #FFF5E5;
