@@ -97,12 +97,12 @@ public class Activity {
 
     @Override
     public String toString() {
-        return    eventID + ','
+        return    activityID + ','
                 + name + ","
                 + description + ","
                 + startTime + ','
                 + endTime  + ","
-                + activityID;
+                + eventID;
     }
 }
 

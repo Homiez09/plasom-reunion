@@ -2,13 +2,11 @@ package cs211.project.componentControllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.User;
-import cs211.project.models.collections.EventList;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
@@ -34,9 +32,9 @@ public class EventTileController {
             eventDateLabel.setText(event.getEventDateStart());
             eventPlaceLabel.setText(event.getEventLocation());
             if (event.getSlotMember() == -1) {
-                eventMemberLabel.setText(event.getMember()+"");
+                eventMemberLabel.setText(event.getUserInEvent()+"");
             }else {
-                eventMemberLabel.setText(event.getMember() + "/" + event.getSlotMember());
+                eventMemberLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
             }
             image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
             if(event.getEventImagePath().equals("null")){

@@ -5,16 +5,17 @@ import cs211.project.models.collections.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EventListDataSource implements Datasource<EventList> {
-    private String directoryName = "data";
-    private String fileName = "event-list.csv";
-    private Datasource<UserList> userListDatasource;
+    private final String directoryName = "data";
+    private final String fileName = "event-list.csv";
     private EventList eventList;
-    private UserList userList;
+    private JoinEventMap eventMapData ;
+
     public EventListDataSource() {
-        this.directoryName = directoryName;
-        this.fileName = fileName;
         checkFileIsExisted();
     }
     // ตรวจสอบว่ามีไฟล์ให้อ่านหรือไม่ ถ้าไม่มีให้สร้างไฟล์เปล่า
@@ -36,8 +37,15 @@ public class EventListDataSource implements Datasource<EventList> {
 
     @Override
     public EventList readData() {
-        userListDatasource = new UserListDataSource("data","user-list.csv");
-        userList = userListDatasource.readData();
+        Datasource<UserList> userListDatasource = new UserListDataSource("data","user-list.csv");
+        UserList userList = userListDatasource.readData();
+
+        Datasource<ActivityList> activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
+        ActivityList activityList = activityListDatasource.readData();
+
+
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -81,18 +89,28 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventEnd = data[6].trim();
                 String eventDescription = data[7].trim().replace("\n", "");
                 String eventLocation = data[8].trim();
-                int member = Integer.parseInt(data[9].trim());
-                int slotmember = Integer.parseInt(data[10].trim());
-                String timeStamp = data[11].trim();
-                boolean joinEvent = Boolean.parseBoolean(data[12].trim());
-                boolean joinTeam = Boolean.parseBoolean(data[13].trim());
+                int slotmember = Integer.parseInt(data[9].trim());
+                String timeStamp = data[10].trim();
+                boolean joinEvent = Boolean.parseBoolean(data[11].trim());
+                boolean joinTeam = Boolean.parseBoolean(data[12].trim());
+
+
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, member, slotmember,timeStamp,joinEvent,joinTeam);
-                eventList.setMemberData();
-                eventList.setTeamData(eventId);
+                                        eventDescription, eventLocation, slotmember,timeStamp,joinEvent,joinTeam
+                                        );
+                for (Team team:teamList.getTeamOfEvent(eventList.findEvent(eventId))) {
+                    eventList.findEvent(eventId).getTeamList().addTeam(team);
+                }
+                for (Activity activity : activityList.getActivities()){
+                    System.out.println(activity.getEventID());
+                    eventList.findEvent(eventId).getActivityList().addActivity(activity);
+                }
 
-                // เพิ่มข้อมูลลงใน list
+                for (User user: userList.getUserOfEvent(eventList.findEvent(eventId))){
+                    eventList.findEvent(eventId).getUserList().addUser(user);
+                }
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -119,9 +137,10 @@ public class EventListDataSource implements Datasource<EventList> {
                 StandardCharsets.UTF_8
         );
         BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
-
+        data.sort();
         try {
             // สร้าง csv
+
             for (Event event : data.getEvents()) {
                 String line = event.toString();
 

@@ -174,7 +174,6 @@ public class SelectTeamController {
         int row = 0, column = 0, row2 = 0;
 
         TeamList teamListSort = (teamHashMap.get(user.getUsername()) != null) ? new TeamList(teamHashMap.get(user.getUsername())) : new TeamList();
-
         if (teamListSort != null) teamListSort.sortTeamByNewCreatedAt();
 
         if (filter.equals("Favorite")) {

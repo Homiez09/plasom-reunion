@@ -23,6 +23,7 @@ module cs211.project.cs211661project {
 
     exports cs211.project.models.collections;
     opens cs211.project.models.collections to javafx.base;
+
     exports cs211.project.componentControllers.teamboxControllers;
     opens cs211.project.componentControllers.teamboxControllers to javafx.fxml;
 
