@@ -740,3 +740,7 @@ Text, Label {
     -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
 
+/* for activity */
+.activity-bg{
+    -fx-background-color: #F6F4EE;
+}
