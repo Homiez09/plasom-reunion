@@ -4,7 +4,7 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.team.TeamTemplateController">
     <children>
-        <AnchorPane fx:id="sideBarAnchorPane" prefHeight="825.0" prefWidth="162.0" />
+        <AnchorPane fx:id="sideBarAnchorPane" prefHeight="768.0" prefWidth="162.0" />
         <AnchorPane fx:id="navbarAnchorPane" prefHeight="72.0" prefWidth="1152.0" />
     </children>
 </AnchorPane>

@@ -1,18 +1,20 @@
-package cs211.project.componentControllers.teamControllers.manageTeamController;
+package cs211.project.controllers.team;
 
 import cs211.project.componentControllers.UserCardProfileController;
+import cs211.project.componentControllers.teamControllers.manageTeamController.ManageMemberTeamListController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
-import javafx.application.Platform;
+import cs211.project.services.team.LoadSideBarComponent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -24,11 +26,13 @@ import java.util.HashMap;
 public class ManageTeamController {
     private User user = (User) FXRouter.getData();
     private Event event = (Event) FXRouter.getData2();
+    private Team team = (Team) FXRouter.getData3();
 
     @FXML private GridPane memberContainer;
+    @FXML AnchorPane navbarAnchorPane, sideBarAnchorPane;
     @FXML private ImageView nameImageView, roleImageView, statusImageView;
-    @FXML private AnchorPane userCardProfileAnchorPane, manageTeamDisableAnchorPane, manageTeamExitAnchorPane;
-    private Image nameIcon, roleIcon, statusIcon;
+    @FXML private AnchorPane userCardProfileAnchorPane, manageTeamExitAnchorPane, manageTeamDisbleAnchorPane;
+    protected Image nameIcon, roleIcon, statusIcon;
 
     TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
     TeamList teamList = teamListDataSource.readData();;
@@ -37,12 +41,20 @@ public class ManageTeamController {
 
     String teamID;
 
+    UserListDataSource datasource ;
+    UserList userList ;
+
+
     boolean nameSort, roleSort, statusSort;
 
     @FXML private void initialize(){
-        manageTeamDisableAnchorPane.setVisible(false);
-        manageTeamExitAnchorPane.setVisible(false);
+        new LoadNavbarComponent(user, navbarAnchorPane);
+        new LoadSideBarComponent(sideBarAnchorPane);
+        datasource = new UserListDataSource("data","user-list.csv");
+        userList = datasource.readData();
         loadIcon();
+        showUserList(team.getTeamID());
+        setManageTeamDisableAnchorPane(false);
     }
 
     public void showUserList(String teamID) {
@@ -54,6 +66,17 @@ public class ManageTeamController {
         }
         this.teamID = teamID;
 
+    }
+
+
+    private void setManageTeamDisableAnchorPane(boolean isDisable){
+        manageTeamDisbleAnchorPane.setDisable(isDisable);
+        manageTeamExitAnchorPane.setVisible(isDisable);
+        if(isDisable){
+            manageTeamDisbleAnchorPane.setEffect(new BoxBlur(6, 5, 2));
+        }else {
+            manageTeamDisbleAnchorPane.setEffect(null);
+        }
     }
 
 
@@ -129,12 +152,12 @@ public class ManageTeamController {
                             throw new RuntimeException(e);
                         }
                     }else if (newValue.equals("View Profile")){
-                        manageTeamExitAnchorPane.setVisible(true);
-                        manageTeamDisableAnchorPane.setVisible(true);
-                        manageTeamDisableAnchorPane.setDisable(true);
+
+                        setManageTeamDisableAnchorPane(true);
                         loadUserCardProfileComponent(userCardProfileAnchorPane, user);
                         userCardProfileAnchorPane.setVisible(true);
                     }
+
                     showUserList(teamID);
                 });
 
@@ -147,6 +170,7 @@ public class ManageTeamController {
         GridPane.setMargin(manageTeamComponent,new Insets(0,0,5,0));
         memberContainer.add(manageTeamComponent, col, row);
     }
+
     private void loadUserCardProfileComponent(AnchorPane userCardProfileAnchorPane, User user) {
         try {
             FXMLLoader userCardProfileComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/user-card-profile.fxml"));
@@ -161,14 +185,6 @@ public class ManageTeamController {
         }
     }
 
-
-    @FXML private void onBackClick() {
-        try {
-            FXRouter.goTo("select-team", user, event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @FXML private void onSortNameClicked(){
         if (hashMap.isEmpty()) return;
         UserList memberList = hashMap.get(teamID);
@@ -205,12 +221,10 @@ public class ManageTeamController {
         }
         statusSort = !statusSort;
     }
-    @FXML private void manageTeamsAnchorPaneClicked(){
-        manageTeamExitAnchorPane.setVisible(false);
-        manageTeamDisableAnchorPane.setVisible(false);
+    @FXML private void manageTeamAnchorPaneClicked(){
+        setManageTeamDisableAnchorPane(false);
         userCardProfileAnchorPane.setVisible(false);
     }
-
 
     private void loadIcon(){
         nameIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));

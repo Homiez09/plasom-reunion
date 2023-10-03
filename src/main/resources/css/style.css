@@ -795,3 +795,10 @@ Text, Label {
 .status-combobox .list-cell:hover {
     -fx-background-color: rgba(255, 153, 0, 0.37);
 }
+
+/* for team manage page */
+.manage-team-corner-radius{
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+
+}
