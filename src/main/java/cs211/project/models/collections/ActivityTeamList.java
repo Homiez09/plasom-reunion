@@ -30,10 +30,8 @@ public class ActivityTeamList {
         }
     }
 
-    public void removeActivity(String activityID) {
-        if (activityID != null) {
-            activities.remove(findActivity(activityID));
-        }
+    public void removeActivity(ActivityTeam activityTeam) {
+        activities.remove(activityTeam);
     }
     public ActivityTeam findActivity(String activityID){
         for (ActivityTeam activity:activities) {
@@ -47,7 +45,7 @@ public class ActivityTeamList {
     public ArrayList<ActivityTeam> getActivitiesByTeamID(String teamID) {
         ArrayList<ActivityTeam> activityTeams = new ArrayList<>();
         for (ActivityTeam activity : activities) {
-            if (activity.getEventID().equals(teamID)) activityTeams.add(activity);
+            if (activity.getTeamID().equals(teamID)) activityTeams.add(activity);
         }
         return activityTeams;
     }
