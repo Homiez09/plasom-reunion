@@ -212,6 +212,7 @@ public class SelectTeamController {
 
                 Label teamID = (Label) teamBoxComponent.getChildren().get(1);
                 Label teamName = (Label)teamBoxComponent.getChildren().get(6);
+                ImageView bodyImageView = (ImageView) teamBoxComponent.getChildren().get(3);
                 ImageView bookMarkImageView = (ImageView) teamBoxComponent.getChildren().get(5);
                 ImageView roleImageView = (ImageView) teamBoxComponent.getChildren().get(7);
                 AnchorPane memberShipAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(10);
@@ -228,7 +229,16 @@ public class SelectTeamController {
                 teamName.setText(team.getTeamName());
                 roleLabel.setText(team.getRole());
                 onlineLabel.setText(String.valueOf(team.getMemberOnline().getUsers().size()));
+
                 participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
+                bodyImageView.setOnMouseClicked(e -> {
+                    try {
+                        this.user.setRole(team.getRole());
+                        FXRouter.goTo("team-activity", this.user, this.event, team);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                });
 
                 if (team.getRole().equals("Owner")) {
                     menuDropDown.getItems().addAll("Manage Team", "Delete Team");

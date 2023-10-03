@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import java.text.DecimalFormat;
 
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ public class AdminDashboardController {
     @FXML private TableView userTableView;
     @FXML private ImageView profileImageView;
     @FXML private ProgressBar eventProgressBar;
-    @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel;
+    @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel, totalLabel;
     @FXML private TableColumn<User, String> idTableCol, profileTableCol, usernameTableCol, nameTableCol, lastLoginTableCol;
     @FXML private TableColumn<User, Boolean> statusTableCol;
     @FXML private AnchorPane changePasswordAnchorPane;
@@ -31,6 +32,7 @@ public class AdminDashboardController {
     private User user = (User) FXRouter.getData();
     UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
     private UserList userList;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @FXML private void initialize() {
         userList = datasource.readData();
@@ -152,13 +154,11 @@ public class AdminDashboardController {
         EventList eventList = new EventListDataSource().readData();
         int sizeTotalEvent = eventList.getSizeTotalEvent();
         int sizeCompletedEvent = eventList.getSizeCompletedEvent();
-//        int sizeTotalEvent = 25;
-//        int sizeCompletedEvent = 12;
         double percent = (double) sizeCompletedEvent / sizeTotalEvent * 100;
         eventLabel.setText(String.valueOf(sizeCompletedEvent));
-        System.out.println(percent);
+        totalLabel.setText("Total: " + String.valueOf(sizeTotalEvent));
         eventProgressBar.setProgress(percent/100);
-        percentLabel.setText(String.valueOf(percent) + "%");
+        percentLabel.setText(String.valueOf(df.format(percent)) + "%");
     }
 
     private void ButtonSelectGraphic(int page) { // Change button graphic when selected
