@@ -23,7 +23,7 @@ public class Event implements Comparable<Event>{
     private final String timestamp;
     private boolean joinEvent = false,joinTeam = false;
     private BooleanProperty isSelected ;
-    private ActivityList activities;
+    private ActivityList activityList;
     private TeamList teamList;
     private UserList userList;
     public Event(String eventName,
@@ -46,7 +46,7 @@ public class Event implements Comparable<Event>{
         this.slotMember = -1;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         this.isSelected = new SimpleBooleanProperty(false);
-        this.activities = new ActivityList();
+        this.activityList = new ActivityList();
         this.teamList = new TeamList();
         this.userList = new UserList();
         this.joinEvent = true;
@@ -74,7 +74,7 @@ public class Event implements Comparable<Event>{
         this.slotMember = slotMember;
         this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
-        this.activities = new ActivityList();
+        this.activityList = new ActivityList();
         this.teamList = new TeamList();
         this.userList = new UserList();
         this.joinEvent = true;
@@ -105,7 +105,7 @@ public class Event implements Comparable<Event>{
         this.slotMember = slotMember;
         this.eventHostUser = eventHostUser;
         this.timestamp =timestamp;
-        this.activities = new ActivityList();
+        this.activityList = new ActivityList();
         this.teamList = new TeamList();
         this.userList = new UserList();
         this.joinEvent = joinEvent;
@@ -123,7 +123,7 @@ public class Event implements Comparable<Event>{
     public int getSlotMember() {return slotMember;}
     public int getUserInEvent() {return userList.getUsers().size();}
     public String getEventLocation() { return eventLocation; }
-    public ActivityList getActivityList() { return activities; }
+    public ActivityList getActivityList() { return activityList; }
     public TeamList getTeamList() { return teamList; }
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
@@ -146,7 +146,7 @@ public class Event implements Comparable<Event>{
     public void setTeamList(TeamList teamList){
         this.teamList = teamList;
     }
-    public void setActivity(ActivityList activityList) {this.activities = activityList;}
+    public void setActivity(ActivityList activityList) {this.activityList = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
     public boolean isFull(){return slotMember == userList.getUsers().size();}
 

@@ -19,22 +19,11 @@ public class CardEventController {
     @FXML
     ImageView eventImage, profileImageView;
     //-------------------------------------------------------
-
     private Event event;
-    private Datasource<UserList> datasource;
     private User currentUser = (User) FXRouter.getData();
-    private UserList userList;
-    private User userHost ;
 
     @FXML
-    private void initialize() {
-        this.datasource = new UserListDataSource("data","user-list.csv");
-        this.userList = datasource.readData();
-
-
-
-
-    }
+    private void initialize() {}
     public void setEvent(Event data) {
         this.event = data;
         if (event != null) {
