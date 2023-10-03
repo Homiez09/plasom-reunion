@@ -605,31 +605,22 @@ Text, Label {
     -fx-text-fill: #E9E2DA;
 }
 
-.delete-button{
-    -fx-background-color: transparent;
-    -fx-border-radius: 7;
-    -fx-border-color: #ff1515;
-    -fx-border-width: 1.5;
-    -fx-text-fill: #ff1515;
+.delete-button {
+    -fx-background-color: linear-gradient(to left, #ff1515 45.96%, #ff1515 70.98%);
+    -fx-background-radius: 7;
     -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
 
-.delete-button:hover{
-    -fx-background-color: transparent;
-    -fx-border-radius: 7;
-    -fx-border-color: #BFBFBF;
-    -fx-border-width: 1.5;
+.delete-button:hover {
+    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-radius: 7;
     -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
-    -fx-text-fill: #BFBFBF;
 }
 
-.delete-button:pressed{
-    -fx-background-color: transparent;
-    -fx-border-radius: 7;
-    -fx-border-color: #E9E2DA;
-    -fx-border-width: 1.5;
-    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
-    -fx-text-fill: #E9E2DA;
+.delete-button:pressed {
+    -fx-background-color: linear-gradient(to left, #FFB875 45.96%, #F8D391  70.98% );
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
 }
 
 .create-team-spinner {
