@@ -22,7 +22,7 @@
     <children>
         <AnchorPane fx:id="sideBarAnchorPane" prefHeight="768.0" prefWidth="162.0" />
         <AnchorPane fx:id="navbarAnchorPane" prefHeight="72.0" prefWidth="1152.0" />
-      <ScrollPane layoutX="161.0" layoutY="114.0" prefHeight="636.0" prefWidth="990.0">
+      <ScrollPane layoutX="161.0" layoutY="114.0" prefHeight="630.0" prefWidth="990.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1034.0" prefWidth="936.0">
                <children>
@@ -37,7 +37,7 @@
                   <Rectangle arcHeight="17.0" arcWidth="17.0" fill="WHITE" height="413.0" layoutX="71.0" layoutY="134.0" stroke="TRANSPARENT" strokeType="INSIDE" width="841.0" />
                   <AnchorPane fx:id="activity" layoutX="68.0" layoutY="156.0">
                      <children>
-                        <AnchorPane fx:id="mainActivityAnchorPane" layoutX="2.0" prefWidth="845.0">
+                        <AnchorPane fx:id="mainActivityAnchorPane" layoutX="2.0" prefWidth="845.0" visible="false">
                            <children>
                               <AnchorPane layoutX="37.0">
                                  <children>
@@ -53,7 +53,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <Button fx:id="createActivityButton" alignment="CENTER_RIGHT" layoutX="640.0" layoutY="2.0" mnemonicParsing="false" onAction="#onCreateTeamButtonClick" prefHeight="34.0" prefWidth="130.0" text="Create Activity" textFill="WHITE">
+                                    <Button fx:id="createActivityButton" alignment="CENTER_RIGHT" layoutX="640.0" layoutY="2.0" mnemonicParsing="false" onAction="#onCreateButtonClick" prefHeight="34.0" prefWidth="130.0" text="Create Activity" textFill="WHITE">
                                        <styleClass>
                                           <String fx:value="weight-medium" />
                                           <String fx:value="text-ms" />
@@ -116,7 +116,7 @@
                                     <AnchorPane layoutX="255.0">
                                        <children>
                                           <Rectangle arcHeight="17.0" arcWidth="17.0" fill="WHITE" height="292.0" stroke="TRANSPARENT" strokeType="INSIDE" width="589.0" />
-                                          <Label layoutX="26.0" layoutY="15.0" prefHeight="32.0" prefWidth="536.0" text="Activity Name">
+                                          <Label fx:id="activityNameLabel" layoutX="26.0" layoutY="15.0" prefHeight="32.0" prefWidth="536.0" text="Activity Name">
                                              <styleClass>
                                                 <String fx:value="font" />
                                                 <String fx:value="text-xl" />
@@ -132,7 +132,7 @@
                                                 <String fx:value="color-black" />
                                              </styleClass>
                                           </Label>
-                                          <Label layoutX="150.0" layoutY="61.0" prefHeight="15.0" prefWidth="136.0" text="22/11/2022 | 12:00:00 PM">
+                                          <Label fx:id="activityStartTimeLabel" layoutX="150.0" layoutY="61.0" prefHeight="15.0" prefWidth="136.0" text="22/11/2022 | 12:00:00 PM">
                                              <styleClass>
                                                 <String fx:value="font" />
                                                 <String fx:value="text-xs" />
@@ -146,7 +146,7 @@
                                                 <String fx:value="color-black" />
                                              </styleClass>
                                           </Label>
-                                          <Label layoutX="426.0" layoutY="61.0" prefHeight="15.0" prefWidth="136.0" text="22/11/2022 | 12:00:00 PM">
+                                          <Label fx:id="activityEndTimeLabel" layoutX="426.0" layoutY="61.0" prefHeight="15.0" prefWidth="136.0" text="22/11/2022 | 12:00:00 PM">
                                              <styleClass>
                                                 <String fx:value="font" />
                                                 <String fx:value="text-xs" />
@@ -160,7 +160,7 @@
                                                 <String fx:value="color-black" />
                                              </styleClass>
                                           </Label>
-                                          <Label fx:id="bioProfileLabel" alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="5.0" layoutX="63.0" layoutY="125.0" lineSpacing="1.0" prefHeight="134.0" prefWidth="484.0" text="เบื่อ">
+                                          <Label fx:id="activityDescriptionLabel" alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="5.0" layoutX="63.0" layoutY="125.0" lineSpacing="1.0" prefHeight="134.0" prefWidth="484.0" text="เบื่อ">
                                              <styleClass>
                                                 <String fx:value="text-ms" />
                                                 <String fx:value="weight-medium" />
@@ -184,8 +184,17 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="createActivityAnchorPane" layoutY="-21.0" prefHeight="413.0" prefWidth="847.0" visible="false">
+                        <AnchorPane fx:id="createActivityAnchorPane" layoutY="-21.0" prefHeight="413.0" prefWidth="847.0">
                            <children>
+                              <TextField fx:id="activityNameTextField" layoutX="102.0" layoutY="72.0" onKeyReleased="#onKeyTeamName" prefHeight="32.0" prefWidth="418.0" promptText="My Activity">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="create-text-field" />
+                                 </styleClass>
+                              </TextField>
                               <Label layoutX="102.0" layoutY="45.0" prefHeight="27.0" prefWidth="115.0" text="Activity Name">
                                  <styleClass>
                                     <String fx:value="font" />
@@ -207,15 +216,6 @@
                                     <String fx:value="text-xl" />
                                  </styleClass>
                               </Label>
-                              <TextField fx:id="teamNameTextField" layoutX="102.0" layoutY="72.0" onKeyReleased="#onKeyTeamName" prefHeight="32.0" prefWidth="418.0" promptText="My Activity">
-                                 <padding>
-                                    <Insets right="10.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="font" />
-                                    <String fx:value="create-text-field" />
-                                 </styleClass>
-                              </TextField>
                               <Label layoutX="103.0" layoutY="121.0" prefHeight="27.0" prefWidth="115.0" text="Activity Start">
                                  <styleClass>
                                     <String fx:value="font" />
@@ -224,15 +224,15 @@
                                     <String fx:value="color-black" />
                                  </styleClass>
                               </Label>
-                              <DatePicker fx:id="startDatePicker" layoutX="102.0" layoutY="149.0" prefHeight="28.0" prefWidth="144.0" stylesheets="@../../../../css/team/create-team.css">
+                              <DatePicker fx:id="startDatePicker" layoutX="103.0" layoutY="149.0" prefHeight="28.0" prefWidth="144.0" stylesheets="@../../../../css/team/create-team.css">
                                  <styleClass>
                                     <String fx:value="create-date-picker" />
                                     <String fx:value="font" />
                                     <String fx:value="text-base" />
                                  </styleClass>
                               </DatePicker>
-                              <Spinner fx:id="endMinuteSpinner" editable="true" layoutX="255.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
-                              <Spinner fx:id="endMinuteSpinner1" editable="true" layoutX="321.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
+                              <Spinner fx:id="startHourSpinner" editable="true" layoutX="255.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
+                              <Spinner fx:id="startMinuteSpinner" editable="true" layoutX="321.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
                               <ChoiceBox fx:id="startDateChoiceBox" layoutX="386.0" layoutY="150.0" prefHeight="28.0" prefWidth="47.0" styleClass="create-team-choice-box" stylesheets="@../../../../css/style.css" />
                               <Label layoutX="467.0" layoutY="121.0" prefHeight="27.0" prefWidth="115.0" text="Activity End">
                                  <styleClass>
@@ -242,16 +242,16 @@
                                     <String fx:value="color-black" />
                                  </styleClass>
                               </Label>
-                              <DatePicker fx:id="startDatePicker1" layoutX="467.0" layoutY="148.0" prefHeight="28.0" prefWidth="144.0" stylesheets="@../../../../css/team/create-team.css">
+                              <DatePicker fx:id="endDatePicker" layoutX="465.0" layoutY="150.0" prefHeight="28.0" prefWidth="144.0" stylesheets="@../../../../css/team/create-team.css">
                                  <styleClass>
                                     <String fx:value="create-date-picker" />
                                     <String fx:value="font" />
                                     <String fx:value="text-base" />
                                  </styleClass>
                               </DatePicker>
-                              <Spinner fx:id="endMinuteSpinner2" editable="true" layoutX="616.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
-                              <Spinner fx:id="endMinuteSpinner11" editable="true" layoutX="682.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
-                              <ChoiceBox fx:id="startDateChoiceBox1" layoutX="747.0" layoutY="150.0" prefHeight="28.0" prefWidth="47.0" styleClass="create-team-choice-box" stylesheets="@../../../../css/style.css" />
+                              <Spinner fx:id="endHourSpinner" editable="true" layoutX="616.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
+                              <Spinner fx:id="endMinuteSpinner" editable="true" layoutX="682.0" layoutY="150.0" prefHeight="28.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
+                              <ChoiceBox fx:id="endDateChoiceBox" layoutX="747.0" layoutY="150.0" prefHeight="28.0" prefWidth="47.0" styleClass="create-team-choice-box" stylesheets="@../../../../css/style.css" />
                               <Label layoutX="103.0" layoutY="192.0" prefHeight="27.0" prefWidth="115.0" text="Description">
                                  <styleClass>
                                     <String fx:value="font" />
@@ -261,7 +261,7 @@
                                  </styleClass>
                               </Label>
                               <TextArea fx:id="descriptionTextArea" layoutX="103.0" layoutY="227.0" onKeyReleased="#onKeyDescriptionCountText" prefHeight="125.0" prefWidth="686.0" promptText="write something here.." styleClass="description-create-team" wrapText="true" />
-                              <Button layoutX="731.0" layoutY="364.0" mnemonicParsing="false" onAction="#onCreateActivityButtonClick" prefHeight="34.0" prefWidth="94.0" text="Create" textFill="WHITE">
+                              <Button layoutX="731.0" layoutY="364.0" mnemonicParsing="false" onAction="#onCreateActivityButtonClick" prefHeight="34.0" prefWidth="94.0" text="Save" textFill="WHITE">
                                  <styleClass>
                                     <String fx:value="weight-medium" />
                                     <String fx:value="text-ms" />
@@ -276,6 +276,16 @@
                                     <String fx:value="weight-medium" />
                                     <String fx:value="text-ms" />
                                     <String fx:value="cancel-create-button" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="5.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="deleteButton" layoutX="24.0" layoutY="363.0" mnemonicParsing="false" onAction="#onDeleteActivityButtonClick" prefHeight="36.0" prefWidth="94.0" text="Delete" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-ms" />
+                                    <String fx:value="delete-button" />
                                  </styleClass>
                                  <font>
                                     <Font size="5.0" />

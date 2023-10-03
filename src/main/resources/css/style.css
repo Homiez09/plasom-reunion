@@ -605,6 +605,33 @@ Text, Label {
     -fx-text-fill: #E9E2DA;
 }
 
+.delete-button{
+    -fx-background-color: transparent;
+    -fx-border-radius: 7;
+    -fx-border-color: #ff1515;
+    -fx-border-width: 1.5;
+    -fx-text-fill: #ff1515;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.delete-button:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 7;
+    -fx-border-color: #BFBFBF;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-text-fill: #BFBFBF;
+}
+
+.delete-button:pressed{
+    -fx-background-color: transparent;
+    -fx-border-radius: 7;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
 .create-team-spinner {
     -fx-border-color: #4D4746;
     -fx-border-radius: 10;
