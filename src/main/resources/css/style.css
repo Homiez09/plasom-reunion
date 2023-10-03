@@ -605,6 +605,24 @@ Text, Label {
     -fx-text-fill: #E9E2DA;
 }
 
+.delete-button {
+    -fx-background-color: linear-gradient(to left, #ff1515 45.96%, #ff1515 70.98%);
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.delete-button:hover {
+    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
+.delete-button:pressed {
+    -fx-background-color: linear-gradient(to left, #FFB875 45.96%, #F8D391  70.98% );
+    -fx-background-radius: 7;
+    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+}
+
 .create-team-spinner {
     -fx-border-color: #4D4746;
     -fx-border-radius: 10;
@@ -746,10 +764,41 @@ Text, Label {
     -fx-border-radius: 9;
 }
 
+/* for activity */
+.activity-bg{
+    -fx-background-color: #F6F4EE;
+}
+
+.status-combobox {
+    -fx-background-color: transparent;
+}
+
+.status-combobox .list-view {
+    -fx-padding: 14 4 14 5;
+    -fx-spacing: 5;
+    -fx-background-color: #F6F4EE;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.status-combobox .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 18;
+    -fx-border-radius: 5;
+    -fx-text-fill: #413B3B;
+    -fx-alignment: center;
+}
+
+.status-combobox .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
 /* for team manage page */
 .manage-team-corner-radius{
     -fx-border-radius: 15;
     -fx-background-radius: 15;
 
 }
-

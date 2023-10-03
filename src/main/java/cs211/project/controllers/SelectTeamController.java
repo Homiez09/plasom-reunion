@@ -230,7 +230,7 @@ public class SelectTeamController {
                 roleLabel.setText(team.getRole());
                 onlineLabel.setText(String.valueOf(team.getMemberOnline().getUsers().size()));
 
-                participantsLabel.setText(String.valueOf(team.getMemberList().getUsers().size())+" / "+team.getMaxSlotTeamMember());
+                participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
                 bodyImageView.setOnMouseClicked(e -> {
                     try {
                         this.user.setRole(team.getRole());
@@ -239,7 +239,16 @@ public class SelectTeamController {
                         ioException.printStackTrace();
                     }
                 });
+
                 participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
+                bodyImageView.setOnMouseClicked(e -> {
+                    try {
+                        this.user.setRole(team.getRole());
+                        FXRouter.goTo("team-activity", this.user, this.event, team);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                });
 
                 if (team.getRole().equals("Owner")) {
                     menuDropDown.getItems().addAll("Manage Team", "Delete Team");

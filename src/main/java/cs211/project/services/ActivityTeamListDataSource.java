@@ -1,18 +1,17 @@
 package cs211.project.services;
 
-import cs211.project.models.Activity;
+import cs211.project.models.ActivityTeam;
 import cs211.project.models.collections.ActivityList;
+import cs211.project.models.collections.ActivityTeamList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ActivityListDataSource implements Datasource<ActivityList>{
+public class ActivityTeamListDataSource implements Datasource<ActivityTeamList>{
     protected String directoryName;
     protected String fileName;
-    private Datasource<ActivityList> datasource;
-    private ActivityList activityList;
 
-    public ActivityListDataSource(String directoryName, String fileName) {
+    public ActivityTeamListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -36,8 +35,8 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
     }
 
     @Override
-    public ActivityList readData() {
-        ActivityList activities = new ActivityList();
+    public ActivityTeamList readData() {
+        ActivityTeamList activities = new ActivityTeamList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -67,14 +66,15 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-                String eventID = data[5].trim();
+                String teamID = data[0].trim();
                 String activityName = data[1].trim();
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
                 String activityEnd = data[4].trim();
-                String activityID = data[0].trim();
+                boolean status = Boolean.parseBoolean(data[5].trim());
+                String activityID = data[6].trim();
 
-                activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd,activityID);
+                activities.addActivity(teamID, activityName, activityDescription, activityStart, activityEnd, activityID, status);
 
                 // เพิ่มข้อมูลลงใน list
             }
@@ -84,8 +84,9 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
 
         return activities;
     }
+
     @Override
-    public void writeData(ActivityList data) {
+    public void writeData(ActivityTeamList data) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -107,8 +108,8 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
         try {
             // สร้าง csv
 
-            for (Activity activity : data.getActivities()) {
-                String line = activity.toString();
+            for (ActivityTeam activityTeam : data.getActivities()) {
+                String line = activityTeam.toString();
 
                 buffer.append(line);
                 buffer.append("\n");
