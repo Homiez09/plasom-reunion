@@ -35,12 +35,18 @@ public class SelectTeamController {
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
     @FXML private Label menu1Label, menu2Label;
     @FXML private Shape selectMenu1, selectMenu2;
-    private String filter = "All";
-    private String teamBox ;
-    private User user = (User) FXRouter.getData();
-    private Event event = (Event) FXRouter.getData2();
+
+    private final User user = (User) FXRouter.getData();
+    private final Event event = (Event) FXRouter.getData2();
+
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamHashMap;
+
+    private String filter = "All";
+    private String teamBox ;
+
+    private final String[] menu = {"Manage Teams", "Switch View"};
+    private final String[] filters = {"All", "Favorite", "Owner", "Leader", "Member"};
 
     Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
     Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
@@ -174,7 +180,7 @@ public class SelectTeamController {
         int row = 0, column = 0, row2 = 0;
 
         TeamList teamListSort = (teamHashMap.get(user.getUsername()) != null) ? new TeamList(teamHashMap.get(user.getUsername())) : new TeamList();
-        if (teamListSort != null) teamListSort.sortTeamByNewCreatedAt();
+        teamListSort.sortTeamByNewCreatedAt();
 
         if (filter.equals("Favorite")) {
             teamListSort.filterByBookmark();
@@ -222,7 +228,7 @@ public class SelectTeamController {
                 teamName.setText(team.getTeamName());
                 roleLabel.setText(team.getRole());
                 onlineLabel.setText(String.valueOf(team.getMemberOnline().getUsers().size()));
-                participantsLabel.setText(String.valueOf(team.getMemberList().getUsers().size())+" / "+team.getMaxSlotTeamMember());
+                participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
 
                 if (team.getRole().equals("Owner")) {
                     menuDropDown.getItems().addAll("Manage Team", "Delete Team");
@@ -297,7 +303,6 @@ public class SelectTeamController {
     private void initMenu() {
         switchViewAnchorPane.setVisible(false);
         manageTeamsAnchorPane.setVisible((false));
-        String menu[] = {"Manage Teams", "Switch View"};
 
         settingMenuComboBox.getItems().addAll(menu);
         settingMenuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
@@ -305,7 +310,6 @@ public class SelectTeamController {
             showBlock((String) newValue);
         });
 
-        String filters[] = {"All", "Favorite", "Owner", "Leader", "Member"};
         filterMenuComboBox.getItems().addAll(filters);
         filterMenuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             if (newValue == null) return;
@@ -327,17 +331,17 @@ public class SelectTeamController {
 
     private void showBlock(String select) {
         switch (select) {
-            case "Manage Teams":
+            case "Manage Teams" -> {
                 teamBoxView(teamBox);
                 manageTeamsAnchorPane.setVisible(true);
                 selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
                 selectTeamAnchorPane.setDisable(true);
-                break;
-            case "Switch View":
+            }
+            case "Switch View" -> {
                 switchViewAnchorPane.setVisible(true);
                 selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
                 selectTeamAnchorPane.setDisable(true);
-                break;
+            }
         }
         // this code will show warning, but it's work (IndexOutOfBoundsException) [todo : fix this warning]
         settingMenuComboBox.getSelectionModel().clearSelection();
@@ -387,15 +391,14 @@ public class SelectTeamController {
         initManageTeamSelectMenuGraphic();
         String selectColor = "-fx-text-fill: #413B3B;";
         switch (page) {
-            case 1:
+            case 1 -> {
                 menu1Label.setStyle(selectColor);
                 selectMenu1.setVisible(true);
-
-                break;
-            case 2:
+            }
+            case 2 -> {
                 menu2Label.setStyle(selectColor);
                 selectMenu2.setVisible(true);
-                break;
+            }
         }
     }
 
