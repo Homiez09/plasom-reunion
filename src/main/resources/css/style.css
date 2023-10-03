@@ -771,3 +771,30 @@ Text, Label {
 .activity-bg{
     -fx-background-color: #F6F4EE;
 }
+
+.status-combobox {
+    -fx-background-color: transparent;
+}
+
+.status-combobox .list-view {
+    -fx-padding: 14 4 14 5;
+    -fx-spacing: 5;
+    -fx-background-color: #F6F4EE;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.status-combobox .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 18;
+    -fx-border-radius: 5;
+    -fx-text-fill: #413B3B;
+    -fx-alignment: center;
+}
+
+.status-combobox .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
