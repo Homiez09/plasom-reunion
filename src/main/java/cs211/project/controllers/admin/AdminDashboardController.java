@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import java.text.DecimalFormat;
 
 import java.io.IOException;
 
@@ -31,6 +32,7 @@ public class AdminDashboardController {
     private User user = (User) FXRouter.getData();
     UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
     private UserList userList;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @FXML private void initialize() {
         userList = datasource.readData();
@@ -156,7 +158,7 @@ public class AdminDashboardController {
         eventLabel.setText(String.valueOf(sizeCompletedEvent));
         totalLabel.setText("Total: " + String.valueOf(sizeTotalEvent));
         eventProgressBar.setProgress(percent/100);
-        percentLabel.setText(String.valueOf(percent) + "%");
+        percentLabel.setText(String.valueOf(df.format(percent)) + "%");
     }
 
     private void ButtonSelectGraphic(int page) { // Change button graphic when selected
