@@ -3,6 +3,8 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
+import javafx.beans.value.ObservableValueBase;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +20,6 @@ import javafx.stage.Popup;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class CardMyEventController {
     @FXML
@@ -38,12 +38,17 @@ public class CardMyEventController {
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     private JoinEventMap joinEventDatasource;
-    private HashMap<String, Set<String>> joinEventMap; // Collect EventID
-    private Set<String> SetUser;// Collect User
+    private HashMap<String, UserList> joinEventMap; // Collect EventID
+    private UserList userList;// Collect User
     private Event event;
 
     @FXML
     public void initialize() {
+        setupPage();
+        buttonVisible(true);
+    }
+
+    private void setupPage(){
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         this.joinEventMap = new HashMap<>();
@@ -51,46 +56,20 @@ public class CardMyEventController {
         this.joinEventMap = joinEventDatasource.readData();
         this.teamListDataSource = new TeamListDataSource("data", "team-list.csv");
         this.teamList = new TeamList();
-        buttonVisible(true);
     }
-
 
     public void onJoinViewAction(ActionEvent actionEvent){
-        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (joinEventMap.containsKey(event.getEventID())) {
-            SetUser = joinEventMap.get(event.getEventID());
-        }else {
-            SetUser = new HashSet<>();
-        }
-        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (SetUser.contains(currentUser.getUserId()) || currentUser.getUserId().equals(event.getEventHostUser())){
-            try {
-                FXRouter.goTo("event",currentUser,event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
 
-            SetUser.add(currentUser.getUserId());
-            joinEventMap.put(event.getEventID(), SetUser);
-
-            eventListDatasource.writeData(eventList);
-            joinEventDatasource.writeData(joinEventMap);
-            try {
-                FXRouter.goTo("my-events", currentUser);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
-    public void onLeaveEventButton(ActionEvent actionEvent) {
+    @FXML
+    private void onLeaveEventButton(ActionEvent actionEvent) {
         
         if (joinEventMap.containsKey(event.getEventID())) {
-            SetUser = joinEventMap.get(event.getEventID());
+            userList = joinEventMap.get(event.getEventID());
         }
 
-        SetUser.remove(currentUser.getUserId());
-        joinEventMap.put(event.getEventID(), SetUser);
+        userList.getUsers().remove(currentUser);
+        joinEventMap.put(event.getEventID(), userList);
 
         eventListDatasource.writeData(eventList);
         joinEventDatasource.writeData(joinEventMap);
@@ -99,10 +78,9 @@ public class CardMyEventController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
-    public void setEvent(Event event) {
+
+    public void setEventData(Event event) {
         this.event = event;
         joinEventMap = new HashMap<>();
         joinEventDatasource = new JoinEventMap();
@@ -112,9 +90,9 @@ public class CardMyEventController {
         teamList = teamHashMap.get(currentUser.getUsername());
 
         if (joinEventMap.containsKey(event.getEventID())) {
-            SetUser = joinEventMap.get(event.getEventID());
+            userList = joinEventMap.get(event.getEventID());
         }else {
-            SetUser = new HashSet<>();
+            userList = new UserList();
         }
 
         buttonVisible(event.isEnd());
@@ -165,8 +143,8 @@ public class CardMyEventController {
         manageEventButton.setVisible(!is);
         leaveEventButton.setVisible(!is);
     }
-
-    public void onForStaffButton(ActionEvent actionEvent) {
+    @FXML
+    private void onForStaffButton(ActionEvent actionEvent) {
         joinTeamMap = new JoinTeamMap();
         teamHashMap = joinTeamMap.readData();
         if (teamHashMap.containsKey(currentUser.getUsername()) || event.isHostEvent(currentUser.getUserId())){
@@ -177,8 +155,8 @@ public class CardMyEventController {
             }
         }
     }
-
-    public void onManageEventButton(ActionEvent actionEvent) {
+    @FXML
+    private void onManageUserButton(ActionEvent actionEvent) {
         Popup popup = new Popup();
         VBox popupContent = new VBox();
         //----------set up---------------\\
@@ -212,6 +190,10 @@ public class CardMyEventController {
                 throw new RuntimeException(e);
             }
 
+
+    }
+
+    public void updateUi(){
 
     }
 }

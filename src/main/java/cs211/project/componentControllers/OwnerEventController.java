@@ -3,6 +3,7 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.TeamList;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -142,7 +143,7 @@ public class OwnerEventController {
                         break;
                     case "Delete":
                         eventList.getEvents().remove(eventList.findEvent(eventToModify.getEventID()));
-                        HashMap<String, Set<String>> deleteEvent = joinEventMap.readData();
+                        HashMap<String, UserList> deleteEvent = joinEventMap.readData();
                         deleteEvent.remove(eventToModify.getEventID());
 
                         String folderPath = eventToModify.getEventImagePath();

@@ -106,7 +106,6 @@ public class UsersEventController {
                         "-fx-alignment: center; -fx-smooth: true;" +
                         "-fx-content-display: text-only;");
 
-
                 comboBox.setButtonCell(new ListCell<>() {
                     {
                         setText("...");
@@ -156,10 +155,10 @@ public class UsersEventController {
                         }
                         break;
                     case "Kick":
-                        System.out.println();
-                        HashMap<String, Set<String>> joinEvent = MapUserJoinEvent.readData();
-                        Set<String> deleteUser = joinEvent.get(currentEvent.getEventID());
-                        deleteUser.remove(user.getUserId());
+
+                        HashMap<String, UserList> joinEvent = MapUserJoinEvent.readData();
+                        UserList deleteUser = joinEvent.get(currentEvent.getEventID());
+                        deleteUser.getUsers().remove(user);
                         observableList.remove(user);
                         joinEvent.put(currentEvent.getEventID(),deleteUser);
                         userSizeLabel.setText(observableList.size()+"");
