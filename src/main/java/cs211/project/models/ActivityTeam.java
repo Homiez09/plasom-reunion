@@ -24,6 +24,10 @@ public class ActivityTeam extends Activity {
         return status;
     }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public String toString() {
         return teamID + "," + name + "," + description + "," + startTime + "," + endTime + ","  + status  + "," + activityID;
     }

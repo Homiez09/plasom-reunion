@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -33,6 +32,7 @@ public class TeamActivityController {
     @FXML private TableColumn<ActivityTeam, String> nameColumn, startTimeColumn, endTimeColumn, descriptionColumn;
     @FXML private TableColumn<ActivityTeam, Boolean> statusColumn;
     @FXML private Label activityNameLabel, activityDescriptionLabel, activityStartTimeLabel, activityEndTimeLabel;
+    @FXML private ComboBox statusComboBox;
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private final Team team = (Team) FXRouter.getData3();
@@ -40,10 +40,16 @@ public class TeamActivityController {
     private ActivityTeamList activityTeamList;
 
     private final String[] time = {"AM", "PM"};
+    private final String[] status = {"On going", "Complete"};
     private LocalDateTime currentDateTime = LocalDateTime.now();
     private int currentMinute, startHour, startMinute, endHour, endMinute;
     private String formattedCurrentHour, startAmPm, endAmPm, startDateFormat, endDateFormat;
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
+
+    boolean editor;
+
+    public TeamActivityController() {
+    }
 
     @FXML void initialize(){
         activityTeamList = activityTeamListDataSource.readData();
@@ -57,10 +63,11 @@ public class TeamActivityController {
     }
 
     @FXML
-    protected void onCreateActivityButtonClick() {
-        activityTeamList.addActivity(new ActivityTeam(team.getTeamID(), activityNameTextField.getText(), descriptionTextArea.getText(), startDateFormat, endDateFormat));
+    protected void onSaveActivityButtonClick() {
+        if (!editor) activityTeamList.addActivity(new ActivityTeam(team.getTeamID(), activityNameTextField.getText(), descriptionTextArea.getText(), startDateFormat, endDateFormat));
         activityTeamListDataSource.writeData(activityTeamList);
         try {
+            editor = false;
             FXRouter.goTo("team-activity", user, event, team);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -111,10 +118,23 @@ public class TeamActivityController {
         if (user.getRole().equals("Member")) createActivityButton.setVisible(false);
     }
 
+    private void initStatus(ActivityTeam activityTeam) {
+        statusComboBox.getItems().addAll(status);
+        statusComboBox.getSelectionModel().select((activityTeam.getStatus() ? 1 : 0));
+        statusComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("Complete")) {
+                activityTeam.setStatus(true);
+            } else {
+                activityTeam.setStatus(false);
+            }
+        });
+    }
+
     private void showCreateActivity() {
         validateDateTime();
         timeInit();
         choiceBoxInit();
+        statusComboBox.setVisible(false);
         deleteButton.setVisible(false);
         mainActivityAnchorPane.setVisible(false);
         createActivityAnchorPane.setVisible(true);
@@ -126,10 +146,15 @@ public class TeamActivityController {
 
         activityNameTextField.setText(activityTeam.getName());
         descriptionTextArea.setText(activityTeam.getDescription());
+        initStatus(activityTeam);
+        editor = true;
     }
 
     private void showEditActivity() {
         deleteButton.setVisible(true);
+        validateDateTime();
+        timeInit();
+        choiceBoxInit();
         mainActivityAnchorPane.setVisible(false);
         createActivityAnchorPane.setVisible(true);
     }
