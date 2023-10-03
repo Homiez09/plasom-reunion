@@ -41,27 +41,27 @@
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="1152.0">
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="79.0" />
-                  <Button mnemonicParsing="false" onAction="#onAllClick" text="All" />
+                  <Button fx:id="allButton" mnemonicParsing="false" onAction="#onAllClick" text="All" />
                   <Separator orientation="VERTICAL" prefHeight="30.0" prefWidth="30.0" />
-                  <Button mnemonicParsing="false" onAction="#onNewClick" text="New" />
+                  <Button fx:id="newButton" mnemonicParsing="false" onAction="#onNewClick" text="New" />
                   <Separator orientation="VERTICAL" prefHeight="30.0" prefWidth="30.0" />
-                  <Button mnemonicParsing="false" onAction="#onUpClick" text="Upcoming" />
+                  <Button fx:id="upComingButton" mnemonicParsing="false" onAction="#onUpClick" text="Upcoming" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="128.0" />
                </children>
             </HBox>
             <Separator opacity="0.0" prefHeight="3.0" prefWidth="200.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="1152.0">
                <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="63.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="44.0" />
                   <StackPane>
                      <children>
-                        <ComboBox fx:id="categoryComboBox" prefWidth="65.0" />
+                        <ComboBox fx:id="categoryComboBox" prefHeight="25.0" prefWidth="120.0" visibleRowCount="6" />
                         <Button fx:id="categoryButton" mnemonicParsing="false" onAction="#onCategory" prefHeight="25.0" prefWidth="120.0" text="Category" />
                      </children>
                   </StackPane>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="135.0" />
-                  <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="500.0" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="120.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="88.0" />
+                  <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="618.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="58.0" />
                   <StackPane>
                      <children>
                         <ImageView fx:id="sortImageView" fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
@@ -69,10 +69,10 @@
                               <Image url="@../../../images/hostevent/sort.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: transparent;" styleClass="hide-button" />
+                        <ComboBox fx:id="sortComboBox" prefHeight="25.0" prefWidth="80.0" visible="false" visibleRowCount="5" />
+                        <Button fx:id="sortButton" mnemonicParsing="false" onAction="#onSort" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: transparent;" styleClass="hide-button" />
                      </children>
                   </StackPane>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="33.0" prefWidth="10.0" />
                   <Button mnemonicParsing="false" onAction="#onCreateClick" prefHeight="25.0" prefWidth="100.0" text="+ Create Event" />
                </children>
             </HBox>
