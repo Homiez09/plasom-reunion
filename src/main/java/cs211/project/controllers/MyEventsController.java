@@ -22,6 +22,7 @@ import javafx.stage.Popup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -36,6 +37,7 @@ public class MyEventsController extends AllEventListController {
     //----------------------------
     private User currentUser = (User) FXRouter.getData();
     private ObservableList<Event> eventObservableList;
+    private EventList eventList;
     private int currentPage = 1;
     private final int itemsPerPage = 4;
     private Predicate<Event> selectedPredicate = null;
@@ -47,15 +49,14 @@ public class MyEventsController extends AllEventListController {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
         setupPage();
         allButton.setDisable(true);
-
         getBySearch();
+        sortTilePane();
     }
 
     private void setupPage(){
         Datasource<EventList> eventDatasource = new EventListDataSource();
-        EventList eventList = eventDatasource.readData();
+        eventList = eventDatasource.readData();
         eventObservableList = FXCollections.observableArrayList(eventList.getCurrentEvent(currentUser));
-        System.out.println(eventObservableList.size());
         initSort();
         setupScrollBar();
         loadData(currentPage,selectedPredicate);
@@ -125,16 +126,44 @@ public class MyEventsController extends AllEventListController {
                 return event.getEventName().toLowerCase().contains(searchText);
             };
 
-            Predicate<Event> combinedPredicate = searchPredicate;
-            if (categoryComboBox.getValue() != null && !categoryComboBox.getValue().isEmpty()) {
-                combinedPredicate = combinedPredicate.and(selectedPredicate);
-            }
-
-            removeNode(combinedPredicate);
+            removeNode(searchPredicate);
             currentPage = 1;
-            loadData(currentPage, combinedPredicate);
+            loadData(currentPage, searchPredicate);
         });
     }
+
+    private void sortTilePane(){
+        sortComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+            String sortBy = newValue.trim();
+            tilePaneMain.getChildren().clear();
+            scrollPane.setVvalue(0.0);
+            currentPage = 1;
+            Comparator<Event> eventComparator =null;
+            switch (sortBy){
+                case "Name":
+                    eventComparator = Comparator.comparing(Event::getEventName);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+                case "Start":
+                    eventComparator = Comparator.comparing(Event::getDateStartAsDate);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+                case "Member":
+                    eventComparator = Comparator.comparing(Event::getUserInEvent);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+                case "End":
+                    eventComparator = Comparator.comparing(Event::getDateEndAsDate);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+            }
+        });
+    }
+
 
     @FXML
     private void onCreateAction(ActionEvent actionEvent) {
@@ -148,6 +177,7 @@ public class MyEventsController extends AllEventListController {
     @FXML
     private void onAllAction(ActionEvent actionEvent) {
         reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getCurrentEvent(currentUser));
         loadData(currentPage,selectedPredicate);
         allButton.setDisable(true);
     }
@@ -155,17 +185,23 @@ public class MyEventsController extends AllEventListController {
     @FXML
     public void onCompleteAction(ActionEvent actionEvent) {
         reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getComplete(currentUser));
+        loadData(currentPage,selectedPredicate);
         completeButton.setDisable(true);
     }
 
     @FXML
     private void onOwnerEventAction(ActionEvent actionEvent) {
         reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getOwner(currentUser));
+        loadData(currentPage,selectedPredicate);
         ownerButton.setDisable(true);
     }
     @FXML
     private void onMemberAction(ActionEvent actionEvent) {
         reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
+        loadData(currentPage,selectedPredicate);
         memberButton.setDisable(true);
     }
 
@@ -173,6 +209,8 @@ public class MyEventsController extends AllEventListController {
     @FXML
     private void onStaffAction(ActionEvent actionEvent) {
         reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getTeamEvent(currentUser));
+        loadData(currentPage,selectedPredicate);
         staffButton.setDisable(true);
     }
     @FXML

@@ -85,12 +85,8 @@ public class EventList {
         ArrayList<Event> list = new ArrayList<>();
         teamMapData = new JoinTeamMap();
         teamList = teamMapData.readData().get(user.getUsername());
-        for (Team team:teamList.getTeams()){
-            System.out.println(team.getMemberList().getUsers().contains(user));
-        }
 
         for (Event event : events) {
-            System.out.println(event.getTeamList());
             if (event.isHostEvent(user.getUserId())) {
                 list.add(event);
             } else if (event.getUserList().getUsers().contains(user)) {
@@ -110,10 +106,22 @@ public class EventList {
         ArrayList<Event> list = new ArrayList<>();
         if (user!=null){
             for (Event event:events){
-                for (User u : event.getUserList().getUsers()){
-                    if (u.equals(user)){
-                        list.add(event);
-                    }
+                if (event.getUserList().getUsers().contains(user)){
+                    list.add(event);
+                }
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Event> getTeamEvent(User user){
+        ArrayList<Event> list = new ArrayList<>();
+        teamMapData = new JoinTeamMap();
+        teamList = teamMapData.readData().get(user.getUsername());
+        for (Event event : events){
+            for (Team team:event.getTeamList().getTeams()) {
+                if (team.getMemberList().getUsers().contains(user)) {
+                    list.add(event);
                 }
             }
         }
@@ -121,19 +129,28 @@ public class EventList {
     }
 
     public ArrayList<Event> getOwner(User user){
-        if (user!=null) {
-            events.removeIf(event -> !event.getEventHostUser().getUserId().equals(user.getUserId()));
+        ArrayList<Event> list = new ArrayList<>();
+        for (Event event : events){
+            if (event.isHostEvent(user.getUserId()) && !event.isEnd()) {
+                list.add(event);
+            }
         }
-        return events;
+        return list;
     }
 
     public ArrayList<Event> getComplete(User user){
-        eventMapData = new JoinEventMap();
-        joinEvent = eventMapData.readData();
+        ArrayList<Event> remove = new ArrayList<>();
+        ArrayList<Event> list = getCurrentEvent(user);
+        for (Event event:getCurrentEvent(user)){
+            if (!event.isEnd()){
+                remove.add(event);
+            }
+        }
+
+        list.removeAll(remove);
 
 
-
-        return  events;
+        return  list;
     }
 
 

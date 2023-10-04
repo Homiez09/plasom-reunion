@@ -127,8 +127,20 @@ public class Event implements Comparable<Event>{
     public TeamList getTeamList() { return teamList; }
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
+    public LocalDateTime getDateStartAsDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        return  LocalDateTime.parse(eventDateStart, formatter);
+
+    }
+    public LocalDateTime getDateEndAsDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        return  LocalDateTime.parse(eventDateEnd, formatter);
+
+    }
     public LocalDateTime getTimestampAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
         return  LocalDateTime.parse(timestamp, formatter);
 
