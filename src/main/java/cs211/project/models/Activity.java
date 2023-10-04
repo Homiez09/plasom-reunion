@@ -1,12 +1,9 @@
 package cs211.project.models;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Activity {
-    protected String name,eventID,startTime,endTime,activityID;
-    protected String description;
+    protected String activityID,name,description,startTime,endTime,eventID;
 
     // Constructors
 

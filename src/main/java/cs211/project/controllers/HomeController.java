@@ -1,10 +1,8 @@
 package cs211.project.controllers;
 
 import cs211.project.componentControllers.EventTileController;
-import cs211.project.models.Activity;
 import cs211.project.models.Event;
 import cs211.project.models.User;
-import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.*;
 import javafx.animation.ScaleTransition;
@@ -33,9 +31,7 @@ public class HomeController {
     @FXML private ImageView categoryButtonImage;
     private User user = (User) FXRouter.getData();
     private Datasource<EventList> datasource;
-    private Datasource<ActivityList> activityListDatasource;
     private EventList eventList,recEventList;
-    private ActivityList activityList;
     private int currentIndexOfUp = 1;
     private int currnetIndexOfNew = 1;
 
