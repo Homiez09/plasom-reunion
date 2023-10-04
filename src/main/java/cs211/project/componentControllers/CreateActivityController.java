@@ -83,7 +83,7 @@ public class CreateActivityController {
     @FXML protected void onSaveButton() {
         String activityName = activityNameTextField.getText();
         String activityDescription = activityDescriptionTextField.getText();
-        String activityStart = formatTime(activityEndDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
+        String activityStart = formatTime(activityStartDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
         String activityEnd = formatTime(activityEndDatePick,activityEndHourSpinner,activityEndMinuteSpinner);
         if (!checkActivityStartEndTime(activityStart,activityEnd)) {
             dateTimeErrorLabel.setText("The start time must come before the end time.");
@@ -155,11 +155,7 @@ public class CreateActivityController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime activityStartDateTime = LocalDateTime.parse(startTime,formatter);
         LocalDateTime activityEndDateTime = LocalDateTime.parse(endTime,formatter);
-        if (activityStartDateTime.isBefore(activityEndDateTime)) {
-            return true;
-        } else {
-            return false;
-        }
+        return activityStartDateTime.isBefore(activityEndDateTime);
     }
 
     public Boolean checkActivityEventTime(Event event, String startTime, String endTime) {
@@ -168,12 +164,8 @@ public class CreateActivityController {
         LocalDateTime eventEndDateTime = LocalDateTime.parse(event.getEventDateEnd(),formatter);
         LocalDateTime activityStartDateTime = LocalDateTime.parse(startTime,formatter);
         LocalDateTime activityEndDateTime = LocalDateTime.parse(endTime,formatter);
-        if ((eventStartDateTime.isBefore(activityStartDateTime) || eventStartDateTime.isEqual(activityStartDateTime))
-                && (eventEndDateTime.isAfter(activityEndDateTime) || eventEndDateTime.isEqual(activityEndDateTime))) {
-            return true;
-        } else {
-            return false;
-        }
+        return (eventStartDateTime.isBefore(activityStartDateTime) || eventStartDateTime.isEqual(activityStartDateTime))
+                && (eventEndDateTime.isAfter(activityEndDateTime) || eventEndDateTime.isEqual(activityEndDateTime));
     }
 
     private void updateSaveButtonState(TextField name, TextField description, Button save) {
