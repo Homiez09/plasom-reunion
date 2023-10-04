@@ -29,7 +29,6 @@ public class CreateActivityController {
     private Spinner<Integer> activityStartHourSpinner,activityEndHourSpinner, activityStartMinuteSpinner,activityEndMinuteSpinner;
     private Datasource<ActivityList> activityListDatasource;
     private ActivityList activityList;
-    private String oldName;
 
     public void initEdit(User user,Event event,String activityID ) {
         this.user = user;
@@ -37,7 +36,6 @@ public class CreateActivityController {
         this.activity = activityList.findActivity(activityID);
         showActivity();
         deleteButton.setVisible(true);
-        oldName = activity.getName();
     }
     public void initCreate(User user,Event event) {
         this.user = user;
@@ -91,15 +89,15 @@ public class CreateActivityController {
             dateTimeErrorLabel.setText("The start time must come before the end time.");
             dateTimeErrorLabel.setVisible(true);
             return;
-        } else {
-            if (!checkActivityEventTime(event,activityStart,activityEnd)) {
-                dateTimeErrorLabel.setText("The activity must start after the event starts and end before the event ends.");
-                dateTimeErrorLabel.setVisible(true);
-                return;}
+        } else if (!checkActivityEventTime(event,activityStart,activityEnd)){
+            dateTimeErrorLabel.setText("The activity must start after the event starts and end before the event ends.");
+            dateTimeErrorLabel.setVisible(true);
+            return;
         }
         if (activity == null) {
-            event.getActivityList().addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
-            activityList.addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
+            Activity newActivity = new Activity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
+            event.getActivityList().addActivity(newActivity);
+            activityList.addActivity(newActivity);
         } else {
             activityList.findActivity(activity.getActivityID()).setDescription(activityDescription);
             activityList.findActivity(activity.getActivityID()).setStartTime(activityStart);
