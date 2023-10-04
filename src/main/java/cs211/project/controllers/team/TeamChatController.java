@@ -1,5 +1,6 @@
 package cs211.project.controllers.team;
 
+import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
@@ -15,12 +16,25 @@ public class TeamChatController {
 
     UserListDataSource datasource ;
     UserList userList ;
+    LoadSideBarComponent sideBarAnchorPaneLoad;
+
 
 
     @FXML void initialize(){
         new LoadNavbarComponent(user, navbarAnchorPane);
-        new LoadSideBarComponent(sideBarAnchorPane);
+        LoadSideBarComponent sideBarAnchorPaneLoad;
+
+        sideBarAnchorPaneLoad = new LoadSideBarComponent();
+        sideBarAnchorPane.getChildren().add(sideBarAnchorPaneLoad.getSideBarComponent());
+
         datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
+
+        setSideBar();
+    }
+
+    protected void setSideBar(){
+        SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
+        sideBarTeamController.setHoverChat();
     }
 }
