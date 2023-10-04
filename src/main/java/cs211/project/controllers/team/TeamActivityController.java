@@ -124,29 +124,33 @@ public class TeamActivityController {
             startHour = Integer.parseInt(startTimeParts[0]);
             endHour = Integer.parseInt(endTimeParts[0]);
 
-            System.out.println(endHour);
+            int startHourTemp = Integer.parseInt(startTimeParts[0]);
+            int endHourTemp = Integer.parseInt(endTimeParts[0]);
             if (startHour > 11) {
                 startDateChoiceBox.setValue("PM");
-                startHour = Integer.parseInt(startTimeParts[0]) - 12;
+                startHourTemp -= 12;
             } else {
                 startDateChoiceBox.setValue("AM");
             }
-            System.out.println(endHour);
-            if (endHour > 11) {
+
+
+            System.out.println(endHourTemp);
+            if (Integer.parseInt(endTimeParts[0]) > 11) {
                 endDateChoiceBox.setValue("PM");
-                endHour = Integer.parseInt(endTimeParts[0]) - 12;
+                endHourTemp -= 12;
             } else {
                 endDateChoiceBox.setValue("AM");
             }
-            System.out.println(endHour);
+
+            System.out.println(endHourTemp);
 
             beforeEditStartHour = startHour;
             beforeEditStartMinute = Integer.parseInt(startTimeParts[1]);
 
-            startHourSpinner.getValueFactory().setValue(startHour);
+            startHourSpinner.getValueFactory().setValue(startHourTemp);
             startMinuteSpinner.getValueFactory().setValue(Integer.parseInt(startTimeParts[1]));
 
-            endHourSpinner.getValueFactory().setValue(endHour);
+            endHourSpinner.getValueFactory().setValue(endHourTemp);
             endMinuteSpinner.getValueFactory().setValue(Integer.parseInt(endTimeParts[1]));
         }else{
             startDatePicker.setValue(LocalDate.now());
@@ -247,7 +251,6 @@ public class TeamActivityController {
             activityTeamList.addActivity(new ActivityTeam(team.getTeamID(), activityNameTextField.getText(), description, startDateFormat, endDateFormat));
             activityTeamListDataSource.writeData(activityTeamList);
             try {
-                editor = false;
                 FXRouter.goTo("team-activity", user, event, team);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -256,7 +259,6 @@ public class TeamActivityController {
             checkDescriptionReq();
             updateActivity();
             try {
-                editor = false;
                 FXRouter.goTo("team-activity", user, event, team);
             } catch (IOException e) {
                 throw new RuntimeException(e);
