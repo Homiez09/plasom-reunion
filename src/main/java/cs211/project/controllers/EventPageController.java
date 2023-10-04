@@ -50,7 +50,7 @@ public class EventPageController {
     private User user = (User) FXRouter.getData();
 
     @FXML private void initialize() {
-        this.eventActivityDatasource = new ActivityListDataSource("data","activity-list.csv");
+        this.eventActivityDatasource = new ActivityListDataSource("data","event-activity-list.csv");
         this.activityList = eventActivityDatasource.readData();
         this.eventDatasource = new EventListDataSource();
         this.eventList = eventDatasource.readData();
@@ -81,7 +81,7 @@ public class EventPageController {
 
     @FXML protected void onEditActivityButtonClick() {
         try {
-            FXRouter.goTo("edit-activity",user,event);
+            FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

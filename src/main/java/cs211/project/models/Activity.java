@@ -1,15 +1,11 @@
 package cs211.project.models;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Activity {
-    private String name,eventID,startTime,endTime,activityID;
-    private String description;
+    protected String activityID,name,description,startTime,endTime,eventID;
 
     // Constructors
-
 
     public Activity(String eventId, String activityName, String activityDescription, String activityStart, String activityEnd) {
         this.eventID =eventId;
@@ -22,6 +18,7 @@ public class Activity {
         this.endTime = activityEnd;
         this.activityID = generateActivityID();
     }
+
     public Activity(String eventId, String activityName, String activityDescription, String activityStart, String activityEnd,String activityID) {
         this.eventID =eventId;
         this.name =activityName;

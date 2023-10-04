@@ -73,27 +73,9 @@ public class MemberApplicationController {
         teamListHashMap.get(user.getUsername()).getTeams().add(team);
         joinTeamMap.writeData(teamListHashMap);
         try {
-            FXRouter.goTo("select-team", currentUser, currentEvent);
-            teamListHashMap = joinTeamMap.readData();
-            teamName = teamChoiceBox.getValue();
-            teamListDataSource = new TeamListDataSource("data", "team-list.csv");
-            teamList = teamListDataSource.readData();
-            team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
-            team.setRole("Member");
-            if (teamListHashMap.get(user.getUsername()) == null) {
-                teamListHashMap.put(user.getUsername(), new TeamList());
-                teamListHashMap.get(user.getUsername()).getTeams().add(team);
-            }
-            teamListHashMap.get(user.getUsername()).getTeams().add(team);
-            joinTeamMap.writeData(teamListHashMap);
-            try {
-                FXRouter.goTo("select-team", user, event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            FXRouter.goTo("select-team", user, event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

@@ -1,22 +1,22 @@
 package cs211.project.services;
 
-import cs211.project.models.*;
-import cs211.project.models.collections.*;
+import cs211.project.models.ActivityTeam;
+import cs211.project.models.collections.ActivityList;
+import cs211.project.models.collections.ActivityTeamList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
-public class EventListDataSource implements Datasource<EventList> {
-    private final String directoryName = "data";
-    private final String fileName = "event-list.csv";
-    private EventList eventList;
+public class ActivityTeamListDataSource implements Datasource<ActivityTeamList>{
+    protected String directoryName;
+    protected String fileName;
 
-    public EventListDataSource() {
+    public ActivityTeamListDataSource(String directoryName, String fileName) {
+        this.directoryName = directoryName;
+        this.fileName = fileName;
         checkFileIsExisted();
     }
+
     // ตรวจสอบว่ามีไฟล์ให้อ่านหรือไม่ ถ้าไม่มีให้สร้างไฟล์เปล่า
     private void checkFileIsExisted() {
         File file = new File(directoryName);
@@ -35,19 +35,9 @@ public class EventListDataSource implements Datasource<EventList> {
     }
 
     @Override
-    public EventList readData() {
-        Datasource<UserList> userListDatasource = new UserListDataSource("data","user-list.csv");
-        UserList userList = userListDatasource.readData();
-
-        Datasource<ActivityList> activityListDatasource = new ActivityListDataSource("data","event-activity-list.csv");
-        ActivityList activityList = activityListDatasource.readData();
-
-
-        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
-        TeamList teamList = teamListDatasource.readData();
-
+    public ActivityTeamList readData() {
+        ActivityTeamList activities = new ActivityTeamList();
         String filePath = directoryName + File.separator + fileName;
-
         File file = new File(filePath);
 
         // เตรียม object ที่ใช้ในการอ่านไฟล์
@@ -63,12 +53,10 @@ public class EventListDataSource implements Datasource<EventList> {
                 fileInputStream,
                 StandardCharsets.UTF_8
         );
-
         BufferedReader buffer = new BufferedReader(inputStreamReader);
 
         String line = "";
         try {
-            eventList = new EventList();
             // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด
             while ( (line = buffer.readLine()) != null ){
                 // ถ้าเป็นบรรทัดว่าง ให้ข้าม
@@ -78,46 +66,27 @@ public class EventListDataSource implements Datasource<EventList> {
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
+                String teamID = data[0].trim();
+                String activityName = data[1].trim();
+                String activityDescription = data[2].trim();
+                String activityStart = data[3].trim();
+                String activityEnd = data[4].trim();
+                boolean status = Boolean.parseBoolean(data[5].trim());
+                String activityID = data[6].trim();
 
-                String eventId = data[0].trim();
-                User eventHost = userList.findUserId(data[1].trim());
-                String eventName = data[2].trim();
-                String imagePath = data[3].trim();
-                String eventTag = data[4].trim();
-                String eventStart = data[5].trim();
-                String eventEnd = data[6].trim();
-                String eventDescription = data[7].trim().replace("\n", "");
-                String eventLocation = data[8].trim();
-                int slotMember = Integer.parseInt(data[9].trim());
-                String timeStamp = data[10].trim();
-                boolean joinEvent = Boolean.parseBoolean(data[11].trim());
-                boolean joinTeam = Boolean.parseBoolean(data[12].trim());
+                activities.addActivity(teamID, activityName, activityDescription, activityStart, activityEnd, activityID, status);
 
-
-
-                eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, slotMember,timeStamp,joinEvent,joinTeam
-                                        );
-                for (Team team:teamList.getTeamOfEvent(eventList.findEvent(eventId))) {
-                    eventList.findEvent(eventId).getTeamList().addTeam(team);
-                }
-                for (Activity activity : activityList.getActivities()){
-                    eventList.findEvent(eventId).getActivityList().addActivity(activity);
-                }
-
-                for (User user: userList.getUserOfEvent(eventList.findEvent(eventId))){
-                    eventList.findEvent(eventId).getUserList().addUser(user);
-                }
-
+                // เพิ่มข้อมูลลงใน list
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return eventList;
+        return activities;
     }
+
     @Override
-    public void writeData(EventList data) {
+    public void writeData(ActivityTeamList data) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -135,12 +104,12 @@ public class EventListDataSource implements Datasource<EventList> {
                 StandardCharsets.UTF_8
         );
         BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
-        data.sort();
+
         try {
             // สร้าง csv
 
-            for (Event event : data.getEvents()) {
-                String line = event.toString();
+            for (ActivityTeam activityTeam : data.getActivities()) {
+                String line = activityTeam.toString();
 
                 buffer.append(line);
                 buffer.append("\n");
@@ -158,6 +127,5 @@ public class EventListDataSource implements Datasource<EventList> {
             }
         }
     }
-
 
 }

@@ -1,6 +1,8 @@
 package cs211.project.models;
 
+import cs211.project.models.collections.ActivityTeamList;
 import cs211.project.models.collections.UserList;
+import cs211.project.services.ActivityTeamListDataSource;
 import cs211.project.services.UserListDataSource;
 
 import java.text.SimpleDateFormat;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,6 +23,7 @@ public class Team implements Comparable<Team> {
     private UserList memberList = new UserList();
     private String role;
     private User teamHostUser;
+    private ActivityTeamList activities;
     private UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
     private UserList userList = userListDataSource.readData();
 
@@ -34,6 +38,7 @@ public class Team implements Comparable<Team> {
         this.createdAt = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss:SSS"));
         this.eventID = eventID;
         this.isBookmarked = false;
+        loadActivities();
     }
 
     public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription) {
@@ -58,6 +63,7 @@ public class Team implements Comparable<Team> {
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = createdAt;
         this.eventID = eventID;
+        loadActivities();
     }
 
     public boolean addMemberToMemberList(String username) {
@@ -144,6 +150,13 @@ public class Team implements Comparable<Team> {
         return userList;
     }
 
+    public void loadActivities() {
+        ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
+        ActivityTeamList activityTeamList = activityTeamListDataSource.readData();
+        activityTeamList.getActivitiesByTeamID(teamID);
+        this.activities = activityTeamList;
+    }
+
     public boolean isFull() {
         return memberList.getUsers().size() >= maxSlotTeamMember; // return true if full
     }
@@ -187,6 +200,10 @@ public class Team implements Comparable<Team> {
 
     public String getEndDate() { // return timestamp (millisecond)
         return endDate;
+    }
+
+    public ArrayList<ActivityTeam> getActivities() {
+        return activities.getActivities();
     }
 
     public boolean isBookmarked() {
