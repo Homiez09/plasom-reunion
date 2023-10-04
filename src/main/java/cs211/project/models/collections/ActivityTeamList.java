@@ -42,6 +42,25 @@ public class ActivityTeamList {
         return null;
     }
 
+    public ActivityTeam findActivityByName(String activityName){
+        for (ActivityTeam activity:activities) {
+            if (activity.getName().equals(activityName) ){
+                return activity;
+            }
+        }
+        return null;
+    }
+
+    public ActivityTeam findActivityById(String activityId){
+        for (ActivityTeam activity:activities) {
+            if (activity.getActivityID().equals(activityId) ){
+                return activity;
+            }
+        }
+        return null;
+    }
+
+
     public ArrayList<ActivityTeam> getActivitiesByTeamID(String teamID) {
         ArrayList<ActivityTeam> activityTeams = new ArrayList<>();
         for (ActivityTeam activity : activities) {
