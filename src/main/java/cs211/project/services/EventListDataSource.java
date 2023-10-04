@@ -13,7 +13,6 @@ public class EventListDataSource implements Datasource<EventList> {
     private final String directoryName = "data";
     private final String fileName = "event-list.csv";
     private EventList eventList;
-    private JoinEventMap eventMapData ;
 
     public EventListDataSource() {
         checkFileIsExisted();
@@ -89,7 +88,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventEnd = data[6].trim();
                 String eventDescription = data[7].trim().replace("\n", "");
                 String eventLocation = data[8].trim();
-                int slotmember = Integer.parseInt(data[9].trim());
+                int slotMember = Integer.parseInt(data[9].trim());
                 String timeStamp = data[10].trim();
                 boolean joinEvent = Boolean.parseBoolean(data[11].trim());
                 boolean joinTeam = Boolean.parseBoolean(data[12].trim());
@@ -97,13 +96,12 @@ public class EventListDataSource implements Datasource<EventList> {
 
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, slotmember,timeStamp,joinEvent,joinTeam
+                                        eventDescription, eventLocation, slotMember,timeStamp,joinEvent,joinTeam
                                         );
                 for (Team team:teamList.getTeamOfEvent(eventList.findEvent(eventId))) {
                     eventList.findEvent(eventId).getTeamList().addTeam(team);
                 }
                 for (Activity activity : activityList.getActivities()){
-                    System.out.println(activity.getEventID());
                     eventList.findEvent(eventId).getActivityList().addActivity(activity);
                 }
 

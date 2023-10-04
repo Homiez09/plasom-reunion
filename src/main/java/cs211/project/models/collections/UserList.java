@@ -160,15 +160,11 @@ public class UserList {
         String eventID = event.getEventID();
         ArrayList<User> userList = new ArrayList<>();
         HashMap<String, UserList> joinEventMap = new JoinEventMap().readData();
-        UserList setUser = joinEventMap.get(eventID);
 
-        if (setUser != null) {
-            for (User user : setUser.getUsers()) {
-                if (joinEventMap.containsKey(eventID)){
-                    userList.add(findUserId(user.getUserId()));
-                }
-            }
+        if (joinEventMap.containsKey(eventID)){
+            userList.addAll(joinEventMap.get(eventID).getUsers());
         }
+
 
         return userList;
     }

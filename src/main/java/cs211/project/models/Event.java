@@ -44,7 +44,7 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = -1;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         this.isSelected = new SimpleBooleanProperty(false);
         this.activityList = new ActivityList();
         this.teamList = new TeamList();
@@ -73,7 +73,7 @@ public class Event implements Comparable<Event>{
         this.eventLocation = eventLocation;
         this.slotMember = slotMember;
         this.isSelected = new SimpleBooleanProperty(false);
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         this.activityList = new ActivityList();
         this.teamList = new TeamList();
         this.userList = new UserList();
@@ -111,7 +111,7 @@ public class Event implements Comparable<Event>{
         this.joinEvent = joinEvent;
         this.joinTeam = joinTeam;
     }
-
+    //---------------- Read CSV ----------------\\
     public String getEventID() {return eventID;}
     public User getEventHostUser() {return eventHostUser;}
     public String getEventName() {return eventName;}
@@ -168,7 +168,7 @@ public class Event implements Comparable<Event>{
         return !eventDate.isBefore(currentTime) && !eventDate.isAfter(currentTime.plusDays(7));
     }
     public boolean isNewEvent() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
         // แปลงสตริง timestamp เป็น LocalDateTime
         LocalDateTime timeStamp = LocalDateTime.parse(timestamp, formatter);
@@ -233,6 +233,21 @@ public class Event implements Comparable<Event>{
     @Override
     public int compareTo(Event o) {
         return eventName.compareTo(o.eventName);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        return eventID.equals(event.eventID);
+    }
+
+    @Override
+    public int hashCode() {
+        return eventID.hashCode();
     }
 }
 

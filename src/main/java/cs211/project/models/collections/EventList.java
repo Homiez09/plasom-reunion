@@ -83,20 +83,24 @@ public class EventList {
 
     public ArrayList<Event> getCurrentEvent(User user){
         ArrayList<Event> list = new ArrayList<>();
-        list = getOwner(user);
-        if (user!=null){
-            eventMapData = new JoinEventMap();
-            joinEvent = eventMapData.readData();
-            teamMapData = new JoinTeamMap();
-            joinTeam = teamMapData.readData();
-            teamList = joinTeam.get(user.getUserId());
-            for (Event event:events){
-                teamList = joinTeam.get(user.getUserId());
-                userList = joinEvent.get(event.getEventID());
-                if (userList != null && userList.findUserId(user.getUserId()) != null){
-                    list.add(event);
-                }
+        teamMapData = new JoinTeamMap();
+        teamList = teamMapData.readData().get(user.getUsername());
+        for (Team team:teamList.getTeams()){
+            System.out.println(team.getMemberList().getUsers().contains(user));
+        }
 
+        for (Event event : events) {
+            System.out.println(event.getTeamList());
+            if (event.isHostEvent(user.getUserId())) {
+                list.add(event);
+            } else if (event.getUserList().getUsers().contains(user)) {
+                list.add(event);
+            } else {
+                for (Team team:event.getTeamList().getTeams()){
+                    if (team.getMemberList().getUsers().contains(user)){
+                        list.add(event);
+                    }
+                }
             }
         }
         return list;
@@ -105,16 +109,13 @@ public class EventList {
     public ArrayList<Event> getUserEvent(User user){
         ArrayList<Event> list = new ArrayList<>();
         if (user!=null){
-            eventMapData = new JoinEventMap();
-            joinEvent = eventMapData.readData();
             for (Event event:events){
                 for (User u : event.getUserList().getUsers()){
-                    if (userList.getUsers().contains(u)){
+                    if (u.equals(user)){
                         list.add(event);
                     }
                 }
             }
-
         }
         return list;
     }

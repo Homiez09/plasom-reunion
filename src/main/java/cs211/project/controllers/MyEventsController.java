@@ -90,7 +90,6 @@ public class MyEventsController extends AllEventListController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double value = newValue.doubleValue();
-                System.out.println(value);
                 if (value >= 0.55 && tilePaneMain.getChildren().size()/itemsPerPage == currentPage) {
                     loadMore();
                 }
@@ -149,6 +148,7 @@ public class MyEventsController extends AllEventListController {
     @FXML
     private void onAllAction(ActionEvent actionEvent) {
         reset();
+        loadData(currentPage,selectedPredicate);
         allButton.setDisable(true);
     }
 
@@ -182,7 +182,7 @@ public class MyEventsController extends AllEventListController {
         popup.setAutoHide(true);
         VBox box = new VBox();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/owner-events.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/owner-event.fxml"));
             VBox loaded = loader.load();
             OwnerEventController ownerEventController = loader.getController();
             ownerEventController.setDataPopup(popup,currentUser);

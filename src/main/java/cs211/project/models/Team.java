@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Objects;
 
 public class Team implements Comparable<Team> {
     private String teamID, teamName, teamDescription, createdAt, eventID, startDate, endDate;
@@ -248,5 +249,20 @@ public class Team implements Comparable<Team> {
                 + maxSlotTeamMember + ","
                 + createdAt + ","
                 + eventID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Team team = (Team) o;
+
+        return teamID.equals(team.teamID);
+    }
+
+    @Override
+    public int hashCode() {
+        return teamID.hashCode();
     }
 }

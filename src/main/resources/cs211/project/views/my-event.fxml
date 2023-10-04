@@ -58,13 +58,13 @@
          </children>
       </HBox>
       <Separator fx:id="popupTest" opacity="0.0" prefHeight="11.0" prefWidth="1152.0" />
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" prefWidth="1152.0">
          <children>
             <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
                <content>
-                  <TilePane fx:id="tilePaneMain" alignment="TOP_CENTER" prefColumns="0" prefHeight="590.0" prefRows="0" prefWidth="1032.0" vgap="20.0">
+                  <TilePane fx:id="tilePaneMain" alignment="TOP_CENTER" prefColumns="0" prefHeight="572.0" prefRows="0" prefWidth="1032.0" vgap="30.0">
                      <padding>
-                        <Insets top="20.0" />
+                        <Insets bottom="20.0" top="20.0" />
                      </padding>
                   </TilePane>
                </content>

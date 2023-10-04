@@ -166,7 +166,7 @@ public class CreateEventController {
         }
 
         try {
-            FXRouter.goTo("my-events",user);
+            FXRouter.goTo("my-event",user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

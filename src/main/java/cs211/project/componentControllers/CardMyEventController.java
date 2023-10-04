@@ -3,8 +3,6 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.beans.value.ObservableValueBase;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +27,7 @@ public class CardMyEventController {
     @FXML
     AnchorPane eventAnchorPane;
     @FXML
-    Button forStaffButton,manageEventButton,leaveEventButton;
+    Button forStaffButton, manageUserButton,leaveEventButton;
     private User currentUser = (User) FXRouter.getData();
     private TeamListDataSource teamListDataSource;
     private TeamList teamList;
@@ -103,12 +101,12 @@ public class CardMyEventController {
 
         if (teamHashMap.containsKey(currentUser.getUsername()) && teamList.getTeamOfEvent(event) != null && !event.isHostEvent(currentUser.getUserId())){
                 leaveEventButton.setVisible(false);
-                manageEventButton.setVisible(false);
+                manageUserButton.setVisible(false);
         }
 
         if (event.isHaveUser(currentUser)) {
             forStaffButton.setVisible(false);
-            manageEventButton.setVisible(false);
+            manageUserButton.setVisible(false);
         }
 
 
@@ -140,7 +138,7 @@ public class CardMyEventController {
 
     public void buttonVisible(Boolean is){
         forStaffButton.setVisible(!is);
-        manageEventButton.setVisible(!is);
+        manageUserButton.setVisible(!is);
         leaveEventButton.setVisible(!is);
     }
     @FXML
@@ -180,7 +178,7 @@ public class CardMyEventController {
         popup.getContent().addAll(popupContent);
 
 
-        popup.show(manageEventButton.getScene().getWindow());
+        popup.show(manageUserButton.getScene().getWindow());
     }
 
     public void onClickCard(MouseEvent mouseEvent) {

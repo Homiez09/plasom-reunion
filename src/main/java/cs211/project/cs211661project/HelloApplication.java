@@ -26,7 +26,7 @@ public class HelloApplication extends Application {
         FXRouter.when("home", resourcesPath+ "home.fxml");
         FXRouter.when("user-profile", resourcesPath+ "user-profile.fxml");
         FXRouter.when("admin-dashboard", resourcesPath+ "admin-dashboard.fxml");
-        FXRouter.when("my-events", resourcesPath+ "my-events.fxml");
+        FXRouter.when("my-event", resourcesPath+ "my-event.fxml");
         FXRouter.when("event", resourcesPath+ "event-view.fxml");
         FXRouter.when("create-event", resourcesPath+ "create-new-event.fxml");
         FXRouter.when("select-team", resourcesPath+ "select-team.fxml");
@@ -36,8 +36,7 @@ public class HelloApplication extends Application {
         FXRouter.when("event-list",resourcesPath+"event-list-view.fxml");
         FXRouter.when("edit-activity",resourcesPath+"edit-activity.fxml");
 
-//        FXRouter.when("host-events",resourcesPath+ "host-events.fxml");
-//        FXRouter.when("owner-event",resourcesPath+ "owner-events.fxml");
+
     }
 
     public static void main(String[] args) {
