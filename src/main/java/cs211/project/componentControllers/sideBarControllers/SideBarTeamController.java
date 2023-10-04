@@ -1,6 +1,9 @@
 package cs211.project.componentControllers.sideBarControllers;
 
 
+import cs211.project.models.Event;
+import cs211.project.models.Team;
+import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
@@ -24,6 +27,10 @@ public class SideBarTeamController {
 
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamHashMap;
+
+    User user = (User) FXRouter.getData();
+    Event event = (Event) FXRouter.getData2();
+    Team team = (Team) FXRouter.getData3();
 
 
     @FXML
@@ -146,12 +153,28 @@ public class SideBarTeamController {
 
     }
 
-    @FXML private void onActivityClick(){
+    @FXML private void onTeamChatClick(){
+        try {
+            FXRouter.goTo("team-chat", user, event, team);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @FXML private void onActivityClick(){
+        try {
+            FXRouter.goTo("team-activity", user, event, team);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML private void onManageTeamClick(){
-
+        try {
+            FXRouter.goTo("manage-team", user, event, team);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
