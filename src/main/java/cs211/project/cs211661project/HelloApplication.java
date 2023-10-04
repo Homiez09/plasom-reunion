@@ -34,7 +34,7 @@ public class HelloApplication extends Application {
         FXRouter.when("team-chat",resourcesPath + "team/" + "team-chat.fxml");
         FXRouter.when("create-team",resourcesPath + "components/" + "create-team.fxml");
         FXRouter.when("event-list",resourcesPath+"event-list-view.fxml");
-        FXRouter.when("edit-activity",resourcesPath+"edit-activity.fxml");
+        FXRouter.when("edit-event-activity",resourcesPath+"edit-event-activity.fxml");
 
 //        FXRouter.when("host-events",resourcesPath+ "host-events.fxml");
 //        FXRouter.when("owner-event",resourcesPath+ "owner-events.fxml");

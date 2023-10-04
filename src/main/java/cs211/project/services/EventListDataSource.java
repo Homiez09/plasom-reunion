@@ -40,7 +40,7 @@ public class EventListDataSource implements Datasource<EventList> {
         Datasource<UserList> userListDatasource = new UserListDataSource("data","user-list.csv");
         UserList userList = userListDatasource.readData();
 
-        Datasource<ActivityList> activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
+        Datasource<ActivityList> activityListDatasource = new ActivityListDataSource("data","event-activity-list.csv");
         ActivityList activityList = activityListDatasource.readData();
 
 
@@ -103,7 +103,6 @@ public class EventListDataSource implements Datasource<EventList> {
                     eventList.findEvent(eventId).getTeamList().addTeam(team);
                 }
                 for (Activity activity : activityList.getActivities()){
-                    System.out.println(activity.getEventID());
                     eventList.findEvent(eventId).getActivityList().addActivity(activity);
                 }
 

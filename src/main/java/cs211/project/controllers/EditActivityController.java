@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class EditActivityController {
     private User user = (User) FXRouter.getData();
-    Event event = (Event) FXRouter.getData2();
+    private Event event = (Event) FXRouter.getData2();
     @FXML private AnchorPane navbarAnchorPane,editActivityAnchorPane;
     @FXML private TableView editActivityTableview;
     @FXML private void initialize() {
@@ -29,7 +29,7 @@ public class EditActivityController {
             @Override
             public void changed(ObservableValue observableValue, Activity oldValue, Activity newValue) {
                 if(newValue != null) {
-                    FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-activity.fxml"));
+                    FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
                     try {
                         AnchorPane editActivityPage = createActivityLoader.load();
                         editActivityAnchorPane.getChildren().add(editActivityPage);
@@ -71,7 +71,7 @@ public class EditActivityController {
         editActivityTableview.setFixedCellSize(40);
     }
     @FXML protected void onCreateActivityButtonClick() {
-        FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-activity.fxml"));
+        FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
         try {
             AnchorPane editActivityPage = createActivityLoader.load();
             editActivityAnchorPane.getChildren().add(editActivityPage);

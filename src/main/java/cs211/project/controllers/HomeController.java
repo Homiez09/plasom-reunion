@@ -43,14 +43,7 @@ public class HomeController {
     private void initialize() {
         datasource = new EventListDataSource();
         eventList = datasource.readData();
-        activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
-        activityList = activityListDatasource.readData();
-        for (Activity activity : activityList.getActivities()) {
-            if (eventList.findEvent(activity.getEventID()) != null) {
-                if(eventList.findEvent(activity.getEventID()).getActivityList() == null) {}
-                eventList.findEvent(activity.getEventID()).getActivityList().addActivity(activity);
-            }
-        }
+
         new LoadNavbarComponent(user, navbarAnchorPane);
         updateButtonState();
 

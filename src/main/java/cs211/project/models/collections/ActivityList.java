@@ -9,7 +9,7 @@ public class ActivityList {
     private ArrayList<Activity> activities;
 
     public ActivityList() { activities = new ArrayList<>(); }
-
+    public ActivityList(ArrayList<Activity> activityList) {activities = activityList;}
 
     public void addActivity(String eventId, String activityName, String activityDescription,String activityStart, String activityEnd) {
         activityName = activityName.trim();
@@ -42,9 +42,6 @@ public class ActivityList {
             }
         }
         return null;
-    }
-    public ArrayList<Activity> getActivitiesOfEvent(Event event){
-        return activities;
     }
     public ArrayList<Activity> getActivities() {
         return activities;

@@ -2,6 +2,7 @@ package cs211.project.componentControllers;
 
 import cs211.project.models.Activity;
 import cs211.project.models.Event;
+import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
 import cs211.project.services.ActivityListDataSource;
@@ -20,7 +21,7 @@ public class CreateActivityController {
     private User user;
     private Event event;
     private Activity activity;
-    @FXML private Button deleteButton;
+    @FXML private Button deleteButton,saveButton;
     @FXML private TextField activityNameTextField,activityDescriptionTextField;
     @FXML private DatePicker activityStartDatePick,activityEndDatePick;
     @FXML private Label dateTimeErrorLabel;
@@ -46,7 +47,7 @@ public class CreateActivityController {
     }
     @FXML
     public void initialize() {
-        activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
+        activityListDatasource = new ActivityListDataSource("data","event-activity-list.csv");
         activityList = activityListDatasource.readData();
         setSpinner(activityStartHourSpinner,23);
         setSpinner(activityEndHourSpinner,23);
@@ -54,11 +55,19 @@ public class CreateActivityController {
         setSpinner(activityEndMinuteSpinner,59);
         deleteButton.setVisible(false);
         dateTimeErrorLabel.setVisible(false);
+        if (activityNameTextField.getText() == "" && activityDescriptionTextField.getText() == "") {saveButton.setDisable(true);}
+        activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
+        });
+
+        activityDescriptionTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
+        });
     }
 
     @FXML protected void onBackClick() {
         try {
-            FXRouter.goTo("edit-activity",user,event);
+            FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -68,7 +77,7 @@ public class CreateActivityController {
         event.getActivityList().removeActivity(activity.getActivityID());
         activityListDatasource.writeData(activityList);
         try {
-            FXRouter.goTo("edit-activity",user,event);
+            FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -99,7 +108,7 @@ public class CreateActivityController {
         }
         activityListDatasource.writeData(activityList);
         try {
-            FXRouter.goTo("edit-activity",user,event);
+            FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -166,6 +175,14 @@ public class CreateActivityController {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void updateSaveButtonState(TextField name, TextField description, Button save) {
+        if (!name.getText().isEmpty() && !description.getText().isEmpty()) {
+            save.setDisable(false);
+        } else {
+            save.setDisable(true);
         }
     }
 }
