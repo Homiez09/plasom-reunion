@@ -34,10 +34,11 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
     }
 
     @Override
-    public HashMap<String, TeamList> readData() { // key: username, value: TeamList
+    public HashMap<String, TeamList> readData() {
         HashMap<String, TeamList> hashMap = new HashMap<>();
 
         TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+        TeamList teamListForSearch;
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -63,7 +64,9 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
         try {
             while ((line = buffer.readLine()) != null) {
                 if (line.equals("")) continue;
-                HashMap<String, Team> teamHashMap = teamListDataSource.readData().teamHashMap();
+
+                teamListForSearch = teamListDataSource.readData();
+
                 String[] data = line.split(",");
                 String username = data[0];
                 String teamID = data[1];
@@ -72,14 +75,14 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
 
                 if (hashMap.containsKey(username)) {
                     TeamList teamList = hashMap.get(username);
-                    Team team = teamHashMap.get(teamID);
+                    Team team = teamListForSearch.findTeamByID(teamID);
                     team.setRole(role);
                     team.setBookmarked(isBookmarked);
                     teamList.addTeam(team);
                     hashMap.put(username, teamList);
                 } else {
                     TeamList teamList = new TeamList();
-                    Team team = teamHashMap.get(teamID);
+                    Team team = teamListForSearch.findTeamByID(teamID);
                     team.setRole(role);
                     team.setBookmarked(isBookmarked);
                     teamList.addTeam(team);
