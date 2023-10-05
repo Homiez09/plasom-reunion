@@ -234,7 +234,7 @@ public class SelectTeamController {
                 bodyImageView.setOnMouseClicked(e -> {
                     try {
                         this.user.setRole(team.getRole());
-                        FXRouter.goTo("manage-team", this.user, this.event, team);
+                        FXRouter.goTo("team-activity", this.user, this.event, team);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }

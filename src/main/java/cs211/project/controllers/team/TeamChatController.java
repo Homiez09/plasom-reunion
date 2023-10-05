@@ -4,6 +4,12 @@ import cs211.project.models.*;
 import cs211.project.models.collections.ActivityTeamList;
 import cs211.project.models.collections.ChatHistory;
 import cs211.project.services.*;
+import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
+import cs211.project.models.User;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.FXRouter;
+import cs211.project.services.LoadNavbarComponent;
+import cs211.project.services.UserListDataSource;
 import cs211.project.services.team.LoadSideBarComponent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,16 +43,25 @@ public class TeamChatController {
     ChatHistory chatHistory = chatHistoryDataSource.readData();
     User userChatTemp;
     ActivityTeam activitySelectTemp;
+    LoadSideBarComponent sideBarAnchorPaneLoad;
 
-    @FXML
-    private void initialize(){
+    @FXML void initialize(){
         new LoadNavbarComponent(user, navbarAnchorPane);
-        new LoadSideBarComponent(sideBarAnchorPane);
+
+        sideBarAnchorPaneLoad = new LoadSideBarComponent();
+        sideBarAnchorPane.getChildren().add(sideBarAnchorPaneLoad.getSideBarComponent());
 
         initializeEnterPressForSendMessage();
 
         checkActivitySelect();
         loadGroupTableView();
+
+        setSideBar();
+    }
+
+    protected void setSideBar(){
+        SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
+        sideBarTeamController.setHoverChat();
     }
 
     @FXML

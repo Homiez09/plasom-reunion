@@ -185,9 +185,9 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="createActivityAnchorPane" layoutY="-21.0" prefHeight="413.0" prefWidth="847.0" visible="false">
+                        <AnchorPane fx:id="createActivityAnchorPane" layoutY="-21.0" prefHeight="413.0" prefWidth="847.0">
                            <children>
-                              <TextField fx:id="activityNameTextField" layoutX="102.0" layoutY="72.0" onKeyReleased="#onKeyTeamName" prefHeight="32.0" prefWidth="418.0" promptText="My Activity">
+                              <TextField fx:id="activityNameTextField" layoutX="102.0" layoutY="72.0" onKeyReleased="#onKeyActivityName" prefHeight="32.0" prefWidth="418.0" promptText="My Activity">
                                  <padding>
                                     <Insets right="10.0" />
                                  </padding>
@@ -293,6 +293,48 @@
                                  </font>
                               </Button>
                               <ComboBox fx:id="statusComboBox" layoutX="704.0" layoutY="13.0" prefHeight="23.0" prefWidth="124.0" styleClass="status-combobox" />
+                              <Label fx:id="nameRequirementLabel" layoutX="217.0" layoutY="48.0" prefHeight="22.0" prefWidth="284.0" text="errorActivityLabel" textFill="#ff1515">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-red" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xs" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="dateRequirementLabel" alignment="CENTER_RIGHT" layoutX="297.0" layoutY="182.0" prefHeight="21.0" prefWidth="497.0" text="errorActuivityDate" textFill="#ff1515">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-red" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xs" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="errorContinueLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="498.0" layoutY="-5.0" prefHeight="30.0" prefWidth="331.0" text="errorLabel" textAlignment="CENTER" textFill="#ff1515" wrapText="true">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-red" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xxs" />
+                                 </styleClass>
+                                 <font>
+                                    <Font name="Leelawadee UI" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="maximumCountDescriptionLabel" layoutX="746.0" layoutY="331.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="36.0" text="/ 280">
+                                 <styleClass>
+                                    <String fx:value="text-xs" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="countDescriptionLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="712.0" layoutY="331.0" lineSpacing="1.0" prefHeight="11.0" prefWidth="30.0" text="0">
+                                 <styleClass>
+                                    <String fx:value="text-xs" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                              </Label>
+                              <ImageView fx:id="teamNameReqImageView" fitHeight="26.0" fitWidth="26.0" layoutX="524.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </children>

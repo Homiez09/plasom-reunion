@@ -12,50 +12,7 @@
 
 <AnchorPane fx:id="sideBarAnchorPane" prefHeight="768.0" prefWidth="162.0" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.sideBarControllers.SideBarTeamController">
    <children>
-      <AnchorPane layoutX="22.0" layoutY="213.0" onMouseClicked="#onDashBoardClick" onMouseEntered="#onDashBoardEntered" onMouseExited="#onDashBoardExit" prefHeight="21.0" prefWidth="96.0">
-         <children>
-            <Circle fx:id="hoverDashBoardShape" centerY="2.2" fill="#4d4746" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-            <ImageView fx:id="dashBoardImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="dashBoardLabel" alignment="CENTER" layoutX="-6.0" layoutY="60.0" prefHeight="9.0" prefWidth="102.0" text="DASHBOARD">
-               <styleClass>
-                  <String fx:value="font" />
-                  <String fx:value="text-xs" />
-                  <String fx:value="sidebar-black" />
-               </styleClass>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="21.0" layoutY="292.0" onMouseClicked="#onHomeClick" onMouseEntered="#onHomeEntered" onMouseExited="#onHomeExit">
-         <children>
-            <Circle fx:id="hoverHomeShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startY="0.4218009478672986">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.48627451062202454" blue="0.03921568766236305" opacity="0.8299999833106995" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.9647058844566345" green="0.7254902124404907" blue="0.40392157435417175" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Circle>
-            <ImageView fx:id="homeImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="homeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="63.0" prefHeight="3.0" prefWidth="94.0" text="HOME">
-               <styleClass>
-                  <String fx:value="font" />
-                  <String fx:value="text-xs" />
-                  <String fx:value="sidebar-black" />
-               </styleClass>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="21.0" layoutY="375.0" onMouseClicked="#onActivityClick" onMouseEntered="#onActivityEntered" onMouseExited="#onActivityExit">
+      <AnchorPane layoutX="40.0" layoutY="240.0" onMouseClicked="#onActivityClick" onMouseEntered="#onActivityEntered" onMouseExited="#onActivityExit">
          <children>
             <Circle fx:id="hoverActivityShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
                <fill>
@@ -85,7 +42,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="21.0" layoutY="461.0" onMouseClicked="#onTeamChatClick" onMouseEntered="#onTeamChatEntered" onMouseExited="#onTeamChatExit">
+      <AnchorPane layoutX="40.0" layoutY="345.0" onMouseClicked="#onTeamChatClick" onMouseEntered="#onTeamChatEntered" onMouseExited="#onTeamChatExit">
          <children>
             <Circle fx:id="hoverTeamChatShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
                <fill>
@@ -115,7 +72,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="21.0" layoutY="549.0" onMouseClicked="#onManageTeamClick" onMouseEntered="#onManageTeamEntered" onMouseExited="#onManageTeamExit">
+      <AnchorPane layoutX="40.0" layoutY="450.0" onMouseClicked="#onManageTeamClick" onMouseEntered="#onManageTeamEntered" onMouseExited="#onManageTeamExit">
          <children>
             <Circle fx:id="hoverManageTeamShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
                <fill>

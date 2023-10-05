@@ -12,7 +12,7 @@ class ActivityListDataSourceTest {
     @Test
     @DisplayName("test read data")
     public  void testReadData() {
-        ActivityListDataSource dataSource = new ActivityListDataSource("data","activity-list.csv");
+        ActivityListDataSource dataSource = new ActivityListDataSource("data","event-activity-list.csv");
         ActivityList activityList = dataSource.readData();
 
         Activity testActivity = activityList.getActivities().get(0);

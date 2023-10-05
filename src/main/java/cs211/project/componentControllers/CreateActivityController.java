@@ -2,6 +2,7 @@ package cs211.project.componentControllers;
 
 import cs211.project.models.Activity;
 import cs211.project.models.Event;
+import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
 import cs211.project.services.ActivityListDataSource;
@@ -20,7 +21,7 @@ public class CreateActivityController {
     private User user;
     private Event event;
     private Activity activity;
-    @FXML private Button deleteButton;
+    @FXML private Button deleteButton,saveButton;
     @FXML private TextField activityNameTextField,activityDescriptionTextField;
     @FXML private DatePicker activityStartDatePick,activityEndDatePick;
     @FXML private Label dateTimeErrorLabel;
@@ -28,7 +29,6 @@ public class CreateActivityController {
     private Spinner<Integer> activityStartHourSpinner,activityEndHourSpinner, activityStartMinuteSpinner,activityEndMinuteSpinner;
     private Datasource<ActivityList> activityListDatasource;
     private ActivityList activityList;
-    private String oldName;
 
     public void initEdit(User user,Event event,String activityID ) {
         this.user = user;
@@ -36,7 +36,6 @@ public class CreateActivityController {
         this.activity = activityList.findActivity(activityID);
         showActivity();
         deleteButton.setVisible(true);
-        oldName = activity.getName();
     }
     public void initCreate(User user,Event event) {
         this.user = user;
@@ -46,7 +45,7 @@ public class CreateActivityController {
     }
     @FXML
     public void initialize() {
-        activityListDatasource = new ActivityListDataSource("data","activity-list.csv");
+        activityListDatasource = new ActivityListDataSource("data","event-activity-list.csv");
         activityList = activityListDatasource.readData();
         setSpinner(activityStartHourSpinner,23);
         setSpinner(activityEndHourSpinner,23);
@@ -54,11 +53,19 @@ public class CreateActivityController {
         setSpinner(activityEndMinuteSpinner,59);
         deleteButton.setVisible(false);
         dateTimeErrorLabel.setVisible(false);
+        if (activityNameTextField.getText() == "" && activityDescriptionTextField.getText() == "") {saveButton.setDisable(true);}
+        activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
+        });
+
+        activityDescriptionTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
+        });
     }
 
     @FXML protected void onBackClick() {
         try {
-            FXRouter.goTo("edit-activity",user,event);
+            FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -68,7 +75,7 @@ public class CreateActivityController {
         event.getActivityList().removeActivity(activity.getActivityID());
         activityListDatasource.writeData(activityList);
         try {
-            FXRouter.goTo("edit-activity",user,event);
+            FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -76,21 +83,21 @@ public class CreateActivityController {
     @FXML protected void onSaveButton() {
         String activityName = activityNameTextField.getText();
         String activityDescription = activityDescriptionTextField.getText();
-        String activityStart = formatTime(activityEndDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
+        String activityStart = formatTime(activityStartDatePick,activityStartHourSpinner,activityStartMinuteSpinner);
         String activityEnd = formatTime(activityEndDatePick,activityEndHourSpinner,activityEndMinuteSpinner);
         if (!checkActivityStartEndTime(activityStart,activityEnd)) {
             dateTimeErrorLabel.setText("The start time must come before the end time.");
             dateTimeErrorLabel.setVisible(true);
             return;
-        } else {
-            if (!checkActivityEventTime(event,activityStart,activityEnd)) {
-                dateTimeErrorLabel.setText("The activity must start after the event starts and end before the event ends.");
-                dateTimeErrorLabel.setVisible(true);
-                return;}
+        } else if (!checkActivityEventTime(event,activityStart,activityEnd)){
+            dateTimeErrorLabel.setText("The activity must start after the event starts and end before the event ends.");
+            dateTimeErrorLabel.setVisible(true);
+            return;
         }
         if (activity == null) {
-            event.getActivityList().addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
-            activityList.addActivity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
+            Activity newActivity = new Activity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
+            event.getActivityList().addActivity(newActivity);
+            activityList.addActivity(newActivity);
         } else {
             activityList.findActivity(activity.getActivityID()).setDescription(activityDescription);
             activityList.findActivity(activity.getActivityID()).setStartTime(activityStart);
@@ -99,7 +106,7 @@ public class CreateActivityController {
         }
         activityListDatasource.writeData(activityList);
         try {
-            FXRouter.goTo("edit-activity",user,event);
+            FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -148,11 +155,7 @@ public class CreateActivityController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime activityStartDateTime = LocalDateTime.parse(startTime,formatter);
         LocalDateTime activityEndDateTime = LocalDateTime.parse(endTime,formatter);
-        if (activityStartDateTime.isBefore(activityEndDateTime)) {
-            return true;
-        } else {
-            return false;
-        }
+        return activityStartDateTime.isBefore(activityEndDateTime);
     }
 
     public Boolean checkActivityEventTime(Event event, String startTime, String endTime) {
@@ -161,11 +164,15 @@ public class CreateActivityController {
         LocalDateTime eventEndDateTime = LocalDateTime.parse(event.getEventDateEnd(),formatter);
         LocalDateTime activityStartDateTime = LocalDateTime.parse(startTime,formatter);
         LocalDateTime activityEndDateTime = LocalDateTime.parse(endTime,formatter);
-        if ((eventStartDateTime.isBefore(activityStartDateTime) || eventStartDateTime.isEqual(activityStartDateTime))
-                && (eventEndDateTime.isAfter(activityEndDateTime) || eventEndDateTime.isEqual(activityEndDateTime))) {
-            return true;
+        return (eventStartDateTime.isBefore(activityStartDateTime) || eventStartDateTime.isEqual(activityStartDateTime))
+                && (eventEndDateTime.isAfter(activityEndDateTime) || eventEndDateTime.isEqual(activityEndDateTime));
+    }
+
+    private void updateSaveButtonState(TextField name, TextField description, Button save) {
+        if (!name.getText().isEmpty() && !description.getText().isEmpty()) {
+            save.setDisable(false);
         } else {
-            return false;
+            save.setDisable(true);
         }
     }
 }
