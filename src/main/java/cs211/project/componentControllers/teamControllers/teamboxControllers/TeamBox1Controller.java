@@ -169,11 +169,21 @@ public class TeamBox1Controller {
     }
 
     private void deleteTeam(){
-        leaveTeam();
+        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
         TeamListDataSource dataSource = new TeamListDataSource("data","team-list.csv");
         TeamList teamList = dataSource.readData();
-        teamList.removeTeam(teamIdLabel.getText());
+
+        Team team = teamList.findTeamByID(teamIdLabel.getText());
+        teamList.removeTeam(team);
+
+        for (User user : team.getMemberList().getUsers()) {
+            teamHashMap.get(user.getUsername()).removeTeam(teamIdLabel.getText());
+        }
+
+        joinTeamMap.writeData(teamHashMap);
         dataSource.writeData(teamList);
+
+        selectTeamController.teamBoxView("teamBox1");
     }
 
     private void leaveTeam(){
@@ -181,6 +191,7 @@ public class TeamBox1Controller {
         if (teamHashMap.containsKey(user.getUsername())) {
             teamHashMap.get(user.getUsername()).removeTeam(teamIdLabel.getText());
         }joinTeamMap.writeData(teamHashMap);
+        selectTeamController.teamBoxView("teamBox1");
     }
 
     private void loadIcon() {

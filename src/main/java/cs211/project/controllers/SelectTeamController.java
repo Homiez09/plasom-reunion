@@ -208,7 +208,7 @@ public class SelectTeamController {
         }
     }
 
-    private void teamBoxView(String teamBox) {
+    public void teamBoxView(String teamBox) {
         teamHashMap = joinTeamMap.readData();
         int row = 0, column = 0, row2 = 0;
 
@@ -224,6 +224,7 @@ public class SelectTeamController {
             teamListSort.filterByAll();
         }
 
+        teamContainer.getChildren().clear();
         for (Team team : teamListSort.getTeams()) {
             if (!team.getEventID().equals(event.getEventID())) continue;
             try {

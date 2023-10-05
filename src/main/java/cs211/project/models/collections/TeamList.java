@@ -104,6 +104,11 @@ public class TeamList {
         teams.removeIf(team -> team.getTeamID().equals(teamID));
     }
 
+    public void removeTeam(Team teamSelect) {
+        String teamID = teamSelect.getTeamID();
+        teams.removeIf(team -> team.getTeamID().equals(teamID));
+    }
+
     public void sortTeamByNewCreatedAt() { // from new to old (Default)
         teams.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
     }
