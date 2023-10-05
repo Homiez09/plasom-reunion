@@ -1,5 +1,6 @@
 package cs211.project.controllers.team;
 
+import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
 import cs211.project.models.*;
 import cs211.project.models.collections.ActivityTeamList;
 import cs211.project.services.ActivityTeamListDataSource;
@@ -9,6 +10,7 @@ import cs211.project.services.team.LoadSideBarComponent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -66,12 +68,16 @@ public class TeamActivityController {
 
     private boolean activityNameRequirement = false, dateValidateRequirement = false, editor;
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
+    LoadSideBarComponent sideBarAnchorPaneLoad;
+
 
 
     @FXML void initialize(){
         activityTeamList = activityTeamListDataSource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
-        new LoadSideBarComponent(sideBarAnchorPane);
+
+        sideBarAnchorPaneLoad = new LoadSideBarComponent();
+        sideBarAnchorPane.getChildren().add(sideBarAnchorPaneLoad.getSideBarComponent());
 
         dataInit();
 
@@ -86,7 +92,16 @@ public class TeamActivityController {
 
         maximumLengthField();
         showFocusRequirement();
+
+        setSideBar();
     }
+
+    protected void setSideBar(){
+        SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
+        sideBarTeamController.setHoverActivity();
+    }
+
+
     private void dataInit(){
         dateRequirementLabel.setVisible(false);
         nameRequirementLabel.setVisible(false);

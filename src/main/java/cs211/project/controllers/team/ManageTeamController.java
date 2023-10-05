@@ -1,6 +1,7 @@
 package cs211.project.controllers.team;
 
 import cs211.project.componentControllers.UserCardProfileController;
+import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
 import cs211.project.componentControllers.teamControllers.manageTeamController.ManageMemberTeamListController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
@@ -43,18 +44,29 @@ public class ManageTeamController {
 
     UserListDataSource datasource ;
     UserList userList ;
+    LoadSideBarComponent sideBarAnchorPaneLoad;
 
 
     boolean nameSort, roleSort, statusSort;
 
     @FXML private void initialize(){
         new LoadNavbarComponent(user, navbarAnchorPane);
-        new LoadSideBarComponent(sideBarAnchorPane);
+
+        sideBarAnchorPaneLoad = new LoadSideBarComponent();
+        sideBarAnchorPane.getChildren().add(sideBarAnchorPaneLoad.getSideBarComponent());
+
+
         datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
         loadIcon();
         showUserList(team.getTeamID());
         setManageTeamDisableAnchorPane(false);
+        setSideBar();
+    }
+
+    protected void setSideBar(){
+        SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
+        sideBarTeamController.setHoverManageTeam();
     }
 
     public void showUserList(String teamID) {
