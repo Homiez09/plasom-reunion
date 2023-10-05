@@ -28,8 +28,9 @@
                         <Image url="@../../../../images/icons/navbar/exit.png" />
                     </image>
                 </ImageView>
-                <HBox layoutX="894.0" prefHeight="75.0" prefWidth="221.0" styleClass="container">
+                <HBox layoutX="850.0" prefHeight="75.0" prefWidth="300.0" styleClass="container">
                     <children>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="75.0" prefWidth="100.0" styleClass="items" text="Home" textFill="#413b3b" />
                         <Button mnemonicParsing="false" onAction="#onSignInButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Sign in" textFill="#413b3b" />
                         <Button mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="Sign up" textFill="#413b3b" />
                     </children>

@@ -10,6 +10,13 @@ public class navbarGuestController {
     private void initialize() {
     }
 
+    @FXML protected void onHomeButtonClick() {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @FXML
     protected void onSignUpButtonClick() {
         try {
