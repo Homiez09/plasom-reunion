@@ -4,6 +4,7 @@ package cs211.project.componentControllers.sideBarControllers;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
+import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,7 +24,8 @@ public class SideBarTeamController {
     private final Event event = (Event) FXRouter.getData2();
     private final Team team = (Team) FXRouter.getData3();
 
-    @FXML private void initialize() {
+    @FXML
+    private void initialize() {
         loadInitImage();
     }
 
