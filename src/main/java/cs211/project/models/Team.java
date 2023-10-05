@@ -150,6 +150,10 @@ public class Team implements Comparable<Team> {
         return memberList.getUsers().size() >= maxSlotTeamMember; // return true if full
     }
 
+    public boolean isClose() {
+        return Long.parseLong(endDate) < System.currentTimeMillis();
+    }
+
     public String getTeamID() {
         return teamID;
     }
@@ -233,7 +237,7 @@ public class Team implements Comparable<Team> {
         this.startDate = formatStringToTimestamp(startDate);
     }
 
-   public void setEndDate(String endDate) { // format : yyyy-MM-dd.HH:mm:ss
+    public void setEndDate(String endDate) { // format : yyyy-MM-dd.HH:mm:ss
         this.endDate = formatStringToTimestamp(endDate);
    }
 
