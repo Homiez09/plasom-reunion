@@ -85,7 +85,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="21.0" layoutY="461.0" onMouseEntered="#onTeamChatEntered" onMouseExited="#onTeamChatExit">
+      <AnchorPane layoutX="21.0" layoutY="461.0" onMouseClicked="#onTeamChatClick" onMouseEntered="#onTeamChatEntered" onMouseExited="#onTeamChatExit">
          <children>
             <Circle fx:id="hoverTeamChatShape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
                <fill>
