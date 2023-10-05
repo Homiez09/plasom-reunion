@@ -1,5 +1,6 @@
-package cs211.project.componentControllers.teamboxControllers;
+package cs211.project.componentControllers.teamControllers.teamboxControllers;
 
+import cs211.project.controllers.SelectTeamController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -21,7 +22,7 @@ import java.util.HashMap;
 public class TeamBox2Controller {
 
     @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
-    @FXML private Label numActiveLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel;
+    @FXML private Label onlineLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel, participantsLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
@@ -31,8 +32,10 @@ public class TeamBox2Controller {
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap;
     TeamList teamList;
+    SelectTeamController selectTeamController;
+
+
     @FXML private void initialize() {
-        initMenu();
         loadIcon();
 
         memberShipAnchorPane.setVisible(false);
@@ -90,15 +93,50 @@ public class TeamBox2Controller {
         menuDropDown.show();
     }
 
-    private void initMenu() {
+    public void setTeamData(Team team) {
+        teamIdLabel.setText(team.getTeamID());
+        teamNameLabel.setText(team.getTeamName());
+        roleLabel.setText(team.getRole());
+        onlineLabel.setText(String.valueOf(team.getMemberOnline().getUsers().size()));
+        participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
+
+        faceImageView.setOnMouseClicked(e -> {
+            try {
+                this.user.setRole(team.getRole());
+                FXRouter.goTo("team-activity", this.user, this.event, team);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        if (team.getRole().equals("Owner")) {
+            menuDropDown.getItems().addAll("Manage Team", "Delete Team");
+        } else {
+            menuDropDown.getItems().addAll("Manage Team", "Leave Team");
+        }
+
         menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             if (newValue == null) return;
             try {
-                goTo((String) newValue);
+                goTo((String)newValue, team);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+
+        if (team.isBookmarked()) {
+            bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png")));
+            bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
+        } else {
+            bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/un_bookmark_icon.png")));
+            bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
+        }
+
+        roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
+    }
+
+    public void setSelectTeamController(SelectTeamController selectTeamController) {
+        this.selectTeamController = selectTeamController;
     }
 
     private void initBookmark() {
@@ -111,13 +149,12 @@ public class TeamBox2Controller {
         initBookMarkCheck = true;
     }
 
-    protected void goTo(String page) throws IOException {
+    private void goTo(String page, Team team) throws IOException {
         switch(page) {
             case "Manage Team":
-                //todo : go to  manage team page
+                selectTeamController.startManageTeam(team);
                 break;
             case "Delete Team":
-                leaveTeam();
                 deleteTeam();
                 break;
             case "Leave Team":

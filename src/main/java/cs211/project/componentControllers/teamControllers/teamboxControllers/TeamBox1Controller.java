@@ -1,6 +1,5 @@
-package cs211.project.componentControllers.teamboxControllers;
+package cs211.project.componentControllers.teamControllers.teamboxControllers;
 
-import cs211.project.componentControllers.AvatarProfileController;
 import cs211.project.controllers.SelectTeamController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
@@ -11,8 +10,7 @@ import cs211.project.services.JoinTeamMap;
 import cs211.project.services.TeamListDataSource;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,21 +23,20 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class TeamBox1Controller {
-    @FXML private ImageView  peopleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
-    @FXML private Label  teamIdLabel, bookmarkLabel;
+    @FXML private ImageView roleImageView, peopleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
+    @FXML private Label  teamIdLabel, teamNameLabel, roleLabel, onlineLabel, participantsLabel, bookmarkLabel;
     @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
-    private User user = (User) FXRouter.getData();
-    private Event event = (Event) FXRouter.getData2();
+    private final User user = (User) FXRouter.getData();
+    private final Event event = (Event) FXRouter.getData2();
     private boolean bookmarked = false, initBookMarkCheck = false;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap;
     TeamList teamList;
-
+    SelectTeamController selectTeamController;
 
     @FXML private void initialize() {
-        //initMenu();
         loadIcon();
 
         memberShipAnchorPane.setVisible(false);
@@ -107,21 +104,45 @@ public class TeamBox1Controller {
         menuDropDown.show();
     }
 
-    private void initBookmark() {
-        if (initBookMarkCheck) return;
-        if (bookmarkLabel.getText().equals("true")) {
-            bookmarked = true;
+    public void setSelectTeamController(SelectTeamController selectTeamController) {
+        this.selectTeamController = selectTeamController;
+    }
+
+    public void setTeamData(Team team) {
+        teamIdLabel.setText(team.getTeamID());
+        teamNameLabel.setText(team.getTeamName());
+        roleLabel.setText(team.getRole());
+        onlineLabel.setText(String.valueOf(team.getMemberOnline().getUsers().size()));
+        participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
+
+        faceImageView.setOnMouseClicked(e -> {
+            try {
+                this.user.setRole(team.getRole());
+                FXRouter.goTo("team-activity", this.user, this.event, team);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        if (team.getRole().equals("Owner")) {
+            menuDropDown.getItems().addAll("Manage Team", "Delete Team");
         } else {
-            bookmarked = false;
+            menuDropDown.getItems().addAll("Manage Team", "Leave Team");
         }
-        initBookMarkCheck = true;
+
+        if (team.isBookmarked()) {
+            bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png")));
+            bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
+        } else {
+            bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/un_bookmark_icon.png")));
+            bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
+        }
+
+        roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
     }
 
     public void goTo(String page) throws IOException {
         switch(page) {
-            case "Manage Team":
-                // todo : manage team
-                break;
             case "Delete Team":
                 deleteTeam();
                 break;
@@ -132,6 +153,17 @@ public class TeamBox1Controller {
         menuDropDown.getSelectionModel().clearSelection();
         FXRouter.goTo("select-team", user, event);
     }
+
+    private void initBookmark() {
+        if (initBookMarkCheck) return;
+        if (bookmarkLabel.getText().equals("true")) {
+            bookmarked = true;
+        } else {
+            bookmarked = false;
+        }
+        initBookMarkCheck = true;
+    }
+
     private void deleteTeam(){
         leaveTeam();
         TeamListDataSource dataSource = new TeamListDataSource("data","team-list.csv");
