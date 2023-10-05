@@ -273,19 +273,22 @@ public class CreateTeamController {
         checkTeamNameReq();
         if(teamNameRequirement) {
             HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
-            Team team = new Team(event.getEventID(), user,teamNameTextField.getText(), startDateFormat, endDateFormat, numMemberSpinner.getValue(), descriptionTextArea.getText());
-            team.setRole("Owner");
-            if (teamListHashMap.containsKey(user.getUsername())) {
-                TeamList teamList = new TeamList(teamListHashMap.get(user.getUsername()));
-                teamList.addTeam(team);
-                teamListHashMap.put(user.getUsername(), teamList);
-            } else {
-                TeamList teamList = new TeamList();
-                teamList.addTeam(team);
-                teamListHashMap.put(user.getUsername(), teamList);
-            }
+
             TeamList teamList = teamListDataSource.readData();
-            teamList.addTeam(team);
+            Team team = teamList.addTeam(event.getEventID(), user, teamNameTextField.getText(), descriptionTextArea.getText(), startDateFormat, endDateFormat, numMemberSpinner.getValue());
+
+            if (teamListHashMap.containsKey(user.getUsername())) {
+                TeamList teamListJoin = new TeamList(teamListHashMap.get(user.getUsername()));
+                teamListJoin.addTeam(team);
+                teamListJoin.updateRole(team.getTeamID(), "Owner");
+                teamListHashMap.put(user.getUsername(), teamListJoin);
+            } else {
+                TeamList teamListJoin = new TeamList();
+                teamListJoin.addTeam(team);
+                teamListJoin.updateRole(team.getTeamID(), "Owner");
+                teamListHashMap.put(user.getUsername(), teamListJoin);
+            }
+
             teamListDataSource.writeData(teamList);
             joinTeamMap.writeData(teamListHashMap);
             FXRouter.goTo("select-team", user, event);

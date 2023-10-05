@@ -83,9 +83,7 @@ public class TeamListDataSource implements Datasource<TeamList> {
                 String createdAt = data[7];
                 String eventID = data[8];
 
-                Team team = new Team(teamID, teamHostUser,teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
-                team.setMemberList(joinTeamMapHashMap.get(teamID)); // if not found, it will be null
-                teamList.addTeam(team);
+                teamList.addTeam(teamID, teamHostUser,teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID, joinTeamMapHashMap.get(teamID));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

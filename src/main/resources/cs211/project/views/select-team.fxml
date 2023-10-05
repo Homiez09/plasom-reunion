@@ -127,7 +127,7 @@
                </image>
             </ImageView>
             <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
-            <Button fx:id="joinButton" alignment="CENTER" layoutX="937.0" layoutY="99.0" mnemonicParsing="false" onAction="#onJoinTeamButtonClick" prefHeight="45.0" prefWidth="168.0" text=" Join Team">
+            <Button fx:id="joinButton" alignment="CENTER" layoutX="937.0" layoutY="99.0" mnemonicParsing="false" onAction="#onJoinTeamButtonClick" prefHeight="45.0" prefWidth="168.0" text=" Join Team" visible="false">
                <padding>
                   <Insets right="14.0" />
                </padding>
