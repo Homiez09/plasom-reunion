@@ -55,7 +55,7 @@ public class CreateEventController {
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
 
-        eventTagChoiceBox.getItems().addAll("Animal","Art","Business","Conference","Education","Food & Drink","Music","Performance","Sport","Workshop");
+        eventTagChoiceBox.getItems().addAll("Animal","Art","Business","Conference","Education","Food & Drink","Music","Performance","Seminar","Sport","Workshop");
         CheckDate();
         setPageHeader();
         if (thisEvent != null) {
@@ -112,7 +112,7 @@ public class CreateEventController {
     @FXML protected void onBackButtonClick() {
         if (thisEvent == null) {
             try {
-                FXRouter.goTo("my-events",user);
+                FXRouter.goTo("all-events",user);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -133,6 +133,23 @@ public class EventList {
 
         return list;
     }
+    public EventList sortByTag(EventList eventList, String tag) {
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(), comparing);
+
+        EventList filteredList = new EventList();
+
+        for (Event event : list.getEvents()) {
+            if (event.getEventTag().equals(tag)) {
+                filteredList.getEvents().add(event);
+            }
+        }
+
+        return filteredList;
+    }
+
     public ArrayList<Event> getEvents() {
         return events;
     }
