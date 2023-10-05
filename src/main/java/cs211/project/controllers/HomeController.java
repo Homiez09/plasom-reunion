@@ -67,9 +67,27 @@ public class HomeController {
         showRecommendedEvent();
     }
 
-    @FXML protected void onUpExploreClick() {}
-    @FXML protected void onNewExploreClick() {}
-    @FXML protected void onRecExploreClick() {}
+    @FXML protected void onUpExploreClick() {
+        try {
+            FXRouter.goTo("all-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML protected void onNewExploreClick() {
+        try {
+            FXRouter.goTo("all-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML protected void onRecExploreClick() {
+        try {
+            FXRouter.goTo("all-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void setCategoryButtonImage() {
         String defaultImgPath = "/images/home/blackgrid.png";
         String hoverImgPath = "/images/home/whitegrid.png";
