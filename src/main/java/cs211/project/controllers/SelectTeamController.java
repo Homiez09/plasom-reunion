@@ -1,6 +1,6 @@
 package cs211.project.controllers;
 
-import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamController;
+import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamComponentController;
 
 import cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox1Controller;
 import cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox2Controller;
@@ -199,7 +199,7 @@ public class SelectTeamController {
         try {
             AnchorPane manageTeamAnchorPaneComponent = manageTeamAnchorPaneLoader.load();
             manageTeamAnchorPane.getChildren().add(manageTeamAnchorPaneComponent);
-            ManageTeamController manageTeamController = manageTeamAnchorPaneLoader.getController();
+            ManageTeamComponentController manageTeamController = manageTeamAnchorPaneLoader.getController();
             manageTeamController.showUserList(teamSelectedComponentID);
             manageTeamAnchorPane.setVisible(false);
             selectTeamAnchorPane.setDisable(false);

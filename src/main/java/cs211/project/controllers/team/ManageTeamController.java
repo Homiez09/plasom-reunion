@@ -38,7 +38,7 @@ public class ManageTeamController {
     TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
     TeamList teamList = teamListDataSource.readData();;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, UserList> hashMap = joinTeamMap.roleReadData();
+    HashMap<String, UserList> hashMap;
 
     String teamID;
 
@@ -52,6 +52,8 @@ public class ManageTeamController {
     @FXML private void initialize(){
         new LoadNavbarComponent(user, navbarAnchorPane);
 
+        hashMap = joinTeamMap.roleReadData();
+
         sideBarAnchorPaneLoad = new LoadSideBarComponent();
         sideBarAnchorPane.getChildren().add(sideBarAnchorPaneLoad.getSideBarComponent());
 
@@ -62,6 +64,10 @@ public class ManageTeamController {
         showUserList(team.getTeamID());
         setManageTeamDisableAnchorPane(false);
         setSideBar();
+    }
+
+    public void reloadDataHashMap() {
+        hashMap = joinTeamMap.roleReadData();
     }
 
     protected void setSideBar(){
@@ -136,7 +142,10 @@ public class ManageTeamController {
                 menuComboBox.getItems().addAll(menuItems);
                 menuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
                     if (newValue == null) return;
+
                     ManageMemberTeamListController manageMemberTeamListController = manageTeamLoader.getController();
+                    manageMemberTeamListController.setManageTeamController(this);
+
                     if (newValue.equals("Promote to Leader")) {
                         try {
                             manageMemberTeamListController.goTo((String) newValue, teamID, user.getUserId());

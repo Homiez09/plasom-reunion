@@ -7,7 +7,6 @@ import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -21,7 +20,7 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ManageTeamController {
+public class ManageTeamComponentController {
     private User user = (User) FXRouter.getData();
     private Event event = (Event) FXRouter.getData2();
 
