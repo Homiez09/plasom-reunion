@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -130,6 +131,22 @@ public class TeamBox1Controller {
             menuDropDown.getItems().addAll("Manage Team", "Leave Team");
         }
 
+        menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            if (newValue == null) return;
+
+            try {
+                if (newValue.equals("Manage Team")) {
+                    selectTeamController.startManageTeam(team);
+                } else if (newValue.equals("Delete Team")) {
+                    deleteTeam();
+                } else if (newValue.equals("Leave Team")) {
+                    leaveTeam();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         if (team.isBookmarked()) {
             bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png")));
             bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
@@ -139,19 +156,6 @@ public class TeamBox1Controller {
         }
 
         roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
-    }
-
-    public void goTo(String page) throws IOException {
-        switch(page) {
-            case "Delete Team":
-                deleteTeam();
-                break;
-            case "Leave Team":
-                leaveTeam();
-                break;
-        }
-        menuDropDown.getSelectionModel().clearSelection();
-        FXRouter.goTo("select-team", user, event);
     }
 
     private void initBookmark() {

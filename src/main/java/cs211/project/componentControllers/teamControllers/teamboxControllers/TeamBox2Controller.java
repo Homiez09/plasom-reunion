@@ -21,9 +21,9 @@ import java.util.HashMap;
 
 public class TeamBox2Controller {
 
-    @FXML private ImageView pointImageView, peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
+    @FXML private ImageView peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
     @FXML private Label onlineLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel, participantsLabel;
-    @FXML private AnchorPane memberShipAnchorPane, participantsAnchorPane;
+    @FXML private AnchorPane memberShipAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
     private User user = (User) FXRouter.getData();
@@ -117,10 +117,17 @@ public class TeamBox2Controller {
 
         menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             if (newValue == null) return;
+
             try {
-                goTo((String)newValue, team);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                if (newValue.equals("Manage Team")) {
+                    selectTeamController.startManageTeam(team);
+                } else if (newValue.equals("Delete Team")) {
+                    deleteTeam();
+                } else if (newValue.equals("Leave Team")) {
+                    leaveTeam();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
@@ -152,7 +159,7 @@ public class TeamBox2Controller {
     private void goTo(String page, Team team) throws IOException {
         switch(page) {
             case "Manage Team":
-                selectTeamController.startManageTeam(team);
+//                selectTeamController.startManageTeam(team);
                 break;
             case "Delete Team":
                 deleteTeam();
@@ -180,6 +187,12 @@ public class TeamBox2Controller {
                 teamList.removeTeam(teamIdLabel.getText());
             }teamHashMap.put(username, teamList);
         }joinTeamMap.writeData(teamHashMap);
+        menuDropDown.getSelectionModel().clearSelection();
+        try {
+            FXRouter.goTo("select-team", user, event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadIcon() {

@@ -101,7 +101,7 @@
                   <Font size="8.0" />
                </font>
             </Label>
-            <Label contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
+            <Label fx:id="roleLabel" contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
                <styleClass>
                   <String fx:value="font" />
                   <String fx:value="center-label" />
@@ -128,7 +128,7 @@
             </Label>
             <HBox alignment="CENTER_LEFT" layoutX="21.0" layoutY="16.0" prefHeight="19.0" prefWidth="66.0">
                <children>
-                  <Label text="10 / 15" />
+                  <Label fx:id="participantsLabel" text="10 / 15" />
                </children>
             </HBox>
          </children>
