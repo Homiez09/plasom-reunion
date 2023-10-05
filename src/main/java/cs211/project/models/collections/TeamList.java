@@ -43,6 +43,26 @@ public class TeamList {
         return null;
     }
 
+    public void addTeam(Team team) {
+        teams.add(team);
+    }
+
+    public void addTeam(String eventID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember) {
+        // create team
+        teamName = teamName.trim();
+        teamDescription = teamDescription.trim();
+        Team team = new Team (eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember);
+        teams.add(team);
+    }
+
+    public void addTeam(String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID, UserList memberList) {
+        // load from file
+        teamName = teamName.trim();
+        teamDescription = teamDescription.trim();
+        Team team = new Team (teamID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID, memberList);
+        teams.add(team);
+    }
+
     public Team findTeamByID(String teamID) {
         for (Team team: teams) {
             if (team.getTeamID().equals(teamID)) {
@@ -74,28 +94,6 @@ public class TeamList {
 
     public void removeTeam(String teamID) {
         teams.removeIf(team -> team.getTeamID().equals(teamID));
-    }
-
-    public void addTeam(Team team) {
-        teams.add(team);
-    }
-
-    public void addTeam(String eventID, User teamHostUser,String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription){
-        teamName = teamName.trim();
-        teamDescription = teamDescription.trim();
-        Team exist = findTeamByName(teamName);
-        if(exist == null){
-            Team team = new Team (eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
-            teams.add(team);
-        }
-    }
-
-    public void addTeam(String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID){
-        // load from file
-        teamName = teamName.trim();
-        teamDescription = teamDescription.trim();
-        Team team = new Team (teamID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
-        teams.add(team);
     }
 
     public void sortTeamByNewCreatedAt() { // from new to old (Default)

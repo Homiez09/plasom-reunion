@@ -40,18 +40,7 @@ public class Team implements Comparable<Team> {
         loadActivities();
     }
 
-    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription) {
-        this(eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember);
-        this.teamDescription = teamDescription;
-    }
-
-
-    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription, UserList memberList) {
-        this(eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
-        this.memberList = memberList;
-    }
-
-    public Team (String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID) {
+    public Team (String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID, UserList memberList) {
         // this constructor is used when loading from database
         this.teamID = teamID;
         this.teamHostUser = teamHostUser;
@@ -62,6 +51,7 @@ public class Team implements Comparable<Team> {
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = createdAt;
         this.eventID = eventID;
+        this.memberList = memberList;
         loadActivities();
     }
 
