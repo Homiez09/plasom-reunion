@@ -33,8 +33,7 @@ public class ManageTeamController {
     TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
     TeamList teamList = teamListDataSource.readData();;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, UserList> hashMap = joinTeamMap.roleReadData();
-
+    HashMap<String, UserList> hashMap;
     String teamID;
 
     boolean nameSort, roleSort, statusSort;
@@ -42,7 +41,12 @@ public class ManageTeamController {
     @FXML private void initialize(){
         manageTeamDisableAnchorPane.setVisible(false);
         manageTeamExitAnchorPane.setVisible(false);
+        hashMap = joinTeamMap.roleReadData();
         loadIcon();
+    }
+
+    public void reloadDataHashMap() {
+        hashMap = joinTeamMap.roleReadData();
     }
 
     public void showUserList(String teamID) {
@@ -101,7 +105,10 @@ public class ManageTeamController {
                 menuComboBox.getItems().addAll(menuItems);
                 menuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
                     if (newValue == null) return;
+
                     ManageMemberTeamListController manageMemberTeamListController = manageTeamLoader.getController();
+                    manageMemberTeamListController.setManageTeamController(this);
+
                     if (newValue.equals("Promote to Leader")) {
                         try {
                             manageMemberTeamListController.goTo((String) newValue, teamID, user.getUserId());
@@ -176,6 +183,7 @@ public class ManageTeamController {
         if (nameSort) {
             memberList.reverse(new UsernameUserComparator());
         }
+        memberContainer.getChildren().clear();
         for (User user : memberList.getUsers()) {
             loadManageTeamComponent(user, 0, memberList.getUsers().indexOf(user), teamID);
         }
@@ -188,6 +196,7 @@ public class ManageTeamController {
         if (roleSort) {
             memberList.reverse(new RoleUserComparator());
         }
+        memberContainer.getChildren().clear();
         for (User user : memberList.getUsers()) {
             loadManageTeamComponent(user, 0, memberList.getUsers().indexOf(user), teamID);
         }
@@ -200,6 +209,7 @@ public class ManageTeamController {
         if (statusSort) {
             memberList.reverse(new StatusUserComparator());
         }
+        memberContainer.getChildren().clear();
         for (User user : memberList.getUsers()) {
             loadManageTeamComponent(user, 0, memberList.getUsers().indexOf(user), teamID);
         }
