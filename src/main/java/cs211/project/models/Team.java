@@ -26,11 +26,11 @@ public class Team implements Comparable<Team> {
     private UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
     private UserList userList = userListDataSource.readData();
 
-    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember) {
+    public Team (String eventID, User teamHostUser, String teamName, String description, String startDate, String endDate, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
         this.teamHostUser = teamHostUser;
         this.teamName = teamName;
-        this.teamDescription = "";
+        this.teamDescription = (description.isEmpty()) ? "-" : description;
         this.startDate = formatStringToTimestamp(startDate);
         this.endDate = formatStringToTimestamp(endDate);
         this.maxSlotTeamMember = maxSlotTeamMember;

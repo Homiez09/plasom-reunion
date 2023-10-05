@@ -34,25 +34,17 @@ public class TeamList {
         this.teams = teams;
     }
 
-    public Team findTeamByName(String teamName) {
-        for (Team team: teams) {
-            if (team.isName(teamName)) {
-                return team;
-            }
-        }
-        return null;
-    }
-
     public void addTeam(Team team) {
         teams.add(team);
     }
 
-    public void addTeam(String eventID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember) {
+    public Team addTeam(String eventID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember) {
         // create team
         teamName = teamName.trim();
         teamDescription = teamDescription.trim();
-        Team team = new Team (eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember);
+        Team team = new Team (eventID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember);
         teams.add(team);
+        return team;
     }
 
     public void addTeam(String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID, UserList memberList) {
@@ -63,9 +55,25 @@ public class TeamList {
         teams.add(team);
     }
 
+    public void updateRole(String teamID, String role) {
+        Team teamExist = findTeamByID(teamID);
+        if (teamExist != null) {
+            teamExist.setRole(role);
+        }
+    }
+
     public Team findTeamByID(String teamID) {
         for (Team team: teams) {
             if (team.getTeamID().equals(teamID)) {
+                return team;
+            }
+        }
+        return null;
+    }
+
+    public Team findTeamByName(String teamName) {
+        for (Team team: teams) {
+            if (team.isName(teamName)) {
                 return team;
             }
         }
