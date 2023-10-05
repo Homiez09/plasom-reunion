@@ -100,9 +100,12 @@ public class ManageMemberTeamListController {
     }
 
     private void reload(String teamID) {
-        manageTeamComponentController.reloadDataHashMap();
-        manageTeamComponentController.showUserList(teamID);
-        manageTeamController.reloadDataHashMap();
-        manageTeamController.showUserList(teamID);
+        if (manageTeamComponentController != null) {
+            manageTeamComponentController.reloadDataHashMap();
+            manageTeamComponentController.showUserList(teamID);
+        } else {
+            manageTeamController.reloadDataHashMap();
+            manageTeamController.showUserList(teamID);
+        }
     }
 }
