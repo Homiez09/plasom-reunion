@@ -143,5 +143,16 @@ public class TeamChatController {
         chatScrollPane.vvalueProperty().bind(mainAnchorPane.heightProperty());
     }
 
-    
+    private void initializeEnterPressForSendMessage() {
+        EventHandler<KeyEvent> enterEventHandler = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    onSendMessageButtonClick();
+                }
+            }
+        };
+
+        typeMessageTextField.setOnKeyPressed(enterEventHandler);
+    }
 }
