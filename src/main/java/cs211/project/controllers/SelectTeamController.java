@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -32,11 +33,12 @@ import java.util.HashMap;
 public class SelectTeamController {
     @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane, manageTeamAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
-    @FXML private ImageView settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
+    @FXML private ImageView createTeamImageView1, settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
     @FXML private Label menu1Label, menu2Label;
     @FXML private Shape selectMenu1, selectMenu2;
+    @FXML private Button createButton, joinButton;
 
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
@@ -58,12 +60,12 @@ public class SelectTeamController {
         teamBox = "teamBox1";
 
         initMenu();
+        initButton();
         initCreateTeamPage();
         manageTeamAnchorPane.setVisible(false);
 
         teamBoxView(teamBox);
         manageTeamSelectMenuGraphic(1);
-
 
         new LoadNavbarComponent(user, navbarAnchorPane);
         loadIconImage();
@@ -95,6 +97,14 @@ public class SelectTeamController {
         selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
     }
 
+    @FXML
+    private void onJoinTeamButtonClick() {
+        try {
+            FXRouter.goTo("join-team", user, event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML private void onShowSettingMenuClick() {
         settingMenuComboBox.show();
@@ -150,6 +160,28 @@ public class SelectTeamController {
         settingImageView.setImage(setting);
     }
 
+    private void initButton() {
+        if (user.getUserId().equals(event.getEventHostUser().getUserId())) createButton.setVisible(true);
+        else joinButton.setVisible(true);
+        // set animation scale up scale down
+        createButton.setOnMouseEntered(event -> {
+            createButton.setScaleX(1.1);
+            createButton.setScaleY(1.1);
+        });
+        createButton.setOnMouseExited(event -> {
+            createButton.setScaleX(1);
+            createButton.setScaleY(1);
+        });
+        joinButton.setOnMouseEntered(event -> {
+            joinButton.setScaleX(1.1);
+            joinButton.setScaleY(1.1);
+        });
+        joinButton.setOnMouseExited(event -> {
+            joinButton.setScaleX(1);
+            joinButton.setScaleY(1);
+        });
+    }
+
     private void initCreateTeamPage(){
         FXMLLoader createTeamAnchorPaneLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-team.fxml"));
         try {
@@ -160,7 +192,6 @@ public class SelectTeamController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void initManageTeam() {
@@ -248,6 +279,8 @@ public class SelectTeamController {
         sortImageView.setImage(sortIcon);
         Image createTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
         createTeamImageView.setImage(createTeamIcon);
+        Image createTeamIcon1 = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
+        createTeamImageView1.setImage(createTeamIcon1);
         Image teamBox1 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_1.png"));
         teamBox1ImageView.setImage(teamBox1);
         Image teamBox2 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_2.png"));
