@@ -15,52 +15,40 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Popup;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Set;
 
 
-public class UsersEventController {
-    @FXML
-    TableView TableUsers;
-    @FXML
-    TableColumn<User,String> statusColumn;
-    @FXML
-    TableColumn<User,String> nameColumn;
-    @FXML
-    TableColumn<User,String> usernameColumn;
-    @FXML
-    TableColumn<User, ImageView> profileColumn;
-    @FXML
-    TableColumn<User,Void> actionColumn;
-    @FXML
-    Button closeButton;
-    @FXML
-    Popup popup;
-    @FXML
-    Label eventNameLabel,userSizeLabel;
+public class UsersEventController extends CardMyEventController{
+    @FXML TableView<User> TableUsers;
+    @FXML TableColumn<User,String> statusColumn;
+    @FXML TableColumn<User,String> nameColumn;
+    @FXML TableColumn<User,String> usernameColumn;
+    @FXML TableColumn<User, ImageView> profileColumn;
+    @FXML TableColumn<User,Void> actionColumn;
+    @FXML Button statusButton;
+    @FXML Label eventNameLabel,userSizeLabel,statusLabel;
+    @FXML Popup popup;
     private JoinEventMap MapUserJoinEvent;
-    private User currentUser;
     private Event currentEvent;
-    private ObservableList<User> userObservableList;
+    Datasource<EventList> eventListDatasource;
+    private EventList eventList;
 
 
 
     @FXML
     public void initialize() {}
-    public void setDataPopup(Popup popup,Event event) {
-        Datasource<EventList> eventListDatasource = new EventListDataSource();
-        EventList eventList = eventListDatasource.readData();
-        currentEvent = eventList.findEvent(event.getEventID());
+    public void setupData(Popup popup, Event event) {
+        this.eventListDatasource = new EventListDataSource();
+        this.eventList = eventListDatasource.readData();
+        this.currentEvent = eventList.findEventById(event.getEventID());
         this.MapUserJoinEvent = new JoinEventMap();
-
         this.popup = popup;
-        userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
+        ObservableList<User> userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
         eventNameLabel.setText(currentEvent.getEventName());
         userSizeLabel.setText(userObservableList.size()+"");
-
+        statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
+        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
         showTable(userObservableList);
-
     }
 
     private void showTable(ObservableList<User> observableList) {
@@ -104,14 +92,9 @@ public class UsersEventController {
                 //---------------Custom---------------\\
                 comboBox.setStyle(  "-fx-background-color:transparent; -fx-background-insets: 0;" +
                         "-fx-alignment: center; -fx-smooth: true;" +
-                        "-fx-content-display: text-only;");
+                        "-fx-content-display: text-only; -fx-arrows-visible: true;");
 
 
-                comboBox.setButtonCell(new ListCell<>() {
-                    {
-                        setText("...");
-                    }
-                });
                 //---------------Custom---------------\\
 
                 comboBox.getItems().addAll("Ban Activity", "Kick");
@@ -148,35 +131,28 @@ public class UsersEventController {
         if (user != null) {
                 switch (selectedOption){
                     case"Ban Activity":
-                        popup.hide();
-                        try {
-                            FXRouter.goTo("create-event",currentUser);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        break;
+
+
                     case "Kick":
-                        System.out.println();
-                        HashMap<String, Set<String>> joinEvent = MapUserJoinEvent.readData();
-                        Set<String> deleteUser = joinEvent.get(currentEvent.getEventID());
-                        deleteUser.remove(user.getUserId());
+                        HashMap<String, UserList> joinEvent = MapUserJoinEvent.readData();
+                        UserList deleteUser = joinEvent.get(currentEvent.getEventID());
+                        deleteUser.getUsers().remove(user);
                         observableList.remove(user);
                         joinEvent.put(currentEvent.getEventID(),deleteUser);
                         userSizeLabel.setText(observableList.size()+"");
                         TableUsers.refresh();
-
                         MapUserJoinEvent.writeData(joinEvent);
 
                         break;
                 }
         }
-
-    }
-    public void onCloseAction(ActionEvent actionEvent) {
-    }
-
-    public void onOpenAction(ActionEvent actionEvent) {
     }
 
 
+    public void onStatusButton(ActionEvent actionEvent) {
+        currentEvent.setJoinEvent(!currentEvent.isJoinEvent());
+        statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
+        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
+        eventListDatasource.writeData(eventList);
+    }
 }

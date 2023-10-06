@@ -205,7 +205,7 @@ public class AllEventListController {
                     loadData(currentPage,selectedPredicate);
                     break;
                 case "Start":
-                    eventComparator = Comparator.comparing(Event::getEventDateStart);
+                    eventComparator = Comparator.comparing(Event::getDateStartAsDate);
                     eventObservableList.sort(eventComparator);
                     loadData(currentPage,selectedPredicate);
                     break;
@@ -215,7 +215,7 @@ public class AllEventListController {
                     loadData(currentPage,selectedPredicate);
                     break;
                 case "End":
-                    eventComparator = Comparator.comparing(Event::getEventDateEnd);
+                    eventComparator = Comparator.comparing(Event::getDateEndAsDate);
                     eventObservableList.sort(eventComparator);
                     loadData(currentPage,selectedPredicate);
                     break;

@@ -5,6 +5,7 @@ import cs211.project.models.Activity;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.EventList;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -26,7 +27,6 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 public class EventPageController {
     Event event = (Event) FXRouter.getData2();
@@ -45,9 +45,9 @@ public class EventPageController {
     private ActivityList activityList;
 
     private Image image;
-    private HashMap<String , Set<String>> hashMap;
+    private HashMap<String, UserList> hashMap;
     private JoinEventMap joinEventMap;
-    private Set<String> set;
+    private UserList userList;
     private User user = (User) FXRouter.getData();
 
     @FXML private void initialize() {
@@ -176,12 +176,12 @@ public class EventPageController {
 
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
         if (hashMap.containsKey(event.getEventID())) {
-            set = hashMap.get(event.getEventID());
+            userList = hashMap.get(event.getEventID());
         }else {
-            set = new HashSet<>();
+            userList = new UserList();
         }
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (set.contains(user.getUserId()) || user.getUserId().equals(event.getEventHostUser().getUserId())){
+        if (userList.getUsers().contains(user) || user.getUserId().equals(event.getEventHostUser().getUserId())){
             try {
                 FXRouter.goTo("event",user,event);
             } catch (IOException e) {
@@ -189,13 +189,13 @@ public class EventPageController {
             }
         }else {
 
-            set.add(user.getUserId());
-            hashMap.put(event.getEventID(), set);
+            userList.getUsers().add(user);
+            hashMap.put(event.getEventID(), userList);
 
             eventDatasource.writeData(eventList);
             joinEventMap.writeData(hashMap);
             try {
-                FXRouter.goTo("my-events", user);
+                FXRouter.goTo("my-event", user);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -209,11 +209,11 @@ public class EventPageController {
             editEventButton.setVisible(false);
         }
         if (hashMap.containsKey(event.getEventID())) {
-            set = hashMap.get(event.getEventID());
+            userList = hashMap.get(event.getEventID());
         }else {
-            set = new HashSet<>();
+            userList = new UserList();
         }
-        if (user == null || set.contains(user.getUserId())|| event.getEventHostUser().getUserId().equals(user.getUserId())){
+        if (user == null || userList.getUsers().contains(user)|| event.getEventHostUser().getUserId().equals(user.getUserId())){
             joinEventButton.setVisible(false);
         }else {
             joinEventButton.setVisible(true);

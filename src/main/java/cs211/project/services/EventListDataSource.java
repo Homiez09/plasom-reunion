@@ -5,15 +5,11 @@ import cs211.project.models.collections.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class EventListDataSource implements Datasource<EventList> {
     private final String directoryName = "data";
     private final String fileName = "event-list.csv";
     private EventList eventList;
-    private JoinEventMap eventMapData ;
 
     public EventListDataSource() {
         checkFileIsExisted();
@@ -89,7 +85,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventEnd = data[6].trim();
                 String eventDescription = data[7].trim().replace("\n", "");
                 String eventLocation = data[8].trim();
-                int slotmember = Integer.parseInt(data[9].trim());
+                int slotMember = Integer.parseInt(data[9].trim());
                 String timeStamp = data[10].trim();
                 boolean joinEvent = Boolean.parseBoolean(data[11].trim());
                 boolean joinTeam = Boolean.parseBoolean(data[12].trim());
@@ -97,17 +93,17 @@ public class EventListDataSource implements Datasource<EventList> {
 
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, slotmember,timeStamp,joinEvent,joinTeam
+                                        eventDescription, eventLocation, slotMember,timeStamp,joinEvent,joinTeam
                                         );
-                for (Team team:teamList.getTeamOfEvent(eventList.findEvent(eventId))) {
-                    eventList.findEvent(eventId).getTeamList().addTeam(team);
+                for (Team team:teamList.getTeamOfEvent(eventList.findEventById(eventId))) {
+                    eventList.findEventById(eventId).getTeamList().addTeam(team);
                 }
                 for (Activity activity : activityList.getActivities()){
-                    eventList.findEvent(eventId).getActivityList().addActivity(activity);
+                    eventList.findEventById(eventId).getActivityList().addActivity(activity);
                 }
 
-                for (User user: userList.getUserOfEvent(eventList.findEvent(eventId))){
-                    eventList.findEvent(eventId).getUserList().addUser(user);
+                for (User user: userList.getUserOfEvent(eventList.findEventById(eventId))){
+                    eventList.findEventById(eventId).getUserList().addUser(user);
                 }
 
             }

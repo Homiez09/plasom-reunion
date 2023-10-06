@@ -31,7 +31,7 @@ public class LoadCardEventComponent {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/card-my-event.fxml"));
                     AnchorPane loaded = loader.load();
                     CardMyEventController loadCard = loader.getController();
-                    loadCard.setEvent(event);
+                    loadCard.setEventData(event);
 
                     anchorPane.getChildren().setAll(loaded);
                     AnimateComponent(loaded);

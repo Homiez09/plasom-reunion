@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.OwnerEventController">
+<VBox alignment="CENTER" style="-fx-background-color: #F6F4EE;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.OwnerEventController">
    <children>
-      <AnchorPane>
+      <AnchorPane style="-fx-background-color: #F6F4EE;">
          <children>
             <VBox>
                <children>

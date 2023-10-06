@@ -3,6 +3,7 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.TeamList;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,7 +16,6 @@ import javafx.stage.Popup;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Set;
 
 
 public class OwnerEventController {
@@ -55,9 +55,7 @@ public class OwnerEventController {
         this.joinEventMap = new JoinEventMap();
         this.currentUser = user;
         this.popup = popup;
-
-
-        ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getOwner(currentUser));
+        ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
         showTable(observableEventList);
 
     }
@@ -141,8 +139,8 @@ public class OwnerEventController {
                         }
                         break;
                     case "Delete":
-                        eventList.getEvents().remove(eventList.findEvent(eventToModify.getEventID()));
-                        HashMap<String, Set<String>> deleteEvent = joinEventMap.readData();
+                        eventList.getEvents().remove(eventList.findEventById(eventToModify.getEventID()));
+                        HashMap<String, UserList> deleteEvent = joinEventMap.readData();
                         deleteEvent.remove(eventToModify.getEventID());
 
                         String folderPath = eventToModify.getEventImagePath();
@@ -150,7 +148,6 @@ public class OwnerEventController {
                         File fileToDelete = new File(folderPath);
                         // ลบไฟล์
                         if (fileToDelete.exists()) {
-
                             if (fileToDelete.delete()) {
                                 System.err.println("Succes Delete");
                             } else {
