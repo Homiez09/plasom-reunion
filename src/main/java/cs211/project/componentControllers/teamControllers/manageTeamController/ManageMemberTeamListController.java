@@ -1,5 +1,6 @@
 package cs211.project.componentControllers.teamControllers.manageTeamController;
 
+import cs211.project.controllers.team.ManageTeamController;
 import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.BanTeamMap;
@@ -22,6 +23,8 @@ public class ManageMemberTeamListController {
     @FXML private ComboBox menuComboBox;
     protected Image roleIcon, statusIcon, menuIcon;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
+    ManageTeamComponentController manageTeamComponentController;
+    ManageTeamController manageTeamController;
 
     @FXML private void initialize() {
         loadImageInit();
@@ -45,6 +48,7 @@ public class ManageMemberTeamListController {
             case "Ban" -> banUser(teamID, userID);
         }
         menuComboBox.getSelectionModel().clearSelection();
+        reload(teamID);
     }
 
     public void goTo(String page, String teamID) throws IOException {
@@ -56,6 +60,7 @@ public class ManageMemberTeamListController {
         userHashMap.get(teamID).promoteToLeader(userID);
         joinTeamMap.roleWriteData(userHashMap);
     }
+
     public void promoteToMember(String teamID, String userID){
         HashMap<String, UserList> userHashMap = joinTeamMap.roleReadData();
         userHashMap.get(teamID).promoteToMember(userID);
@@ -68,6 +73,7 @@ public class ManageMemberTeamListController {
             teamHashMap.get(userIdLabel.getText()).removeTeam(teamID);
         }joinTeamMap.writeData(teamHashMap);
     }
+
     public void banUser(String teamID, String userID){
         kickUser(teamID);
         BanTeamMap banHashMap = new BanTeamMap();
@@ -83,5 +89,23 @@ public class ManageMemberTeamListController {
 
         if (!banTeamHashMap.containsKey(teamID)) banTeamHashMap.put(teamID, set);
         banHashMap.writeData(banTeamHashMap);
+    }
+
+    public void setManageTeamController(ManageTeamComponentController manageTeamComponentController) {
+        this.manageTeamComponentController = manageTeamComponentController;
+    }
+
+    public void setManageTeamController(ManageTeamController manageTeamController) {
+        this.manageTeamController = manageTeamController;
+    }
+
+    private void reload(String teamID) {
+        if (manageTeamComponentController != null) {
+            manageTeamComponentController.reloadDataHashMap();
+            manageTeamComponentController.showUserList(teamID);
+        } else {
+            manageTeamController.reloadDataHashMap();
+            manageTeamController.showUserList(teamID);
+        }
     }
 }

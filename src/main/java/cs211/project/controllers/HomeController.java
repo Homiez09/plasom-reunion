@@ -60,15 +60,34 @@ public class HomeController {
             throw new RuntimeException(e);
         }
 
-    setCategoryButtonImage();
-    setUpCategoryButton();
-    setUpSortMenuButton();
-    showRecommendedEvent();
+        recEventList = eventList.suffleEvent(eventList);
+        setCategoryButtonImage();
+        setUpCategoryButton();
+        setUpSortMenuButton();
+        showRecommendedEvent();
     }
 
-    @FXML protected void onUpExploreClick() {}
-    @FXML protected void onNewExploreClick() {}
-    @FXML protected void onRecExploreClick() {}
+    @FXML protected void onUpExploreClick() {
+        try {
+            FXRouter.goTo("all-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML protected void onNewExploreClick() {
+        try {
+            FXRouter.goTo("all-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML protected void onRecExploreClick() {
+        try {
+            FXRouter.goTo("all-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void setCategoryButtonImage() {
         String defaultImgPath = "/images/home/blackgrid.png";
         String hoverImgPath = "/images/home/whitegrid.png";
@@ -86,66 +105,43 @@ public class HomeController {
         });
     }
     private void setUpCategoryButton() {
-        MenuItem all = new MenuItem("All");
-        all.setOnAction( event -> {
-            categoryButton.setText("All events");
-        });
-        MenuItem animal = new MenuItem("Animal");
-        animal.setOnAction( event -> {
-            categoryButton.setText("Animal");
-        });
-        MenuItem art = new MenuItem("Art");
-        art.setOnAction( event -> {
-            categoryButton.setText("Art");
-        });
-        MenuItem business = new MenuItem("Business");
-        business.setOnAction( event -> {
-            categoryButton.setText("Business");
-        });
-        MenuItem conference = new MenuItem("Conference");
-        conference.setOnAction( event -> {
-            categoryButton.setText("Conference");
-        });
-        MenuItem education = new MenuItem("Education");
-        education.setOnAction( event -> {
-            categoryButton.setText("Education");
-        });
-        MenuItem foodDrink = new MenuItem("Food & Drink");
-        foodDrink.setOnAction( event -> {
-            categoryButton.setText("Food & Drink");
-        });
-        MenuItem music = new MenuItem("Music");
-        music.setOnAction( event -> {
-            categoryButton.setText("Music");
-        });
-        MenuItem performance = new MenuItem("Performance");
-        performance.setOnAction( event -> {
-            categoryButton.setText("Performance");
-        });
-        MenuItem sport = new MenuItem("Sport");
-        sport.setOnAction( event -> {
-            categoryButton.setText("Sport");
-        });
-        MenuItem workshop = new MenuItem("Workshop");
-        workshop.setOnAction( event -> {
-            categoryButton.setText("Workshop");
-        });
-        categoryButton.getItems().addAll(all,animal,art,business,conference,education,foodDrink,music,performance,sport,workshop);
+        String[] categories = {"All", "Animal", "Art", "Business", "Conference", "Education",
+                "Food & Drink", "Music", "Performance", "Seminar", "Sport", "Workshop"};
+        for (String category : categories) {
+            MenuItem menuItem = new MenuItem(category);
+            menuItem.setOnAction(event -> {
+                categoryButton.setText(category);
+                if ("All".equals(category)) {
+                    recEventList = eventList.sortByMember(eventList);
+                } else {
+                    recEventList = eventList.sortByTag(eventList, category);
+                }
+                showRecommendedEvent();
+            });
+            categoryButton.getItems().add(menuItem);
+        }
     }
+
     private void setUpSortMenuButton() {
         MenuItem eng = new MenuItem("A - Z");
         eng.setOnAction( event -> {
             recSortMenuButton.setText("Sort By : A - Z");
-        });
-        MenuItem thai = new MenuItem("ก - ฮ");
-        thai.setOnAction( event -> {
-            recSortMenuButton.setText("Sort By : ก - ฮ");
+            recEventList = recEventList.sortByName(recEventList);
+            showRecommendedEvent();
         });
         MenuItem recent = new MenuItem("Recent Event");
         recent.setOnAction( event -> {
             recSortMenuButton.setText("Sort By : Recent Event");
+            recEventList = recEventList.sortNewEvent(recEventList);
+            showRecommendedEvent();
         });
-        recSortMenuButton.getItems().addAll(eng,thai,recent);
+        MenuItem pop = new MenuItem("Popularity");
+        pop.setOnAction( event -> {
+            recSortMenuButton.setText("Sort By : Popularity");
+            recEventList = recEventList.sortByMember(recEventList);
+            showRecommendedEvent();
+        });
+        recSortMenuButton.getItems().addAll(eng,recent,pop);
     }
     private void showRecommendedEvent() {
         ArrayList<AnchorPane> recAnchorPaneList = new ArrayList<>(Arrays.asList(
@@ -158,8 +154,10 @@ public class HomeController {
         ));
         // use resEventList as sorted eventList
         for (int i = 0 ; i < 6 ; i++) {
-            if(i < eventList.getEvents().size()) {
-                loadRecommendedEventTile(recAnchorPaneList.get(i),eventList.getEvents().get(i));
+            if(i < recEventList.getEvents().size()) {
+                loadRecommendedEventTile(recAnchorPaneList.get(i),recEventList.getEvents().get(i));
+            } else {
+                recAnchorPaneList.get(i).getChildren().clear();
             }
         }
     }

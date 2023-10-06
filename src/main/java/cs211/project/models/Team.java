@@ -23,11 +23,11 @@ public class Team implements Comparable<Team> {
     private UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
     private UserList userList = userListDataSource.readData();
 
-    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember) {
+    public Team (String eventID, User teamHostUser, String teamName, String description, String startDate, String endDate, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
         this.teamHostUser = teamHostUser;
         this.teamName = teamName;
-        this.teamDescription = "";
+        this.teamDescription = (description.isEmpty()) ? "-" : description;
         this.startDate = formatStringToTimestamp(startDate);
         this.endDate = formatStringToTimestamp(endDate);
         this.maxSlotTeamMember = maxSlotTeamMember;
@@ -37,18 +37,7 @@ public class Team implements Comparable<Team> {
         loadActivities();
     }
 
-    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription) {
-        this(eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember);
-        this.teamDescription = teamDescription;
-    }
-
-
-    public Team (String eventID, User teamHostUser, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription, UserList memberList) {
-        this(eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
-        this.memberList = memberList;
-    }
-
-    public Team (String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID) {
+    public Team (String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID, UserList memberList) {
         // this constructor is used when loading from database
         this.teamID = teamID;
         this.teamHostUser = teamHostUser;
@@ -59,6 +48,7 @@ public class Team implements Comparable<Team> {
         this.maxSlotTeamMember = maxSlotTeamMember;
         this.createdAt = createdAt;
         this.eventID = eventID;
+        this.memberList = memberList;
         loadActivities();
     }
 
@@ -189,6 +179,10 @@ public class Team implements Comparable<Team> {
         return memberList.getUsers().size() >= maxSlotTeamMember; // return true if full
     }
 
+    public boolean isClose() {
+        return Long.parseLong(endDate) < System.currentTimeMillis();
+    }
+
     public String getTeamID() {
         return teamID;
     }
@@ -272,7 +266,7 @@ public class Team implements Comparable<Team> {
         this.startDate = formatStringToTimestamp(startDate);
     }
 
-   public void setEndDate(String endDate) { // format : yyyy-MM-dd.HH:mm:ss
+    public void setEndDate(String endDate) { // format : yyyy-MM-dd.HH:mm:ss
         this.endDate = formatStringToTimestamp(endDate);
    }
 

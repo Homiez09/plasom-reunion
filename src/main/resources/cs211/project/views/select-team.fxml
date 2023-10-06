@@ -98,7 +98,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button alignment="CENTER_RIGHT" layoutX="937.0" layoutY="99.0" mnemonicParsing="false" onAction="#onCreateTeamButtonClick" prefHeight="45.0" prefWidth="168.0" text="Create Team">
+            <Button fx:id="createButton" alignment="CENTER" layoutX="937.0" layoutY="99.0" mnemonicParsing="false" onAction="#onCreateTeamButtonClick" prefHeight="45.0" prefWidth="168.0" text="Create Team" visible="false">
                <padding>
                   <Insets right="14.0" />
                </padding>
@@ -108,12 +108,14 @@
                   <String fx:value="weight-medium" />
                   <String fx:value="create-team-button" />
                </styleClass>
+               <graphic>
+                  <ImageView fx:id="createTeamImageView" fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/select-team/create_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <ImageView fx:id="createTeamImageView" fitHeight="24.0" fitWidth="29.0" layoutX="952.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/icons/select-team/create_icon.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="sortImageView" fitHeight="25.0" fitWidth="28.0" layoutX="823.0" layoutY="109.0" onMouseClicked="#onShowFilterMenuClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/icons/select-team/sort_icon.png" />
@@ -125,6 +127,24 @@
                </image>
             </ImageView>
             <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
+            <Button fx:id="joinButton" alignment="CENTER" layoutX="937.0" layoutY="99.0" mnemonicParsing="false" onAction="#onJoinTeamButtonClick" prefHeight="45.0" prefWidth="168.0" text=" Join Team" visible="false">
+               <padding>
+                  <Insets right="14.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-lg" />
+                  <String fx:value="weight-medium" />
+                  <String fx:value="create-team-button" />
+               </styleClass>
+               <graphic>
+                  <ImageView fx:id="createTeamImageView1" fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/select-team/create_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="switchViewAnchorPane" layoutX="180.0" layoutY="160.0" prefHeight="516.0" prefWidth="787.0" visible="false">
