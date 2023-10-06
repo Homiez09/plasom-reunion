@@ -17,11 +17,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
 
 public class SignInController {
 
@@ -30,24 +25,17 @@ public class SignInController {
     private final int maxPasswordLimit = 27, maxUsernameLimit = 20;
 
 
-    @FXML
-    private Button backButton, nextButton;
-    @FXML
-    private Shape backCircle, nextCircle;
+    @FXML private Button backButton, nextButton;
+    @FXML private Shape backCircle, nextCircle;
 
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private TextField showPasswordTextField, usernameTextField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextField showPasswordTextField, usernameTextField;
 
-    @FXML
-    private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
-    @FXML
-    private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
+    @FXML private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
+    @FXML private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
     private Image showPasswordImage, hidePasswordImage;
 
-    @FXML
-    private Label errorLabel;
+    @FXML private Label errorLabel;
 
     private String password, username;
     private UserListDataSource datasource;
@@ -113,8 +101,7 @@ public class SignInController {
         user = userList.login(username, password);
         matchingUsername = userList.findUsername(username);
         if (user != null) {
-            user.setStatus(true);
-            user.setLastedLogin(generateLastedLogin());
+            user.updateAfterLogin();
             datasource.writeData(userList);
             try {
                 if (user.isAdmin()) {
@@ -174,11 +161,7 @@ public class SignInController {
         }
     }
 
-    private String generateLastedLogin(){
-        LocalDateTime currentDate = LocalDateTime.now();
-        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yy-MM-dd : hh:mm:ss").withLocale(Locale.US));
-        return formattedDate;
-    }
+
 
     private String setColorBorderTextField(String color){
         switch (color) {
