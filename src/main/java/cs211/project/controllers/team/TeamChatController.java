@@ -6,10 +6,8 @@ import cs211.project.models.collections.ChatHistory;
 import cs211.project.services.*;
 import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
 import cs211.project.models.User;
-import cs211.project.models.collections.UserList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
-import cs211.project.services.UserListDataSource;
 import cs211.project.services.team.LoadSideBarComponent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +21,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 
@@ -37,13 +36,17 @@ public class TeamChatController {
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private final Team team = (Team) FXRouter.getData3();
-    ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
-    ActivityTeamList activityTeamList = activityTeamListDataSource.readData();
-    ChatHistoryDataSource chatHistoryDataSource = new ChatHistoryDataSource("data", "chat-history.csv");
-    ChatHistory chatHistory = chatHistoryDataSource.readData();
-    User userChatTemp;
-    ActivityTeam activitySelectTemp;
-    LoadSideBarComponent sideBarAnchorPaneLoad;
+    private ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
+    private ActivityTeamList activityTeamList = activityTeamListDataSource.readData();
+    private ChatHistoryDataSource chatHistoryDataSource = new ChatHistoryDataSource("data", "chat-history.csv");
+    private ChatHistory chatHistory = chatHistoryDataSource.readData();
+    private User userChatTemp;
+    private ActivityTeam activitySelectTemp;
+    private LoadSideBarComponent sideBarAnchorPaneLoad;
+    private int row = 0;
+
+    UploadMessageThread uploadMessageThread = new UploadMessageThread();
+    Thread thread = new Thread(uploadMessageThread);
 
     @FXML void initialize(){
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -57,11 +60,7 @@ public class TeamChatController {
         loadGroupTableView();
 
         setSideBar();
-    }
-
-    protected void setSideBar(){
-        SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
-        sideBarTeamController.setHoverChat();
+        thread.start();
     }
 
     @FXML
@@ -69,18 +68,31 @@ public class TeamChatController {
         if (activitySelectTemp == null) return;
         if (typeMessageTextField.getText().isEmpty()) return;
 
-        chatHistory.add(new Chat(typeMessageTextField.getText(), user, activitySelectTemp.getActivityID()));
-        chatHistoryDataSource.writeData(chatHistory);
+        Chat chatTemp = new Chat(typeMessageTextField.getText(), user, activitySelectTemp.getActivityID());
 
+        uploadMessageThread.uploadMessage(chatTemp);
+
+//        chatHistory.add(chatTemp);
+//        chatHistoryDataSource.writeData(chatHistory);
+
+        System.out.println(chatHistory.getChats().size());
         typeMessageTextField.clear();
 
-        loadChatOfActivity(activitySelectTemp);
+//        loadChatOfActivity(activitySelectTemp);
+        loadChatCache(chatTemp);
     }
 
+    protected void setSideBar(){
+        SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
+        sideBarTeamController.setHoverChat();
+    }
+
+    protected void loadChatCache(Chat chat) {
+        loadMessageBox(chat, row++);
+        goToLastMessage();
+    }
 
     private void loadChatOfActivity(ActivityTeam activity) {
-        int row = 0;
-
         chatContainer.getChildren().clear();
         for (Chat chat : chatHistory.getChatByActivityId(activity.getActivityID())) {
             loadMessageBox(chat, row++);
@@ -91,7 +103,6 @@ public class TeamChatController {
     }
 
     private void loadMessageBox(Chat chat, int row) {
-        Runtime.getRuntime().freeMemory();
         FXMLLoader messageBoxLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/chats/message-box.fxml"));
         AnchorPane messageBoxComponent;
 
