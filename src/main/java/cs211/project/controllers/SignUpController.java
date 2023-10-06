@@ -31,33 +31,27 @@ public class SignUpController {
     private int maxPage;
     private final int maxPasswordLimit = 27, maxUsernameLimit = 20, maxDisplayNameLimit = 24;
 
-    @FXML
-    private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
-    @FXML
-    private ImageView fullNameIconView, usernameIconView, passwordIconView, confirmPasswordIconView, visiblePasswordImageView,checkBoxPasswordImageView,checkBoxConfirmPasswordImageView;
-    private Image showPasswordImage, hidePasswordImage,checkBoxPasswordImage;
+    @FXML private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
+    @FXML private ImageView fullNameIconView, usernameIconView, passwordIconView, confirmPasswordIconView, visiblePasswordImageView,checkBoxPasswordImageView,checkBoxConfirmPasswordImageView;private Image showPasswordImage, hidePasswordImage,checkBoxPasswordImage;
 
-    @FXML
-    private Button backButton, nextButton;
-    @FXML
-    private Shape backCircle, nextCircle, passwordRequireBox, passwordRequireBoxLabel;
+    @FXML private Button backButton, nextButton;
+    @FXML private Shape backCircle, nextCircle, passwordRequireBox, passwordRequireBoxLabel;
 
-    @FXML
-    private Label passwordRequireLabel, passwordLengthReq, passwordUpperCaseReq, passwordLowerCaseReq, passwordSpecialReq, passwordNumReq, usernameReq, displayNameReq, errorLabel;
+    @FXML private Label passwordRequireLabel, passwordLengthReq, passwordUpperCaseReq, passwordLowerCaseReq, passwordSpecialReq, passwordNumReq, usernameReq, displayNameReq, errorLabel;
 
-    @FXML
-    private PasswordField passwordField, confirmPasswordField;
-    @FXML
-    private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
+    @FXML private PasswordField passwordField, confirmPasswordField;
+    @FXML private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
 
     private String password, confirmPassword, displayName, username;
     private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false, findDisplayNameValidate = false;
+    protected char firstUsernameChar;
+
+    protected User user, findUsername, findDisplayName;
     UserListDataSource datasource ;
     UserList userList ;
 
-    protected User user, findUsername, findDisplayName;
-    protected String path;
-    protected char firstUsernameChar;
+
+
 
     @FXML
     void initialize() {
@@ -101,9 +95,7 @@ public class SignUpController {
         findUsernameValidate = false;
         findDisplayNameValidate = false;
         if(validateConfirmation()){
-            setPassword(password);
-            user = new User(generateUserID(), displayNameTextfield.getText(), usernameTextField.getText(),this.password, "", generateRegisterDate(),"",generateAvatar(),"", false, false,false);
-            userList.getUsers().add(user);
+            userList.addUser(displayName, username, password);
             try {
                 datasource.writeData(userList);
                 FXRouter.goTo("sign-in");
@@ -184,48 +176,6 @@ public class SignUpController {
     }
 
 
-    private String generateRegisterDate(){
-        LocalDate currentDate = LocalDate.now();
-        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        return formattedDate;
-    }
-
-    private String generateRandomText(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
-
-        Random random = new Random();
-
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-
-        return randomText.toString();
-    }
-    private String generateUserID() {
-
-        Random random = new Random();
-
-        String id = "user-";
-        int ranInt = random.nextInt(1000000);
-        String ranText = generateRandomText(3);
-
-        id = id + ranText + ranInt;
-        return id;
-    }
-
-    private void setPassword(String password){
-        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
-    }
-
-    private String generateAvatar(){
-        int randomAvatar = (int)(Math.random()*10);
-        path = "x/images/profile/default-avatar/default" + randomAvatar + ".png";
-        return path;
-    }
-
 
 
     private boolean validateConfirmation(){
@@ -263,7 +213,6 @@ public class SignUpController {
                 break;
             }
         }
-
         if(isValid && hasFirstAlphabetic){
             usernameTextField.setStyle(setColorBorderTextField("black"));
             usernameReq.setStyle(setColorTextFill("black"));
@@ -273,6 +222,7 @@ public class SignUpController {
             usernameRequirement = false;
         }
     }
+
     private void checkPasswordRequirement() {
         boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasSpecialCharacter = false , hasFitLength = false;
         String specialCharacters = "!@#$";

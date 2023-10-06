@@ -5,14 +5,12 @@ import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.services.JoinEventMap;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class UserList {
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     public UserList() {
         users = new ArrayList<>();
@@ -57,13 +55,20 @@ public class UserList {
             users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, bio, status, admin,showContactNumber));
         }
     }
+    public void addUser(String displayName, String username, String password){
+        username = username.trim();
+        password = password.trim();
+        User newUser = findUsername(username);
+        if(newUser == null){
+            users.add(new User(displayName, username, password));
+        }
+    }
 
     public boolean removeUser(User user) {
         if (user == null) return false;
         users.remove(user);
         return true;
     }
-
 
     public User login(String username, String password){
         for(User exist: users){
@@ -73,7 +78,6 @@ public class UserList {
         }
         return null;
     }
-
 
     public void logout(User oldUser) {
         User newUser = findUsername(oldUser.getUsername());
@@ -86,7 +90,6 @@ public class UserList {
             exist.setPassword(newPassword);
         }
     }
-
 
     public void updateUserProfile(String username, String displayName, String contactNumber, String bio, String newImagePath) {
         User exist = findUsername(username);
@@ -101,8 +104,6 @@ public class UserList {
             exist.setShowContact(showContactNumber);
         }
     }
-
-
 
     public ArrayList<User> getNotAdminUsers() {
         ArrayList<User> notAdminUsers = new ArrayList<>();
