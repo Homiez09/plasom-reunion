@@ -23,8 +23,6 @@ public class navbarController {
     private UserList userList;
 
     @FXML private void initialize() {
-
-
         String menu[] = {"profile", "setting", "logout"};
 
         toggleComboBox.getItems().addAll(menu);
@@ -41,19 +39,15 @@ public class navbarController {
 
     private void goTo(String page) throws IOException {
         switch(page) {
-            case "profile":
-                FXRouter.goTo("user-profile", user);
-                break;
-            case "setting":
-                FXRouter.goTo("setting", user);
-                break;
-            case "logout":
+            case "profile" -> FXRouter.goTo("user-profile", user);
+            case "setting" -> FXRouter.goTo("setting", user);
+            case "logout" -> {
                 userList = datasource.readData();
                 userList.logout(user);
                 datasource.writeData(userList);
-                System.out.println(user.getStatus());
+
                 FXRouter.goTo("welcome");
-                break;
+            }
         }
     }
 
