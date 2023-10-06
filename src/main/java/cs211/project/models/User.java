@@ -1,6 +1,7 @@
 package cs211.project.models;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import cs211.project.models.collections.UserList;
 import cs211.project.services.BanTeamMap;
 
 import java.util.*;
@@ -182,6 +183,14 @@ public class User implements Comparable<User>{
         HashMap<String, Set<String>> banTeamHashMap = banTeamMap.readData();
         if (!banTeamHashMap.containsKey(teamId)) return false;
         else return banTeamHashMap.get(teamId).contains(userId);
+    }
+
+    public boolean isAlreadyJoinTeam(UserList memberList) {
+        if (memberList == null) return false;
+        for (User user: memberList.getUsers()) {
+            if (user.getUserId().equals(userId)) return true;
+        }
+        return false;
     }
 }
 
