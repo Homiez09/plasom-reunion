@@ -6,6 +6,7 @@ import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -52,21 +53,27 @@ public class EditActivityController {
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         TableColumn<Activity,String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        TableColumn<Activity,String> statusColumn = new TableColumn<>("Activity status");
+        statusColumn.setCellValueFactory(cellData -> {
+            Activity activity = cellData.getValue();
+            String status = activity.getActivityStatus();
+            return new SimpleStringProperty(status);
+        });
         editActivityTableview.getColumns().clear();
         editActivityTableview.getColumns().add(nameColumn);
         editActivityTableview.getColumns().add(startTimeColumn);
         editActivityTableview.getColumns().add(endTimeColumn);
+        editActivityTableview.getColumns().add(statusColumn);
         editActivityTableview.getColumns().add(descriptionColumn);
         editActivityTableview.getItems().clear();
-        nameColumn.setPrefWidth(200);
-        startTimeColumn.setPrefWidth(150);
-        endTimeColumn.setPrefWidth(150);
+        nameColumn.setPrefWidth(180);
+        startTimeColumn.setPrefWidth(120);
+        endTimeColumn.setPrefWidth(120);
+        statusColumn.setPrefWidth(100);
         descriptionColumn.prefWidthProperty().bind(editActivityTableview.widthProperty().subtract(nameColumn.widthProperty())
-                .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()));
+                .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()).subtract(statusColumn.widthProperty()));
         for (Activity activity: event.getActivityList().getActivities()) {
-            if (event.getEventID().equals(activity.getEventID())) {
-                editActivityTableview.getItems().add(activity);
-            }
+            editActivityTableview.getItems().add(activity);
         }
         editActivityTableview.setFixedCellSize(40);
     }

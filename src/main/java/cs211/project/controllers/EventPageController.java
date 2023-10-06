@@ -6,6 +6,7 @@ import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -120,21 +121,27 @@ public class EventPageController {
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         TableColumn<Activity,String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        TableColumn<Activity,String> statusColumn = new TableColumn<>("Activity status");
+        statusColumn.setCellValueFactory(cellData -> {
+            Activity activity = cellData.getValue();
+            String status = activity.getActivityStatus();
+            return new SimpleStringProperty(status);
+        });
         eventActivityTableView.getColumns().clear();
         eventActivityTableView.getColumns().add(nameColumn);
         eventActivityTableView.getColumns().add(startTimeColumn);
         eventActivityTableView.getColumns().add(endTimeColumn);
+        eventActivityTableView.getColumns().add(statusColumn);
         eventActivityTableView.getColumns().add(descriptionColumn);
         eventActivityTableView.getItems().clear();
-        nameColumn.setPrefWidth(200);
-        startTimeColumn.setPrefWidth(150);
-        endTimeColumn.setPrefWidth(150);
-        descriptionColumn.prefWidthProperty().bind(eventActivityTableView.widthProperty().subtract(nameColumn.widthProperty())
-                .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()));
-        for (Activity activity: activityList.getActivities()) {
-            if (event.getEventID().equals(activity.getEventID())) {
-                eventActivityTableView.getItems().add(activity);
-            }
+        nameColumn.setPrefWidth(180);
+        startTimeColumn.setPrefWidth(120);
+        endTimeColumn.setPrefWidth(120);
+        statusColumn.setPrefWidth(100);
+        descriptionColumn.prefWidthProperty().bind(eventActivityTableView.prefWidthProperty().subtract(nameColumn.widthProperty())
+                .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()).subtract(statusColumn.widthProperty()));
+        for (Activity activity: activityList.getActivityOfEvent(event.getEventID())) {
+            eventActivityTableView.getItems().add(activity);
         }
         eventActivityTableView.setFixedCellSize(40);
     }
