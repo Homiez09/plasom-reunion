@@ -111,7 +111,6 @@ public class Team implements Comparable<Team> {
 
     public String getStartDateTime(){
         String startDateFormatted =  formatTimestampToString(startDate);
-        System.out.println(startDateFormatted);
         int year, month, day, hour, minute;
         year = Integer.parseInt(startDateFormatted.substring(0,4))-543;
         month = Integer.parseInt(startDateFormatted.substring(5,7));
@@ -128,7 +127,6 @@ public class Team implements Comparable<Team> {
 
     public String getEndDateTime(){
         String endDateFormatted =  formatTimestampToString(endDate);
-        System.out.println(endDateFormatted);
         int year, month, day, hour, minute;
         year = Integer.parseInt(endDateFormatted.substring(0,4))-543;
         month = Integer.parseInt(endDateFormatted.substring(5,7));
