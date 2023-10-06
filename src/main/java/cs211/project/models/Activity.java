@@ -1,5 +1,7 @@
 package cs211.project.models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Activity {
@@ -54,6 +56,14 @@ public class Activity {
         return id;
     }
 
+    public String getActivityStatus() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime start = LocalDateTime.parse(this.getStartTime(),formatter);
+        LocalDateTime end = LocalDateTime.parse(this.getEndTime(),formatter);
+        if (LocalDateTime.now().isBefore(start)) {return "Upcoming";}
+        else if (LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end)) {return "On-going";}
+        else {return "Completed";}
+    }
     // Getters and Setters
     public String getName() {
         return name;

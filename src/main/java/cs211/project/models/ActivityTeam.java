@@ -1,5 +1,8 @@
 package cs211.project.models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ActivityTeam extends Activity {
     protected String teamID;
     protected boolean status;
@@ -21,7 +24,12 @@ public class ActivityTeam extends Activity {
     }
 
     public boolean getStatus() {
-        return status;
+        if (status) return true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm");
+        LocalDateTime start = LocalDateTime.parse(this.getStartTime(),formatter);
+        LocalDateTime end = LocalDateTime.parse(this.getEndTime(),formatter);
+        if (LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end)) return false;
+        else return true;
     }
 
     public void setStatus(boolean status) {

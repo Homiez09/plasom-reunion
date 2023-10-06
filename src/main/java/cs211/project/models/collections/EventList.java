@@ -71,6 +71,81 @@ public class EventList {
         Collections.sort(events);
     }
 
+    public EventList suffleEvent(EventList eventList){
+        EventList list = new EventList();
+        Collections.shuffle(events);
+        list.getEvents().addAll(eventList.getEvents());
+
+        return list;
+    }
+
+    public EventList sortNewEvent(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getTimestamp);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+
+    public EventList sortUpcoming(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventDateStart);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+
+    public EventList sortByName(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventName);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+    public EventList sortById(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventID);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+    public EventList sortByMember(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getUserInEvent);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+        Collections.reverse(list.getEvents());
+        return list;
+    }
+    public EventList sortByTag(EventList eventList){
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
+    public EventList sortByTag(EventList eventList, String tag) {
+        Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(), comparing);
+
+        EventList filteredList = new EventList();
+
+        for (Event event : list.getEvents()) {
+            if (event.getEventTag().equals(tag)) {
+                filteredList.getEvents().add(event);
+            }
+        }
+
+        return filteredList;
+    }
+
     public ArrayList<Event> getEvents() {
         return events;
     }

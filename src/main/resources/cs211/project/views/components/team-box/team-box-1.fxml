@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamboxControllers.TeamBox1Controller">
+<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox1Controller">
    <children>
       <ComboBox fx:id="menuDropDown" layoutX="32.0" layoutY="-9.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
       <Label fx:id="teamIdLabel" layoutX="50.0" layoutY="50.0" text="Label" />
@@ -50,7 +50,7 @@
       <HBox alignment="CENTER_RIGHT" layoutX="133.0" layoutY="201.0" prefHeight="23.0" prefWidth="78.0">
          <children>
             <ImageView fx:id="activeImageView" fitHeight="4.0" fitWidth="4.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="numActiveLabel" alignment="CENTER_RIGHT" prefHeight="10.0" prefWidth="21.0" text="111">
+            <Label fx:id="onlineLabel" alignment="CENTER_RIGHT" prefHeight="10.0" prefWidth="21.0" text="111">
                <styleClass>
                   <String fx:value="font" />
                   <String fx:value="text-ปห" />
@@ -108,7 +108,7 @@
             </Label>
             <HBox alignment="CENTER_RIGHT" layoutX="68.0" layoutY="11.0" prefHeight="15.0" prefWidth="48.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="56.0" text="99 / 99">
+                  <Label fx:id="participantsLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="56.0" text="99 / 99">
                      <styleClass>
                         <String fx:value="font" />
                         <String fx:value="center-label" />

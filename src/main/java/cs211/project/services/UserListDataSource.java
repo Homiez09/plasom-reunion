@@ -75,12 +75,11 @@ public class UserListDataSource implements Datasource<UserList> {
                 String registerDate = data[5];
                 String contactNumber = data[4];
                 String lastedLogin = data[6];
-                String bio = data[8];
+                String bio = data[8].trim();
                 boolean showContactNumber = Boolean.parseBoolean(data[11]);
                 boolean status = Boolean.parseBoolean(data[9]);
                 boolean admin = Boolean.parseBoolean(data[10].trim());
                 userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, bio, status, admin, showContactNumber);
-
 
             }
         } catch (IOException e) {

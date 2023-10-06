@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamboxControllers.TeamBox2Controller">
+<AnchorPane prefHeight="228.0" prefWidth="228.0" styleClass="selected-team-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox2Controller">
    <children>
       <ComboBox fx:id="menuDropDown" layoutX="37.0" layoutY="3.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
       <Label fx:id="teamIdLabel" layoutX="60.0" layoutY="60.0" text="Label" />
@@ -70,7 +70,7 @@
                   <Image url="@../../../../../images/icons/team-box/active_icon.png" />
                </image>
             </ImageView>
-            <Label fx:id="numActiveLabel" alignment="CENTER_RIGHT" prefHeight="10.0" prefWidth="21.0" text="111">
+            <Label fx:id="onlineLabel" alignment="CENTER_RIGHT" prefHeight="10.0" prefWidth="21.0" text="111">
                <styleClass>
                   <String fx:value="font" />
                   <String fx:value="text-xs" />
@@ -101,7 +101,7 @@
                   <Font size="8.0" />
                </font>
             </Label>
-            <Label contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
+            <Label fx:id="roleLabel" contentDisplay="RIGHT" layoutX="92.0" layoutY="2.0" prefHeight="15.0" prefWidth="57.0" text="Leader">
                <styleClass>
                   <String fx:value="font" />
                   <String fx:value="center-label" />
@@ -128,7 +128,7 @@
             </Label>
             <HBox alignment="CENTER_LEFT" layoutX="21.0" layoutY="16.0" prefHeight="19.0" prefWidth="66.0">
                <children>
-                  <Label text="10 / 15" />
+                  <Label fx:id="participantsLabel" text="10 / 15" />
                </children>
             </HBox>
          </children>

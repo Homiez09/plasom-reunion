@@ -42,40 +42,41 @@ public class MemberApplicationController {
             teamChoiceBox.getItems().add(team.getTeamName());
         }
     }
-    @FXML protected void onConfirmTeamButtonClick() {
 
-        HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
-        teamName = teamChoiceBox.getValue();
-
-        TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
-        TeamList teamList = teamListDataSource.readData();
-
-
-        Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
-        if (user.isBanFromTeam(team.getTeamID())) {
-            System.out.println("You are banned from this team");
-            return;
-        }
-        if (team.isFull()) {
-            System.out.println("Team is full");
-            return;
-        }
-        team.setRole("Member");
-        if(teamListHashMap.get(user.getUsername()) == null) {
-            teamListHashMap.put(user.getUsername(), new TeamList());
-        }
-        for (Team teamCheck : teamListHashMap.get(user.getUsername()).getTeams()) {
-            if (teamCheck.getTeamID().equals(team.getTeamID())) {
-                System.out.println("Already join this team");
-                return;
-            }
-        }
-        teamListHashMap.get(user.getUsername()).getTeams().add(team);
-        joinTeamMap.writeData(teamListHashMap);
-        try {
-            FXRouter.goTo("select-team", user, event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    @FXML protected void onConfirmTeamButtonClick() {
+//
+//        HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
+//        teamName = teamChoiceBox.getValue();
+//
+//        TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+//        TeamList teamList = teamListDataSource.readData();
+//
+//
+//        Team team = teamList.findTeamByNameInEvent(teamName, event.getEventID());
+//        if (user.isBanFromTeam(team.getTeamID())) {
+//            System.out.println("You are banned from this team");
+//            return;
+//        }
+//        if (team.isFull()) {
+//            System.out.println("Team is full");
+//            return;
+//        }
+//        team.setRole("Member");
+//        if(teamListHashMap.get(user.getUsername()) == null) {
+//            teamListHashMap.put(user.getUsername(), new TeamList());
+//        }
+//        for (Team teamCheck : teamListHashMap.get(user.getUsername()).getTeams()) {
+//            if (teamCheck.getTeamID().equals(team.getTeamID())) {
+//                System.out.println("Already join this team");
+//                return;
+//            }
+//        }
+//        teamListHashMap.get(user.getUsername()).getTeams().add(team);
+//        joinTeamMap.writeData(teamListHashMap);
+//        try {
+//            FXRouter.goTo("select-team", user, event);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

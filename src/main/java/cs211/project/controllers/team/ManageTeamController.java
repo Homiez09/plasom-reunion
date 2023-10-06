@@ -1,6 +1,7 @@
 package cs211.project.controllers.team;
 
 import cs211.project.componentControllers.UserCardProfileController;
+import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
 import cs211.project.componentControllers.teamControllers.manageTeamController.ManageMemberTeamListController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
@@ -37,24 +38,41 @@ public class ManageTeamController {
     TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
     TeamList teamList = teamListDataSource.readData();;
     JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, UserList> hashMap = joinTeamMap.roleReadData();
+    HashMap<String, UserList> hashMap;
 
     String teamID;
 
     UserListDataSource datasource ;
     UserList userList ;
+    LoadSideBarComponent sideBarAnchorPaneLoad;
 
 
     boolean nameSort, roleSort, statusSort;
 
     @FXML private void initialize(){
         new LoadNavbarComponent(user, navbarAnchorPane);
-        new LoadSideBarComponent(sideBarAnchorPane);
+
+        hashMap = joinTeamMap.roleReadData();
+
+        sideBarAnchorPaneLoad = new LoadSideBarComponent();
+        sideBarAnchorPane.getChildren().add(sideBarAnchorPaneLoad.getSideBarComponent());
+
+
         datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
         loadIcon();
         showUserList(team.getTeamID());
         setManageTeamDisableAnchorPane(false);
+        setSideBar();
+    }
+
+    public void reloadDataHashMap() {
+        hashMap = joinTeamMap.roleReadData();
+    }
+
+    protected void setSideBar(){
+        SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
+        sideBarTeamController.setHoverManageTeam();
     }
 
     public void showUserList(String teamID) {
@@ -124,7 +142,10 @@ public class ManageTeamController {
                 menuComboBox.getItems().addAll(menuItems);
                 menuComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
                     if (newValue == null) return;
+
                     ManageMemberTeamListController manageMemberTeamListController = manageTeamLoader.getController();
+                    manageMemberTeamListController.setManageTeamController(this);
+
                     if (newValue.equals("Promote to Leader")) {
                         try {
                             manageMemberTeamListController.goTo((String) newValue, teamID, user.getUserId());

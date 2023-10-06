@@ -1,7 +1,10 @@
 package cs211.project.controllers;
 
-import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamController;
-import cs211.project.componentControllers.teamboxControllers.TeamBox1Controller;
+import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamComponentController;
+
+import cs211.project.componentControllers.teamControllers.manageTeamsController.ManageTeamsBoxController;
+import cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox1Controller;
+import cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox2Controller;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.Event;
@@ -13,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,7 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -30,11 +33,12 @@ import java.util.HashMap;
 public class SelectTeamController {
     @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane, manageTeamAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
-    @FXML private ImageView settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
+    @FXML private ImageView joinTeamImageView, settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
     @FXML private Label menu1Label, menu2Label;
     @FXML private Shape selectMenu1, selectMenu2;
+    @FXML private Button createButton, joinButton;
 
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
@@ -47,21 +51,23 @@ public class SelectTeamController {
 
     private final String[] menu = {"Manage Teams", "Switch View"};
     private final String[] filters = {"All", "Favorite", "Owner", "Leader", "Member"};
-
-    Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
+    Image create = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
+    Image createHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon_hover.png"));
     Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
+    Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
+
     String teamSelectedComponentID = "";
     @FXML
     private void initialize() {
         teamBox = "teamBox1";
 
         initMenu();
+        initButton();
         initCreateTeamPage();
         manageTeamAnchorPane.setVisible(false);
 
         teamBoxView(teamBox);
         manageTeamSelectMenuGraphic(1);
-
 
         new LoadNavbarComponent(user, navbarAnchorPane);
         loadIconImage();
@@ -93,6 +99,14 @@ public class SelectTeamController {
         selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
     }
 
+    @FXML
+    private void onJoinTeamButtonClick() {
+        try {
+            FXRouter.goTo("join-team", user, event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML private void onShowSettingMenuClick() {
         settingMenuComboBox.show();
@@ -148,6 +162,16 @@ public class SelectTeamController {
         settingImageView.setImage(setting);
     }
 
+    private void initButton() {
+        if (user.getUserId().equals(event.getEventHostUser().getUserId())) createButton.setVisible(true);
+        else joinButton.setVisible(true);
+
+        createButton.setOnMouseEntered(event -> createTeamImageView.setImage(createHover));
+        createButton.setOnMouseExited(event -> createTeamImageView.setImage(create));
+        joinButton.setOnMouseEntered(event -> joinTeamImageView.setImage(createHover));
+        joinButton.setOnMouseExited(event -> joinTeamImageView.setImage(create));
+    }
+
     private void initCreateTeamPage(){
         FXMLLoader createTeamAnchorPaneLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-team.fxml"));
         try {
@@ -158,7 +182,6 @@ public class SelectTeamController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void initManageTeam() {
@@ -166,7 +189,7 @@ public class SelectTeamController {
         try {
             AnchorPane manageTeamAnchorPaneComponent = manageTeamAnchorPaneLoader.load();
             manageTeamAnchorPane.getChildren().add(manageTeamAnchorPaneComponent);
-            ManageTeamController manageTeamController = manageTeamAnchorPaneLoader.getController();
+            ManageTeamComponentController manageTeamController = manageTeamAnchorPaneLoader.getController();
             manageTeamController.showUserList(teamSelectedComponentID);
             manageTeamAnchorPane.setVisible(false);
             selectTeamAnchorPane.setDisable(false);
@@ -175,7 +198,7 @@ public class SelectTeamController {
         }
     }
 
-    private void teamBoxView(String teamBox) {
+    public void teamBoxView(String teamBox) {
         teamHashMap = joinTeamMap.readData();
         int row = 0, column = 0, row2 = 0;
 
@@ -191,6 +214,9 @@ public class SelectTeamController {
             teamListSort.filterByAll();
         }
 
+        teamContainer.getChildren().clear();
+        managerContainer.getChildren().clear();
+
         for (Team team : teamListSort.getTeams()) {
             if (!team.getEventID().equals(event.getEventID())) continue;
             try {
@@ -202,98 +228,19 @@ public class SelectTeamController {
                     teamBox1CheckBox.setSelected(true);
                     teamBox2CheckBox.setSelected(false);
                     teamBoxComponent = teamBoxLoader1.load();
+                    TeamBox1Controller teamBox1Controller = teamBoxLoader1.getController();
+                    teamBox1Controller.setTeamData(team);
+                    teamBox1Controller.setSelectTeamController(this);
                 } else {
                     teamBox1CheckBox.setSelected(false);
                     teamBox2CheckBox.setSelected(true);
                     teamBoxComponent = teamBoxLoader2.load();
+                    TeamBox2Controller teamBox2Controller = teamBoxLoader2.getController();
+                    teamBox2Controller.setTeamData(team);
+                    teamBox2Controller.setSelectTeamController(this);
                 }
 
                 loadTeamBoxComponent(team, 0, row2++);
-
-                Label teamID = (Label) teamBoxComponent.getChildren().get(1);
-                Label teamName = (Label)teamBoxComponent.getChildren().get(6);
-                ImageView bodyImageView = (ImageView) teamBoxComponent.getChildren().get(3);
-                ImageView bookMarkImageView = (ImageView) teamBoxComponent.getChildren().get(5);
-                ImageView roleImageView = (ImageView) teamBoxComponent.getChildren().get(7);
-                AnchorPane memberShipAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(10);
-                Label roleLabel = (Label) memberShipAnchorPane.getChildren().get(2);
-                ComboBox menuDropDown = (ComboBox) teamBoxComponent.getChildren().get(0);
-                HBox onlineHBox = (HBox) teamBoxComponent.getChildren().get(9);
-                Label onlineLabel = (Label) onlineHBox.getChildren().get(1);
-                AnchorPane participantAnchorPane = (AnchorPane) teamBoxComponent.getChildren().get(11);
-                HBox participantHBox = (HBox) participantAnchorPane.getChildren().get(2);
-                Label participantsLabel = (Label) participantHBox.getChildren().get(0);
-                Label bookmarkLabel = (Label) teamBoxComponent.getChildren().get(12);
-
-                teamID.setText(team.getTeamID());
-                teamName.setText(team.getTeamName());
-                roleLabel.setText(team.getRole());
-                onlineLabel.setText(String.valueOf(team.getMemberOnline().getUsers().size()));
-
-                participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
-                bodyImageView.setOnMouseClicked(e -> {
-                    try {
-                        this.user.setRole(team.getRole());
-                        FXRouter.goTo("manage-team", this.user, this.event, team);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                });
-
-                participantsLabel.setText(team.getMemberList().getUsers().size() +" / "+team.getMaxSlotTeamMember());
-                bodyImageView.setOnMouseClicked(e -> {
-                    try {
-                        this.user.setRole(team.getRole());
-                        FXRouter.goTo("team-activity", this.user, this.event, team);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                });
-
-                if (team.getRole().equals("Owner")) {
-                    menuDropDown.getItems().addAll("Manage Team", "Delete Team");
-                } else {
-                    menuDropDown.getItems().addAll("Manage Team", "Leave Team");
-                }
-
-                menuDropDown.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
-                    if (newValue == null) return;
-                    if (newValue.equals("Manage Team")) {
-                        manageTeamSelectMenuGraphic(1);
-
-                        manageTeamAnchorPane.setVisible(true);
-                        selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
-                        selectTeamAnchorPane.setDisable(true);
-                        teamSelectedComponentID = team.getTeamID();
-                        initManageTeam();
-                        showManageTeam();
-                        return;
-                    }
-                    TeamBox1Controller teamBox1Controller = teamBoxLoader1.getController();
-                    if (newValue.equals("Delete Team")) {
-                        try {
-                            teamBox1Controller.goTo("Delete Team");
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else if (newValue.equals("Leave Team")) {
-                        try {
-                            teamBox1Controller.goTo("Leave Team");
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
-
-                if (team.isBookmarked()) {
-                    bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/bookmark_icon.png")));
-                    bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
-                } else {
-                    bookMarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/un_bookmark_icon.png")));
-                    bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
-                }
-
-                roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
 
                 if (column == 4) {
                     column = 0;
@@ -307,17 +254,29 @@ public class SelectTeamController {
         }
     }
 
+    public void startManageTeam(Team team) {
+        manageTeamSelectMenuGraphic(1);
+
+        manageTeamAnchorPane.setVisible(true);
+        selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
+        selectTeamAnchorPane.setDisable(true);
+        teamSelectedComponentID = team.getTeamID();
+        initManageTeam();
+        showManageTeam();
+    }
+
     private void loadIconImage(){
         Image settingIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
-        settingImageView.setImage(settingIcon);
         Image sortIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/sort_icon.png"));
-        sortImageView.setImage(sortIcon);
-        Image createTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
-        createTeamImageView.setImage(createTeamIcon);
         Image teamBox1 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_1.png"));
-        teamBox1ImageView.setImage(teamBox1);
         Image teamBox2 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_2.png"));
+
+        settingImageView.setImage(settingIcon);
+        sortImageView.setImage(sortIcon);
+        teamBox1ImageView.setImage(teamBox1);
         teamBox2ImageView.setImage(teamBox2);
+        createTeamImageView.setImage(create);
+        joinTeamImageView.setImage(create);
     }
 
     private void initMenu() {
@@ -373,28 +332,10 @@ public class SelectTeamController {
         if (team != null) {
             try {
                 teamBoxComponent = teamBoxLoader.load();
-                Label teamName = (Label)teamBoxComponent.getChildren().get(0);
-                HBox HBoxRole = (HBox)teamBoxComponent.getChildren().get(1);
-                ImageView roleImageView = (ImageView)HBoxRole.getChildren().get(0);
-                Label role = (Label)HBoxRole.getChildren().get(1);
-                HBox HBoxPeople = (HBox) teamBoxComponent.getChildren().get(2);
-                Label people = (Label) HBoxPeople.getChildren().get(0);
-                ImageView bookmarkImageView = (ImageView) teamBoxComponent.getChildren().get(3);
-                ImageView menuImageView = (ImageView) teamBoxComponent.getChildren().get(4);
-                Label bookmarkLabel = (Label) teamBoxComponent.getChildren().get(6);
-                Label teamIdLabel = (Label) teamBoxComponent.getChildren().get(7);
-
-                teamName.setText(team.getTeamName());
-                role.setText(team.getRole());
-                roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
-                role.setText(team.getRole());
-                people.setText(String.valueOf(team.getMemberList().getUsers().size())+ " / " + String.valueOf(team.getMaxSlotTeamMember()));
-                bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
-                teamIdLabel.setText(team.getTeamID());
-
-                String bookmark = team.isBookmarked() ? "bookmark_icon" : "un_bookmark_icon";
-                bookmarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/" + bookmark +".png")));
-                menuImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/dot_icon.png")));
+                ManageTeamsBoxController manageTeamsBoxController = teamBoxLoader.getController();
+                manageTeamsBoxController.setSelectTeamController(this);
+                manageTeamsBoxController.setTeamData(team);
+                manageTeamsAnchorPane.getChildren().add(teamBoxComponent);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

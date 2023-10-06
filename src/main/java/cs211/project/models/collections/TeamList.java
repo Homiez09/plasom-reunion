@@ -34,18 +34,46 @@ public class TeamList {
         this.teams = teams;
     }
 
-    public Team findTeamByName(String teamName) {
+    public void addTeam(Team team) {
+        teams.add(team);
+    }
+
+    public Team addTeam(String eventID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember) {
+        // create team
+        teamName = teamName.trim();
+        teamDescription = teamDescription.trim();
+        Team team = new Team (eventID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember);
+        teams.add(team);
+        return team;
+    }
+
+    public void addTeam(String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID, UserList memberList) {
+        // load from file
+        teamName = teamName.trim();
+        teamDescription = teamDescription.trim();
+        Team team = new Team (teamID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID, memberList);
+        teams.add(team);
+    }
+
+    public void updateRole(String teamID, String role) {
+        Team teamExist = findTeamByID(teamID);
+        if (teamExist != null) {
+            teamExist.setRole(role);
+        }
+    }
+
+    public Team findTeamByID(String teamID) {
         for (Team team: teams) {
-            if (team.isName(teamName)) {
+            if (team.getTeamID().equals(teamID)) {
                 return team;
             }
         }
         return null;
     }
 
-    public Team findTeamByID(String teamID) {
+    public Team findTeamByName(String teamName) {
         for (Team team: teams) {
-            if (team.getTeamID().equals(teamID)) {
+            if (team.isName(teamName)) {
                 return team;
             }
         }
@@ -76,26 +104,9 @@ public class TeamList {
         teams.removeIf(team -> team.getTeamID().equals(teamID));
     }
 
-    public void addTeam(Team team) {
-        teams.add(team);
-    }
-
-    public void addTeam(String eventID, User teamHostUser,String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription){
-        teamName = teamName.trim();
-        teamDescription = teamDescription.trim();
-        Team exist = findTeamByName(teamName);
-        if(exist == null){
-            Team team = new Team (eventID, teamHostUser, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
-            teams.add(team);
-        }
-    }
-
-    public void addTeam(String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID){
-        // load from file
-        teamName = teamName.trim();
-        teamDescription = teamDescription.trim();
-        Team team = new Team (teamID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
-        teams.add(team);
+    public void removeTeam(Team teamSelect) {
+        String teamID = teamSelect.getTeamID();
+        teams.removeIf(team -> team.getTeamID().equals(teamID));
     }
 
     public void sortTeamByNewCreatedAt() { // from new to old (Default)
@@ -104,6 +115,14 @@ public class TeamList {
 
     public void sortTeamByOldCreatedAt() { // from old to new
         teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
+    }
+
+    public void sortTeamByNameA() {
+        teams.sort((team1, team2) -> team1.getTeamName().compareTo(team2.getTeamName()));
+    }
+
+    public void sortTeamByNameZ() {
+        teams.sort((team1, team2) -> team2.getTeamName().compareTo(team1.getTeamName()));
     }
 
     public void filterByAll() {

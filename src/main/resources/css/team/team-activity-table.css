@@ -17,12 +17,12 @@
     -fx-padding: 2 0 2 10px;
 }
 .table-row-cell:odd{
-    -fx-background-color: #93f9b911;
+    -fx-background-color: #FFFFFF;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 .table-row-cell:even{
-    -fx-background-color: #1dbbdd11;
+    -fx-background-color: #FFECCE;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
