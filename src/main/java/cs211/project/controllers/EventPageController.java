@@ -160,11 +160,14 @@ public class EventPageController {
 //            }
 //        }
 //    }
+
     @FXML protected void onApplyStaffButtonClick(){
-        try {
-            FXRouter.goTo("join-team",user,event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!staffApplicationAnchorPane.isVisible()) {
+            try {
+                FXRouter.goTo("join-team", user, event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

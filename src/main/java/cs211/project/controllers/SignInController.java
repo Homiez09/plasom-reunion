@@ -53,7 +53,6 @@ public class SignInController {
     private UserListDataSource datasource;
     private UserList userList;
     protected User matchingUsername,user;
-    protected String formattedDate;
 
     @FXML
     void initialize() {
