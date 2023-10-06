@@ -273,6 +273,8 @@ public class CreateTeamController {
         checkTeamNameReq();
         if(teamNameRequirement) {
             HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
+            System.out.println(startDateFormat);
+            System.out.println(endDateFormat);
             Team team = new Team(event.getEventID(), user,teamNameTextField.getText(), startDateFormat, endDateFormat, numMemberSpinner.getValue(), descriptionTextArea.getText());
             team.setRole("Owner");
             if (teamListHashMap.containsKey(user.getUsername())) {
@@ -293,6 +295,7 @@ public class CreateTeamController {
             checkTeamNameReq();
         }
     }
+
     @FXML private void onBackButtonClick(){
         firstPage.setVisible(true);
         secondPage.setVisible(false);
