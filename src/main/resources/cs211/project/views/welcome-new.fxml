@@ -45,7 +45,7 @@
          <styleClass>
             <String fx:value="h3" />
             <String fx:value="text-color-white" />
-            <String fx:value="bold700" />
+            <String fx:value="weight-bold" />
             <String fx:value="text-shadow" />
          </styleClass>
       </Text>

@@ -195,6 +195,8 @@ public class JoinTeamController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }else{
+                teamCountLabel.setText(String.valueOf(teamContainer.getRowCount()));
             }
         }
     }

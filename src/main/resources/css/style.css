@@ -5,17 +5,31 @@
 }
 
 * {
-    -fx-font-family: Leelawadee;
-}
-
-* {
     -fx-white1-color : white;
     -fx-white2-color : #F6F4EE;
     -fx-white3-color : #FEF4E0;
     -fx-white4-color : #F5F3ED;
+    -fx-white5-color : #DCDCDD;
+    -fx-white6-color : #FFF5E5;
+    -fx-white7-color : #D7CFC3;
+
+    -fx-orange1-color : #FFC75A;
+    -fx-orange2-color : #FFAC60;
+    -fx-orange3-color : #FF922E;
+    -fx-orange4-color : #F8D391;
+    -fx-orange5-color : #FFB875;
+    -fx-orange6-color : #f90;
+    -fx-orange7-color : #FF9E22;
 
     -fx-black1-color : #413B3B;
-    -fx-gray1-color : BFBFBF;
+    -fx-black2-color : #4D4746;
+
+    -fx-gray1-color : #BFBFBF;
+    -fx-gray2-color : #666668;
+    -fx-gray3-color : #585858;
+
+    -fx-red-color : #C84D3D;
+    -fx-green-color : #38C65C;
 }
 
 .text-xxs{-fx-font-style-size: 8;}
@@ -38,54 +52,51 @@
 .weight-semi-bold{-fx-font-weight: 600}
 .weight-bold{-fx-font-weight: 700;}
 
+
+/* text color */
 .color-gray{
-    -fx-text-fill: #585858;
+    -fx-text-fill: -fx-gray3-color;
 }
+
 .color-black{
     -fx-text-fill: -fx-black1-color;
 }
-.color-gray{
-    -fx-text-fill: #666668;
-}
 .color-red{
-    -fx-text-fill: #ff1515;
+    -fx-text-fill: -fx-red-color;
 }
-
-
 
 
 
 /* for login page */
+
 /* for background */
-.signin-signup-background1{
-    -fx-background-color:  #FEF4E0;
+.signIn-signup-background1{
+    -fx-background-color:  -fx-white3-color;
 
 }
 
-.signin-signup-background2{
+.signIn-signup-background2{
     fx--background-color : linear-gradient(#F08A4E 50%, #FDA83A 100%);
 }
 
-.signin-signup-border {
+.signIn-signup-border {
     -fx-border-radius: 10;
     -fx-border-width: 2;
-    -fx-border-color: FEF4E0;
+    -fx-border-color: -fx-white3-color;
     -fx-background-color: rgba(255, 255, 255, 0.20);
     -fx-background-radius: 10;
     -fx-effect: dropshadow(gaussian, antiquewhite, 4, 0, 0, 0.7);
 }
-
 
 .upcoming-border {
     -fx-border-radius: 127;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0.1, 0, 0.1), 4, 0.1, 1, 2);
 }
 
-
 /* field */
-.signin-signup-field {
+.signIn-signup-field {
     -fx-background-radius: 23;
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
     -fx-border-color: -fx-black1-color;
     -fx-border-width: 1;
     -fx-border-radius: 23;
@@ -95,19 +106,19 @@
 /* button */
 
 .orange-button{
-    -fx-background-color : linear-gradient(to left, #FF9839 20.10%, #FF922E 53.96%, #F97800 91.98%);
+    -fx-background-color : linear-gradient(to left, #FF9839 20.10%, -fx-orange3-color 53.96%, #F97800 91.98%);
     -fx-background-radius: 20;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
 }
 
 .orange-button:hover{
-    -fx-background-color : linear-gradient(to left,  #FFC75A 5.37%, #FFAC60 52.40%, #F7973E 91.98%);
+    -fx-background-color : linear-gradient(to left,  -fx-orange1-color 5.37%, -fx-orange2-color 52.40%, #F7973E 91.98%);
     -fx-background-radius: 20;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
 }
 
 .orange-button:pressed{
-    -fx-background-color : linear-gradient(to left,  #F8D391 5.37%, #FFCEA0 52.40%, #FFB875 91.98%);
+    -fx-background-color : linear-gradient(to left,  -fx-orange4-color 5.37%, #FFCEA0 52.40%, -fx-orange5-color 91.98%);
     -fx-background-radius: 20;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 4);
 }
@@ -137,14 +148,14 @@
     -fx-text-fill:  -fx-gray1-color;
 }
 .check-box .box {
-    -fx-background-color: #DCDCDD;
+    -fx-background-color: -fx-white5-color;
     -fx-background-radius: 4;
 }
 .check-box:selected .mark {
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
 }
 .check-box:selected .box {
-    -fx-background-color: #FF922E;
+    -fx-background-color: -fx-orange3-color;
     -fx-text-fill: -fx-black1-color;
 }
 
@@ -153,37 +164,28 @@
 .next-page:hover {
     -fx-font-size: 20 ;
 }
-
 .next-page-bar:hover{
     -fx-font-size: 24;
-
 }
 .next-page-shadow:hover{
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 2, 0, 0, 2);
 }
 
+
 /* for condition box */
 .condition-box-text{
     -fx-wrap-text: true;
-    -fx-text-fill: #F5F3ED;
-
-
+    -fx-text-fill: -fx-white4-color;
 }
 
 .condition-box{
     -fx-arc-width: 12;
     -fx-arc-height: 12;
     -fx-opacity: 1;
-
-
 }
 
 
 /* for login page */
-
-Text, Label {
-    -fx-font-family: FreesiaUPC;
-}
 
 .background-develop-profile {
     -fx-background-color: linear-gradient(#FF7217, #FAA929, #FA8729);
@@ -223,7 +225,7 @@ Text, Label {
 
 .card-description-header {
     -fx-font-size: 29;
-    -fx-fill: linear-gradient(#FF780C 0%, #FF8806 52.60%, #F90 98.96%);
+    -fx-fill: linear-gradient(#FF780C 0%, #FF8806 52.60%, -fx-orange6-color 98.96%);
     -fx-font-weight: 700;
 }
 
@@ -272,15 +274,15 @@ Text, Label {
 
 /* for user-profile page */
 .bgProfile1{
-    -fx-background-color: #FFF5E5;
+    -fx-background-color: -fx-white6-color;
 }
 .bgProfile2{
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 40, 0.4, 0, 0.7);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 40, 0.4, 0, 0.7);
     -fx-arc-height: 50;
     -fx-arc-width: 50;
 }
 .profile-text-field{
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
     -fx-border-color: #000000;
     -fx-border-width: 1;
     -fx-border-radius: 11;
@@ -289,7 +291,7 @@ Text, Label {
 }
 
 .profile-text-field2 {
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
     -fx-border-color: #000000;
     -fx-border-width: 1;
     -fx-border-radius: 11;
@@ -297,7 +299,7 @@ Text, Label {
     -fx-opacity: 1;-fx-padding: 0 0 0 35;
 }
 .profile-text-area2{
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
     -fx-border-color: #000000;
     -fx-border-width: 1;
     -fx-border-radius: 11;
@@ -305,7 +307,7 @@ Text, Label {
     -fx-opacity: 0.1;-fx-padding: 0 0 0 35;
 }
 .profile-text-area2{
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
     -fx-border-color: #000000;
     -fx-border-width: 1;
     -fx-border-radius: 11;
@@ -325,7 +327,7 @@ Text, Label {
 
 }
 .profile-text-area .content{
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-colorD;
     -fx-border-color: #000000;
     -fx-border-radius: 11;
     -fx-border-width: 1;
@@ -349,30 +351,30 @@ Text, Label {
 }
 
 .edit-profile-button {
-    -fx-background-color: linear-gradient(to left, #FF922E 45.96%, #FF9E22 70.98%);
+    -fx-background-color: linear-gradient(to left, -fx-orange3-color 45.96%, -fx-orange7-color 70.98%);
     -fx-background-radius: 12;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .edit-profile-button:hover {
-    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-color: linear-gradient(to left,  -fx-orange2-color 45.96%, -fx-orange1-color  70.98% );
     -fx-background-radius: 12;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .edit-profile-button:pressed {
-    -fx-background-color: linear-gradient(to left, #FFB875 45.96%, #F8D391  70.98% );
+    -fx-background-color: linear-gradient(to left, -fx-orange5-color 45.96%, -fx-orange4-color  70.98% );
     -fx-background-radius: 12;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .cancel-profile-button{
     -fx-background-color: transparent;
     -fx-border-radius: 12;
-    -fx-border-color: #FF922E;
+    -fx-border-color: -fx-orange3-color;
     -fx-border-width: 2;
-    -fx-text-fill: #FF922E;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-text-fill: -fx-orange3-color;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .cancel-profile-button:hover{
@@ -380,7 +382,7 @@ Text, Label {
     -fx-border-radius: 12;
     -fx-border-color: -fx-gray1-color;
     -fx-border-width: 2;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
     -fx-text-fill: -fx-gray1-color;
 }
 
@@ -394,7 +396,7 @@ Text, Label {
 }
 
 .image-change-effect:hover{
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .description-profile-text{
@@ -408,10 +410,10 @@ Text, Label {
 .upload-image-button{
     -fx-background-color: #FFB761;
     -fx-border-color: transparent;
-    -fx-text-fill: #F5F3ED;
+    -fx-text-fill: -fx-white4-color;
     -fx-background-radius: 15;
     -fx-border-width: 2;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .upload-image-button:hover{
@@ -420,20 +422,20 @@ Text, Label {
     -fx-background-radius: 15;
     -fx-text-fill: #F4B352;
     -fx-border-width: 2;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .show-information-box{
     -fx-background-color: #F9D396;
     -fx-background-radius: 2;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 /* end for user-profile page */
 
 /* for select-team page */
 .selected-team-background{
-    -fx-background-color: #FFF5E5;
+    -fx-background-color: -fx-white6-color;
 }
 
 /* for team box */
@@ -448,7 +450,7 @@ Text, Label {
     -fx-stroke-width: 2;
     -fx-border-color: -fx-black1-color;
     -fx-border-radius: 8;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 10, 0.5, 0, 0);
 }
 
 /* for select team */
@@ -474,7 +476,7 @@ Text, Label {
     -fx-border-radius: 8;
     -fx-border-width: 2;
     -fx-stroke-width: 10;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 10, 0.5, 0, 0);
 }
 
 .setting-select-team-dropdown {
@@ -511,7 +513,7 @@ Text, Label {
 }
 
 .switch-view{
-    -fx-effect:  dropshadow(gaussian, #D7CFC3, 5, 0.2, 0, 0);
+    -fx-effect:  dropshadow(gaussian, -fx-white7-color, 5, 0.2, 0, 0);
     -fx-arc-height: 15;
     -fx-arc-width: 15;
 }
@@ -521,14 +523,14 @@ Text, Label {
     -fx-text-fill:  -fx-black1-color;
 }
 .check-box .box {
-    -fx-background-color: #DCDCDD;
+    -fx-background-color: -fx-white5-color;
     -fx-background-radius: 4;
 }
 .check-box:selected .mark {
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
 }
 .check-box:selected .box {
-    -fx-background-color: #FF922E;
+    -fx-background-color: -fx-orange3-color;
     -fx-text-fill: -fx-black1-color;
 }
 
@@ -537,11 +539,11 @@ Text, Label {
     -fx-arc-width: 2;
     -fx-font-size: 10;
     -fx-text-fill: #585858;
-    -fx-effect:  dropshadow(gaussian, #D7CFC3, 4, 0.5, 0, 1);
+    -fx-effect:  dropshadow(gaussian, -fx-white7-color, 4, 0.5, 0, 1);
 }
 
 .manage-team {
-    -fx-effect:  dropshadow(gaussian, #D7CFC3, 5, 0.2, 0, 0);
+    -fx-effect:  dropshadow(gaussian, -fx-white7-color, 5, 0.2, 0, 0);
     -fx-arc-height: 15;
     -fx-arc-width: 15;
     -fx-background-radius: 10;
@@ -553,7 +555,7 @@ Text, Label {
 }
 /* for team page */
 .sidebar-black{
-    -fx-text-fill: #4D4746;
+    -fx-text-fill: -fx-black2-color;
     -fx-effect:  dropshadow(gaussian, #C7C7C7, 10, 0.2, 0, 0);
 }
 
@@ -561,7 +563,7 @@ Text, Label {
     -fx-background-radius: 10;
     -fx-background-color: -fx-white2-color;
     -fx-border-radius: 10;
-    -fx-border-color: #4D4746;
+    -fx-border-color: -fx-black2-color;
     -fx-stroke-width: 5;
 }
 
@@ -575,30 +577,30 @@ Text, Label {
 }
 
 .edit-create-button {
-    -fx-background-color: linear-gradient(to left, #FF922E 45.96%, #FF9E22 70.98%);
+    -fx-background-color: linear-gradient(to left, -fx-orange3-color 45.96%, -fx-orange7-color 70.98%);
     -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .edit-create-button:hover {
-    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-color: linear-gradient(to left,  -fx-orange2-color 45.96%, -fx-orange1-color  70.98% );
     -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .edit-create-button:pressed {
-    -fx-background-color: linear-gradient(to left, #FFB875 45.96%, #F8D391  70.98% );
+    -fx-background-color: linear-gradient(to left,-fx-orange5-color 45.96%,-fx-orange4-color  70.98% );
     -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .cancel-create-button{
     -fx-background-color: transparent;
     -fx-border-radius: 7;
-    -fx-border-color: #FF922E;
+    -fx-border-color: -fx-orange3-color;
     -fx-border-width: 1.5;
-    -fx-text-fill: #FF922E;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-text-fill: -fx-orange3-color;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .cancel-create-button:hover{
@@ -606,7 +608,7 @@ Text, Label {
     -fx-border-radius: 7;
     -fx-border-color: -fx-gray1-color;
     -fx-border-width: 1.5;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color3, 5, 0, 0, 3);
     -fx-text-fill: -fx-gray1-color;
 }
 
@@ -620,57 +622,57 @@ Text, Label {
 }
 
 .delete-button {
-    -fx-background-color: linear-gradient(to left, #ff1515 45.96%, #ff1515 70.98%);
+    -fx-background-color: -fx-red-color;
     -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .delete-button:hover {
-    -fx-background-color: linear-gradient(to left,  #FFAC60  45.96%, #FFC75A  70.98% );
+    -fx-background-color: linear-gradient(to left,  -fx-orange2-color 45.96%,-fx-orange1-color  70.98% );
     -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .delete-button:pressed {
-    -fx-background-color: linear-gradient(to left, #FFB875 45.96%, #F8D391  70.98% );
+    -fx-background-color: linear-gradient(to left,-fx-orange5-color 45.96%, -fx-orange4-color  70.98% );
     -fx-background-radius: 7;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian,-fx-white7-color, 5, 0, 0, 3);
 }
 
 .create-team-spinner {
-    -fx-border-color: #4D4746;
+    -fx-border-color: -fx-black2-color;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-background-color: #F5F3ED;
-    -fx-primary-color: #4D4746;
-    -fx-secondary-color: #F90;
-    -fx-focus-color: #4D4746;
+    -fx-background-color: -fx-white4-color;
+    -fx-primary-color: -fx-black2-color;
+    -fx-secondary-color: -fx-orange6-color0;
+    -fx-focus-color: -fx-black2-color;
 }
 
 .create-team-spinner .text-field {
     -fx-font-size : 12;
-    -fx-text-fill: #4D4746;
+    -fx-text-fill: -fx-black2-color;
     -fx-border-radius: 10;
     -fx-border-color: transparent;
     -fx-background-radius: 10;
     -fx-background-color: white;
-    -fx-primary-color: #4D4746;
-    -fx-secondary-color: #F90;
-    -fx-focus-color: #4D4746;
+    -fx-primary-color: -fx-black2-color;
+    -fx-secondary-color: -fx-orange6-color;
+    -fx-focus-color: -fx-black2-color;
 }
 .spinner .increment-arrow-button {
-    -fx-background-color: #4D4746;
+    -fx-background-color: -fx-black2-color;
     -fx-background-radius: 0 10 0 0;
 }
 
 .spinner .decrement-arrow-button {
-    -fx-background-color: #4D4746;
+    -fx-background-color: -fx-black2-color;
     -fx-background-radius: 0 0 10 0;
 }
 
 .spinner .increment-arrow-button:hover,
 .spinner .decrement-arrow-button:hover {
-    -fx-background-color: #f90;
+    -fx-background-color: -fx-orange6-color;
 }
 .spinner .increment-arrow-button:hover:pressed,
 .spinner .decrement-arrow-button:hover:pressed,
@@ -685,14 +687,14 @@ Text, Label {
 
 
 .create-team-choice-box {
-    -fx-border-color: #4D4746;
+    -fx-border-color:-fx-black2-color;
     -fx-border-radius: 10;
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
     -fx-background-radius: 10;
 }
 
 .create-team-choice-box .label {
-    -fx-text-fill: #4D4746;
+    -fx-text-fill: -fx-black2-color;
 }
 
 .create-team-choice-box:hover {
@@ -700,17 +702,17 @@ Text, Label {
 }
 
 .create-team-choice-box:pressed {
-    -fx-background-color: #F5F3ED;
+    -fx-background-color: -fx-white4-color;
 }
 
 .choice-box .menu-item:focused {
     -fx-background-radius: 10;
-    -fx-background-color: #f90;
+    -fx-background-color: -fx-orange6-color;
 }
 
 .description-create-team{
     -fx-background-color: white;
-    -fx-border-color: #000000;
+    -fx-border-color: black;
     -fx-border-width: 1;
     -fx-border-radius: 10;
     -fx-font-size: 17;
@@ -743,8 +745,8 @@ Text, Label {
 
 /* for reset password page */
 .reset-password-text-field{
-    -fx-background-color: #F5F3ED;
-    -fx-border-color: #000000;
+    -fx-background-color: -fx-white4-color;
+    -fx-border-color: black;
     -fx-border-width: 1.5;
     -fx-border-radius: 11;
     -fx-font-size: 18;
@@ -755,21 +757,21 @@ Text, Label {
     -fx-background-color: #EFA44F;
     -fx-background-radius: 25;
     -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .reset-password-button:hover {
     -fx-background-color: #FCB361;
     -fx-background-radius: 25;
     -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .reset-password-button:pressed {
     -fx-background-color: #FFBF78;
     -fx-background-radius: 25;
     -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 /* for user card-profile */
@@ -824,7 +826,7 @@ Text, Label {
     -fx-border-radius: 23;
     -fx-border-width: 2;
     -fx-stroke-width: 10;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 10, 0.5, 0, 0);
 }
 .sort-button:hover{
     -fx-background-color: -fx-black1-color;
@@ -839,23 +841,23 @@ Text, Label {
     -fx-text-fill: -fx-gray1-color;
     -fx-background-radius: 8;
     -fx-border-radius: 8 ;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 8, 0.1, 0, 0);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 8, 0.1, 0, 0);
 }
 
 /* for join-team component */
 .joint-team-card-box{
     -fx-background-color: -fx-white2-color;
     -fx-background-radius: 15;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 10, 0.5, 0, 0);
 
 }
 
 /* join-team-alert-Button */
 .ok-join-team-button{
-    -fx-background-color: #4D4746;
+    -fx-background-color: -fx-black2-color;
     -fx-text-fill: -fx-white2-color;
     -fx-background-radius: 12;
-    -fx-effect: dropshadow(gaussian, #D7CFC3, 5, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 .ok-join-team-button:hover{
     -fx-background-color: #5C5251;
