@@ -148,16 +148,12 @@ public class TeamActivityController {
                 startDateChoiceBox.setValue("AM");
             }
 
-
-            System.out.println(endHourTemp);
             if (Integer.parseInt(endTimeParts[0]) > 11) {
                 endDateChoiceBox.setValue("PM");
                 endHourTemp -= 12;
             } else {
                 endDateChoiceBox.setValue("AM");
             }
-
-            System.out.println(endHourTemp);
 
             beforeEditStartHour = startHour;
             beforeEditStartMinute = Integer.parseInt(startTimeParts[1]);

@@ -45,9 +45,9 @@
                                     <TableView fx:id="activityTableView" editable="true" layoutY="54.0" prefHeight="282.0" prefWidth="771.0" stylesheets="@../../../../css/team/team-activity-table.css">
                                       <columns>
                                         <TableColumn fx:id="nameColumn" prefWidth="151.2000274658203" text="Activity Name" />
-                                        <TableColumn fx:id="startTimeColumn" prefWidth="121.5999755859375" text="Activity Start" />
-                                          <TableColumn fx:id="endTimeColumn" prefWidth="147.20001220703125" text="Activity End" />
-                                          <TableColumn fx:id="statusColumn" prefWidth="137.60003662109375" text="Status" />
+                                        <TableColumn fx:id="startTimeColumn" prefWidth="121.5999755859375" style="-fx-alignment: CENTER;" text="Activity Start" />
+                                          <TableColumn fx:id="endTimeColumn" prefWidth="147.20001220703125" style="-fx-alignment: CENTER;" text="Activity End" />
+                                          <TableColumn fx:id="statusColumn" prefWidth="137.60003662109375" style="-fx-alignment: CENTER;" text="Status" />
                                           <TableColumn fx:id="descriptionColumn" minWidth="0.0" prefWidth="156.79998779296875" text="Description" />
                                       </columns>
                                        <columnResizePolicy>
@@ -185,7 +185,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="createActivityAnchorPane" layoutY="-21.0" prefHeight="413.0" prefWidth="847.0">
+                        <AnchorPane fx:id="createActivityAnchorPane" layoutY="-21.0" prefHeight="413.0" prefWidth="847.0" visible="false">
                            <children>
                               <TextField fx:id="activityNameTextField" layoutX="102.0" layoutY="72.0" onKeyReleased="#onKeyActivityName" prefHeight="32.0" prefWidth="418.0" promptText="My Activity">
                                  <padding>
