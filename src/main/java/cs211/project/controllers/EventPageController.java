@@ -140,7 +140,7 @@ public class EventPageController {
         statusColumn.setPrefWidth(100);
         descriptionColumn.prefWidthProperty().bind(eventActivityTableView.prefWidthProperty().subtract(nameColumn.widthProperty())
                 .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()).subtract(statusColumn.widthProperty()));
-        for (Activity activity: activityList.getActivityOfEvent(event.getEventID())) {
+        for (Activity activity: activityList.sortActivity(activityList).getActivityOfEvent(event.getEventID())) {
             eventActivityTableView.getItems().add(activity);
         }
         eventActivityTableView.setFixedCellSize(40);
