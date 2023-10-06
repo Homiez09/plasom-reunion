@@ -6,14 +6,11 @@ import cs211.project.services.ActivityTeamListDataSource;
 import cs211.project.services.UserListDataSource;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class Team implements Comparable<Team> {
     private String teamID, teamName, teamDescription, createdAt, eventID, startDate, endDate;
@@ -107,9 +104,41 @@ public class Team implements Comparable<Team> {
     private String formatStringToTimestamp(String date) {
         String data[] = date.split("[\\-\\.\\:]");
         LocalDateTime futureDate = LocalDateTime.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3]), Integer.parseInt(data[4])); // Year, Month, Day, Hour, Minute
-        Instant instant = futureDate.toInstant(ZoneOffset.UTC);
+        Instant instant = futureDate.atZone(ZoneId.of("UTC+7")).toInstant();
         long timestamp = instant.toEpochMilli();
         return String.valueOf(timestamp);
+    }
+
+    public String getStartDateTime(){
+        String startDateFormatted =  formatTimestampToString(startDate);
+        int year, month, day, hour, minute;
+        year = Integer.parseInt(startDateFormatted.substring(0,4))-543;
+        month = Integer.parseInt(startDateFormatted.substring(5,7));
+        day = Integer.parseInt(startDateFormatted.substring(8,10));
+        hour = Integer.parseInt(startDateFormatted.substring(11,13));
+        minute = Integer.parseInt(startDateFormatted.substring(14,16));
+
+        LocalDateTime startDateTime = LocalDateTime.of(year, month, day, hour, minute);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy | hh:mm a", Locale.ENGLISH);
+        startDateFormatted = startDateTime.format(dateTimeFormatter);
+
+        return startDateFormatted;
+    }
+
+    public String getEndDateTime(){
+        String endDateFormatted =  formatTimestampToString(endDate);
+        int year, month, day, hour, minute;
+        year = Integer.parseInt(endDateFormatted.substring(0,4))-543;
+        month = Integer.parseInt(endDateFormatted.substring(5,7));
+        day = Integer.parseInt(endDateFormatted.substring(8,10));
+        hour = Integer.parseInt(endDateFormatted.substring(11,13));
+        minute = Integer.parseInt(endDateFormatted.substring(14,16));
+
+        LocalDateTime endDateTime = LocalDateTime.of(year, month, day, hour, minute);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy | hh:mm a", Locale.ENGLISH);
+        endDateFormatted = endDateTime.format(dateTimeFormatter);
+
+        return endDateFormatted;
     }
 
     private String generateTeamID() {

@@ -106,6 +106,14 @@ public class TeamList {
         teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
     }
 
+    public void sortTeamByNameA() {
+        teams.sort((team1, team2) -> team1.getTeamName().compareTo(team2.getTeamName()));
+    }
+
+    public void sortTeamByNameZ() {
+        teams.sort((team1, team2) -> team2.getTeamName().compareTo(team1.getTeamName()));
+    }
+
     public void filterByAll() {
         if (teams == null) return;
         return;
