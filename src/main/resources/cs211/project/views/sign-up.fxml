@@ -123,7 +123,7 @@
                         <Insets bottom="2.0" left="50.0" top="2.0" />
                      </padding>
                      <styleClass>
-                        <String fx:value="signin-signup-field" />
+                        <String fx:value="signIn-signup-field" />
                         <String fx:value="text-base" />
                         <String fx:value="font" />
                      </styleClass>
@@ -140,7 +140,7 @@
                         <Insets left="50.0" />
                      </padding>
                      <styleClass>
-                        <String fx:value="signin-signup-field" />
+                        <String fx:value="signIn-signup-field" />
                         <String fx:value="font" />
                         <String fx:value="text-base" />
                      </styleClass>
@@ -421,7 +421,7 @@
             <Insets left="50.0" />
          </padding>
          <styleClass>
-            <String fx:value="signin-signup-field" />
+            <String fx:value="signIn-signup-field" />
             <String fx:value="text-base" />
             <String fx:value="font" />
          </styleClass>
@@ -437,7 +437,7 @@
             <Insets left="50.0" />
          </padding>
          <styleClass>
-            <String fx:value="signin-signup-field" />
+            <String fx:value="signIn-signup-field" />
             <String fx:value="text-base" />
             <String fx:value="font" />
          </styleClass>
