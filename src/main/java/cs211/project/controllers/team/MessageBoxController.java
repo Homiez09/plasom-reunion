@@ -13,13 +13,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class MessageBoxController {
     @FXML private Text messageText, messageText2, messageText3;
     @FXML protected Label nameLabel;
     @FXML protected ImageView profileImageView;
     @FXML protected AnchorPane otherAnchorPane, midAnchorPane, selfAnchorPane;
-    User user;
+    private User user;
+
     protected void setChat(Chat chat) {
         user = chat.getSender();
         nameLabel.setText(user.getDisplayName());

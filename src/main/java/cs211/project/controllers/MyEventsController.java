@@ -2,112 +2,174 @@ package cs211.project.controllers;
 
 import cs211.project.componentControllers.OwnerEventController;
 import cs211.project.models.*;
+import cs211.project.models.Event;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
 
-public class MyEventsController  {
-    @FXML
-    AnchorPane navbarAnchorPane;
-    @FXML
-    Label eventLabel;
-    @FXML
-    ListView mainListView;
-    @FXML
-    Button upcomingButton,completeButton,ownerButton,memberButton,staffButton;
-    @FXML
-    ChoiceBox sortChoiceBox;
-    @FXML
-    ImageView sortIamgeView;
-    @FXML
-    Separator popupTest;
-    private boolean ascending = true;
+public class MyEventsController extends AllEventListController {
+    @FXML AnchorPane navbarAnchorPane;
+    @FXML Button allButton,completeButton,ownerButton,memberButton,staffButton;
+    @FXML ComboBox<String> sortComboBox;
+    @FXML Separator popupTest;
+    @FXML ListView<Node> listViewMain;
+    @FXML TextField searchbarTextField;
+    //----------------------------
     private User currentUser = (User) FXRouter.getData();
-    private Datasource<EventList> eventDatasource;
+    private ObservableList<Event> eventObservableList;
     private EventList eventList;
-    private EventList showlist;
-    private JoinEventMap joinEventMap;
-    private ObservableList<Event> observableList;
+    private int currentPage = 1;
+    private final int itemsPerPage = 4;
+    private Predicate<Event> selectedPredicate = null;
+    private ObservableList<Node> nodes;
 
-    private HashMap<String, Set<String>> eventMap;
-    private Set<String> userSet;
-    private JoinTeamMap joinTeamMap ;
-    private TeamListDataSource teamListDataSource ;
-    private TeamList teamList;
-    private HashMap<String, TeamList> teamListHashMap;
+
 
     @FXML
-    public void initialize() {
-        initSortCheckBox();
-
+    private void initialize() {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
-
-        this.eventDatasource = new EventListDataSource();
-        this.eventList = eventDatasource.readData();
-        this.teamListDataSource = new TeamListDataSource("data","team-list.csv");
-        this.teamList = teamListDataSource.readData();
-        observableList = FXCollections.observableArrayList(eventList.getEvents());
-
-        setMainListView(observableList);
-
+        setupPage();
+        allButton.setDisable(true);
+        getBySearch();
+        sortTilePane();
     }
 
-
-
-    public void update(){
-
+    private void setupPage(){
+        Datasource<EventList> eventDatasource = new EventListDataSource();
+        eventList = eventDatasource.readData();
+        eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
+        initSort();
+        setupScrollBar();
+        loadData(currentPage,selectedPredicate);
     }
-    public void  setMainListView(ObservableList<Event> observableList){
-        mainListView.getItems().clear();
-        mainListView.getStyleClass().add("event-list");
 
-
-        if (observableList != null){
-            for (Event event:observableList){
-                    AnchorPane anchorPane = new AnchorPane();
-                    Separator separator = new Separator();
-                    new LoadCardEventComponent(anchorPane,event,"card-my-event");
-
-                    separator.setOrientation(Orientation.VERTICAL);
-                    separator.setOpacity(0.0);
-                    separator.setPrefWidth(24.0);
-
-                    mainListView.getItems().add(separator);
-                    mainListView.getItems().add(anchorPane);
-
+    private void loadData(int page,Predicate<Event> selectedPredicate) {
+        FilteredList<Event> filteredList = new FilteredList<>(eventObservableList,selectedPredicate);
+        System.out.println(filteredList.size());
+        int startIndex = (page - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, filteredList.size());
+        if (nodes ==null) {
+            nodes = FXCollections.observableArrayList();
+        }
+        for (int i = startIndex; i < endIndex; i++) {
+            Event event = filteredList.get(i);
+            if (!checkNode(event)) {
+                AnchorPane anchorPane = new AnchorPane();
+                anchorPane.setUserData(event);
+                anchorPane.setId(event.getEventID());
+                new LoadCardEventComponent(anchorPane, event, "card-my-event");
+                nodes.add(anchorPane);
             }
         }
-
+        listViewMain.setItems(nodes);
     }
 
-    public void onBackAction(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("home",currentUser);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    @FXML
+    private void loadMore() {
+        currentPage++;
+        loadData(currentPage,selectedPredicate);
+    }
+
+    @FXML
+    private void setupScrollBar() {
+            listViewMain.addEventHandler(ScrollEvent.SCROLL, scrollEvent ->{
+                if (scrollEvent.getDeltaY() < 0 && (listViewMain.getItems().size()/itemsPerPage == currentPage)){
+                    loadMore();
+                }
+            });
+    }
+
+    private void removeNode(Predicate<Event> selectedPredicate) {
+        FilteredList<Event> filteredList = eventObservableList.filtered(selectedPredicate);
+        List<Node> nodesToRemove = new ArrayList<>();
+        for (Node node: listViewMain.getItems()) {
+            Event event = (Event) node.getUserData();
+            if (!filteredList.contains(event)) {
+                nodesToRemove.add(node);
+            }
         }
+        listViewMain.getItems().removeAll(nodesToRemove);
     }
 
-    public void onCreateAction(ActionEvent actionEvent) {
+    private void initSort(){
+        String sort[] = {"Name","Start","Member","End"};
+        sortComboBox.getItems().addAll(sort);
+        sortComboBox.setValue("");
+    }
+
+    private void getBySearch(){
+        searchbarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String searchText = newValue.toLowerCase().trim();
+            Predicate<Event> searchPredicate = event -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                return event.getEventName().toLowerCase().contains(searchText);
+            };
+
+            removeNode(searchPredicate);
+            currentPage = 1;
+            loadData(currentPage, searchPredicate);
+        });
+    }
+
+    private void sortTilePane(){
+        sortComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+            String sortBy = newValue.trim();
+            listViewMain.getItems().clear();
+            currentPage = 1;
+            Comparator<Event> eventComparator =null;
+            switch (sortBy){
+                case "Name":
+                    eventComparator = Comparator.comparing(Event::getEventName);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+                case "Start":
+                    eventComparator = Comparator.comparing(Event::getDateStartAsDate);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+                case "Member":
+                    eventComparator = Comparator.comparing(Event::getUserInEvent);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+                case "End":
+                    eventComparator = Comparator.comparing(Event::getDateEndAsDate);
+                    eventObservableList.sort(eventComparator);
+                    loadData(currentPage,selectedPredicate);
+                    break;
+            }
+        });
+    }
+
+    private void checkEventList(){
+
+    }
+
+    @FXML
+    private void onCreateAction(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("create-event",currentUser,null);
         } catch (IOException e) {
@@ -115,63 +177,55 @@ public class MyEventsController  {
         }
     }
 
-    public void onClickAscenDecen(MouseEvent mouseEvent) {
-        // Invert the ascending flag
-        ascending = !ascending;
-
-        // Update the sort icon
-        String imgPath = ascending ? "/images/hostevent/sort-ascending.png" : "/images/hostevent/sort-descending.png";
-        sortIamgeView.setImage(new Image(getClass().getResourceAsStream(imgPath)));
-
+    @FXML
+    private void onAllAction(ActionEvent actionEvent) {
+        reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
+        loadData(currentPage,selectedPredicate);
+        allButton.setDisable(true);
     }
 
-    private void initSortCheckBox(){
-        String sortList[] = {"Name","Date","Member","Tag"};
-        sortChoiceBox.getItems().addAll(sortList);
-        sortChoiceBox.setValue("Name");
-    }
-
-    private void setSearchBar(){
-
-    }
-
-    public void onAllAction(ActionEvent actionEvent) {
-        observableList.setAll(eventList.getEvents()); // ใช้ setAll เพื่ออัปเดตรายการใน observableList
-        setMainListView(observableList);
-
-    }
-
+    @FXML
     public void onCompleteAction(ActionEvent actionEvent) {
-        observableList.setAll(eventList.getComplete(currentUser)); // ใช้ setAll เพื่ออัปเดตรายการใน observableList
-        setMainListView(observableList);
+        reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getCompleteEvent(currentUser));
+        loadData(currentPage,selectedPredicate);
+        completeButton.setDisable(true);
     }
 
-    public void onMemberAction(ActionEvent actionEvent) {
-        showlist =  filterEvent(eventList,"Member");
+    @FXML
+    private void onOwnerEventAction(ActionEvent actionEvent) {
+        reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
+        loadData(currentPage,selectedPredicate);
+        ownerButton.setDisable(true);
     }
 
-    public void onOwnerEventAction(ActionEvent actionEvent) {
-        showlist =  filterEvent(eventList,"Owner");
-
+    @FXML
+    private void onMemberAction(ActionEvent actionEvent) {
+        reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
+        loadData(currentPage,selectedPredicate);
+        memberButton.setDisable(true);
     }
 
-    public void onStaffAction(ActionEvent actionEvent) {
-        showlist =  filterEvent(eventList,"Staff");
-
+    @FXML
+    private void onStaffAction(ActionEvent actionEvent) {
+        reset();
+        eventObservableList = FXCollections.observableArrayList(eventList.getTeamEvent(currentUser));
+        loadData(currentPage,selectedPredicate);
+        staffButton.setDisable(true);
     }
 
-    public void onManageEventButton(ActionEvent actionEvent) {
+    @FXML
+    private void onManageEventButton(ActionEvent actionEvent) {
         Popup popup = new Popup();
         VBox popupContent = new VBox();
-        //----------set up---------------\\
-        popupContent.setStyle("-fx-background-color: #F6F4EE;");
         popup.setAutoHide(true);
-
-        //----------set up---------------\\
-
         VBox box = new VBox();
+
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/owner-events.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/owner-event.fxml"));
             VBox loaded = loader.load();
             OwnerEventController ownerEventController = loader.getController();
             ownerEventController.setDataPopup(popup,currentUser);
@@ -180,126 +234,42 @@ public class MyEventsController  {
             throw new RuntimeException(e);
         }
         popupContent.getChildren().add(box);
-
         popup.getContent().addAll(popupContent);
-
-
         popup.show(navbarAnchorPane.getScene().getWindow());
+        if (popup.isShowing()) {
+            listViewMain.refresh();
+        }
     }
 
-    public void sortBox(EventList eventList){
-        sortChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, o, option) -> {
-            EventList list = new EventList();
-            if (option != null) {
-                String selectedOption = option.toString();
-                switch (selectedOption) {
-                    case "Name":
-                        list = eventList.sortByName(eventList);
+    @FXML
+    private void onBackAction(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("home",currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-                        break;
-                    case "Date":
-                        list = eventList.sortUpcoming(eventList);
+    private void reset() {
+        allButton.setDisable(false);
+        completeButton.setDisable(false);
+        ownerButton.setDisable(false);
+        memberButton.setDisable(false);
+        staffButton.setDisable(false);
+        currentPage = 1;
+        listViewMain.getItems().clear();
+        selectedPredicate = null;
+    }
 
-                        break;
-                    case "Member":
-                        list = eventList.sortByMember(eventList);
-
-                        break;
-                    case "Tag":
-                        list = eventList.sortByTag(eventList);
-
-                        break;
-                    default:
-                        // กรณีไม่มีตัวเลือกที่ตรงกับ case ใด ๆ
-                        break;
-                }
+    private boolean checkNode(Event event) {
+        for (Node node : listViewMain.getItems()) {
+            if (node.getId() != null && node.getId().equals(event.getEventID())) {
+                return true;
             }
-        });
+        }
+        return false;
     }
 
-    private EventList filterEvent(EventList eventList,String type){
-        EventList filterlist = new EventList();
-        this.joinEventMap = new JoinEventMap();
-        this.eventMap = joinEventMap.readData();
-
-
-        this.joinTeamMap = new JoinTeamMap();
-        this.teamListHashMap = joinTeamMap.readData();
-        if (teamListHashMap.containsKey(currentUser.getUsername())){
-            this.teamList = teamListHashMap.get(currentUser.getUsername());
-        }else {
-            teamList = new TeamList();
-        }
-
-
-
-        switch (type){
-            case "Upcomming":
-                for (Event event:eventList.getEvents()) {
-                    if (eventMap.containsKey(event.getEventID())){
-                        userSet = eventMap.get(event.getEventID());
-                    }else {
-                        userSet = new HashSet<>();
-                    }
-                    if (event.isUpComming() && userSet.contains(currentUser.getUserId())){
-                        filterlist.addEvent(event);
-                    }
-                }
-                break;
-            case "Complete":
-                for (Event event:eventList.getEvents()) {
-                    if (eventMap.containsKey(event.getEventID())){
-                        userSet = eventMap.get(event.getEventID());
-                    }else {
-                        userSet = new HashSet<>();
-                    }
-                    if (userSet.contains(currentUser.getUserId()) && event.isEnd() || event.isHostEvent(currentUser.getUserId()) && event.isEnd()){
-                        filterlist.addEvent(event);
-                    }
-                }
-                break;
-            case "Owner":
-                for (Event event:eventList.getEvents()) {
-                    if (event.isHostEvent(currentUser.getUserId()) && !event.isEnd() ){
-                        filterlist.addEvent(event);
-                    }
-                }
-                break;
-            case "Member":
-                for (Event event:eventList.getEvents()) {
-                    if (eventMap.containsKey(event.getEventID())){
-                        userSet = eventMap.get(event.getEventID());
-                    }else {
-                        userSet = new HashSet<>();
-                    }
-                    if (userSet.contains(currentUser.getUserId()) && !event.isEnd()){
-                        filterlist.addEvent(event);
-                    }
-
-                }
-                break;
-            case "Staff":
-                for (Event event:eventList.getEvents()) {
-                    if (eventMap.containsKey(event.getEventID())){
-                        userSet = eventMap.get(event.getEventID());
-                    }else {
-                        userSet = new HashSet<>();
-                    }
-                    for (Team team:teamList.getTeams()) {
-                        if (team.getEventID().equals(event.getEventID())) {
-                            filterlist.addEvent(event);
-                            System.out.println("Test");
-                            break;
-                        }
-                    }
-                }
-                break;
-
-        }
-
-
-        return filterlist;
-    }
 
 }
 

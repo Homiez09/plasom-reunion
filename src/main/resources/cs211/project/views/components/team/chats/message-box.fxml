@@ -4,23 +4,29 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="58.0" prefWidth="579.0" stylesheets="@../../../../../../css/team/team-chat.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.team.MessageBoxController">
+<AnchorPane prefHeight="61.0" prefWidth="579.0" stylesheets="@../../../../../../css/team/team-chat.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.team.MessageBoxController">
    <children>
-      <AnchorPane fx:id="otherAnchorPane" disable="true" layoutX="21.0" visible="false">
+      <AnchorPane fx:id="otherAnchorPane" disable="true" layoutX="21.0" prefHeight="61.0" prefWidth="375.0" visible="false">
          <children>
-            <TextFlow layoutX="60.0" layoutY="14.0" prefHeight="44.0" prefWidth="308.0" styleClass="other-message-box-body">
+            <HBox alignment="BOTTOM_LEFT" layoutX="60.0" layoutY="14.0">
                <children>
-                  <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Hello">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
+                  <TextFlow fx:id="messageTextFlow" maxWidth="270.0" styleClass="other-message-box-body">
+                     <children>
+                        <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Hello">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <Label fx:id="timeLabel" text="08:25" />
                </children>
-            </TextFlow>
+            </HBox>
             <ImageView fx:id="profileImageView" fitHeight="44.0" fitWidth="44.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../images/profile/default-avatar/default5.png" />
@@ -35,28 +41,38 @@
       </AnchorPane>
       <AnchorPane fx:id="midAnchorPane" layoutX="81.0" layoutY="2.0" prefHeight="55.0" prefWidth="375.0" visible="false">
          <children>
-            <TextFlow layoutY="1.0" prefHeight="44.0" prefWidth="308.0" styleClass="mid-message-box-body">
+            <HBox alignment="BOTTOM_LEFT">
                <children>
-                  <Text fx:id="messageText2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Hello">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
+                  <TextFlow fx:id="messageTextFlow2" maxWidth="270.0" styleClass="mid-message-box-body">
+                     <children>
+                        <Text fx:id="messageText2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Hello">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <Label fx:id="timeLabel2" text="08:25" />
                </children>
-            </TextFlow>
+            </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="selfAnchorPane" layoutX="205.0" layoutY="3.0" prefHeight="50.0" prefWidth="368.0" visible="false">
+      <AnchorPane fx:id="selfAnchorPane" layoutX="248.0" layoutY="1.0" prefHeight="50.0" prefWidth="322.0" visible="false">
          <children>
-            <TextFlow layoutX="60.0" layoutY="2.0" prefHeight="44.0" prefWidth="308.0" styleClass="self-message-box-body">
+            <HBox alignment="BOTTOM_RIGHT" layoutY="2.0" prefHeight="55.0" prefWidth="327.0">
                <children>
-                  <Text fx:id="messageText3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Hello">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
+                  <Label fx:id="timeLabel3" text="08:25" />
+                  <TextFlow fx:id="messageTextFlow3" maxWidth="270.0" prefHeight="70.0" styleClass="self-message-box-body">
+                     <children>
+                        <Text fx:id="messageText3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Hello">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
                </children>
-            </TextFlow>
+            </HBox>
          </children>
       </AnchorPane>
    </children>

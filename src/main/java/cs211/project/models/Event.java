@@ -44,7 +44,7 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = -1;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         this.isSelected = new SimpleBooleanProperty(false);
         this.activityList = new ActivityList();
         this.teamList = new TeamList();
@@ -73,7 +73,7 @@ public class Event implements Comparable<Event>{
         this.eventLocation = eventLocation;
         this.slotMember = slotMember;
         this.isSelected = new SimpleBooleanProperty(false);
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         this.activityList = new ActivityList();
         this.teamList = new TeamList();
         this.userList = new UserList();
@@ -111,7 +111,7 @@ public class Event implements Comparable<Event>{
         this.joinEvent = joinEvent;
         this.joinTeam = joinTeam;
     }
-
+    //---------------- Read CSV ----------------\\
     public String getEventID() {return eventID;}
     public User getEventHostUser() {return eventHostUser;}
     public String getEventName() {return eventName;}
@@ -127,8 +127,20 @@ public class Event implements Comparable<Event>{
     public TeamList getTeamList() { return teamList; }
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
+    public LocalDateTime getDateStartAsDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        return  LocalDateTime.parse(eventDateStart, formatter);
+
+    }
+    public LocalDateTime getDateEndAsDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        return  LocalDateTime.parse(eventDateEnd, formatter);
+
+    }
     public LocalDateTime getTimestampAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
         return  LocalDateTime.parse(timestamp, formatter);
 
@@ -148,6 +160,7 @@ public class Event implements Comparable<Event>{
     }
     public void setActivity(ActivityList activityList) {this.activityList = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
+    public void setJoinEvent (boolean joinEvent){this.joinEvent = joinEvent;}
     public boolean isFull(){return slotMember == userList.getUsers().size();}
 
     private String generateEventID() {
@@ -161,24 +174,25 @@ public class Event implements Comparable<Event>{
 
         return id;
     }
-    public boolean isUpComming(){
+    public boolean isUpComing() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
-        return !eventDate.isBefore(currentTime) && !eventDate.isAfter(currentTime.plusDays(7));
-    }
-    public boolean isNewEvent() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-        // แปลงสตริง timestamp เป็น LocalDateTime
+        long eventDateDiff = ChronoUnit.DAYS.between(eventDate, currentTime);
+
+        return eventDateDiff >= 14;
+    }
+
+    public boolean isNewEvent() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
         LocalDateTime timeStamp = LocalDateTime.parse(timestamp, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
 
-        // คำนวณความต่างของวันระหว่าง timestamp กับวันปัจจุบัน
-        long timeStampDiff = ChronoUnit.DAYS.between(timeStamp, currentTime);
+        long eventDateDiff = ChronoUnit.DAYS.between(timeStamp, currentTime);
 
-        // ตรวจสอบว่า timestamp ไม่เกิน 7 วัน
-        return timeStampDiff <= 7;
+        return eventDateDiff <= 7;
     }
 
     public boolean isEnd() {
@@ -192,10 +206,7 @@ public class Event implements Comparable<Event>{
     public boolean isHostEvent(String currentUserId) {
         return eventHostUser.getUserId().equals(currentUserId);
     }
-    public boolean isHaveUser(User user){
-        User finduser = userList.findUserId(user.getUserId());
-        return finduser != null;
-    }
+    public boolean isHaveUser(User user){return eventHostUser.equals(user);}
     private String generateRandomText() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder randomText = new StringBuilder();
@@ -209,7 +220,6 @@ public class Event implements Comparable<Event>{
         }
         return randomText.toString();
     }
-
 
     @Override
     public String toString() {
@@ -229,10 +239,24 @@ public class Event implements Comparable<Event>{
 
     }
 
-
     @Override
     public int compareTo(Event o) {
         return eventName.compareTo(o.eventName);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        return eventID.equals(event.eventID);
+    }
+
+    @Override
+    public int hashCode() {
+        return eventID.hashCode();
     }
 }
 

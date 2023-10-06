@@ -3,7 +3,11 @@ package cs211.project.models.collections;
 import cs211.project.models.Activity;
 import cs211.project.models.Event;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ActivityList {
     protected ArrayList<Activity> activities;
@@ -54,6 +58,16 @@ public class ActivityList {
             }
         }
         return activityOfEvent;
+    }
+    public ActivityList sortActivity(ActivityList activityList){
+        Comparator<Activity> comparing = Comparator
+                .comparing((Activity activity) -> LocalDateTime.parse(activity.getStartTime(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
+                .thenComparing((Activity activity) -> LocalDateTime.parse(activity.getStartTime(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        ActivityList list = new ActivityList();
+        list.getActivities().addAll(activityList.getActivities());
+        Collections.sort(list.getActivities(),comparing);
+
+        return list;
     }
 }
 

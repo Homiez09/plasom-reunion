@@ -49,7 +49,6 @@ public class UserList {
         users.add(user);
     }
 
-
     public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, String bio, boolean status, boolean admin, boolean showContactNumber){
         username = username.trim();
         password = password.trim();
@@ -160,16 +159,12 @@ public class UserList {
     public ArrayList<User> getUserOfEvent(Event event) {
         String eventID = event.getEventID();
         ArrayList<User> userList = new ArrayList<>();
-        HashMap<String, Set<String>> joinEventMap = new JoinEventMap().readData();
-        Set<String> setUser = joinEventMap.get(eventID);
+        HashMap<String, UserList> joinEventMap = new JoinEventMap().readData();
 
-        if (setUser != null) {
-            for (String userID : setUser) {
-                if (joinEventMap.containsKey(eventID)){
-                    userList.add(findUserId(userID));
-                }
-            }
+        if (joinEventMap.containsKey(eventID)){
+            userList.addAll(joinEventMap.get(eventID).getUsers());
         }
+
 
         return userList;
     }

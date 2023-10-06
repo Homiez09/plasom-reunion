@@ -20,7 +20,7 @@ Text, Label {
     -fx-border-radius: 0 25 25 25;
     -fx-border-color: #e0e0e0;
     -fx-border-width: 1;
-    -fx-padding: 16;
+    -fx-padding: 10;
 }
 
 .mid-message-box-body {
