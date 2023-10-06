@@ -82,6 +82,9 @@ public class TeamListDataSource implements Datasource<TeamList> {
                 int maxSlotTeamMember = Integer.parseInt(data[6]);
                 String createdAt = data[7];
                 String eventID = data[8];
+                if (joinTeamMapHashMap.get(teamID)==null) {
+                    joinTeamMapHashMap.put(teamID, new UserList());
+                }
 
                 teamList.addTeam(teamID, teamHostUser,teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID, joinTeamMapHashMap.get(teamID));
             }
