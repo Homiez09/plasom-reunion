@@ -2,6 +2,7 @@ package cs211.project.controllers;
 
 import cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamComponentController;
 
+import cs211.project.componentControllers.teamControllers.manageTeamsController.ManageTeamsBoxController;
 import cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox1Controller;
 import cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox2Controller;
 import cs211.project.models.Team;
@@ -24,7 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ import java.util.HashMap;
 public class SelectTeamController {
     @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane, manageTeamAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
-    @FXML private ImageView createTeamImageView1, settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
+    @FXML private ImageView joinTeamImageView, settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
     @FXML private Label menu1Label, menu2Label;
@@ -51,9 +51,11 @@ public class SelectTeamController {
 
     private final String[] menu = {"Manage Teams", "Switch View"};
     private final String[] filters = {"All", "Favorite", "Owner", "Leader", "Member"};
-
-    Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
+    Image create = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
+    Image createHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon_hover.png"));
     Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
+    Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
+
     String teamSelectedComponentID = "";
     @FXML
     private void initialize() {
@@ -163,23 +165,11 @@ public class SelectTeamController {
     private void initButton() {
         if (user.getUserId().equals(event.getEventHostUser().getUserId())) createButton.setVisible(true);
         else joinButton.setVisible(true);
-        // set animation scale up scale down
-        createButton.setOnMouseEntered(event -> {
-            createButton.setScaleX(1.1);
-            createButton.setScaleY(1.1);
-        });
-        createButton.setOnMouseExited(event -> {
-            createButton.setScaleX(1);
-            createButton.setScaleY(1);
-        });
-        joinButton.setOnMouseEntered(event -> {
-            joinButton.setScaleX(1.1);
-            joinButton.setScaleY(1.1);
-        });
-        joinButton.setOnMouseExited(event -> {
-            joinButton.setScaleX(1);
-            joinButton.setScaleY(1);
-        });
+
+        createButton.setOnMouseEntered(event -> createTeamImageView.setImage(createHover));
+        createButton.setOnMouseExited(event -> createTeamImageView.setImage(create));
+        joinButton.setOnMouseEntered(event -> joinTeamImageView.setImage(createHover));
+        joinButton.setOnMouseExited(event -> joinTeamImageView.setImage(create));
     }
 
     private void initCreateTeamPage(){
@@ -225,6 +215,8 @@ public class SelectTeamController {
         }
 
         teamContainer.getChildren().clear();
+        managerContainer.getChildren().clear();
+
         for (Team team : teamListSort.getTeams()) {
             if (!team.getEventID().equals(event.getEventID())) continue;
             try {
@@ -275,17 +267,16 @@ public class SelectTeamController {
 
     private void loadIconImage(){
         Image settingIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
-        settingImageView.setImage(settingIcon);
         Image sortIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/sort_icon.png"));
-        sortImageView.setImage(sortIcon);
-        Image createTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
-        createTeamImageView.setImage(createTeamIcon);
-        Image createTeamIcon1 = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
-        createTeamImageView1.setImage(createTeamIcon1);
         Image teamBox1 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_1.png"));
-        teamBox1ImageView.setImage(teamBox1);
         Image teamBox2 = new Image(getClass().getResourceAsStream("/images/icons/team-box/switch-view/team_box_2.png"));
+
+        settingImageView.setImage(settingIcon);
+        sortImageView.setImage(sortIcon);
+        teamBox1ImageView.setImage(teamBox1);
         teamBox2ImageView.setImage(teamBox2);
+        createTeamImageView.setImage(create);
+        joinTeamImageView.setImage(create);
     }
 
     private void initMenu() {
@@ -341,28 +332,10 @@ public class SelectTeamController {
         if (team != null) {
             try {
                 teamBoxComponent = teamBoxLoader.load();
-                Label teamName = (Label)teamBoxComponent.getChildren().get(0);
-                HBox HBoxRole = (HBox)teamBoxComponent.getChildren().get(1);
-                ImageView roleImageView = (ImageView)HBoxRole.getChildren().get(0);
-                Label role = (Label)HBoxRole.getChildren().get(1);
-                HBox HBoxPeople = (HBox) teamBoxComponent.getChildren().get(2);
-                Label people = (Label) HBoxPeople.getChildren().get(0);
-                ImageView bookmarkImageView = (ImageView) teamBoxComponent.getChildren().get(3);
-                ImageView menuImageView = (ImageView) teamBoxComponent.getChildren().get(4);
-                Label bookmarkLabel = (Label) teamBoxComponent.getChildren().get(6);
-                Label teamIdLabel = (Label) teamBoxComponent.getChildren().get(7);
-
-                teamName.setText(team.getTeamName());
-                role.setText(team.getRole());
-                roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
-                role.setText(team.getRole());
-                people.setText(String.valueOf(team.getMemberList().getUsers().size())+ " / " + String.valueOf(team.getMaxSlotTeamMember()));
-                bookmarkLabel.setText(String.valueOf(team.isBookmarked()));
-                teamIdLabel.setText(team.getTeamID());
-
-                String bookmark = team.isBookmarked() ? "bookmark_icon" : "un_bookmark_icon";
-                bookmarkImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/bookmark/" + bookmark +".png")));
-                menuImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/dot_icon.png")));
+                ManageTeamsBoxController manageTeamsBoxController = teamBoxLoader.getController();
+                manageTeamsBoxController.setSelectTeamController(this);
+                manageTeamsBoxController.setTeamData(team);
+                manageTeamsAnchorPane.getChildren().add(teamBoxComponent);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

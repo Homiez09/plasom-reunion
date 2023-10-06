@@ -473,10 +473,16 @@
 .create-team-button{
     -fx-background-color: transparent;
     -fx-border-color: -fx-black1-color;
+    -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-border-width: 2;
     -fx-stroke-width: 10;
     -fx-effect: dropshadow(gaussian, -fx-white7-color, 10, 0.5, 0, 0);
+}
+
+.create-team-button:hover{
+    -fx-background-color: -fx-black1-color;
+    -fx-text-fill: -fx-white1-color;
 }
 
 .setting-select-team-dropdown {

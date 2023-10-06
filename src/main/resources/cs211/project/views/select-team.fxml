@@ -138,7 +138,7 @@
                   <String fx:value="create-team-button" />
                </styleClass>
                <graphic>
-                  <ImageView fx:id="createTeamImageView1" fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="joinTeamImageView" fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/icons/select-team/create_icon.png" />
                      </image>
