@@ -70,7 +70,7 @@ public class TeamChatController {
         Chat chatTemp = new Chat(typeMessageTextField.getText(), user, activitySelectTemp.getActivityID());
 
         uploadMessageThread.uploadMessage(chatTemp);
-        
+
         typeMessageTextField.clear();
 
         loadChatCache(chatTemp);
