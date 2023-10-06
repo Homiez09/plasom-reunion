@@ -8,9 +8,7 @@ public class UploadMessageThread implements Runnable {
     private ChatHistory chatHistory = chatHistoryDataSource.readData();
 
     @Override
-    public void run() {
-        System.out.println("UploadMessageThread is running");
-    }
+    public void run() {}
 
     public void uploadMessage(Chat chat) {
         chatHistory.add(chat);
