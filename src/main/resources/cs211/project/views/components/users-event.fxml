@@ -7,13 +7,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.UsersEventController">
+<VBox alignment="CENTER" style="-fx-background-color: #F6F4EE;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.UsersEventController">
    <children>
-      <AnchorPane>
+      <AnchorPane style="-fx-background-color: #F6F4EE;">
          <children>
             <VBox>
                <children>
@@ -47,13 +46,21 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="356.0" style="-fx-border-color: #FFFFF;" />
-                        <StackPane>
-                           <children>
-                              <Button fx:id="openButton" mnemonicParsing="false" onAction="#onOpenAction" prefWidth="50.0" text="Open" />
-                              <Button fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseAction" prefWidth="50.0" text="Close" />
-                           </children>
-                        </StackPane>
+                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="258.0" style="-fx-border-color: #FFFFF;" />
+                        <Label alignment="CENTER" text="Status" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                        <Label fx:id="statusLabel" alignment="CENTER" text="statusLabel" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                        <Button fx:id="statusButton" mnemonicParsing="false" onAction="#onStatusButton" text="Button" />
+                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
                      </children>
                   </HBox>
                   <Separator prefHeight="16.0" />
