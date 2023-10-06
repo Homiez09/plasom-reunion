@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UserList {
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     public UserList() {
         users = new ArrayList<>();

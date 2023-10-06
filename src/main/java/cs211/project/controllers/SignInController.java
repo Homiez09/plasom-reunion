@@ -25,24 +25,17 @@ public class SignInController {
     private final int maxPasswordLimit = 27, maxUsernameLimit = 20;
 
 
-    @FXML
-    private Button backButton, nextButton;
-    @FXML
-    private Shape backCircle, nextCircle;
+    @FXML private Button backButton, nextButton;
+    @FXML private Shape backCircle, nextCircle;
 
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private TextField showPasswordTextField, usernameTextField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextField showPasswordTextField, usernameTextField;
 
-    @FXML
-    private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
-    @FXML
-    private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
+    @FXML private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
+    @FXML private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
     private Image showPasswordImage, hidePasswordImage;
 
-    @FXML
-    private Label errorLabel;
+    @FXML private Label errorLabel;
 
     private String password, username;
     private UserListDataSource datasource;

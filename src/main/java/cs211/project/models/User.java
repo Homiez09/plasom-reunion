@@ -10,14 +10,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class User implements Comparable<User>{
-    private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath;
-    private String  registerDate, userId, role, formattedDate;
+    private String  displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath,userId, role, formattedDate;
+    private final String  registerDate, username;
+    protected String characters;
+    private boolean status, showContact, bookmark;
+    private final boolean admin;
 
-    private boolean bookmark;
-    private boolean admin, status, showContact;
-
-    @Override
-    public int compareTo(User user) {
+    @Override public int compareTo(User user) {
         return this.getUsername().compareTo(user.getUsername());
     }
 
@@ -34,6 +33,7 @@ public class User implements Comparable<User>{
         this.showContact = false;
         this.bio = "";
     }
+
     public User(String userId, String displayName, String username, String password, String contactNumber,
                 String registerDate, String lastedLogin, String imagePath, String bio,
                 boolean status, boolean admin, boolean showContact) {
@@ -76,7 +76,7 @@ public class User implements Comparable<User>{
         this.userId = id;
     }
     private String generateRandomText() {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder randomText = new StringBuilder();
 
         Random random = new Random();
