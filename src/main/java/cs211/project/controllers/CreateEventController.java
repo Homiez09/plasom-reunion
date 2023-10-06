@@ -29,7 +29,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -153,14 +152,14 @@ public class CreateEventController {
             //add event
             eventListDatasource.writeData(eventList);
         } else {
-            eventList.findEvent(thisEvent.getEventID()).changeName(eventNameTextField.getText());
-            eventList.findEvent(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText().replace("\n","\\n"));
-            eventList.findEvent(thisEvent.getEventID()).changeSlotMember(Integer.parseInt(eventCapTextField.getText()));
-            eventList.findEvent(thisEvent.getEventID()).changeDateStart(formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
-            eventList.findEvent(thisEvent.getEventID()).changeDateEnd(formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
-            eventList.findEvent(thisEvent.getEventID()).changeTag(eventTagChoiceBox.getValue());
+            eventList.findEventById(thisEvent.getEventID()).changeName(eventNameTextField.getText());
+            eventList.findEventById(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText().replace("\n","\\n"));
+            eventList.findEventById(thisEvent.getEventID()).changeSlotMember(Integer.parseInt(eventCapTextField.getText()));
+            eventList.findEventById(thisEvent.getEventID()).changeDateStart(formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
+            eventList.findEventById(thisEvent.getEventID()).changeDateEnd(formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
+            eventList.findEventById(thisEvent.getEventID()).changeTag(eventTagChoiceBox.getValue());
             if (newEventImagePath != null) {
-                eventList.findEvent(thisEvent.getEventID()).changeEventImagePath(newEventImagePath);
+                eventList.findEventById(thisEvent.getEventID()).changeEventImagePath(newEventImagePath);
             }
             eventListDatasource.writeData(eventList);
         }

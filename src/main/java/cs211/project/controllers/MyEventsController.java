@@ -2,10 +2,9 @@ package cs211.project.controllers;
 
 import cs211.project.componentControllers.OwnerEventController;
 import cs211.project.models.*;
+import cs211.project.models.Event;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,8 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
@@ -31,8 +32,7 @@ public class MyEventsController extends AllEventListController {
     @FXML Button allButton,completeButton,ownerButton,memberButton,staffButton;
     @FXML ComboBox<String> sortComboBox;
     @FXML Separator popupTest;
-    @FXML TilePane tilePaneMain;
-    @FXML ScrollPane scrollPane;
+    @FXML ListView<Node> listViewMain;
     @FXML TextField searchbarTextField;
     //----------------------------
     private User currentUser = (User) FXRouter.getData();
@@ -41,6 +41,7 @@ public class MyEventsController extends AllEventListController {
     private int currentPage = 1;
     private final int itemsPerPage = 4;
     private Predicate<Event> selectedPredicate = null;
+    private ObservableList<Node> nodes;
 
 
 
@@ -56,7 +57,7 @@ public class MyEventsController extends AllEventListController {
     private void setupPage(){
         Datasource<EventList> eventDatasource = new EventListDataSource();
         eventList = eventDatasource.readData();
-        eventObservableList = FXCollections.observableArrayList(eventList.getCurrentEvent(currentUser));
+        eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
         initSort();
         setupScrollBar();
         loadData(currentPage,selectedPredicate);
@@ -64,10 +65,12 @@ public class MyEventsController extends AllEventListController {
 
     private void loadData(int page,Predicate<Event> selectedPredicate) {
         FilteredList<Event> filteredList = new FilteredList<>(eventObservableList,selectedPredicate);
-
+        System.out.println(filteredList.size());
         int startIndex = (page - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, filteredList.size());
-
+        if (nodes ==null) {
+            nodes = FXCollections.observableArrayList();
+        }
         for (int i = startIndex; i < endIndex; i++) {
             Event event = filteredList.get(i);
             if (!checkNode(event)) {
@@ -75,9 +78,10 @@ public class MyEventsController extends AllEventListController {
                 anchorPane.setUserData(event);
                 anchorPane.setId(event.getEventID());
                 new LoadCardEventComponent(anchorPane, event, "card-my-event");
-                tilePaneMain.getChildren().add(anchorPane);
+                nodes.add(anchorPane);
             }
         }
+        listViewMain.setItems(nodes);
     }
 
     @FXML
@@ -86,28 +90,25 @@ public class MyEventsController extends AllEventListController {
         loadData(currentPage,selectedPredicate);
     }
 
-    private void setupScrollBar(){
-        scrollPane.vvalueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                double value = newValue.doubleValue();
-                if (value >= 0.55 && tilePaneMain.getChildren().size()/itemsPerPage == currentPage) {
+    @FXML
+    private void setupScrollBar() {
+            listViewMain.addEventHandler(ScrollEvent.SCROLL, scrollEvent ->{
+                if (scrollEvent.getDeltaY() < 0 && (listViewMain.getItems().size()/itemsPerPage == currentPage)){
                     loadMore();
                 }
-            }
-        });
+            });
     }
 
     private void removeNode(Predicate<Event> selectedPredicate) {
         FilteredList<Event> filteredList = eventObservableList.filtered(selectedPredicate);
         List<Node> nodesToRemove = new ArrayList<>();
-        for (Node node:tilePaneMain.getChildren()) {
+        for (Node node: listViewMain.getItems()) {
             Event event = (Event) node.getUserData();
             if (!filteredList.contains(event)) {
                 nodesToRemove.add(node);
             }
         }
-        tilePaneMain.getChildren().removeAll(nodesToRemove);
+        listViewMain.getItems().removeAll(nodesToRemove);
     }
 
     private void initSort(){
@@ -135,8 +136,7 @@ public class MyEventsController extends AllEventListController {
     private void sortTilePane(){
         sortComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
             String sortBy = newValue.trim();
-            tilePaneMain.getChildren().clear();
-            scrollPane.setVvalue(0.0);
+            listViewMain.getItems().clear();
             currentPage = 1;
             Comparator<Event> eventComparator =null;
             switch (sortBy){
@@ -164,6 +164,9 @@ public class MyEventsController extends AllEventListController {
         });
     }
 
+    private void checkEventList(){
+
+    }
 
     @FXML
     private void onCreateAction(ActionEvent actionEvent) {
@@ -177,7 +180,7 @@ public class MyEventsController extends AllEventListController {
     @FXML
     private void onAllAction(ActionEvent actionEvent) {
         reset();
-        eventObservableList = FXCollections.observableArrayList(eventList.getCurrentEvent(currentUser));
+        eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
         loadData(currentPage,selectedPredicate);
         allButton.setDisable(true);
     }
@@ -185,7 +188,7 @@ public class MyEventsController extends AllEventListController {
     @FXML
     public void onCompleteAction(ActionEvent actionEvent) {
         reset();
-        eventObservableList = FXCollections.observableArrayList(eventList.getComplete(currentUser));
+        eventObservableList = FXCollections.observableArrayList(eventList.getCompleteEvent(currentUser));
         loadData(currentPage,selectedPredicate);
         completeButton.setDisable(true);
     }
@@ -193,18 +196,18 @@ public class MyEventsController extends AllEventListController {
     @FXML
     private void onOwnerEventAction(ActionEvent actionEvent) {
         reset();
-        eventObservableList = FXCollections.observableArrayList(eventList.getOwner(currentUser));
+        eventObservableList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
         loadData(currentPage,selectedPredicate);
         ownerButton.setDisable(true);
     }
+
     @FXML
     private void onMemberAction(ActionEvent actionEvent) {
         reset();
-        eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
+        eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
         loadData(currentPage,selectedPredicate);
         memberButton.setDisable(true);
     }
-
 
     @FXML
     private void onStaffAction(ActionEvent actionEvent) {
@@ -213,12 +216,14 @@ public class MyEventsController extends AllEventListController {
         loadData(currentPage,selectedPredicate);
         staffButton.setDisable(true);
     }
+
     @FXML
     private void onManageEventButton(ActionEvent actionEvent) {
         Popup popup = new Popup();
         VBox popupContent = new VBox();
         popup.setAutoHide(true);
         VBox box = new VBox();
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/owner-event.fxml"));
             VBox loaded = loader.load();
@@ -231,6 +236,9 @@ public class MyEventsController extends AllEventListController {
         popupContent.getChildren().add(box);
         popup.getContent().addAll(popupContent);
         popup.show(navbarAnchorPane.getScene().getWindow());
+        if (popup.isShowing()) {
+            listViewMain.refresh();
+        }
     }
 
     @FXML
@@ -241,6 +249,7 @@ public class MyEventsController extends AllEventListController {
             throw new RuntimeException(e);
         }
     }
+
     private void reset() {
         allButton.setDisable(false);
         completeButton.setDisable(false);
@@ -248,19 +257,19 @@ public class MyEventsController extends AllEventListController {
         memberButton.setDisable(false);
         staffButton.setDisable(false);
         currentPage = 1;
-        scrollPane.setVvalue(0.0);
-        tilePaneMain.getChildren().clear();
+        listViewMain.getItems().clear();
         selectedPredicate = null;
     }
 
     private boolean checkNode(Event event) {
-        for (Node node : tilePaneMain.getChildren()) {
+        for (Node node : listViewMain.getItems()) {
             if (node.getId() != null && node.getId().equals(event.getEventID())) {
                 return true;
             }
         }
         return false;
     }
+
 
 }
 

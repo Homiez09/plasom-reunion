@@ -5,9 +5,6 @@ import cs211.project.models.collections.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class EventListDataSource implements Datasource<EventList> {
     private final String directoryName = "data";
@@ -98,15 +95,15 @@ public class EventListDataSource implements Datasource<EventList> {
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
                                         eventDescription, eventLocation, slotMember,timeStamp,joinEvent,joinTeam
                                         );
-                for (Team team:teamList.getTeamOfEvent(eventList.findEvent(eventId))) {
-                    eventList.findEvent(eventId).getTeamList().addTeam(team);
+                for (Team team:teamList.getTeamOfEvent(eventList.findEventById(eventId))) {
+                    eventList.findEventById(eventId).getTeamList().addTeam(team);
                 }
                 for (Activity activity : activityList.getActivities()){
-                    eventList.findEvent(eventId).getActivityList().addActivity(activity);
+                    eventList.findEventById(eventId).getActivityList().addActivity(activity);
                 }
 
-                for (User user: userList.getUserOfEvent(eventList.findEvent(eventId))){
-                    eventList.findEvent(eventId).getUserList().addUser(user);
+                for (User user: userList.getUserOfEvent(eventList.findEventById(eventId))){
+                    eventList.findEventById(eventId).getUserList().addUser(user);
                 }
 
             }
