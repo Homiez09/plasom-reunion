@@ -6,13 +6,11 @@ import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -39,8 +37,6 @@ public class JoinTeamAlertBoxController {
 
     @FXML private void initialize(){
         loadImageInit();
-//        validateTeam();
-//        validateButton();
     }
 
     public void setTeam(Team team) {
@@ -65,22 +61,30 @@ public class JoinTeamAlertBoxController {
             notificationLabel.setText("The maximum team capacity has been reached.");
         }else if(user.isAlreadyJoinTeam(team.getMemberList())){
             notificationLabel.setText("You have already joined the team.");
+        }else if(team.isClose()){
+            notificationLabel.setText("This team is no longer accepting.");
         }else{
             joinTeam();
             notificationLabel.setText("You have successfully joined.");
             isValidate = true;
             return;
-        }
-//        else if(team.isClose){ //todo : add close function
-//            notificationLabel.setText("This team is no longer accepting.");
-//        }
+       }
         isValidate = false;
     }
 
     private void joinTeam(){
         HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
-        teamListHashMap.get(user.getUsername()).getTeams().add(team);
-        team.setRole("Member");
+        if (teamListHashMap.containsKey(user.getUsername())) {
+            TeamList teamListJoin = new TeamList(teamListHashMap.get(user.getUsername()));
+            teamListJoin.addTeam(team);
+            teamListJoin.updateRole(team.getTeamID(), "Member");
+            teamListHashMap.put(user.getUsername(), teamListJoin);
+        } else {
+            TeamList teamListJoin = new TeamList();
+            teamListJoin.addTeam(team);
+            teamListJoin.updateRole(team.getTeamID(), "Member");
+            teamListHashMap.put(user.getUsername(), teamListJoin);
+        }
         joinTeamMap.writeData(teamListHashMap);
     }
 

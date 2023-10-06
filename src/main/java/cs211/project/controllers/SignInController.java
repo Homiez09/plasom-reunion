@@ -58,8 +58,6 @@ public class SignInController {
     @FXML
     void initialize() {
         datasource = new UserListDataSource("data", "user-list.csv");
-        usernameTextField.setText("mingmmie");
-        passwordField.setText("@14700Ta06");
 
         userList = datasource.readData();
         eventHandleEnter();
