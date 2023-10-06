@@ -62,26 +62,6 @@ public class Team implements Comparable<Team> {
         return false;
     }
 
-    public boolean addMemberToMemberList(String username, String role) {
-        User userExist = memberList.findUsername(username); // check user is exist in member list
-        if (userExist == null) {
-            User user = userList.findUsername(username);
-            user.setRole(role);
-            memberList.addUser(user);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean removeMember(User user) {
-        User userExist = memberList.findUsername(user.getUsername());
-        if (userExist == null) {
-            memberList.removeUser(user);
-            return true;
-        }
-        return false;
-    }
-
     // go to test file to see how to use this method
     public String formatTimestampToString(String timestamp) { // param require team.getStartDate() or team.getEndDate()
         long time = Long.parseLong(timestamp);

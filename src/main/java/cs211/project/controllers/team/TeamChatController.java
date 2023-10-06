@@ -21,7 +21,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 
@@ -71,14 +70,9 @@ public class TeamChatController {
         Chat chatTemp = new Chat(typeMessageTextField.getText(), user, activitySelectTemp.getActivityID());
 
         uploadMessageThread.uploadMessage(chatTemp);
-
-//        chatHistory.add(chatTemp);
-//        chatHistoryDataSource.writeData(chatHistory);
-
-        System.out.println(chatHistory.getChats().size());
+        
         typeMessageTextField.clear();
 
-//        loadChatOfActivity(activitySelectTemp);
         loadChatCache(chatTemp);
     }
 

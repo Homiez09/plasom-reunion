@@ -17,7 +17,7 @@ import javafx.scene.text.TextFlow;
 
 public class MessageBoxController {
     @FXML private Text messageText, messageText2, messageText3;
-    @FXML protected Label nameLabel;
+    @FXML protected Label nameLabel, timeLabel, timeLabel2, timeLabel3;
     @FXML protected ImageView profileImageView;
     @FXML protected AnchorPane otherAnchorPane, midAnchorPane, selfAnchorPane;
     private User user;
@@ -26,6 +26,7 @@ public class MessageBoxController {
         user = chat.getSender();
         nameLabel.setText(user.getDisplayName());
         setMessageText(chat.getMessage());
+        setTime(chat.getTime());
 
         ImagePathFormat path = new ImagePathFormat(user.getImagePath());
         profileImageView.setImage(new Image(path.toString(), 1280, 1280, false, false));
@@ -44,5 +45,12 @@ public class MessageBoxController {
         messageText.setText(message);
         messageText2.setText(message);
         messageText3.setText(message);
+    }
+
+    private void setTime(String time) {
+        String timeFormat = time.split(" ")[1];
+        timeLabel.setText(timeFormat);
+        timeLabel2.setText(timeFormat);
+        timeLabel3.setText(timeFormat);
     }
 }
