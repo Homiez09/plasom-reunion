@@ -174,15 +174,15 @@ public class Event implements Comparable<Event>{
 
         return id;
     }
+
     public boolean isUpComing() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
 
-        long eventDateDiff = ChronoUnit.DAYS.between(eventDate, currentTime);
-
-        return eventDateDiff >= 14;
+        return eventDate.isAfter(currentTime);
     }
+
 
     public boolean isNewEvent() {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -205,8 +205,8 @@ public class Event implements Comparable<Event>{
 
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
-    public boolean isHostEvent(String currentUserId) {
-        return eventHostUser.getUserId().equals(currentUserId);
+    public boolean isHostEvent(User user) {
+        return eventHostUser.equals(user);
     }
     public boolean isHaveUser(User user){return eventHostUser.equals(user);}
     private String generateRandomText() {

@@ -57,10 +57,10 @@ public class CardUpcoming {
         Event event;
         Image image;
 
-        if (eventList.getUpcomingEvent().getEvents().size() == 0) {
-            event = eventList.getEvents().get(pageNumber);
+        if (eventList.getUpcomingEvent().size() == 0) {
+            event = eventList.getUpcomingEvent().get(pageNumber);
         } else {
-            event = eventList.getUpcomingEvent().getEvents().get(pageNumber);
+            event = eventList.getUpcomingEvent().get(pageNumber);
         }
 
         if (event.getEventImagePath().equals("null")) image = new Image(getClass().getResourceAsStream("/images/events/event-default-auth.png"));

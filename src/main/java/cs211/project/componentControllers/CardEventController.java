@@ -43,16 +43,11 @@ public class CardEventController {
 
             Image image = new Image("file:" + event.getEventImagePath(), 200, 200, false, false);
             if (event.getEventImagePath().equals("null")) {
-                String imgpath = "/images/events/event-default.png";
-                image = new Image(getClass().getResourceAsStream(imgpath), 200, 200, false, false);
+                String imgPath = "/images/events/event-default-auth.png";
+                image = new Image(getClass().getResourceAsStream(imgPath), 200, 200, false, false);
             }
             eventImage.setImage(image);
         }
-    }
-    public void onJoinEventAcition(ActionEvent actionEvent) {
-    }
-
-    public void onJoinStaffButton(ActionEvent actionEvent) {
     }
 
     public void onClickCard(MouseEvent mouseEvent) {

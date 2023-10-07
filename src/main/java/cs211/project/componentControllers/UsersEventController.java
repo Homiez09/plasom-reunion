@@ -32,6 +32,8 @@ public class UsersEventController extends CardMyEventController{
     private Event currentEvent;
     Datasource<EventList> eventListDatasource;
     private EventList eventList;
+    private ObservableList<User> userObservableList;
+    private ObservableList<User> banUserObservableList;
 
 
 
@@ -43,7 +45,15 @@ public class UsersEventController extends CardMyEventController{
         this.currentEvent = eventList.findEventById(event.getEventID());
         this.MapUserJoinEvent = new JoinEventMap();
         this.popup = popup;
-        ObservableList<User> userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
+        BanUser data = new BanUser();
+        HashMap<User,EventList> getBan = data.readData();
+        UserList banList = new UserList();
+        for (User user: getBan.keySet()){
+            banList.getUsers().add(user);
+        }
+        userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
+        banUserObservableList = FXCollections.observableArrayList(banList.getUsers());
+
         eventNameLabel.setText(currentEvent.getEventName());
         userSizeLabel.setText(userObservableList.size()+"");
         statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
@@ -53,6 +63,7 @@ public class UsersEventController extends CardMyEventController{
 
     private void showTable(ObservableList<User> observableList) {
         // กำหนด column
+
         TableUsers.setPlaceholder(new Label("No User"));
 
 
@@ -82,7 +93,13 @@ public class UsersEventController extends CardMyEventController{
         statusColumn.setCellValueFactory(cellData -> {
             // ในส่วนนี้คุณสามารถกำหนดวิธีการเข้าถึงข้อมูลแบบกำหนดเอง
             User user = cellData.getValue();
-            return new SimpleStringProperty(currentEvent.isHaveUser(user)? "Member":"None");
+            BanUser data = new BanUser();
+            HashMap<User,EventList> getBan = data.readData();
+            EventList findEvent = getBan.get(user);
+            if (findEvent == null){
+                findEvent = new EventList();
+            }
+            return new SimpleStringProperty(!banUserObservableList.contains(user) && !findEvent.getEvents().contains(currentEvent)? "Member":"Ban");
         });
 
         actionColumn.setCellFactory(param -> new TableCell<>() {
@@ -92,12 +109,13 @@ public class UsersEventController extends CardMyEventController{
                 //---------------Custom---------------\\
                 comboBox.setStyle(  "-fx-background-color:transparent; -fx-background-insets: 0;" +
                         "-fx-alignment: center; -fx-smooth: true;" +
-                        "-fx-content-display: text-only; -fx-arrows-visible: true;");
+                        "-fx-content-display: text-only; -fx-arrows-visible: false;");
+
 
 
                 //---------------Custom---------------\\
 
-                comboBox.getItems().addAll("Ban Activity", "Kick");
+                comboBox.getItems().addAll("Ban","UnBan", "Kick");
 
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
@@ -129,20 +147,50 @@ public class UsersEventController extends CardMyEventController{
     }
     public void onComboBoxSelectionChanged(User user, String selectedOption,ObservableList<User> observableList) {
         if (user != null) {
+            BanUser data = new BanUser();
+            HashMap<User,EventList> getBan = data.readData();
+            EventList list;
+            HashMap<String, UserList> joinEvent = MapUserJoinEvent.readData();
+            UserList deleteUser = joinEvent.get(currentEvent.getEventID());
                 switch (selectedOption){
-                    case"Ban Activity":
+                    case"Ban":
+                        if (getBan.containsKey(user)) {
+                            list = getBan.get(user);
+                        }else {
+                            list = new EventList();
 
-
+                        }
+                        if (!list.getEvents().contains(currentEvent)) {
+                            list.getEvents().add(currentEvent);
+                        }
+                        banUserObservableList.add(user);
+                        getBan.put(user,list);
+                        data.writeData(getBan);
+                        TableUsers.refresh();
+                        break;
+                    case"UnBan":
+                        list = getBan.get(user);
+                        list.getEvents().remove(currentEvent);
+                        banUserObservableList.remove(user);
+                        getBan.put(user,list);
+                        data.writeData(getBan);
+                        TableUsers.refresh();
+                        break;
                     case "Kick":
-                        HashMap<String, UserList> joinEvent = MapUserJoinEvent.readData();
-                        UserList deleteUser = joinEvent.get(currentEvent.getEventID());
+                        data = new BanUser();
+                        getBan = data.readData();
+                        list = getBan.get(user);
+                        if (list != null) {
+                            list.getEvents().remove(currentEvent);
+                            getBan.put(user, list);
+                        }
+                        data.writeData(getBan);
                         deleteUser.getUsers().remove(user);
                         observableList.remove(user);
                         joinEvent.put(currentEvent.getEventID(),deleteUser);
                         userSizeLabel.setText(observableList.size()+"");
-                        TableUsers.refresh();
                         MapUserJoinEvent.writeData(joinEvent);
-
+                        TableUsers.refresh();
                         break;
                 }
         }
@@ -155,4 +203,6 @@ public class UsersEventController extends CardMyEventController{
         statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
         eventListDatasource.writeData(eventList);
     }
+
+
 }

@@ -236,7 +236,6 @@ public class HomeController {
         }
     }
 
-    //-------------Button of upComingEvent-------------\\
     @FXML protected void onNewLeftButton() {
         if (currnetIndexOfNew > 1) {
             currnetIndexOfNew--;
@@ -253,9 +252,7 @@ public class HomeController {
             loadNextEventTile(newRightAnchorPane,currnetIndexOfNew,newEventList);
         }
     }
-    //-------------Button of upComingEvent-------------\\
 
-    // -------------Button of upComingEvent-------------\\
     @FXML protected void onUpLeftButton() {
         if (currentIndexOfUp > 1) {
             currentIndexOfUp--;
@@ -272,7 +269,6 @@ public class HomeController {
             loadNextEventTile(upRightAnchorPane,currentIndexOfUp,upEventList);
         }
     }
-    //-------------Button of upComingEvent-------------\\
 
     private void updateButtonState() {
         // ตรวจสอบสถานะของปุ่ม "Left" และ "Right" แล้วอัปเดต
