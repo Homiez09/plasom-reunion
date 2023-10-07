@@ -1,20 +1,23 @@
 package cs211.project.services;
 
-import cs211.project.models.User;
-import cs211.project.models.collections.UserList;
+import cs211.project.models.Event;
+import cs211.project.models.collections.EventList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
-    private String directoryName = "data";
-    private String fileName = "join-event.csv";
-    private HashMap<String,UserList> hashMap;
-    public JoinEventMap(){
+
+public class BanUser implements Datasource<HashMap<String, EventList>>{
+    private final String directoryName = "data";
+    private final String fileName = "ban-user.csv";
+    private HashMap<String,EventList> hashMap ;
+
+    public BanUser() {
         checkFileIsExisted();
     }
-
+    // ตรวจสอบว่ามีไฟล์ให้อ่านหรือไม่ ถ้าไม่มีให้สร้างไฟล์เปล่า
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -32,10 +35,9 @@ public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
     }
 
     @Override
-    public HashMap<String, UserList> readData() {
+    public HashMap<String, EventList> readData() {
         hashMap = new HashMap<>();
-        UserList userList ;
-
+        EventList banList ;
         String filePath = directoryName + File.separator + fileName;
 
         File file = new File(filePath);
@@ -58,22 +60,27 @@ public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
 
         String line = "";
 
+
+
         try {
-            Datasource<UserList> userListDatasource = new UserListDataSource("data", "user-list.csv");
-            UserList list = userListDatasource.readData();
+            Datasource<EventList> eventListDatasource = new EventListDataSource();
+            EventList list = eventListDatasource.readData();
             while ((line = buffer.readLine()) != null) {
                 if (line.equals("")) continue;
-                    String[] data = line.split(",");
-                    String event = data[0].trim();
-                    if (!hashMap.containsKey(event)) {
-                        userList = new UserList();
-                    }else {
-                        userList = hashMap.get(event);
-                    }
-                    if (!userList.getUsers().contains(list.findUserId(data[1].trim()))) {
-                        userList.addUser(list.findUserId(data[1].trim()));
-                    }
-                    hashMap.put(event , userList);
+                String[] data = line.split(",");
+                String userID= data[0].trim();
+
+                if (!hashMap.containsKey(userID)) {
+                    banList = new EventList();
+                }else {
+                    banList = hashMap.get(userID);
+                }
+                String eventId = data[1].trim();
+                if (!banList.getEvents().contains(list.findEventById(eventId))) {
+                    banList.getEvents().add(list.findEventById(eventId));
+                }
+                hashMap.put(userID, banList);
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -83,7 +90,7 @@ public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
     }
 
     @Override
-    public void writeData(HashMap<String, UserList> data) {
+    public void writeData(HashMap<String, EventList> data) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -102,17 +109,17 @@ public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
         );
         BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
         try {
-            for (Map.Entry<String, UserList> entry : data.entrySet()) {
-                String eventID = entry.getKey();
-                UserList userList = entry.getValue();
-                    for (User user : userList.getUsers()) {
-                        String line = eventID + "," + user.getUserId();
+            for (Map.Entry<String, EventList> entry : data.entrySet()) {
+                String user = entry.getKey();
+                EventList banList = entry.getValue();
+
+                    for (Event eventId : banList.getEvents()) {
+                        String line = user + "," + eventId.getEventID();
                         buffer.write(line);
                         buffer.newLine();
                     }
 
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }finally {
@@ -124,6 +131,5 @@ public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
             }
         }
     }
-
 
 }

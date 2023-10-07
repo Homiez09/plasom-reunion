@@ -53,6 +53,7 @@ public class UsersEventController extends CardMyEventController{
 
     private void showTable(ObservableList<User> observableList) {
         // กำหนด column
+
         TableUsers.setPlaceholder(new Label("No User"));
 
 
@@ -82,7 +83,14 @@ public class UsersEventController extends CardMyEventController{
         statusColumn.setCellValueFactory(cellData -> {
             // ในส่วนนี้คุณสามารถกำหนดวิธีการเข้าถึงข้อมูลแบบกำหนดเอง
             User user = cellData.getValue();
-            return new SimpleStringProperty(currentEvent.isHaveUser(user)? "Member":"None");
+            String userId = user.getUserId();
+            BanUser data = new BanUser();
+            HashMap<String,EventList> getBan = data.readData();
+            EventList list = getBan.get(userId);
+            if (list == null) {
+                list = new EventList();
+            }
+            return new SimpleStringProperty(!list.getEvents().contains(currentEvent)? "Member":"Ban");
         });
 
         actionColumn.setCellFactory(param -> new TableCell<>() {
@@ -97,7 +105,7 @@ public class UsersEventController extends CardMyEventController{
 
                 //---------------Custom---------------\\
 
-                comboBox.getItems().addAll("Ban Activity", "Kick");
+                comboBox.getItems().addAll("Ban", "Kick");
 
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
@@ -129,20 +137,45 @@ public class UsersEventController extends CardMyEventController{
     }
     public void onComboBoxSelectionChanged(User user, String selectedOption,ObservableList<User> observableList) {
         if (user != null) {
+            BanUser data = new BanUser();
+            HashMap<String,EventList> getBan = data.readData();
+            EventList list;
+            String userId = user.getUserId();
                 switch (selectedOption){
-                    case"Ban Activity":
+                    case"Ban":
+                        System.out.println(getBan.keySet());
+                        System.out.println(getBan.containsKey(userId));
+                        if (getBan.containsKey(userId)) {
+                            list = getBan.get(userId);
+                        }else {
+                            list = new EventList();
 
+                        }
+                        if (!list.getEvents().contains(currentEvent)) {
+                            list.getEvents().add(currentEvent);
+                        }
 
+                        getBan.put(userId,list);
+                        data.writeData(getBan);
+                        break;
                     case "Kick":
                         HashMap<String, UserList> joinEvent = MapUserJoinEvent.readData();
                         UserList deleteUser = joinEvent.get(currentEvent.getEventID());
+                        data = new BanUser();
+                        getBan = data.readData();
+                        list = getBan.get(userId);
+                        if (list != null) {
+                            list.getEvents().remove(currentEvent);
+                            getBan.put(userId, list);
+                        }
+                        data.writeData(getBan);
                         deleteUser.getUsers().remove(user);
                         observableList.remove(user);
                         joinEvent.put(currentEvent.getEventID(),deleteUser);
                         userSizeLabel.setText(observableList.size()+"");
-                        TableUsers.refresh();
-                        MapUserJoinEvent.writeData(joinEvent);
 
+                        MapUserJoinEvent.writeData(joinEvent);
+                        TableUsers.refresh();
                         break;
                 }
         }

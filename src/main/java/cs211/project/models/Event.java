@@ -179,9 +179,9 @@ public class Event implements Comparable<Event>{
         LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
 
-        long eventDateDiff = ChronoUnit.DAYS.between(eventDate, currentTime);
+        long eventDateDiff = ChronoUnit.DAYS.between(currentTime, eventDate);
 
-        return eventDateDiff >= 14;
+        return eventDateDiff >= 0;
     }
 
     public boolean isNewEvent() {

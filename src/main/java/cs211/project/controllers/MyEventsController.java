@@ -73,7 +73,7 @@ public class MyEventsController extends AllEventListController {
         }
         for (int i = startIndex; i < endIndex; i++) {
             Event event = filteredList.get(i);
-            if (!checkNode(event)) {
+            if (!checkNode(event) && !event.isEnd()) {
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.setUserData(event);
                 anchorPane.setId(event.getEventID());

@@ -150,7 +150,7 @@ public class CardMyEventController {
         popupContent.getChildren().add(box);
         popup.getContent().addAll(popupContent);
         popup.show(manageUserButton.getScene().getWindow());
-        System.out.println(popup.isShowing());
+
     }
     @FXML
     private void onClickCard(MouseEvent mouseEvent) {
