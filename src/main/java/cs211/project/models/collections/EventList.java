@@ -2,6 +2,8 @@ package cs211.project.models.collections;
 
 import cs211.project.models.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EventList {
@@ -86,6 +88,16 @@ public class EventList {
         return list;
     }
 
+    public EventList sortUpcoming(EventList eventList){
+        Comparator<Event> comparing = Comparator
+                .comparing((Event event) -> LocalDateTime.parse(event.getEventDateStart(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
+                .thenComparing((Event event) -> LocalDateTime.parse(event.getEventDateEnd(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        EventList list = new EventList();
+        list.getEvents().addAll(eventList.getEvents());
+        Collections.sort(list.getEvents(),comparing);
+
+        return list;
+    }
 
     public EventList sortByName(EventList eventList){
         Comparator<Event> comparing = Comparator.comparing(Event::getEventName);
@@ -104,14 +116,7 @@ public class EventList {
         Collections.reverse(list.getEvents());
         return list;
     }
-    public EventList sortByTag(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
-        EventList list = new EventList();
-        list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
 
-        return list;
-    }
     public EventList sortByTag(EventList eventList, String tag) {
         Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
         EventList list = new EventList();
@@ -200,14 +205,15 @@ public class EventList {
         return  list;
     }
 
-    public ArrayList<Event> getUpcomingEvent(){
+    public ArrayList<Event> getUpcomingEvent() {
         ArrayList<Event> list = new ArrayList<>();
-        for (Event event:events){
-            if (event.isUpComing() && !event.isEnd()){
+        for (Event event : events) {
+            if (event.isUpComing() && !event.isEnd()) {
                 list.add(event);
             }
         }
-        return  list;
+        list.sort(Comparator.comparing(Event::getDateStartAsDate));
+        return list;
     }
 
     public ArrayList<Event> getNewEvent(){
@@ -220,4 +226,13 @@ public class EventList {
         return  list;
     }
 
+    public EventList getAvailableEvent(){
+        EventList list = new EventList();
+        for (Event event:events){
+            if (!event.isEnd()){
+                list.getEvents().add(event);
+            }
+        }
+        return list;
+    }
 }

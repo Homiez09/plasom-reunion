@@ -31,7 +31,7 @@ public class AllEventListController {
     @FXML TextField searchbarTextField;
     @FXML ComboBox<String> categoryComboBox,sortComboBox;
     @FXML ScrollPane scrollPane;
-    @FXML Button categoryButton,sortButton,allButton,newButton,upComingButton;
+    @FXML Button categoryButton,sortButton,allButton,newButton,upComingButton,createButton;
     //---------------------------------------------------
     private User currentUser = (User) FXRouter.getData();
     private ObservableList<Event> eventObservableList;
@@ -46,6 +46,7 @@ public class AllEventListController {
         getByCategory();
         getBySearch();
         sortTilePane();
+        createButton.setVisible(currentUser != null);
     }
 
     private void setupPage() {

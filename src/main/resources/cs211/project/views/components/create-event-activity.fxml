@@ -34,7 +34,7 @@
                   <Font name="Leelawadee Bold" size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="activityNameTextField" styleClass="text-field-bg" stylesheets="@../../../../css/create-event.css">
+            <TextField fx:id="activityNameTextField" promptText="Name is limited to 30 characters or fewer." styleClass="text-field-bg" stylesheets="@../../../../css/create-event.css">
                <VBox.margin>
                   <Insets left="120.0" />
                </VBox.margin>
@@ -83,7 +83,7 @@
                   <Font name="Leelawadee Bold" size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="activityDescriptionTextField" styleClass="text-field-bg" stylesheets="@../../../../css/create-event.css">
+            <TextField fx:id="activityDescriptionTextField" promptText="Description is limited to 50 characters or fewer." styleClass="text-field-bg" stylesheets="@../../../../css/create-event.css">
                <VBox.margin>
                   <Insets left="120.0" />
                </VBox.margin>
