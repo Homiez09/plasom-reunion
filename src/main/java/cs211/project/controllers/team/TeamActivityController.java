@@ -27,19 +27,14 @@ import java.util.Locale;
 
 public class TeamActivityController {
     @FXML private AnchorPane navbarAnchorPane, sideBarAnchorPane, mainActivityAnchorPane, createActivityAnchorPane;
-
     @FXML private Label activityNameLabel, activityDescriptionLabel, activityStartTimeLabel, activityEndTimeLabel, nameRequirementLabel, errorContinueLabel, dateRequirementLabel, countDescriptionLabel;
     @FXML private TextField activityNameTextField;
     @FXML private TextArea descriptionTextArea;
-
     @FXML private DatePicker startDatePicker, endDatePicker;
-
     @FXML private Button createActivityButton, deleteButton;
     @FXML private ComboBox statusComboBox;
-
     @FXML private TableView activityTableView;
-    @FXML private ImageView teamNameReqImageView;
-
+    @FXML private ImageView teamNameReqImageView, chatIconImageView;
     @FXML private Spinner<Integer> startHourSpinner, startMinuteSpinner, endHourSpinner, endMinuteSpinner;
     @FXML private ChoiceBox<String> startDateChoiceBox, endDateChoiceBox;
     @FXML private TableColumn<ActivityTeam, String> nameColumn, startTimeColumn, endTimeColumn, descriptionColumn;
@@ -49,27 +44,26 @@ public class TeamActivityController {
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private final Team team = (Team) FXRouter.getData3();
+    private final String[] time = {"AM", "PM"}, status = {"On going", "Complete"};
+    private final int MAX_ACTIVITY_NAME_LIMIT = 35, MAX_DESCRIPTION_LIMIT = 280;
     private final ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
     private ActivityTeamList activityTeamList;
 
     protected LocalDateTime startDateTime, endDateTime, beforeStartDateTime;
     private LocalDateTime currentDateTime = LocalDateTime.now();
     protected LocalDate startDate, endDate;
+    private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
 
-    private final String[] time = {"AM", "PM"}, status = {"On going", "Complete"};
     protected String[] startTimeParts = {}, endTimeParts = {}, startParts = {}, endParts = {};
-
-    private final int MAX_ACTIVITY_NAME_LIMIT = 35, MAX_DESCRIPTION_LIMIT = 280;
-    private int beforeEditStartHour, beforeEditStartMinute;
-    protected int currentMinute, startHour, startMinute, endHour, endMinute, countInit = 0;
-
     private String startDateFormat, endDateFormat, description, activityName, beforeEditActivityName;
     protected String formattedCurrentHour, startAmPm, endAmPm, beforeStartDateEditFormat, startDateFromCSV, endDateFromCSV;
-
+    private int beforeEditStartHour, beforeEditStartMinute;
+    protected int currentMinute, startHour, startMinute, endHour, endMinute, countInit = 0;
     private boolean activityNameRequirement = false, dateValidateRequirement = false, editor;
-    private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
-    LoadSideBarComponent sideBarAnchorPaneLoad;
 
+    private LoadSideBarComponent sideBarAnchorPaneLoad;
+    private Image chat = new Image(getClass().getResourceAsStream("/images/icons/activity/chat.png"));
+    private Image chat_hover = new Image(getClass().getResourceAsStream("/images/icons/activity/chat_hover.png"));
 
 
     @FXML void initialize(){
@@ -94,6 +88,25 @@ public class TeamActivityController {
         showFocusRequirement();
 
         setSideBar();
+    }
+
+    @FXML
+    private void onChatButtonEntered() {
+        chatIconImageView.setImage(chat_hover);
+    }
+
+    @FXML
+    private void onChatButtonExited() {
+        chatIconImageView.setImage(chat);
+    }
+
+    @FXML
+    private void onChatButtonClicked() {
+        try {
+            FXRouter.goTo("team-chat", user, event, team);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected void setSideBar(){
