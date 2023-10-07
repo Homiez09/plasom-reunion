@@ -32,6 +32,8 @@ public class UsersEventController extends CardMyEventController{
     private Event currentEvent;
     Datasource<EventList> eventListDatasource;
     private EventList eventList;
+    private ObservableList<User> userObservableList;
+    private ObservableList<User> banUserObservableList;
 
 
 
@@ -43,7 +45,11 @@ public class UsersEventController extends CardMyEventController{
         this.currentEvent = eventList.findEventById(event.getEventID());
         this.MapUserJoinEvent = new JoinEventMap();
         this.popup = popup;
-        ObservableList<User> userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
+        BanUser data = new BanUser();
+        HashMap<User,EventList> getBan = data.readData();
+        userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
+        banUserObservableList = FXCollections.observableArrayList();
+
         eventNameLabel.setText(currentEvent.getEventName());
         userSizeLabel.setText(userObservableList.size()+"");
         statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
@@ -85,7 +91,7 @@ public class UsersEventController extends CardMyEventController{
             User user = cellData.getValue();
             String userId = user.getUserId();
             BanUser data = new BanUser();
-            HashMap<String,EventList> getBan = data.readData();
+            HashMap<User,EventList> getBan = data.readData();
             EventList list = getBan.get(userId);
             if (list == null) {
                 list = new EventList();
@@ -138,15 +144,16 @@ public class UsersEventController extends CardMyEventController{
     public void onComboBoxSelectionChanged(User user, String selectedOption,ObservableList<User> observableList) {
         if (user != null) {
             BanUser data = new BanUser();
-            HashMap<String,EventList> getBan = data.readData();
+            HashMap<User,EventList> getBan = data.readData();
             EventList list;
-            String userId = user.getUserId();
+            HashMap<String, UserList> joinEvent = MapUserJoinEvent.readData();
+            UserList deleteUser = joinEvent.get(currentEvent.getEventID());
                 switch (selectedOption){
                     case"Ban":
                         System.out.println(getBan.keySet());
-                        System.out.println(getBan.containsKey(userId));
-                        if (getBan.containsKey(userId)) {
-                            list = getBan.get(userId);
+                        System.out.println(getBan.containsKey(user));
+                        if (getBan.containsKey(user)) {
+                            list = getBan.get(user);
                         }else {
                             list = new EventList();
 
@@ -155,25 +162,22 @@ public class UsersEventController extends CardMyEventController{
                             list.getEvents().add(currentEvent);
                         }
 
-                        getBan.put(userId,list);
+                        getBan.put(user,list);
                         data.writeData(getBan);
                         break;
                     case "Kick":
-                        HashMap<String, UserList> joinEvent = MapUserJoinEvent.readData();
-                        UserList deleteUser = joinEvent.get(currentEvent.getEventID());
                         data = new BanUser();
                         getBan = data.readData();
-                        list = getBan.get(userId);
+                        list = getBan.get(user);
                         if (list != null) {
                             list.getEvents().remove(currentEvent);
-                            getBan.put(userId, list);
+                            getBan.put(user, list);
                         }
                         data.writeData(getBan);
                         deleteUser.getUsers().remove(user);
                         observableList.remove(user);
                         joinEvent.put(currentEvent.getEventID(),deleteUser);
                         userSizeLabel.setText(observableList.size()+"");
-
                         MapUserJoinEvent.writeData(joinEvent);
                         TableUsers.refresh();
                         break;
@@ -188,4 +192,6 @@ public class UsersEventController extends CardMyEventController{
         statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
         eventListDatasource.writeData(eventList);
     }
+
+
 }

@@ -60,12 +60,11 @@ public class MyEventsController extends AllEventListController {
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
         initSort();
         setupScrollBar();
-        loadData(currentPage,selectedPredicate);
+        loadData(1,selectedPredicate);
     }
 
     private void loadData(int page,Predicate<Event> selectedPredicate) {
         FilteredList<Event> filteredList = new FilteredList<>(eventObservableList,selectedPredicate);
-        System.out.println(filteredList.size());
         int startIndex = (page - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, filteredList.size());
         if (nodes ==null) {
@@ -73,7 +72,7 @@ public class MyEventsController extends AllEventListController {
         }
         for (int i = startIndex; i < endIndex; i++) {
             Event event = filteredList.get(i);
-            if (!checkNode(event) && !event.isEnd()) {
+            if (!checkNode(event)) {
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.setUserData(event);
                 anchorPane.setId(event.getEventID());
@@ -81,6 +80,7 @@ public class MyEventsController extends AllEventListController {
                 nodes.add(anchorPane);
             }
         }
+        System.out.println(nodes.size());
         listViewMain.setItems(nodes);
     }
 
@@ -93,7 +93,7 @@ public class MyEventsController extends AllEventListController {
     @FXML
     private void setupScrollBar() {
             listViewMain.addEventHandler(ScrollEvent.SCROLL, scrollEvent ->{
-                if (scrollEvent.getDeltaY() < 0 && (listViewMain.getItems().size()/itemsPerPage == currentPage)){
+                if (scrollEvent.getDeltaY() < 0 && (nodes.size()/itemsPerPage == currentPage)){
                     loadMore();
                 }
             });
@@ -164,9 +164,6 @@ public class MyEventsController extends AllEventListController {
         });
     }
 
-    private void checkEventList(){
-
-    }
 
     @FXML
     private void onCreateAction(ActionEvent actionEvent) {

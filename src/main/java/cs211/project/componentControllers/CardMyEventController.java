@@ -107,11 +107,11 @@ public class CardMyEventController {
             hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
             String descrip = event.getEventDescription().replaceAll("\n", " ");
             descriptionLabel.setText(descrip);
-            if (event.getSlotMember() == -1) {
+            /*if (event.getSlotMember() == -1) {
                 memberCountLabel.setText(userObservableList.size() + "");
             } else {
                 memberCountLabel.setText(userObservableList.size() + "/" + event.getSlotMember());
-            }
+            }*/
         }
     }
 

@@ -133,7 +133,7 @@ public class EventList {
         return events;
     }
 
-    public ArrayList<Event> getUserEventAll(User user){
+    public ArrayList<Event> getUserEvent(User user){
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events) {
             if (event.isHostEvent(user.getUserId())) {
@@ -143,24 +143,6 @@ public class EventList {
             } else {
                 for (Team team:event.getTeamList().getTeams()){
                     if (team.getMemberList().getUsers().contains(user)){
-                        list.add(event);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-    public ArrayList<Event> getUserEvent(User user){
-        ArrayList<Event> list = new ArrayList<>();
-        for (Event event : events) {
-            if (event.isHostEvent(user.getUserId())) {
-                list.add(event);
-            } else if (event.getUserList().getUsers().contains(user) && !event.isEnd()) {
-                list.add(event);
-            } else {
-                for (Team team:event.getTeamList().getTeams()){
-                    if (team.getMemberList().getUsers().contains(user) && !event.isEnd()){
                         list.add(event);
                     }
                 }
