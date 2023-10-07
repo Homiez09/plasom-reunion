@@ -53,6 +53,7 @@ public class CreateActivityController {
         setSpinner(activityEndMinuteSpinner,59);
         deleteButton.setVisible(false);
         dateTimeErrorLabel.setVisible(false);
+        limitCharacter();
         if (activityNameTextField.getText() == "" && activityDescriptionTextField.getText() == "") {saveButton.setDisable(true);}
         activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
@@ -174,5 +175,13 @@ public class CreateActivityController {
         } else {
             save.setDisable(true);
         }
+    }
+    private void limitCharacter() {
+        activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (activityNameTextField.getText().length() > 30) {activityNameTextField.setText(oldValue);}
+        });
+        activityDescriptionTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (activityDescriptionTextField.getText().length() > 50) {activityDescriptionTextField.setText(oldValue);}
+        });
     }
 }

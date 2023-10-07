@@ -29,7 +29,7 @@ import java.util.HashMap;
 public class EventPageController {
     Event event = (Event) FXRouter.getData2();
     @FXML
-    private AnchorPane navbarAnchorPane,staffApplicationAnchorPane;
+    private AnchorPane navbarAnchorPane;
     @FXML private StackPane imageStackPane;
     @FXML private Button editEventButton, joinEventButton,editActivityButton;
     @FXML private Text eventInformationText;
@@ -42,7 +42,6 @@ public class EventPageController {
     private EventList eventList;
     private ActivityList activityList;
 
-    private Image image;
     private HashMap<String, UserList> hashMap;
     private JoinEventMap joinEventMap;
     private UserList userList;
@@ -59,7 +58,6 @@ public class EventPageController {
         new LoadNavbarComponent(user, navbarAnchorPane);
         initButton();
         showEventData();
-        staffApplicationAnchorPane.setVisible(false);
 
     }
 
@@ -144,28 +142,11 @@ public class EventPageController {
         eventActivityTableView.setFixedCellSize(40);
     }
 
-//    @FXML protected void onApplyStaffButtonClick() {
-//        if (!staffApplicationAnchorPane.isVisible()) {
-//            staffApplicationAnchorPane.setVisible(true);
-//            FXMLLoader staffApplicationLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/member-application.fxml"));
-//            try {
-//                AnchorPane staffApplicationWindow = staffApplicationLoader.load();
-//                MemberApplicationController memberApplicationController = staffApplicationLoader.getController();
-//                memberApplicationController.loadData(event);
-//                staffApplicationAnchorPane.getChildren().add(staffApplicationWindow);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//    }
-
     @FXML protected void onApplyStaffButtonClick(){
-        if (!staffApplicationAnchorPane.isVisible()) {
-            try {
-                FXRouter.goTo("join-team", user, event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            FXRouter.goTo("join-team", user, event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
