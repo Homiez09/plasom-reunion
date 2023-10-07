@@ -219,10 +219,11 @@ public class EventList {
     public ArrayList<Event> getNewEvent(){
         ArrayList<Event> list = new ArrayList<>();
         for (Event event:events){
-            if (event.isNewEvent() && !event.isEnd()){
+            if (!event.isEnd()){
                 list.add(event);
             }
         }
+        list.sort(Comparator.comparing(Event::getTimestampAsDate));
         return  list;
     }
 

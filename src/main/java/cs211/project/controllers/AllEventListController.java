@@ -35,8 +35,7 @@ public class AllEventListController {
     //---------------------------------------------------
     private User currentUser = (User) FXRouter.getData();
     private ObservableList<Event> eventObservableList;
-    private int currentPage = 1;
-    private final int itemsPerPage = 8;
+    private EventList eventList;
     private Predicate<Event> selectedPredicate = null;
 
     @FXML
@@ -51,7 +50,7 @@ public class AllEventListController {
 
     private void setupPage() {
         Datasource<EventList> eventListDatasource = new EventListDataSource();
-        EventList eventList = eventListDatasource.readData();
+        eventList = eventListDatasource.readData();
         this.eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
         initCategory();
         initSort();
@@ -59,31 +58,17 @@ public class AllEventListController {
         allButton.setDisable(true);
         Comparator<Event> eventComparator = Comparator.comparing(Event::getEventName);
         eventObservableList.sort(eventComparator);
-        loadData(currentPage,selectedPredicate);
+        loadFirst(selectedPredicate);
     }
 
-    private void loadData(int page,Predicate<Event> selectedPredicate) {
-        FilteredList<Event> filteredList = new FilteredList<>(eventObservableList,selectedPredicate);
-
-        int startIndex = (page - 1) * itemsPerPage;
-        int endIndex = Math.min(startIndex + itemsPerPage, filteredList.size());
-
-        for (int i = startIndex; i < endIndex; i++) {
-            Event event = filteredList.get(i);
-            if (!checkNode(event) && !event.isEnd()) {
-                AnchorPane anchorPane = new AnchorPane();
-                anchorPane.setUserData(event);
-                anchorPane.setId(event.getEventID());
-                new LoadCardEventComponent(anchorPane, event, "card-event");
-                tilePaneMain.getChildren().add(anchorPane);
-            }
-        }
+    private void loadFirst(Predicate<Event> selectedPredicate) {
+        FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
+        LoadComponent(filteredList, 8);
     }
 
-    @FXML
-    private void loadMore() {
-        currentPage++;
-        loadData(currentPage,selectedPredicate);
+    private void loadMore(Predicate<Event> selectedPredicate) {
+        FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
+        LoadComponent(filteredList, 4);
     }
 
     private void setupScrollBar(){
@@ -91,12 +76,13 @@ public class AllEventListController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double value = newValue.doubleValue();
-                if (value >= 0.15 && tilePaneMain.getChildren().size()/itemsPerPage == currentPage) {
-                        loadMore();
+                if (value > 0.8) {
+                    loadMore(selectedPredicate);
                 }
             }
         });
     }
+
     private void removeNode(Predicate<Event> selectedPredicate) {
         FilteredList<Event> filteredList = eventObservableList.filtered(selectedPredicate);
         List<Node> nodesToRemove = new ArrayList<>();
@@ -160,13 +146,12 @@ public class AllEventListController {
                     default:
                         break;
                 }
-            currentPage = 1;
             allButton.setDisable(false);
             newButton.setDisable(false);
             upComingButton.setDisable(false);
             removeNode(selectedPredicate);
             if (!oldTag.isEmpty()) {
-                loadData(currentPage,selectedPredicate);
+                loadFirst(selectedPredicate);
             }
         });
     }
@@ -187,8 +172,8 @@ public class AllEventListController {
             }
 
             removeNode(combinedPredicate);
-            currentPage = 1;
-            loadData(currentPage, combinedPredicate);
+            loadFirst(combinedPredicate);
+
         });
     }
 
@@ -197,28 +182,27 @@ public class AllEventListController {
             String sortBy = newValue.trim();
             tilePaneMain.getChildren().clear();
             scrollPane.setVvalue(0.0);
-            currentPage = 1;
             Comparator<Event> eventComparator =null;
             switch (sortBy){
                 case "Name":
                     eventComparator = Comparator.comparing(Event::getEventName);
                     eventObservableList.sort(eventComparator);
-                    loadData(currentPage,selectedPredicate);
+                    loadFirst(selectedPredicate);
                     break;
                 case "Start":
                     eventComparator = Comparator.comparing(Event::getDateStartAsDate);
                     eventObservableList.sort(eventComparator);
-                    loadData(currentPage,selectedPredicate);
+                    loadFirst(selectedPredicate);
                     break;
                 case "Member":
                     eventComparator = Comparator.comparing(Event::getUserInEvent);
                     eventObservableList.sort(eventComparator);
-                    loadData(currentPage,selectedPredicate);
+                    loadFirst(selectedPredicate);
                     break;
                 case "End":
                     eventComparator = Comparator.comparing(Event::getDateEndAsDate);
                     eventObservableList.sort(eventComparator);
-                    loadData(currentPage,selectedPredicate);
+                    loadFirst(selectedPredicate);
                     break;
             }
         });
@@ -247,29 +231,23 @@ public class AllEventListController {
         allButton.setDisable(true);
         Comparator<Event> eventComparator = Comparator.comparing(Event::getEventName);
         eventObservableList.sort(eventComparator);
-        loadData(currentPage,selectedPredicate);
-
-
+        loadFirst(selectedPredicate);
     }
 
     @FXML
     private void onNewClick(ActionEvent actionEvent) {
         reset();
         newButton.setDisable(true);
-        Comparator<Event> eventComparator = Comparator.comparing(Event::getTimestamp);
-        eventObservableList.sort(eventComparator);
-        loadData(currentPage,selectedPredicate);
-
-
+        eventObservableList = FXCollections.observableArrayList(eventList.getNewEvent());
+        loadFirst(selectedPredicate);
     }
 
     @FXML
     private void onUpClick(ActionEvent actionEvent) {
         reset();
         upComingButton.setDisable(true);
-        Comparator<Event> eventComparator = Comparator.comparing(Event::getEventDateEnd);
-        eventObservableList.sort(eventComparator);
-        loadData(currentPage,selectedPredicate);
+        eventObservableList = FXCollections.observableArrayList(eventList.getUpcomingEvent());
+        loadFirst(selectedPredicate);
     }
 
     @FXML
@@ -296,7 +274,6 @@ public class AllEventListController {
         allButton.setDisable(false);
         newButton.setDisable(false);
         upComingButton.setDisable(false);
-        currentPage = 1;
         scrollPane.setVvalue(0.0);
         tilePaneMain.getChildren().clear();
         selectedPredicate = null;
@@ -313,4 +290,20 @@ public class AllEventListController {
         return false;
     }
 
+    private void LoadComponent(FilteredList<Event> filteredList, int maxItemsPerLoad) {
+        int itemsLoaded = 0;
+        for (Event event : filteredList) {
+            if (!checkNode(event)) {
+                AnchorPane anchorPane = new AnchorPane();
+                anchorPane.setUserData(event);
+                anchorPane.setId(event.getEventID());
+                new LoadCardEventComponent(anchorPane, event, "card-event");
+                tilePaneMain.getChildren().addAll(anchorPane);
+                itemsLoaded++;
+                if (itemsLoaded >= maxItemsPerLoad) {
+                    break;
+                }
+            }
+        }
+    }
 }

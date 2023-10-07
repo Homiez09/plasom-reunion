@@ -183,19 +183,17 @@ public class Event implements Comparable<Event>{
         return eventDate.isAfter(currentTime);
     }
 
-
+/*
     public boolean isNewEvent() {
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime parsedTimeStamp;
-        if (timestamp.length() == 16) {parsedTimeStamp = LocalDateTime.parse(timestamp, formatter2);}
-        else {parsedTimeStamp = LocalDateTime.parse(timestamp, formatter1);}
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime parsedTimeStamp = LocalDateTime.parse(timestamp, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
 
-        long eventDateDiff = ChronoUnit.DAYS.between(parsedTimeStamp, currentTime);
+        long daysUntilEvent = ChronoUnit.DAYS.between(currentTime, parsedTimeStamp);
 
-        return eventDateDiff <= 7;
+        return daysUntilEvent >= 0 && daysUntilEvent <= 7;
     }
+*/
 
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();

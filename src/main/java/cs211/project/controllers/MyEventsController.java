@@ -18,7 +18,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
@@ -61,7 +60,7 @@ public class MyEventsController{
             eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
             memberButton.setDisable(true);
         }
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
     }
 
     private void setupPage(){
@@ -73,13 +72,20 @@ public class MyEventsController{
 
     }
 
-    private void loadData(Predicate<Event> selectedPredicate) {
+    private void loadFirst(Predicate<Event> selectedPredicate) {
         FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
         if (nodes == null) {
             nodes = FXCollections.observableArrayList();
         }
+        LoadComponent(filteredList, 3);
+    }
+    private void loadMore(Predicate<Event> selectedPredicate) {
+        FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
+        LoadComponent(filteredList, 1);
+    }
+
+    private void LoadComponent(FilteredList<Event> filteredList, int maxItemsPerLoad) {
         int itemsLoaded = 0;
-        int maxItemsPerLoad = 3;
         for (Event event : filteredList) {
             if (!checkNode(event)) {
                 AnchorPane anchorPane = new AnchorPane();
@@ -97,9 +103,8 @@ public class MyEventsController{
         if (scrollBar!=null){
             scrollBar.setValue(0.5);
         }
-        System.out.println(nodes.size());
-        System.out.println(eventObservableList.size());
     }
+
 
     @FXML
     private void setupScrollBar() {
@@ -107,8 +112,8 @@ public class MyEventsController{
             scrollBar = (ScrollBar) listViewMain.lookup(".scroll-bar:vertical");
             scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
                 double scrollValue = newValue.doubleValue();
-                if (scrollValue >= 0.9 && nodes.size() < eventObservableList.size()){
-                    loadData(selectedPredicate);
+                if (scrollValue > 0.8 && nodes.size() < eventObservableList.size()){
+                    loadMore(selectedPredicate);
                 }
             });
         });
@@ -143,7 +148,7 @@ public class MyEventsController{
                 return event.getEventName().toLowerCase().contains(searchText);
             };
             removeNode(searchPredicate);
-            loadData(searchPredicate);
+            loadFirst(searchPredicate);
             sortComboBox.setValue("");
         });
     }
@@ -173,7 +178,7 @@ public class MyEventsController{
                     eventObservableList.sort(eventComparator);
                     break;
             }
-            loadData(selectedPredicate);
+            loadFirst(selectedPredicate);
             searchbarTextField.setText("");
         });
     }
@@ -192,7 +197,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         allButton.setDisable(true);
     }
 
@@ -201,7 +206,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getCompleteEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         completeButton.setDisable(true);
     }
 
@@ -210,7 +215,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         ownerButton.setDisable(true);
     }
 
@@ -219,7 +224,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         memberButton.setDisable(true);
     }
 
@@ -228,7 +233,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getTeamEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         staffButton.setDisable(true);
     }
 
@@ -292,7 +297,7 @@ public class MyEventsController{
                 int itemCount = listViewMain.getItems().size();
                 if (itemCount == 2) {
                     System.out.println("Test Lock");
-                    loadData(selectedPredicate);
+                    loadFirst(selectedPredicate);
                 }
         });
     }
