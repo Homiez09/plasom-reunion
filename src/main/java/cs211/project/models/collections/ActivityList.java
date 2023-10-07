@@ -62,7 +62,7 @@ public class ActivityList {
     public ActivityList sortActivity(ActivityList activityList){
         Comparator<Activity> comparing = Comparator
                 .comparing((Activity activity) -> LocalDateTime.parse(activity.getStartTime(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
-                .thenComparing((Activity activity) -> LocalDateTime.parse(activity.getStartTime(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+                .thenComparing((Activity activity) -> LocalDateTime.parse(activity.getEndTime(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
         ActivityList list = new ActivityList();
         list.getActivities().addAll(activityList.getActivities());
         Collections.sort(list.getActivities(),comparing);
