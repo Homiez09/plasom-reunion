@@ -2,6 +2,8 @@ package cs211.project.models.collections;
 
 import cs211.project.models.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EventList {
@@ -89,7 +91,9 @@ public class EventList {
     }
 
     public EventList sortUpcoming(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getEventDateStart);
+        Comparator<Event> comparing = Comparator
+                .comparing((Event event) -> LocalDateTime.parse(event.getEventDateStart(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
+                .thenComparing((Event event) -> LocalDateTime.parse(event.getEventDateEnd(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
         Collections.sort(list.getEvents(),comparing);
@@ -255,4 +259,13 @@ public class EventList {
         return  list;
     }
 
+    public EventList getAvailableEvent(){
+        EventList list = new EventList();
+        for (Event event:events){
+            if (!event.isEnd()){
+                list.addEvent(event);
+            }
+        }
+        return list;
+    }
 }

@@ -185,12 +185,14 @@ public class Event implements Comparable<Event>{
     }
 
     public boolean isNewEvent() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-        LocalDateTime timeStamp = LocalDateTime.parse(timestamp, formatter);
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime parsedTimeStamp;
+        if (timestamp.length() == 16) {parsedTimeStamp = LocalDateTime.parse(timestamp, formatter2);}
+        else {parsedTimeStamp = LocalDateTime.parse(timestamp, formatter1);}
         LocalDateTime currentTime = LocalDateTime.now();
 
-        long eventDateDiff = ChronoUnit.DAYS.between(timeStamp, currentTime);
+        long eventDateDiff = ChronoUnit.DAYS.between(parsedTimeStamp, currentTime);
 
         return eventDateDiff <= 7;
     }
