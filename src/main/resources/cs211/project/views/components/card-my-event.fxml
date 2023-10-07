@@ -79,18 +79,6 @@
                            </font>
                         </Label>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="21.0" />
-                        <Label fx:id="memberCountLabel" text="10/15">
-                           <graphic>
-                              <ImageView fx:id="calendaImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../images/events/user-group.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT">

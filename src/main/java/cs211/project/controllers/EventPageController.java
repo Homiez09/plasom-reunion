@@ -10,7 +10,6 @@ import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -26,7 +25,6 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class EventPageController {
     Event event = (Event) FXRouter.getData2();
@@ -152,9 +150,7 @@ public class EventPageController {
         }
     }
 
-    public void onJoinEventAcition(ActionEvent actionEvent) {
-
-
+    public void onJoinEventAction(ActionEvent actionEvent) {
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
         if (hashMap.containsKey(event.getEventID())) {
             userList = hashMap.get(event.getEventID());
@@ -162,6 +158,7 @@ public class EventPageController {
             userList = new UserList();
         }
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+
         if (userList.getUsers().contains(user) || user.getUserId().equals(event.getEventHostUser().getUserId())){
             try {
                 FXRouter.goTo("event",user,event);
@@ -169,14 +166,11 @@ public class EventPageController {
                 throw new RuntimeException(e);
             }
         }else {
-
             userList.getUsers().add(user);
             hashMap.put(event.getEventID(), userList);
-
-            eventDatasource.writeData(eventList);
             joinEventMap.writeData(hashMap);
             try {
-                FXRouter.goTo("my-event", user);
+                FXRouter.goTo("my-event", user,"event");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -184,27 +178,11 @@ public class EventPageController {
     }
 
     public void initButton(){
-        if (user != null && user.getUserId().equals(event.getEventHostUser().getUserId())) {
-            editEventButton.setVisible(true);
-            editActivityButton.setVisible(true);
-        } else {
-            editEventButton.setVisible(false);
-            editActivityButton.setVisible(false);
-        }
-        if (hashMap.containsKey(event.getEventID())) {
-            userList = hashMap.get(event.getEventID());
-        }else {
-            userList = new UserList();
-        }
-        if (user == null || userList.getUsers().contains(user)|| event.getEventHostUser().getUserId().equals(user.getUserId())){
-            joinEventButton.setVisible(false);
-        }else {
-            joinEventButton.setVisible(true);
-        }
-        if ( user != null && event.getTeamList().getTeams().size() != 0) {
-            teamApplyBox.setVisible(true);
-        } else {
-            teamApplyBox.setVisible(false);
-        }
+        editEventButton.setVisible(event.isHostEvent(user));
+        joinEventButton.setVisible( event.isJoinEvent() &&
+                                    !event.isFull() &&
+                                    !event.getUserList().getUsers().contains(user) &&
+                                    !event.isHostEvent(user));
+        teamApplyBox.setVisible(event.getTeamList() != null);
     }
 }

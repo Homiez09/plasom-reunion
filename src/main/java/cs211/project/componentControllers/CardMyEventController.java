@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 public class CardMyEventController {
     @FXML
-    Label eventNameLabel,startDateLabel,locationLabel, memberCountLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
+    Label eventNameLabel,startDateLabel,locationLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
     @FXML
     ImageView eventImageView,profileImageView;
     @FXML
@@ -40,7 +40,6 @@ public class CardMyEventController {
     private HashMap<String, UserList> joinEventMap; // Collect EventID
     private UserList userList;// Collect User
     private Event currentEvent;
-    private ObservableList<User> userObservableList;
 
     @FXML
     private void initialize() {
@@ -64,14 +63,17 @@ public class CardMyEventController {
         userList.getUsers().remove(currentUser);
         joinEventMap.put(currentEvent.getEventID(), userList);
         joinEventDatasource.writeData(joinEventMap);
-
+        try {
+            FXRouter.goTo("my-event",currentUser,"card");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setEventData(Event event) {
         setupDataPage();
         if (event !=null) {
             currentEvent = eventList.findEventById(event.getEventID());
-            userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
 
             buttonVisible(event.isEnd());
             if (event.getUserList().getUsers().contains(currentUser)) {
@@ -82,7 +84,7 @@ public class CardMyEventController {
                 leaveEventButton.setVisible(false);
             }
             for (Team team : event.getTeamList().getTeams()) {
-                if (team.getMemberList().getUsers().contains(currentUser) && !currentEvent.isHostEvent(currentUser.getUserId())) {
+                if (team.getMemberList().getUsers().contains(currentUser) && !currentEvent.isHostEvent(currentUser)) {
                     manageUserButton.setVisible(false);
                     leaveEventButton.setVisible(false);
                 }
@@ -91,8 +93,8 @@ public class CardMyEventController {
 
             Image image = new Image("file:" + event.getEventImagePath(), 200, 200, false, false);
             if (event.getEventImagePath().equals("null")) {
-                String imgpath = "/images/events/event-default.png";
-                image = new Image(getClass().getResourceAsStream(imgpath), 200, 200, false, false);
+                String imgPath = "/images/events/event-default-auth.png";
+                image = new Image(getClass().getResourceAsStream(imgPath), 200, 200, false, false);
             }
             eventImageView.setImage(image);
             eventNameLabel.setText(event.getEventName());
@@ -107,11 +109,7 @@ public class CardMyEventController {
             hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
             String descrip = event.getEventDescription().replaceAll("\n", " ");
             descriptionLabel.setText(descrip);
-            if (event.getSlotMember() == -1) {
-                memberCountLabel.setText(userObservableList.size() + "");
-            } else {
-                memberCountLabel.setText(userObservableList.size() + "/" + event.getSlotMember());
-            }
+
         }
     }
 
@@ -124,7 +122,7 @@ public class CardMyEventController {
     private void onForStaffButton(ActionEvent actionEvent) {
         joinTeamMap = new JoinTeamMap();
         teamHashMap = joinTeamMap.readData();
-        if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser.getUserId())){
+        if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser)){
             try {
                 FXRouter.goTo("select-team",currentUser, currentEvent);
             } catch (IOException e) {
@@ -150,7 +148,7 @@ public class CardMyEventController {
         popupContent.getChildren().add(box);
         popup.getContent().addAll(popupContent);
         popup.show(manageUserButton.getScene().getWindow());
-        System.out.println(popup.isShowing());
+
     }
     @FXML
     private void onClickCard(MouseEvent mouseEvent) {

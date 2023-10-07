@@ -92,7 +92,7 @@
                                        </children>
                                     </HBox>
                                     <Label fx:id="eventTagLabel" text="eventTagLabel" />
-                                    <Button fx:id="joinEventButton" mnemonicParsing="false" onAction="#onJoinEventAcition" styleClass="page-button" text="Add to Calendar" />
+                                    <Button fx:id="joinEventButton" mnemonicParsing="false" onAction="#onJoinEventAction" styleClass="page-button" text="Add to Calendar" />
                                     <VBox fx:id="teamApplyBox" alignment="CENTER" maxWidth="390.0" prefWidth="390.0" spacing="10.0" styleClass="staff-apply-box">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This event is open for staff application!">
