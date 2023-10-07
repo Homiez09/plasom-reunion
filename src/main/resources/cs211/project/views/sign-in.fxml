@@ -7,13 +7,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -220,119 +217,7 @@
          </fill>
       </Rectangle>
       <ImageView fx:id="upComingEventsBackgroundImageView" fitHeight="771.0" fitWidth="537.0" layoutX="615.0" layoutY="-3.0" />
-      <VBox layoutX="616.0" prefHeight="768.0" prefWidth="536.0">
-         <children>
-            <Label contentDisplay="CENTER" prefHeight="182.0" prefWidth="475.0" text="upcoming events" textAlignment="CENTER">
-               <font>
-                  <Font name="FreesiaUPC Bold" size="48.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="80.0" top="12.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets top="75.0" />
-               </padding>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="0.4360189573459715" startX="0.18009478672985782" startY="0.43601895734597157">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.9607843160629272" green="0.9529411792755127" blue="0.929411768913269" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-               <styleClass>
-                  <String fx:value="font" />
-                  <String fx:value="text-5xl" />
-                  <String fx:value="weight-bold" />
-               </styleClass>
-            </Label>
-            <Pane prefHeight="514.0" prefWidth="529.0">
-               <children>
-                  <ImageView fx:id="upComingEventsImageView" fitHeight="478.0" fitWidth="320.0" layoutX="115.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" styleClass="custom-box" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="224.0" layoutX="115.0" layoutY="267.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="320.0">
-                     <fill>
-                        <LinearGradient endX="0.6445497630331753" endY="0.16587677725118488" startX="0.5260663507109005" startY="0.8246445497630331">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.9921568632125854" green="0.658823549747467" blue="0.22745098173618317" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.9921568632125854" green="0.658823549747467" blue="0.22745098173618317" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                     <styleClass>
-                        <String fx:value="upcoming-border" />
-                        <String fx:value="custom-box" />
-                     </styleClass>
-                  </Rectangle>
-                  <Label fx:id="eventUpComingName" layoutX="155.0" layoutY="287.0" prefHeight="43.0" prefWidth="235.0" text="EVENT NAME" textFill="#f5f3ed">
-                     <font>
-                        <Font name="FreesiaUPC Bold" size="24.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="font" />
-                        <String fx:value="text-2xl" />
-                        <String fx:value="weight-bold" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="eventUpComingPlace" layoutX="155.0" layoutY="330.0" prefHeight="0.0" prefWidth="207.0" text="PLACE" textFill="#f5f3ed">
-                     <font>
-                        <Font name="FreesiaUPC Bold" size="20.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="font" />
-                        <String fx:value="text-xl" />
-                        <String fx:value="weight-bold" />
-                     </styleClass>
-                  </Label>
-                  <Circle fx:id="nextCircle" fill="#fff5e5d6" layoutX="445.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button" />
-                  <Label fx:id="eventUpComingDate" layoutX="155.0" layoutY="442.0" prefHeight="32.0" prefWidth="207.0" text="22  Aug,2023" textFill="#e8e8e8">
-                     <font>
-                        <Font name="FreesiaUPC" size="18.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="font" />
-                        <String fx:value="text-lg" />
-                     </styleClass>
-                  </Label>
-                  <Circle fx:id="backCircle" fill="#fff4e3d7" layoutX="104.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button">
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </Circle>
-                  <Button fx:id="backButton" layoutX="43.0" layoutY="122.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="52.0" prefWidth="102.0" text="&lt;" textFill="#00000099">
-                     <font>
-                        <Font name="Agency FB" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="nextButton" layoutX="390.0" layoutY="122.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="43.0" prefWidth="109.0" text="&gt;" textFill="#00000099">
-                     <styleClass>
-                        <String fx:value="upcoming-button" />
-                        <String fx:value="arrow-upcoming-button" />
-                        <String fx:value="arrow-circle-button" />
-                     </styleClass>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Pane>
-         </children>
-      </VBox>
+      <AnchorPane fx:id="upcomingZoneAnchorPane" layoutX="616.0" prefHeight="200.0" prefWidth="200.0" />
       <Label fx:id="backButtonLabel" layoutX="30.0" layoutY="20.0" lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="32.0" prefWidth="64.0" text="back " textFill="#413b3b">
          <font>
             <Font name="FreesiaUPC" size="20.0" />

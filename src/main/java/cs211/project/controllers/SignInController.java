@@ -1,12 +1,14 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
+import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
+import cs211.project.services.EventListDataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.LoadCardEventUpcomingForAuth;
 import cs211.project.services.UserListDataSource;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,29 +16,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Shape;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class SignInController {
-
-    private int page = 0;
-    private int maxPage;
     private final int maxPasswordLimit = 27, maxUsernameLimit = 20;
-
-
-    @FXML private Button backButton, nextButton;
-    @FXML private Shape backCircle, nextCircle;
 
     @FXML private PasswordField passwordField;
     @FXML private TextField showPasswordTextField, usernameTextField;
 
-    @FXML private ImageView upComingEventsImageView, signBackgroundImageView, upComingEventsBackgroundImageView;
+    @FXML private ImageView signBackgroundImageView, upComingEventsBackgroundImageView;
     @FXML private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
-    private Image showPasswordImage, hidePasswordImage;
-
     @FXML private Label errorLabel;
+    @FXML private AnchorPane upcomingZoneAnchorPane;
 
+    private Image showPasswordImage, hidePasswordImage;
     private String password, username;
     private UserListDataSource datasource;
     private UserList userList;
@@ -45,18 +40,17 @@ public class SignInController {
     @FXML
     void initialize() {
         datasource = new UserListDataSource("data", "user-list.csv");
-
         userList = datasource.readData();
+
         eventHandleEnter();
         loadImage();
-        showImage(page);
-        maxPage = calculateMaxPage();
+
+        new LoadCardEventUpcomingForAuth(upcomingZoneAnchorPane);
 
         maximumLengthField();
 
         showPasswordTextField.setVisible(false);
         visiblePasswordImageView.setImage(hidePasswordImage);
-        updateVisibleButton();
 
         errorLabel.setVisible(false);
     }
@@ -125,18 +119,7 @@ public class SignInController {
             resetBorderTextField();
         }
     }
-    @FXML private void onNextButtonClick() {
-        if (page < maxPage) {
-            page++;
-        }
-        showImage(page);
-    }
-    @FXML private void onBackButtonClick() {
-        if (page > 0) {
-            page--;
-        }
-        showImage(page);
-    }
+
     @FXML private void onVisiblePasswordClick() {
         if (visiblePasswordImageView.getImage() == hidePasswordImage) {
             showPasswordTextField.setVisible(true);
@@ -202,13 +185,6 @@ public class SignInController {
 
     }
 
-    private void updateVisibleButton() {
-        backButton.setVisible(page > 0);
-        backCircle.setVisible(page > 0);
-        nextButton.setVisible(page != maxPage);
-        nextCircle.setVisible(page != maxPage);
-    }
-
     @FXML private void onKeyHidePassword() {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
@@ -240,22 +216,4 @@ public class SignInController {
         hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
         visiblePasswordImageView.setImage(hidePasswordImage);
     }
-    private void showImage(int pageNumber) {
-        Image image = new Image(getClass().getResourceAsStream("/images/login/event" + pageNumber + "_test.jpg"));
-        upComingEventsImageView.setImage(image);
-        updateVisibleButton();
-    }
-    private int calculateMaxPage() {
-        int countImage = 0;
-        while (true) {
-            String path = "/images/login/event" + countImage + "_test.jpg";
-            if (getClass().getResource(path) != null) {
-                countImage++;
-            } else {
-                break;
-            }
-        }
-        return countImage - 1;
-    }
-
 }
