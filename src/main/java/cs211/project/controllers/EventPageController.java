@@ -170,7 +170,7 @@ public class EventPageController {
             hashMap.put(event.getEventID(), userList);
             joinEventMap.writeData(hashMap);
             try {
-                FXRouter.goTo("my-event", user);
+                FXRouter.goTo("my-event", user,"event");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

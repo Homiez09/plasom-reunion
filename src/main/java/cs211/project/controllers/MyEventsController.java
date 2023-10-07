@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -38,12 +39,12 @@ public class MyEventsController{
     @FXML TextField searchbarTextField;
     //----------------------------
     private User currentUser = (User) FXRouter.getData();
+    private String from = (String) FXRouter.getData2();
     private ObservableList<Event> eventObservableList;
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
     private Predicate<Event> selectedPredicate = null;
     private ObservableList<Node> nodes;
-    private boolean lockLoad = true;
     private ScrollBar scrollBar ;
 
 
@@ -54,7 +55,13 @@ public class MyEventsController{
         allButton.setDisable(true);
         getBySearch();
         sortTilePane();
-
+        if (from.equals("card")){
+            System.out.println(from);
+            resetButton();
+            eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
+            memberButton.setDisable(true);
+        }
+        loadData(selectedPredicate);
     }
 
     private void setupPage(){
@@ -63,7 +70,7 @@ public class MyEventsController{
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
         initSort();
         setupScrollBar();
-        loadData(selectedPredicate);
+
     }
 
     private void loadData(Predicate<Event> selectedPredicate) {
@@ -257,15 +264,19 @@ public class MyEventsController{
     }
 
     private void reset() {
+        resetButton();
+        selectedPredicate = null;
+        sortComboBox.setValue("");
+        eventList = eventDatasource.readData();
+        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
+    }
+
+    private void resetButton(){
         allButton.setDisable(false);
         completeButton.setDisable(false);
         ownerButton.setDisable(false);
         memberButton.setDisable(false);
         staffButton.setDisable(false);
-        selectedPredicate = null;
-        sortComboBox.setValue("");
-        eventList = eventDatasource.readData();
-        eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
     }
 
     private boolean checkNode(Event event) {
@@ -286,5 +297,12 @@ public class MyEventsController{
         });
     }
 
+    public void onEventsClick(MouseEvent mouseEvent) {
+        try {
+            FXRouter.goTo("all-events",currentUser);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 

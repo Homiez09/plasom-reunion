@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 public class CardMyEventController {
     @FXML
-    Label eventNameLabel,startDateLabel,locationLabel, memberCountLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
+    Label eventNameLabel,startDateLabel,locationLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
     @FXML
     ImageView eventImageView,profileImageView;
     @FXML
@@ -63,7 +63,11 @@ public class CardMyEventController {
         userList.getUsers().remove(currentUser);
         joinEventMap.put(currentEvent.getEventID(), userList);
         joinEventDatasource.writeData(joinEventMap);
-
+        try {
+            FXRouter.goTo("my-event",currentUser,"card");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setEventData(Event event) {
@@ -105,11 +109,7 @@ public class CardMyEventController {
             hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
             String descrip = event.getEventDescription().replaceAll("\n", " ");
             descriptionLabel.setText(descrip);
-            /*if (event.getSlotMember() == -1) {
-                memberCountLabel.setText(userObservableList.size() + "");
-            } else {
-                memberCountLabel.setText(userObservableList.size() + "/" + event.getSlotMember());
-            }*/
+
         }
     }
 

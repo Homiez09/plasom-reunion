@@ -19,7 +19,13 @@
       <Separator fx:id="popupTest11" opacity="0.0" prefHeight="11.0" prefWidth="1152.0" />
       <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="1152.0">
          <children>
-            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="100.0" />
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="60.0" />
+            <Label fx:id="evventsLabel" alignment="CENTER" lineSpacing="2.0" onMouseClicked="#onEventsClick" text="&lt; Events" textFill="#413b3b">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="30.0" />
             <VBox alignment="CENTER_LEFT">
                <children>
                   <Label prefWidth="130.0" text="My Event">
@@ -29,7 +35,7 @@
                   </Label>
                </children>
             </VBox>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="668.0" />
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="590.0" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onManageEventButton" styleClass="cancel-profile-button" text="Manage Event" />
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="15.0" />
             <Button fx:id="createAction" mnemonicParsing="false" onAction="#onCreateAction" styleClass="cancel-profile-button" text="+ Create Event" />

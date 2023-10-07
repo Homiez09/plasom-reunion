@@ -160,7 +160,7 @@ public class EventList {
         ArrayList<Event> list = new ArrayList<>();
         if (user!=null){
             for (Event event:events){
-                if (event.getUserList().getUsers().contains(user)){
+                if (event.getUserList().getUsers().contains(user) && !event.isEnd()){
                     list.add(event);
                 }
             }
