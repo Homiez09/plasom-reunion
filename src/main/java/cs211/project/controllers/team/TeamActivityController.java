@@ -382,6 +382,21 @@ public class TeamActivityController {
     private void showTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        startTimeColumn.setCellFactory(column -> {
+            return new TableCell<ActivityTeam, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) setText(null);
+                    String[] itemSplit = item.split(".");
+                    String[] dateSplit = itemSplit[0].split("-");
+                    String date = dateSplit[2] + "/" +  dateSplit[1] + "/" + dateSplit[0];
+                    String time = itemSplit[1];
+
+                    setText(date + " " + time);
+                }
+            };
+        });
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusColumn.setCellFactory(column -> {

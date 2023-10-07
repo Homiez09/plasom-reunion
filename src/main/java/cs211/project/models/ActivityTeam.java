@@ -26,10 +26,9 @@ public class ActivityTeam extends Activity {
     public boolean getStatus() {
         if (status) return true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm");
-        LocalDateTime start = LocalDateTime.parse(this.getStartTime(),formatter);
         LocalDateTime end = LocalDateTime.parse(this.getEndTime(),formatter);
-        if (LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end)) return false;
-        else return true;
+        if (LocalDateTime.now().isAfter(end)) return true;
+        else return false;
     }
 
     public void setStatus(boolean status) {
