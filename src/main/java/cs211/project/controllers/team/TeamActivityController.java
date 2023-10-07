@@ -7,15 +7,18 @@ import cs211.project.services.ActivityTeamListDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
 import cs211.project.services.team.LoadSideBarComponent;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -24,6 +27,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TeamActivityController {
     @FXML private AnchorPane navbarAnchorPane, sideBarAnchorPane, mainActivityAnchorPane, createActivityAnchorPane;
@@ -64,7 +69,6 @@ public class TeamActivityController {
     private LoadSideBarComponent sideBarAnchorPaneLoad;
     private Image chat = new Image(getClass().getResourceAsStream("/images/icons/activity/chat.png"));
     private Image chat_hover = new Image(getClass().getResourceAsStream("/images/icons/activity/chat_hover.png"));
-
 
     @FXML void initialize(){
         activityTeamList = activityTeamListDataSource.readData();
@@ -107,6 +111,88 @@ public class TeamActivityController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML protected void onSaveActivityButtonClick() {
+        activityNameRequirement = false;
+        checkActivityNameReq();
+        checkDateReq();
+        if(activityNameRequirement && dateValidateRequirement && !editor){
+            checkDescriptionReq();
+            activityTeamList.addActivity(new ActivityTeam(team.getTeamID(), activityNameTextField.getText(), description, startDateFormat, endDateFormat));
+            activityTeamListDataSource.writeData(activityTeamList);
+            try {
+                FXRouter.goTo("team-activity", user, event, team);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else if (activityNameRequirement && dateValidateRequirement){
+            checkDescriptionReq();
+            updateActivity();
+            try {
+                FXRouter.goTo("team-activity", user, event, team);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            checkActivityNameReq();
+            checkDateReq();
+            dateRequirementLabel.setVisible(true);
+            errorContinueLabel.setVisible(true);
+            if(!dateValidateRequirement){
+                dateRequirementLabel.setText("Please specify the correct Activity period.");
+            }else{
+                dateRequirementLabel.setVisible(false);
+            }
+        }
+    }
+    @FXML protected void onDeleteActivityButtonClick() {
+        ActivityTeam activityTeam = (ActivityTeam) activityTableView.getSelectionModel().getSelectedItem();
+        activityTeamList.getActivities().remove(activityTeam);
+        activityTeamListDataSource.writeData(activityTeamList);
+        try {
+            FXRouter.goTo("team-activity", user, event, team);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML protected void onBackClick() {
+        try {
+            FXRouter.goTo("team-activity", user, event, team);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML protected void onCreateButtonClick() {
+        showCreateActivity();
+    }
+    @FXML protected void onCancelButtonClick() throws IOException {
+        FXRouter.goTo("team-activity", user, event, team);
+    }
+
+    @FXML private void onKeyActivityName(){
+        checkActivityNameReq();
+    }
+    @FXML protected void onKeyDescriptionCountText(){
+        description = descriptionTextArea.getText();
+        countDescriptionLabel.setText(String.valueOf((int) description.length()));
+        if (description.length() >= 280) {
+            if (description.length() > 280) {
+                countDescriptionLabel.setStyle("-fx-text-fill: red ");
+            } else {
+                countDescriptionLabel.setStyle("");
+            }
+        }else {
+            countDescriptionLabel.setStyle("");
+        }
+    }
+
+    @FXML private void onNextActivityClicked() {
+
+    }
+
+    @FXML private void onPreviousActivityClicked() {
+
     }
 
     protected void setSideBar(){
@@ -266,64 +352,6 @@ public class TeamActivityController {
         activityTeamListDataSource.writeData(activityTeamList);
     }
 
-    @FXML protected void onSaveActivityButtonClick() {
-        activityNameRequirement = false;
-        checkActivityNameReq();
-        checkDateReq();
-        if(activityNameRequirement && dateValidateRequirement && !editor){
-            checkDescriptionReq();
-            activityTeamList.addActivity(new ActivityTeam(team.getTeamID(), activityNameTextField.getText(), description, startDateFormat, endDateFormat));
-            activityTeamListDataSource.writeData(activityTeamList);
-            try {
-                FXRouter.goTo("team-activity", user, event, team);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else if (activityNameRequirement && dateValidateRequirement){
-            checkDescriptionReq();
-            updateActivity();
-            try {
-                FXRouter.goTo("team-activity", user, event, team);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else{
-            checkActivityNameReq();
-            checkDateReq();
-            dateRequirementLabel.setVisible(true);
-            errorContinueLabel.setVisible(true);
-            if(!dateValidateRequirement){
-                dateRequirementLabel.setText("Please specify the correct Activity period.");
-            }else{
-                dateRequirementLabel.setVisible(false);
-            }
-        }
-    }
-    @FXML protected void onDeleteActivityButtonClick() {
-        ActivityTeam activityTeam = (ActivityTeam) activityTableView.getSelectionModel().getSelectedItem();
-        activityTeamList.getActivities().remove(activityTeam);
-        activityTeamListDataSource.writeData(activityTeamList);
-        try {
-            FXRouter.goTo("team-activity", user, event, team);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @FXML protected void onBackClick() {
-        try {
-            FXRouter.goTo("team-activity", user, event, team);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @FXML protected void onCreateButtonClick() {
-        showCreateActivity();
-    }
-    @FXML protected void onCancelButtonClick() throws IOException {
-        FXRouter.goTo("team-activity", user, event, team);
-    }
-
-
     private void initUser() {
         if (user.getRole().equals("Member")) createActivityButton.setVisible(false);
     }
@@ -367,6 +395,7 @@ public class TeamActivityController {
             };
         });
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+
         activityTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ActivityTeam>() {
             @Override
             public void changed(ObservableValue observableValue, ActivityTeam oldValue, ActivityTeam newValue) {
@@ -376,8 +405,20 @@ public class TeamActivityController {
                     activityDescriptionLabel.setText(newValue.getDescription());
                     activityStartTimeLabel.setText(newValue.getStartTime());
                     activityEndTimeLabel.setText(newValue.getEndTime());
-                    setEditActivity(newValue);
+                } else {
+                    setEditActivity(oldValue);
                     if (!user.getRole().equals("Member")) showEditActivity();
+                }
+            }
+        });
+
+        activityTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2 && !user.getRole().equals("Member")) {
+                    ActivityTeam activityTeam = (ActivityTeam) activityTableView.getSelectionModel().getSelectedItem();
+                    setEditActivity(activityTeam);
+                    showEditActivity();
                 }
             }
         });
@@ -390,6 +431,10 @@ public class TeamActivityController {
             if (team.getTeamID().equals(activity.getTeamID())) {
                 activityTableView.getItems().add(activity);
             }
+        }
+
+        if (!activityTableView.getItems().isEmpty()) {
+            activityTableView.getSelectionModel().select(0);
         }
 
     }
@@ -502,22 +547,5 @@ public class TeamActivityController {
         activityNameRequirement = isValidate;
         teamNameReqImageView.setVisible(isValidate);
         nameRequirementLabel.setVisible(!isValidate);
-    }
-
-    @FXML private void onKeyActivityName(){
-        checkActivityNameReq();
-    }
-    @FXML protected void onKeyDescriptionCountText(){
-        description = descriptionTextArea.getText();
-        countDescriptionLabel.setText(String.valueOf((int) description.length()));
-        if (description.length() >= 280) {
-            if (description.length() > 280) {
-                countDescriptionLabel.setStyle("-fx-text-fill: red ");
-            } else {
-                countDescriptionLabel.setStyle("");
-            }
-        }else {
-            countDescriptionLabel.setStyle("");
-        }
     }
 }
