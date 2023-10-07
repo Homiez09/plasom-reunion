@@ -146,12 +146,12 @@
                                                 <String fx:value="center-label" />
                                              </styleClass>
                                           </Label>
-                                          <ImageView fitHeight="21.8" fitWidth="21.8" layoutX="781.0" layoutY="9.0" onMouseClicked="#onPreviousActivityClicked">
+                                          <ImageView fx:id="previousImageView" fitHeight="21.8" fitWidth="21.8" layoutX="781.0" layoutY="9.0" onMouseClicked="#onPreviousActivityClicked">
                                              <image>
                                                 <Image url="@../../../../images/icons/activity/back_arrow.png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fitHeight="21.8" fitWidth="21.8" layoutX="812.0" layoutY="9.0" onMouseClicked="#onNextActivityClicked" rotate="180.0">
+                                          <ImageView fx:id="nextImageView" fitHeight="21.8" fitWidth="21.8" layoutX="812.0" layoutY="9.0" onMouseClicked="#onNextActivityClicked" rotate="180.0">
                                              <image>
                                                 <Image url="@../../../../images/icons/activity/back_arrow.png" />
                                              </image>

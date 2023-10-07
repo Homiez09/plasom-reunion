@@ -39,7 +39,7 @@ public class TeamActivityController {
     @FXML private Button createActivityButton, deleteButton;
     @FXML private ComboBox statusComboBox;
     @FXML private TableView activityTableView;
-    @FXML private ImageView teamNameReqImageView, chatIconImageView;
+    @FXML private ImageView teamNameReqImageView, chatIconImageView, nextImageView, previousImageView;
     @FXML private Spinner<Integer> startHourSpinner, startMinuteSpinner, endHourSpinner, endMinuteSpinner;
     @FXML private ChoiceBox<String> startDateChoiceBox, endDateChoiceBox;
     @FXML private TableColumn<ActivityTeam, String> nameColumn, startTimeColumn, endTimeColumn, descriptionColumn;
@@ -64,7 +64,7 @@ public class TeamActivityController {
     protected String formattedCurrentHour, startAmPm, endAmPm, beforeStartDateEditFormat, startDateFromCSV, endDateFromCSV;
     private int beforeEditStartHour, beforeEditStartMinute;
     private int currentMinute, startHour, startMinute, endHour, endMinute, countInit = 0;
-    private int current_page, max_page;
+    private int current_page = 0, max_page;
     private boolean activityNameRequirement = false, dateValidateRequirement = false, editor;
 
     private LoadSideBarComponent sideBarAnchorPaneLoad;
@@ -89,6 +89,7 @@ public class TeamActivityController {
         initUser();
 
         showTable();
+        checkButtonNextAndPrevious();
 
         maximumLengthField();
         showFocusRequirement();
@@ -190,11 +191,28 @@ public class TeamActivityController {
     }
 
     @FXML private void onNextActivityClicked() {
-
+        if (current_page == max_page - 1) return;
+        activityTableView.getSelectionModel().select(++current_page);
+        checkButtonNextAndPrevious();
     }
 
     @FXML private void onPreviousActivityClicked() {
+        if (current_page == 0) return;
+        activityTableView.getSelectionModel().select(--current_page);
+        checkButtonNextAndPrevious();
+    }
 
+    private void checkButtonNextAndPrevious() {
+        if (current_page == max_page - 1) {
+            nextImageView.setVisible(false);
+        } else {
+            nextImageView.setVisible(true);
+        }
+        if (current_page == 0) {
+            previousImageView.setVisible(false);
+        } else {
+            previousImageView.setVisible(true);
+        }
     }
 
     protected void setSideBar(){
@@ -432,11 +450,13 @@ public class TeamActivityController {
             public void changed(ObservableValue observableValue, ActivityTeam oldValue, ActivityTeam newValue) {
                 if(newValue != null) {
                     activityTeamSelect = newValue;
+                    current_page = activityTableView.getSelectionModel().getSelectedIndex();
                     countDescriptionLabel.setText(String.valueOf(newValue.getDescription().length()));
                     activityNameLabel.setText(newValue.getName());
                     activityDescriptionLabel.setText(newValue.getDescription());
                     activityStartTimeLabel.setText(newValue.getStartTime());
                     activityEndTimeLabel.setText(newValue.getEndTime());
+                    checkButtonNextAndPrevious();
                 }
             }
         });
