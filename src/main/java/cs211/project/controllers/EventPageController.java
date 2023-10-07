@@ -170,8 +170,6 @@ public class EventPageController {
     }
 
     public void onJoinEventAction(ActionEvent actionEvent) {
-
-
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
         if (hashMap.containsKey(event.getEventID())) {
             userList = hashMap.get(event.getEventID());
@@ -187,11 +185,8 @@ public class EventPageController {
                 throw new RuntimeException(e);
             }
         }else {
-
             userList.getUsers().add(user);
             hashMap.put(event.getEventID(), userList);
-
-
             joinEventMap.writeData(hashMap);
             try {
                 FXRouter.goTo("my-event", user);
@@ -202,25 +197,11 @@ public class EventPageController {
     }
 
     public void initButton(){
-        if (user != null && user.getUserId().equals(event.getEventHostUser().getUserId())) {
-            editEventButton.setVisible(true);
-        } else {
-            editEventButton.setVisible(false);
-        }
-        if (hashMap.containsKey(event.getEventID())) {
-            userList = hashMap.get(event.getEventID());
-        }else {
-            userList = new UserList();
-        }
-        if (user == null || userList.getUsers().contains(user)|| event.getEventHostUser().getUserId().equals(user.getUserId())){
-            joinEventButton.setVisible(false);
-        }else {
-            joinEventButton.setVisible(true);
-        }
-        if (event.getTeamList() != null) {
-            teamApplyBox.setVisible(true);
-        } else {
-            teamApplyBox.setVisible(false);
-        }
+        editEventButton.setVisible(event.isHostEvent(user));
+        joinEventButton.setVisible( event.isJoinEvent() &&
+                                    !event.isFull() &&
+                                    !event.getUserList().getUsers().contains(user) &&
+                                    !event.isHostEvent(user));
+        teamApplyBox.setVisible(event.getTeamList() != null);
     }
 }

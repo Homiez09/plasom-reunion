@@ -203,8 +203,8 @@ public class Event implements Comparable<Event>{
 
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
-    public boolean isHostEvent(String currentUserId) {
-        return eventHostUser.getUserId().equals(currentUserId);
+    public boolean isHostEvent(User user) {
+        return eventHostUser.equals(user);
     }
     public boolean isHaveUser(User user){return eventHostUser.equals(user);}
     private String generateRandomText() {

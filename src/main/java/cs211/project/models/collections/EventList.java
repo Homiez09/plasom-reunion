@@ -136,7 +136,7 @@ public class EventList {
     public ArrayList<Event> getUserEvent(User user){
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events) {
-            if (event.isHostEvent(user.getUserId())) {
+            if (event.isHostEvent(user)) {
                 list.add(event);
             } else if (event.getUserList().getUsers().contains(user)) {
                 list.add(event);
@@ -178,7 +178,7 @@ public class EventList {
     public ArrayList<Event> getOwnerEvent(User user){
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events){
-            if (event.isHostEvent(user.getUserId())) {
+            if (event.isHostEvent(user)) {
                 list.add(event);
             }
         }

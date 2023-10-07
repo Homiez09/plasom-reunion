@@ -93,7 +93,13 @@ public class UsersEventController extends CardMyEventController{
         statusColumn.setCellValueFactory(cellData -> {
             // ในส่วนนี้คุณสามารถกำหนดวิธีการเข้าถึงข้อมูลแบบกำหนดเอง
             User user = cellData.getValue();
-            return new SimpleStringProperty(!banUserObservableList.contains(user)? "Member":"Ban");
+            BanUser data = new BanUser();
+            HashMap<User,EventList> getBan = data.readData();
+            EventList findEvent = getBan.get(user);
+            if (findEvent == null){
+                findEvent = new EventList();
+            }
+            return new SimpleStringProperty(!banUserObservableList.contains(user) && !findEvent.getEvents().contains(currentEvent)? "Member":"Ban");
         });
 
         actionColumn.setCellFactory(param -> new TableCell<>() {

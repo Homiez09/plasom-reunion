@@ -82,7 +82,7 @@ public class CardMyEventController {
                 leaveEventButton.setVisible(false);
             }
             for (Team team : event.getTeamList().getTeams()) {
-                if (team.getMemberList().getUsers().contains(currentUser) && !currentEvent.isHostEvent(currentUser.getUserId())) {
+                if (team.getMemberList().getUsers().contains(currentUser) && !currentEvent.isHostEvent(currentUser)) {
                     manageUserButton.setVisible(false);
                     leaveEventButton.setVisible(false);
                 }
@@ -124,7 +124,7 @@ public class CardMyEventController {
     private void onForStaffButton(ActionEvent actionEvent) {
         joinTeamMap = new JoinTeamMap();
         teamHashMap = joinTeamMap.readData();
-        if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser.getUserId())){
+        if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser)){
             try {
                 FXRouter.goTo("select-team",currentUser, currentEvent);
             } catch (IOException e) {
