@@ -153,6 +153,12 @@ public class TeamChatController {
         for(ActivityTeam activityTeam : activityTeamList.getActivitiesByTeamID(team.getTeamID())){
             groupTableView.getItems().add(activityTeam);
         }
+
+        if (activityTeam != null) {
+            groupTableView.getSelectionModel().select(activityTeamList.findActivityById(activityTeam.getActivityID()));
+        } else if (!groupTableView.getItems().isEmpty()) {
+            groupTableView.getSelectionModel().select(0);
+        }
     }
 
     private void checkActivitySelect() {

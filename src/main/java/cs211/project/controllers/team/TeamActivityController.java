@@ -69,6 +69,7 @@ public class TeamActivityController {
     private LoadSideBarComponent sideBarAnchorPaneLoad;
     private Image chat = new Image(getClass().getResourceAsStream("/images/icons/activity/chat.png"));
     private Image chat_hover = new Image(getClass().getResourceAsStream("/images/icons/activity/chat_hover.png"));
+    private ActivityTeam activityTeamSelect;
 
     @FXML void initialize(){
         activityTeamList = activityTeamListDataSource.readData();
@@ -107,7 +108,7 @@ public class TeamActivityController {
     @FXML
     private void onChatButtonClicked() {
         try {
-            FXRouter.goTo("team-chat", user, event, team);
+            FXRouter.goTo("team-chat", user, event, team, activityTeamSelect);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -400,14 +401,12 @@ public class TeamActivityController {
             @Override
             public void changed(ObservableValue observableValue, ActivityTeam oldValue, ActivityTeam newValue) {
                 if(newValue != null) {
+                    activityTeamSelect = newValue;
                     countDescriptionLabel.setText(String.valueOf(newValue.getDescription().length()));
                     activityNameLabel.setText(newValue.getName());
                     activityDescriptionLabel.setText(newValue.getDescription());
                     activityStartTimeLabel.setText(newValue.getStartTime());
                     activityEndTimeLabel.setText(newValue.getEndTime());
-                } else {
-                    setEditActivity(oldValue);
-                    if (!user.getRole().equals("Member")) showEditActivity();
                 }
             }
         });
@@ -435,6 +434,8 @@ public class TeamActivityController {
 
         if (!activityTableView.getItems().isEmpty()) {
             activityTableView.getSelectionModel().select(0);
+        } else {
+            chatIconImageView.setVisible(false);
         }
 
     }
