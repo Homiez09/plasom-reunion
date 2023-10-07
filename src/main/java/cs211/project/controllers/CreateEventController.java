@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
-    @FXML private Label headCreateEventLabel;
+    @FXML private Label headCreateEventLabel,errorCapacityLabel;
     @FXML private ChoiceBox<String> eventTagChoiceBox;
     @FXML private ImageView uploadImageView;
     @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField;
@@ -60,7 +60,7 @@ public class CreateEventController {
         if (thisEvent != null) {
             showEventDetail(thisEvent);
         }
-
+        limitCharacter();
     }
     @FXML protected void handleUploadButton(ActionEvent event) {
         FileChooser chooser = new FileChooser();
@@ -127,6 +127,11 @@ public class CreateEventController {
     @FXML protected void onSubmitBasicInformationClick() {
         eventListDatasource = new EventListDataSource();
         eventList = eventListDatasource.readData();
+        if (!eventCapTextField.getText().equals("") && !eventCapTextField.getText().matches("[0-9]+")) {
+            errorCapacityLabel.setText("Capacity must be integer only.");
+            errorCapacityLabel.setVisible(true);
+            return;
+        }
         if (thisEvent == null) {
             String eventNameString = eventNameTextField.getText().trim();
             User eventHost = user;
@@ -230,6 +235,16 @@ public class CreateEventController {
                     }
                 }
             }
+        });
+    }
+
+    private void limitCharacter() {
+        errorCapacityLabel.setVisible(false);
+        eventNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (eventNameTextField.getText().length() > 30) {eventNameTextField.setText(oldValue);}
+        });
+        eventLocationTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (eventLocationTextField.getText().length() > 50) {eventLocationTextField.setText(oldValue);}
         });
     }
 }
