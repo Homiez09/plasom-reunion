@@ -9,13 +9,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Popup;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.function.Predicate;
 
 
 public class OwnerEventController {
@@ -43,10 +46,12 @@ public class OwnerEventController {
     private User currentUser;
     private EventList eventList;
     private TeamList teamList;
+    private ObservableList<Node> nodeObservableList;
+    private ObservableList<Event> eventObservableList;
 
     @FXML
     public void initialize() {}
-    public void setDataPopup(Popup popup,User user) {
+    public void setDataPopup(Popup popup, User user, ObservableList<Node> nodes,ObservableList<Event> events) {
         backButton.setOnAction(e -> popup.hide());
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
@@ -55,12 +60,15 @@ public class OwnerEventController {
         this.joinEventMap = new JoinEventMap();
         this.currentUser = user;
         this.popup = popup;
+        this.nodeObservableList = nodes;
+        this.eventObservableList = events;
         ObservableList<Event> observableEventList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
         showTable(observableEventList);
 
     }
 
     private void showTable(ObservableList<Event> observableList) {
+        observableList.sort(Comparator.comparing(Event::isEnd));
         // กำหนด column
         TableEvents.setPlaceholder(new Label("No Event"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
@@ -157,6 +165,14 @@ public class OwnerEventController {
                             System.err.println("Not Found");
                         }
                         observableList.remove(eventToModify);
+                        eventObservableList.remove(eventToModify);
+                        Node removeNode = null;
+                        for (Node node:nodeObservableList) {
+                            if (node.getUserData().equals(eventToModify)){
+                                removeNode = node;
+                            }
+                        }
+                        nodeObservableList.remove(removeNode);
                         eventListDatasource.writeData(eventList);
                         teamList.removeTeamByEvent(eventToModify);
                         joinEventMap.writeData(deleteEvent);
@@ -166,5 +182,4 @@ public class OwnerEventController {
             }
         }
     }
-
 }

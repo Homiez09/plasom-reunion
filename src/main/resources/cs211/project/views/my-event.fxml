@@ -59,13 +59,10 @@
       <Separator fx:id="popupTest" opacity="0.0" prefHeight="11.0" prefWidth="1152.0" />
       <HBox alignment="CENTER" prefWidth="1152.0">
          <children>
-            <ListView fx:id="listViewMain" prefHeight="572.0" prefWidth="1032.0" HBox.hgrow="NEVER">
+            <ListView fx:id="listViewMain" fixedCellSize="250.0" prefHeight="572.0" prefWidth="900.0" HBox.hgrow="NEVER">
                <opaqueInsets>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets />
                </opaqueInsets>
-               <padding>
-                  <Insets bottom="20.0" left="60.0" top="20.0" />
-               </padding>
                <HBox.margin>
                   <Insets />
                </HBox.margin>

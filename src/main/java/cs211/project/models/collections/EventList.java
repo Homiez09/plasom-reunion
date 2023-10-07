@@ -182,6 +182,7 @@ public class EventList {
                 list.add(event);
             }
         }
+        list.sort(Comparator.comparing(Event::isEnd));
         return list;
     }
 

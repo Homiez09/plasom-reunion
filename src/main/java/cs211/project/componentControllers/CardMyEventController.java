@@ -40,7 +40,6 @@ public class CardMyEventController {
     private HashMap<String, UserList> joinEventMap; // Collect EventID
     private UserList userList;// Collect User
     private Event currentEvent;
-    private ObservableList<User> userObservableList;
 
     @FXML
     private void initialize() {
@@ -71,7 +70,6 @@ public class CardMyEventController {
         setupDataPage();
         if (event !=null) {
             currentEvent = eventList.findEventById(event.getEventID());
-            userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
 
             buttonVisible(event.isEnd());
             if (event.getUserList().getUsers().contains(currentUser)) {
