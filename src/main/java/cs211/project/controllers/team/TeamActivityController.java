@@ -63,7 +63,8 @@ public class TeamActivityController {
     private String startDateFormat, endDateFormat, description, activityName, beforeEditActivityName;
     protected String formattedCurrentHour, startAmPm, endAmPm, beforeStartDateEditFormat, startDateFromCSV, endDateFromCSV;
     private int beforeEditStartHour, beforeEditStartMinute;
-    protected int currentMinute, startHour, startMinute, endHour, endMinute, countInit = 0;
+    private int currentMinute, startHour, startMinute, endHour, endMinute, countInit = 0;
+    private int current_page, max_page;
     private boolean activityNameRequirement = false, dateValidateRequirement = false, editor;
 
     private LoadSideBarComponent sideBarAnchorPaneLoad;
@@ -379,25 +380,39 @@ public class TeamActivityController {
         timeInit();
         setPageVisible(false);
     }
+
+    private TableCell<ActivityTeam, String> formatTime() {
+        return new TableCell<ActivityTeam, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) setText(null);
+                else {
+                    String[] parts = item.split("\\.");
+                    String[] timeParts = parts[1].split(":");
+                    int hour = Integer.parseInt(timeParts[0]);
+                    int minute = Integer.parseInt(timeParts[1]);
+                    String amPm = "AM";
+                    if (hour > 11) {
+                        amPm = "PM";
+                        if (hour > 12) {
+                            hour -= 12;
+                        }
+                    } else if (hour == 0) {
+                        hour = 12;
+                    }
+                    setText(parts[0] + " " + hour + ":" + String.format("%02d", minute) + " " + amPm);
+                }
+            }
+        };
+    }
+
     private void showTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        startTimeColumn.setCellFactory(column -> {
-            return new TableCell<ActivityTeam, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) setText(null);
-                    String[] itemSplit = item.split(".");
-                    String[] dateSplit = itemSplit[0].split("-");
-                    String date = dateSplit[2] + "/" +  dateSplit[1] + "/" + dateSplit[0];
-                    String time = itemSplit[1];
-
-                    setText(date + " " + time);
-                }
-            };
-        });
+        startTimeColumn.setCellFactory(column -> formatTime());
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        endTimeColumn.setCellFactory(column -> formatTime());
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusColumn.setCellFactory(column -> {
             return new TableCell<ActivityTeam, Boolean>() {
@@ -447,6 +462,7 @@ public class TeamActivityController {
             }
         }
 
+        max_page = activityTableView.getItems().size();
         if (!activityTableView.getItems().isEmpty()) {
             activityTableView.getSelectionModel().select(0);
         } else {

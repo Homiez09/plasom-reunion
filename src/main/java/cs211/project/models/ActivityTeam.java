@@ -35,6 +35,7 @@ public class ActivityTeam extends Activity {
         this.status = status;
     }
 
+    @Override
     public String toString() {
         return teamID + "," + name + "," + description + "," + startTime + "," + endTime + ","  + status  + "," + activityID;
     }
