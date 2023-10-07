@@ -47,8 +47,12 @@ public class UsersEventController extends CardMyEventController{
         this.popup = popup;
         BanUser data = new BanUser();
         HashMap<User,EventList> getBan = data.readData();
+        UserList banList = new UserList();
+        for (User user: getBan.keySet()){
+            banList.getUsers().add(user);
+        }
         userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
-        banUserObservableList = FXCollections.observableArrayList();
+        banUserObservableList = FXCollections.observableArrayList(banList.getUsers());
 
         eventNameLabel.setText(currentEvent.getEventName());
         userSizeLabel.setText(userObservableList.size()+"");
@@ -89,14 +93,7 @@ public class UsersEventController extends CardMyEventController{
         statusColumn.setCellValueFactory(cellData -> {
             // ในส่วนนี้คุณสามารถกำหนดวิธีการเข้าถึงข้อมูลแบบกำหนดเอง
             User user = cellData.getValue();
-            String userId = user.getUserId();
-            BanUser data = new BanUser();
-            HashMap<User,EventList> getBan = data.readData();
-            EventList list = getBan.get(userId);
-            if (list == null) {
-                list = new EventList();
-            }
-            return new SimpleStringProperty(!list.getEvents().contains(currentEvent)? "Member":"Ban");
+            return new SimpleStringProperty(!banUserObservableList.contains(user)? "Member":"Ban");
         });
 
         actionColumn.setCellFactory(param -> new TableCell<>() {
@@ -106,12 +103,13 @@ public class UsersEventController extends CardMyEventController{
                 //---------------Custom---------------\\
                 comboBox.setStyle(  "-fx-background-color:transparent; -fx-background-insets: 0;" +
                         "-fx-alignment: center; -fx-smooth: true;" +
-                        "-fx-content-display: text-only; -fx-arrows-visible: true;");
+                        "-fx-content-display: text-only; -fx-arrows-visible: false;");
+
 
 
                 //---------------Custom---------------\\
 
-                comboBox.getItems().addAll("Ban", "Kick");
+                comboBox.getItems().addAll("Ban","UnBan", "Kick");
 
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
@@ -150,8 +148,6 @@ public class UsersEventController extends CardMyEventController{
             UserList deleteUser = joinEvent.get(currentEvent.getEventID());
                 switch (selectedOption){
                     case"Ban":
-                        System.out.println(getBan.keySet());
-                        System.out.println(getBan.containsKey(user));
                         if (getBan.containsKey(user)) {
                             list = getBan.get(user);
                         }else {
@@ -161,9 +157,18 @@ public class UsersEventController extends CardMyEventController{
                         if (!list.getEvents().contains(currentEvent)) {
                             list.getEvents().add(currentEvent);
                         }
-
+                        banUserObservableList.add(user);
                         getBan.put(user,list);
                         data.writeData(getBan);
+                        TableUsers.refresh();
+                        break;
+                    case"UnBan":
+                        list = getBan.get(user);
+                        list.getEvents().remove(currentEvent);
+                        banUserObservableList.remove(user);
+                        getBan.put(user,list);
+                        data.writeData(getBan);
+                        TableUsers.refresh();
                         break;
                     case "Kick":
                         data = new BanUser();
