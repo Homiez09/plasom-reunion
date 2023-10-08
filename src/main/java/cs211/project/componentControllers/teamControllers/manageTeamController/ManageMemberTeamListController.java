@@ -22,6 +22,7 @@ public class ManageMemberTeamListController {
     @FXML private Label userIdLabel;
     @FXML private ComboBox menuComboBox;
     protected Image roleIcon, statusIcon, menuIcon;
+    BanTeamMap banHashMap = new BanTeamMap();
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     ManageTeamComponentController manageTeamComponentController;
     ManageTeamController manageTeamController;
@@ -75,8 +76,6 @@ public class ManageMemberTeamListController {
     }
 
     public void banUser(String teamID, String userID){
-        kickUser(teamID);
-        BanTeamMap banHashMap = new BanTeamMap();
         HashMap<String, Set<String>> banTeamHashMap = banHashMap.readData();
         Set<String> set;
 
@@ -89,6 +88,7 @@ public class ManageMemberTeamListController {
 
         if (!banTeamHashMap.containsKey(teamID)) banTeamHashMap.put(teamID, set);
         banHashMap.writeData(banTeamHashMap);
+        kickUser(teamID);
     }
 
     public void setManageTeamController(ManageTeamComponentController manageTeamComponentController) {

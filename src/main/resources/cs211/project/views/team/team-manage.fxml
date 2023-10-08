@@ -344,6 +344,17 @@
                               </Label>
                               <ImageView fx:id="teamNameReqImageView" fitHeight="26.0" fitWidth="26.0" layoutX="438.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="passwordIconView" fitHeight="24.0" fitWidth="24.0" layoutX="71.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" x="5.0" y="2.0" />
+                              <Button layoutX="725.0" layoutY="75.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="111.0" text="Banned User" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-ms" />
+                                    <String fx:value="ok-join-team-button" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="5.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="39.0" layoutY="14.0" prefHeight="95.0" prefWidth="878.0">

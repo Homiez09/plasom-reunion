@@ -35,6 +35,7 @@ public class TeamChatController {
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private final Team team = (Team) FXRouter.getData3();
+    private final ActivityTeam activityTeam = (ActivityTeam) FXRouter.getData4();
     private ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
     private ActivityTeamList activityTeamList = activityTeamListDataSource.readData();
     private ChatHistoryDataSource chatHistoryDataSource = new ChatHistoryDataSource("data", "chat-history.csv");
@@ -151,6 +152,12 @@ public class TeamChatController {
         groupTableView.getItems().clear();
         for(ActivityTeam activityTeam : activityTeamList.getActivitiesByTeamID(team.getTeamID())){
             groupTableView.getItems().add(activityTeam);
+        }
+
+        if (activityTeam != null) {
+            groupTableView.getSelectionModel().select(activityTeamList.findActivityById(activityTeam.getActivityID()));
+        } else if (!groupTableView.getItems().isEmpty()) {
+            groupTableView.getSelectionModel().select(0);
         }
     }
 

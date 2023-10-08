@@ -2,6 +2,8 @@ package cs211.project.models.collections;
 
 import cs211.project.models.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EventList {
@@ -43,8 +45,6 @@ public class EventList {
                                     eventLocation,slotMember,timeStamp,joinEvent,joinTeam));
         }
     }
-
-    public void addEvent(Event event){events.add(event);}
 
     public Event findEventById(String eventId) {
         for (Event event : events) {
@@ -89,7 +89,9 @@ public class EventList {
     }
 
     public EventList sortUpcoming(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getEventDateStart);
+        Comparator<Event> comparing = Comparator
+                .comparing((Event event) -> LocalDateTime.parse(event.getEventDateStart(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
+                .thenComparing((Event event) -> LocalDateTime.parse(event.getEventDateEnd(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
         Collections.sort(list.getEvents(),comparing);
@@ -105,14 +107,7 @@ public class EventList {
 
         return list;
     }
-    public EventList sortById(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getEventID);
-        EventList list = new EventList();
-        list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
 
-        return list;
-    }
     public EventList sortByMember(EventList eventList){
         Comparator<Event> comparing = Comparator.comparing(Event::getUserInEvent);
         EventList list = new EventList();
@@ -121,14 +116,7 @@ public class EventList {
         Collections.reverse(list.getEvents());
         return list;
     }
-    public EventList sortByTag(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
-        EventList list = new EventList();
-        list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
 
-        return list;
-    }
     public EventList sortByTag(EventList eventList, String tag) {
         Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
         EventList list = new EventList();
@@ -150,34 +138,16 @@ public class EventList {
         return events;
     }
 
-    public ArrayList<Event> getUserEventAll(User user){
+    public ArrayList<Event> getUserEvent(User user){
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events) {
-            if (event.isHostEvent(user.getUserId())) {
+            if (event.isHostEvent(user)) {
                 list.add(event);
             } else if (event.getUserList().getUsers().contains(user)) {
                 list.add(event);
             } else {
                 for (Team team:event.getTeamList().getTeams()){
                     if (team.getMemberList().getUsers().contains(user)){
-                        list.add(event);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-    public ArrayList<Event> getUserEvent(User user){
-        ArrayList<Event> list = new ArrayList<>();
-        for (Event event : events) {
-            if (event.isHostEvent(user.getUserId()) && !event.isEnd()) {
-                list.add(event);
-            } else if (event.getUserList().getUsers().contains(user) && !event.isEnd()) {
-                list.add(event);
-            } else {
-                for (Team team:event.getTeamList().getTeams()){
-                    if (team.getMemberList().getUsers().contains(user) && !event.isEnd()){
                         list.add(event);
                     }
                 }
@@ -202,7 +172,7 @@ public class EventList {
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events){
             for (Team team:event.getTeamList().getTeams()) {
-                if (team.getMemberList().getUsers().contains(user) && !event.isEnd()) {
+                if (team.getMemberList().getUsers().contains(user)) {
                     list.add(event);
                 }
             }
@@ -213,10 +183,11 @@ public class EventList {
     public ArrayList<Event> getOwnerEvent(User user){
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events){
-            if (event.isHostEvent(user.getUserId()) && !event.isEnd()) {
+            if (event.isHostEvent(user)) {
                 list.add(event);
             }
         }
+        list.sort(Comparator.comparing(Event::isEnd));
         return list;
     }
 
@@ -231,28 +202,37 @@ public class EventList {
 
         list.removeAll(remove);
 
-
         return  list;
     }
 
-    public EventList getUpcomingEvent(){
-        EventList list = new EventList();
-        for (Event event:events){
-            if (event.isUpComing() && !event.isEnd()){
-                list.addEvent(event);
+    public ArrayList<Event> getUpcomingEvent() {
+        ArrayList<Event> list = new ArrayList<>();
+        for (Event event : events) {
+            if (event.isUpComing() && !event.isEnd()) {
+                list.add(event);
             }
         }
-        return  list;
+        list.sort(Comparator.comparing(Event::getDateStartAsDate));
+        return list;
     }
 
-    public EventList getNewEvent(){
-        EventList list = new EventList();
+    public ArrayList<Event> getNewEvent(){
+        ArrayList<Event> list = new ArrayList<>();
         for (Event event:events){
             if (event.isNewEvent() && !event.isEnd()){
-                list.addEvent(event);
+                list.add(event);
             }
         }
         return  list;
     }
 
+    public EventList getAvailableEvent(){
+        EventList list = new EventList();
+        for (Event event:events){
+            if (!event.isEnd()){
+                list.getEvents().add(event);
+            }
+        }
+        return list;
+    }
 }

@@ -28,13 +28,28 @@ public class DeleteTeamAlertBoxController {
     TeamList teamList = teamListDataSource.readData();
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, UserList> hashMap;
-
     Team team;
 
     @FXML private void initialize() {
         hashMap = joinTeamMap.roleReadData();
         notificationImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/alert/question.png")));
+    }
 
+    @FXML public void onBackButtonClick(){
+        manageTeamController.closeAlertBox();
+    }
+
+    @FXML public void onDeleteButtonClick(){
+        try {
+            teamList.removeTeam(this.team.getTeamID());
+            hashMap.remove(this.team.getTeamID());
+            teamListDataSource.writeData(teamList);
+            joinTeamMap.roleWriteData(hashMap);
+
+            FXRouter.goTo("select-team", user, event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setTeam(Team team) {
@@ -44,27 +59,4 @@ public class DeleteTeamAlertBoxController {
     public void setManageTeamController(ManageTeamController manageTeamController) {
         this.manageTeamController = manageTeamController;
     }
-
-
-    @FXML public void onBackButtonClick(){
-        manageTeamController.closeAlertBox();
-    }
-
-    @FXML public void onDeleteButtonClick(){
-        deleteTeam();
-    }
-
-    public void deleteTeam(){
-        teamList.removeTeam(this.team.getTeamID());
-        teamListDataSource.writeData(teamList);
-        hashMap.remove(this.team.getTeamID());
-        joinTeamMap.roleWriteData(hashMap);
-        try {
-            FXRouter.goTo("select-team", user, event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
 }
