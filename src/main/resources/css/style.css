@@ -27,6 +27,7 @@
     -fx-gray1-color : #BFBFBF;
     -fx-gray2-color : #666668;
     -fx-gray3-color : #585858;
+    -fx-gray4-color : #858585;
 
     -fx-red-color : #C84D3D;
     -fx-green-color : #38C65C;
@@ -57,6 +58,11 @@
 .color-gray{
     -fx-text-fill: -fx-gray3-color;
 }
+
+.color-gray1{
+    -fx-text-fill: -fx-gray4-color;
+}
+
 
 .color-black{
     -fx-text-fill: -fx-black1-color;
@@ -304,7 +310,8 @@
     -fx-border-width: 1;
     -fx-border-radius: 11;
     -fx-font-size: 17;
-    -fx-opacity: 0.1;-fx-padding: 0 0 0 35;
+    -fx-opacity: 0.1;
+    -fx-padding: 0 0 0 35;
 }
 .profile-text-area2{
     -fx-background-color: -fx-white4-color;
@@ -312,7 +319,8 @@
     -fx-border-width: 1;
     -fx-border-radius: 11;
     -fx-font-size: 17;
-    -fx-opacity: 0.1;-fx-padding: 10 15 16 15;
+    -fx-opacity: 0.1;
+    -fx-padding: 10 15 16 15;
     -fx-wrap-text: true;
 }
 .profile-text-area {
@@ -634,13 +642,13 @@
 }
 
 .delete-button:hover {
-    -fx-background-color: linear-gradient(to left,  -fx-orange2-color 45.96%,-fx-orange1-color  70.98% );
+    -fx-background-color: #DC5341;
     -fx-background-radius: 7;
     -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 .delete-button:pressed {
-    -fx-background-color: linear-gradient(to left,-fx-orange5-color 45.96%, -fx-orange4-color  70.98% );
+    -fx-background-color: #EA5845;
     -fx-background-radius: 7;
     -fx-effect: dropshadow(gaussian,-fx-white7-color, 5, 0, 0, 3);
 }
@@ -649,7 +657,6 @@
     -fx-border-color: -fx-black2-color;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-background-color: -fx-white4-color;
     -fx-primary-color: -fx-black2-color;
     -fx-secondary-color: -fx-orange6-color0;
     -fx-focus-color: -fx-black2-color;
@@ -658,10 +665,9 @@
 .create-team-spinner .text-field {
     -fx-font-size : 12;
     -fx-text-fill: -fx-black2-color;
-    -fx-border-radius: 10;
     -fx-border-color: transparent;
-    -fx-background-radius: 10;
     -fx-background-color: white;
+    -fx-background-radius: 10 0 0 10;
     -fx-primary-color: -fx-black2-color;
     -fx-secondary-color: -fx-orange6-color;
     -fx-focus-color: -fx-black2-color;
@@ -683,9 +689,7 @@
 .spinner .increment-arrow-button:hover:pressed,
 .spinner .decrement-arrow-button:hover:pressed,
 .spinner .increment-arrow-button:pressed,
-.spinner .decrement-arrow-button:pressed {
-    -fx-background-color: -fx-secondary-color;
-}
+.spinner .decrement-arrow-button:pressed {}
 .spinner .increment-arrow-button .increment-arrow,
 .spinner .decrement-arrow-button .decrement-arrow {
     -fx-background-color: white;
@@ -825,6 +829,39 @@
 
 }
 
+.manage-text-field{
+    -fx-background-color: -fx-white4-color;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 1;-fx-padding: 0 0 0 25;
+}
+
+.manage-text-area {
+    -fx-background-radius: 11;
+    -fx-background-color: -fx-white4-color;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 11;
+    -fx-font-size: 17;
+    -fx-opacity: 1;
+    -fx-wrap-text: true;
+
+}
+.manage-text-area .content{
+    -fx-background-color: -fx-white4-color;
+    -fx-border-color: #000000;
+    -fx-border-radius: 11;
+    -fx-border-width: 1;
+    -fx-font-size: 17;
+    -fx-opacity: 1;
+    -fx-padding: 10 15 16 18;
+    -fx-wrap-text: true;
+
+}
+
+
 /* for join team page */
 .sort-button{
     -fx-background-color: transparent;
@@ -841,6 +878,7 @@
     -fx-border-radius: 23;
     -fx-text-fill: -fx-white2-color;
 }
+
 
 .team-search-bar{
     -fx-background-color: -fx-white2-color;
