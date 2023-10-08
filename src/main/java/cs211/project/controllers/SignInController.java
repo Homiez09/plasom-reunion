@@ -21,7 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class SignInController {
-    private final int maxPasswordLimit = 27, maxUsernameLimit = 20;
+    private final int MAX_PASSWORD_LIMIT = 27, MAX_USERNAME_LIMIT = 20;
 
     @FXML private PasswordField passwordField;
     @FXML private TextField showPasswordTextField, usernameTextField;
@@ -57,12 +57,9 @@ public class SignInController {
     }
 
     private void eventHandleEnter(){
-        EventHandler<KeyEvent> enterEventHandler = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER) {
-                    onLoginButton();
-                }
+        EventHandler<KeyEvent> enterEventHandler = event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onLoginButton();
             }
         };
         usernameTextField.setOnKeyPressed(enterEventHandler);
@@ -71,19 +68,19 @@ public class SignInController {
     }
     private void maximumLengthField() {
         usernameTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (newValue.length() > maxUsernameLimit) {
+            if (newValue.length() > MAX_USERNAME_LIMIT) {
                 usernameTextField.setText(oldValue);
             }
         }));
 
         passwordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (newValue.length() > maxPasswordLimit) {
+            if (newValue.length() > MAX_PASSWORD_LIMIT) {
                 passwordField.setText(oldValue);
             }
         }));
 
         showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (newValue.length() > maxPasswordLimit) {
+            if (newValue.length() > MAX_PASSWORD_LIMIT) {
                 showPasswordTextField.setText(oldValue);
             }
         }));
