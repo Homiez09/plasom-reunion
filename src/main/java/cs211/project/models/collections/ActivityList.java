@@ -1,8 +1,6 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.Activity;
-import cs211.project.models.Event;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,21 +11,13 @@ public class ActivityList {
     protected ArrayList<Activity> activities;
 
     public ActivityList() { activities = new ArrayList<>(); }
-    public ActivityList(ArrayList<Activity> activityList) {activities = activityList;}
 
-    public void addActivity(String eventId, String activityName, String activityDescription,String activityStart, String activityEnd) {
-        activityName = activityName.trim();
-        if (!activityName.equals("")) {
-            activities.add(new Activity(eventId,activityName,activityDescription,activityStart,activityEnd));
-        }
-    }
     public void addActivity(String eventId, String activityName, String activityDescription,String activityStart, String activityEnd,String activityID) {
         activityName = activityName.trim();
         if (!activityName.equals("")) {
             activities.add(new Activity(eventId,activityName,activityDescription,activityStart,activityEnd,activityID));
         }
     }
-
     public void addActivity(Activity activity) {
         if (activity != null) {
             activities.add(activity);
@@ -39,6 +29,7 @@ public class ActivityList {
             activities.remove(findActivity(activityID));
         }
     }
+
     public Activity findActivity(String activityID){
         for (Activity activity:activities) {
             if (activity.getActivityID().equals(activityID) ){
@@ -47,6 +38,7 @@ public class ActivityList {
         }
         return null;
     }
+
     public ArrayList<Activity> getActivities() {
         return activities;
     }
@@ -59,6 +51,7 @@ public class ActivityList {
         }
         return activityOfEvent;
     }
+
     public ActivityList sortActivity(ActivityList activityList){
         Comparator<Activity> comparing = Comparator
                 .comparing((Activity activity) -> LocalDateTime.parse(activity.getStartTime(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
