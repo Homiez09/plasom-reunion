@@ -13,14 +13,19 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Popup;
+import javafx.util.Callback;
 
 
 import java.io.IOException;
@@ -61,6 +66,23 @@ public class MyEventsController{
             memberButton.setDisable(true);
         }
         loadFirst(selectedPredicate);
+        listViewMain.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<Node> call(ListView<Node> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(Node item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setGraphic(item);
+                        } else {
+                            setGraphic(null);
+                        }
+                        setAlignment(Pos.CENTER);
+                    }
+                };
+            }
+        });
     }
 
     private void setupPage(){
@@ -69,6 +91,7 @@ public class MyEventsController{
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
         initSort();
         setupScrollBar();
+
 
     }
 

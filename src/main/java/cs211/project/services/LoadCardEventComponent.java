@@ -19,7 +19,6 @@ public class LoadCardEventComponent {
                     CardEventController loadCard = loader.getController();
                     loadCard.setEvent(event);
                     anchorPane.getChildren().setAll(loaded);
-                    AnimateComponent(loaded);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -31,23 +30,10 @@ public class LoadCardEventComponent {
                     CardMyEventController loadCard = loader.getController();
                     loadCard.setEventData(event);
                     anchorPane.getChildren().setAll(loaded);
-                    AnimateComponent(loaded);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
         }
     }
 
-    //-------------Animate Pop for any AnchorPane-------------\\
-    private void AnimateComponent(AnchorPane anchorPane) {
-        ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleIn.setToX(1.1);
-        scaleIn.setToY(1.1);
-        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleOut.setToX(1);
-        scaleOut.setToY(1);
-        anchorPane.setOnMouseEntered(event -> {scaleIn.play();});
-        anchorPane.setOnMouseExited(event -> {scaleOut.play();});
-    }
-    //-------------Animate Zoom for any AnchorPane-------------\\
 }
