@@ -18,7 +18,7 @@ public class UserList {
 
     public User findUsername(String username) {
         for (User exist: users) {
-            if (exist.isUserName(username)) {
+            if (exist.isUserName(username) && !username.isEmpty()) {
                 return exist;
             }
         }
@@ -64,15 +64,9 @@ public class UserList {
         }
     }
 
-    public boolean removeUser(User user) {
-        if (user == null) return false;
-        users.remove(user);
-        return true;
-    }
-
     public User login(String username, String password){
         for(User exist: users){
-            if(exist.getUsername().equals(username) && exist.validatePassword(password)){
+            if(exist.getUsername().equals(username) && exist.validatePassword(password) && !username.isEmpty() && !password.isEmpty()){
                 return exist;
             }
         }

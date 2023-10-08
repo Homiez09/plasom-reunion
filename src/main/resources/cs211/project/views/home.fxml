@@ -44,7 +44,7 @@
                                        <Font name="Leelawadee" size="14.0" />
                                     </font>
                                  </Text>
-                                 <Button mnemonicParsing="false" onAction="#onClickButton" styleClass="page-button" stylesheets="@../../../css/event.css" text="View All Events" />
+                                 <Button mnemonicParsing="false" onAction="#onAllEventClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="View All Events" />
                               </children>
                               <HBox.margin>
                                  <Insets left="100.0" top="20.0" />

@@ -6,7 +6,6 @@ import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.*;
 import javafx.animation.ScaleTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,26 +30,30 @@ public class HomeController {
     private Datasource<EventList> datasource;
     private EventList eventList,recEventList,newEventList,upEventList;
     private int currentIndexOfUp = 1;
-    private int currnetIndexOfNew = 1;
+    private int currentIndexOfNew = 1;
 
-    @FXML
-    private void initialize() {
+    @FXML private void initialize() {
         datasource = new EventListDataSource();
         eventList = datasource.readData().getAvailableEvent();
 
         new LoadNavbarComponent(user, navbarAnchorPane);
         upEventList = eventList.sortUpcoming(eventList);
         newEventList = eventList.sortNewEvent(eventList);
+        recEventList = eventList.suffleEvent(eventList);
         updateButtonState();
+        setCategoryButtonImage();
+        setUpCategoryButton();
+        setUpSortMenuButton();
+        showRecommendedEvent();
 
         try {
-            //if newEvent
-            if (newEventList != null && !newEventList.getEvents().isEmpty() && currnetIndexOfNew >= 1) {
-                loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew,newEventList);
-                loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currnetIndexOfNew));
-                loadNextEventTile(newRightAnchorPane,currnetIndexOfNew,newEventList);
+            //load newEvent anchorPane
+            if (newEventList != null && !newEventList.getEvents().isEmpty() && currentIndexOfNew >= 1) {
+                loadOldEventTile(newLeftAnchorPane,currentIndexOfNew,newEventList);
+                loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currentIndexOfNew));
+                loadNextEventTile(newRightAnchorPane,currentIndexOfNew,newEventList);
             }
-            //if upcomingEvent
+            //load upcomingEvent anchorPane
             if (upEventList != null && !upEventList.getEvents().isEmpty() && currentIndexOfUp >= 1) {
                 loadOldEventTile(upLeftAnchorPane,currentIndexOfUp,upEventList);
                 loadCurrentEventTile(upCenterAnchorPane,upEventList.getEvents().get(currentIndexOfUp));
@@ -60,35 +62,39 @@ public class HomeController {
         }catch (IndexOutOfBoundsException e){
             throw new RuntimeException(e);
         }
-
-        recEventList = eventList.suffleEvent(eventList);
-        setCategoryButtonImage();
-        setUpCategoryButton();
-        setUpSortMenuButton();
-        showRecommendedEvent();
     }
 
-    @FXML protected void onUpExploreClick() {
+    // button to another page
+    @FXML private void onUpExploreClick() {
         try {
             FXRouter.goTo("all-events",user,"home","upcoming");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML protected void onNewExploreClick() {
+    @FXML private void onNewExploreClick() {
         try {
             FXRouter.goTo("all-events",user,"home","new");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML protected void onRecExploreClick() {
+    @FXML private void onRecExploreClick() {
         try {
             FXRouter.goTo("all-events",user,"home","");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+    @FXML private void onAllEventClick() {
+        try {
+            FXRouter.goTo("all-events",user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // set up page
     private void setCategoryButtonImage() {
         String defaultImgPath = "/images/home/blackgrid.png";
         String hoverImgPath = "/images/home/whitegrid.png";
@@ -117,12 +123,26 @@ public class HomeController {
                 } else {
                     recEventList = eventList.sortByTag(eventList, category);
                 }
+                String sortingOption = recSortMenuButton.getText();
+                switch (sortingOption) {
+                    case "Sort By : A - Z":
+                        recEventList = recEventList.sortByName(recEventList);
+                        break;
+                    case "Sort By : Recent Event":
+                        recEventList = recEventList.sortNewEvent(recEventList);
+                        break;
+                    case "Sort By : Upcoming Event":
+                        recEventList = recEventList.sortUpcoming(recEventList);
+                        break;
+                    case "Sort By : Popularity":
+                        recEventList = recEventList.sortByMember(recEventList);
+                        break;
+                }
                 showRecommendedEvent();
             });
             categoryButton.getItems().add(menuItem);
         }
     }
-
     private void setUpSortMenuButton() {
         MenuItem eng = new MenuItem("A - Z");
         eng.setOnAction( event -> {
@@ -167,6 +187,8 @@ public class HomeController {
             }
         }
     }
+
+    // load event tile
     private void loadRecommendedEventTile(AnchorPane anchorPane,Event event) {
         try {
             FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile.fxml"));
@@ -190,8 +212,6 @@ public class HomeController {
 
             anchorPane.getChildren().setAll(load);
             AnimateComponent(load);
-
-            // ตรวจสอบสถานะของปุ่ม "Left" และ "Right"
             updateButtonState();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -236,24 +256,24 @@ public class HomeController {
         }
     }
 
-    @FXML protected void onNewLeftButton() {
-        if (currnetIndexOfNew > 1) {
-            currnetIndexOfNew--;
-            loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew,newEventList);
-            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currnetIndexOfNew));
-            loadNextEventTile(newRightAnchorPane,currnetIndexOfNew,newEventList);
+    // button for loading event tile
+    @FXML private void onNewLeftButton() {
+        if (currentIndexOfNew > 1) {
+            currentIndexOfNew--;
+            loadOldEventTile(newLeftAnchorPane,currentIndexOfNew,newEventList);
+            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currentIndexOfNew));
+            loadNextEventTile(newRightAnchorPane,currentIndexOfNew,newEventList);
         }
     }
-    @FXML protected void onNewRightButton() {
-        if (currnetIndexOfNew < newEventList.getEvents().size()) {
-            currnetIndexOfNew++;
-            loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew,newEventList);
-            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currnetIndexOfNew));
-            loadNextEventTile(newRightAnchorPane,currnetIndexOfNew,newEventList);
+    @FXML private void onNewRightButton() {
+        if (currentIndexOfNew < newEventList.getEvents().size()-2) {
+            currentIndexOfNew++;
+            loadOldEventTile(newLeftAnchorPane,currentIndexOfNew,newEventList);
+            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currentIndexOfNew));
+            loadNextEventTile(newRightAnchorPane,currentIndexOfNew,newEventList);
         }
     }
-
-    @FXML protected void onUpLeftButton() {
+    @FXML private void onUpLeftButton() {
         if (currentIndexOfUp > 1) {
             currentIndexOfUp--;
             loadOldEventTile(upLeftAnchorPane,currentIndexOfUp,upEventList);
@@ -261,8 +281,8 @@ public class HomeController {
             loadNextEventTile(upRightAnchorPane,currentIndexOfUp,upEventList);
         }
     }
-    @FXML protected void onUpRightButton() {
-        if (currentIndexOfUp < upEventList.getEvents().size()) {
+    @FXML private void onUpRightButton() {
+        if (currentIndexOfUp < upEventList.getEvents().size()-2) {
             currentIndexOfUp++;
             loadOldEventTile(upLeftAnchorPane,currentIndexOfUp,upEventList);
             loadCurrentEventTile(upCenterAnchorPane,upEventList.getEvents().get(currentIndexOfUp));
@@ -272,14 +292,14 @@ public class HomeController {
 
     private void updateButtonState() {
         // ตรวจสอบสถานะของปุ่ม "Left" และ "Right" แล้วอัปเดต
-        newLeftButton.setDisable(currnetIndexOfNew == 1);
-        newRightButton.setDisable(currnetIndexOfNew == newEventList.getEvents().size()-2);
-
         upLeftButton.setDisable(currentIndexOfUp == 1);
         upRightButton.setDisable(currentIndexOfUp == upEventList.getEvents().size()-2);
+
+        newLeftButton.setDisable(currentIndexOfNew == 1);
+        newRightButton.setDisable(currentIndexOfNew == newEventList.getEvents().size()-2);
     }
 
-    //-------------Animate Zoom for any AnchorPane-------------\\
+    // anchorPane's zoom animation
     private void AnimateComponent(AnchorPane anchorPane) {
         ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), anchorPane);
         scaleIn.setToX(1.1);
@@ -290,14 +310,4 @@ public class HomeController {
         anchorPane.setOnMouseEntered(event -> {scaleIn.play();});
         anchorPane.setOnMouseExited(event -> {scaleOut.play();});
     }
-    //-------------Animate Zoom for any AnchorPane-------------\\
-
-    public void onClickButton(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("all-events",user);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

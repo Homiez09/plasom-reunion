@@ -7,7 +7,6 @@ import cs211.project.services.ActivityTeamListDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
 import cs211.project.services.team.LoadSideBarComponent;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -27,13 +26,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.function.Predicate;
 
 public class TeamActivityController {
     @FXML private AnchorPane navbarAnchorPane, sideBarAnchorPane, mainActivityAnchorPane, createActivityAnchorPane;
-    @FXML private Label activityNameLabel, activityDescriptionLabel, activityStartTimeLabel, activityEndTimeLabel, nameRequirementLabel, errorContinueLabel, dateRequirementLabel, countDescriptionLabel;
-    @FXML private TextField activityNameTextField;
+    @FXML private Label activityNameLabel, activityDescriptionLabel, activityStartTimeLabel, activityEndTimeLabel, nameRequirementLabel, errorContinueLabel, dateRequirementLabel, countDescriptionLabel, entriesLabel;
+    @FXML private TextField activityNameTextField, searchbarTextField;
     @FXML private TextArea descriptionTextArea;
     @FXML private DatePicker startDatePicker, endDatePicker;
     @FXML private Button createActivityButton, deleteButton;
@@ -74,27 +72,24 @@ public class TeamActivityController {
 
     @FXML void initialize(){
         activityTeamList = activityTeamListDataSource.readData();
-        new LoadNavbarComponent(user, navbarAnchorPane);
 
+        new LoadNavbarComponent(user, navbarAnchorPane);
         sideBarAnchorPaneLoad = new LoadSideBarComponent();
         sideBarAnchorPane.getChildren().add(sideBarAnchorPaneLoad.getSideBarComponent());
+        setSideBar();
+
+        setPageVisible(true);
 
         dataInit();
-
+        userInit();
+        searchbarInit();
         validateDateTime();
         choiceBoxInit();
         checkDateReq();
-
-        setPageVisible(true);
-        initUser();
-
         showTable();
         checkButtonNextAndPrevious();
-
         maximumLengthField();
         showFocusRequirement();
-
-        setSideBar();
     }
 
     @FXML
@@ -372,7 +367,7 @@ public class TeamActivityController {
         activityTeamListDataSource.writeData(activityTeamList);
     }
 
-    private void initUser() {
+    private void userInit() {
         if (user.getRole().equals("Member")) createActivityButton.setVisible(false);
     }
     private void initStatus(ActivityTeam activityTeam) {
@@ -489,6 +484,8 @@ public class TeamActivityController {
             chatIconImageView.setVisible(false);
         }
 
+        entriesLabel.setText("Showing " + max_page + " of " + max_page + " entries");
+
     }
 
     private void validateDateTime() {
@@ -599,5 +596,20 @@ public class TeamActivityController {
         activityNameRequirement = isValidate;
         teamNameReqImageView.setVisible(isValidate);
         nameRequirementLabel.setVisible(!isValidate);
+    }
+
+    private void searchbarInit() {
+        searchbarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            activityTableView.getItems().clear();
+            Predicate<ActivityTeam> name = activityTeam -> {
+                if (newValue == null || newValue.isEmpty()) return true;
+                return activityTeam.getName().toLowerCase().contains(newValue.toLowerCase());
+            };
+            activityTeamList.getActivitiesByTeamID(team.getTeamID()).stream().filter(name).forEach(activityTeam -> {
+                activityTableView.getItems().add(activityTeam);
+            });
+            entriesLabel.setText("Showing " + activityTableView.getItems().size() + " of " + max_page + " entries");
+            activityTableView.getSelectionModel().select(0);
+        });
     }
 }

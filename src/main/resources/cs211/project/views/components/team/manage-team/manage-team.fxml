@@ -97,18 +97,6 @@
             <Line endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-70.0" layoutY="-58.0" startX="272.0" startY="104.0" stroke="#ff9900" strokeWidth="3.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="270.0" layoutY="60.0" prefHeight="48.0" prefWidth="185.0">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="12.0" text="Pending Invites">
-               <styleClass>
-                  <String fx:value="font" />
-                  <String fx:value="text-lg" />
-                  <String fx:value="weight-bold" />
-               </styleClass>
-            </Label>
-            <Line endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-69.0" layoutY="-58.0" startX="272.0" startY="104.0" stroke="#ff9900" strokeWidth="3.0" visible="false" />
-         </children>
-      </AnchorPane>
       <AnchorPane layoutX="476.0" layoutY="60.0" prefHeight="48.0" prefWidth="185.0" />
       <AnchorPane fx:id="manageTeamDisableAnchorPane" opacity="0.35" prefHeight="542.0" prefWidth="913.0" styleClass="bgProfile1" />
       <AnchorPane fx:id="manageTeamExitAnchorPane" onMouseClicked="#manageTeamsAnchorPaneClicked" prefHeight="542.0" prefWidth="913.0" />

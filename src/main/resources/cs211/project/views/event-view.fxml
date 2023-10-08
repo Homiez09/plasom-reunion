@@ -134,7 +134,7 @@
                                     </VBox>
                               </content>
                             </Tab>
-                            <Tab text="Event Schedule">
+                            <Tab fx:id="eventActivityTab" text="Event Schedule">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0">
                                        <children>

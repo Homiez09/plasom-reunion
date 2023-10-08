@@ -8,7 +8,6 @@ import cs211.project.services.EventListDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
 import javafx.event.ActionEvent;
-//import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -39,11 +38,12 @@ public class CreateEventController {
     @FXML private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     @FXML private Button submitButton;
     private Event thisEvent = (Event) FXRouter.getData2();
+    private User user = (User) FXRouter.getData();
     private String newEventImagePath = null;
-    private final User user = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
-    @FXML  void initialize() {
+
+    @FXML private   void initialize() {
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -60,6 +60,8 @@ public class CreateEventController {
         timeCheck();
         limitCharacter();
     }
+
+    // create and edit event
     @FXML protected void handleUploadButton(ActionEvent event) {
         FileChooser chooser = new FileChooser();
         // SET FILECHOOSER INITIAL DIRECTORY
@@ -93,12 +95,14 @@ public class CreateEventController {
             }
         }
     }
+
     private void setSpinner(Spinner<Integer> spinner, int time) {
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0,time,0);
         spinner.setValueFactory(valueFactory);
         spinner.setEditable(true);
     }
+
     private void setPage() {
         errorStartLabel.setVisible(false);
         errorEndLabel.setVisible(false);
@@ -110,6 +114,7 @@ public class CreateEventController {
             showEventDetail(thisEvent);
         }
     }
+
     @FXML protected void onBackButtonClick() {
         if (thisEvent == null) {
             try {
@@ -149,12 +154,12 @@ public class CreateEventController {
             if (!numMemberString.equals("")){
                 int numMember = Integer.parseInt(numMemberString);
                 eventList.createEvent(  eventNameString,eventHost,eventImagePath,
-                                        eventTag,startDate,endDate,eventDescriptionString,
-                                        eventLocationString,numMember);
+                        eventTag,startDate,endDate,eventDescriptionString,
+                        eventLocationString,numMember);
             }else {
                 eventList.createEvent(  eventNameString,eventHost,eventImagePath,
-                                        eventTag,startDate,endDate,
-                                        eventDescriptionString,eventLocationString);
+                        eventTag,startDate,endDate,
+                        eventDescriptionString,eventLocationString);
             }
             eventListDatasource.writeData(eventList);
         } else {
@@ -174,6 +179,14 @@ public class CreateEventController {
             FXRouter.goTo("my-event",user);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void setPageHeader() {
+        if(thisEvent == null) {
+            headCreateEventLabel.setText("Create your own event!");
+        } else {
+            headCreateEventLabel.setText("Edit event");
         }
     }
 
@@ -204,6 +217,7 @@ public class CreateEventController {
         LocalDateTime dateTime = datePick.atTime(Time);
         return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
+
     private void timeCheck() {
         errorStartLabel.setVisible(false);
         errorEndLabel.setVisible(false);
@@ -227,6 +241,7 @@ public class CreateEventController {
             validateTime();
         });
     }
+
     private void validateDate() {
         errorStartLabel.setText("Invalid Date");
         errorEndLabel.setText("Invalid Date");
@@ -274,7 +289,6 @@ public class CreateEventController {
 
     }
 
-
     private void setTime(DatePicker datePicker){
         datePicker.setValue(LocalDate.now());
     }
@@ -288,4 +302,5 @@ public class CreateEventController {
             if (eventLocationTextField.getText().length() > 50) {eventLocationTextField.setText(oldValue);}
         });
     }
+
 }

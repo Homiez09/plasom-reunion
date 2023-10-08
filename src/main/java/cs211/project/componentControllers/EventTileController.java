@@ -15,14 +15,11 @@ import java.io.IOException;
 public class EventTileController {
     @FXML private ImageView eventTileImageView;
     @FXML private StackPane imageStackPane;
-    @FXML
-    Label eventNameLabel,eventDateLabel,eventPlaceLabel,eventMemberLabel;
+    @FXML private Label eventNameLabel,eventDateLabel,eventPlaceLabel,eventMemberLabel;
     private User currentUser = (User) FXRouter.getData();
     private Image image;
     private  Event thisEvent;
-    @FXML private void initialize() {
-
-    }
+    @FXML private void initialize() {}
 
     public void showEventTile(Event event) {
         thisEvent = event;
@@ -52,13 +49,11 @@ public class EventTileController {
         }
     }
 
-
-    @FXML protected void onEventTileClick() {
+    @FXML private void onEventTileClick() {
         try {
             FXRouter.goTo("event",currentUser,thisEvent);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 }
