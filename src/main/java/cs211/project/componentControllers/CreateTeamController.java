@@ -44,7 +44,7 @@ public class CreateTeamController {
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
     protected SpinnerValueFactory<Integer> numMemberSpin;
 
-    private final int MAX_TEAM_NAME_LIMIT = 50, MAX_DESCRIPTION_LIMIT = 280;
+    private final int MAX_TEAM_NAME_LIMIT = 35, MAX_DESCRIPTION_LIMIT = 280;
     protected int currentMinute, startHour, startMinute, endHour, endMinute;
     protected int countInit = 0;
 
