@@ -53,6 +53,7 @@ public class SignInController {
         visiblePasswordImageView.setImage(hidePasswordImage);
 
         errorLabel.setVisible(false);
+
     }
 
     private void eventHandleEnter(){
