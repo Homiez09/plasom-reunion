@@ -25,18 +25,11 @@
       <HBox alignment="CENTER_LEFT" layoutY="-6.0" styleClass="card-my-event">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefWidth="19.0" />
-            <VBox alignment="CENTER">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <children>
-                  <ImageView fx:id="eventImageView" cache="true" cacheHint="QUALITY" depthTest="DISABLE" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
-                     <viewport>
-                        <Rectangle2D height="200.0" width="200.0" />
-                     </viewport>
-                  </ImageView>
-               </children>
-            </VBox>
+            <ImageView fx:id="eventImageView" cache="true" cacheHint="QUALITY" depthTest="DISABLE" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
             <Separator opacity="0.0" orientation="VERTICAL" prefWidth="19.0" />
             <VBox>
                <children>

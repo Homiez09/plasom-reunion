@@ -18,10 +18,8 @@ public class LoadCardEventComponent {
                     AnchorPane loaded = loader.load();
                     CardEventController loadCard = loader.getController();
                     loadCard.setEvent(event);
-
                     anchorPane.getChildren().setAll(loaded);
                     AnimateComponent(loaded);
-
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -32,10 +30,8 @@ public class LoadCardEventComponent {
                     AnchorPane loaded = loader.load();
                     CardMyEventController loadCard = loader.getController();
                     loadCard.setEventData(event);
-
                     anchorPane.getChildren().setAll(loaded);
                     AnimateComponent(loaded);
-
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

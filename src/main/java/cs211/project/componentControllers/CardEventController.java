@@ -41,10 +41,10 @@ public class CardEventController {
             profileImageView.setImage(new Image(pathFormat.toString(), 30, 30, false, false));
             new CreateProfileCircle(profileImageView, 30);
 
-            Image image = new Image("file:" + event.getEventImagePath(), 200, 200, false, false);
+            Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
             if (event.getEventImagePath().equals("null")) {
                 String imgPath = "/images/events/event-default-auth.png";
-                image = new Image(getClass().getResourceAsStream(imgPath), 200, 200, false, false);
+                image = new Image(getClass().getResourceAsStream(imgPath), 1280, 1280, false, false);
             }
             eventImage.setImage(image);
         }

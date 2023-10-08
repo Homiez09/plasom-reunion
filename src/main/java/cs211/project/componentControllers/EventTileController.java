@@ -36,10 +36,10 @@ public class EventTileController {
             }else {
                 eventMemberLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
             }
-            image = new Image("file:"+event.getEventImagePath(),200,200,true,true);
+            image = new Image("file:"+event.getEventImagePath(),1280,1280,false,false);
             if(event.getEventImagePath().equals("null")){
-                String imgpath = "/images/events/event-default.png";
-                image = new Image(getClass().getResourceAsStream(imgpath),300,300,false,false);
+                String imgpath = "/images/events/event-default-auth.png";
+                image = new Image(getClass().getResourceAsStream(imgpath),1280,1280,false,false);
             }
             eventTileImageView.setImage(image);
             eventTileImageView.setFitWidth(150);

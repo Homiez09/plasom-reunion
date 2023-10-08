@@ -74,6 +74,8 @@ public class CardMyEventController {
         setupDataPage();
         if (event !=null) {
             currentEvent = eventList.findEventById(event.getEventID());
+            Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+            TeamList teamList = teamListDatasource.readData();
 
             buttonVisible(event.isEnd());
             if (event.getUserList().getUsers().contains(currentUser)) {
@@ -83,18 +85,21 @@ public class CardMyEventController {
             if (event.getEventHostUser().equals(currentUser)) {
                 leaveEventButton.setVisible(false);
             }
-            for (Team team : event.getTeamList().getTeams()) {
-                if (team.getMemberList().getUsers().contains(currentUser) && !currentEvent.isHostEvent(currentUser)) {
+
+            for (Team team : teamList.getTeams()) {
+                if (    team.getMemberList().getUsers().contains(currentUser) &&
+                        !currentEvent.isHostEvent(currentUser) &&
+                        event.getEventID().equals(team.getEventID())) {
                     manageUserButton.setVisible(false);
                     leaveEventButton.setVisible(false);
                 }
             }
 
 
-            Image image = new Image("file:" + event.getEventImagePath(), 200, 200, false, false);
+            Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
             if (event.getEventImagePath().equals("null")) {
                 String imgPath = "/images/events/event-default-auth.png";
-                image = new Image(getClass().getResourceAsStream(imgPath), 200, 200, false, false);
+                image = new Image(getClass().getResourceAsStream(imgPath), 1280, 1280, false, false);
             }
             eventImageView.setImage(image);
             eventNameLabel.setText(event.getEventName());

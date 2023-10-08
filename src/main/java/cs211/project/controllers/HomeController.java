@@ -70,21 +70,21 @@ public class HomeController {
 
     @FXML protected void onUpExploreClick() {
         try {
-            FXRouter.goTo("all-events",user);
+            FXRouter.goTo("all-events",user,"home","upcoming");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML protected void onNewExploreClick() {
         try {
-            FXRouter.goTo("all-events",user);
+            FXRouter.goTo("all-events",user,"home","new");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML protected void onRecExploreClick() {
         try {
-            FXRouter.goTo("all-events",user);
+            FXRouter.goTo("all-events",user,"home","");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

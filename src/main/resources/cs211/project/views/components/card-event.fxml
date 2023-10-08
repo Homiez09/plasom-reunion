@@ -15,17 +15,11 @@
       <VBox alignment="CENTER">
          <children>
             <Separator opacity="0.0" prefHeight="5.0" prefWidth="5.0" />
-            <HBox alignment="CENTER">
-               <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
-                  <ImageView fx:id="eventImage" cache="true" cacheHint="QUALITY" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
-                     <viewport>
-                        <Rectangle2D height="200.0" width="200.0" />
-                     </viewport>
-                  </ImageView>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
-               </children>
-            </HBox>
+            <ImageView fx:id="eventImage" cache="true" cacheHint="QUALITY" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />

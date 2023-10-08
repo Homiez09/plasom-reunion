@@ -5,6 +5,7 @@ import cs211.project.models.Activity;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.EventList;
+import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
@@ -178,11 +179,14 @@ public class EventPageController {
     }
 
     public void initButton(){
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
+
         editEventButton.setVisible(event.isHostEvent(user));
         joinEventButton.setVisible( event.isJoinEvent() &&
                                     !event.isFull() &&
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user));
-        teamApplyBox.setVisible(event.getTeamList() != null);
+        teamApplyBox.setVisible(teamList.getTeamOfEvent(event) != null);
     }
 }

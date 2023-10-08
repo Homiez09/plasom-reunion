@@ -1,6 +1,8 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.*;
+import cs211.project.services.Datasource;
+import cs211.project.services.TeamListDataSource;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -89,10 +91,9 @@ public class EventList {
     }
 
     public EventList sortUpcoming(EventList eventList){
-        Comparator<Event> comparing = Comparator
-                .comparing((Event event) -> LocalDateTime.parse(event.getEventDateStart(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
-                .thenComparing((Event event) -> LocalDateTime.parse(event.getEventDateEnd(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        Comparator<Event> comparing = Comparator.comparing(Event::getDateStartAsDate);
         EventList list = new EventList();
+
         list.getEvents().addAll(eventList.getEvents());
         Collections.sort(list.getEvents(),comparing);
 
@@ -139,6 +140,9 @@ public class EventList {
     }
 
     public ArrayList<Event> getUserEvent(User user){
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
+
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events) {
             if (event.isHostEvent(user)) {
@@ -146,8 +150,8 @@ public class EventList {
             } else if (event.getUserList().getUsers().contains(user)) {
                 list.add(event);
             } else {
-                for (Team team:event.getTeamList().getTeams()){
-                    if (team.getMemberList().getUsers().contains(user)){
+                for (Team team:teamList.getTeams()){
+                    if (team.getMemberList().getUsers().contains(user) && event.getEventID().equals(team.getEventID())){
                         list.add(event);
                     }
                 }
@@ -169,10 +173,13 @@ public class EventList {
     }
 
     public ArrayList<Event> getTeamEvent(User user){
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
+
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events){
-            for (Team team:event.getTeamList().getTeams()) {
-                if (team.getMemberList().getUsers().contains(user)) {
+            for (Team team:teamList.getTeams()) {
+                if (team.getMemberList().getUsers().contains(user) && event.getEventID().equals(team.getEventID())) {
                     list.add(event);
                 }
             }
@@ -224,6 +231,7 @@ public class EventList {
             }
         }
         list.sort(Comparator.comparing(Event::getTimestampAsDate));
+        Collections.reverse(list);
         return  list;
     }
 
