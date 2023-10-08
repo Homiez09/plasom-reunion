@@ -22,9 +22,7 @@ public class Event implements Comparable<Event>{
     private int slotMember;
     private final String timestamp;
     private boolean joinEvent = false,joinTeam = false;
-    private BooleanProperty isSelected ;
     private ActivityList activityList;
-    private TeamList teamList;
     private UserList userList;
     public Event(String eventName,
                  User eventHostUser,
@@ -44,10 +42,8 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = -1;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        this.isSelected = new SimpleBooleanProperty(false);
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         this.activityList = new ActivityList();
-        this.teamList = new TeamList();
         this.userList = new UserList();
         this.joinEvent = true;
         this.joinTeam = true;
@@ -72,10 +68,8 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = slotMember;
-        this.isSelected = new SimpleBooleanProperty(false);
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         this.activityList = new ActivityList();
-        this.teamList = new TeamList();
         this.userList = new UserList();
         this.joinEvent = true;
         this.joinTeam = true;
@@ -106,7 +100,6 @@ public class Event implements Comparable<Event>{
         this.eventHostUser = eventHostUser;
         this.timestamp =timestamp;
         this.activityList = new ActivityList();
-        this.teamList = new TeamList();
         this.userList = new UserList();
         this.joinEvent = joinEvent;
         this.joinTeam = joinTeam;
@@ -124,7 +117,6 @@ public class Event implements Comparable<Event>{
     public int getUserInEvent() {return userList.getUsers().size();}
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivityList() { return activityList; }
-    public TeamList getTeamList() { return teamList; }
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
     public LocalDateTime getDateStartAsDate(){
@@ -155,9 +147,6 @@ public class Event implements Comparable<Event>{
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
     public void changeTag(String newTag) {this.eventTag = newTag;}
     public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
-    public void setTeamList(TeamList teamList){
-        this.teamList = teamList;
-    }
     public void setActivity(ActivityList activityList) {this.activityList = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
     public void setJoinEvent (boolean joinEvent){this.joinEvent = joinEvent;}
@@ -183,20 +172,6 @@ public class Event implements Comparable<Event>{
         return eventDate.isAfter(currentTime);
     }
 
-
-    public boolean isNewEvent() {
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime parsedTimeStamp;
-        if (timestamp.length() == 16) {parsedTimeStamp = LocalDateTime.parse(timestamp, formatter2);}
-        else {parsedTimeStamp = LocalDateTime.parse(timestamp, formatter1);}
-        LocalDateTime currentTime = LocalDateTime.now();
-
-        long eventDateDiff = ChronoUnit.DAYS.between(parsedTimeStamp, currentTime);
-
-        return eventDateDiff <= 7;
-    }
-
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -205,10 +180,11 @@ public class Event implements Comparable<Event>{
 
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
+
     public boolean isHostEvent(User user) {
         return eventHostUser.equals(user);
     }
-    public boolean isHaveUser(User user){return eventHostUser.equals(user);}
+
     private String generateRandomText() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         StringBuilder randomText = new StringBuilder();

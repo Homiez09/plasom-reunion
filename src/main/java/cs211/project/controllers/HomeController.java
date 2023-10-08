@@ -67,21 +67,21 @@ public class HomeController {
     // button to another page
     @FXML private void onUpExploreClick() {
         try {
-            FXRouter.goTo("all-events",user);
+            FXRouter.goTo("all-events",user,"home","upcoming");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void onNewExploreClick() {
         try {
-            FXRouter.goTo("all-events",user);
+            FXRouter.goTo("all-events",user,"home","new");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void onRecExploreClick() {
         try {
-            FXRouter.goTo("all-events",user);
+            FXRouter.goTo("all-events",user,"home","");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
