@@ -7,8 +7,6 @@ import cs211.project.services.Datasource;
 import cs211.project.services.EventListDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadNavbarComponent;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 //import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -32,14 +30,14 @@ import java.time.format.DateTimeFormatter;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
-    @FXML private Label headCreateEventLabel,errorCapacityLabel;
+    @FXML private Label headCreateEventLabel,errorCapacityLabel,errorStartLabel,errorEndLabel,errorTimeLabel;
     @FXML private ChoiceBox<String> eventTagChoiceBox;
     @FXML private ImageView uploadImageView;
     @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField;
     @FXML private TextArea eventDescriptionTextArea;
     @FXML private DatePicker eventStartDatePick,eventEndDatePick;
-    @FXML
-    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
+    @FXML private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
+    @FXML private Button submitButton;
     private Event thisEvent = (Event) FXRouter.getData2();
     private String newEventImagePath = null;
     private final User user = (User) FXRouter.getData();
@@ -49,17 +47,17 @@ public class CreateEventController {
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
+        setTime(eventStartDatePick);
+        setTime(eventEndDatePick);
         setSpinner(eventStartHourSpinner,23);
         setSpinner(eventEndHourSpinner,23);
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
 
         eventTagChoiceBox.getItems().addAll("Animal","Art","Business","Conference","Education","Food & Drink","Music","Performance","Seminar","Sport","Workshop");
-        CheckDate();
-        setPageHeader();
-        if (thisEvent != null) {
-            showEventDetail(thisEvent);
-        }
+
+        setPage();
+        timeCheck();
         limitCharacter();
     }
     @FXML protected void handleUploadButton(ActionEvent event) {
@@ -101,11 +99,15 @@ public class CreateEventController {
         spinner.setValueFactory(valueFactory);
         spinner.setEditable(true);
     }
-    private void setPageHeader() {
+    private void setPage() {
+        errorStartLabel.setVisible(false);
+        errorEndLabel.setVisible(false);
+        errorTimeLabel.setVisible(false);
         if(thisEvent == null) {
             headCreateEventLabel.setText("Create your own event!");
         } else {
             headCreateEventLabel.setText("Edit event");
+            showEventDetail(thisEvent);
         }
     }
     @FXML protected void onBackButtonClick() {
@@ -125,6 +127,7 @@ public class CreateEventController {
     }
 
     @FXML protected void onSubmitBasicInformationClick() {
+
         eventListDatasource = new EventListDataSource();
         eventList = eventListDatasource.readData();
         if (!eventCapTextField.getText().equals("") && !eventCapTextField.getText().matches("[0-9]+")) {
@@ -144,7 +147,6 @@ public class CreateEventController {
             String eventImagePath = newEventImagePath;
 
             if (!numMemberString.equals("")){
-
                 int numMember = Integer.parseInt(numMemberString);
                 eventList.createEvent(  eventNameString,eventHost,eventImagePath,
                                         eventTag,startDate,endDate,eventDescriptionString,
@@ -154,17 +156,16 @@ public class CreateEventController {
                                         eventTag,startDate,endDate,
                                         eventDescriptionString,eventLocationString);
             }
-            //add event
             eventListDatasource.writeData(eventList);
         } else {
-            eventList.findEventById(thisEvent.getEventID()).changeName(eventNameTextField.getText());
-            eventList.findEventById(thisEvent.getEventID()).changeDescription(eventDescriptionTextArea.getText().replace("\n","\\n"));
-            eventList.findEventById(thisEvent.getEventID()).changeSlotMember(Integer.parseInt(eventCapTextField.getText()));
-            eventList.findEventById(thisEvent.getEventID()).changeDateStart(formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
-            eventList.findEventById(thisEvent.getEventID()).changeDateEnd(formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
-            eventList.findEventById(thisEvent.getEventID()).changeTag(eventTagChoiceBox.getValue());
+            eventList.changeName(thisEvent,eventNameTextField.getText());
+            eventList.changeDescription(thisEvent,eventDescriptionTextArea.getText().replace("\n"," "));
+            eventList.changeSlotMember(thisEvent,Integer.parseInt(eventCapTextField.getText()));
+            eventList.changeDateStart(thisEvent,formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
+            eventList.changeDateEnd(thisEvent,formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
+            eventList.changeTag(thisEvent,eventTagChoiceBox.getValue());
             if (newEventImagePath != null) {
-                eventList.findEventById(thisEvent.getEventID()).changeEventImagePath(newEventImagePath);
+                eventList.changeImagePath(thisEvent,newEventImagePath);
             }
             eventListDatasource.writeData(eventList);
         }
@@ -195,47 +196,87 @@ public class CreateEventController {
     }
 
     private String formatTime(DatePicker datePicker,Spinner<Integer> hour,Spinner<Integer> minute){
-        LocalDate DatePick = datePicker.getValue();
+        LocalDate datePick;
         int Hour = hour.getValue();
         int Minute = minute.getValue();
+        datePick = datePicker.getValue();
         LocalTime Time = LocalTime.of(Hour, Minute);
-        LocalDateTime DateTime = DatePick.atTime(Time);
-        return DateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-
+        LocalDateTime dateTime = datePick.atTime(Time);
+        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
-
-    private void CheckDate() {
-        SettingCheckDate(eventStartDatePick);
-        SettingCheckDate(eventEndDatePick);
-    }
-    private void SettingCheckDate(DatePicker datePicker){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Date Error");
-        alert.setHeaderText("Invalid Date Format");
-        datePicker.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean lostFocus, Boolean onFocus) {
-
-                if(!onFocus && !datePicker.getEditor().getText().isEmpty()){
-                    try {
-                        LocalDate selectedDate = datePicker.getValue();
-                        LocalDate currentDate = LocalDate.now();
-
-                        if (selectedDate.isBefore(currentDate)) {
-                            // ถ้าวันที่ที่ผู้ใช้เลือกน้อยกว่าวันปัจจุบัน
-                            // คุณสามารถทำการแจ้งเตือนหรือทำการแก้ไขค่าใน eventStartDatePick ตามที่คุณต้องการ
-                            alert.showAndWait();
-                            datePicker.setValue(null);
-                            datePicker.getEditor().setText("");
-                        }
-                    } catch (Exception e) {
-                        alert.showAndWait();
-                        datePicker.setValue(null);
-                        datePicker.getEditor().setText("");
-                    }
-                }
-            }
+    private void timeCheck() {
+        errorStartLabel.setVisible(false);
+        errorEndLabel.setVisible(false);
+        eventStartDatePick.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            validateDate();
         });
+
+        eventEndDatePick.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            validateDate();
+        });
+        eventStartHourSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            validateTime();
+        });
+        eventStartMinuteSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            validateTime();
+        });
+        eventEndHourSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            validateTime();
+        });
+        eventEndMinuteSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            validateTime();
+        });
+    }
+    private void validateDate() {
+        errorStartLabel.setText("Invalid Date");
+        errorEndLabel.setText("Invalid Date");
+        int startHour = eventStartHourSpinner.getValue();
+        int endHour = eventEndHourSpinner.getValue();
+        int startMinute = eventStartMinuteSpinner.getValue();
+        int endMinute = eventEndMinuteSpinner.getValue();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        LocalDate startDate = eventStartDatePick.getValue();
+        LocalDate endDate = eventEndDatePick.getValue();
+
+        LocalDateTime startTime = LocalDateTime.of(startDate, LocalTime.of(startHour, startMinute));
+        LocalDateTime endTime = LocalDateTime.of(endDate, LocalTime.of(endHour, endMinute));
+
+        errorStartLabel.setVisible(!startTime.isAfter(currentDateTime));
+        errorEndLabel.setVisible(!endTime.isAfter(currentDateTime));
+
+        submitButton.setDisable(!(startTime.isAfter(currentDateTime) && endTime.isAfter(currentDateTime)));
+
+    }
+
+    private void validateTime() {
+        errorTimeLabel.setText("Invalid Time");
+        int startHour = eventStartHourSpinner.getValue();
+        int endHour = eventEndHourSpinner.getValue();
+        int startMinute = eventStartMinuteSpinner.getValue();
+        int endMinute = eventEndMinuteSpinner.getValue();
+
+        LocalTime startTime = LocalTime.of(startHour, startMinute);
+        LocalTime endTime = LocalTime.of(endHour, endMinute);
+        boolean isTimeValid = startTime.isBefore(endTime);
+
+        if (eventStartDatePick.getValue() != null && eventEndDatePick.getValue() != null) {
+            LocalDateTime startDate = eventStartDatePick.getValue().atStartOfDay();
+            LocalDateTime endDate = eventEndDatePick.getValue().atStartOfDay();
+            if (startDate.equals(endDate) ){
+
+                errorTimeLabel.setVisible(!isTimeValid);
+                submitButton.setDisable(!isTimeValid);
+            }
+        }
+
+
+
+    }
+
+
+    private void setTime(DatePicker datePicker){
+        datePicker.setValue(LocalDate.now());
     }
 
     private void limitCharacter() {

@@ -107,7 +107,7 @@ public class CardMyEventController {
             locationLabel.setText(event.getEventLocation());
 
             ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());
-            profileImageView.setImage(new Image(pathFormat.toString(), 30, 30, false, false));
+            profileImageView.setImage(new Image(pathFormat.toString(), 500, 500, false, false));
             new CreateProfileCircle(profileImageView, 32);
 
             hostUserNameLabel.setText(event.getEventHostUser().getUsername());

@@ -69,6 +69,35 @@ public class EventList {
         return count;
     }
 
+    public void changeName(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeName(change);
+    }
+    public void changeDescription(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeDescription(change);
+    }
+    public void changeImagePath(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeEventImagePath(change);
+    }
+    public void changeSlotMember(Event event,int change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeSlotMember(change);
+    }
+    public void changeDateStart(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeDateStart(change);
+    }
+    public void changeDateEnd(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeDateEnd(change);
+    }
+    public void changeTag(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeTag(change);
+    }
+
     public void sort(){
         Collections.sort(events);
     }

@@ -25,6 +25,7 @@ import javafx.stage.Popup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -54,8 +55,7 @@ public class MyEventsController{
         allButton.setDisable(true);
         getBySearch();
         sortTilePane();
-        if (from.equals("card")){
-            System.out.println(from);
+        if (from!=null){
             resetButton();
             eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
             memberButton.setDisable(true);
@@ -128,12 +128,12 @@ public class MyEventsController{
                 nodesToRemove.add(node);
             }
         }
-        listViewMain.getItems().removeAll(nodesToRemove);
+//        listViewMain.getItems().removeAll(nodesToRemove);
         nodes.removeAll(nodesToRemove);
     }
 
     private void initSort(){
-        String sort[] = {"Name","Start","Member","End"};
+        String sort[] = {"A - Z","Start Date","Popularity","End Date"};
         sortComboBox.getItems().addAll(sort);
         sortComboBox.setValue("");
     }
@@ -157,23 +157,22 @@ public class MyEventsController{
         sortComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
             String sortBy = newValue.trim();
             listViewMain.getItems().clear();
-            System.out.println(oldValue);
-            System.out.println(newValue);
             Comparator<Event> eventComparator =null;
             switch (sortBy){
-                case "Name":
+                case "A - Z":
                     eventComparator = Comparator.comparing(Event::getEventName);
                     eventObservableList.sort(eventComparator);
                     break;
-                case "Start":
+                case "Start Date":
                     eventComparator = Comparator.comparing(Event::getDateStartAsDate);
                     eventObservableList.sort(eventComparator);
                     break;
-                case "Member":
+                case "Popularity":
                     eventComparator = Comparator.comparing(Event::getUserInEvent);
                     eventObservableList.sort(eventComparator);
+                    Collections.reverse(eventObservableList);
                     break;
-                case "End":
+                case "End Date":
                     eventComparator = Comparator.comparing(Event::getDateEndAsDate);
                     eventObservableList.sort(eventComparator);
                     break;

@@ -38,7 +38,7 @@ public class CardEventController {
             }
 
             ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());
-            profileImageView.setImage(new Image(pathFormat.toString(), 30, 30, false, false));
+            profileImageView.setImage(new Image(pathFormat.toString(), 500, 500, false, false));
             new CreateProfileCircle(profileImageView, 30);
 
             Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);

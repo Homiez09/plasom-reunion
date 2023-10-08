@@ -147,9 +147,7 @@ public class AllEventListController {
                     default:
                         break;
                 }
-            allButton.setDisable(false);
-            newButton.setDisable(false);
-            upComingButton.setDisable(false);
+            resetButton();
             removeNode(selectedPredicate);
             if (!oldTag.isEmpty()) {
                 loadFirst(selectedPredicate);
@@ -166,15 +164,12 @@ public class AllEventListController {
                 }
                 return event.getEventName().toLowerCase().contains(searchText);
             };
-
             Predicate<Event> combinedPredicate = searchPredicate;
             if (categoryComboBox.getValue() != null && !categoryComboBox.getValue().isEmpty()) {
                 combinedPredicate = combinedPredicate.and(selectedPredicate);
             }
-
             removeNode(combinedPredicate);
             loadFirst(combinedPredicate);
-
         });
     }
 
@@ -188,25 +183,22 @@ public class AllEventListController {
                 case "A - Z":
                     eventComparator = Comparator.comparing(Event::getEventName);
                     eventObservableList.sort(eventComparator);
-                    loadFirst(selectedPredicate);
                     break;
                 case "Start Date":
                     eventComparator = Comparator.comparing(Event::getDateStartAsDate);
                     eventObservableList.sort(eventComparator);
-                    loadFirst(selectedPredicate);
                     break;
                 case "Popularity":
                     eventComparator = Comparator.comparing(Event::getUserInEvent);
                     eventObservableList.sort(eventComparator);
                     Collections.reverse(eventObservableList);
-                    loadFirst(selectedPredicate);
                     break;
                 case "End Date":
                     eventComparator = Comparator.comparing(Event::getDateEndAsDate);
                     eventObservableList.sort(eventComparator);
-                    loadFirst(selectedPredicate);
                     break;
             }
+            loadFirst(selectedPredicate);
         });
     }
 
@@ -266,9 +258,7 @@ public class AllEventListController {
     }
 
     private void reset() {
-        allButton.setDisable(false);
-        newButton.setDisable(false);
-        upComingButton.setDisable(false);
+        resetButton();
         scrollPane.setVvalue(0.0);
         tilePaneMain.getChildren().clear();
         selectedPredicate = null;
@@ -336,5 +326,11 @@ public class AllEventListController {
         eventObservableList = FXCollections.observableArrayList(eventList.getNewEvent());
         System.out.println(eventObservableList.size());
         loadFirst(selectedPredicate);
+    }
+
+    private void resetButton(){
+        allButton.setDisable(false);
+        newButton.setDisable(false);
+        upComingButton.setDisable(false);
     }
 }
