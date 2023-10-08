@@ -10,7 +10,6 @@ import cs211.project.services.LoadNavbarComponent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-//import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -38,14 +37,14 @@ public class CreateEventController {
     @FXML private TextField eventNameTextField,eventCapTextField,eventLocationTextField;
     @FXML private TextArea eventDescriptionTextArea;
     @FXML private DatePicker eventStartDatePick,eventEndDatePick;
-    @FXML
-    private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
+    @FXML private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     private Event thisEvent = (Event) FXRouter.getData2();
+    private User user = (User) FXRouter.getData();
     private String newEventImagePath = null;
-    private final User user = (User) FXRouter.getData();
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
-    @FXML  void initialize() {
+
+    @FXML private   void initialize() {
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -54,7 +53,8 @@ public class CreateEventController {
         setSpinner(eventStartMinuteSpinner,59);
         setSpinner(eventEndMinuteSpinner,59);
 
-        eventTagChoiceBox.getItems().addAll("Animal","Art","Business","Conference","Education","Food & Drink","Music","Performance","Seminar","Sport","Workshop");
+        eventTagChoiceBox.getItems().addAll("Animal","Art","Business","Conference",
+                "Education","Food & Drink","Music","Performance","Seminar","Sport","Workshop");
         CheckDate();
         setPageHeader();
         if (thisEvent != null) {
@@ -62,6 +62,8 @@ public class CreateEventController {
         }
         limitCharacter();
     }
+
+    // create and edit event
     @FXML protected void handleUploadButton(ActionEvent event) {
         FileChooser chooser = new FileChooser();
         // SET FILECHOOSER INITIAL DIRECTORY
@@ -95,35 +97,6 @@ public class CreateEventController {
             }
         }
     }
-    private void setSpinner(Spinner<Integer> spinner, int time) {
-        SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0,time,0);
-        spinner.setValueFactory(valueFactory);
-        spinner.setEditable(true);
-    }
-    private void setPageHeader() {
-        if(thisEvent == null) {
-            headCreateEventLabel.setText("Create your own event!");
-        } else {
-            headCreateEventLabel.setText("Edit event");
-        }
-    }
-    @FXML protected void onBackButtonClick() {
-        if (thisEvent == null) {
-            try {
-                FXRouter.goTo("all-events",user);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            try {
-                FXRouter.goTo("event",user,thisEvent);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
     @FXML protected void onSubmitBasicInformationClick() {
         eventListDatasource = new EventListDataSource();
         eventList = eventListDatasource.readData();
@@ -147,12 +120,12 @@ public class CreateEventController {
 
                 int numMember = Integer.parseInt(numMemberString);
                 eventList.createEvent(  eventNameString,eventHost,eventImagePath,
-                                        eventTag,startDate,endDate,eventDescriptionString,
-                                        eventLocationString,numMember);
+                        eventTag,startDate,endDate,eventDescriptionString,
+                        eventLocationString,numMember);
             }else {
                 eventList.createEvent(  eventNameString,eventHost,eventImagePath,
-                                        eventTag,startDate,endDate,
-                                        eventDescriptionString,eventLocationString);
+                        eventTag,startDate,endDate,
+                        eventDescriptionString,eventLocationString);
             }
             //add event
             eventListDatasource.writeData(eventList);
@@ -176,6 +149,20 @@ public class CreateEventController {
         }
     }
 
+    // set up page
+    private void setSpinner(Spinner<Integer> spinner, int time) {
+        SpinnerValueFactory<Integer> valueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0,time,0);
+        spinner.setValueFactory(valueFactory);
+        spinner.setEditable(true);
+    }
+    private void setPageHeader() {
+        if(thisEvent == null) {
+            headCreateEventLabel.setText("Create your own event!");
+        } else {
+            headCreateEventLabel.setText("Edit event");
+        }
+    }
     private void showEventDetail(Event event) {
         eventNameTextField.setText(event.getEventName());
         eventLocationTextField.setText(event.getEventLocation());
@@ -194,6 +181,24 @@ public class CreateEventController {
         uploadImageView.setImage(new Image("file:"+event.getEventImagePath(),300,300,true,true));
     }
 
+    // button to another page
+    @FXML protected void onBackButtonClick() {
+        if (thisEvent == null) {
+            try {
+                FXRouter.goTo("all-events",user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            try {
+                FXRouter.goTo("event",user,thisEvent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    // set limit and boundaries for inputs
     private String formatTime(DatePicker datePicker,Spinner<Integer> hour,Spinner<Integer> minute){
         LocalDate DatePick = datePicker.getValue();
         int Hour = hour.getValue();
@@ -201,7 +206,6 @@ public class CreateEventController {
         LocalTime Time = LocalTime.of(Hour, Minute);
         LocalDateTime DateTime = DatePick.atTime(Time);
         return DateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-
     }
 
     private void CheckDate() {

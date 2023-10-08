@@ -4,11 +4,9 @@ import cs211.project.models.Event;
 import cs211.project.models.Activity;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
-import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,14 +20,11 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.util.HashMap;
 
 public class EventPageController {
-    Event event = (Event) FXRouter.getData2();
-    @FXML
-    private AnchorPane navbarAnchorPane;
+    @FXML private AnchorPane navbarAnchorPane;
     @FXML private StackPane imageStackPane;
     @FXML private Button editEventButton, joinEventButton,editActivityButton;
     @FXML private Text eventInformationText;
@@ -37,53 +32,83 @@ public class EventPageController {
     @FXML private VBox teamApplyBox;
     @FXML private ImageView eventImageView;
     @FXML private TableView<Activity> eventActivityTableView;
+    private Event event = (Event) FXRouter.getData2();
+    private User user = (User) FXRouter.getData();
     private Datasource<ActivityList> eventActivityDatasource;
-    private Datasource<EventList> eventDatasource;
-    private EventList eventList;
     private ActivityList activityList;
-
     private HashMap<String, UserList> hashMap;
     private JoinEventMap joinEventMap;
     private UserList userList;
-    private User user = (User) FXRouter.getData();
 
     @FXML private void initialize() {
         this.eventActivityDatasource = new ActivityListDataSource("data","event-activity-list.csv");
         this.activityList = eventActivityDatasource.readData();
-        this.eventDatasource = new EventListDataSource();
-        this.eventList = eventDatasource.readData();
         this.joinEventMap = new JoinEventMap();
         this.hashMap = joinEventMap.readData();
 
         new LoadNavbarComponent(user, navbarAnchorPane);
         initButton();
         showEventData();
-
     }
 
-    @FXML protected void onEditButtonClick() {
+    // button to another page
+    @FXML private void onEditButtonClick() {
         try {
             FXRouter.goTo("create-event", user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public void onBackButtonClick() {
+    @FXML private void onBackButtonClick() {
         try {
-            FXRouter.goTo("home",user);
+            FXRouter.goTo("home",user,null);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    @FXML protected void onEditActivityButtonClick() {
+    @FXML private void onEditActivityButtonClick() {
         try {
             FXRouter.goTo("edit-event-activity",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public void showEventData() {
+    @FXML private void onApplyStaffButtonClick(){
+        try {
+            FXRouter.goTo("join-team", user, event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML private void onJoinEventAction() {
+        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+        if (hashMap.containsKey(event.getEventID())) {
+            userList = hashMap.get(event.getEventID());
+        }else {
+            userList = new UserList();
+        }
+        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+
+        if (userList.getUsers().contains(user) || user.getUserId().equals(event.getEventHostUser().getUserId())){
+            try {
+                FXRouter.goTo("event",user,event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            userList.getUsers().add(user);
+            hashMap.put(event.getEventID(), userList);
+            joinEventMap.writeData(hashMap);
+            try {
+                FXRouter.goTo("my-event", user,"event");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    // set up page
+    private void showEventData() {
         String date = event.getEventDateStart()+" - " + event.getEventDateEnd();
         eventNameLabel.setText(event.getEventName());
         eventDateLabel.setText(date);
@@ -109,6 +134,7 @@ public class EventPageController {
         transparentBackground.setStyle("-fx-background-color: transparent;");
         imageStackPane.getChildren().addAll(transparentBackground);
 
+        // activity table
         TableColumn<Activity,String> nameColumn = new TableColumn<>("Activity name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Activity,String> startTimeColumn = new TableColumn<>("Activity start");
@@ -141,48 +167,13 @@ public class EventPageController {
         }
         eventActivityTableView.setFixedCellSize(40);
     }
-
-    @FXML protected void onApplyStaffButtonClick(){
-        try {
-            FXRouter.goTo("join-team", user, event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void onJoinEventAction(ActionEvent actionEvent) {
-        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        if (hashMap.containsKey(event.getEventID())) {
-            userList = hashMap.get(event.getEventID());
-        }else {
-            userList = new UserList();
-        }
-        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-
-        if (userList.getUsers().contains(user) || user.getUserId().equals(event.getEventHostUser().getUserId())){
-            try {
-                FXRouter.goTo("event",user,event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            userList.getUsers().add(user);
-            hashMap.put(event.getEventID(), userList);
-            joinEventMap.writeData(hashMap);
-            try {
-                FXRouter.goTo("my-event", user,"event");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    public void initButton(){
+    private void initButton(){
         editEventButton.setVisible(event.isHostEvent(user));
+        editActivityButton.setVisible(event.isHostEvent(user));
         joinEventButton.setVisible( event.isJoinEvent() &&
                                     !event.isFull() &&
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user));
-        teamApplyBox.setVisible(event.getTeamList() != null);
+        teamApplyBox.setVisible(user != null && event.getTeamList() != null);
     }
 }

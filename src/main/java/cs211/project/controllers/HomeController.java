@@ -30,10 +30,9 @@ public class HomeController {
     private Datasource<EventList> datasource;
     private EventList eventList,recEventList,newEventList,upEventList;
     private int currentIndexOfUp = 1;
-    private int currnetIndexOfNew = 1;
+    private int currentIndexOfNew = 1;
 
-    @FXML
-    private void initialize() {
+    @FXML private void initialize() {
         datasource = new EventListDataSource();
         eventList = datasource.readData().getAvailableEvent();
 
@@ -49,10 +48,10 @@ public class HomeController {
 
         try {
             //load newEvent anchorPane
-            if (newEventList != null && !newEventList.getEvents().isEmpty() && currnetIndexOfNew >= 1) {
-                loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew,newEventList);
-                loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currnetIndexOfNew));
-                loadNextEventTile(newRightAnchorPane,currnetIndexOfNew,newEventList);
+            if (newEventList != null && !newEventList.getEvents().isEmpty() && currentIndexOfNew >= 1) {
+                loadOldEventTile(newLeftAnchorPane,currentIndexOfNew,newEventList);
+                loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currentIndexOfNew));
+                loadNextEventTile(newRightAnchorPane,currentIndexOfNew,newEventList);
             }
             //load upcomingEvent anchorPane
             if (upEventList != null && !upEventList.getEvents().isEmpty() && currentIndexOfUp >= 1) {
@@ -259,19 +258,19 @@ public class HomeController {
 
     // button for loading event tile
     @FXML private void onNewLeftButton() {
-        if (currnetIndexOfNew > 1) {
-            currnetIndexOfNew--;
-            loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew,newEventList);
-            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currnetIndexOfNew));
-            loadNextEventTile(newRightAnchorPane,currnetIndexOfNew,newEventList);
+        if (currentIndexOfNew > 1) {
+            currentIndexOfNew--;
+            loadOldEventTile(newLeftAnchorPane,currentIndexOfNew,newEventList);
+            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currentIndexOfNew));
+            loadNextEventTile(newRightAnchorPane,currentIndexOfNew,newEventList);
         }
     }
     @FXML private void onNewRightButton() {
-        if (currnetIndexOfNew < newEventList.getEvents().size()-1) {
-            currnetIndexOfNew++;
-            loadOldEventTile(newLeftAnchorPane,currnetIndexOfNew,newEventList);
-            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currnetIndexOfNew));
-            loadNextEventTile(newRightAnchorPane,currnetIndexOfNew,newEventList);
+        if (currentIndexOfNew < newEventList.getEvents().size()-2) {
+            currentIndexOfNew++;
+            loadOldEventTile(newLeftAnchorPane,currentIndexOfNew,newEventList);
+            loadCurrentEventTile(newCenterAnchorPane,newEventList.getEvents().get(currentIndexOfNew));
+            loadNextEventTile(newRightAnchorPane,currentIndexOfNew,newEventList);
         }
     }
     @FXML private void onUpLeftButton() {
@@ -283,7 +282,7 @@ public class HomeController {
         }
     }
     @FXML private void onUpRightButton() {
-        if (currentIndexOfUp < upEventList.getEvents().size()-1) {
+        if (currentIndexOfUp < upEventList.getEvents().size()-2) {
             currentIndexOfUp++;
             loadOldEventTile(upLeftAnchorPane,currentIndexOfUp,upEventList);
             loadCurrentEventTile(upCenterAnchorPane,upEventList.getEvents().get(currentIndexOfUp));
@@ -296,8 +295,8 @@ public class HomeController {
         upLeftButton.setDisable(currentIndexOfUp == 1);
         upRightButton.setDisable(currentIndexOfUp == upEventList.getEvents().size()-2);
 
-        newLeftButton.setDisable(currnetIndexOfNew == 1);
-        newRightButton.setDisable(currnetIndexOfNew == newEventList.getEvents().size()-2);
+        newLeftButton.setDisable(currentIndexOfNew == 1);
+        newRightButton.setDisable(currentIndexOfNew == newEventList.getEvents().size()-2);
     }
 
     // anchorPane's zoom animation

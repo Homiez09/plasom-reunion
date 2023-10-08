@@ -15,7 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 
 public class EditActivityController {
@@ -77,6 +76,7 @@ public class EditActivityController {
         }
         editActivityTableview.setFixedCellSize(40);
     }
+
     @FXML protected void onCreateActivityButtonClick() {
         FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
         try {
