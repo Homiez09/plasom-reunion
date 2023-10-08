@@ -64,17 +64,9 @@ public class UserList {
         }
     }
 
-    public boolean removeUser(User user) {
-        if (user == null) return false;
-        users.remove(user);
-        return true;
-    }
-
     public User login(String username, String password){
         for(User exist: users){
-
             if(exist.getUsername().equals(username) && exist.validatePassword(password) && !username.isEmpty() && !password.isEmpty()){
-                System.out.println("Login Success");
                 return exist;
             }
         }
