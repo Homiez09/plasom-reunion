@@ -609,6 +609,7 @@ public class TeamActivityController {
                 activityTableView.getItems().add(activityTeam);
             });
             entriesLabel.setText("Showing " + activityTableView.getItems().size() + " of " + max_page + " entries");
+            activityTableView.getSelectionModel().select(0);
         });
     }
 }
