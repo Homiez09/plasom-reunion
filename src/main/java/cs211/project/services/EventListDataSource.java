@@ -40,9 +40,6 @@ public class EventListDataSource implements Datasource<EventList> {
         ActivityList activityList = activityListDatasource.readData();
 
 
-        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
-        TeamList teamList = teamListDatasource.readData();
-
         String filePath = directoryName + File.separator + fileName;
 
         File file = new File(filePath);
@@ -95,9 +92,6 @@ public class EventListDataSource implements Datasource<EventList> {
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
                                         eventDescription, eventLocation, slotMember,timeStamp,joinEvent,joinTeam
                                         );
-                for (Team team:teamList.getTeamOfEvent(eventList.findEventById(eventId))) {
-                    eventList.findEventById(eventId).getTeamList().addTeam(team);
-                }
                 for (Activity activity : activityList.getActivities()){
                     eventList.findEventById(eventId).getActivityList().addActivity(activity);
                 }

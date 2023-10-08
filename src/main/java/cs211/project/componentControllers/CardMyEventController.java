@@ -3,8 +3,6 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +17,9 @@ import javafx.stage.Popup;
 
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class CardMyEventController {
     @FXML
@@ -74,6 +74,8 @@ public class CardMyEventController {
         setupDataPage();
         if (event !=null) {
             currentEvent = eventList.findEventById(event.getEventID());
+            Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+            TeamList teamList = teamListDatasource.readData();
 
             buttonVisible(event.isEnd());
             if (event.getUserList().getUsers().contains(currentUser)) {
@@ -83,27 +85,32 @@ public class CardMyEventController {
             if (event.getEventHostUser().equals(currentUser)) {
                 leaveEventButton.setVisible(false);
             }
-            for (Team team : event.getTeamList().getTeams()) {
-                if (team.getMemberList().getUsers().contains(currentUser) && !currentEvent.isHostEvent(currentUser)) {
+
+            for (Team team : teamList.getTeams()) {
+                if (    team.getMemberList().getUsers().contains(currentUser) &&
+                        !currentEvent.isHostEvent(currentUser) &&
+                        event.getEventID().equals(team.getEventID())) {
                     manageUserButton.setVisible(false);
                     leaveEventButton.setVisible(false);
                 }
             }
 
-
-            Image image = new Image("file:" + event.getEventImagePath(), 200, 200, false, false);
+            new BorderImagView(eventImageView).setClip(14);
+            Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
             if (event.getEventImagePath().equals("null")) {
                 String imgPath = "/images/events/event-default-auth.png";
-                image = new Image(getClass().getResourceAsStream(imgPath), 200, 200, false, false);
+                image = new Image(getClass().getResourceAsStream(imgPath), 1280, 1280, false, false);
             }
             eventImageView.setImage(image);
             eventNameLabel.setText(event.getEventName());
-            startDateLabel.setText(event.getEventDateStart());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd/MM/yyyy | hh:mm:ss a", Locale.ENGLISH);
+
+            startDateLabel.setText(event.getDateStartAsDate().format(formatter));
             locationLabel.setText(event.getEventLocation());
 
             ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());
-            profileImageView.setImage(new Image(pathFormat.toString(), 30, 30, false, false));
-            new CreateProfileCircle(profileImageView, 32);
+            profileImageView.setImage(new Image(pathFormat.toString(), 1280, 1280, false, false));
+            new CreateProfileCircle(profileImageView, 30);
 
             hostUserNameLabel.setText(event.getEventHostUser().getUsername());
             hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());

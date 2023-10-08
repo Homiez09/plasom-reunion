@@ -13,19 +13,24 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Popup;
+import javafx.util.Callback;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -55,13 +60,29 @@ public class MyEventsController{
         allButton.setDisable(true);
         getBySearch();
         sortTilePane();
-        if (from.equals("card")){
-            System.out.println(from);
+        if (from!=null){
             resetButton();
             eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
             memberButton.setDisable(true);
         }
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
+        listViewMain.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<Node> call(ListView<Node> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(Node item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setGraphic(item);
+                        } else {
+                            setGraphic(null);
+                        }
+                        setAlignment(Pos.CENTER);
+                    }
+                };
+            }
+        });
     }
 
     private void setupPage(){
@@ -71,15 +92,23 @@ public class MyEventsController{
         initSort();
         setupScrollBar();
 
+
     }
 
-    private void loadData(Predicate<Event> selectedPredicate) {
+    private void loadFirst(Predicate<Event> selectedPredicate) {
         FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
         if (nodes == null) {
             nodes = FXCollections.observableArrayList();
         }
+        LoadComponent(filteredList, 3);
+    }
+    private void loadMore(Predicate<Event> selectedPredicate) {
+        FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
+        LoadComponent(filteredList, 1);
+    }
+
+    private void LoadComponent(FilteredList<Event> filteredList, int maxItemsPerLoad) {
         int itemsLoaded = 0;
-        int maxItemsPerLoad = 3;
         for (Event event : filteredList) {
             if (!checkNode(event)) {
                 AnchorPane anchorPane = new AnchorPane();
@@ -97,9 +126,8 @@ public class MyEventsController{
         if (scrollBar!=null){
             scrollBar.setValue(0.5);
         }
-        System.out.println(nodes.size());
-        System.out.println(eventObservableList.size());
     }
+
 
     @FXML
     private void setupScrollBar() {
@@ -107,8 +135,8 @@ public class MyEventsController{
             scrollBar = (ScrollBar) listViewMain.lookup(".scroll-bar:vertical");
             scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
                 double scrollValue = newValue.doubleValue();
-                if (scrollValue >= 0.9 && nodes.size() < eventObservableList.size()){
-                    loadData(selectedPredicate);
+                if (scrollValue > 0.8 && nodes.size() < eventObservableList.size()){
+                    loadMore(selectedPredicate);
                 }
             });
         });
@@ -123,12 +151,12 @@ public class MyEventsController{
                 nodesToRemove.add(node);
             }
         }
-        listViewMain.getItems().removeAll(nodesToRemove);
+//        listViewMain.getItems().removeAll(nodesToRemove);
         nodes.removeAll(nodesToRemove);
     }
 
     private void initSort(){
-        String sort[] = {"Name","Start","Member","End"};
+        String sort[] = {"A - Z","Start Date","Popularity","End Date"};
         sortComboBox.getItems().addAll(sort);
         sortComboBox.setValue("");
     }
@@ -143,7 +171,7 @@ public class MyEventsController{
                 return event.getEventName().toLowerCase().contains(searchText);
             };
             removeNode(searchPredicate);
-            loadData(searchPredicate);
+            loadFirst(searchPredicate);
             sortComboBox.setValue("");
         });
     }
@@ -152,28 +180,27 @@ public class MyEventsController{
         sortComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
             String sortBy = newValue.trim();
             listViewMain.getItems().clear();
-            System.out.println(oldValue);
-            System.out.println(newValue);
             Comparator<Event> eventComparator =null;
             switch (sortBy){
-                case "Name":
+                case "A - Z":
                     eventComparator = Comparator.comparing(Event::getEventName);
                     eventObservableList.sort(eventComparator);
                     break;
-                case "Start":
+                case "Start Date":
                     eventComparator = Comparator.comparing(Event::getDateStartAsDate);
                     eventObservableList.sort(eventComparator);
                     break;
-                case "Member":
+                case "Popularity":
                     eventComparator = Comparator.comparing(Event::getUserInEvent);
                     eventObservableList.sort(eventComparator);
+                    Collections.reverse(eventObservableList);
                     break;
-                case "End":
+                case "End Date":
                     eventComparator = Comparator.comparing(Event::getDateEndAsDate);
                     eventObservableList.sort(eventComparator);
                     break;
             }
-            loadData(selectedPredicate);
+            loadFirst(selectedPredicate);
             searchbarTextField.setText("");
         });
     }
@@ -192,7 +219,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         allButton.setDisable(true);
     }
 
@@ -201,7 +228,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getCompleteEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         completeButton.setDisable(true);
     }
 
@@ -210,7 +237,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         ownerButton.setDisable(true);
     }
 
@@ -219,7 +246,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         memberButton.setDisable(true);
     }
 
@@ -228,7 +255,7 @@ public class MyEventsController{
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getTeamEvent(currentUser));
         removeNode(selectedPredicate);
-        loadData(selectedPredicate);
+        loadFirst(selectedPredicate);
         staffButton.setDisable(true);
     }
 
@@ -292,7 +319,7 @@ public class MyEventsController{
                 int itemCount = listViewMain.getItems().size();
                 if (itemCount == 2) {
                     System.out.println("Test Lock");
-                    loadData(selectedPredicate);
+                    loadFirst(selectedPredicate);
                 }
         });
     }

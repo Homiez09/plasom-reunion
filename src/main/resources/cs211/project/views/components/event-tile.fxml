@@ -14,10 +14,7 @@
    <children>
       <VBox alignment="CENTER" onMouseClicked="#onEventTileClick" prefHeight="375.0" prefWidth="250.0" spacing="20.0" styleClass="tile-bg" stylesheets="@../../../../css/home.css">
          <children>
-            <StackPane fx:id="imageStackPane" prefHeight="150.0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
+            <StackPane fx:id="imageStackPane">
                <children>
                   <ImageView fx:id="eventTileImageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                </children>

@@ -4,6 +4,7 @@ import cs211.project.models.Event;
 import cs211.project.models.Activity;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
+import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
@@ -165,14 +166,19 @@ public class EventPageController {
         }
         eventActivityTableView.setFixedCellSize(40);
     }
-    private void initButton(){
+
+    public void initButton(){
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
+
         editEventButton.setVisible(event.isHostEvent(user));
         editActivityButton.setVisible(event.isHostEvent(user));
         joinEventButton.setVisible( event.isJoinEvent() &&
                                     !event.isFull() &&
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user));
-        teamApplyBox.setVisible(user != null && event.getTeamList() != null);
+        teamApplyBox.setVisible(teamList.getTeamOfEvent(event) != null);
+        teamApplyBox.setVisible(user != null && teamList.getTeamOfEvent(event) != null);
         eventActivityTab.setDisable(user == null || !event.getUserList().getUsers().contains(user));
     }
 }
