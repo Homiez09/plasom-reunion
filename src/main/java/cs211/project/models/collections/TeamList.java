@@ -62,6 +62,17 @@ public class TeamList {
         }
     }
 
+    public void updateTeam(String teamID, String teamName, int maxSlotTeamMember, String startDate, String endDate, String description){
+        Team teamExist = findTeamByID(teamID);
+        if (teamExist != null) {
+            teamExist.setTeamName(teamName);
+            teamExist.setMaxSlotTeamMember(maxSlotTeamMember);
+            teamExist.setStartDate(startDate);
+            teamExist.setEndDate(endDate);
+            teamExist.setTeamDescription(description);
+        }
+    }
+
     public Team findTeamByID(String teamID) {
         for (Team team: teams) {
             if (team.getTeamID().equals(teamID)) {
