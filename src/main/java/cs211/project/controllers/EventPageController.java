@@ -8,10 +8,7 @@ import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +28,7 @@ public class EventPageController {
     @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel,eventTagLabel,currentParticipantsLabel;
     @FXML private VBox teamApplyBox;
     @FXML private ImageView eventImageView;
+    @FXML private Tab eventActivityTab;
     @FXML private TableView<Activity> eventActivityTableView;
     private Event event = (Event) FXRouter.getData2();
     private User user = (User) FXRouter.getData();
@@ -175,5 +173,6 @@ public class EventPageController {
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user));
         teamApplyBox.setVisible(user != null && event.getTeamList() != null);
+        eventActivityTab.setDisable(user == null || !event.getUserList().getUsers().contains(user));
     }
 }
