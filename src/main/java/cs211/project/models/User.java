@@ -3,6 +3,7 @@ package cs211.project.models;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.BanTeamMap;
+import cs211.project.services.GenerateRandomID;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +13,6 @@ import java.util.*;
 public class User implements Comparable<User> {
     private String displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath, userId, role, formattedDate;
     private final String registerDate, username;
-    protected String characters;
     private boolean status, showContact, bookmark;
     private final boolean admin;
 
@@ -72,29 +72,10 @@ public class User implements Comparable<User> {
     }
 
     private void generateUserID() {
-        Random random = new Random();
         String id = "user-";
-        int ranInt = random.nextInt(1000000);
-        String ranText = generateRandomText();
-        id = id + ranText + ranInt;
+        id += new GenerateRandomID().getRandomText();
         this.userId = id;
     }
-
-    private String generateRandomText() {
-        characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
-
-        Random random = new Random();
-
-        for (int i = 0; i < 3; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-
-        return randomText.toString();
-    }
-
 
     public boolean isAdmin() {
         return this.admin;

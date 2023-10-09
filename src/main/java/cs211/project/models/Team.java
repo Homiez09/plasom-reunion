@@ -3,25 +3,21 @@ package cs211.project.models;
 import cs211.project.models.collections.ActivityTeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.ActivityTeamListDataSource;
-import cs211.project.services.UserListDataSource;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class Team implements Comparable<Team> {
-    private String teamID, teamName, teamDescription, createdAt, eventID, startDate, endDate;
+    private final String teamID, createdAt, eventID;
+    private String teamName, teamDescription, startDate, endDate;
     private int maxSlotTeamMember;
     private boolean isBookmarked;
     private UserList memberList = new UserList();
     private String role;
-    private User teamHostUser;
-    private ActivityTeamList activities;
-    private UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
-    private UserList userList = userListDataSource.readData();
+    private final User teamHostUser;
 
     public Team (String eventID, User teamHostUser, String teamName, String description, String startDate, String endDate, int maxSlotTeamMember) {
         this.teamID = generateTeamID();
@@ -52,63 +48,43 @@ public class Team implements Comparable<Team> {
         loadActivities();
     }
 
-    public boolean addMemberToMemberList(String username) {
-        User userExist = memberList.findUsername(username); // check user is exist in member list
-        if (userExist == null) {
-            User user = userList.findUsername(username);
-            memberList.addUser(user);
-            return true;
-        }
-        return false;
-    }
-
-    // go to test file to see how to use this method
-    public String formatTimestampToString(String timestamp) { // param require team.getStartDate() or team.getEndDate()
+    public String formatTimestampToString(String timestamp) {
         long time = Long.parseLong(timestamp);
         Date date = new Date(time);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH:mm");
-        String formattedDate = sdf.format(date);
-        return formattedDate; // if you want for get date and time pattern yyyy-MM-dd.HH:mm:ss (split with .)
+        return sdf.format(date);
     }
 
     private String formatStringToTimestamp(String date) {
-        String data[] = date.split("[\\-\\.\\:]");
+        String[] data = date.split("[-.:]");
         LocalDateTime futureDate = LocalDateTime.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3]), Integer.parseInt(data[4])); // Year, Month, Day, Hour, Minute
         Instant instant = futureDate.atZone(ZoneId.of("UTC+7")).toInstant();
         long timestamp = instant.toEpochMilli();
         return String.valueOf(timestamp);
     }
 
-    public String getStartDateTime(){
-        String startDateFormatted =  formatTimestampToString(startDate);
+    private String getDateTime(String date) {
+        String dateFormatted =  formatTimestampToString(date);
         int year, month, day, hour, minute;
-        year = Integer.parseInt(startDateFormatted.substring(0,4))-543;
-        month = Integer.parseInt(startDateFormatted.substring(5,7));
-        day = Integer.parseInt(startDateFormatted.substring(8,10));
-        hour = Integer.parseInt(startDateFormatted.substring(11,13));
-        minute = Integer.parseInt(startDateFormatted.substring(14,16));
+        year = Integer.parseInt(dateFormatted.substring(0,4));
+        month = Integer.parseInt(dateFormatted.substring(5,7));
+        day = Integer.parseInt(dateFormatted.substring(8,10));
+        hour = Integer.parseInt(dateFormatted.substring(11,13));
+        minute = Integer.parseInt(dateFormatted.substring(14,16));
 
         LocalDateTime startDateTime = LocalDateTime.of(year, month, day, hour, minute);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy | hh:mm a", Locale.ENGLISH);
-        startDateFormatted = startDateTime.format(dateTimeFormatter);
+        dateFormatted = startDateTime.format(dateTimeFormatter);
 
-        return startDateFormatted;
+        return dateFormatted;
     }
 
-    public String getEndDateTime(){
-        String endDateFormatted =  formatTimestampToString(endDate);
-        int year, month, day, hour, minute;
-        year = Integer.parseInt(endDateFormatted.substring(0,4))-543;
-        month = Integer.parseInt(endDateFormatted.substring(5,7));
-        day = Integer.parseInt(endDateFormatted.substring(8,10));
-        hour = Integer.parseInt(endDateFormatted.substring(11,13));
-        minute = Integer.parseInt(endDateFormatted.substring(14,16));
+    public String getStartDateTime(){
+        return getDateTime(startDate);
+    }
 
-        LocalDateTime endDateTime = LocalDateTime.of(year, month, day, hour, minute);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy | hh:mm a", Locale.ENGLISH);
-        endDateFormatted = endDateTime.format(dateTimeFormatter);
-
-        return endDateFormatted;
+    public String getEndDateTime() {
+        return getDateTime(endDate);
     }
 
     private String generateTeamID() {
@@ -152,7 +128,6 @@ public class Team implements Comparable<Team> {
         ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
         ActivityTeamList activityTeamList = activityTeamListDataSource.readData();
         activityTeamList.getActivitiesByTeamID(teamID);
-        this.activities = activityTeamList;
     }
 
     public boolean isFull() {
@@ -196,17 +171,6 @@ public class Team implements Comparable<Team> {
     public User getTeamHostUser() {
         return teamHostUser;
     }
-    public String getStartDate() { // return timestamp (millisecond)
-        return startDate;
-    }
-
-    public String getEndDate() { // return timestamp (millisecond)
-        return endDate;
-    }
-
-    public ArrayList<ActivityTeam> getActivities() {
-        return activities.getActivities();
-    }
 
     public boolean isBookmarked() {
         return isBookmarked;
@@ -237,11 +201,6 @@ public class Team implements Comparable<Team> {
         this.isBookmarked = bookmarked;
     }
 
-    public void setMemberList(UserList userList) {
-        if (userList == null) return;
-        this.memberList = userList;
-    }
-
     public void setStartDate(String startDate) { // format : yyyy-MM-dd.HH:mm:ss
         this.startDate = formatStringToTimestamp(startDate);
     }
@@ -254,7 +213,7 @@ public class Team implements Comparable<Team> {
     public int compareTo(Team team) {
         int s = Integer.parseInt(this.createdAt.replace("|", "").replace(":", "").replace("-", ""));
         int t = Integer.parseInt(team.getCreatedAt().replace("|", "").replace(":", "").replace("-", ""));
-        return (int)t - s;
+        return t - s;
     }
 
     @Override

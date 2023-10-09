@@ -1,8 +1,9 @@
 package cs211.project.models;
 
+import cs211.project.services.GenerateRandomID;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 public class Activity {
     protected String activityID,name,description,startTime,endTime,eventID;
@@ -37,21 +38,8 @@ public class Activity {
         return text;
     }
     public String generateActivityID() {
-        Random random = new Random();
-
         String id = "act-";
-        int randomInt = random.nextInt(1000000);
-
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
-
-        for (int i = 0; i < 3; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-
-        id = id + randomText + randomInt;
+        id += new GenerateRandomID().getRandomText();
         return id;
     }
     public String getActivityStatus() {
