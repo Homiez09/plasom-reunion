@@ -50,7 +50,8 @@ public class TableCellCenter<S,T> extends TableCell<S,T> {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item.toString());
+                    setText(item ? "Open" : "Close");
+
                 }
 
                 setAlignment(Pos.CENTER); // กำหนดให้ข้อมูลแสดงตรงกลาง

@@ -43,7 +43,7 @@ public class EventTileController {
             eventTileImageView.setFitWidth(180);
             eventTileImageView.setFitHeight(180);
             eventTileImageView.setPreserveRatio(true);
-            new BorderImagView(eventTileImageView).setClip(14);
+            new BorderImagView(eventTileImageView).setSquareClip(14);
             Region transparentBackground = new Region();
             transparentBackground.setStyle("-fx-background-color: transparent;");
             imageStackPane.getChildren().addAll(transparentBackground);
@@ -53,7 +53,7 @@ public class EventTileController {
 
     @FXML private void onEventTileClick() {
         try {
-            FXRouter.goTo("event",currentUser,thisEvent);
+            FXRouter.goTo("event",currentUser,thisEvent,"tile");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
