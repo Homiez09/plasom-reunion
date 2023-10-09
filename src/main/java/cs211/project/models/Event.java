@@ -7,6 +7,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -42,7 +43,7 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = -1;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.activityList = new ActivityList();
         this.userList = new UserList();
         this.joinEvent = true;
@@ -68,7 +69,7 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = slotMember;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.activityList = new ActivityList();
         this.userList = new UserList();
         this.joinEvent = true;
@@ -110,8 +111,16 @@ public class Event implements Comparable<Event>{
     public String getEventName() {return eventName;}
     public String getEventImagePath() {return eventImagePath;}
     public String getEventTag() {return eventTag;}
-    public String getEventDateStart() {return eventDateStart;}
-    public String getEventDateEnd() {return eventDateEnd;}
+    public String getEventDateStart() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(eventDateStart, inputFormatter);
+        return dateTime.format(outputFormatter);}
+    public String getEventDateEnd() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(eventDateEnd, inputFormatter);
+        return dateTime.format(outputFormatter);}
     public String getEventDescription() {return eventDescription;}
     public int getSlotMember() {return slotMember;}
     public int getUserInEvent() {return userList.getUsers().size();}
@@ -120,19 +129,18 @@ public class Event implements Comparable<Event>{
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
     public LocalDateTime getDateStartAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         return  LocalDateTime.parse(eventDateStart, formatter);
 
     }
     public LocalDateTime getDateEndAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
         return  LocalDateTime.parse(eventDateEnd, formatter);
 
     }
     public LocalDateTime getTimestampAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
         return  LocalDateTime.parse(timestamp, formatter);
 
@@ -154,30 +162,24 @@ public class Event implements Comparable<Event>{
 
     private String generateEventID() {
         Random random = new Random();
-
         String id = "event-";
         int ranInt = random.nextInt(1000000);
         String ranText = generateRandomText();
-
         id = id + ranText + ranInt;
-
         return id;
     }
 
     public boolean isUpComing() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
         LocalDateTime currentTime = LocalDateTime.now();
-
         return eventDate.isAfter(currentTime);
     }
 
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime parsedEventDateEnd = LocalDateTime.parse(eventDateEnd, formatter);
-
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
 

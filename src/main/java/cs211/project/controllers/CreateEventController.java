@@ -211,7 +211,7 @@ public class CreateEventController {
         eventTagChoiceBox.setValue(event.getEventTag());
         eventDescriptionTextArea.setText(event.getEventDescription());
         eventCapTextField.setText(Integer.toString(event.getSlotMember()));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime eventStartDateTime = LocalDateTime.parse(event.getEventDateStart(),formatter);
         LocalDateTime eventEndDateTime = LocalDateTime.parse(event.getEventDateEnd(),formatter);
         eventStartDatePick.setValue(eventStartDateTime.toLocalDate());
@@ -230,7 +230,7 @@ public class CreateEventController {
         datePick = datePicker.getValue();
         LocalTime Time = LocalTime.of(Hour, Minute);
         LocalDateTime dateTime = datePick.atTime(Time);
-        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 
     private void timeCheck() {
@@ -291,11 +291,8 @@ public class CreateEventController {
         if (eventStartDatePick.getValue() != null && eventEndDatePick.getValue() != null) {
             LocalDateTime startDate = eventStartDatePick.getValue().atStartOfDay();
             LocalDateTime endDate = eventEndDatePick.getValue().atStartOfDay();
-            if (startDate.equals(endDate) ){
-
-                errorTimeLabel.setVisible(!isTimeValid);
-                submitButton.setDisable(!isTimeValid);
-            }
+            errorTimeLabel.setVisible(!isTimeValid && startDate.equals(endDate));
+            submitButton.setDisable(!isTimeValid && startDate.equals(endDate));
         }
     }
 
@@ -313,7 +310,6 @@ public class CreateEventController {
     }
 
     private void limitCharacter() {
-
         errorCapacityLabel.setVisible(false);
         eventNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (eventNameTextField.getText().length() > 30) {

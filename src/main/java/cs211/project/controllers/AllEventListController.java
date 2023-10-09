@@ -240,7 +240,7 @@ public class AllEventListController {
     @FXML
     private void onCreateClick(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("create-event",currentUser,null);
+            FXRouter.goTo("create-event",currentUser,null,"all-event");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
