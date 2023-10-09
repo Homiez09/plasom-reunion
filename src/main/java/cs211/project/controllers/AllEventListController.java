@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 
@@ -33,6 +35,8 @@ public class AllEventListController {
     @FXML ComboBox<String> categoryComboBox,sortComboBox;
     @FXML ScrollPane scrollPane;
     @FXML Button categoryButton,sortButton,allButton,newButton,upComingButton,createButton;
+    @FXML
+    ImageView searchImageView;
     //---------------------------------------------------
     private User currentUser = (User) FXRouter.getData();
     private String from = (String) FXRouter.getData2();
@@ -49,6 +53,8 @@ public class AllEventListController {
         getByCategory();
         getBySearch();
         sortTilePane();
+        loadImageIcon();
+        maximumLengthField();
         createButton.setVisible(currentUser != null);
 
         tilePaneMain.setVgap(20);
@@ -334,5 +340,17 @@ public class AllEventListController {
         allButton.setDisable(false);
         newButton.setDisable(false);
         upComingButton.setDisable(false);
+    }
+
+    private void maximumLengthField(){
+        searchbarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 50) {
+                searchbarTextField.setText(oldValue);
+            }
+        });
+    }
+
+    private void loadImageIcon(){
+        searchImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/join-team/search_bar.png")));
     }
 }

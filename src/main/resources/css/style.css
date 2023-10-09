@@ -1395,7 +1395,7 @@
 .all-event-combobox .arrow {
     -fx-background-color: transparent;
 }
-.all-event-combobox .list-view{
+.all-event-combobox .list-view {
     -fx-font-size: 14;
     -fx-text-fill: #413B3B;
     -fx-background-color: #F6F4EE;
@@ -1415,6 +1415,22 @@
 .all-event-combobox .list-cell:hover {
     -fx-background-color: rgba(255, 153, 0, 0.37);
 }
+.all-event-combobox .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.all-event-combobox .list-view .scroll-bar .thumb {
+    -fx-background-color: transparent;
+}
+
+.all-event-combobox .list-view:hover .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.all-event-combobox .list-view:hover .scroll-bar .thumb {
+    -fx-background-color: #DDD3C3;
+}
+
 
 
 
