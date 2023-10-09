@@ -16,7 +16,7 @@
 <AnchorPane maxHeight="-Infinity" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
       <ScrollPane fx:id="homeScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutY="75.0" prefHeight="693.0" prefWidth="1152.0" stylesheets="@../../../css/event.css">
           <content>
-              <VBox alignment="TOP_CENTER" prefHeight="2550.0" styleClass="bg">
+              <VBox fx:id="homeVbox" alignment="TOP_CENTER" prefHeight="2550.0" styleClass="bg">
                   <children>
                       <HBox alignment="CENTER_LEFT" prefHeight="300.0" styleClass="top-banner">
                   <children>

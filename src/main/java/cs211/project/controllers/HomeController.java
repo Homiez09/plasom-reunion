@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +23,8 @@ import java.util.Collections;
 
 public class HomeController {
     @FXML private HBox upScrollHbox,newScrollHbox;
-    @FXML private ScrollPane upScrollPane,newScrollPane;
+    @FXML private VBox homeVbox;
+    @FXML private ScrollPane upScrollPane,newScrollPane,homeScrollPane;
     @FXML private AnchorPane navbarAnchorPane;
     @FXML private AnchorPane recTileAnchorPane1,recTileAnchorPane2,recTileAnchorPane3,
             recTileAnchorPane4,recTileAnchorPane5,recTileAnchorPane6;
@@ -210,7 +212,11 @@ public class HomeController {
         }
         scrollPane.addEventFilter(ScrollEvent.SCROLL, event -> {
             if (event.getDeltaY() != 0) {
-                scrollPane.setHvalue(scrollPane.getHvalue() - event.getDeltaY() / hBox.getWidth());
+                if (scrollPane.getHvalue() == 1) {
+                    homeScrollPane.setVvalue(homeScrollPane.getVvalue() - event.getDeltaY() / homeVbox.getHeight() );
+                } else {
+                    scrollPane.setHvalue(scrollPane.getHvalue() - event.getDeltaY() / hBox.getWidth());
+                }
                 event.consume();
             }
         });
