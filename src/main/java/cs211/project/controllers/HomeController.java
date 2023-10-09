@@ -214,11 +214,6 @@ public class HomeController {
                 event.consume();
             }
         });
-        scrollPane.setOnScroll(event -> {
-            if(event.getDeltaX() == 0 && event.getDeltaY() != 0) {
-                scrollPane.setHvalue(scrollPane.getHvalue() - event.getDeltaY() / hBox.getWidth());
-            }
-        });
     }
     private void loadRecommendedEventTile(AnchorPane anchorPane,Event event) {
         try {
