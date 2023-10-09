@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -70,6 +71,12 @@ public class OwnerEventController {
     private void showTable(ObservableList<Event> observableList) {
         observableList.sort(Comparator.comparing(Event::isEnd));
         // กำหนด column
+        eventNameColumn.setReorderable(false);
+        startDateColumn.setReorderable(false);
+        endDateColumn.setReorderable(false);
+        memberColumn.setReorderable(false);
+        statusColumn.setReorderable(false);
+        buttonColumn.setReorderable(false);
         TableEvents.setPlaceholder(new Label("No Event"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateStart"));
@@ -78,25 +85,14 @@ public class OwnerEventController {
             return new SimpleStringProperty(cellData.getValue().getUserList().getUsers().size()+"");
         });
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("joinEvent"));
+
         buttonColumn.setCellFactory(param -> new TableCell<>() {
             private final ComboBox<String> comboBox = new ComboBox<>();
 
             {
-                //---------------Custom---------------\\
-                comboBox.setStyle(  "-fx-background-color:transparent; -fx-background-insets: 0;" +
-                                    "-fx-alignment: center; -fx-smooth: true;" +
-                        "-fx-content-display: text-only;");
-
-
-                comboBox.setButtonCell(new ListCell<>() {
-                    {
-                        setText("...");
-                    }
-                });
-                //---------------Custom---------------\\
-
+                comboBox.getStyleClass().add("owner-event-combobox");
+                comboBox.setValue("Action");
                 comboBox.getItems().addAll("Manage", "View", "Delete");
-
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
                     Event eventToModify = getTableView().getItems().get(getIndex());
@@ -115,10 +111,6 @@ public class OwnerEventController {
             }
         });
 
-        eventNameColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(eventNameColumn));
-        startDateColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(startDateColumn));
-        endDateColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(endDateColumn));
-        memberColumn.setCellFactory(column ->new TableCellCenter<>().CellAsString(memberColumn));
         statusColumn.setCellFactory(column ->new TableCellCenter<>().CellAsBoolean(statusColumn));
 
 
@@ -133,7 +125,7 @@ public class OwnerEventController {
                     case"Manage":
                         popup.hide();
                         try {
-                            FXRouter.goTo("create-event",currentUser,eventToModify);
+                            FXRouter.goTo("create-event",currentUser,eventToModify,"my-event");
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -141,7 +133,7 @@ public class OwnerEventController {
                     case "View":
                         popup.hide();
                         try {
-                            FXRouter.goTo("event",currentUser,eventToModify);
+                            FXRouter.goTo("event",currentUser,eventToModify,"my-event");
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

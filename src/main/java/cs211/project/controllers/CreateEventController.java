@@ -37,6 +37,7 @@ public class CreateEventController {
     @FXML private DatePicker eventStartDatePick,eventEndDatePick;
     @FXML private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     @FXML private Button submitButton;
+    private String from = (String) FXRouter.getData3();
     private Event thisEvent = (Event) FXRouter.getData2();
     private User user = (User) FXRouter.getData();
     private String newEventImagePath = null;
@@ -141,7 +142,7 @@ public class CreateEventController {
             }
         } else {
             try {
-                FXRouter.goTo("event",user,thisEvent);
+                FXRouter.goTo("event",user,thisEvent,from);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -167,10 +168,15 @@ public class CreateEventController {
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
             String eventImagePath = newEventImagePath;
+            int numMember;
+            try {
+                numMember = Integer.parseInt(numMemberString);
+            }catch (NumberFormatException e){
+                numMember = -1;
+            }
+            if (numMember > 0 ){
 
-            if (!numMemberString.equals("")){
-                int numMember = Integer.parseInt(numMemberString);
-                eventList.createEvent(  eventNameString,eventHost,eventImagePath,
+                eventList.createEvent(eventNameString,eventHost,eventImagePath,
                         eventTag,startDate,endDate,eventDescriptionString,
                         eventLocationString,numMember);
             }else {
@@ -307,9 +313,11 @@ public class CreateEventController {
     }
 
     private void limitCharacter() {
+
         errorCapacityLabel.setVisible(false);
         eventNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (eventNameTextField.getText().length() > 30) {eventNameTextField.setText(oldValue);}
+            if (eventNameTextField.getText().length() > 30) {
+                eventNameTextField.setText(oldValue);}
         });
         eventLocationTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (eventLocationTextField.getText().length() > 50) {eventLocationTextField.setText(oldValue);}
