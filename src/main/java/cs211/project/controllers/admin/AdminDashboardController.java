@@ -22,7 +22,6 @@ public class AdminDashboardController {
     @FXML private Tab menu1Tab, menu2Tab;
     @FXML private Button menu1, menu2;
     @FXML private TableView userTableView;
-    @FXML private ImageView profileImageView;
     @FXML private ProgressBar eventProgressBar;
     @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel, totalLabel;
     @FXML private TableColumn<User, String> idTableCol, profileTableCol, usernameTableCol, nameTableCol, lastLoginTableCol;
@@ -30,18 +29,16 @@ public class AdminDashboardController {
     @FXML private AnchorPane changePasswordAnchorPane;
 
     private User user = (User) FXRouter.getData();
-    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
+    private UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
     private UserList userList;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @FXML private void initialize() {
         userList = datasource.readData();
 
-        new CreateProfileCircle(profileImageView, 28);
         new BlockArrowKeyFromTabPane(mainTab);
 
         LoadChangePasswordComponent();
-        showProfile();
         showEventProgressBarAndEventLabel();
         showOnlineUserLabel();
         showOfflineUserLabel();
@@ -179,11 +176,5 @@ public class AdminDashboardController {
         String style = "";
         menu1.setStyle(style);
         menu2.setStyle(style);
-    }
-
-    private void showProfile() {
-        ImagePathFormat pathFormat = new ImagePathFormat(user.getImagePath());
-        profileImageView.setImage(new Image(pathFormat.toString(), 1280, 1280, false, false));
-        new CreateProfileCircle(profileImageView, 28);
     }
 }
