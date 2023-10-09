@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="278.0" prefWidth="943.0" styleClass="bg-transparent" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardJoinTeamController">
    <children>
-      <AnchorPane prefWidth="883.0" styleClass="joint-team-card-box">
+      <AnchorPane prefWidth="883.0" styleClass="join-team-card-box">
          <children>
             <Rectangle arcHeight="19.0" arcWidth="19.0" fill="#f6f4ee" height="276.0" layoutX="-2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="944.0" />
             <Label fx:id="teamNameLabel" layoutX="45.0" layoutY="12.0" prefHeight="45.0" prefWidth="801.0" text="Team Name">
