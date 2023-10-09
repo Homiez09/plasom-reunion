@@ -20,7 +20,7 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: white;
+    -fx-background-color: #f0edeb;
     -fx-background-radius: 5em;
 }
 
@@ -41,16 +41,39 @@
 -fx-border-radius: 10px;
 -fx-border-color: black;
 -fx-background-radius: 10px;
--fx-border-width: 2px;
+-fx-border-width: 1px;
 }
 
-.date-time-picker-bg {
--fx-background-color: #F9F6F7;
--fx-border-radius: 5px;
--fx-border-color: black;
--fx-background-radius: 5px;
--fx-border-width: 2px;
+.event-text-area {
+    -fx-background-color: #F9F6F7;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-padding: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
 }
+.event-text-area .content {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+}
+.event-text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.event-choice-box {
+-fx-background-color: #F9F6F7;
+-fx-border-radius: 10px;
+-fx-border-color: black;
+-fx-background-radius: 10px;
+-fx-border-width: 1px;
+}
+.event-choice-box .context-menu { -fx-background-color: white; }
+.event-choice-box .menu-item:focused { -fx-background-color: #FFE8D6; }
+.event-choice-box .menu-item > .label { -fx-text-fill: black; }
+.event-choice-box .menu-item:focused > .label { -fx-text-fill: black; }
 
 .inbox-bg{
 -fx-background-color: #FF971D;

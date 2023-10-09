@@ -12,7 +12,7 @@ event-VSA289648,user-MEf337756,Event 4 Music FEtivAl,images/events/2023-09-21_16
 event-Din80656,user-MEf337756,Event 6 Test Join Data on csv,null,Performance,25/09/2023 12:00,26/09/2023 14:00,โปรดบอกฉันว่าโลกนี้มันยังไม่เลวร้ายเกินไปและพรุ่งนี้โลกใบนี้มันยังไม่แตกสลายไปขอให้เธอใจดีกับฉัน ในวันที่โลกทั้งใบใจร้ายเคว้งคว้างล่องลอยในทะเล ที่มองไม่เห็นฝั่งไม่รู้จะจบลงเมื่อไร และวันพรุ่งนี้ จะเจอสิ่งไหนแค่ขอเธอคอยบอก และทำให้ฉันมั่นใจ,test,-1,21/09/2023 02:30,true,true
 event-YZz749796,user-MEf337756,Event DesBug Test Func,null,null,23/09/2023 15:00,30/09/2023 17:00,คิดถึงอีกแล้ว คิดไกลอีกแล้ว คิดถึงแต่เธอ เมื่อไม่ได้เจอ และมากขึ้นทุกวัน,asd,1,21/09/2023 17:16,true,true
 event-HUq801709,user-MEf337756,Event tao rai wa Test Description,null,Sport,07/10/2023 14:00,07/10/2023 16:00,เธอรู้ไหมกำลังมีใครดีใจที่ได้พบเธอหากความหมายของการได้อยู่ก็เพราะความรักที่เจอขอบคุณเธอที่ทำให้รู้โลกใบนี้ช่างงดงามเกินกว่าสิ่งใด,test,1,21/09/2023 02:32,true,true
-event-RTC113887,user-ZKt668157,Music Festival Night Party #1,images/events/2023-10-09_1696815187545.png,Music,09/10/2023 14:34,11/11/2023 23:00,tonight we here to go night festival concert in 2023 ,LA,5,09/10/2023 08:35,true,true
+event-RTC113887,user-ZKt668157,Music Festival Night Party #1,images/events/2023-10-09_1696815187545.png,Music,09/10/2023 14:34,11/11/2023 23:00,tonight we here to go night festival concert in 2023,LA,5,09/10/2023 08:35,true,true
 event-hDY736041,user-MEf337756,TESET,null,Seminar,07/10/2023 14:00,07/10/2023 16:00,เป็นห่วงมากเลยรู้ไหม หากไม่จำเป็นอย่าออกไปไหนเลย ออกไปข้างนอกเธออาจได้เจอใคร ที่ไม่น่าไว้ใจได้เลยสักคน,12312312312321eqwe,1,21/09/2023 02:50,true,true
 event-yiQ50295,user-MEf337751,Test,images/events/2023-10-08_1696770364915.png,Music,09/10/2023 12:00,14/10/2023 23:00,Test,test,0,08/10/2023 19:25,true,true
 event-CrG865499,user-MEf337756,Test Create Fix bug,null,Animal,04/11/2023 10:00,04/11/2023 12:00,,TEst,123,07/10/2023 01:24,false,true
@@ -22,3 +22,4 @@ event-vfv638328,user-iIP330521,sdsd,null,Conference,09/10/2023 00:00,04/11/2023 
 event-XAq437333,user-teM342866,test create test,null,null,14/10/2023 14:00,15/10/2023 15:00,,,-1,08/10/2023 06:03,true,true
 event-Auv872861,user-gCD111042,test create test2,null,Business,20/10/2023 12:00,21/10/2023 15:00,TEts,ruck,-1,08/10/2023 06:07,true,true
 event-sOL969020,user-teM342866,test2 create test,null,null,21/10/2023 21:00,22/10/2023 22:00,,test,-1,08/10/2023 06:03,true,true
+event-vuk11216,user-xYW32665,testAc,null,Food & Drink,10/11/2023 11:00,11/11/2023 08:00,no,here,10,09/10/2023 14:41,true,true
