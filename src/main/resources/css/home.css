@@ -73,10 +73,10 @@
 }
 .font{
  -fx-font-family: Leelawadee;
- -fx-font-size: 18;
+ -fx-font-size: 15;
 }
 .h1{
- -fx-font-size: 24;
+ -fx-font-size: 18;
  -fx-font-family: Leelawadee;
  -fx-font-weight: bold;
 }

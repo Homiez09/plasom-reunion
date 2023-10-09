@@ -12,6 +12,7 @@ public class HelloApplication extends Application {
         configRoute();
 
         FXRouter.bind(this, stage, "CS211 661 Project");
+        stage.setResizable(false);
 
         FXRouter.goTo("welcome");
     }

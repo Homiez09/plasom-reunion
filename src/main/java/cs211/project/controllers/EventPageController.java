@@ -167,7 +167,7 @@ public class EventPageController {
         eventActivityTableView.setFixedCellSize(40);
     }
 
-    public void initButton(){
+    private void initButton(){
         Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
         TeamList teamList = teamListDatasource.readData();
 
