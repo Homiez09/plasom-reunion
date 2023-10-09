@@ -66,13 +66,13 @@ public class ActivityTeamListDataSource implements Datasource<ActivityTeamList>{
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-                String teamID = data[0].trim();
+                String activityID = data[0].trim();
                 String activityName = data[1].trim();
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
                 String activityEnd = data[4].trim();
                 boolean status = Boolean.parseBoolean(data[5].trim());
-                String activityID = data[6].trim();
+                String teamID = data[6].trim();
 
                 activities.addActivity(teamID, activityName, activityDescription, activityStart, activityEnd, activityID, status);
 

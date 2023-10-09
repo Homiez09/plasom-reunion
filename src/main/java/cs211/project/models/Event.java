@@ -6,7 +6,6 @@ import cs211.project.services.GenerateRandomID;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 public class Event implements Comparable<Event>{
     private final String eventID;
@@ -18,7 +17,8 @@ public class Event implements Comparable<Event>{
     private final String eventLocation;
     private int slotMember;
     private final String timestamp;
-    private boolean joinEvent = false ,joinTeam = false;
+    private boolean joinEvent;
+    private final boolean joinTeam;
     private ActivityList activityList;
     private UserList userList;
     public Event(String eventName,
@@ -136,7 +136,6 @@ public class Event implements Comparable<Event>{
     }
 
     public boolean isJoinEvent() {return joinEvent;}
-    public boolean isJoinTeam() {return joinTeam;}
     public void changeDateStart(String newDate){this.eventDateStart = newDate;}
     public void changeDateEnd(String newDate){this.eventDateEnd = newDate;}
     public void changeName(String newName){this.eventName = newName;}
@@ -150,14 +149,8 @@ public class Event implements Comparable<Event>{
     public boolean isFull(){return slotMember == userList.getUsers().size();}
 
     private String generateEventID() {
-        Random random = new Random();
-
         String id = "event-";
-        int ranInt = random.nextInt(1000000);
-        String ranText = generateRandomText();
-
-        id = id + ranText + ranInt;
-
+        id += new GenerateRandomID().getRandomText();
         return id;
     }
 
@@ -180,12 +173,6 @@ public class Event implements Comparable<Event>{
 
     public boolean isHostEvent(User user) {
         return eventHostUser.equals(user);
-    }
-
-    private String generateRandomText() {
-        String id = "event-";
-        id += new GenerateRandomID().getRandomText();
-        return id;
     }
 
     @Override

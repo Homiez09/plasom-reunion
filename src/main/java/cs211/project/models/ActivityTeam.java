@@ -36,6 +36,6 @@ public class ActivityTeam extends Activity {
 
     @Override
     public String toString() {
-        return teamID + "," + name + "," + description + "," + startTime + "," + endTime + ","  + status  + "," + activityID;
+        return activityID + "," + name + "," + description + "," + startTime + "," + endTime + ","  + status  + "," + teamID;
     }
 }
