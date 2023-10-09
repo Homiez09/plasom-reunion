@@ -61,19 +61,19 @@
                               <Button fx:id="categoryButton" mnemonicParsing="false" onAction="#onCategory" prefHeight="32.0" prefWidth="120.0" styleClass="all-event-button-category" text="Category" textOverrun="CLIP" />
                            </children>
                         </StackPane>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="60.0" />
-                        <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="618.0" promptText="search">
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="426.0" />
+                        <TextField fx:id="searchbarTextField" prefHeight="33.0" prefWidth="304.0" promptText="search">
                            <styleClass>
                               <String fx:value="team-search-bar" />
                               <String fx:value="font" />
                               <String fx:value="text-base" />
-                           </styleClass></TextField>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="38.0" prefWidth="48.0" />
+                           </styleClass>
+                        </TextField>
                         <StackPane>
                            <children>
                               <ImageView fx:id="sortImageView" fitHeight="30.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../images/hostevent/sort.png" />
+                                    <Image url="@../../../images/icons/select-team/sort_icon.png" />
                                  </image>
                               </ImageView>
                               <ComboBox fx:id="sortComboBox" prefHeight="25.0" prefWidth="80.0" styleClass="all-event-combobox" visible="false" visibleRowCount="5" />
@@ -89,7 +89,8 @@
                            </styleClass>
                            <font>
                               <Font name="Leelawadee UI" size="13.0" />
-                           </font></Button>
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
                   <Separator opacity="0.0" prefHeight="3.0" prefWidth="200.0" />
@@ -114,7 +115,7 @@
             </VBox>
          </children>
       </VBox>
-      <AnchorPane layoutX="829.0" layoutY="174.0" prefHeight="16.0" prefWidth="16.0">
+      <AnchorPane layoutX="883.0" layoutY="174.0" prefHeight="16.0" prefWidth="16.0">
          <children>
             <ImageView fx:id="searchImageView" fitHeight="16.0" fitWidth="16.0" layoutX="-1.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
          </children>

@@ -16,14 +16,14 @@ public class CardEventController {
     @FXML ImageView eventImage, profileImageView;
     //-------------------------------------------------------
     private Event event;
-    private User currentUser = (User) FXRouter.getData();
+    private final User currentUser = (User) FXRouter.getData();
     @FXML
     private void initialize() {}
     public void setEvent(Event data) {
         this.event = data;
         if (event != null) {
             eventNameLabel.setText(event.getEventName());
-            hostUsernameLabel.setText(event.getEventHostUser().getUsername());
+            hostUsernameLabel.setText("@" + event.getEventHostUser().getUsername());
             hostNameLabel.setText(event.getEventHostUser().getDisplayName());
             if (event.isJoinEvent()) {
                 if (!event.isFull()) {

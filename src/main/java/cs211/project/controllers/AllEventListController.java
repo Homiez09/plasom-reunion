@@ -56,8 +56,6 @@ public class AllEventListController {
         loadImageIcon();
         maximumLengthField();
         createButton.setVisible(currentUser != null);
-
-        tilePaneMain.setVgap(20);
     }
 
     private void setupPage() {

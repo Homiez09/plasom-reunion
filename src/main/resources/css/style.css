@@ -1139,7 +1139,7 @@
 
     /* card-my-event */
 .my-event-card{
-    -fx-background-color: #fbfaf8;
+    -fx-background-color: #F6F4EE;
     -fx-background-radius: 10px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.18, 0, 0.7);
 }
@@ -1460,9 +1460,14 @@
     -fx-font-family: Leelawadee;
 }
 
+.event-card .font-display-name{
+    -fx-font-size: 10;
+    -fx-font-family: Leelawadee;
+}
+
 .my-event-card .image-card{
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 10, 0.3, 0, 0);
-
+    -fx-border-radius: 12;
 }
 
 
