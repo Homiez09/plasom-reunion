@@ -151,6 +151,15 @@ public class UserList {
 
         return userHashMapTemp;
     }
+
+    public HashMap<String, User> userIdHashMap() {
+        HashMap<String, User> userHashMapTemp= new HashMap<>();
+        for (User user: users) {
+            userHashMapTemp.put(user.getUserId(), user);
+        }
+
+        return userHashMapTemp;
+    }
     public ArrayList<User> getUserOfEvent(Event event) {
         String eventID = event.getEventID();
         ArrayList<User> userList = new ArrayList<>();
