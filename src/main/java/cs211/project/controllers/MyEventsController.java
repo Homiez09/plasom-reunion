@@ -18,6 +18,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -37,6 +39,7 @@ import java.util.function.Predicate;
 
 public class MyEventsController{
     @FXML AnchorPane navbarAnchorPane;
+    @FXML ImageView searchImageView;
     @FXML Button allButton,completeButton,ownerButton,memberButton,staffButton;
     @FXML ComboBox<String> sortComboBox;
     @FXML Separator popupTest;
@@ -56,10 +59,12 @@ public class MyEventsController{
     @FXML
     private void initialize() {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
+        loadImageIcon();
         setupPage();
         allButton.setDisable(true);
         getBySearch();
         sortTilePane();
+        maximumLengthField();
         if (from!=null){
             resetButton();
             eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
@@ -132,15 +137,19 @@ public class MyEventsController{
     @FXML
     private void setupScrollBar() {
         Platform.runLater(() -> {
-            scrollBar = (ScrollBar) listViewMain.lookup(".scroll-bar:vertical");
-            scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
-                double scrollValue = newValue.doubleValue();
-                if (scrollValue > 0.8 && nodes.size() < eventObservableList.size()){
-                    loadMore(selectedPredicate);
-                }
-            });
+            Node node = listViewMain.lookup(".scroll-bar:vertical");
+            if (node instanceof ScrollBar) {
+                scrollBar = (ScrollBar) node;
+                scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
+                    double scrollValue = newValue.doubleValue();
+                    if (scrollValue > 0.8 && nodes.size() < eventObservableList.size()) {
+                        loadMore(selectedPredicate);
+                    }
+                });
+            }
         });
     }
+
 
     private void removeNode(Predicate<Event> selectedPredicate) {
         FilteredList<Event> filteredList = eventObservableList.filtered(selectedPredicate);
@@ -330,6 +339,18 @@ public class MyEventsController{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void maximumLengthField(){
+        searchbarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 50) {
+                searchbarTextField.setText(oldValue);
+            }
+        });
+    }
+
+    private void loadImageIcon(){
+        searchImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/join-team/search_bar.png")));
     }
 }
 

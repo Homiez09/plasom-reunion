@@ -971,10 +971,10 @@
 }
 
 .my-event-button{
-    -fx-font-size: 12;
-
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
     -fx-background-color: transparent;
-    -fx-border-radius: 6;
+    -fx-border-radius: 23;
     -fx-border-color: #413B3B;
     -fx-border-width: 2;
     -fx-text-fill: #413B3B;
@@ -982,7 +982,7 @@
 }
 .my-event-button:hover{
     -fx-background-color: transparent;
-    -fx-border-radius: 6;
+    -fx-border-radius: 23;
     -fx-border-color: -fx-gray1-color;
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
@@ -990,11 +990,29 @@
 }
 .my-event-button:pressed{
     -fx-background-color: transparent;
-    -fx-border-radius: 6;
+    -fx-border-radius:23;
     -fx-border-color: #E9E2DA;
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
     -fx-text-fill: #E9E2DA;
+}
+
+.create-event-button {
+    -fx-background-color: linear-gradient(to left, -fx-orange3-color 45.96%, -fx-orange7-color 70.98%);
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+
+.create-event-button:hover {
+    -fx-background-color: linear-gradient(to left,  -fx-orange2-color 45.96%, -fx-orange1-color  70.98% );
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+
+.create-event-button:pressed {
+    -fx-background-color: linear-gradient(to left, -fx-orange5-color 45.96%, -fx-orange4-color  70.98% );
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 
 /* text */
@@ -1044,10 +1062,25 @@
     -fx-scale-y: 1.1;
     -fx-transition-duration: 0.3s;
 }
+
+.my-event-list-view  .scroll-bar {
+    -fx-background-color: transparent;
+}
+.my-event-list-view  .scroll-bar .thumb {
+    -fx-background-color: transparent;
+}
+.my-event-list-view:hover .scroll-bar {
+    -fx-background-color: transparent;
+}
+.my-event-list-view:hover .scroll-bar .thumb {
+    -fx-background-color: #DDD3C3;
+}
+
+
 /* combobox-sort */
 .my-event-sort {
     -fx-background-color: transparent;
-    -fx-border-radius: 6;
+    -fx-border-radius: 23;
     -fx-border-color: #413B3B;
     -fx-border-width: 2;
     -fx-text-fill: #413B3B;
@@ -1186,5 +1219,37 @@
 
 
 
+.toggle-event {
+    -fx-background-color: transparent;
+    -fx-pref-width: 150;
+}
+
+.toggle-event .arrow {
+    -fx-background-color: transparent;
+}
+
+
+.toggle-event .list-view {
+    -fx-padding: 14 4 14 5;
+    -fx-spacing: 5;
+    -fx-background-color: F6F4EE;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.toggle-event .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+    -fx-border-radius: 5;
+    -fx-text-fill: #666666;
+    -fx-alignment: center;
+}
+
+.toggle-event .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
 
 /*======================= my event =======================*/
