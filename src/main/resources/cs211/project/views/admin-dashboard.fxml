@@ -335,7 +335,7 @@
          </children>
       </AnchorPane>
       <AnchorPane fx:id="hoverAdminDashBoardAnchorPane" onMouseClicked="#onAdminDashBoardDisableClick" prefHeight="768.0" prefWidth="1152.0" visible="false" />
-      <AnchorPane fx:id="userCardProfileAnchorPane" layoutX="514.0" layoutY="160.0" prefHeight="435.0" prefWidth="324.0" />
+      <AnchorPane fx:id="userCardProfileAnchorPane" layoutX="451.0" layoutY="160.0" prefHeight="435.0" prefWidth="324.0" visible="false" />
    </children>
    <stylesheets>
       <URL value="@../../../css/style2.css" />
