@@ -38,8 +38,14 @@ public class MemberApplicationController {
 
     public void loadData(Event event) {
         // todo: ให้โชว์แต่ team ที่สามารถเข้าร่ววมได้ (team.isFull, team ที่เข้าร่วมแล้ว จะไม่โชว์)
-        for (Team team : event.getTeamList().getTeams()) {
-            teamChoiceBox.getItems().add(team.getTeamName());
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
+        TeamList teamList = teamListDatasource.readData();
+
+        for (Team team : teamList.getTeams()) {
+            if (event.getEventID().equals(team.getEventID()) &&
+                !team.isFull() && team.getMemberList().getUsers().contains(currentUser)) {
+                teamChoiceBox.getItems().add(team.getTeamName());
+            }
         }
     }
 

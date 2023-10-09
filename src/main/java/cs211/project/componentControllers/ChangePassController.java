@@ -343,7 +343,7 @@ public class ChangePassController {
     private String setColorTextFill(String color){
         switch (color) {
             case "black" -> color = "-fx-text-fill: #413b3b";
-            case "red" -> color = "-fx-text-fill: red";
+            case "red" -> color = "-fx-text-fill: #C84D3D";
             case "green" -> color = "-fx-text-fill: green";
         }
         return color;

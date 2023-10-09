@@ -335,7 +335,7 @@
 
 }
 .profile-text-area .content{
-    -fx-background-color: -fx-white4-colorD;
+    -fx-background-color: -fx-white4-color;
     -fx-border-color: #000000;
     -fx-border-radius: 11;
     -fx-border-width: 1;
@@ -909,4 +909,347 @@
 .ok-join-team-button:pressed{
     -fx-background-color: #716867;
 }
+/*======================= my event =======================*/
+.my-event-background{
+    -fx-background-color: #FFF5E5;
+}
 
+/* button */
+.my-event-button-manage{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: -fx-orange3-color;
+    -fx-border-width: 2;
+    -fx-text-fill: -fx-orange3-color;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+}
+.my-event-button-manage:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: -fx-gray1-color;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-text-fill: -fx-gray1-color;
+
+}
+.my-event-button-manage:pressed{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
+.my-event-button-create{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: -fx-orange3-color;
+    -fx-border-width: 2;
+    -fx-text-fill: -fx-orange3-color;
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+.my-event-button-create:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: -fx-gray1-color;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-text-fill: -fx-gray1-color;
+}
+.my-event-button-create:pressed{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
+.my-event-button{
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+    -fx-background-color: transparent;
+    -fx-border-radius: 23;
+    -fx-border-color: #413B3B;
+    -fx-border-width: 2;
+    -fx-text-fill: #413B3B;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+.my-event-button:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 23;
+    -fx-border-color: -fx-gray1-color;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-text-fill: -fx-gray1-color;
+}
+.my-event-button:pressed{
+    -fx-background-color: transparent;
+    -fx-border-radius:23;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
+.create-event-button {
+    -fx-background-color: linear-gradient(to left, -fx-orange3-color 45.96%, -fx-orange7-color 70.98%);
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+
+.create-event-button:hover {
+    -fx-background-color: linear-gradient(to left,  -fx-orange2-color 45.96%, -fx-orange1-color  70.98% );
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+
+.create-event-button:pressed {
+    -fx-background-color: linear-gradient(to left, -fx-orange5-color 45.96%, -fx-orange4-color  70.98% );
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+
+/* text */
+.my-event-text{
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-black1-color;
+    -fx-font-family: Leelawadee;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition-duration: 0.3s;
+}
+.my-event-text:hover{
+    -fx-text-fill: -fx-gray1-color;
+    -fx-scale-x: 1.1; /* เปลี่ยนขนาดเมื่อโฮเวอร์ */
+    -fx-scale-y: 1.1;
+    -fx-transition-duration: 0.3s;
+}
+.my-event-text:pressed{
+    -fx-text-fill: #E9E2DA;
+    -fx-scale-x: 0.9; /* เปลี่ยนขนาดเมื่อกด */
+    -fx-scale-y: 0.9;
+    -fx-transition-duration: 0.3s;
+}
+.my-event-text-head{
+    -fx-font-size: 32;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+}
+
+/* list-view my-event */
+.my-event-list-view {
+    -fx-background-color: transparent;
+
+}
+.my-event-list-view .list-view{
+    -fx-alignment: center;
+}
+.my-event-list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 30px 0px 0px 125px;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition-duration: 0.3s;
+}
+.my-event-list-view .list-cell:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-transition-duration: 0.3s;
+}
+
+.my-event-list-view  .scroll-bar {
+    -fx-background-color: transparent;
+}
+.my-event-list-view  .scroll-bar .thumb {
+    -fx-background-color: transparent;
+}
+.my-event-list-view:hover .scroll-bar {
+    -fx-background-color: transparent;
+}
+.my-event-list-view:hover .scroll-bar .thumb {
+    -fx-background-color: #DDD3C3;
+}
+
+
+/* combobox-sort */
+.my-event-sort {
+    -fx-background-color: transparent;
+    -fx-border-radius: 23;
+    -fx-border-color: #413B3B;
+    -fx-border-width: 2;
+    -fx-text-fill: #413B3B;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+}
+.my-event-combobox{
+    -fx-background-color: transparent;
+    -fx-font-size: 14;
+    -fx-text-fill: #413B3B;
+    -fx-font-family: Leelawadee;
+    -fx-text-overrun: center-ellipsis;
+
+}
+.my-event-combobox .arrow {
+    -fx-background-color: transparent;
+}
+.my-event-combobox .list-view{
+    -fx-font-size: 14;
+    -fx-text-fill: #413B3B;
+    -fx-background-color: #F6F4EE;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+}
+.my-event-combobox .list-view:hover{
+    -fx-background-color: #dddbd6;
+}
+
+/* card-my-event */
+.my-event-card{
+    -fx-background-color: #fbfaf8;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.18, 0, 0.7);
+}
+.my-event-card .font-head{
+    -fx-font-size: 32;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+    -fx-font-style: normal;
+    -fx-text-fill: #4D4746;
+}
+.my-event-card .font{
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+    -fx-font-family: Leelawadee;
+
+}
+.my-event-card .font-username{
+    -fx-text-fill: #666668;
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+}
+
+.my-event-card .button-staff{
+    -fx-background-color: linear-gradient(#FF9900, #ffad32);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #FFFFFF;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition-duration: 0.3s;
+}
+.my-event-card .button-staff:hover{
+    -fx-background-color: linear-gradient(#ffc166, #ffd699);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #FFFFFF;
+}
+.my-event-card .button-staff:pressed{
+    -fx-background-color: linear-gradient(#bcbcbc, #eeeeee);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #bcbcbc;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+    -fx-transition-duration: 0.3s;
+}
+
+.my-event-card .button-manage{
+    -fx-background-color: linear-gradient(#4D4746,#706b6a);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #FFFFFF;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition-duration: 0.3s;
+}
+.my-event-card .button-manage:hover{
+    -fx-background-color: linear-gradient(#949090,#b7b5b5);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #FFFFFF;
+}
+.my-event-card .button-manage:pressed{
+    -fx-background-color: linear-gradient(#bcbcbc, #eeeeee);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #bcbcbc;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+    -fx-transition-duration: 0.3s;
+}
+
+.my-event-card .button-leave{
+    -fx-background-color: linear-gradient(#EF7B57,#f29578);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #FFFFFF;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition-duration: 0.3s;
+
+}
+.my-event-card .button-leave:hover{
+    -fx-background-color: linear-gradient(#f5af9a,#f8cabb);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #FFFFFF;
+
+}
+.my-event-card .button-leave:pressed{
+    -fx-background-color: linear-gradient(#bcbcbc, #eeeeee);
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-text-fill: #bcbcbc;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+    -fx-transition-duration: 0.3s;
+
+}
+
+.my-event-card .image-card{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 10, 0.3, 0, 0);
+}
+
+
+
+.toggle-event {
+    -fx-background-color: transparent;
+    -fx-pref-width: 150;
+}
+
+.toggle-event .arrow {
+    -fx-background-color: transparent;
+}
+
+
+.toggle-event .list-view {
+    -fx-padding: 14 4 14 5;
+    -fx-spacing: 5;
+    -fx-background-color: F6F4EE;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.toggle-event .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+    -fx-border-radius: 5;
+    -fx-text-fill: #666666;
+    -fx-alignment: center;
+}
+
+.toggle-event .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+/*======================= my event =======================*/

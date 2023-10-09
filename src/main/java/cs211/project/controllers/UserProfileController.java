@@ -58,7 +58,7 @@ public class UserProfileController {
     UserList userList ;
 
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         new LoadNavbarComponent(user, navbarAnchorPane);
 
         datasource = new UserListDataSource("data","user-list.csv");
@@ -108,12 +108,9 @@ public class UserProfileController {
     }
 
     private void eventHandleEnter(){
-        EventHandler<KeyEvent> enterEventHandler = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER) {
-                    onSaveButtonClick();
-                }
+        EventHandler<KeyEvent> enterEventHandler = event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onSaveButtonClick();
             }
         };
         displayNameTextField.setOnKeyPressed(enterEventHandler);
@@ -170,9 +167,7 @@ public class UserProfileController {
             }
         });
 
-        displayNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            displayNameProfileLabel.setText(newValue);
-        });
+        displayNameTextField.textProperty().addListener((observable, oldValue, newValue) -> displayNameProfileLabel.setText(newValue));
 
         contactNumberTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
@@ -180,9 +175,7 @@ public class UserProfileController {
             }
         });
 
-        contactNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            checkContactNumberReq();
-        });
+        contactNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> checkContactNumberReq());
 
         bioTextArea.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
@@ -190,9 +183,7 @@ public class UserProfileController {
             }
         });
 
-        bioTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            bioProfileLabel.setText(newValue);
-        });
+        bioTextArea.textProperty().addListener((observable, oldValue, newValue) -> bioProfileLabel.setText(newValue));
     }
 
 
@@ -413,6 +404,7 @@ public class UserProfileController {
             if (directory.exists() && directory.isDirectory() && user.getNewImagePath() != null) {
                 File[] files = directory.listFiles();
 
+                assert files != null;
                 for (File file : files) {
                     String newName = file.getName();
                     if (newName.startsWith(user.getUserId())) {
@@ -539,7 +531,7 @@ public class UserProfileController {
     @FXML private void onKeyBioCountText(){
         if (saveButton.isVisible()) {
             bioText = bioTextArea.getText();
-            countBioLabel.setText(String.valueOf((int) bioText.length()));
+            countBioLabel.setText(String.valueOf(bioText.length()));
             if (bioText.length() >= 280) {
                 if (bioText.length() > 280) {
                     countBioLabel.setStyle("-fx-text-fill: red ");
@@ -557,7 +549,7 @@ public class UserProfileController {
             dragEvent.acceptTransferModes(TransferMode.ANY);
         }
     }
-    @FXML private void onHandleDrop(DragEvent dragEvent) throws FileNotFoundException {
+    @FXML private void onHandleDrop(DragEvent dragEvent) {
         List<File> files = dragEvent.getDragboard().getFiles();
         if (!files.isEmpty()) {
             File file = files.get(0);
@@ -611,7 +603,6 @@ public class UserProfileController {
         frameIconImageView.setImage(frameIcon);
 
 
-        boolean defaultImageCheck = false;
         String path = user.getNewImagePath() == null ? user.getImagePath() : user.getNewImagePath();
         ImagePathFormat pathFormat = new ImagePathFormat(path);
 
@@ -682,7 +673,7 @@ public class UserProfileController {
                 avatarProfileController.setImage(defaultAvatarProfile);
                 avatarProfileComponent.setOnMouseClicked(event -> {
                     user.setNewImagePath("x" + defaultAvatarProfilePath);
-                    avatarProfileImageView.setImage(new Image(getClass().getResourceAsStream(defaultAvatarProfilePath.toString()),1280, 1280, false, false));
+                    avatarProfileImageView.setImage(new Image(getClass().getResourceAsStream(defaultAvatarProfilePath),1280, 1280, false, false));
                     defaultAvatarContainerProfile();
                     loadImage();
                 });
@@ -716,6 +707,7 @@ public class UserProfileController {
             defaultAvatarImageView.setImage(avatarIcon);
         } else {
             defaultAvatarHover.setVisible(true);
+            defaultAvatarLabel.setStyle("");
             defaultAvatarLabel.setStyle("-fx-text-fill: #6B6B6B");
             defaultAvatarImageView.setImage(hoverAvatarIcon);
         }
@@ -728,6 +720,7 @@ public class UserProfileController {
             deviceAvatarImageView.setImage(deviceAvatarIcon);
         }else{
             deviceAvatarHover.setVisible(true);
+            deviceAvatarLabel.setStyle("");
             deviceAvatarLabel.setStyle("-fx-text-fill: #6B6B6B");
             deviceAvatarImageView.setImage(hoverDeviceAvatarIcon);
         }
@@ -735,11 +728,13 @@ public class UserProfileController {
     private void onShowDefaultAvatar(){
         defaultAvatarLine.setVisible(true);
         defaultAvatarImageView.setImage(clickAvatarIcon);
+        defaultAvatarLabel.setStyle("");
         defaultAvatarLabel.setStyle("-fx-text-fill: #F90");
     }
     private void onShowDeviceAvatar(){
         deviceAvatarLine.setVisible(true);
         deviceAvatarImageView.setImage(clickDeviceAvatarIcon);
+        deviceAvatarLabel.setStyle("");
         deviceAvatarLabel.setStyle("-fx-text-fill: #F90");
     }
 

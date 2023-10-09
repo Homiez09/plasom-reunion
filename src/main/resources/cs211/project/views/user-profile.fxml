@@ -306,7 +306,7 @@
                         <Font name="FreesiaUPC" size="26.0" />
                      </font>
                      <styleClass>
-                        <String fx:value="spacing1" />
+                        <String fx:value="color-black" />
                         <String fx:value="font" />
                         <String fx:value="text-xl" />
                      </styleClass>
@@ -322,9 +322,9 @@
                         <Font name="FreesiaUPC" size="26.0" />
                      </font>
                      <styleClass>
-                        <String fx:value="spacing1" />
                         <String fx:value="font" />
                         <String fx:value="text-xl" />
+                        <String fx:value="color-black" />
                      </styleClass>
                   </Label>
                   <Line fx:id="defaultAvatarLine" endX="231.5" endY="1.0" layoutX="92.0" layoutY="94.0" startX="-90.0" startY="1.0" stroke="#ff9900" strokeWidth="3.0" />

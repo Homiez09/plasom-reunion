@@ -20,7 +20,8 @@ import javafx.scene.shape.Shape;
 import java.io.IOException;
 
 public class SignUpController {
-    private final int maxPasswordLimit = 27, maxUsernameLimit = 20, maxDisplayNameLimit = 24;
+    private final int MAX_PASSWORD_LIMIT = 27, MAX_USERNAME_LIMIT = 20, MAX_DISPLAY_NAME_LIMIT = 24;
+
 
     @FXML private AnchorPane upcomingZoneAnchorPane;
     @FXML private ImageView signBackgroundImageView, upComingEventsBackgroundImageView;
@@ -59,12 +60,9 @@ public class SignUpController {
     }
 
     private void eventHandleEnter(){
-        EventHandler<KeyEvent> enterEventHandler = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER) {
-                    onCreateAccountButton();
-                }
+        EventHandler<KeyEvent> enterEventHandler = event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onCreateAccountButton();
             }
         };
         displayNameTextfield.setOnKeyPressed(enterEventHandler);
@@ -193,6 +191,7 @@ public class SignUpController {
 
     private void checkPasswordRequirement() {
         boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasSpecialCharacter = false , hasFitLength = false;
+        password = passwordField.getText();
         String specialCharacters = "!@#$";
         if(password.length() >= 8 && password.length() <= 20){
             hasFitLength = true;
@@ -339,37 +338,37 @@ public class SignUpController {
     }
     @FXML private void maximumLengthField(){
         displayNameTextfield.textProperty().addListener((observableValue, oldValue , newValue) -> {
-            if(newValue.length() > maxDisplayNameLimit){
+            if(newValue.length() > MAX_DISPLAY_NAME_LIMIT){
                 displayNameTextfield.setText(oldValue);
             }
         });
 
         usernameTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxUsernameLimit){
+            if(newValue.length() > MAX_USERNAME_LIMIT){
                 usernameTextField.setText(oldValue);
             }
         }));
 
         passwordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxPasswordLimit){
+            if(newValue.length() > MAX_PASSWORD_LIMIT){
                 passwordField.setText(oldValue);
             }
         }));
 
         showPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxPasswordLimit){
+            if(newValue.length() > MAX_PASSWORD_LIMIT){
                 showPasswordTextField.setText(oldValue);
             }
         }));
 
         confirmPasswordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxPasswordLimit){
+            if(newValue.length() > MAX_PASSWORD_LIMIT){
                 confirmPasswordField.setText(oldValue);
             }
         }));
 
         showConfirmPasswordTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if(newValue.length() > maxPasswordLimit){
+            if(newValue.length() > MAX_PASSWORD_LIMIT){
                 showConfirmPasswordTextField.setText(oldValue);
             }
         }));
@@ -385,8 +384,8 @@ public class SignUpController {
     private String setColorTextFill(String color){
         switch (color) {
             case "black" -> color = "-fx-text-fill: #413b3b";
-            case "red" -> color = "-fx-text-fill: red";
-            case "green" -> color = "-fx-text-fill: green";
+            case "red" -> color = "-fx-text-fill: #C84D3D";
+            case "green" -> color = "-fx-text-fill: #70C050";
         }
         return color;
     }

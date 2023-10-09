@@ -18,6 +18,14 @@ public class UnbanUserTeamController {
     private BanTeamMap banTeamMap = new BanTeamMap();
     private HashMap<String, Set<String>> hashMap = banTeamMap.readData();
 
+    @FXML private void onButtonClicked() {
+
+    }
+
+    @FXML private void onBackButtonClicked() {
+
+    }
+
     public void setup(Team team) {
         this.team = team;
         showList();
