@@ -21,7 +21,7 @@
    <children>
       <ScrollPane hbarPolicy="NEVER" layoutY="75.0" AnchorPane.topAnchor="75.0">
          <content>
-            <AnchorPane prefHeight="693.0" prefWidth="1152.0" styleClass="bg">
+            <AnchorPane prefHeight="693.0" prefWidth="1152.0" styleClass="page-bg">
                <children>
                   <VBox prefWidth="1152.0">
                      <children>
@@ -116,7 +116,7 @@
                               </VBox>
                            </children>
                         </AnchorPane>
-                        <TabPane prefWidth="200.0" styleClass="bg" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane prefWidth="200.0" styleClass="page-bg" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab text="Event info">
                               <content>
