@@ -51,7 +51,7 @@ public class EventTileController {
 
     @FXML private void onEventTileClick() {
         try {
-            FXRouter.goTo("event",currentUser,thisEvent);
+            FXRouter.goTo("event",currentUser,thisEvent,"tile");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -33,6 +33,7 @@ public class EventPageController {
     @FXML private TableView<Activity> eventActivityTableView;
     private Event event = (Event) FXRouter.getData2();
     private User user = (User) FXRouter.getData();
+    private String from = (String) FXRouter.getData3();
     private Datasource<ActivityList> eventActivityDatasource;
     private ActivityList activityList;
     private HashMap<String, UserList> hashMap;
@@ -59,10 +60,18 @@ public class EventPageController {
         }
     }
     @FXML private void onBackButtonClick() {
-        try {
-            FXRouter.goTo("home",user,null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (from.equals("card-my-event")) {
+            try {
+                FXRouter.goTo("my-event", user, null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            try {
+                FXRouter.goTo("all-events",user,null);
+            }catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     @FXML private void onEditActivityButtonClick() {

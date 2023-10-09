@@ -57,7 +57,7 @@ public class CardEventController {
 
     public void onClickCard(MouseEvent mouseEvent) {
             try {
-                FXRouter.goTo("event",currentUser,event);
+                FXRouter.goTo("event",currentUser,event,"card-event");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

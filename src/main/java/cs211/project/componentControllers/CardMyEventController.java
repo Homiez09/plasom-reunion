@@ -160,7 +160,7 @@ public class CardMyEventController {
     @FXML
     private void onClickCard(MouseEvent mouseEvent) {
             try {
-                FXRouter.goTo("event",currentUser, currentEvent);
+                FXRouter.goTo("event",currentUser, currentEvent,"card-my-event");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
