@@ -1069,10 +1069,13 @@
 .my-event-menu .arrow {
     -fx-background-color: transparent;
 }
-
+.my-event-menu .context-menu{
+    -fx-background-color: #F6F4EE;
+}
 .my-event-menu .menu-button{
     -fx-font-size: 14;
-    -fx-background-color: #F6F4EE;
+    -fx-font-family: Leelawadee;
+    -fx-background-color: transparent;
     -fx-alignment:center;
 }
 .my-event-menu .menu-item {
@@ -1088,7 +1091,7 @@
     -fx-text-fill: #666262;
 }
 .my-event-menu .menu-item:pressed {
-    -fx-background-color: rgba(255, 153, 0, 0.1);
+    -fx-background-color: rgba(255, 153, 0, 0.15);
     -fx-text-fill: #8d8989;
 
 }
@@ -1415,8 +1418,300 @@
 }
 
 
-
 /*============================================== All event ==============================================*/
+/*============================================== owner event ==============================================*/
+.owner-event .background{
+    -fx-background-color:#f6f5ef;
+}
 
+.owner-event .font-head{
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+    -fx-font-style: normal;
+    -fx-text-fill: #4D4746;
+    -fx-text-overrun: word-ellipsis;
+}
+
+.owner-event .button-close{
+    -fx-font-size: 14;
+    -fx-background-color:transparent;
+    -fx-text-fill: #e21e1e;
+    -fx-border-radius: 10;
+    -fx-border-color: #e21e1e;
+
+}
+.owner-event .button-close:hover{
+    -fx-font-size: 14;
+    -fx-background-color:transparent;
+    -fx-text-fill: #ea6161;
+    -fx-border-radius: 10;
+    -fx-border-color: #ea6161;
+}
+.owner-event .button-close:pressed{
+    -fx-font-size: 14;
+    -fx-background-color:transparent;
+    -fx-text-fill: #f3a5a5;
+    -fx-border-radius: 10;
+    -fx-border-color: #f3a5a5;
+}
+
+.owner-event-table-view {
+    -fx-background-color:transparent;
+}
+.owner-event-table-view .scroll-bar{
+    -fx-background-color:transparent;
+}
+.owner-event-table-view .column-header-background{
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+    -fx-background-color:transparent;
+}
+.owner-event-table-view .table-row-cell{
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+    -fx-text-fill: #413B3B;
+    -fx-background-color:#FFECCE;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+.owner-event-table-view .table-cell{
+    -fx-background-color:#FFECCE;
+    -fx-font-size: 12;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-font-family: Leelawadee;
+    -fx-text-fill: #413B3B;
+
+}
+.owner-event-table-view .table-cell:even{
+    -fx-background-color:#FFECCE;
+ }
+.owner-event-table-view .table-cell:odd{
+    -fx-background-color:#ffefd7;
+}
+
+.owner-event-separator {
+    -fx-background-color: transparent;
+}
+.owner-event-separator .line{
+    -fx-background-color: #262626;
+}
+
+.owner-event-combobox{
+    -fx-font-size: 14;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+    -fx-text-fill: #413B3B;
+    -fx-content-display: center;
+    -fx-background-color:transparent;
+    -fx-padding: 0 0 0 30;
+}
+.owner-event-combobox .label{
+    -fx-font-size: 14;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+    -fx-text-fill: #413B3B;
+    -fx-content-display: center;
+
+}
+.owner-event-combobox .arrow{
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+}
+.owner-event-combobox .combo-box-base{
+    -fx-text-alignment: center;
+    -fx-content-display: center;
+
+    -fx-alignment:center;
+}
+.owner-event-combobox .arrow-button{
+    -fx-text-alignment: center;
+    -fx-content-display: center;
+    -fx-alignment:center;
+}
+.owner-event-combobox .text-field{
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+}
+
+.owner-event-combobox .list-view{
+    -fx-font-size: 14;
+    -fx-text-fill: #413B3B;
+    -fx-background-color: #F6F4EE;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+}
+.owner-event-combobox .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+    -fx-border-radius: 5;
+    -fx-text-fill: #666666;
+    -fx-alignment: center;
+}
+.owner-event-combobox .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+
+/*============================================== owner event ==============================================*/
+/*============================================== user in event ==============================================*/
+.users-event-background{
+    -fx-background-color:#f6f5ef;
+}
+.users-event-font{
+    -fx-font-size: 18;
+    -fx-text-fill: black;
+    -fx-font-family: Leelawadee;
+
+}
+.users-event-font-username{
+    -fx-text-fill: #666668;
+    -fx-font-size: 10;
+    -fx-font-family: Leelawadee;
+}
+
+.users-event-font-head{
+    -fx-font-size: 24;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+    -fx-font-style: normal;
+    -fx-text-fill: #4D4746;
+    -fx-text-overrun: word-ellipsis;
+}
+
+.users-event-button-close{
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+    -fx-text-fill: #4D4746;
+    -fx-background-color:transparent;
+    -fx-border-radius: 10;
+    -fx-border-color: #4D4746;
+
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+.users-event-button-close:hover{
+    -fx-font-size: 14;
+    -fx-background-color:transparent;
+    -fx-text-fill: #706b6a;
+    -fx-border-radius: 10;
+    -fx-border-color: #706b6a;
+}
+.users-event-button-close:pressed{
+    -fx-font-size: 14;
+    -fx-background-color:transparent;
+    -fx-text-fill: #949090;
+    -fx-border-radius: 10;
+    -fx-border-color: #949090;
+}
+
+.users-event-table-view {
+    -fx-background-color:transparent;
+}
+.users-event-table-view:filled{
+    -fx-background-color:transparent;
+}
+.users-event-table-view .scroll-bar{
+    -fx-background-color:transparent;
+}
+.users-event-table-view .column-header-background{
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+    -fx-background-color:transparent;
+}
+.users-event-table-view .table-row-cell{
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+    -fx-text-fill: #413B3B;
+    -fx-background-color:#FFECCE;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+.users-event-table-view .table-cell{
+    -fx-background-color:#FFECCE;
+    -fx-font-size: 12;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-font-family: Leelawadee;
+    -fx-text-fill: #413B3B;
+
+}
+.users-event-table-view .table-cell:even{
+    -fx-background-color:#FFECCE;
+}
+.users-event-table-view .table-cell:odd{
+    -fx-background-color:#ffefd7;
+}
+
+.users-event-combobox{
+    -fx-font-size: 14;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+    -fx-text-fill: #413B3B;
+    -fx-content-display: center;
+    -fx-background-color:transparent;
+    -fx-padding: 0 0 0 30;
+}
+
+.users-event-combobox .label{
+    -fx-font-size: 14;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+    -fx-text-fill: #413B3B;
+    -fx-content-display: center;
+
+}
+.users-event-combobox .text-field{
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+    -fx-content-display: center;
+}
+.users-event-combobox .arrow{
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+}
+
+.users-event-combobox .arrow-button{
+    -fx-text-alignment: center;
+    -fx-content-display: center;
+    -fx-alignment:center;
+}
+
+.users-event-combobox .list-view{
+    -fx-font-size: 14;
+    -fx-text-fill: #413B3B;
+    -fx-background-color: #F6F4EE;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+}
+.users-event-combobox .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+    -fx-border-radius: 5;
+    -fx-text-fill: #666666;
+    -fx-alignment: center;
+}
+.users-event-combobox .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+.users-event-separator {
+    -fx-background-color: transparent;
+}
+.users-event-separator .line{
+    -fx-background-color: #262626;
+}
+/*============================================== user in event ==============================================*/
 
 

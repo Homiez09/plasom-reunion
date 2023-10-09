@@ -54,13 +54,13 @@ public class EventPageController {
     // button to another page
     @FXML private void onEditButtonClick() {
         try {
-            FXRouter.goTo("create-event", user,event);
+            FXRouter.goTo("create-event", user,event,"my-event");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void onBackButtonClick() {
-        if (from.equals("card-my-event")) {
+        if (from.equals("my-event")) {
             try {
                 FXRouter.goTo("my-event", user, null);
             } catch (IOException e) {

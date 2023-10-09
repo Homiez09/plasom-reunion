@@ -132,7 +132,7 @@ public class MyEventsController{
             scrollBar = (ScrollBar) listViewMain.lookup(".scroll-bar:vertical");
             scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
                 double scrollValue = newValue.doubleValue();
-                if (scrollValue > 0.8 && nodes.size() < eventObservableList.size()){
+                if (scrollValue > 0.9 && nodes.size() < eventObservableList.size()){
                     loadMore(selectedPredicate);
                 }
             });
@@ -180,7 +180,7 @@ public class MyEventsController{
     private void onAllAction(ActionEvent actionEvent) {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
-        removeNode(selectedPredicate);
+
         loadFirst(selectedPredicate);
         allButton.setDisable(true);
     }
@@ -189,7 +189,7 @@ public class MyEventsController{
     public void onCompleteAction(ActionEvent actionEvent) {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getCompleteEvent(currentUser));
-        removeNode(selectedPredicate);
+
         loadFirst(selectedPredicate);
         completeButton.setDisable(true);
     }
@@ -198,7 +198,7 @@ public class MyEventsController{
     private void onOwnerEventAction(ActionEvent actionEvent) {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
-        removeNode(selectedPredicate);
+
         loadFirst(selectedPredicate);
         ownerButton.setDisable(true);
     }
@@ -207,7 +207,7 @@ public class MyEventsController{
     private void onMemberAction(ActionEvent actionEvent) {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
-        removeNode(selectedPredicate);
+
         loadFirst(selectedPredicate);
         memberButton.setDisable(true);
     }
@@ -216,7 +216,7 @@ public class MyEventsController{
     private void onStaffAction(ActionEvent actionEvent) {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getTeamEvent(currentUser));
-        removeNode(selectedPredicate);
+
         loadFirst(selectedPredicate);
         staffButton.setDisable(true);
     }
@@ -227,7 +227,6 @@ public class MyEventsController{
         VBox popupContent = new VBox();
         popup.setAutoHide(true);
         VBox box = new VBox();
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/owner-event.fxml"));
             VBox loaded = loader.load();
@@ -248,6 +247,7 @@ public class MyEventsController{
         selectedPredicate = null;
         eventList = eventDatasource.readData();
         eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
+        listViewMain.getItems().clear();
     }
 
     private void resetButton(){
@@ -271,7 +271,6 @@ public class MyEventsController{
         listViewMain.getItems().addListener((ListChangeListener<? super Node>) change -> {
                 int itemCount = listViewMain.getItems().size();
                 if (itemCount == 2) {
-                    System.out.println("Test Lock");
                     loadFirst(selectedPredicate);
                 }
         });

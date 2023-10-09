@@ -110,7 +110,7 @@ public class CardMyEventController {
 
             ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());
             profileImageView.setImage(new Image(pathFormat.toString(), 1280, 1280, false, false));
-            new CreateProfileCircle(profileImageView, 30);
+            new CreateProfileCircle(profileImageView, 15);
 
             hostUserNameLabel.setText(event.getEventHostUser().getUsername());
             hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
@@ -157,10 +157,11 @@ public class CardMyEventController {
         popup.show(manageUserButton.getScene().getWindow());
 
     }
+
     @FXML
     private void onClickCard(MouseEvent mouseEvent) {
             try {
-                FXRouter.goTo("event",currentUser, currentEvent,"card-my-event");
+                FXRouter.goTo("event",currentUser, currentEvent,"my-event");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

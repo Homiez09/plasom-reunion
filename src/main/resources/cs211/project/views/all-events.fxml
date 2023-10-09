@@ -81,9 +81,9 @@
                   <Separator opacity="0.0" prefHeight="3.0" prefWidth="200.0" />
                   <HBox alignment="CENTER" prefHeight="565.0" prefWidth="1152.0">
                      <children>
-                        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
+                        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="all-event-scroll-pane" vbarPolicy="ALWAYS">
                            <content>
-                              <TilePane fx:id="tilePaneMain" hgap="30.0" nodeOrientation="LEFT_TO_RIGHT" prefColumns="4" prefHeight="560.0" prefRows="1" prefTileHeight="280.0" prefTileWidth="215.0" prefWidth="1062.0" styleClass="all-event-tile-pane" vgap="30.0">
+                              <TilePane fx:id="tilePaneMain" hgap="30.0" prefColumns="4" prefHeight="560.0" prefRows="1" prefTileHeight="280.0" prefTileWidth="215.0" prefWidth="1052.0" styleClass="all-event-tile-pane" vgap="30.0">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

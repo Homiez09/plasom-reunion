@@ -37,6 +37,7 @@ public class CreateEventController {
     @FXML private DatePicker eventStartDatePick,eventEndDatePick;
     @FXML private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     @FXML private Button submitButton;
+    private String from = (String) FXRouter.getData3();
     private Event thisEvent = (Event) FXRouter.getData2();
     private User user = (User) FXRouter.getData();
     private String newEventImagePath = null;
@@ -124,7 +125,7 @@ public class CreateEventController {
             }
         } else {
             try {
-                FXRouter.goTo("event",user,thisEvent);
+                FXRouter.goTo("event",user,thisEvent,from);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
