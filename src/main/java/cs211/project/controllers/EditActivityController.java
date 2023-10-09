@@ -43,7 +43,7 @@ public class EditActivityController {
         });
     }
 
-    public void showTable() {
+    private void showTable() {
         TableColumn<Activity,String> nameColumn = new TableColumn<>("Activity name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Activity,String> startTimeColumn = new TableColumn<>("Activity start");
@@ -77,7 +77,7 @@ public class EditActivityController {
         editActivityTableview.setFixedCellSize(40);
     }
 
-    @FXML protected void onCreateActivityButtonClick() {
+    @FXML private void onCreateActivityButtonClick() {
         FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
         try {
             AnchorPane editActivityPage = createActivityLoader.load();
@@ -88,7 +88,7 @@ public class EditActivityController {
             throw new RuntimeException(e);
         }
     }
-    @FXML protected void onBackClick() {
+    @FXML private void onBackClick() {
         try {
             FXRouter.goTo("event",user,event);
         } catch (IOException e) {

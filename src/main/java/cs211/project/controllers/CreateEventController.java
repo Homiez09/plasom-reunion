@@ -37,6 +37,7 @@ public class CreateEventController {
     @FXML private DatePicker eventStartDatePick,eventEndDatePick;
     @FXML private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     @FXML private Button submitButton;
+    private String from = (String) FXRouter.getData3();
     private Event thisEvent = (Event) FXRouter.getData2();
     private User user = (User) FXRouter.getData();
     private String newEventImagePath = null;
@@ -59,6 +60,23 @@ public class CreateEventController {
         setPage();
         timeCheck();
         limitCharacter();
+
+        if (eventNameTextField.getText().equals("") || eventDescriptionTextArea.getText().equals("") ||
+                eventLocationTextField.getText().equals("")) {
+            submitButton.setDisable(true);
+        }
+        eventNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSubmitButtonState(eventNameTextField, eventDescriptionTextArea,eventLocationTextField,eventTagChoiceBox,submitButton);
+        });
+        eventDescriptionTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSubmitButtonState(eventNameTextField, eventDescriptionTextArea,eventLocationTextField,eventTagChoiceBox,submitButton);
+        });
+        eventLocationTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSubmitButtonState(eventNameTextField, eventDescriptionTextArea,eventLocationTextField,eventTagChoiceBox,submitButton);
+        });
+        eventTagChoiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            updateSubmitButtonState(eventNameTextField, eventDescriptionTextArea,eventLocationTextField,eventTagChoiceBox,submitButton);
+        });
     }
 
     // create and edit event
@@ -124,7 +142,7 @@ public class CreateEventController {
             }
         } else {
             try {
-                FXRouter.goTo("event",user,thisEvent);
+                FXRouter.goTo("event",user,thisEvent,from);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -150,10 +168,15 @@ public class CreateEventController {
             String eventLocationString = eventLocationTextField.getText().trim();
             String numMemberString = eventCapTextField.getText().trim();
             String eventImagePath = newEventImagePath;
+            int numMember;
+            try {
+                numMember = Integer.parseInt(numMemberString);
+            }catch (NumberFormatException e){
+                numMember = -1;
+            }
+            if (numMember > 0 ){
 
-            if (!numMemberString.equals("")){
-                int numMember = Integer.parseInt(numMemberString);
-                eventList.createEvent(  eventNameString,eventHost,eventImagePath,
+                eventList.createEvent(eventNameString,eventHost,eventImagePath,
                         eventTag,startDate,endDate,eventDescriptionString,
                         eventLocationString,numMember);
             }else {
@@ -179,14 +202,6 @@ public class CreateEventController {
             FXRouter.goTo("my-event",user);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    private void setPageHeader() {
-        if(thisEvent == null) {
-            headCreateEventLabel.setText("Create your own event!");
-        } else {
-            headCreateEventLabel.setText("Edit event");
         }
     }
 
@@ -224,7 +239,6 @@ public class CreateEventController {
         eventStartDatePick.focusedProperty().addListener((observable, oldValue, newValue) -> {
             validateDate();
         });
-
         eventEndDatePick.focusedProperty().addListener((observable, oldValue, newValue) -> {
             validateDate();
         });
@@ -261,7 +275,6 @@ public class CreateEventController {
         errorEndLabel.setVisible(!endTime.isAfter(currentDateTime));
 
         submitButton.setDisable(!(startTime.isAfter(currentDateTime) && endTime.isAfter(currentDateTime)));
-
     }
 
     private void validateTime() {
@@ -284,19 +297,27 @@ public class CreateEventController {
                 submitButton.setDisable(!isTimeValid);
             }
         }
-
-
-
     }
 
     private void setTime(DatePicker datePicker){
         datePicker.setValue(LocalDate.now());
     }
 
+    private void updateSubmitButtonState(TextField name, TextArea description,TextField location,ChoiceBox<String> tag, Button submit) {
+        if (!name.getText().isEmpty() && !description.getText().isEmpty()
+                && !location.getText().isEmpty() && tag.getValue() != null) {
+            submit.setDisable(false);
+        } else {
+            submit.setDisable(true);
+        }
+    }
+
     private void limitCharacter() {
+
         errorCapacityLabel.setVisible(false);
         eventNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (eventNameTextField.getText().length() > 30) {eventNameTextField.setText(oldValue);}
+            if (eventNameTextField.getText().length() > 30) {
+                eventNameTextField.setText(oldValue);}
         });
         eventLocationTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (eventLocationTextField.getText().length() > 50) {eventLocationTextField.setText(oldValue);}

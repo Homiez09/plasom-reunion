@@ -1,16 +1,11 @@
 package cs211.project.models;
 
 import cs211.project.models.collections.ActivityList;
-import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-
+import cs211.project.services.GenerateRandomID;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Random;
 
 public class Event implements Comparable<Event>{
     private final String eventID;
@@ -18,10 +13,12 @@ public class Event implements Comparable<Event>{
     private String eventName;
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
-    private String eventDescription, eventLocation;
+    private String eventDescription;
+    private final String eventLocation;
     private int slotMember;
     private final String timestamp;
-    private boolean joinEvent = false,joinTeam = false;
+    private boolean joinEvent;
+    private final boolean joinTeam;
     private ActivityList activityList;
     private UserList userList;
     public Event(String eventName,
@@ -139,7 +136,6 @@ public class Event implements Comparable<Event>{
     }
 
     public boolean isJoinEvent() {return joinEvent;}
-    public boolean isJoinTeam() {return joinTeam;}
     public void changeDateStart(String newDate){this.eventDateStart = newDate;}
     public void changeDateEnd(String newDate){this.eventDateEnd = newDate;}
     public void changeName(String newName){this.eventName = newName;}
@@ -153,14 +149,8 @@ public class Event implements Comparable<Event>{
     public boolean isFull(){return slotMember == userList.getUsers().size();}
 
     private String generateEventID() {
-        Random random = new Random();
-
         String id = "event-";
-        int ranInt = random.nextInt(1000000);
-        String ranText = generateRandomText();
-
-        id = id + ranText + ranInt;
-
+        id += new GenerateRandomID().getRandomText();
         return id;
     }
 
@@ -183,20 +173,6 @@ public class Event implements Comparable<Event>{
 
     public boolean isHostEvent(User user) {
         return eventHostUser.equals(user);
-    }
-
-    private String generateRandomText() {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
-
-        Random random = new Random();
-
-        for (int i = 0; i < 3; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-        return randomText.toString();
     }
 
     @Override

@@ -74,7 +74,7 @@
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <ChoiceBox fx:id="eventTagChoiceBox" layoutX="74.4000015258789" prefWidth="150.0" styleClass="text-field-bg" AnchorPane.leftAnchor="200.0" />
+                              <ChoiceBox fx:id="eventTagChoiceBox" layoutX="74.4000015258789" prefWidth="150.0" styleClass="event-choice-box" AnchorPane.leftAnchor="200.0" />
                               <Text layoutX="224.8000030517578" layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Event capacity" AnchorPane.leftAnchor="420.0">
                                  <font>
                                     <Font name="Leelawadee" size="18.0" />
@@ -116,24 +116,24 @@
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <DatePicker fx:id="eventStartDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                              <DatePicker fx:id="eventStartDatePick" layoutX="92.80000305175781" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" AnchorPane.leftAnchor="200.0" />
                               <Text layoutX="530.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" AnchorPane.leftAnchor="532.0">
                                  <font>
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <Label fx:id="errorStartLabel" layoutX="390.0" layoutY="5.0" text="errorLabel" textFill="RED">
+                              <Label fx:id="errorStartLabel" layoutX="400.0" layoutY="5.0" text="errorLabel" textFill="RED">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Spinner fx:id="eventStartHourSpinner" layoutX="620.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Spinner fx:id="eventStartHourSpinner" layoutX="620.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
                               <Text layoutX="722.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
                                  <font>
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <Spinner fx:id="eventStartMinuteSpinner" layoutX="740.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Spinner fx:id="eventStartMinuteSpinner" layoutX="740.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
                               <Label fx:id="errorTimeLabel" layoutX="845.0" layoutY="5.0" text="errorLabel" textFill="RED">
                                  <font>
                                     <Font size="14.0" />
@@ -148,20 +148,20 @@
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <DatePicker fx:id="eventEndDatePick" layoutX="92.80000305175781" styleClass="date-time-picker-bg" AnchorPane.leftAnchor="200.0" />
+                              <DatePicker fx:id="eventEndDatePick" layoutX="92.80000305175781" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" AnchorPane.leftAnchor="200.0" />
                               <Text layoutX="530.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End time" AnchorPane.leftAnchor="533.0">
                                  <font>
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <Spinner fx:id="eventEndHourSpinner" layoutX="620.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
+                              <Spinner fx:id="eventEndHourSpinner" layoutX="620.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
                               <Text layoutX="723.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
                                  <font>
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <Spinner fx:id="eventEndMinuteSpinner" layoutX="740.0" prefWidth="90.0" styleClass="date-time-picker-bg" />
-                              <Label fx:id="errorEndLabel" layoutX="390.0" layoutY="5.0" text="errorLabel" textFill="RED">
+                              <Spinner fx:id="eventEndMinuteSpinner" layoutX="740.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                              <Label fx:id="errorEndLabel" layoutX="400.0" layoutY="5.0" text="errorLabel" textFill="RED">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -175,7 +175,10 @@
                                     <Font name="Leelawadee" size="18.0" />
                                  </font>
                               </Text>
-                              <TextArea fx:id="eventDescriptionTextArea" layoutX="172.8000030517578" layoutY="10.399999618530273" prefHeight="200.0" prefWidth="600.0" styleClass="date-time-picker-bg" wrapText="true" AnchorPane.leftAnchor="200.0" />
+                              <TextArea fx:id="eventDescriptionTextArea" layoutX="172.8000030517578" layoutY="10.399999618530273" prefHeight="200.0" prefWidth="600.0" styleClass="event-text-area" stylesheets="@../../../css/create-event.css" wrapText="true" AnchorPane.leftAnchor="200.0">
+                                 <font>
+                                    <Font name="Leelawadee" size="14.0" />
+                                 </font></TextArea>
                            </children>
                         </AnchorPane>
                         <AnchorPane>

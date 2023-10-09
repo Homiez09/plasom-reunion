@@ -78,7 +78,7 @@ public class UsersEventController extends CardMyEventController{
                 ImagePathFormat pathFormat = new ImagePathFormat(user.getImagePath());
                 Image image = new Image(pathFormat.toString());
                 imageView.setImage(image);
-
+                new CreateProfileCircle(imageView,15);
                 return new SimpleObjectProperty<>(imageView);
             }
             return null;
@@ -106,15 +106,8 @@ public class UsersEventController extends CardMyEventController{
             private final ComboBox<String> comboBox = new ComboBox<>();
 
             {
-                //---------------Custom---------------\\
-                comboBox.setStyle(  "-fx-background-color:transparent; -fx-background-insets: 0;" +
-                        "-fx-alignment: center; -fx-smooth: true;" +
-                        "-fx-content-display: text-only; -fx-arrows-visible: false;");
-
-
-
-                //---------------Custom---------------\\
-
+                comboBox.getStyleClass().add("users-event-combobox");
+                comboBox.setValue("Action");
                 comboBox.getItems().addAll("Ban","UnBan", "Kick");
 
                 comboBox.setOnAction(event -> {

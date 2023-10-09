@@ -55,7 +55,7 @@ public class CreateActivityController {
         dateTimeErrorLabel.setVisible(false);
         limitCharacter();
 
-        if (activityNameTextField.getText() == "" && activityDescriptionTextField.getText() == "") {saveButton.setDisable(true);}
+        if (activityNameTextField.getText() == "" || activityDescriptionTextField.getText() == "") {saveButton.setDisable(true);}
         activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
         });

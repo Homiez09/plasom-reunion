@@ -27,8 +27,7 @@ public class ActivityTeam extends Activity {
         if (status) return true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm");
         LocalDateTime end = LocalDateTime.parse(this.getEndTime(),formatter);
-        if (LocalDateTime.now().isAfter(end)) return true;
-        else return false;
+        return LocalDateTime.now().isAfter(end);
     }
 
     public void setStatus(boolean status) {
@@ -37,6 +36,6 @@ public class ActivityTeam extends Activity {
 
     @Override
     public String toString() {
-        return teamID + "," + name + "," + description + "," + startTime + "," + endTime + ","  + status  + "," + activityID;
+        return activityID + "," + name + "," + description + "," + startTime + "," + endTime + ","  + status  + "," + teamID;
     }
 }

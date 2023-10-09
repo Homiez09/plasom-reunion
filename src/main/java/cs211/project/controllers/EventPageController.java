@@ -33,6 +33,7 @@ public class EventPageController {
     @FXML private TableView<Activity> eventActivityTableView;
     private Event event = (Event) FXRouter.getData2();
     private User user = (User) FXRouter.getData();
+    private String from = (String) FXRouter.getData3();
     private Datasource<ActivityList> eventActivityDatasource;
     private ActivityList activityList;
     private HashMap<String, UserList> hashMap;
@@ -53,16 +54,24 @@ public class EventPageController {
     // button to another page
     @FXML private void onEditButtonClick() {
         try {
-            FXRouter.goTo("create-event", user,event);
+            FXRouter.goTo("create-event", user,event,"my-event");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void onBackButtonClick() {
-        try {
-            FXRouter.goTo("home",user,null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (from.equals("my-event")) {
+            try {
+                FXRouter.goTo("my-event", user, null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            try {
+                FXRouter.goTo("all-events",user,null);
+            }catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     @FXML private void onEditActivityButtonClick() {
@@ -167,18 +176,18 @@ public class EventPageController {
         eventActivityTableView.setFixedCellSize(40);
     }
 
-    public void initButton(){
+    private void initButton(){
         Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
         TeamList teamList = teamListDatasource.readData();
 
         editEventButton.setVisible(event.isHostEvent(user));
         editActivityButton.setVisible(event.isHostEvent(user));
-        joinEventButton.setVisible( event.isJoinEvent() &&
-                                    !event.isFull() &&
+        joinEventButton.setVisible( user != null && event.isJoinEvent() &&
+                                    !event.isFull() && !event.isEnd() &&
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user));
-        teamApplyBox.setVisible(teamList.getTeamOfEvent(event) != null);
-        teamApplyBox.setVisible(user != null && teamList.getTeamOfEvent(event) != null);
-        eventActivityTab.setDisable(user == null || !event.getUserList().getUsers().contains(user));
+        teamApplyBox.setVisible(user != null && teamList.getTeamOfEvent(event) != null &&
+                teamList.getTeamOfEvent(event).size() > 0 && !event.isHostEvent(user));
+        eventActivityTab.setDisable((user == null || !event.getUserList().getUsers().contains(user)) && !event.isHostEvent(user));
     }
 }

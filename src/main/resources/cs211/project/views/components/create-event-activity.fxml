@@ -46,10 +46,10 @@
                         <Font name="Leelawadee Bold" size="18.0" />
                      </font>
                   </Text>
-                  <DatePicker fx:id="activityStartDatePick" styleClass="date-time-picker-bg" stylesheets="@../../../../css/create-event.css" />
-                  <Spinner fx:id="activityStartHourSpinner" styleClass="date-time-picker-bg" stylesheets="@../../../../css/create-event.css" />
+                  <DatePicker fx:id="activityStartDatePick" styleClass="date-time-picker-bg" stylesheets="@../../../../css/team/create-team.css" />
+                  <Spinner fx:id="activityStartHourSpinner" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                  <Spinner fx:id="activityStartMinuteSpinner" styleClass="date-time-picker-bg" stylesheets="@../../../../css/create-event.css" />
+                  <Spinner fx:id="activityStartMinuteSpinner" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
                </children>
                <VBox.margin>
                   <Insets left="80.0" />
@@ -62,14 +62,14 @@
                         <Font name="Leelawadee Bold" size="18.0" />
                      </font>
                   </Text>
-                  <DatePicker fx:id="activityEndDatePick" styleClass="date-time-picker-bg" stylesheets="@../../../../css/create-event.css">
+                  <DatePicker fx:id="activityEndDatePick" styleClass="date-picker" stylesheets="@../../../../css/team/create-team.css">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </DatePicker>
-                  <Spinner fx:id="activityEndHourSpinner" styleClass="date-time-picker-bg" stylesheets="@../../../../css/create-event.css" />
+                  <Spinner fx:id="activityEndHourSpinner" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                  <Spinner fx:id="activityEndMinuteSpinner" styleClass="date-time-picker-bg" stylesheets="@../../../../css/create-event.css" />
+                  <Spinner fx:id="activityEndMinuteSpinner" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
                </children>
                <VBox.margin>
                   <Insets left="80.0" />

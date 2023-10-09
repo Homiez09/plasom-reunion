@@ -50,6 +50,8 @@ public class AllEventListController {
         getBySearch();
         sortTilePane();
         createButton.setVisible(currentUser != null);
+
+        tilePaneMain.setVgap(20);
     }
 
     private void setupPage() {
