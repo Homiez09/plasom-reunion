@@ -7,25 +7,22 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="admin-bg" stylesheets="@../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.admin.AdminDashboardController">
    <children>
-      <AnchorPane prefHeight="768.0" prefWidth="314.0" styleClass="admin-sidebar-bg">
+      <AnchorPane prefHeight="768.0" prefWidth="294.0" styleClass="admin-sidebar-bg">
          <children>
-            <Line endX="155.20001220703125" endY="7.62939453125E-6" layoutX="135.0" layoutY="108.0" startX="-111.80000305175781" stroke="#bfbfbf" />
-            <Text layoutX="61.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" wrappingWidth="191.7366180419922">
+            <Line endX="155.20001220703125" endY="7.62939453125E-6" layoutX="125.0" layoutY="108.0" startX="-111.80000305175781" stroke="#bfbfbf" />
+            <Text layoutX="51.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" wrappingWidth="191.7366180419922">
                <font>
                   <Font name="System Italic" size="31.0" />
                </font>
@@ -63,13 +60,13 @@
             </VBox>
          </children>
       </AnchorPane>
-      <TabPane fx:id="mainTab" layoutX="315.0" layoutY="43.0" prefHeight="727.0" prefWidth="838.0" stylesheets="@../../../css/style2.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="mainTab" layoutX="314.0" layoutY="-30.0" prefHeight="793.0" prefWidth="838.0" stylesheets="@../../../css/style2.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="menu1Tab" text="user_log">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="admin-body">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="692.0" prefWidth="838.0" styleClass="admin-body">
                      <children>
-                        <HBox layoutX="35.0" layoutY="32.0" prefHeight="126.0" prefWidth="767.0" styleClass="spacing30">
+                        <HBox layoutX="28.0" layoutY="74.0" prefHeight="126.0" prefWidth="767.0" styleClass="spacing30">
                            <children>
                               <Pane prefHeight="125.0" prefWidth="166.0" styleClass="box-success">
                                  <children>
@@ -120,14 +117,14 @@
                               </Pane>
                            </children>
                         </HBox>
-                        <TableView fx:id="userTableView" layoutX="36.0" layoutY="179.0" prefHeight="479.0" prefWidth="782.0" styleClass="log-user-table">
+                        <TableView fx:id="userTableView" layoutX="35.0" layoutY="241.0" prefHeight="479.0" prefWidth="758.0" styleClass="log-user-table">
                           <columns>
                             <TableColumn fx:id="idTableCol" prefWidth="125.5999755859375" text="ID" />
                             <TableColumn fx:id="profileTableCol" prefWidth="56.0" resizable="false" text="Profile" />
                               <TableColumn fx:id="usernameTableCol" prefWidth="152.79998779296875" text="Username" />
-                              <TableColumn fx:id="nameTableCol" prefWidth="246.4000244140625" text="Name" />
-                              <TableColumn fx:id="statusTableCol" prefWidth="58.4000244140625" text="Status" />
-                              <TableColumn fx:id="lastLoginTableCol" prefWidth="119.20001220703125" sortType="DESCENDING" text="LastLogin" />
+                              <TableColumn fx:id="nameTableCol" prefWidth="204.00006103515625" text="Name" />
+                              <TableColumn fx:id="statusTableCol" prefWidth="64.800048828125" text="Status" />
+                              <TableColumn fx:id="lastLoginTableCol" prefWidth="137.59991455078125" sortType="DESCENDING" text="LastLogin" />
                           </columns>
                         </TableView>
                      </children>
@@ -145,39 +142,5 @@
             </Tab>
         </tabs>
       </TabPane>
-      <AnchorPane layoutX="314.0" prefHeight="75.0" prefWidth="838.0" styleClass="Nav">
-         <children>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="19.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/logo/logo_white.png" />
-               </image>
-            </ImageView>
-            <Line endX="-100.00003051757812" endY="34.199981689453125" layoutX="820.0" layoutY="25.0" startX="-100.0" startY="-8.600000381469727" stroke="WHITE" />
-            <ImageView fitHeight="40.0" fitWidth="44.0" layoutX="652.0" layoutY="18.0">
-               <image>
-                  <Image url="@../../../images/icons/navbar/mail.png" />
-               </image>
-            </ImageView>
-            <AnchorPane layoutX="688.0" layoutY="18.0" prefHeight="14.0" prefWidth="14.0" style="-fx-background-color: #E61B1B; -fx-background-radius: 5;">
-               <children>
-                  <Text layoutX="2.0" layoutY="11.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9+">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <Circle fill="#ffa527" layoutX="777.0" layoutY="38.0" radius="30.0" stroke="#ffa527" strokeType="INSIDE">
-               <effect>
-                  <DropShadow height="0.0" offsetY="2.0" radius="0.0" width="0.0">
-                     <color>
-                        <Color opacity="0.41717326641082764" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Circle>
-            <ImageView fx:id="profileImageView" fitHeight="58.0" fitWidth="58.0" layoutX="748.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

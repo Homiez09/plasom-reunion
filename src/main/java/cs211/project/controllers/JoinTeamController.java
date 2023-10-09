@@ -29,7 +29,7 @@ import java.util.HashMap;
 public class JoinTeamController {
     @FXML private AnchorPane navbarAnchorPane, staffButtonAnchorPane, alertBoxAnchorPane, joinTeamAnchorPane;
     @FXML private GridPane teamContainer;
-    @FXML private ImageView staffImageView;
+    @FXML private ImageView staffImageView, searchImageView;
     @FXML private ComboBox sortComboBox;
     @FXML private Button onSortButton;
     @FXML private Label  teamCountLabel;
@@ -38,7 +38,6 @@ public class JoinTeamController {
     private final String[] sortType = {"A-Z","Z-A","recent", "oldest"};
     private String sortComboBoxValue = "A-Z";
     private final int MAX_SEARCH_TEAM_NAME_LIMIT = 40;
-    protected Image usersIcon;
 
     protected User user = (User) FXRouter.getData();
     protected Event event = (Event) FXRouter.getData2();
@@ -60,8 +59,8 @@ public class JoinTeamController {
     }
 
     private void loadImageInit(){
-        usersIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group.png"));
-        staffImageView.setImage(usersIcon);
+        searchImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/join-team/search_bar.png")));
+        staffImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group.png")));
     }
     private void loadSortType(){
         sortComboBox.getItems().addAll(sortType);

@@ -257,21 +257,15 @@ ProgressBar {
 }
 
 .log-user-table .column-header{
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
     -fx-background-color: #FFE4B8;
-}
-
-.log-user-table .column-header:empty{
-    -fx-background-color: transparent;
 }
 
 .log-user-table .column-header .label{
     -fx-alignment: center;
 }
 
-.manage-team-table .column-header-background {
-    -fx-background-color: transparent;
+.log-user-table .column-header-background {
+    -fx-background-color: #FFE4B8;
 }
 
 .log-user-table:empty {

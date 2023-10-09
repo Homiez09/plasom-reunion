@@ -58,16 +58,18 @@ public class TeamActivityController {
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
 
     protected String[] startTimeParts = {}, endTimeParts = {}, startParts = {}, endParts = {};
-    private String startDateFormat, endDateFormat, description, activityName, beforeEditActivityName;
+    private String startDateFormat, endDateFormat, description, beforeEditActivityName;
+    protected String activityName;
     protected String formattedCurrentHour, startAmPm, endAmPm, beforeStartDateEditFormat, startDateFromCSV, endDateFromCSV;
     private int beforeEditStartHour, beforeEditStartMinute;
-    private int currentMinute, startHour, startMinute, endHour, endMinute, countInit = 0;
+    private int startHour, endHour,countInit = 0;
+    protected int currentMinute, startMinute, endMinute;
     private int current_page = 0, max_page;
     private boolean activityNameRequirement = false, dateValidateRequirement = false, editor;
 
     private LoadSideBarComponent sideBarAnchorPaneLoad;
-    private Image chat = new Image(getClass().getResourceAsStream("/images/icons/activity/chat.png"));
-    private Image chat_hover = new Image(getClass().getResourceAsStream("/images/icons/activity/chat_hover.png"));
+    protected Image chat = new Image(getClass().getResourceAsStream("/images/icons/activity/chat.png"));
+    protected Image chat_hover = new Image(getClass().getResourceAsStream("/images/icons/activity/chat_hover.png"));
     private ActivityTeam activityTeamSelect;
 
     @FXML void initialize(){
@@ -92,18 +94,15 @@ public class TeamActivityController {
         showFocusRequirement();
     }
 
-    @FXML
-    private void onChatButtonEntered() {
+    @FXML private void onChatButtonEntered() {
         chatIconImageView.setImage(chat_hover);
     }
 
-    @FXML
-    private void onChatButtonExited() {
+    @FXML private void onChatButtonExited() {
         chatIconImageView.setImage(chat);
     }
 
-    @FXML
-    private void onChatButtonClicked() {
+    @FXML private void onChatButtonClicked() {
         try {
             FXRouter.goTo("team-chat", user, event, team, activityTeamSelect);
         } catch (IOException e) {
@@ -176,7 +175,7 @@ public class TeamActivityController {
         countDescriptionLabel.setText(String.valueOf((int) description.length()));
         if (description.length() >= 280) {
             if (description.length() > 280) {
-                countDescriptionLabel.setStyle("-fx-text-fill: red ");
+                countDescriptionLabel.setStyle("-fx-text-fill: #C84D3D ");
             } else {
                 countDescriptionLabel.setStyle("");
             }

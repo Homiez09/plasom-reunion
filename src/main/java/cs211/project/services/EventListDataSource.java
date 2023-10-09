@@ -92,7 +92,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
                                         eventDescription, eventLocation, slotMember,timeStamp,joinEvent,joinTeam
                                         );
-                for (Activity activity : activityList.getActivities()){
+                for (Activity activity : activityList.getActivityOfEvent(eventId)){
                     eventList.findEventById(eventId).getActivityList().addActivity(activity);
                 }
 

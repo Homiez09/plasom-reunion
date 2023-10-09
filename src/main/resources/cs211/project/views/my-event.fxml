@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -8,6 +10,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -18,52 +21,73 @@
       <VBox alignment="TOP_CENTER" prefHeight="768.0" prefWidth="1152.0">
          <children>
             <AnchorPane fx:id="navbarAnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" />
-            <Separator fx:id="popupTest11" opacity="0.0" prefHeight="11.0" prefWidth="1152.0" />
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="1152.0">
+            <Separator fx:id="popupTest11" opacity="0.0" prefHeight="15.0" prefWidth="1152.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1152.0">
                <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="60.0" />
-                  <Label fx:id="evventsLabel" alignment="CENTER" lineSpacing="2.0" onMouseClicked="#onEventsClick" styleClass="my-event-text" text="&lt; Events" textFill="#413b3b">
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="36.0" />
+                  <Label fx:id="eventsLabel" alignment="CENTER" layoutX="1.0" lineSpacing="2.0" onMouseClicked="#onEventsClick" styleClass="my-event-text" text="&lt; Events" textFill="#413b3b">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
                   </Label>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="30.0" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="17.0" />
                   <VBox alignment="CENTER_LEFT">
                      <children>
-                        <Label prefHeight="39.0" prefWidth="150.0" styleClass="my-event-text-head" text="My Event">
+                        <Label prefHeight="39.0" prefWidth="148.0" styleClass="my-event-text-head" text="My Event">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
                      </children>
                   </VBox>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="535.0" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onManageEventButton" prefHeight="35.0" prefWidth="109.0" styleClass="my-event-button-manage" text="Manage Event" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="46.0" prefWidth="594.0" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onManageEventButton" prefHeight="57.0" prefWidth="109.0" styleClass="my-event-button-manage" text="Manage Event" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="15.0" />
-                  <Button fx:id="createAction" mnemonicParsing="false" onAction="#onCreateAction" prefHeight="35.0" styleClass="my-event-button-create" text="+ Create Event" />
+                  <Button fx:id="createAction" mnemonicParsing="false" onAction="#onCreateAction" prefHeight="39.0" prefWidth="118.0" text="+ Create Event" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="create-event-button" />
+                        <String fx:value="font" />
+                        <String fx:value="weight-normal" />
+                     </styleClass>
+                     <font>
+                        <Font name="Leelawadee UI" size="14.0" />
+                     </font></Button>
                </children>
             </HBox>
-            <Separator fx:id="popupTest1" opacity="0.0" prefHeight="11.0" prefWidth="1152.0" />
+            <Separator fx:id="popupTest1" opacity="0.0" prefHeight="20.0" prefWidth="1152.0" />
             <HBox alignment="CENTER_LEFT">
                <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="58.0" />
-                  <Button fx:id="allButton" mnemonicParsing="false" onAction="#onAllAction" styleClass="my-event-button" text="All" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
-                  <Button fx:id="completeButton" mnemonicParsing="false" onAction="#onCompleteAction" styleClass="my-event-button" text="Complete" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
-                  <Button fx:id="ownerButton" mnemonicParsing="false" onAction="#onOwnerEventAction" styleClass="my-event-button" text="Owner" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
-                  <Button fx:id="memberButton" mnemonicParsing="false" onAction="#onMemberAction" styleClass="my-event-button" text="Member" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
-                  <Button fx:id="staffButton" mnemonicParsing="false" onAction="#onStaffAction" prefHeight="25.0" prefWidth="61.0" styleClass="my-event-button" text="Staff" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="20.0" />
-                  <TextField fx:id="searchbarTextField" prefHeight="25.0" prefWidth="470.0" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
-                  <HBox alignment="CENTER_RIGHT" styleClass="my-event-sort">
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="30.0" />
+                  <Button fx:id="allButton" mnemonicParsing="false" onAction="#onAllAction" prefHeight="30.0" prefWidth="62.0" styleClass="my-event-button" text="All" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="15.0" />
+                  <Button fx:id="completeButton" mnemonicParsing="false" onAction="#onCompleteAction" prefHeight="30.0" prefWidth="86.0" styleClass="my-event-button" text="Complete" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="15.0" />
+                  <Button fx:id="ownerButton" mnemonicParsing="false" onAction="#onOwnerEventAction" prefHeight="30.0" styleClass="my-event-button" text="Owner" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="15.0" />
+                  <Button fx:id="memberButton" mnemonicParsing="false" onAction="#onMemberAction" prefHeight="30.0" styleClass="my-event-button" text="Member" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="15.0" />
+                  <Button fx:id="staffButton" mnemonicParsing="false" onAction="#onStaffAction" prefHeight="30.0" prefWidth="61.0" styleClass="my-event-button" text="Staff" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="20.0" />
+                  <TextField fx:id="searchbarTextField" prefHeight="30.0" prefWidth="476.0" promptText="search">
+                     <styleClass>
+                        <String fx:value="team-search-bar" />
+                        <String fx:value="font" />
+                        <String fx:value="teaxt-base" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding></TextField>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="8.0" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="170.0" styleClass="my-event-sort">
                      <children>
-                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="60.0" styleClass="my-event-combobox" text="Sort By :" textAlignment="CENTER" />
-                        <MenuButton fx:id="sortMenuButton" alignment="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="105.0" styleClass="my-event-menu" textAlignment="CENTER" textOverrun="CLIP">
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="60.0" styleClass="my-event-combobox" text="Sort By :" />
+                        <MenuButton fx:id="sortMenuButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" styleClass="my-event-menu" textOverrun="CLIP">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#onSortName" text="A - Z" />
                             <MenuItem mnemonicParsing="false" onAction="#onSortStart" text="Start Date" />
@@ -71,12 +95,13 @@
                               <MenuItem mnemonicParsing="false" onAction="#onSortEnd" text="End Date" />
                           </items>
                         </MenuButton>
+
                      </children>
                   </HBox>
                </children>
             </HBox>
             <Separator fx:id="popupTest" opacity="0.0" prefHeight="11.0" prefWidth="1152.0" />
-            <HBox alignment="CENTER" prefWidth="1152.0">
+            <HBox alignment="CENTER" prefHeight="562.0" prefWidth="1152.0">
                <children>
                   <ListView fx:id="listViewMain" prefHeight="572.0" prefWidth="1052.0" styleClass="my-event-list-view" HBox.hgrow="NEVER">
                      <opaqueInsets>
@@ -90,5 +115,14 @@
             </HBox>
          </children>
       </VBox>
+      <AnchorPane layoutX="900.0" layoutY="155.0" prefHeight="16.0" prefWidth="16.0">
+         <children>
+            <ImageView fx:id="searchImageView" fitHeight="16.0" fitWidth="16.0" layoutX="-1.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../../../css/style.css" />
+      <URL value="@../../../css/style2.css" />
+   </stylesheets>
 </AnchorPane>

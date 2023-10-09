@@ -14,268 +14,196 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" stylesheets="@../../../css/home.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
-    <AnchorPane layoutY="75.0" prefHeight="693.0" prefWidth="1152.0" styleClass="bgProfile1">
-        <children>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="693.0" prefWidth="1152.0" vbarPolicy="NEVER">
-                <content>
-                    <VBox alignment="TOP_CENTER" prefHeight="2400.0" styleClass="bg">
+      <ScrollPane fx:id="homeScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutY="75.0" prefHeight="693.0" prefWidth="1152.0" stylesheets="@../../../css/event.css">
+          <content>
+              <VBox alignment="TOP_CENTER" prefHeight="2550.0" styleClass="bg">
+                  <children>
+                      <HBox alignment="CENTER_LEFT" prefHeight="300.0" styleClass="top-banner">
+                  <children>
+                     <VBox spacing="20.0">
                         <children>
-                            <HBox alignment="CENTER_LEFT" prefHeight="300.0" styleClass="top-banner">
-                        <children>
-                           <VBox spacing="20.0">
-                              <children>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PLASOM">
-                                    <font>
-                                       <Font name="Leelawadee Bold" size="48.0" />
-                                    </font>
-                                 </Text>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Application">
-                                    <font>
-                                       <Font name="Leelawadee" size="24.0" />
-                                    </font>
-                                 </Text>
-                                 <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Unlock a world of entertainment with a single tap!">
-                                    <font>
-                                       <Font name="Leelawadee" size="14.0" />
-                                    </font>
-                                 </Text>
-                                 <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Join and create amazing events with your  App today!">
-                                    <font>
-                                       <Font name="Leelawadee" size="14.0" />
-                                    </font>
-                                 </Text>
-                                 <Button mnemonicParsing="false" onAction="#onAllEventClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="View All Events" />
-                              </children>
-                              <HBox.margin>
-                                 <Insets left="100.0" top="20.0" />
-                              </HBox.margin>
-                           </VBox>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PLASOM">
+                              <font>
+                                 <Font name="Leelawadee Bold" size="48.0" />
+                              </font>
+                           </Text>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Application">
+                              <font>
+                                 <Font name="Leelawadee" size="24.0" />
+                              </font>
+                           </Text>
+                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Unlock a world of entertainment with a single tap!">
+                              <font>
+                                 <Font name="Leelawadee" size="14.0" />
+                              </font>
+                           </Text>
+                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Join and create amazing events with your  App today!">
+                              <font>
+                                 <Font name="Leelawadee" size="14.0" />
+                              </font>
+                           </Text>
+                           <Button mnemonicParsing="false" onAction="#onAllEventClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="View All Events" />
                         </children>
-                            </HBox>
-                            <VBox alignment="CENTER" prefHeight="550.0">
-                                <children>
-                           <AnchorPane prefHeight="75.0" prefWidth="1152.0">
-                              <children>
-                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                            <Label alignment="BOTTOM_LEFT" layoutX="40.0" prefHeight="75.0" styleClass="h1" text="Upcoming Events">
-                                                <font>
-                                                    <Font size="18.0" />
-                                                </font>
-                                            </Label>
-                                 <Text layoutX="237.60000610351562" layoutY="67.484375" onMouseClicked="#onUpExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
-                                    <font>
-                                       <Font name="Leelawadee Bold" size="12.0" />
-                                    </font>
-                                 </Text>
-                              </children>
-                           </AnchorPane>
-                                    <HBox alignment="CENTER" prefHeight="450.0">
-                                        <children>
-                                            <VBox alignment="CENTER" prefHeight="200.0">
-                                                <children>
-                                                    <Button fx:id="upLeftButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpLeftButton" styleClass="tile-button" text="&lt;" textAlignment="CENTER" textFill="#201f1d">
-                                                        <font>
-                                                            <Font name="Consolas Bold" size="24.0" />
-                                                        </font>
-                                                    </Button>
-                                                </children>
-                                            </VBox>
-                                            <ScrollPane fx:id="upEventScrollPane" hbarPolicy="NEVER" hmax="0.0" prefHeight="485.0" prefWidth="1000.0" styleClass="bg" vbarPolicy="NEVER" vmax="0.0">
-                                                <content>
-                                                    <HBox alignment="CENTER" fillHeight="false" prefHeight="450.0" prefWidth="1000.0" styleClass="bg">
-                                                        <children>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                            <AnchorPane fx:id="upLeftAnchorPane" prefHeight="400.0" prefWidth="250.0">
-                                                                <HBox.margin>
-                                                                    <Insets />
-                                                                </HBox.margin>
-                                                            </AnchorPane>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                            <AnchorPane fx:id="upCenterAnchorPane" prefHeight="400.0" prefWidth="250.0">
-                                                                <HBox.margin>
-                                                                    <Insets />
-                                                                </HBox.margin>
-                                                            </AnchorPane>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                            <AnchorPane fx:id="upRightAnchorPane" prefHeight="400.0" prefWidth="250.0">
-                                                                <HBox.margin>
-                                                                    <Insets />
-                                                                </HBox.margin>
-                                                            </AnchorPane>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                        </children>
-                                                    </HBox>
-                                                </content>
-                                                <padding>
-                                                    <Insets top="20.0" />
-                                                </padding>
-                                            </ScrollPane>
-                                            <VBox alignment="CENTER" prefHeight="200.0">
-                                                <children>
-                                                    <Button fx:id="upRightButton" mnemonicParsing="false" onAction="#onUpRightButton" styleClass="tile-button" text="&gt;" textAlignment="CENTER" textFill="#7b7a77">
-                                                        <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                        </font>
-                                                    </Button>
-                                                </children>
-                                            </VBox>
-                                        </children>
-                                        <VBox.margin>
-                                            <Insets />
-                                        </VBox.margin>
-                                    </HBox>
-                                </children>
-                            </VBox>
-                            <Separator opacity="0.0" prefHeight="30.0" />
-                            <VBox alignment="CENTER" prefHeight="550.0">
-                                <children>
-                           <AnchorPane prefHeight="75.0" prefWidth="1152.0">
-                              <children>
-                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                            <Label layoutX="40.0" layoutY="15.199999809265137" styleClass="h1" text="New Events">
-                                                <font>
-                                                    <Font name="Leelawadee UI Bold" size="24.0" />
-                                                </font>
-                                            </Label>
-                                 <Text layoutX="871.2000122070312" layoutY="44.28437423706055" onMouseClicked="#onNewExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
-                                    <font>
-                                       <Font name="Leelawadee Bold" size="12.0" />
-                                    </font>
-                                 </Text>
-                              </children>
-                           </AnchorPane>
-                                    <HBox alignment="CENTER" minWidth="1136.0" prefHeight="450.0">
-                                        <children>
-                                            <VBox alignment="CENTER" prefHeight="200.0">
-                                                <children>
-                                                    <Button fx:id="newLeftButton" mnemonicParsing="false" onAction="#onNewLeftButton" styleClass="tile-button" text="&lt;" textAlignment="CENTER">
-                                                        <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                        </font>
-                                                    </Button>
-                                                </children>
-                                                <HBox.margin>
-                                                    <Insets />
-                                                </HBox.margin>
-                                            </VBox>
-                                            <ScrollPane fx:id="newEventScrollPane" hbarPolicy="NEVER" hmax="0.0" prefHeight="485.0" prefWidth="1000.0" styleClass="bg" vbarPolicy="NEVER" vmax="0.0">
-                                                <content>
-                                                    <HBox alignment="CENTER" fillHeight="false" prefHeight="480.0" prefWidth="1000.0" styleClass="bg">
-                                                        <children>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                            <AnchorPane fx:id="newLeftAnchorPane" prefHeight="400.0" prefWidth="250.0">
-                                                                <HBox.margin>
-                                                                    <Insets />
-                                                                </HBox.margin>
-                                                            </AnchorPane>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                            <AnchorPane fx:id="newCenterAnchorPane" prefHeight="400.0" prefWidth="250.0">
-                                                                <HBox.margin>
-                                                                    <Insets />
-                                                                </HBox.margin>
-                                                            </AnchorPane>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                            <AnchorPane fx:id="newRightAnchorPane" prefHeight="400.0" prefWidth="250.0">
-                                                                <HBox.margin>
-                                                                    <Insets />
-                                                                </HBox.margin>
-                                                            </AnchorPane>
-                                                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                                        </children>
-                                                    </HBox>
-                                                </content>
-                                            </ScrollPane>
-                                            <VBox alignment="CENTER" prefHeight="200.0">
-                                                <children>
-                                                    <Button fx:id="newRightButton" mnemonicParsing="false" onAction="#onNewRightButton" styleClass="tile-button" text="&gt;" textAlignment="CENTER">
-                                                        <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                        </font>
-                                                    </Button>
-                                                </children>
-                                                <HBox.margin>
-                                                    <Insets right="5.0" />
-                                                </HBox.margin>
-                                            </VBox>
-                                        </children>
-                                        <VBox.margin>
-                                            <Insets />
-                                        </VBox.margin>
-                                    </HBox>
-                                </children>
-                            </VBox>
-                     <Separator layoutX="10.0" layoutY="836.0" opacity="0.0" prefHeight="30.0" />
-                     <VBox alignment="CENTER" spacing="15.0">
-                        <children>
-                           <AnchorPane prefHeight="75.0" prefWidth="1152.0">
-                              <children>
-                                 <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                 <Label layoutX="40.0" layoutY="15.199999809265137" styleClass="h1" text="Recommended Events">
-                                    <font>
-                                       <Font name="Leelawadee UI Bold" size="24.0" />
-                                    </font>
-                                 </Label>
-                                 <Text layoutX="288.79998779296875" layoutY="44.28437423706055" onMouseClicked="#onRecExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
-                                    <font>
-                                       <Font name="Leelawadee Bold" size="12.0" />
-                                    </font>
-                                 </Text>
-                              </children>
-                           </AnchorPane>
-                           <AnchorPane>
-                              <VBox.margin>
-                                 <Insets left="50.0" top="-20.0" />
-                              </VBox.margin>
-                              <children>
-                                 <MenuButton fx:id="categoryButton" mnemonicParsing="false" styleClass="cat-button" text="Category">
-                                    <graphic>
-                                       <ImageView fx:id="categoryButtonImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-                                    </graphic>
-                                    <font>
-                                       <Font name="Leelawadee" size="12.0" />
-                                    </font>
-                                 </MenuButton>
-                                 <MenuButton fx:id="recSortMenuButton" layoutX="105.5999984741211" mnemonicParsing="false" styleClass="cat-button" text="Sort by :          " AnchorPane.rightAnchor="50.0" />
-                              </children>
-                           </AnchorPane>
-                           <HBox alignment="TOP_CENTER" spacing="30.0">
-                              <VBox.margin>
-                                 <Insets />
-                              </VBox.margin>
-                              <children>
-                                 <AnchorPane fx:id="recTileAnchorPane1" prefHeight="400.0" prefWidth="250.0" />
-                                 <AnchorPane fx:id="recTileAnchorPane2" layoutX="485.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
-                                 <AnchorPane fx:id="recTileAnchorPane3" layoutX="385.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
-                              </children>
-                           </HBox>
-                           <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="130.0" spacing="40.0">
-                              <children>
-                                 <AnchorPane fx:id="recTileAnchorPane4" layoutX="385.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
-                                 <AnchorPane fx:id="recTileAnchorPane5" prefHeight="400.0" prefWidth="250.0" />
-                                 <AnchorPane fx:id="recTileAnchorPane6" layoutX="485.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
-                              </children>
-                           </HBox>
-                        </children>
+                        <HBox.margin>
+                           <Insets left="100.0" top="20.0" />
+                        </HBox.margin>
                      </VBox>
-                     <Separator layoutX="10.0" layoutY="1198.0" opacity="0.0" prefHeight="50.0" />
-                            <HBox alignment="BOTTOM_CENTER" prefHeight="115.0">
-                                <children>
-                                    <VBox alignment="BOTTOM_CENTER" prefHeight="111.0" prefWidth="1200.0">
-                                        <children>
-                                            <HBox prefHeight="20.0" prefWidth="1137.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
-                                            <HBox alignment="CENTER" prefHeight="50.0" styleClass="outer-bottom-tab" stylesheets="@../../../css/home.css" />
-                                        </children>
-                                    </VBox>
-                                </children>
+                  </children>
+                      </HBox>
+                      <VBox alignment="CENTER" prefHeight="550.0" prefWidth="1150.0">
+                          <children>
+                     <AnchorPane prefHeight="75.0" prefWidth="1152.0">
+                        <children>
+                                      <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                      <Label alignment="CENTER" layoutX="40.0" styleClass="h1" text="Upcoming Events" AnchorPane.bottomAnchor="20.0">
+                                          <font>
+                                              <Font size="18.0" />
+                                          </font>
+                                      </Label>
+                           <Text layoutX="237.60000610351562" layoutY="67.484375" onMouseClicked="#onUpExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
+                              <font>
+                                 <Font name="Leelawadee Bold" size="12.0" />
+                              </font>
+                           </Text>
+                        </children>
+                     </AnchorPane>
+                              <HBox alignment="CENTER" prefHeight="480.0" prefWidth="1150.0" spacing="30.0">
+                                  <children>
+                           <Button fx:id="upLeftButton" mnemonicParsing="false" onAction="#onUpLeftButton" styleClass="tile-button" text="&lt;" textAlignment="CENTER">
+                              <font>
+                                 <Font name="System Bold" size="24.0" />
+                              </font>
+                           </Button>
+                           <ScrollPane fx:id="upScrollPane" prefHeight="480.0" prefWidth="900.0" vbarPolicy="NEVER">
+                              <content>
+                                              <HBox fx:id="upScrollHbox" alignment="CENTER" fillHeight="false" prefHeight="480.0" spacing="40.0" styleClass="bg">
+                                    <padding>
+                                       <Insets left="60.0" right="60.0" />
+                                    </padding>
+                                              </HBox>
+                              </content>
+                           </ScrollPane>
+                           <Button fx:id="upRightButton" mnemonicParsing="false" onAction="#onUpRightButton" styleClass="tile-button" text="&gt;" textAlignment="CENTER">
+                              <font>
+                                 <Font name="System Bold" size="24.0" />
+                              </font>
+                           </Button>
+                                  </children>
+                              </HBox>
+                          </children>
+                      </VBox>
+                      <Separator opacity="0.0" prefHeight="30.0" />
+                      <VBox alignment="CENTER" prefHeight="550.0">
+                          <children>
+                     <AnchorPane prefHeight="75.0" prefWidth="1152.0">
+                        <children>
+                                      <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                                      <Label layoutX="40.0" layoutY="15.199999809265137" styleClass="h1" text="New Events">
+                                          <font>
+                                              <Font name="Leelawadee UI Bold" size="24.0" />
+                                          </font>
+                                      </Label>
+                           <Text layoutX="871.2000122070312" layoutY="44.28437423706055" onMouseClicked="#onNewExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
+                              <font>
+                                 <Font name="Leelawadee Bold" size="12.0" />
+                              </font>
+                           </Text>
+                        </children>
+                     </AnchorPane>
+                              <HBox alignment="CENTER" minWidth="1136.0" prefHeight="480.0" prefWidth="1150.0" spacing="30.0">
+                                  <children>
+                                        <Button fx:id="newLeftButton" mnemonicParsing="false" onAction="#onNewLeftButton" styleClass="tile-button" text="&lt;" textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Button>
+                           <ScrollPane fx:id="newScrollPane" prefHeight="480.0" prefWidth="900.0" vbarPolicy="NEVER">
+                              <content>
+                                              <HBox fx:id="newScrollHbox" alignment="CENTER" fillHeight="false" prefHeight="480.0" spacing="40.0" styleClass="bg" />
+                              </content>
+                           </ScrollPane>
+                                        <Button fx:id="newRightButton" mnemonicParsing="false" onAction="#onNewRightButton" styleClass="tile-button" text="&gt;" textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Button>
+                                  </children>
+                                  <VBox.margin>
+                                      <Insets />
+                                  </VBox.margin>
+                              </HBox>
+                          </children>
+                      </VBox>
+               <Separator layoutX="10.0" layoutY="836.0" opacity="0.0" prefHeight="30.0" />
+               <VBox alignment="CENTER" spacing="15.0">
+                  <children>
+                     <AnchorPane prefHeight="75.0" prefWidth="1152.0">
+                        <children>
+                           <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
+                           <Label layoutX="40.0" layoutY="15.199999809265137" styleClass="h1" text="Recommended Events">
+                              <font>
+                                 <Font name="Leelawadee UI Bold" size="24.0" />
+                              </font>
+                           </Label>
+                           <Text layoutX="288.79998779296875" layoutY="44.28437423706055" onMouseClicked="#onRecExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
+                              <font>
+                                 <Font name="Leelawadee Bold" size="12.0" />
+                              </font>
+                           </Text>
+                        </children>
+                     </AnchorPane>
+                     <AnchorPane>
+                        <VBox.margin>
+                           <Insets left="50.0" top="-20.0" />
+                        </VBox.margin>
+                        <children>
+                           <MenuButton fx:id="categoryButton" mnemonicParsing="false" styleClass="cat-button" text="Category">
+                              <graphic>
+                                 <ImageView fx:id="categoryButtonImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                              </graphic>
+                              <font>
+                                 <Font name="Leelawadee" size="12.0" />
+                              </font>
+                           </MenuButton>
+                           <MenuButton fx:id="recSortMenuButton" layoutX="105.5999984741211" mnemonicParsing="false" styleClass="cat-button" text="Sort by :          " AnchorPane.rightAnchor="50.0" />
+                        </children>
+                     </AnchorPane>
+                     <HBox alignment="TOP_CENTER" spacing="30.0">
                         <VBox.margin>
                            <Insets />
                         </VBox.margin>
-                            </HBox>
+                        <children>
+                           <AnchorPane fx:id="recTileAnchorPane1" prefHeight="400.0" prefWidth="250.0" />
+                           <AnchorPane fx:id="recTileAnchorPane2" layoutX="485.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
+                           <AnchorPane fx:id="recTileAnchorPane3" layoutX="385.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
                         </children>
-                    </VBox>
-                </content>
-            </ScrollPane>
-        </children>
-    </AnchorPane>
+                     </HBox>
+                     <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="130.0" spacing="40.0">
+                        <children>
+                           <AnchorPane fx:id="recTileAnchorPane4" layoutX="385.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
+                           <AnchorPane fx:id="recTileAnchorPane5" prefHeight="400.0" prefWidth="250.0" />
+                           <AnchorPane fx:id="recTileAnchorPane6" layoutX="485.0" layoutY="10.0" prefHeight="400.0" prefWidth="250.0" />
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+               <Separator layoutX="10.0" layoutY="1198.0" opacity="0.0" prefHeight="50.0" />
+                      <HBox alignment="BOTTOM_CENTER" prefHeight="115.0">
+                          <children>
+                              <VBox alignment="BOTTOM_CENTER" prefHeight="111.0" prefWidth="1200.0">
+                                  <children>
+                                      <HBox prefHeight="20.0" prefWidth="1137.0" styleClass="inner-bottom-tab" stylesheets="@../../../css/home.css" />
+                                      <HBox alignment="CENTER" prefHeight="50.0" styleClass="outer-bottom-tab" stylesheets="@../../../css/home.css" />
+                                  </children>
+                              </VBox>
+                          </children>
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+                      </HBox>
+                  </children>
+              </VBox>
+          </content>
+      </ScrollPane>
     <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
 </AnchorPane>

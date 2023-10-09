@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane styleClass="all-event-background" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.AllEventListController">
    <children>
       <VBox alignment="CENTER" stylesheets="@../../../css/my-events.css">
@@ -88,7 +87,7 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <padding>
-                                    <Insets left="60.0" top="20.0" />
+                                    <Insets bottom="20.0" left="60.0" top="20.0" />
                                  </padding>
                               </TilePane>
                            </content>
