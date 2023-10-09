@@ -177,8 +177,8 @@ public class EventPageController {
                                     !event.isFull() &&
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user));
-        teamApplyBox.setVisible(teamList.getTeamOfEvent(event) != null);
-        teamApplyBox.setVisible(user != null && teamList.getTeamOfEvent(event) != null);
-        eventActivityTab.setDisable(user == null || !event.getUserList().getUsers().contains(user));
+        teamApplyBox.setVisible(user != null && teamList.getTeamOfEvent(event) != null &&
+                teamList.getTeamOfEvent(event).size() > 0 && !event.isHostEvent(user));
+        eventActivityTab.setDisable((user == null || !event.getUserList().getUsers().contains(user)) && !event.isHostEvent(user));
     }
 }

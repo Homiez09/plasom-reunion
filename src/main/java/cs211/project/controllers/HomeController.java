@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class HomeController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -128,6 +129,10 @@ public class HomeController {
                     case "Sort By : A - Z":
                         recEventList = recEventList.sortByName(recEventList);
                         break;
+                    case "Sort By : Z - A":
+                        recEventList = recEventList.sortByName(recEventList);
+                        Collections.reverse(recEventList.getEvents());
+                        break;
                     case "Sort By : Recent Event":
                         recEventList = recEventList.sortNewEvent(recEventList);
                         break;
@@ -150,6 +155,13 @@ public class HomeController {
             recEventList = recEventList.sortByName(recEventList);
             showRecommendedEvent();
         });
+        MenuItem reversed = new MenuItem("Z - A");
+        reversed.setOnAction( event -> {
+            recSortMenuButton.setText("Sort By : Z- A");
+            recEventList = recEventList.sortByName(recEventList);
+            Collections.reverse(recEventList.getEvents());
+            showRecommendedEvent();
+        });
         MenuItem recent = new MenuItem("Recent Event");
         recent.setOnAction( event -> {
             recSortMenuButton.setText("Sort By : Recent Event");
@@ -168,7 +180,7 @@ public class HomeController {
             recEventList = recEventList.sortByMember(recEventList);
             showRecommendedEvent();
         });
-        recSortMenuButton.getItems().addAll(eng,recent,upcoming,pop);
+        recSortMenuButton.getItems().addAll(eng,reversed,recent,upcoming,pop);
     }
     private void showRecommendedEvent() {
         ArrayList<AnchorPane> recAnchorPaneList = new ArrayList<>(Arrays.asList(
