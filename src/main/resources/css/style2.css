@@ -317,3 +317,39 @@ ProgressBar {
     -fx-background-radius: 10;
     -fx-border-radius:10;
 }
+
+.admin-progress-bar > .track {
+    -fx-background-color: #F6F4EE;
+}
+
+.admin-progress-bar > .bar {
+    -fx-background-color: linear-gradient(to right, #EFA44E, #FEDCA7);
+}
+
+.admin-background {
+    -fx-background-color: #F6F4EE;
+    -fx-background-radius: 15;
+}
+
+.admin-online-progress-indicator {
+    -fx-background-color: transparent;
+    -fx-box-border: transparent;
+    -fx-box-border-radius: 5px;
+    -fx-box-border-width: 1px;
+    -fx-progress-color: #4D4746;
+    -fx-background-radius: 5px;
+    -fx-padding: 3px;
+    -fx-text-fill: transparent;
+}
+
+.admin-offline-progress-indicator {
+    -fx-background-color: transparent;
+    -fx-box-border: transparent;
+    -fx-box-border-radius: 5px;
+    -fx-box-border-width: 1px;
+    -fx-box-color: #F5F3ED;
+    -fx-progress-color: #EFA44E;
+    -fx-background-radius: 5px;
+    -fx-padding: 3px;
+    -fx-text-fill: transparent;
+}

@@ -59,6 +59,10 @@
     -fx-text-fill: -fx-gray3-color;
 }
 
+.color-white{
+    -fx-text-fill: -fx-white1-color;
+}
+
 .color-gray1{
     -fx-text-fill: -fx-gray4-color;
 }
