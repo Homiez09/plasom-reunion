@@ -344,7 +344,7 @@
                               </Label>
                               <ImageView fx:id="teamNameReqImageView" fitHeight="26.0" fitWidth="26.0" layoutX="438.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="passwordIconView" fitHeight="24.0" fitWidth="24.0" layoutX="71.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" x="5.0" y="2.0" />
-                              <Button layoutX="725.0" layoutY="75.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="111.0" text="Banned User" textFill="WHITE">
+                              <Button layoutX="725.0" layoutY="75.0" mnemonicParsing="false" onAction="#onBannedButtonClick" prefHeight="43.0" prefWidth="111.0" text="Banned User" textFill="WHITE">
                                  <styleClass>
                                     <String fx:value="weight-medium" />
                                     <String fx:value="text-ms" />
@@ -415,5 +415,6 @@
       <AnchorPane fx:id="manageTeamExitAnchorPane" layoutY="1.0" onMouseClicked="#onManageTeamAnchorPaneClick" prefHeight="768.0" prefWidth="1152.0" visible="false" />
       <AnchorPane fx:id="userCardProfileAnchorPane" layoutX="400.0" layoutY="150.0" prefHeight="435.0" prefWidth="324.0" visible="false" />
       <AnchorPane fx:id="alertBoxAnchorPane" layoutX="425.0" layoutY="237.0" prefHeight="384.0" prefWidth="470.0" visible="false" />
+      <AnchorPane fx:id="unbanAnchorPane" layoutX="192.0" layoutY="134.0" prefHeight="500.0" prefWidth="768.0" visible="false" />
     </children>
 </AnchorPane>

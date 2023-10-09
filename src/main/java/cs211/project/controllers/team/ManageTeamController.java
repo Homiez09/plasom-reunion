@@ -4,6 +4,7 @@ import cs211.project.componentControllers.UserCardProfileController;
 import cs211.project.componentControllers.alertBox.DeleteTeamAlertBoxController;
 import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
 import cs211.project.componentControllers.teamControllers.manageTeamController.ManageMemberTeamListController;
+import cs211.project.componentControllers.teamControllers.manageTeamController.UnbanUserTeamController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -40,7 +41,7 @@ public class ManageTeamController {
     private final Team team = (Team) FXRouter.getData3();
 
     @FXML private GridPane memberContainer;
-    @FXML private AnchorPane navbarAnchorPane, sideBarAnchorPane, membersAnchorPane, settingAnchorPane, settingHeaderAnchorPane, alertBoxAnchorPane;
+    @FXML private AnchorPane navbarAnchorPane, sideBarAnchorPane, membersAnchorPane, settingAnchorPane, settingHeaderAnchorPane, alertBoxAnchorPane, unbanAnchorPane;
     @FXML private Rectangle settingHover, membersHover;
     @FXML private Line memberHoverLine, settingHoverLine;
     @FXML private Label membersLabel, settingLabel;
@@ -122,6 +123,15 @@ public class ManageTeamController {
             eventHandleEnter();
 
         }
+    }
+
+    @FXML
+    private void onBannedButtonClick() throws IOException {
+        FXMLLoader unbanLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/team/manage-team/unban-user-team.fxml"));
+        unbanAnchorPane.getChildren().add(unbanLoader.load());
+        UnbanUserTeamController unbanUserTeamController = unbanLoader.getController();
+        unbanUserTeamController.setup(team);
+        unbanAnchorPane.setVisible(true);
     }
 
     private void eventHandleEnter(){
