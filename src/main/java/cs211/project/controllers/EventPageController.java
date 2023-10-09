@@ -173,8 +173,8 @@ public class EventPageController {
 
         editEventButton.setVisible(event.isHostEvent(user));
         editActivityButton.setVisible(event.isHostEvent(user));
-        joinEventButton.setVisible( event.isJoinEvent() &&
-                                    !event.isFull() &&
+        joinEventButton.setVisible( user != null && event.isJoinEvent() &&
+                                    !event.isFull() && !event.isEnd() &&
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user));
         teamApplyBox.setVisible(user != null && teamList.getTeamOfEvent(event) != null &&
