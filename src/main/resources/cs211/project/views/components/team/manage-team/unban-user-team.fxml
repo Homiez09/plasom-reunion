@@ -11,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="768.0" style="-fx-background-color: #FFFCF6;">
          <children>
-            <Button layoutX="327.0" layoutY="401.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="43.0" prefWidth="112.0" style="-fx-font-size: 20; -fx-text-fill: white;" text="UNBAN">
+            <Button fx:id="unbanButton" layoutX="327.0" layoutY="399.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="43.0" prefWidth="112.0" style="-fx-font-size: 20; -fx-text-fill: white;" text="UNBAN">
                <styleClass>
                   <String fx:value="arrow-circle-button" />
                   <String fx:value="edit-create-button" />
