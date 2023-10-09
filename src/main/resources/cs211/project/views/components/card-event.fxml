@@ -14,48 +14,48 @@
    <children>
       <HBox>
          <children>
-            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
+            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="9.0" />
             <VBox alignment="CENTER" cacheHint="SCALE">
                <children>
                   <Separator cacheHint="SCALE" opacity="0.0" prefHeight="12.0" />
                   <HBox alignment="CENTER" VBox.vgrow="NEVER">
                      <children>
-                        <ImageView fx:id="eventImage" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="image-card">
+                        <ImageView fx:id="eventImage" fitHeight="220.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" styleClass="image-card" HBox.hgrow="NEVER">
                            <viewport>
                               <Rectangle2D />
                            </viewport>
                         </ImageView>
                      </children>
                   </HBox>
-                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="12.0" />
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="10.0" />
                   <HBox alignment="CENTER_LEFT" cacheHint="SCALE">
                      <children>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
-                        <Label fx:id="eventNameLabel" prefHeight="23.0" prefWidth="195.0" styleClass="font-head" text="event name" textOverrun="WORD_ELLIPSIS">
+                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                        <Label fx:id="eventNameLabel" prefHeight="23.0" prefWidth="165.0" styleClass="font-head" text="event name" textOverrun="WORD_ELLIPSIS">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="5.0" prefWidth="5.0" />
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="7.0" />
                   <HBox alignment="CENTER_LEFT" cacheHint="SCALE">
                      <children>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
+                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
                         <ImageView fx:id="profileImageView" cacheHint="SCALE" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                            <viewport>
                               <Rectangle2D />
                            </viewport>
                         </ImageView>
                         <Separator cacheHint="SCALE" opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
-                        <VBox alignment="CENTER_LEFT" cacheHint="SCALE" prefHeight="34.0" prefWidth="80.0">
+                        <VBox alignment="CENTER_LEFT" cacheHint="SCALE" prefHeight="34.0" prefWidth="70.0">
                            <children>
                               <Label fx:id="hostUsernameLabel" styleClass="font-username" text="\@mingmmie" textOverrun="WORD_ELLIPSIS" />
                               <Label fx:id="hostNameLabel" prefWidth="95.0" styleClass="font" text="PINKPPANTHER" textOverrun="WORD_ELLIPSIS" />
                            </children>
                         </VBox>
                         <Separator cacheHint="SCALE" opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
-                        <Label fx:id="memberCountLabel" cacheHint="SCALE" prefHeight="20.0" prefWidth="69.0" styleClass="font" text="10/15" textOverrun="WORD_ELLIPSIS">
+                        <Label fx:id="memberCountLabel" cacheHint="SCALE" prefHeight="20.0" prefWidth="60.0" styleClass="font" text="10/15" textOverrun="WORD_ELLIPSIS">
                            <graphic>
                               <ImageView fx:id="calendaImageView" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -72,7 +72,7 @@
                   <Separator cacheHint="SCALE" opacity="0.0" prefHeight="12.0" prefWidth="5.0" />
                </children>
             </VBox>
-            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
+            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="9.0" />
          </children>
       </HBox>
    </children>

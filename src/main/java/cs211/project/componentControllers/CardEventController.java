@@ -1,9 +1,7 @@
 package cs211.project.componentControllers;
 
 import cs211.project.models.*;
-import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -45,12 +43,12 @@ public class CardEventController {
             profileImageView.setImage(new Image(pathFormat.toString(), 500, 500, false, false));
             new CreateProfileCircle(profileImageView, 15);
 
-            Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
+            Image image = new Image("file:" + event.getEventImagePath(), 1440, 1800, false, false);
             if (event.getEventImagePath().equals("null")) {
                 String imgPath = "/images/events/event-default-auth.png";
-                image = new Image(getClass().getResourceAsStream(imgPath), 1280, 1280, false, false);
+                image = new Image(getClass().getResourceAsStream(imgPath), 1440, 1800, false, false);
             }
-            new BorderImagView(eventImage).setClip(15);
+            new BorderImagView(eventImage).setRecClip(20);
             eventImage.setImage(image);
         }
     }

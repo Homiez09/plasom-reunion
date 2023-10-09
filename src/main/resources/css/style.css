@@ -1369,16 +1369,6 @@
     -fx-background-color: #FFF5E5;
 
 }
-.all-event-tile-pane .cell{
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-    -fx-transition-duration: 0.3s;
-}
-.all-event-tile-pane .cell:hover{
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
-    -fx-transition-duration: 0.3s;
-}
 /* combobox-sort */
 .all-event-sort {
     -fx-background-color: transparent;
@@ -1427,11 +1417,11 @@
 /* card-event */
 .event-card{
     -fx-background-color: #fbfaf8;
-    -fx-background-radius: 10px;
+    -fx-background-radius: 12px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.18, 0, 0.7);
 }
 .event-card .font-head{
-    -fx-font-size: 18;
+    -fx-font-size: 14;
     -fx-font-weight: 700;
     -fx-font-family: Leelawadee;
     -fx-font-style: normal;
@@ -1439,7 +1429,7 @@
     -fx-text-overrun: word-ellipsis;
 }
 .event-card .font{
-    -fx-font-size: 13;
+    -fx-font-size: 12;
     -fx-text-fill: black;
     -fx-font-family: Leelawadee;
 

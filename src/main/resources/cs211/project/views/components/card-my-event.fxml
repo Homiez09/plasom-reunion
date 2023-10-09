@@ -18,7 +18,7 @@
       <Insets bottom="5.0" top="5.0" />
    </opaqueInsets>
    <children>
-      <HBox alignment="CENTER_LEFT" layoutY="-6.0" styleClass="card-my-event">
+      <HBox alignment="CENTER_LEFT" layoutY="-6.0" styleClass="background">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
             <ImageView fx:id="eventImageView" depthTest="DISABLE" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="image-card" HBox.hgrow="NEVER">
@@ -68,9 +68,9 @@
                      </children>
                   </HBox>
                   <Separator opacity="0.0" prefHeight="7.0" />
-                  <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="524.0">
+                  <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Label fx:id="descriptionLabel" alignment="TOP_LEFT" prefHeight="110.0" prefWidth="495.0" styleClass="font" text="descriptionLabel" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                        <Label fx:id="descriptionLabel" alignment="TOP_LEFT" prefHeight="80.0" prefWidth="495.0" styleClass="font" text="descriptionLabel" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -135,7 +135,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Separator opacity="0.0" prefHeight="5.0" />
+                  <Separator opacity="0.0" prefHeight="10.0" />
                </children>
             </VBox>
          </children>

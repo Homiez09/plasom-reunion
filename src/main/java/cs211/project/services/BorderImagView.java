@@ -12,10 +12,19 @@ public class BorderImagView {
         this.imageView = imageView;
     }
 
-    public void setClip(double size){
+    public void setSquareClip(double size){
         clip.setArcHeight(size);
         clip.setArcWidth(size);
         imageView.setClip(clip);
     }
+
+    public void setRecClip(double size){
+        clip.setWidth(imageView.getFitWidth());
+        clip.setHeight(imageView.getFitHeight());
+        clip.setArcHeight(size);
+        clip.setArcWidth(size);
+        imageView.setClip(clip);
+    }
+    
 
 }

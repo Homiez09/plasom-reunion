@@ -95,7 +95,7 @@ public class CardMyEventController {
                 }
             }
 
-            new BorderImagView(eventImageView).setClip(14);
+            new BorderImagView(eventImageView).setSquareClip(14);
             Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
             if (event.getEventImagePath().equals("null")) {
                 String imgPath = "/images/events/event-default-auth.png";
