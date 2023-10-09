@@ -14,14 +14,11 @@ import java.io.IOException;
 
 public class CardEventController {
     //-------------------------------------------------------
-    @FXML
-    Label eventNameLabel,hostUsernameLabel,hostNameLabel,memberCountLabel;
-    @FXML
-    ImageView eventImage, profileImageView;
+    @FXML Label eventNameLabel,hostUsernameLabel,hostNameLabel,memberCountLabel;
+    @FXML ImageView eventImage, profileImageView;
     //-------------------------------------------------------
     private Event event;
     private User currentUser = (User) FXRouter.getData();
-
     @FXML
     private void initialize() {}
     public void setEvent(Event data) {
@@ -30,22 +27,30 @@ public class CardEventController {
             eventNameLabel.setText(event.getEventName());
             hostUsernameLabel.setText(event.getEventHostUser().getUsername());
             hostNameLabel.setText(event.getEventHostUser().getDisplayName());
-
-            if (event.getSlotMember() == -1) {
-                memberCountLabel.setText(event.getUserInEvent()+"");
+            if (event.isJoinEvent()) {
+                if (!event.isFull()) {
+                    if (event.getSlotMember() == -1) {
+                        memberCountLabel.setText(event.getUserInEvent() + "");
+                    } else {
+                        memberCountLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
+                    }
+                }else {
+                    memberCountLabel.setText("Full");
+                }
             }else {
-                memberCountLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
+                memberCountLabel.setText("Closed");
             }
 
             ImagePathFormat pathFormat = new ImagePathFormat(event.getEventHostUser().getImagePath());
             profileImageView.setImage(new Image(pathFormat.toString(), 500, 500, false, false));
-            new CreateProfileCircle(profileImageView, 30);
+            new CreateProfileCircle(profileImageView, 15);
 
             Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
             if (event.getEventImagePath().equals("null")) {
                 String imgPath = "/images/events/event-default-auth.png";
                 image = new Image(getClass().getResourceAsStream(imgPath), 1280, 1280, false, false);
             }
+            new BorderImagView(eventImage).setClip(15);
             eventImage.setImage(image);
         }
     }

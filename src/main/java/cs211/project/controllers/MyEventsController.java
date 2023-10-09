@@ -39,6 +39,7 @@ public class MyEventsController{
     @FXML AnchorPane navbarAnchorPane;
     @FXML Button allButton,completeButton,ownerButton,memberButton,staffButton;
     @FXML ComboBox<String> sortComboBox;
+    @FXML MenuButton sortMenuButton;
     @FXML Separator popupTest;
     @FXML ListView<Node> listViewMain;
     @FXML TextField searchbarTextField;
@@ -59,7 +60,6 @@ public class MyEventsController{
         setupPage();
         allButton.setDisable(true);
         getBySearch();
-        sortTilePane();
         if (from!=null){
             resetButton();
             eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
@@ -89,10 +89,7 @@ public class MyEventsController{
         eventDatasource = new EventListDataSource();
         eventList = eventDatasource.readData();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
-        initSort();
         setupScrollBar();
-
-
     }
 
     private void loadFirst(Predicate<Event> selectedPredicate) {
@@ -155,12 +152,6 @@ public class MyEventsController{
         nodes.removeAll(nodesToRemove);
     }
 
-    private void initSort(){
-        String sort[] = {"A - Z","Start Date","Popularity","End Date"};
-        sortComboBox.getItems().addAll(sort);
-        sortComboBox.setValue("");
-    }
-
     private void getBySearch(){
         searchbarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             String searchText = newValue.toLowerCase().trim();
@@ -173,35 +164,6 @@ public class MyEventsController{
             removeNode(searchPredicate);
             loadFirst(searchPredicate);
             sortComboBox.setValue("");
-        });
-    }
-
-    private void sortTilePane(){
-        sortComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
-            String sortBy = newValue.trim();
-            listViewMain.getItems().clear();
-            Comparator<Event> eventComparator =null;
-            switch (sortBy){
-                case "A - Z":
-                    eventComparator = Comparator.comparing(Event::getEventName);
-                    eventObservableList.sort(eventComparator);
-                    break;
-                case "Start Date":
-                    eventComparator = Comparator.comparing(Event::getDateStartAsDate);
-                    eventObservableList.sort(eventComparator);
-                    break;
-                case "Popularity":
-                    eventComparator = Comparator.comparing(Event::getUserInEvent);
-                    eventObservableList.sort(eventComparator);
-                    Collections.reverse(eventObservableList);
-                    break;
-                case "End Date":
-                    eventComparator = Comparator.comparing(Event::getDateEndAsDate);
-                    eventObservableList.sort(eventComparator);
-                    break;
-            }
-            loadFirst(selectedPredicate);
-            searchbarTextField.setText("");
         });
     }
 
@@ -281,19 +243,9 @@ public class MyEventsController{
         itemLess();
     }
 
-    @FXML
-    private void onBackAction(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("home",currentUser);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void reset() {
         resetButton();
         selectedPredicate = null;
-        sortComboBox.setValue("");
         eventList = eventDatasource.readData();
         eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
     }
@@ -314,6 +266,7 @@ public class MyEventsController{
         }
         return false;
     }
+
     private void itemLess(){
         listViewMain.getItems().addListener((ListChangeListener<? super Node>) change -> {
                 int itemCount = listViewMain.getItems().size();
@@ -330,6 +283,43 @@ public class MyEventsController{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void onSortName(ActionEvent actionEvent) {
+        listViewMain.getItems().clear();
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getEventName);
+        eventObservableList.sort(eventComparator);
+        loadFirst(selectedPredicate);
+        sortMenuButton.setText("A - Z");
+        searchbarTextField.setText("");
+    }
+
+    public void onSortStart(ActionEvent actionEvent) {
+        listViewMain.getItems().clear();
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getDateStartAsDate);
+        eventObservableList.sort(eventComparator);
+        loadFirst(selectedPredicate);
+        sortMenuButton.setText("Start Date");
+        searchbarTextField.setText("");
+    }
+
+    public void onSortPopularity(ActionEvent actionEvent) {
+        listViewMain.getItems().clear();
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getUserInEvent);
+        eventObservableList.sort(eventComparator);
+        Collections.reverse(eventObservableList);
+        loadFirst(selectedPredicate);
+        sortMenuButton.setText("Popularity");
+        searchbarTextField.setText("");
+    }
+
+    public void onSortEnd(ActionEvent actionEvent) {
+        listViewMain.getItems().clear();
+        Comparator<Event> eventComparator = Comparator.comparing(Event::getDateEndAsDate);
+        eventObservableList.sort(eventComparator);
+        loadFirst(selectedPredicate);
+        sortMenuButton.setText("End Date");
+        searchbarTextField.setText("");
     }
 }
 

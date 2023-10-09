@@ -944,30 +944,30 @@
 }
 
 .my-event-button-create{
-    -fx-background-color: transparent;
+    -fx-background-color: -fx-orange3-color;
     -fx-border-radius: 6;
     -fx-border-color: -fx-orange3-color;
     -fx-border-width: 2;
-    -fx-text-fill: -fx-orange3-color;
+    -fx-text-fill: -fx-white1-color;
     -fx-font-size: 14;
     -fx-font-family: Leelawadee;
     -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
 }
 .my-event-button-create:hover{
-    -fx-background-color: transparent;
+    -fx-background-color: -fx-gray1-color;
     -fx-border-radius: 6;
     -fx-border-color: -fx-gray1-color;
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
-    -fx-text-fill: -fx-gray1-color;
+    -fx-text-fill: #e5e5e5;
 }
 .my-event-button-create:pressed{
-    -fx-background-color: transparent;
+    -fx-background-color: #E9E2DA;
     -fx-border-radius: 6;
     -fx-border-color: #E9E2DA;
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
-    -fx-text-fill: #E9E2DA;
+    -fx-text-fill: #999999;
 }
 
 .my-event-button{
@@ -1027,6 +1027,9 @@
 /* list-view my-event */
 .my-event-list-view {
     -fx-background-color: transparent;
+}
+.my-event-list-view .scroll-bar{
+    -fx-background-color: transparent;
 
 }
 .my-event-list-view .list-view{
@@ -1055,29 +1058,45 @@
     -fx-font-size: 14;
     -fx-font-family: Leelawadee;
 }
-.my-event-combobox{
+.my-event-menu{
     -fx-background-color: transparent;
     -fx-font-size: 14;
     -fx-text-fill: #413B3B;
     -fx-font-family: Leelawadee;
-    -fx-text-overrun: center-ellipsis;
-
+    -fx-text-alignment: left;
+    -fx-alignment: center;
 }
-.my-event-combobox .arrow {
+.my-event-menu .arrow {
     -fx-background-color: transparent;
 }
-.my-event-combobox .list-view{
+
+.my-event-menu .menu-button{
     -fx-font-size: 14;
-    -fx-text-fill: #413B3B;
     -fx-background-color: #F6F4EE;
-    -fx-text-alignment: center;
     -fx-alignment:center;
 }
-.my-event-combobox .list-view:hover{
-    -fx-background-color: #dddbd6;
+.my-event-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+    -fx-border-radius: 5;
+    -fx-text-fill: #413B3B;
+}
+.my-event-menu .menu-item:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+    -fx-text-fill: #666262;
+}
+.my-event-menu .menu-item:pressed {
+    -fx-background-color: rgba(255, 153, 0, 0.1);
+    -fx-text-fill: #8d8989;
+
+}
+.my-event-menu .menu-item .label{
+    -fx-text-fill: #413B3B;
 }
 
-/* card-my-event */
+    /* card-my-event */
 .my-event-card{
     -fx-background-color: #fbfaf8;
     -fx-background-radius: 10px;
@@ -1187,4 +1206,217 @@
 
 
 
-/*======================= my event =======================*/
+/*============================================== All event ==============================================*/
+
+.all-event-background{
+    -fx-background-color: #FFF5E5;
+}
+
+/* button */
+.all-event-button-category{
+    -fx-background-color: #413B3B;
+    -fx-background-radius: 16;
+
+    -fx-border-width: 2;
+    -fx-text-fill: -fx-white1-color;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+}
+.all-event-button-category:hover{
+    -fx-background-color:#666262;
+    -fx-background-radius: 16;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-text-fill: -fx-gray1-color;
+
+}
+.all-event-button-category:pressed{
+    -fx-background-color: #8d8989;
+    -fx-background-radius: 16;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
+.all-event-button-create{
+    -fx-background-color: -fx-orange3-color;
+    -fx-border-radius: 6;
+    -fx-border-color: -fx-orange3-color;
+    -fx-border-width: 2;
+    -fx-text-fill: -fx-white1-color;
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+.all-event-button-create:hover{
+    -fx-background-color: -fx-gray1-color;
+    -fx-border-radius: 6;
+    -fx-border-color: -fx-gray1-color;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-text-fill: #e5e5e5;
+}
+.all-event-button-create:pressed{
+    -fx-background-color: #E9E2DA;
+    -fx-border-radius: 6;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #999999;
+}
+
+.all-event-button{
+    -fx-font-size: 12;
+
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: #413B3B;
+    -fx-border-width: 2;
+    -fx-text-fill: #413B3B;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+}
+.all-event-button:hover{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: -fx-gray1-color;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-text-fill: -fx-gray1-color;
+}
+.all-event-button:pressed{
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: #E9E2DA;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, antiquewhite, 5, 0, 0, 3);
+    -fx-text-fill: #E9E2DA;
+}
+
+/* text */
+.all-event-text{
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-black1-color;
+    -fx-font-family: Leelawadee;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition-duration: 0.3s;
+}
+.all-event-text:hover{
+    -fx-text-fill: -fx-gray1-color;
+    -fx-scale-x: 1.1; /* เปลี่ยนขนาดเมื่อโฮเวอร์ */
+    -fx-scale-y: 1.1;
+    -fx-transition-duration: 0.3s;
+}
+.all-event-text:pressed{
+    -fx-text-fill: #E9E2DA;
+    -fx-scale-x: 0.9; /* เปลี่ยนขนาดเมื่อกด */
+    -fx-scale-y: 0.9;
+    -fx-transition-duration: 0.3s;
+}
+.all-event-text-head{
+    -fx-font-size: 32;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+}
+
+.all-event-scroll-pane{
+    -fx-background-color: transparent;
+}
+/* list-view all-event */
+.all-event-tile-pane {
+    -fx-background-color: #FFF5E5;
+
+}
+.all-event-tile-pane .cell{
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition-duration: 0.3s;
+}
+.all-event-tile-pane .cell:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-transition-duration: 0.3s;
+}
+/* combobox-sort */
+.all-event-sort {
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-color: #413B3B;
+    -fx-border-width: 2;
+    -fx-text-fill: #413B3B;
+    -fx-effect: dropshadow(gaussian, -fx-white7-color, 5, 0, 0, 3);
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+}
+.all-event-combobox{
+    -fx-background-color: transparent;
+    -fx-font-size: 14;
+    -fx-text-fill: #413B3B;
+    -fx-font-family: Leelawadee;
+    -fx-text-overrun: center-ellipsis;
+
+}
+.all-event-combobox .arrow {
+    -fx-background-color: transparent;
+}
+.all-event-combobox .list-view{
+    -fx-font-size: 14;
+    -fx-text-fill: #413B3B;
+    -fx-background-color: #F6F4EE;
+    -fx-text-alignment: center;
+    -fx-alignment:center;
+}
+.all-event-combobox .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+    -fx-border-radius: 5;
+    -fx-text-fill: #666666;
+    -fx-alignment: center;
+}
+.all-event-combobox .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+
+
+/* card-event */
+.event-card{
+    -fx-background-color: #fbfaf8;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.18, 0, 0.7);
+}
+.event-card .font-head{
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+    -fx-font-style: normal;
+    -fx-text-fill: #4D4746;
+    -fx-text-overrun: word-ellipsis;
+}
+.event-card .font{
+    -fx-font-size: 13;
+    -fx-text-fill: black;
+    -fx-font-family: Leelawadee;
+
+}
+.event-card .font-username{
+    -fx-text-fill: #666668;
+    -fx-font-size: 10;
+    -fx-font-family: Leelawadee;
+}
+
+.my-event-card .image-card{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 10, 0.3, 0, 0);
+
+}
+
+
+
+/*============================================== All event ==============================================*/
+
+
+
