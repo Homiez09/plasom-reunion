@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="768.0" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.manageTeamController.UnbanUserTeamController">
    <children>
-      <AnchorPane prefHeight="500.0" prefWidth="768.0" style="-fx-background-color: #FFFCF6;" styleClass="manage-team-corner-radius">
+      <AnchorPane prefHeight="500.0" prefWidth="768.0" style="-fx-background-color: #FFFCF6;">
          <children>
             <Button layoutX="327.0" layoutY="401.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="43.0" prefWidth="112.0" style="-fx-font-size: 20; -fx-text-fill: white;" text="UNBAN">
                <styleClass>
@@ -26,8 +26,14 @@
                   <String fx:value="weight-bold" />
                </styleClass>
             </Text>
-            <ListView fx:id="userListView" layoutX="112.0" layoutY="113.0" prefHeight="247.0" prefWidth="544.0" />
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="26.0" prefWidth="26.0" style="-fx-border-radius: 100; -fx-background-radius: 100;" styleClass="delete-button" />
-         </children></AnchorPane>
+            <ListView fx:id="userListView" layoutX="120.0" layoutY="111.0" prefHeight="247.0" prefWidth="526.0" />
+            <AnchorPane layoutX="569.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="29.0" prefWidth="31.0" style="-fx-background-radius: 100;" styleClass="delete-button" />
+         </children>
+         <styleClass>
+            <String fx:value="manage-team-corner-radius" />
+            <String fx:value="unban-list" />
+            <String fx:value="join-team-card-box" />
+         </styleClass></AnchorPane>
    </children>
 </AnchorPane>

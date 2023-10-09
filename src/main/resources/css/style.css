@@ -889,7 +889,7 @@
 }
 
 /* for join-team component */
-.joint-team-card-box{
+.join-team-card-box{
     -fx-background-color: -fx-white2-color;
     -fx-background-radius: 15;
     -fx-effect: dropshadow(gaussian, -fx-white7-color, 10, 0.5, 0, 0);
@@ -1253,3 +1253,40 @@
 }
 
 /*======================= my event =======================*/
+
+.unban-list {
+    -fx-background-color: transparent;
+    -fx-pref-width: 179;
+}
+
+.unban-list .arrow {
+    -fx-background-color: transparent;
+}
+
+
+.unban-list .list-view {
+    -fx-padding: 14 4 14 5;
+    -fx-spacing: 5;
+    -fx-background-color: F6F4EE;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.unban-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: Leelawadee;
+    -fx-background-radius: 5;
+    -fx-font-size: 18;
+    -fx-border-radius: 5;
+    -fx-text-fill: -fx-black1-color;
+    -fx-alignment: center;
+}
+
+.unban-list .list-cell:hover {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}
+
+.unban-list .list-cell:selected {
+    -fx-background-color: rgba(255, 153, 0, 0.37);
+}

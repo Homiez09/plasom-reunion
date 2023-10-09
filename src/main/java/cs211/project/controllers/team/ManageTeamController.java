@@ -131,6 +131,9 @@ public class ManageTeamController {
         unbanAnchorPane.getChildren().add(unbanLoader.load());
         UnbanUserTeamController unbanUserTeamController = unbanLoader.getController();
         unbanUserTeamController.setup(team);
+        //blur
+        manageTeamDisbleAnchorPane.setEffect(new BoxBlur(6, 5, 2));
+        manageTeamDisbleAnchorPane.setDisable(true);
         unbanAnchorPane.setVisible(true);
     }
 
