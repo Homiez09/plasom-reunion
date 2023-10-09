@@ -2,6 +2,7 @@ package cs211.project.componentControllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.User;
+import cs211.project.services.BorderImagView;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -39,9 +40,10 @@ public class EventTileController {
                 image = new Image(getClass().getResourceAsStream(imgpath),1280,1280,false,false);
             }
             eventTileImageView.setImage(image);
-            eventTileImageView.setFitWidth(150);
-            eventTileImageView.setFitHeight(150);
+            eventTileImageView.setFitWidth(180);
+            eventTileImageView.setFitHeight(180);
             eventTileImageView.setPreserveRatio(true);
+            new BorderImagView(eventTileImageView).setClip(14);
             Region transparentBackground = new Region();
             transparentBackground.setStyle("-fx-background-color: transparent;");
             imageStackPane.getChildren().addAll(transparentBackground);
