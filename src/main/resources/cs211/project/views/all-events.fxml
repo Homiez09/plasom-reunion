@@ -52,7 +52,7 @@
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="128.0" />
                      </children>
                   </HBox>
-                <Separator opacity="0.0" prefHeight="22.0" prefWidth="1152.0" />
+                <Separator opacity="0.0" prefHeight="20.0" prefWidth="1152.0" />
                   <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="1152.0">
                      <children>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="44.0" prefWidth="54.0" />
@@ -62,8 +62,8 @@
                               <Button fx:id="categoryButton" mnemonicParsing="false" onAction="#onCategory" prefHeight="32.0" prefWidth="120.0" styleClass="all-event-button-category" text="Category" textOverrun="CLIP" />
                            </children>
                         </StackPane>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="426.0" />
-                        <TextField fx:id="searchbarTextField" prefHeight="33.0" prefWidth="304.0" promptText="search">
+                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="426.0" />
+                        <TextField fx:id="searchbarTextField" prefHeight="35.0" prefWidth="304.0" promptText="search">
                            <styleClass>
                               <String fx:value="team-search-bar" />
                               <String fx:value="font" />
@@ -115,7 +115,7 @@
             </VBox>
          </children>
       </VBox>
-      <AnchorPane layoutX="883.0" layoutY="174.0" prefHeight="16.0" prefWidth="16.0">
+      <AnchorPane layoutX="880.0" layoutY="200.0" prefHeight="16.0" prefWidth="16.0">
          <children>
             <ImageView fx:id="searchImageView" fitHeight="16.0" fitWidth="16.0" layoutX="-1.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
          </children>

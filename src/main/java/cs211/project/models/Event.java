@@ -15,7 +15,7 @@ public class Event implements Comparable<Event>{
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
     private String eventDescription;
-    private final String eventLocation;
+    private String eventLocation;
     private int slotMember;
     private final String timestamp;
     private boolean joinEvent;
@@ -151,6 +151,7 @@ public class Event implements Comparable<Event>{
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
     public void changeTag(String newTag) {this.eventTag = newTag;}
     public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
+    public void changeLocation(String newLocation){this.eventLocation = newLocation;}
     public void setActivity(ActivityList activityList) {this.activityList = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
     public void setJoinEvent (boolean joinEvent){this.joinEvent = joinEvent;}
@@ -160,13 +161,6 @@ public class Event implements Comparable<Event>{
         String id = "event-";
         id += new GenerateRandomID().getRandomText();
         return id;
-    }
-
-    public boolean isUpComing() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
-        LocalDateTime currentTime = LocalDateTime.now();
-        return eventDate.isAfter(currentTime);
     }
 
     public boolean isEnd() {
