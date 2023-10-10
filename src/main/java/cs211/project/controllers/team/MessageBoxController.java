@@ -4,16 +4,12 @@ import cs211.project.models.Chat;
 import cs211.project.models.User;
 import cs211.project.services.CreateProfileCircle;
 import cs211.project.services.ImagePathFormat;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 public class MessageBoxController {
     @FXML private Text messageText, messageText2, messageText3;

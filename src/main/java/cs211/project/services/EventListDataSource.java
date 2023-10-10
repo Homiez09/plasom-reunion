@@ -61,6 +61,7 @@ public class EventListDataSource implements Datasource<EventList> {
         BufferedReader buffer = new BufferedReader(inputStreamReader);
 
         String line = "";
+
         try {
             eventList = new EventList();
             // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด

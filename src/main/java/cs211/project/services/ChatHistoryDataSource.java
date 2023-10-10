@@ -1,14 +1,12 @@
 package cs211.project.services;
 
 import cs211.project.models.Chat;
-import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.ChatHistory;
 import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
 public class ChatHistoryDataSource implements Datasource<ChatHistory> {
     private final String directoryName;

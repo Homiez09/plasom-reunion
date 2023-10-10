@@ -1,6 +1,5 @@
 package cs211.project.services;
 
-import cs211.project.models.User;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;

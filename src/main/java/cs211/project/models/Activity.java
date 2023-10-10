@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Activity {
-    protected String activityID,name,description,startTime,endTime,eventID;
+    protected String activityID, name, description, startTime, endTime, eventID;
 
     // Constructors
     public Activity(String eventId, String activityName, String activityDescription, String activityStart, String activityEnd) {

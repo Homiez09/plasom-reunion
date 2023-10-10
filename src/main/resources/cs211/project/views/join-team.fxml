@@ -36,7 +36,7 @@
                   <String fx:value="scroll-pane" />
                </styleClass>
             </ScrollPane>
-            <AnchorPane fx:id="navbarAnchorPane" layoutX="-9.0" layoutY="-4.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" prefWidth="1152.0" styleClass="bgPane" />
+            <AnchorPane fx:id="navbarAnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" prefWidth="1152.0" />
             <AnchorPane layoutX="42.0" layoutY="88.0">
                <children>
                   <Label lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="32.0" prefWidth="64.0" text="back " textFill="#413b3b">

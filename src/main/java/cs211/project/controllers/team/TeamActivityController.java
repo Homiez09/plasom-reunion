@@ -197,16 +197,8 @@ public class TeamActivityController {
     }
 
     private void checkButtonNextAndPrevious() {
-        if (current_page == max_page - 1) {
-            nextImageView.setVisible(false);
-        } else {
-            nextImageView.setVisible(true);
-        }
-        if (current_page == 0) {
-            previousImageView.setVisible(false);
-        } else {
-            previousImageView.setVisible(true);
-        }
+        nextImageView.setVisible(current_page != max_page - 1);
+        previousImageView.setVisible(current_page != 0);
     }
 
     protected void setSideBar(){
@@ -385,6 +377,7 @@ public class TeamActivityController {
         timeInit();
         setPageVisible(false);
     }
+
     private void showEditActivity() {
         deleteButton.setVisible(true);
 

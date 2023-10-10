@@ -7,21 +7,10 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class ChatHistory {
-    private ArrayList<Chat> chats;
+    private final ArrayList<Chat> chats;
 
     public ChatHistory() {
         chats = new ArrayList<>();
-    }
-
-    public ChatHistory(ArrayList<Chat> chats) {
-        this.chats = chats;
-    }
-
-    public ChatHistory(ChatHistory chatHistory) {
-        chats = new ArrayList<>();
-        for (Chat chat: chatHistory.getChats()) {
-            chats.add(chat);
-        }
     }
 
     public void add(Chat chat) {
@@ -37,11 +26,7 @@ public class ChatHistory {
     }
 
     public void sort(Comparator<Chat> cmp){
-        Collections.sort(chats, cmp);
-    }
-
-    public void reverse(Comparator<Chat> cmp){
-        Collections.reverse(chats);
+        chats.sort(cmp);
     }
 
     public ArrayList<Chat> getChatByActivityId(String activityId) {

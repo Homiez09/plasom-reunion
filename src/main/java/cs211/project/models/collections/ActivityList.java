@@ -4,7 +4,6 @@ import cs211.project.models.Activity;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class ActivityList {
@@ -58,7 +57,7 @@ public class ActivityList {
                 .thenComparing((Activity activity) -> LocalDateTime.parse(activity.getEndTime(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
         ActivityList list = new ActivityList();
         list.getActivities().addAll(activityList.getActivities());
-        Collections.sort(list.getActivities(),comparing);
+        list.getActivities().sort(comparing);
 
         return list;
     }

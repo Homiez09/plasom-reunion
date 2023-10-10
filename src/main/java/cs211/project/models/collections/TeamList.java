@@ -7,10 +7,11 @@ import cs211.project.services.JoinTeamMap;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class TeamList {
-    private ArrayList<Team> teams;
+    private final ArrayList<Team> teams;
 
     public TeamList() {
         teams = new ArrayList<>();
@@ -25,9 +26,7 @@ public class TeamList {
 
     public TeamList(TeamList teamList) {
         teams = new ArrayList<>();
-        for (Team team: teamList.getTeams()) {
-            teams.add(team);
-        }
+        teams.addAll(teamList.getTeams());
     }
 
     public TeamList(ArrayList<Team> teams) {
@@ -82,15 +81,6 @@ public class TeamList {
         return null;
     }
 
-    public Team findTeamByName(String teamName) {
-        for (Team team: teams) {
-            if (team.isName(teamName)) {
-                return team;
-            }
-        }
-        return null;
-    }
-
     public Team findTeamByNameInEvent(String teamName, String eventID) {
         for (Team team: teams) {
             if (team.isName(teamName) && team.getEventID().equals(eventID)) {
@@ -120,26 +110,23 @@ public class TeamList {
         teams.removeIf(team -> team.getTeamID().equals(teamID));
     }
 
-    public void sortTeamByNewCreatedAt() { // from new to old (Default)
+    public void sortTeamByNewCreatedAt() {
         teams.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
     }
 
-    public void sortTeamByOldCreatedAt() { // from old to new
-        teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
+    public void sortTeamByOldCreatedAt() {
+        teams.sort(Comparator.comparing(Team::getCreatedAt));
     }
 
     public void sortTeamByNameA() {
-        teams.sort((team1, team2) -> team1.getTeamName().compareTo(team2.getTeamName()));
+        teams.sort(Comparator.comparing(Team::getTeamName));
     }
 
     public void sortTeamByNameZ() {
-        teams.sort((team1, team2) -> team2.getTeamName().compareTo(team1.getTeamName()));
+        teams.sort(Comparator.comparing(Team::getTeamName).reversed());
     }
 
-    public void filterByAll() {
-        if (teams == null) return;
-        return;
-    }
+    public void filterByAll() {}
 
     public void filterByRole(String role) {
         if (teams == null) return;
@@ -151,7 +138,6 @@ public class TeamList {
         teams.removeIf(team -> !team.isBookmarked());
     }
 
-    // find teamlist by event id and user correct
     public ArrayList<Team> getTeamOfEvent(Event event) {
         String eventID = event.getEventID();
         ArrayList<Team> teamOfEvent = new ArrayList<>();
@@ -161,15 +147,6 @@ public class TeamList {
             }
         }
         return teamOfEvent;
-    }
-
-    public HashMap<String, Team> teamHashMap() {
-        HashMap<String, Team> teamHashMapTemp= new HashMap<>();
-        for (Team team: teams) {
-            teamHashMapTemp.put(team.getTeamID(), team);
-        }
-
-        return teamHashMapTemp;
     }
 
     public ArrayList<Team> getTeams() {

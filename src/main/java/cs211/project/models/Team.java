@@ -34,7 +34,6 @@ public class Team implements Comparable<Team> {
     }
 
     public Team (String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID, UserList memberList) {
-        // this constructor is used when loading from database
         this.teamID = teamID;
         this.teamHostUser = teamHostUser;
         this.teamName = teamName;
@@ -91,21 +90,17 @@ public class Team implements Comparable<Team> {
         final int MAX_ID_LENGTH = 16;
         StringBuilder sb = new StringBuilder();
 
-        // formatted date & time now
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
         String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HHmmss"));
 
-        // random number
         int randomNum = (int)(Math.random()*1000);
 
-        // append to StringBuilder
         sb.append(formattedDate);
         sb.append(formattedTime);
         sb.append(randomNum);
 
-        // substring to MAX_ID_LENGTH
         String result = sb.toString();
         if(result.length() > MAX_ID_LENGTH){
             result = result.substring(0, MAX_ID_LENGTH);
@@ -131,7 +126,7 @@ public class Team implements Comparable<Team> {
     }
 
     public boolean isFull() {
-        return memberList.getUsers().size() >= maxSlotTeamMember; // return true if full
+        return memberList.getUsers().size() >= maxSlotTeamMember;
     }
 
     public boolean isClose() {
@@ -201,11 +196,11 @@ public class Team implements Comparable<Team> {
         this.isBookmarked = bookmarked;
     }
 
-    public void setStartDate(String startDate) { // format : yyyy-MM-dd.HH:mm:ss
+    public void setStartDate(String startDate) {
         this.startDate = formatStringToTimestamp(startDate);
     }
 
-    public void setEndDate(String endDate) { // format : yyyy-MM-dd.HH:mm:ss
+    public void setEndDate(String endDate) {
         this.endDate = formatStringToTimestamp(endDate);
    }
 

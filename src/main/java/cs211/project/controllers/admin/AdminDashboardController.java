@@ -1,10 +1,10 @@
 package cs211.project.controllers.admin;
 
-import cs211.project.componentControllers.UserCardProfileController;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
+import cs211.project.services.team.LoadUserCardProfileComponent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -32,14 +32,13 @@ public class AdminDashboardController {
     @FXML private ImageView logoutImageView, offlineImageView, onlineImageView, menu1ImageView, menu2ImageView;
     @FXML private Circle hoverMenu1Shape, hoverMenu2Shape;
     @FXML private ProgressIndicator offlineIndicator, onlineIndicator;
-
     Image menu1Icon, menu2Icon, hoverMenu1Icon, hoverMenu2Icon;
 
-
-    private User user = (User) FXRouter.getData();
-    private UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
+    private final User user = (User) FXRouter.getData();
+    private final UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
+    private final DecimalFormat df = new DecimalFormat("0.00");
     private UserList userList;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+
 
     @FXML private void initialize() {
         userList = datasource.readData();
@@ -121,9 +120,11 @@ public class AdminDashboardController {
         lastLoginTableCol.setCellValueFactory(new PropertyValueFactory<>("lastedLogin"));
 
         userTableView.getColumns().clear();
-        userTableView.getColumns().addAll(idTableCol, profileTableCol, usernameTableCol, nameTableCol, statusTableCol, lastLoginTableCol);
         userTableView.getItems().clear();
+
+        userTableView.getColumns().addAll(idTableCol, profileTableCol, usernameTableCol, nameTableCol, statusTableCol, lastLoginTableCol);
         userTableView.getItems().addAll(userList.getNotAdminUsers());
+
         userTableView.getSortOrder().add(lastLoginTableCol);
     }
 
@@ -150,20 +151,6 @@ public class AdminDashboardController {
         percentLabel.setText(df.format(percent) + "%");
     }
 
-
-    private void loadUserCardProfileComponent(AnchorPane userCardProfileAnchorPane, User user) {
-        try {
-            FXMLLoader userCardProfileComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/user-card-profile.fxml"));
-            AnchorPane userCardProfileComponent = userCardProfileComponentLoader.load();
-
-            UserCardProfileController userCardProfileController = userCardProfileComponentLoader.getController();
-            userCardProfileController.setUser(user);
-            userCardProfileAnchorPane.getChildren().clear();
-            userCardProfileAnchorPane.getChildren().add(userCardProfileComponent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     private void loadIconInit(){
         onlineImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/login/status/online_active.png")));
         offlineImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/login/status/offline_active.png")));
@@ -201,7 +188,8 @@ public class AdminDashboardController {
                 adminDashBoardAnchorPane.setDisable(true);
                 adminDashBoardAnchorPane.setEffect(new BoxBlur(6, 5, 2));
                 hoverAdminDashBoardAnchorPane.setVisible(true);
-                loadUserCardProfileComponent(userCardProfileAnchorPane, selectedUser);
+
+                new LoadUserCardProfileComponent(userCardProfileAnchorPane, selectedUser);
             }
         });
     }

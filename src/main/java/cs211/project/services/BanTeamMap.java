@@ -5,10 +5,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class BanTeamMap implements Datasource<HashMap<String,Set<String>>>{
-    private String directoryName = "data";
-    private String fileName = "ban-team.csv";
-    private Set<String> set;
-    private HashMap<String,Set<String>> hashMap;
+    private final String directoryName = "data";
+    private final String fileName = "ban-team.csv";
+
     public BanTeamMap(){
         checkFileIsExisted();
     }
@@ -31,8 +30,8 @@ public class BanTeamMap implements Datasource<HashMap<String,Set<String>>>{
 
     @Override
     public HashMap<String, Set<String>> readData() {
-        hashMap = new HashMap<>();
-        set = new HashSet<>();
+        HashMap<String, Set<String>> hashMap = new HashMap<>();
+        Set<String> set;
 
         String filePath = directoryName + File.separator + fileName;
 

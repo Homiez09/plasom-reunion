@@ -1,13 +1,12 @@
 package cs211.project.services;
 
-import cs211.project.models.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class LoadTopbarComponent {
-    public LoadTopbarComponent(AnchorPane topBarAnchorPane, boolean hideBackButton) {
+public class LoadTopBarComponent {
+    public LoadTopBarComponent(AnchorPane topBarAnchorPane, boolean hideBackButton) {
         FXMLLoader topBarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/topbar.fxml"));
         try {
             AnchorPane topBarComponent = topBarComponentLoader.load();
@@ -18,7 +17,7 @@ public class LoadTopbarComponent {
         }
     }
 
-    public LoadTopbarComponent(AnchorPane topBarAnchorPane) {
+    public LoadTopBarComponent(AnchorPane topBarAnchorPane) {
         this(topBarAnchorPane,false);
     }
 

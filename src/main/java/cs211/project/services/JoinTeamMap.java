@@ -11,8 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
-    private String directoryName = "data";
-    private String fileName = "join-team.csv";
+    private final String directoryName = "data";
+    private final String fileName = "join-team.csv";
     public JoinTeamMap() {
         checkFileIsExisted();
     }

@@ -4,12 +4,10 @@ import cs211.project.models.*;
 import cs211.project.services.Datasource;
 import cs211.project.services.TeamListDataSource;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EventList {
-    private ArrayList<Event> events;
+    private final ArrayList<Event> events;
 
     public EventList() {
         events = new ArrayList<>();
@@ -114,7 +112,7 @@ public class EventList {
         Comparator<Event> comparing = Comparator.comparing(Event::getTimestamp);
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
+        list.getEvents().sort(comparing);
 
         return list;
     }
@@ -124,7 +122,7 @@ public class EventList {
         EventList list = new EventList();
 
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
+        list.getEvents().sort(comparing);
 
         return list;
     }
@@ -133,7 +131,7 @@ public class EventList {
         Comparator<Event> comparing = Comparator.comparing(Event::getEventName);
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
+        list.getEvents().sort(comparing);
 
         return list;
     }
@@ -142,7 +140,7 @@ public class EventList {
         Comparator<Event> comparing = Comparator.comparing(Event::getUserInEvent);
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
+        list.getEvents().sort(comparing);
         Collections.reverse(list.getEvents());
         return list;
     }
@@ -151,7 +149,7 @@ public class EventList {
         Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(), comparing);
+        list.getEvents().sort(comparing);
 
         EventList filteredList = new EventList();
 
