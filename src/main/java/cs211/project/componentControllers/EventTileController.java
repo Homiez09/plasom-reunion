@@ -40,8 +40,8 @@ public class EventTileController {
                 image = new Image(getClass().getResourceAsStream(imgpath),1280,1280,false,false);
             }
             eventTileImageView.setImage(image);
-            eventTileImageView.setFitWidth(180);
-            eventTileImageView.setFitHeight(180);
+            eventTileImageView.setFitWidth(220);
+            eventTileImageView.setFitHeight(220);
             eventTileImageView.setPreserveRatio(true);
             new BorderImagView(eventTileImageView).setSquareClip(14);
             Region transparentBackground = new Region();

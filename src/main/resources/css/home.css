@@ -66,20 +66,30 @@
 }
 /*event tile*/
 .tile-bg{
--fx-border-radius: 20px;
--fx-border-color: black;
--fx-background-color: #F9F6F7;
--fx-background-radius: 20px;
+ -fx-border-radius: 20px;
+ -fx-background-color: #F9F6F7;
+ -fx-background-radius: 20px;
+ -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.18, 0, 0.7);
 }
+
 .font{
  -fx-font-family: Leelawadee;
- -fx-font-size: 15;
 }
+
 .h1{
  -fx-font-size: 18;
- -fx-font-family: Leelawadee;
  -fx-font-weight: bold;
 }
+
+.card-header {
+  -fx-font-size: 18;
+  -fx-font-weight: bold;
+}
+
+.text-detail {
+    -fx-font-size: 15;
+}
+
 .list-view {
  -fx-background-color: #FFF5E5;
  -fx-background-radius: 15;
