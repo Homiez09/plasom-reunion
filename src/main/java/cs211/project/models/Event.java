@@ -4,6 +4,7 @@ import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.GenerateRandomID;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +15,7 @@ public class Event implements Comparable<Event>{
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
     private String eventDescription;
-    private final String eventLocation;
+    private String eventLocation;
     private int slotMember;
     private final String timestamp;
     private boolean joinEvent;
@@ -39,7 +40,7 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = -1;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.activityList = new ActivityList();
         this.userList = new UserList();
         this.joinEvent = true;
@@ -65,7 +66,7 @@ public class Event implements Comparable<Event>{
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
         this.slotMember = slotMember;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.activityList = new ActivityList();
         this.userList = new UserList();
         this.joinEvent = true;
@@ -107,8 +108,16 @@ public class Event implements Comparable<Event>{
     public String getEventName() {return eventName;}
     public String getEventImagePath() {return eventImagePath;}
     public String getEventTag() {return eventTag;}
-    public String getEventDateStart() {return eventDateStart;}
-    public String getEventDateEnd() {return eventDateEnd;}
+    public String getEventDateStart() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(eventDateStart, inputFormatter);
+        return dateTime.format(outputFormatter);}
+    public String getEventDateEnd() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(eventDateEnd, inputFormatter);
+        return dateTime.format(outputFormatter);}
     public String getEventDescription() {return eventDescription;}
     public int getSlotMember() {return slotMember;}
     public int getUserInEvent() {return userList.getUsers().size();}
@@ -117,19 +126,18 @@ public class Event implements Comparable<Event>{
     public UserList getUserList(){return userList;}
     public String getTimestamp() {return timestamp;}
     public LocalDateTime getDateStartAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         return  LocalDateTime.parse(eventDateStart, formatter);
 
     }
     public LocalDateTime getDateEndAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
         return  LocalDateTime.parse(eventDateEnd, formatter);
 
     }
     public LocalDateTime getTimestampAsDate(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
         return  LocalDateTime.parse(timestamp, formatter);
 
@@ -143,6 +151,7 @@ public class Event implements Comparable<Event>{
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
     public void changeTag(String newTag) {this.eventTag = newTag;}
     public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
+    public void changeLocation(String newLocation){this.eventLocation = newLocation;}
     public void setActivity(ActivityList activityList) {this.activityList = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
     public void setJoinEvent (boolean joinEvent){this.joinEvent = joinEvent;}
@@ -154,20 +163,10 @@ public class Event implements Comparable<Event>{
         return id;
     }
 
-    public boolean isUpComing() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
-        LocalDateTime currentTime = LocalDateTime.now();
-
-        return eventDate.isAfter(currentTime);
-    }
-
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime parsedEventDateEnd = LocalDateTime.parse(eventDateEnd, formatter);
-
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
 

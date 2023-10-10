@@ -246,7 +246,7 @@ public class AllEventListController {
     @FXML
     private void onCreateClick(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("create-event",currentUser,null);
+            FXRouter.goTo("create-event",currentUser,null,"all-event");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -323,14 +323,12 @@ public class AllEventListController {
     private void setUp(){
         upComingButton.setDisable(true);
         eventObservableList = FXCollections.observableArrayList(eventList.getUpcomingEvent());
-        System.out.println(eventObservableList.size());
         loadFirst(selectedPredicate);
     }
 
     private void setNew(){
         newButton.setDisable(true);
         eventObservableList = FXCollections.observableArrayList(eventList.getNewEvent());
-        System.out.println(eventObservableList.size());
         loadFirst(selectedPredicate);
     }
 
