@@ -192,18 +192,20 @@ public class EventPageController {
 
         editEventButton.setVisible(event.isHostEvent(user));
         editActivityButton.setVisible(event.isHostEvent(user));
+
+        TeamList teamTempCheck = (joinTeamMap.containsKey(user.getUsername())) ? joinTeamMap.get(user.getUsername()) : new TeamList();
         joinEventButton.setVisible( user != null && event.isJoinEvent() &&
                                     !event.isFull() && !event.isEnd() &&
                                     !event.getUserList().getUsers().contains(user) &&
                                     !event.isHostEvent(user) &&
-                                    !joinTeamMap.containsKey(user.getUsername())
+                                    teamTempCheck.getTeamOfEvent(event).size() == 0
         );
         teamApplyBox.setVisible(user != null &&
                                 teamList.getTeamOfEvent(event) != null &&
                                 !teamList.getTeamOfEvent(event).isEmpty() &&
                                 !event.isHostEvent(user) &&
                                 !event.getUserList().getUsers().contains(user)&&
-                                !joinTeamMap.containsKey(user.getUsername()));
+                                teamTempCheck.getTeamOfEvent(event).size() == 0);
         eventActivityTab.setDisable((user == null || !event.getUserList().getUsers().contains(user)
                 || banList.containsKey(user) && eventList.getEvents().contains(event) )
                 && !event.isHostEvent(user));
