@@ -14,66 +14,89 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventTileController">
    <children>
-      <VBox alignment="CENTER" onMouseClicked="#onEventTileClick" prefHeight="375.0" prefWidth="250.0" spacing="15.0" styleClass="tile-bg" stylesheets="@../../../../css/home.css">
+      <VBox alignment="CENTER" onMouseClicked="#onEventTileClick" prefHeight="375.0" prefWidth="250.0" spacing="15.0" styleClass="tile-bg">
          <children>
             <StackPane fx:id="imageStackPane">
                <children>
-                  <ImageView fx:id="eventTileImageView" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="eventTileImageView" fitHeight="212.0" fitWidth="219.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </StackPane>
-            <Label fx:id="eventNameLabel" styleClass="font" text="eventNameLabel" textAlignment="CENTER">
+            <Label fx:id="eventNameLabel" text="eventNameLabel" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="card-header" />
+                  <String fx:value="color-black" />
+               </styleClass>
             </Label>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <AnchorPane prefHeight="20.0" prefWidth="34.0" />
+                  <ImageView fitHeight="27.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../images/events/calendar.png" />
+                        <Image url="@../../../../images/icons/team/side-bar/activity.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="eventDateLabel" styleClass="font" text="eventDateLabel" textAlignment="CENTER">
+                  <Label fx:id="eventDateLabel" text="eventDateLabel" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="font" />
+                        <String fx:value="text-detail" />
+                        <String fx:value="color-black" />
+                     </styleClass>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <AnchorPane prefHeight="22.0" prefWidth="33.0" />
+                  <ImageView fitHeight="21.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../images/events/pin.png" />
+                        <Image url="@../../../../images/icons/team/side-bar/home.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="eventPlaceLabel" styleClass="font" text="eventPlaceLabel">
+                  <Label fx:id="eventPlaceLabel" text="eventPlaceLabel">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="font" />
+                        <String fx:value="text-detail" />
+                        <String fx:value="color-black" />
+                     </styleClass>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <AnchorPane prefHeight="22.0" prefWidth="32.0" />
+                  <ImageView fitHeight="21.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../../images/events/person.png" />
+                        <Image url="@../../../../images/icons/admin-sidebar/user_log.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="eventMemberLabel" styleClass="font" text="eventMemberLabel">
+                  <Label fx:id="eventMemberLabel" text="eventMemberLabel">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="font" />
+                        <String fx:value="text-detail" />
+                        <String fx:value="color-black" />
+                     </styleClass>
                   </Label>
                </children>
             </HBox>
@@ -87,6 +110,7 @@
    <stylesheets>
       <URL value="@../../../../css/home.css" />
       <URL value="@../../../../css/card-event.css" />
+      <URL value="@../../../../css/style.css" />
    </stylesheets>
    <styleClass>
       <String fx:value="font-text" />

@@ -65,7 +65,11 @@ public class UsersEventController extends CardMyEventController{
         // กำหนด column
 
         TableUsers.setPlaceholder(new Label("No User"));
-
+        profileColumn.setReorderable(false);
+        usernameColumn.setReorderable(false);
+        nameColumn.setReorderable(false);
+        statusColumn.setReorderable(false);
+        actionColumn.setReorderable(false);
 
         profileColumn.setCellValueFactory(cellData -> {
             User user = cellData.getValue();

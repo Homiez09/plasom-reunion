@@ -179,7 +179,7 @@ public class HomeController {
         ));
         for (int i = 0 ; i < 6 ; i++) {
             if(i < recEventList.getEvents().size()) {
-                loadRecommendedEventTile(recAnchorPaneList.get(i),recEventList.getEvents().get(i));
+                new LoadCardEventComponent(recAnchorPaneList.get(i),recEventList.getEvents().get(i),"tile-event");
             } else {
                 recAnchorPaneList.get(i).getChildren().clear();
             }
@@ -193,19 +193,8 @@ public class HomeController {
             if (numEvent < 10 && numEvent < eventList.getSizeTotalEvent()) {
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.setPrefWidth(250);
-                anchorPane.setPrefHeight(400);
-                try {
-                    FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile.fxml"));
-                    AnchorPane load = eventTileLoader.load();
-                    EventTileController eventTileController = eventTileLoader.getController();
-                    eventTileController.showEventTile(event);
-
-                    anchorPane.getChildren().setAll(load);
-                    AnimateComponent(load);
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                anchorPane.setPrefHeight(325);
+                new LoadCardEventComponent(anchorPane,event,"tile-event");
                 hBox.getChildren().add(anchorPane);
                 numEvent++;
             }
@@ -220,20 +209,6 @@ public class HomeController {
                 event.consume();
             }
         });
-    }
-    private void loadRecommendedEventTile(AnchorPane anchorPane,Event event) {
-        try {
-            FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile.fxml"));
-            AnchorPane load = eventTileLoader.load();
-            EventTileController eventTileController = eventTileLoader.getController();
-            eventTileController.showEventTile(event);
-
-            anchorPane.getChildren().setAll(load);
-            AnimateComponent(load);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     // button for going through event tile
@@ -274,15 +249,4 @@ public class HomeController {
         newScrollPane.setHvalue(newHvalue);
     }
 
-    // anchorPane's zoom animation
-    private void AnimateComponent(AnchorPane anchorPane) {
-        ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleIn.setToX(1.1);
-        scaleIn.setToY(1.1);
-        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(0.2), anchorPane);
-        scaleOut.setToX(1);
-        scaleOut.setToY(1);
-        anchorPane.setOnMouseEntered(event -> {scaleIn.play();});
-        anchorPane.setOnMouseExited(event -> {scaleOut.play();});
-    }
 }
