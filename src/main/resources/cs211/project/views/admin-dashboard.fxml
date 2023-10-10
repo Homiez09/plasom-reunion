@@ -1,146 +1,344 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="admin-bg" stylesheets="@../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.admin.AdminDashboardController">
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="admin-bg" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.admin.AdminDashboardController">
    <children>
-      <AnchorPane prefHeight="768.0" prefWidth="294.0" styleClass="admin-sidebar-bg">
+      <AnchorPane fx:id="adminDashBoardAnchorPane" layoutY="-30.0">
          <children>
-            <Line endX="155.20001220703125" endY="7.62939453125E-6" layoutX="125.0" layoutY="108.0" startX="-111.80000305175781" stroke="#bfbfbf" />
-            <Text layoutX="51.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" wrappingWidth="191.7366180419922">
-               <font>
-                  <Font name="System Italic" size="31.0" />
-               </font>
-            </Text>
-            <VBox layoutX="25.0" layoutY="119.0" prefHeight="179.0" prefWidth="262.0">
+            <AnchorPane layoutY="30.0" prefHeight="768.0" prefWidth="113.0" styleClass="bgProfile1">
                <children>
-                  <Button fx:id="menu1" mnemonicParsing="false" onAction="#onMenuOneClick" prefHeight="32.0" prefWidth="262.0" text="User Log">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <AnchorPane fx:id="menu1AnchorPane" layoutX="19.0" layoutY="316.0" onMouseClicked="#onMenuOneClick" onMouseEntered="#onMenuOneEntered" onMouseExited="#onMenuOneExit" prefHeight="85.0" prefWidth="78.0">
+                     <children>
+                        <Circle fx:id="hoverMenu1Shape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
+                           <fill>
+                              <LinearGradient endX="1.0" endY="1.0" startY="0.4218009478672986">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Circle>
+                        <ImageView fx:id="menu1ImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="menu1Label" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="64.0" prefHeight="9.0" prefWidth="95.0" text="USER LOG">
+                           <styleClass>
+                              <String fx:value="font" />
+                              <String fx:value="text-base" />
+                              <String fx:value="sidebar-black" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="menu2AnchorPane" layoutX="20.0" layoutY="435.0" onMouseClicked="#onMenuTwoClick" onMouseEntered="#onMenuTwoEntered" onMouseExited="#onMenuTwoExit" prefHeight="86.0" prefWidth="85.0">
+                     <children>
+                        <Circle fx:id="hoverMenu2Shape" centerY="2.2" layoutX="44.0" layoutY="24.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
+                           <fill>
+                              <LinearGradient endX="1.0" endY="1.0" startY="0.4218009478672986">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.3019607961177826" green="0.27843138575553894" blue="0.27450981736183167" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Circle>
+                        <ImageView fx:id="menu2ImageView" fitHeight="23.0" fitWidth="23.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="menu2Label" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="62.0" prefHeight="21.0" prefWidth="78.0" text="SETTING">
+                           <styleClass>
+                              <String fx:value="font" />
+                              <String fx:value="text-base" />
+                              <String fx:value="sidebar-black" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="logout" layoutX="22.0" layoutY="725.0" onMouseClicked="#onLogoutClick">
+                     <children>
+                        <Label fx:id="logoutLabel" contentDisplay="CENTER" layoutX="32.0" layoutY="3.0" onMouseClicked="#onLogoutClick" prefHeight="21.0" prefWidth="78.0" text="logout">
+                           <styleClass>
+                              <String fx:value="font" />
+                              <String fx:value="text-lg" />
+                              <String fx:value="shadow" />
+                              <String fx:value="next-page-shadow" />
+                           </styleClass>
+                        </Label>
+                        <ImageView fx:id="logoutImageView" fitHeight="28.0" fitWidth="35.0" layoutX="-4.0" onMouseClicked="#onLogoutClick" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/admin-sidebar/user-group.png" />
+                              <Image url="@../../../images/icons/team/side-bar/leave_team.png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="menu2" mnemonicParsing="false" onAction="#onMenuTwoClick" prefHeight="32.0" prefWidth="262.0" text="Setting">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/icons/admin-sidebar/cog.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="32.0" prefWidth="262.0" text="Logout">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/icons/admin-sidebar/logout.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                     </children>
+                  </AnchorPane>
                </children>
-            </VBox>
+            </AnchorPane>
+            <TabPane fx:id="mainTab" layoutX="130.0" layoutY="3.0" prefHeight="793.0" prefWidth="1097.0" stylesheets="@../../../css/style2.css" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="menu1Tab" text="user_log">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="1044.0" styleClass="admin-body">
+                           <children>
+                              <AnchorPane layoutX="18.0" layoutY="30.0" opacity="0.55" prefHeight="714.0" prefWidth="964.0" styleClass="admin-background" />
+                              <TableView fx:id="userTableView" layoutX="52.0" layoutY="245.0" prefHeight="470.0" prefWidth="892.0">
+                                <columns>
+                                  <TableColumn fx:id="idTableCol" prefWidth="182.0" text="ID" />
+                                  <TableColumn fx:id="profileTableCol" prefWidth="128.0" resizable="false" text="Profile" />
+                                    <TableColumn fx:id="usernameTableCol" prefWidth="170.0" text="Username" />
+                                    <TableColumn fx:id="nameTableCol" prefWidth="161.0" text="Name" />
+                                    <TableColumn fx:id="statusTableCol" prefWidth="91.0" text="Status" />
+                                    <TableColumn fx:id="lastLoginTableCol" prefWidth="158.0" sortType="DESCENDING" text="LastLogin" />
+                                </columns>
+                                 <styleClass>
+                                    <String fx:value="log-user-table" />
+                                    <String fx:value="font" />
+                                    <String fx:value="text-base" />
+                                 </styleClass>
+                              </TableView>
+                              <AnchorPane layoutX="55.0" layoutY="25.0" prefHeight="204.0" prefWidth="898.0">
+                                 <children>
+                                    <Rectangle arcHeight="45.0" arcWidth="45.0" height="165.0" layoutX="14.0" layoutY="20.0" stroke="#e3e3e338" strokeType="INSIDE" strokeWidth="2.0" width="165.0">
+                                       <fill>
+                                          <LinearGradient endX="1.0" endY="0.43601895734597157" startX="1.0" startY="0.7819905213270142">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" opacity="0.0" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" opacity="0.17557251453399658" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" opacity="0.7557252049446106" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </fill>
+                                       <effect>
+                                          <DropShadow blurType="GAUSSIAN" height="21.36" radius="9.355" spread="0.13" width="18.06">
+                                             <color>
+                                                <Color opacity="0.06870228797197342" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </Rectangle>
+                                    <Rectangle arcHeight="45.0" arcWidth="45.0" fill="#4d4746" height="165.0" layoutX="222.0" layoutY="20.0" stroke="#e3e3e300" strokeType="INSIDE" strokeWidth="2.0" width="165.0">
+                                       <effect>
+                                          <DropShadow blurType="GAUSSIAN" height="21.36" radius="9.355" spread="0.13" width="18.06">
+                                             <color>
+                                                <Color opacity="0.06870228797197342" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </Rectangle>
+                                    <ProgressIndicator fx:id="onlineIndicator" layoutX="42.0" layoutY="45.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.72" prefHeight="105.0" prefWidth="110.0" progress="0.18">
+                                       <styleClass>
+                                          <String fx:value="admin-online-progress-indicator" />
+                                          <String fx:value="font" />
+                                          <String fx:value="text-ms" />
+                                       </styleClass>
+                                    </ProgressIndicator>
+                                    <ProgressIndicator fx:id="offlineIndicator" layoutX="250.0" layoutY="40.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="110.0" progress="0.46">
+                                       <styleClass>
+                                          <String fx:value="admin-offline-progress-indicator" />
+                                          <String fx:value="font" />
+                                          <String fx:value="text-ms" />
+                                       </styleClass>
+                                    </ProgressIndicator>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="156.0" prefHeight="21.0" prefWidth="59.0" text="online">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                          <String fx:value="sidebar-black" />
+                                          <String fx:value="weight-bold" />
+                                          <String fx:value="color-black" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label fx:id="onlineLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="65.0" layoutY="156.0" prefHeight="21.0" prefWidth="28.0" text="7">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                          <String fx:value="sidebar-black" />
+                                          <String fx:value="weight-bold" />
+                                          <String fx:value="color-black" />
+                                       </styleClass>
+                                    </Label>
+                                    <ImageView fx:id="onlineImageView" fitHeight="15.0" fitWidth="15.0" layoutX="42.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="149.0" prefHeight="21.0" prefWidth="59.0" text="offline">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                          <String fx:value="weight-bold" />
+                                          <String fx:value="color-white" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label fx:id="offlineLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="264.0" layoutY="149.0" prefHeight="21.0" prefWidth="28.0" text="7">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                          <String fx:value="weight-bold" />
+                                          <String fx:value="color-white" />
+                                       </styleClass>
+                                    </Label>
+                                    <ImageView fx:id="offlineImageView" fitHeight="15.0" fitWidth="15.0" layoutX="243.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Rectangle arcHeight="45.0" arcWidth="45.0" height="165.0" layoutX="429.0" layoutY="20.0" stroke="#e3e3e338" strokeType="INSIDE" strokeWidth="2.0" width="390.0">
+                                       <fill>
+                                          <LinearGradient endX="1.0" endY="0.43601895734597157" startX="1.0" startY="0.7819905213270142">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" opacity="0.0" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" opacity="0.17557251453399658" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="1.0" blue="1.0" opacity="0.7557252049446106" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </fill>
+                                       <effect>
+                                          <DropShadow blurType="GAUSSIAN" height="21.36" radius="9.355" spread="0.13" width="18.06">
+                                             <color>
+                                                <Color opacity="0.06870228797197342" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </Rectangle>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="453.0" layoutY="40.0" prefHeight="29.0" prefWidth="182.0" text="Event Analysis">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-2xl" />
+                                          <String fx:value="sidebar-black" />
+                                          <String fx:value="weight-bold" />
+                                          <String fx:value="color-black" />
+                                       </styleClass>
+                                    </Label>
+                                    <AnchorPane layoutX="457.0" layoutY="77.0">
+                                       <children>
+                                          <ProgressBar fx:id="eventProgressBar" layoutX="10.0" layoutY="35.0" prefHeight="18.0" prefWidth="324.0" progress="0.27" styleClass="admin-progress-bar" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="131.0" text="Event Complete">
+                                             <styleClass>
+                                                <String fx:value="font" />
+                                                <String fx:value="text-lg" />
+                                                <String fx:value="sidebar-black" />
+                                                <String fx:value="weight-medium" />
+                                                <String fx:value="color-black" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label fx:id="percentLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="240.0" layoutY="10.0" prefHeight="29.0" prefWidth="94.0" text="55%">
+                                             <styleClass>
+                                                <String fx:value="font" />
+                                                <String fx:value="text-lg" />
+                                                <String fx:value="sidebar-black" />
+                                                <String fx:value="weight-bold" />
+                                                <String fx:value="color-black" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="153.0" layoutY="53.0" prefHeight="29.0" prefWidth="61.0" text="Events">
+                                             <styleClass>
+                                                <String fx:value="font" />
+                                                <String fx:value="text-lg" />
+                                                <String fx:value="sidebar-black" />
+                                                <String fx:value="weight-medium" />
+                                                <String fx:value="color-black" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="53.0" prefHeight="29.0" prefWidth="78.0" text="Complete">
+                                             <styleClass>
+                                                <String fx:value="font" />
+                                                <String fx:value="text-lg" />
+                                                <String fx:value="sidebar-black" />
+                                                <String fx:value="weight-medium" />
+                                                <String fx:value="color-black" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label fx:id="eventLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="219.0" layoutY="53.0" prefHeight="29.0" prefWidth="35.0" text="100">
+                                             <styleClass>
+                                                <String fx:value="font" />
+                                                <String fx:value="text-lg" />
+                                                <String fx:value="sidebar-black" />
+                                                <String fx:value="weight-medium" />
+                                                <String fx:value="color-black" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label fx:id="totalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="123.0" layoutY="53.0" prefHeight="29.0" prefWidth="35.0" text="100">
+                                             <styleClass>
+                                                <String fx:value="font" />
+                                                <String fx:value="text-lg" />
+                                                <String fx:value="sidebar-black" />
+                                                <String fx:value="weight-medium" />
+                                                <String fx:value="color-black" />
+                                             </styleClass>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="menu2Tab" text="setting">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="577.0" prefWidth="791.0">
+                           <children>
+                              <AnchorPane fx:id="changePasswordAnchorPane" layoutX="22.0" layoutY="122.0" prefHeight="579.0" prefWidth="1039.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </AnchorPane>
-      <TabPane fx:id="mainTab" layoutX="314.0" layoutY="-30.0" prefHeight="793.0" prefWidth="838.0" stylesheets="@../../../css/style2.css" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab fx:id="menu1Tab" text="user_log">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="692.0" prefWidth="838.0" styleClass="admin-body">
-                     <children>
-                        <HBox layoutX="28.0" layoutY="74.0" prefHeight="126.0" prefWidth="767.0" styleClass="spacing30">
-                           <children>
-                              <Pane prefHeight="125.0" prefWidth="166.0" styleClass="box-success">
-                                 <children>
-                                    <Text layoutX="34.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ONLINE" wrappingWidth="58.0" />
-                                    <ImageView layoutX="117.0" layoutY="61.0">
-                                       <image>
-                                          <Image url="@../../../images/icons/admin-sidebar/user-group.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label fx:id="onlineLabel" layoutX="42.0" layoutY="58.0" text="7" />
-                                 </children></Pane>
-                              <Pane prefHeight="125.0" prefWidth="166.0" styleClass="box-danger">
-                                 <children>
-                                    <Text layoutX="34.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OFFLINE" wrappingWidth="58.0" />
-                                    <ImageView layoutX="117.0" layoutY="61.0">
-                                       <image>
-                                          <Image url="@../../../images/icons/admin-sidebar/user-group.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label fx:id="offlineLabel" layoutX="42.0" layoutY="58.0" text="21" />
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="207.0" layoutY="10.0" prefHeight="125.0" prefWidth="370.0" styleClass="box-primary">
-                                 <children>
-                                    <Text layoutX="34.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT COMPLETED" />
-                                    <Label fx:id="eventLabel" layoutX="42.0" layoutY="58.0" text="0">
-                                       <font>
-                                          <Font size="29.0" />
-                                       </font>
-                                    </Label>
-                                    <ImageView layoutX="323.0" layoutY="62.0">
-                                       <image>
-                                          <Image url="@../../../images/icons/admin-sidebar/folder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ProgressBar fx:id="eventProgressBar" layoutX="114.0" layoutY="71.0" prefHeight="12.0" prefWidth="200.0" progress="0.0" />
-                                    <HBox alignment="CENTER_RIGHT" layoutX="182.0" layoutY="54.0" prefHeight="15.0" prefWidth="130.0">
-                                       <children>
-                                          <Label fx:id="percentLabel" text="0%" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" layoutX="114.0" layoutY="55.0" prefHeight="15.0" prefWidth="95.0">
-                                       <children>
-                                          <Label fx:id="totalLabel" prefWidth="58.0" text="Total: 25" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </HBox>
-                        <TableView fx:id="userTableView" layoutX="35.0" layoutY="241.0" prefHeight="479.0" prefWidth="758.0" styleClass="log-user-table">
-                          <columns>
-                            <TableColumn fx:id="idTableCol" prefWidth="125.5999755859375" text="ID" />
-                            <TableColumn fx:id="profileTableCol" prefWidth="56.0" resizable="false" text="Profile" />
-                              <TableColumn fx:id="usernameTableCol" prefWidth="152.79998779296875" text="Username" />
-                              <TableColumn fx:id="nameTableCol" prefWidth="204.00006103515625" text="Name" />
-                              <TableColumn fx:id="statusTableCol" prefWidth="64.800048828125" text="Status" />
-                              <TableColumn fx:id="lastLoginTableCol" prefWidth="137.59991455078125" sortType="DESCENDING" text="LastLogin" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab fx:id="menu2Tab" text="setting">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="810.0">
-                     <children>
-                        <AnchorPane fx:id="changePasswordAnchorPane" prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+      <AnchorPane fx:id="hoverAdminDashBoardAnchorPane" onMouseClicked="#onAdminDashBoardDisableClick" prefHeight="768.0" prefWidth="1152.0" visible="false" />
+      <AnchorPane fx:id="userCardProfileAnchorPane" layoutX="451.0" layoutY="160.0" prefHeight="435.0" prefWidth="324.0" visible="false" />
    </children>
+   <stylesheets>
+      <URL value="@../../../css/style2.css" />
+      <URL value="@../../../css/style.css" />
+   </stylesheets>
 </AnchorPane>

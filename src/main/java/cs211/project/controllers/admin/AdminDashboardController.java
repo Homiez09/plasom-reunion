@@ -1,18 +1,20 @@
 package cs211.project.controllers.admin;
 
+import cs211.project.componentControllers.UserCardProfileController;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
+
 import java.text.DecimalFormat;
 
 import java.io.IOException;
@@ -20,13 +22,19 @@ import java.io.IOException;
 public class AdminDashboardController {
     @FXML private TabPane mainTab;
     @FXML private Tab menu1Tab, menu2Tab;
-    @FXML private Button menu1, menu2;
+
     @FXML private TableView userTableView;
     @FXML private ProgressBar eventProgressBar;
     @FXML private Label onlineLabel, offlineLabel, eventLabel, percentLabel, totalLabel;
     @FXML private TableColumn<User, String> idTableCol, profileTableCol, usernameTableCol, nameTableCol, lastLoginTableCol;
     @FXML private TableColumn<User, Boolean> statusTableCol;
-    @FXML private AnchorPane changePasswordAnchorPane;
+    @FXML private AnchorPane changePasswordAnchorPane, userCardProfileAnchorPane, adminDashBoardAnchorPane, hoverAdminDashBoardAnchorPane;
+    @FXML private ImageView logoutImageView, offlineImageView, onlineImageView, menu1ImageView, menu2ImageView;
+    @FXML private Circle hoverMenu1Shape, hoverMenu2Shape;
+    @FXML private ProgressIndicator offlineIndicator, onlineIndicator;
+
+    Image menu1Icon, menu2Icon, hoverMenu1Icon, hoverMenu2Icon;
+
 
     private User user = (User) FXRouter.getData();
     private UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
@@ -43,32 +51,14 @@ public class AdminDashboardController {
         showOnlineUserLabel();
         showOfflineUserLabel();
         showUserTable();
-        ButtonSelectGraphic(1);
+
+        loadIconInit();
+        userProfileView();
     }
 
-    @FXML protected void onMenuOneClick() {
-        mainTab.getSelectionModel().select(menu1Tab);
-        ButtonSelectGraphic(1);
-    }
-
-    @FXML protected void onMenuTwoClick() {
-        mainTab.getSelectionModel().select(menu2Tab);
-        ButtonSelectGraphic(2);
-    }
-
-    @FXML protected void onLogoutButtonClick() {
-        try {
-            userList = datasource.readData();
-            userList.logout(user);
-            datasource.writeData(userList);
-            FXRouter.goTo("welcome");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private void LoadChangePasswordComponent() {
-        FXMLLoader navbarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/changepass.fxml"));
+        FXMLLoader navbarComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/change-password.fxml"));
         try {
             AnchorPane changePassComponent = navbarComponentLoader.load();
             changePasswordAnchorPane.getChildren().add(changePassComponent);
@@ -140,11 +130,13 @@ public class AdminDashboardController {
     private void showOnlineUserLabel() {
         int online = userList.getOnlineUsers().size();
         onlineLabel.setText(String.valueOf(online));
+        onlineIndicator.setProgress((double) online / userList.getNotAdminUsers().size());
     }
 
     private void showOfflineUserLabel() {
         int offline = userList.getNotAdminUsers().size() - userList.getOnlineUsers().size();
         offlineLabel.setText(String.valueOf(offline));
+        offlineIndicator.setProgress((double) offline / userList.getNotAdminUsers().size());
     }
 
     private void showEventProgressBarAndEventLabel() {
@@ -153,28 +145,123 @@ public class AdminDashboardController {
         int sizeCompletedEvent = eventList.getSizeCompletedEvent();
         double percent = (double) sizeCompletedEvent / sizeTotalEvent * 100;
         eventLabel.setText(String.valueOf(sizeCompletedEvent));
-        totalLabel.setText("Total: " + String.valueOf(sizeTotalEvent));
+        totalLabel.setText(String.valueOf(sizeTotalEvent));
         eventProgressBar.setProgress(percent/100);
-        percentLabel.setText(String.valueOf(df.format(percent)) + "%");
+        percentLabel.setText(df.format(percent) + "%");
     }
 
-    private void ButtonSelectGraphic(int page) { // Change button graphic when selected
-        ResetSelectGraphic();
-        String style = "-fx-background-color: #FFE4B8";
-        switch(page) {
-            case 1:
-                menu1.setStyle(style);
-                break;
-            case 2:
-                menu2.setStyle(style);
-                break;
-            default:
-                break;
+
+    private void loadUserCardProfileComponent(AnchorPane userCardProfileAnchorPane, User user) {
+        try {
+            FXMLLoader userCardProfileComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/user-card-profile.fxml"));
+            AnchorPane userCardProfileComponent = userCardProfileComponentLoader.load();
+
+            UserCardProfileController userCardProfileController = userCardProfileComponentLoader.getController();
+            userCardProfileController.setUser(user);
+            userCardProfileAnchorPane.getChildren().clear();
+            userCardProfileAnchorPane.getChildren().add(userCardProfileComponent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
-    private void ResetSelectGraphic() { // Reset all button to default
-        String style = "";
-        menu1.setStyle(style);
-        menu2.setStyle(style);
+    private void loadIconInit(){
+        onlineImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/login/status/online_active.png")));
+        offlineImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/login/status/offline_active.png")));
+        logoutImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/admin-sidebar/logout.png")));
+
+        menu1Icon = new Image(getClass().getResourceAsStream("/images/icons/admin-sidebar/user_log.png"));
+        hoverMenu1Icon = new Image(getClass().getResourceAsStream("/images/icons/admin-sidebar/hover_user_log.png"));
+
+        menu2Icon = new Image(getClass().getResourceAsStream("/images/icons/admin-sidebar/setting.png"));
+        hoverMenu2Icon = new Image(getClass().getResourceAsStream("/images/icons/admin-sidebar/hover_setting.png"));
+
+        menu1ImageView.setImage(hoverMenu1Icon);
+        menu2ImageView.setImage(menu2Icon);
+
+        hoverMenu1Shape.setVisible(true);
+        checkHover();
     }
+
+    private void checkHover(){
+        if(mainTab.getSelectionModel().getSelectedItem().equals(menu1Tab)){
+            menu2ImageView.setImage(menu2Icon);
+            hoverMenu1Shape.setVisible(true);
+            hoverMenu2Shape.setVisible(false);
+        }else{
+            menu1ImageView.setImage(menu1Icon);
+            hoverMenu2Shape.setVisible(true);
+            hoverMenu1Shape.setVisible(false);
+        }
+    }
+    private void userProfileView(){
+        userTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                User selectedUser = (User) newValue;
+                userCardProfileAnchorPane.setVisible(true);
+                adminDashBoardAnchorPane.setDisable(true);
+                adminDashBoardAnchorPane.setEffect(new BoxBlur(6, 5, 2));
+                hoverAdminDashBoardAnchorPane.setVisible(true);
+                loadUserCardProfileComponent(userCardProfileAnchorPane, selectedUser);
+            }
+        });
+    }
+
+
+    @FXML private void onAdminDashBoardDisableClick(){
+        userCardProfileAnchorPane.setVisible(false);
+        adminDashBoardAnchorPane.setDisable(false);
+        adminDashBoardAnchorPane.setEffect(null);
+        hoverAdminDashBoardAnchorPane.setVisible(false);
+    }
+    @FXML protected void onLogoutClick() {
+        try {
+            userList = datasource.readData();
+            userList.logout(user);
+            datasource.writeData(userList);
+            FXRouter.goTo("welcome");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML protected void onMenuOneClick() {
+        mainTab.getSelectionModel().select(menu1Tab);
+        checkHover();
+
+    }
+    @FXML protected void onMenuTwoClick() {
+        mainTab.getSelectionModel().select(menu2Tab);
+        checkHover();
+    }
+
+    @FXML void onMenuOneEntered() {
+        if (!mainTab.getSelectionModel().getSelectedItem().equals(menu1Tab)) {
+            menu1ImageView.setImage(hoverMenu1Icon);
+            hoverMenu1Shape.setVisible(true);
+        }else{
+            menu2ImageView.setImage(menu2Icon);
+            hoverMenu2Shape.setVisible(false);
+        }
+    }
+    @FXML void onMenuOneExit() {
+        if(mainTab.getSelectionModel().getSelectedItem().equals(menu2Tab)) {
+            menu1ImageView.setImage(menu1Icon);
+            hoverMenu1Shape.setVisible(false);
+        }
+    }
+    @FXML void onMenuTwoEntered() {
+        if (!mainTab.getSelectionModel().getSelectedItem().equals(menu2Tab)) {
+            menu2ImageView.setImage(hoverMenu2Icon);
+            hoverMenu2Shape.setVisible(true);
+        }else{
+            menu1ImageView.setImage(menu1Icon);
+            hoverMenu1Shape.setVisible(false);
+        }
+    }
+    @FXML void onMenuTwoExit() {
+        if(mainTab.getSelectionModel().getSelectedItem().equals(menu1Tab)){
+            menu2ImageView.setImage(menu2Icon);
+            hoverMenu2Shape.setVisible(false);
+        }
+    }
+
 }

@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -47,7 +46,7 @@ public class SettingPageController {
         contactPane.setVisible(false);
     }
     private void LoadChangePassword(AnchorPane passwordAnchorPane) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/changepass.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/change-password.fxml"));
         try {
             AnchorPane load = fxmlLoader.load();
             passwordAnchorPane.getChildren().add(load);

@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class ChangePassController {
+public class ChangePasswordController {
 
     @FXML private PasswordField currentPasswordField, newPasswordField, reNewPasswordField;
 
@@ -81,10 +81,18 @@ public class ChangePassController {
             userList.resetPassword(user.getUsername(),newPassword);
             User userUpdate = userList.findUsername(user.getUsername());
             datasource.writeData(userList);
-            try {
-                FXRouter.goTo("setting", userUpdate);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if(user.isAdmin()){
+                try {
+                    FXRouter.goTo("admin-dashboard", userUpdate);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else{
+                try {
+                    FXRouter.goTo("setting", userUpdate);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }else{
             errorLabel.setVisible(true);

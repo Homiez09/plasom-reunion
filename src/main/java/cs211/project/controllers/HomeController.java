@@ -193,9 +193,9 @@ public class HomeController {
             if (numEvent < 10 && numEvent < eventList.getSizeTotalEvent()) {
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.setPrefWidth(250);
-                anchorPane.setPrefHeight(400);
+                anchorPane.setPrefHeight(325);
                 try {
-                    FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile.fxml"));
+                    FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile-new.fxml"));
                     AnchorPane load = eventTileLoader.load();
                     EventTileController eventTileController = eventTileLoader.getController();
                     eventTileController.showEventTile(event);
@@ -223,7 +223,7 @@ public class HomeController {
     }
     private void loadRecommendedEventTile(AnchorPane anchorPane,Event event) {
         try {
-            FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile.fxml"));
+            FXMLLoader eventTileLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/event-tile-new.fxml"));
             AnchorPane load = eventTileLoader.load();
             EventTileController eventTileController = eventTileLoader.getController();
             eventTileController.showEventTile(event);

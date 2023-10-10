@@ -5,11 +5,11 @@ import java.util.Date;
 import java.util.Random;
 
 public class Chat implements Comparable<Chat> {
-    private String messageId; // random * unique
-    private String message; // msg
-    private User sender; // user id
-    private String groupReceiver; // activity id
-    private String timestamp; // random
+    private String messageId;
+    private final String message;
+    private final User sender;
+    private final String groupReceiver;
+    private String timestamp;
 
     public Chat(String messageId, String message, User sender, String groupReceiver, String timestamp) {
         this.messageId = messageId;
@@ -53,10 +53,6 @@ public class Chat implements Comparable<Chat> {
         Date date = new Date(Long.parseLong(timestamp));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return sdf.format(date);
-    }
-
-    public String getMessageId() {
-        return messageId;
     }
 
     public String getMessage() {

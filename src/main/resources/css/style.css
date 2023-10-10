@@ -59,6 +59,10 @@
     -fx-text-fill: -fx-gray3-color;
 }
 
+.color-white{
+    -fx-text-fill: -fx-white1-color;
+}
+
 .color-gray1{
     -fx-text-fill: -fx-gray4-color;
 }
@@ -1135,7 +1139,7 @@
 
     /* card-my-event */
 .my-event-card{
-    -fx-background-color: #fbfaf8;
+    -fx-background-color: #F6F4EE;
     -fx-background-radius: 10px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.18, 0, 0.7);
 }
@@ -1391,7 +1395,7 @@
 .all-event-combobox .arrow {
     -fx-background-color: transparent;
 }
-.all-event-combobox .list-view{
+.all-event-combobox .list-view {
     -fx-font-size: 14;
     -fx-text-fill: #413B3B;
     -fx-background-color: #F6F4EE;
@@ -1411,6 +1415,22 @@
 .all-event-combobox .list-cell:hover {
     -fx-background-color: rgba(255, 153, 0, 0.37);
 }
+.all-event-combobox .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.all-event-combobox .list-view .scroll-bar .thumb {
+    -fx-background-color: transparent;
+}
+
+.all-event-combobox .list-view:hover .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.all-event-combobox .list-view:hover .scroll-bar .thumb {
+    -fx-background-color: #DDD3C3;
+}
+
 
 
 
@@ -1440,9 +1460,14 @@
     -fx-font-family: Leelawadee;
 }
 
+.event-card .font-display-name{
+    -fx-font-size: 10;
+    -fx-font-family: Leelawadee;
+}
+
 .my-event-card .image-card{
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 10, 0.3, 0, 0);
-
+    -fx-border-radius: 12;
 }
 
 
