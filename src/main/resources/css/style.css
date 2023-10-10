@@ -1368,11 +1368,12 @@
 .all-event-scroll-pane{
     -fx-background-color: transparent;
 }
-/* list-view all-event */
+/* tile-pane all-event */
 .all-event-tile-pane {
     -fx-background-color: #FFF5E5;
 
 }
+
 /* combobox-sort */
 .all-event-sort {
     -fx-background-color: transparent;
@@ -1418,21 +1419,15 @@
 .all-event-combobox .scroll-bar {
     -fx-background-color: transparent;
 }
-
 .all-event-combobox .list-view .scroll-bar .thumb {
     -fx-background-color: transparent;
 }
-
 .all-event-combobox .list-view:hover .scroll-bar {
     -fx-background-color: transparent;
 }
-
 .all-event-combobox .list-view:hover .scroll-bar .thumb {
     -fx-background-color: #DDD3C3;
 }
-
-
-
 
 /* card-event */
 .event-card{
@@ -1475,6 +1470,10 @@
 /*============================================== owner event ==============================================*/
 .owner-event .background{
     -fx-background-color:#f6f5ef;
+    -fx-background-radius: 12;
+    -fx-border-color:#666262;
+    -fx-border-radius: 12;
+    -fx-border-width: 3;
 }
 
 .owner-event .font-head{
@@ -1617,6 +1616,11 @@
 /*============================================== user in event ==============================================*/
 .users-event-background{
     -fx-background-color:#f6f5ef;
+    -fx-background-radius: 12;
+    -fx-border-color: #666262;
+    -fx-border-radius: 12;
+    -fx-border-width: 3;
+
 }
 .users-event-font{
     -fx-font-size: 18;

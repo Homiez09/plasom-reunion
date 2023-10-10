@@ -61,7 +61,9 @@ public class CreateEventController {
 
         setPage();
         limitCharacter();
-        validateDateTime();
+        if (!eventStartDatePick.isFocused() || !eventEndDatePick.isFocused() ){
+            validateDateTime();
+        }
         timeCheck();
         if (eventNameTextField.getText().equals("") || eventDescriptionTextArea.getText().equals("") ||
                 eventLocationTextField.getText().equals("")) {
