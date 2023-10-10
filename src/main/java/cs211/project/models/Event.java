@@ -110,12 +110,12 @@ public class Event implements Comparable<Event>{
     public String getEventTag() {return eventTag;}
     public String getEventDateStart() {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(eventDateStart, inputFormatter);
         return dateTime.format(outputFormatter);}
     public String getEventDateEnd() {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(eventDateEnd, inputFormatter);
         return dateTime.format(outputFormatter);}
     public String getEventDescription() {return eventDescription;}
