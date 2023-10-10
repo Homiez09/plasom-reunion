@@ -4,7 +4,6 @@ import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.GenerateRandomID;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -124,7 +123,6 @@ public class Event implements Comparable<Event>{
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivityList() { return activityList; }
     public UserList getUserList(){return userList;}
-    public String getTimestamp() {return timestamp;}
     public LocalDateTime getDateStartAsDate(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         return  LocalDateTime.parse(eventDateStart, formatter);
