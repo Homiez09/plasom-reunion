@@ -80,7 +80,7 @@ public class EventListDataSource implements Datasource<EventList> {
                 String eventTag = data[4].trim();
                 String eventStart = data[5].trim();
                 String eventEnd = data[6].trim();
-                String eventDescription = data[7].trim().replace("\n", "");
+                String eventDescription = data[7].trim();
                 String eventLocation = data[8].trim();
                 int slotMember = Integer.parseInt(data[9].trim());
                 String timeStamp = data[10].trim();

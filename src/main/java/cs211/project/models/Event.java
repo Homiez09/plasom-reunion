@@ -183,7 +183,7 @@ public class Event implements Comparable<Event>{
                 +   eventTag + ','
                 +   eventDateStart + ','
                 +   eventDateEnd + ','
-                +   eventDescription.replaceAll("\n"," ") + ','
+                +   eventDescription.replaceAll("\n"," ").replaceAll(",", " ") + ','
                 +   eventLocation + ','
                 +   slotMember +','
                 +   timestamp+','

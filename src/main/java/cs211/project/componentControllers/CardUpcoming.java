@@ -54,24 +54,27 @@ public class CardUpcoming {
     }
 
     private void showImage(int pageNumber) {
-        Event event;
+        Event event = null;
         Image image;
 
-        if (eventList.getUpcomingEvent().size() == 0) {
-            event = eventList.getUpcomingEvent().get(pageNumber);
-        } else {
-            event = eventList.getUpcomingEvent().get(pageNumber);
+        if (!eventList.getEvents().isEmpty()) {
+            if (eventList.getUpcomingEvent().size() == 0) {
+                event = eventList.getUpcomingEvent().get(pageNumber);
+            } else {
+                event = eventList.getUpcomingEvent().get(pageNumber);
+            }
+
+
+            if (event.getEventImagePath().equals("null"))
+                image = new Image(getClass().getResourceAsStream("/images/events/event-default-auth.png"));
+            else image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
+
+            upComingEventsImageView.setImage(image);
+
+            eventUpComingDate.setText(event.getEventDateStart());
+            eventUpComingName.setText(event.getEventName());
+            eventUpComingPlace.setText(event.getEventLocation());
         }
-
-        if (event.getEventImagePath().equals("null")) image = new Image(getClass().getResourceAsStream("/images/events/event-default-auth.png"));
-        else image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
-
-        upComingEventsImageView.setImage(image);
-
-        eventUpComingDate.setText(event.getEventDateStart());
-        eventUpComingName.setText(event.getEventName());
-        eventUpComingPlace.setText(event.getEventLocation());
-
         updateVisibleButton();
     }
 }
