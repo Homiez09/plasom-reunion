@@ -1511,6 +1511,7 @@
 
 .owner-event-table-view {
     -fx-background-color:transparent;
+    -fx-border-color: transparent;
 }
 .owner-event-table-view .scroll-bar{
     -fx-background-color:transparent;
@@ -1666,6 +1667,7 @@
 
 .users-event-table-view {
     -fx-background-color:transparent;
+    -fx-border-color: transparent;
 }
 .users-event-table-view:filled{
     -fx-background-color:transparent;
@@ -1689,6 +1691,7 @@
 .users-event-table-view .table-cell{
     -fx-background-color:#FFECCE;
     -fx-font-size: 12;
+    -fx-border-color: transparent;
     -fx-text-alignment: center;
     -fx-alignment: center;
     -fx-content-display: center;
@@ -1796,7 +1799,7 @@
     -fx-background-color: rgba(255, 153, 0, 0.37);
 }
 
-/*======================= my event =======================*/
+/*============================================== user in event ==============================================*/
 
 .unban-list {
     -fx-background-color: transparent;

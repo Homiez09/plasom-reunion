@@ -26,6 +26,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.zip.DataFormatException;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -58,9 +60,9 @@ public class CreateEventController {
         eventTagChoiceBox.getItems().addAll("Animal","Art","Business","Conference","Education","Food & Drink","Music","Performance","Seminar","Sport","Workshop");
 
         setPage();
-        timeCheck();
         limitCharacter();
-
+        validateDateTime();
+        timeCheck();
         if (eventNameTextField.getText().equals("") || eventDescriptionTextArea.getText().equals("") ||
                 eventLocationTextField.getText().equals("")) {
             submitButton.setDisable(true);
@@ -77,6 +79,11 @@ public class CreateEventController {
         eventTagChoiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             updateSubmitButtonState(eventNameTextField, eventDescriptionTextArea,eventLocationTextField,eventTagChoiceBox,submitButton);
         });
+        eventTagChoiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+
+            updateSubmitButtonState(eventNameTextField, eventDescriptionTextArea,eventLocationTextField,eventTagChoiceBox,submitButton);
+        });
+
     }
 
     // create and edit event
@@ -135,10 +142,18 @@ public class CreateEventController {
 
     @FXML protected void onBackButtonClick() {
         if (thisEvent == null) {
-            try {
-                FXRouter.goTo("all-events",user);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (from.equals("my-event")) {
+                try {
+                    FXRouter.goTo("my-event", user);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else {
+                try {
+                    FXRouter.goTo("all-events", user);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         } else {
             try {
@@ -150,7 +165,7 @@ public class CreateEventController {
     }
 
     @FXML protected void onSubmitBasicInformationClick() {
-
+        timeCheck();
         eventListDatasource = new EventListDataSource();
         eventList = eventListDatasource.readData();
         if (!eventCapTextField.getText().equals("") && !eventCapTextField.getText().matches("[0-9]+")) {
@@ -192,6 +207,7 @@ public class CreateEventController {
             eventList.changeDateStart(thisEvent,formatTime(eventStartDatePick,eventStartHourSpinner,eventStartMinuteSpinner));
             eventList.changeDateEnd(thisEvent,formatTime(eventEndDatePick,eventEndHourSpinner,eventEndMinuteSpinner));
             eventList.changeTag(thisEvent,eventTagChoiceBox.getValue());
+            eventList.changeLocation(thisEvent,eventLocationTextField.getText().trim());
             if (newEventImagePath != null) {
                 eventList.changeImagePath(thisEvent,newEventImagePath);
             }
@@ -211,16 +227,15 @@ public class CreateEventController {
         eventTagChoiceBox.setValue(event.getEventTag());
         eventDescriptionTextArea.setText(event.getEventDescription());
         eventCapTextField.setText(Integer.toString(event.getSlotMember()));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime eventStartDateTime = LocalDateTime.parse(event.getEventDateStart(),formatter);
-        LocalDateTime eventEndDateTime = LocalDateTime.parse(event.getEventDateEnd(),formatter);
+        LocalDateTime eventStartDateTime = event.getDateStartAsDate();
+        LocalDateTime eventEndDateTime = event.getDateEndAsDate();
         eventStartDatePick.setValue(eventStartDateTime.toLocalDate());
         eventStartHourSpinner.getValueFactory().setValue(eventStartDateTime.getHour());
         eventStartMinuteSpinner.getValueFactory().setValue(eventStartDateTime.getMinute());
         eventEndDatePick.setValue(eventEndDateTime.toLocalDate());
         eventEndHourSpinner.getValueFactory().setValue(eventEndDateTime.getHour());
         eventEndMinuteSpinner.getValueFactory().setValue(eventEndDateTime.getMinute());
-        uploadImageView.setImage(new Image("file:"+event.getEventImagePath(),300,300,true,true));
+        uploadImageView.setImage(new Image("file:"+event.getEventImagePath(),500,500,true,true));
     }
 
     private String formatTime(DatePicker datePicker,Spinner<Integer> hour,Spinner<Integer> minute){
@@ -230,35 +245,38 @@ public class CreateEventController {
         datePick = datePicker.getValue();
         LocalTime Time = LocalTime.of(Hour, Minute);
         LocalDateTime dateTime = datePick.atTime(Time);
-        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 
     private void timeCheck() {
         errorStartLabel.setVisible(false);
         errorEndLabel.setVisible(false);
-        eventStartDatePick.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            validateDate();
+
+        eventStartDatePick.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateDateTime();
         });
-        eventEndDatePick.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            validateDate();
+        eventEndDatePick.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateDateTime();
         });
-        eventStartHourSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            validateTime();
+        eventStartHourSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateDateTime();
         });
-        eventStartMinuteSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            validateTime();
+        eventStartMinuteSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateDateTime();
         });
-        eventEndHourSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            validateTime();
+        eventEndHourSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateDateTime();
         });
-        eventEndMinuteSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            validateTime();
+        eventEndMinuteSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateDateTime();
         });
     }
 
-    private void validateDate() {
+    private void validateDateTime() {
         errorStartLabel.setText("Invalid Date");
         errorEndLabel.setText("Invalid Date");
+        errorTimeLabel.setText("Invalid Time");
+
         int startHour = eventStartHourSpinner.getValue();
         int endHour = eventEndHourSpinner.getValue();
         int startMinute = eventStartMinuteSpinner.getValue();
@@ -268,35 +286,23 @@ public class CreateEventController {
         LocalDate startDate = eventStartDatePick.getValue();
         LocalDate endDate = eventEndDatePick.getValue();
 
-        LocalDateTime startTime = LocalDateTime.of(startDate, LocalTime.of(startHour, startMinute));
-        LocalDateTime endTime = LocalDateTime.of(endDate, LocalTime.of(endHour, endMinute));
-
-        errorStartLabel.setVisible(!startTime.isAfter(currentDateTime));
-        errorEndLabel.setVisible(!endTime.isAfter(currentDateTime));
-
-        submitButton.setDisable(!(startTime.isAfter(currentDateTime) && endTime.isAfter(currentDateTime)));
-    }
-
-    private void validateTime() {
-        errorTimeLabel.setText("Invalid Time");
-        int startHour = eventStartHourSpinner.getValue();
-        int endHour = eventEndHourSpinner.getValue();
-        int startMinute = eventStartMinuteSpinner.getValue();
-        int endMinute = eventEndMinuteSpinner.getValue();
-
         LocalTime startTime = LocalTime.of(startHour, startMinute);
         LocalTime endTime = LocalTime.of(endHour, endMinute);
-        boolean isTimeValid = startTime.isBefore(endTime);
+        boolean isTimeValid = startTime.isAfter(endTime);
 
-        if (eventStartDatePick.getValue() != null && eventEndDatePick.getValue() != null) {
-            LocalDateTime startDate = eventStartDatePick.getValue().atStartOfDay();
-            LocalDateTime endDate = eventEndDatePick.getValue().atStartOfDay();
-            if (startDate.equals(endDate) ){
+        LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+        LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
 
-                errorTimeLabel.setVisible(!isTimeValid);
-                submitButton.setDisable(!isTimeValid);
-            }
-        }
+        errorStartLabel.setVisible(!startDateTime.isAfter(currentDateTime));
+        errorEndLabel.setVisible(!endDateTime.isAfter(currentDateTime));
+        errorTimeLabel.setVisible( !endDateTime.isAfter(startDateTime) || (isTimeValid && startDate.equals(endDate)));
+        submitButton.setDisable(
+                !startDateTime.isAfter(currentDateTime)
+                || !endDateTime.isAfter(currentDateTime)
+                || !endDateTime.isAfter(startDateTime)
+                || (isTimeValid && startDate.equals(endDate))
+        );
+
     }
 
     private void setTime(DatePicker datePicker){
@@ -305,15 +311,16 @@ public class CreateEventController {
 
     private void updateSubmitButtonState(TextField name, TextArea description,TextField location,ChoiceBox<String> tag, Button submit) {
         if (!name.getText().isEmpty() && !description.getText().isEmpty()
-                && !location.getText().isEmpty() && tag.getValue() != null) {
+                && !location.getText().isEmpty() && tag.getValue() != null ) {
             submit.setDisable(false);
+            validateDateTime();
         } else {
             submit.setDisable(true);
         }
+
     }
 
     private void limitCharacter() {
-
         errorCapacityLabel.setVisible(false);
         eventNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (eventNameTextField.getText().length() > 30) {

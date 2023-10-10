@@ -1,8 +1,7 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.*;
-import cs211.project.services.Datasource;
-import cs211.project.services.TeamListDataSource;
+import cs211.project.services.*;
 
 import java.util.*;
 
@@ -95,6 +94,10 @@ public class EventList {
         Event changeEvent = findEventById(event.getEventID());
         changeEvent.changeTag(change);
     }
+    public void changeLocation(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeLocation(change);
+    }
 
     public void sort(){
         Collections.sort(events);
@@ -109,10 +112,14 @@ public class EventList {
     }
 
     public EventList sortNewEvent(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getTimestamp);
+        return getListCompare(eventList, Comparator.comparing(Event::getTimestampAsDate));
+    }
+
+    private EventList getListCompare(EventList eventList, Comparator<Event> cmp) {
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
-        list.getEvents().sort(comparing);
+        list.getEvents().sort(cmp);
+        Collections.reverse(list.getEvents());
 
         return list;
     }
@@ -137,12 +144,7 @@ public class EventList {
     }
 
     public EventList sortByMember(EventList eventList){
-        Comparator<Event> comparing = Comparator.comparing(Event::getUserInEvent);
-        EventList list = new EventList();
-        list.getEvents().addAll(eventList.getEvents());
-        list.getEvents().sort(comparing);
-        Collections.reverse(list.getEvents());
-        return list;
+        return getListCompare(eventList, Comparator.comparing(Event::getUserInEvent));
     }
 
     public EventList sortByTag(EventList eventList, String tag) {
@@ -242,7 +244,7 @@ public class EventList {
     public ArrayList<Event> getUpcomingEvent() {
         ArrayList<Event> list = new ArrayList<>();
         for (Event event : events) {
-            if (event.isUpComing() && !event.isEnd()) {
+            if (!event.isEnd()) {
                 list.add(event);
             }
         }
