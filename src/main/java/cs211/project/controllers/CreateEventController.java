@@ -61,9 +61,7 @@ public class CreateEventController {
 
         setPage();
         limitCharacter();
-        if (!eventStartDatePick.isFocused() || !eventEndDatePick.isFocused() ){
-            validateDateTime();
-        }
+        validateDateTime();
         timeCheck();
         if (eventNameTextField.getText().equals("") || eventDescriptionTextArea.getText().equals("") ||
                 eventLocationTextField.getText().equals("")) {
@@ -315,7 +313,7 @@ public class CreateEventController {
         if (!name.getText().isEmpty() && !description.getText().isEmpty()
                 && !location.getText().isEmpty() && tag.getValue() != null ) {
             submit.setDisable(false);
-
+            validateDateTime();
         } else {
             submit.setDisable(true);
         }
