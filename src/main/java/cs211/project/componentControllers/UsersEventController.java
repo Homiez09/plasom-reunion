@@ -26,23 +26,16 @@ public class UsersEventController extends CardMyEventController{
     @FXML TableColumn<User, ImageView> profileColumn;
     @FXML TableColumn<User,Void> actionColumn;
     @FXML Button statusButton;
-    @FXML Label eventNameLabel,userSizeLabel,statusLabel;
+    @FXML Label eventNameLabel,userSizeLabel,statusLabel,totalLabel,inLabel;
     @FXML Popup popup;
     private JoinEventMap MapUserJoinEvent;
     private Event currentEvent;
-    Datasource<EventList> eventListDatasource;
-    private EventList eventList;
-    private ObservableList<User> userObservableList;
     private ObservableList<User> banUserObservableList;
-
-
 
     @FXML
     public void initialize() {}
     public void setupData(Popup popup, Event event) {
-        this.eventListDatasource = new EventListDataSource();
-        this.eventList = eventListDatasource.readData();
-        this.currentEvent = eventList.findEventById(event.getEventID());
+        this.currentEvent = event;
         this.MapUserJoinEvent = new JoinEventMap();
         this.popup = popup;
         BanUser data = new BanUser();
@@ -51,16 +44,22 @@ public class UsersEventController extends CardMyEventController{
         for (User user: getBan.keySet()){
             banList.getUsers().add(user);
         }
-        userObservableList = FXCollections.observableArrayList(currentEvent.getUserList().getUsers());
+        ObservableList<User> userObservableList = FXCollections.observableArrayList(event.getUserList().getUsers());
         banUserObservableList = FXCollections.observableArrayList(banList.getUsers());
 
         eventNameLabel.setText(currentEvent.getEventName());
-        userSizeLabel.setText(userObservableList.size()+"");
+        if (event.getSlotMember()  > 0) {
+            userSizeLabel.setText(userObservableList.size() + "");
+            totalLabel.setText(event.getSlotMember() + "");
+        }else {
+            totalLabel.setVisible(false);
+            inLabel.setVisible(false);
+        }
+
         statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
         statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
         showTable(userObservableList);
     }
-
     private void showTable(ObservableList<User> observableList) {
         // กำหนด column
 
@@ -136,9 +135,6 @@ public class UsersEventController extends CardMyEventController{
         usernameColumn.setCellFactory(column -> new TableCellCenter<>().CellAsString(usernameColumn));
         nameColumn.setCellFactory(column ->  new TableCellCenter<>().CellAsString(nameColumn));
         statusColumn.setCellFactory(column ->  new TableCellCenter<>().CellAsString(statusColumn));
-
-
-
         TableUsers.setItems(observableList);
 
     }
@@ -192,9 +188,10 @@ public class UsersEventController extends CardMyEventController{
                 }
         }
     }
-
-
     public void onStatusButton(ActionEvent actionEvent) {
+        Datasource<EventList> eventListDatasource = new EventListDataSource();
+        EventList eventList = eventListDatasource.readData();
+        eventList.changeStatus(currentEvent,!currentEvent.isJoinEvent());
         currentEvent.setJoinEvent(!currentEvent.isJoinEvent());
         statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
         statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");

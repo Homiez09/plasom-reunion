@@ -19,7 +19,6 @@ public class Event implements Comparable<Event>{
     private int slotMember;
     private final String timestamp;
     private boolean joinEvent;
-    private final boolean joinTeam;
     private ActivityList activityList;
     private UserList userList;
     public Event(String eventName,
@@ -44,7 +43,6 @@ public class Event implements Comparable<Event>{
         this.activityList = new ActivityList();
         this.userList = new UserList();
         this.joinEvent = true;
-        this.joinTeam = true;
     }
 
     public Event(String eventName,
@@ -70,7 +68,6 @@ public class Event implements Comparable<Event>{
         this.activityList = new ActivityList();
         this.userList = new UserList();
         this.joinEvent = true;
-        this.joinTeam = true;
     }
     //---------------- Read CSV ----------------\\
     public Event(String eventID,
@@ -84,8 +81,7 @@ public class Event implements Comparable<Event>{
                  String eventLocation,
                  int slotMember,
                  String timestamp,
-                 boolean joinEvent,
-                 boolean joinTeam) {
+                 boolean joinEvent) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
@@ -100,7 +96,6 @@ public class Event implements Comparable<Event>{
         this.activityList = new ActivityList();
         this.userList = new UserList();
         this.joinEvent = joinEvent;
-        this.joinTeam = joinTeam;
     }
     //---------------- Read CSV ----------------\\
     public String getEventID() {return eventID;}
@@ -124,7 +119,6 @@ public class Event implements Comparable<Event>{
     public String getEventLocation() { return eventLocation; }
     public ActivityList getActivityList() { return activityList; }
     public UserList getUserList(){return userList;}
-    public String getTimestamp() {return timestamp;}
     public LocalDateTime getDateStartAsDate(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         return  LocalDateTime.parse(eventDateStart, formatter);
@@ -187,8 +181,7 @@ public class Event implements Comparable<Event>{
                 +   eventLocation + ','
                 +   slotMember +','
                 +   timestamp+','
-                +   joinEvent+','
-                +   joinTeam;
+                +   joinEvent+',';
 
     }
 

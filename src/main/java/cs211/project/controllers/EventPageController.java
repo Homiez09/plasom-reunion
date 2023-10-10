@@ -4,6 +4,7 @@ import cs211.project.models.Event;
 import cs211.project.models.Activity;
 import cs211.project.models.User;
 import cs211.project.models.collections.ActivityList;
+import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
@@ -17,13 +18,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.HashMap;
 
 public class EventPageController {
     @FXML private AnchorPane navbarAnchorPane;
-    @FXML private StackPane imageStackPane;
     @FXML private Button editEventButton, joinEventButton,editActivityButton;
     @FXML private Text eventInformationText;
     @FXML private Label eventNameLabel,eventDateLabel,eventLocationLabel,eventTagLabel,currentParticipantsLabel;
@@ -31,6 +32,7 @@ public class EventPageController {
     @FXML private ImageView eventImageView;
     @FXML private Tab eventActivityTab;
     @FXML private TableView<Activity> eventActivityTableView;
+    @FXML private Text statusText;
     private Event event = (Event) FXRouter.getData2();
     private User user = (User) FXRouter.getData();
     private String from = (String) FXRouter.getData3();
@@ -50,7 +52,6 @@ public class EventPageController {
         initButton();
         showEventData();
     }
-
     // button to another page
     @FXML private void onEditButtonClick() {
         try {
@@ -88,7 +89,6 @@ public class EventPageController {
             throw new RuntimeException(e);
         }
     }
-
     @FXML private void onJoinEventAction() {
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
         if (hashMap.containsKey(event.getEventID())) {
@@ -117,6 +117,18 @@ public class EventPageController {
     }
     // set up page
     private void showEventData() {
+        if (event.isJoinEvent()) {
+            if (event.isFull()) {
+                statusText.setText("Full");
+            }else {
+                statusText.setStyle("-fx-fill: #50e150;");
+                statusText.setText("Open");
+            }
+        }else {
+            statusText.setStyle("-fx-fill: #ff5959;");
+            statusText.setText("Closed");
+        }
+
         String date = event.getEventDateStart()+" - " + event.getEventDateEnd();
         eventNameLabel.setText(event.getEventName());
         eventDateLabel.setText(date);
@@ -129,18 +141,12 @@ public class EventPageController {
         }else {
             currentParticipantsLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
         }
-        Image image = new Image("file:" + event.getEventImagePath(), 300, 350, true, false);
+        Image image = new Image("file:" + event.getEventImagePath(), 1925, 1375, false, false);
         if (event.getEventImagePath().equals("null")) {
             String imgpath = "/images/events/event-default.png";
-            image = new Image(getClass().getResourceAsStream(imgpath), 300, 350, true, false);
+            image = new Image(getClass().getResourceAsStream(imgpath), 1925, 1375, false, false);
         }
-        eventImageView.setImage(image);
-        eventImageView.setFitWidth(300);
-        eventImageView.setFitHeight(350);
-        eventImageView.setPreserveRatio(true);
-        Region transparentBackground = new Region();
-        transparentBackground.setStyle("-fx-background-color: transparent;");
-        imageStackPane.getChildren().addAll(transparentBackground);
+        eventImageView.setImage(image);;
 
         // activity table
         TableColumn<Activity,String> nameColumn = new TableColumn<>("Activity name");
@@ -175,19 +181,31 @@ public class EventPageController {
         }
         eventActivityTableView.setFixedCellSize(40);
     }
-
     private void initButton(){
         Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
         TeamList teamList = teamListDatasource.readData();
+        JoinTeamMap joinTeamData = new JoinTeamMap();
+        HashMap<String,TeamList> joinTeamMap = joinTeamData.readData();
+        BanUser banUser = new BanUser();
+        HashMap<User, EventList> banList = banUser.readData();
+        EventList eventList = banList.get(user);
 
         editEventButton.setVisible(event.isHostEvent(user));
         editActivityButton.setVisible(event.isHostEvent(user));
         joinEventButton.setVisible( user != null && event.isJoinEvent() &&
                                     !event.isFull() && !event.isEnd() &&
                                     !event.getUserList().getUsers().contains(user) &&
-                                    !event.isHostEvent(user));
-        teamApplyBox.setVisible(user != null && teamList.getTeamOfEvent(event) != null &&
-                teamList.getTeamOfEvent(event).size() > 0 && !event.isHostEvent(user));
-        eventActivityTab.setDisable((user == null || !event.getUserList().getUsers().contains(user)) && !event.isHostEvent(user));
+                                    !event.isHostEvent(user) &&
+                                    !joinTeamMap.containsKey(user.getUsername())
+        );
+        teamApplyBox.setVisible(user != null &&
+                                teamList.getTeamOfEvent(event) != null &&
+                                !teamList.getTeamOfEvent(event).isEmpty() &&
+                                !event.isHostEvent(user) &&
+                                !event.getUserList().getUsers().contains(user)&&
+                                !joinTeamMap.containsKey(user.getUsername()));
+        eventActivityTab.setDisable((user == null || !event.getUserList().getUsers().contains(user)
+                || banList.containsKey(user) && eventList.getEvents().contains(event) )
+                && !event.isHostEvent(user));
     }
 }

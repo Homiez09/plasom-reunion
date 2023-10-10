@@ -97,6 +97,10 @@ public class EventList {
         Event changeEvent = findEventById(event.getEventID());
         changeEvent.changeLocation(change);
     }
+    public void changeStatus(Event event,boolean join){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.setJoinEvent(join);
+    }
 
     public void sort(){
         Collections.sort(events);
