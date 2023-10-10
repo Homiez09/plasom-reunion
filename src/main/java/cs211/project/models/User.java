@@ -60,7 +60,7 @@ public class User implements Comparable<User> {
 
     private String generateLastedLogin() {
         LocalDateTime currentDate = LocalDateTime.now();
-        formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yy-MM-dd : hh:mm:ss").withLocale(Locale.US));
+        formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd : hh:mm:ss").withLocale(Locale.US));
         return formattedDate;
     }
 

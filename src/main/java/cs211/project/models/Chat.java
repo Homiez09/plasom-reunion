@@ -1,8 +1,9 @@
 package cs211.project.models;
 
+import cs211.project.services.GenerateRandomID;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 public class Chat implements Comparable<Chat> {
     private String messageId;
@@ -30,22 +31,8 @@ public class Chat implements Comparable<Chat> {
     }
 
     public String generateChatID() {
-        Random random = new Random();
-
         String id = "msg-";
-        int randomInt = random.nextInt(1000000);
-
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
-
-        for (int i = 0; i < 3; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-
-        id = id + randomText + randomInt;
-
+        id += new GenerateRandomID().getRandomText();
         return id;
     }
 

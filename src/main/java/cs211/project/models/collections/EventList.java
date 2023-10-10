@@ -2,10 +2,11 @@ package cs211.project.models.collections;
 
 import cs211.project.models.*;
 import cs211.project.services.*;
+
 import java.util.*;
 
 public class EventList {
-    private ArrayList<Event> events;
+    private final ArrayList<Event> events;
 
     public EventList() {
         events = new ArrayList<>();
@@ -33,14 +34,14 @@ public class EventList {
     public void addEvent(String eventId, User eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
-                         int slotMember,String timeStamp,boolean joinEvent,boolean joinTeam) {
+                         int slotMember,String timeStamp,boolean joinEvent) {
         eventId = eventId.trim();
         eventName = eventName.trim();
 
         Event exist = findEventById(eventId);
         if (exist == null && !eventName.equals("") && eventHost != null){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
-                                    eventLocation,slotMember,timeStamp,joinEvent,joinTeam));
+                                    eventLocation,slotMember,timeStamp,joinEvent));
         }
     }
 
@@ -123,6 +124,7 @@ public class EventList {
         list.getEvents().addAll(eventList.getEvents());
         list.getEvents().sort(cmp);
         Collections.reverse(list.getEvents());
+
         return list;
     }
 
@@ -131,7 +133,7 @@ public class EventList {
         EventList list = new EventList();
 
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
+        list.getEvents().sort(comparing);
 
         return list;
     }
@@ -140,7 +142,7 @@ public class EventList {
         Comparator<Event> comparing = Comparator.comparing(Event::getEventName);
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(),comparing);
+        list.getEvents().sort(comparing);
 
         return list;
     }
@@ -153,7 +155,7 @@ public class EventList {
         Comparator<Event> comparing = Comparator.comparing(Event::getEventTag);
         EventList list = new EventList();
         list.getEvents().addAll(eventList.getEvents());
-        Collections.sort(list.getEvents(), comparing);
+        list.getEvents().sort(comparing);
 
         EventList filteredList = new EventList();
 

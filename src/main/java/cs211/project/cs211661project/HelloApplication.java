@@ -39,9 +39,6 @@ public class HelloApplication extends Application {
         FXRouter.when("team-manage",resourcesPath + "team/" + "team-manage.fxml");
         FXRouter.when("edit-event-activity",resourcesPath+"edit-event-activity.fxml");
         FXRouter.when("join-team",resourcesPath+"join-team.fxml");
-
-
-
     }
 
     public static void main(String[] args) {

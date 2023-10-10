@@ -1,12 +1,9 @@
 package cs211.project.models.collections;
 
 import cs211.project.models.Event;
-import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.services.JoinEventMap;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UserList {
@@ -184,10 +181,10 @@ public class UserList {
     }
 
     public void sort(Comparator<User> cmp){
-        Collections.sort(users, cmp);
+        users.sort(cmp);
     }
 
-    public void reverse(Comparator<User> cmp){
+    public void reverse(){
         Collections.reverse(users);
     }
 }

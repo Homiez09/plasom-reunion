@@ -2,7 +2,7 @@ package cs211.project.controllers;
 
 
 import cs211.project.services.FXRouter;
-import cs211.project.services.LoadTopbarComponent;
+import cs211.project.services.LoadTopBarComponent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
@@ -12,7 +12,7 @@ public class WelcomeController {
     @FXML private AnchorPane topBarAnchorPane;
 
     @FXML private void initialize() {
-        new LoadTopbarComponent(topBarAnchorPane, true);
+        new LoadTopBarComponent(topBarAnchorPane, true);
     }
 
     @FXML protected void onSignInButtonClick()  throws IOException {

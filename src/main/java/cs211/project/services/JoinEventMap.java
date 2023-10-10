@@ -8,8 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
-    private String directoryName = "data";
-    private String fileName = "join-event.csv";
+    private final String directoryName = "data";
+    private final String fileName = "join-event.csv";
     private HashMap<String,UserList> hashMap;
     public JoinEventMap(){
         checkFileIsExisted();
@@ -110,9 +110,7 @@ public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
                         buffer.write(line);
                         buffer.newLine();
                     }
-
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }finally {

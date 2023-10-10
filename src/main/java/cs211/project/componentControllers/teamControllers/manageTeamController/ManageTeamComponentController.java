@@ -180,7 +180,7 @@ public class ManageTeamComponentController {
         UserList memberList = hashMap.get(teamID);
         memberList.sort(new UsernameUserComparator());
         if (nameSort) {
-            memberList.reverse(new UsernameUserComparator());
+            memberList.reverse();
         }
         memberContainer.getChildren().clear();
         for (User user : memberList.getUsers()) {
@@ -193,7 +193,7 @@ public class ManageTeamComponentController {
         UserList memberList = hashMap.get(teamID);
         memberList.sort(new RoleUserComparator());
         if (roleSort) {
-            memberList.reverse(new RoleUserComparator());
+            memberList.reverse();
         }
         memberContainer.getChildren().clear();
         for (User user : memberList.getUsers()) {
@@ -206,7 +206,7 @@ public class ManageTeamComponentController {
         UserList memberList = hashMap.get(teamID);
         memberList.sort(new StatusUserComparator());
         if (statusSort) {
-            memberList.reverse(new StatusUserComparator());
+            memberList.reverse();
         }
         memberContainer.getChildren().clear();
         for (User user : memberList.getUsers()) {

@@ -4,7 +4,6 @@ import cs211.project.models.collections.ActivityList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.GenerateRandomID;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

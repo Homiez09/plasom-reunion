@@ -4,8 +4,8 @@ import cs211.project.models.Chat;
 import cs211.project.models.collections.ChatHistory;
 
 public class UploadMessageThread implements Runnable {
-    private ChatHistoryDataSource chatHistoryDataSource = new ChatHistoryDataSource("data", "chat-history.csv");
-    private ChatHistory chatHistory = chatHistoryDataSource.readData();
+    private final ChatHistoryDataSource chatHistoryDataSource = new ChatHistoryDataSource("data", "chat-history.csv");
+    private final ChatHistory chatHistory = chatHistoryDataSource.readData();
 
     @Override
     public void run() {}

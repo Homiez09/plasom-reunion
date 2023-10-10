@@ -61,6 +61,7 @@ public class EventListDataSource implements Datasource<EventList> {
         BufferedReader buffer = new BufferedReader(inputStreamReader);
 
         String line = "";
+
         try {
             eventList = new EventList();
             // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด
@@ -85,13 +86,11 @@ public class EventListDataSource implements Datasource<EventList> {
                 int slotMember = Integer.parseInt(data[9].trim());
                 String timeStamp = data[10].trim();
                 boolean joinEvent = Boolean.parseBoolean(data[11].trim());
-                boolean joinTeam = Boolean.parseBoolean(data[12].trim());
-
-
 
                 eventList.addEvent(     eventId,eventHost, eventName, imagePath,eventTag, eventStart, eventEnd,
-                                        eventDescription, eventLocation, slotMember,timeStamp,joinEvent,joinTeam
+                                        eventDescription, eventLocation, slotMember,timeStamp,joinEvent
                                         );
+
                 for (Activity activity : activityList.getActivityOfEvent(eventId)){
                     eventList.findEventById(eventId).getActivityList().addActivity(activity);
                 }

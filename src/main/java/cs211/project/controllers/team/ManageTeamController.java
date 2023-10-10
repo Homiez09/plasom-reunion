@@ -12,6 +12,7 @@ import cs211.project.models.collections.TeamList;
 import cs211.project.models.collections.UserList;
 import cs211.project.services.*;
 import cs211.project.services.team.LoadSideBarComponent;
+import cs211.project.services.team.LoadUserCardProfileComponent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -322,7 +323,7 @@ public class ManageTeamController {
                     } else if (newValue.equals("View Profile")) {
 
                         setManageTeamDisableAnchorPane(true);
-                        loadUserCardProfileComponent(userCardProfileAnchorPane, user);
+                        new LoadUserCardProfileComponent(userCardProfileAnchorPane, user);
                         userCardProfileAnchorPane.setVisible(true);
                     }
 
@@ -339,26 +340,12 @@ public class ManageTeamController {
         memberContainer.add(manageTeamComponent, col, row);
     }
 
-    private void loadUserCardProfileComponent(AnchorPane userCardProfileAnchorPane, User user) {
-        try {
-            FXMLLoader userCardProfileComponentLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/user-card-profile.fxml"));
-            AnchorPane userCardProfileComponent = userCardProfileComponentLoader.load();
-
-            UserCardProfileController userCardProfileController = userCardProfileComponentLoader.getController();
-            userCardProfileController.setUser(user);
-
-            userCardProfileAnchorPane.getChildren().add(userCardProfileComponent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @FXML private void onSortNameClick() {
         if (hashMap.isEmpty()) return;
         UserList memberList = hashMap.get(teamID);
         memberList.sort(new UsernameUserComparator());
         if (nameSort) {
-            memberList.reverse(new UsernameUserComparator());
+            memberList.reverse();
         }
         for (User user : memberList.getUsers()) {
             loadManageTeamComponent(user, 0, memberList.getUsers().indexOf(user), teamID);
@@ -370,7 +357,7 @@ public class ManageTeamController {
         UserList memberList = hashMap.get(teamID);
         memberList.sort(new RoleUserComparator());
         if (roleSort) {
-            memberList.reverse(new RoleUserComparator());
+            memberList.reverse();
         }
         for (User user : memberList.getUsers()) {
             loadManageTeamComponent(user, 0, memberList.getUsers().indexOf(user), teamID);
@@ -382,7 +369,7 @@ public class ManageTeamController {
         UserList memberList = hashMap.get(teamID);
         memberList.sort(new StatusUserComparator());
         if (statusSort) {
-            memberList.reverse(new StatusUserComparator());
+            memberList.reverse();
         }
         for (User user : memberList.getUsers()) {
             loadManageTeamComponent(user, 0, memberList.getUsers().indexOf(user), teamID);

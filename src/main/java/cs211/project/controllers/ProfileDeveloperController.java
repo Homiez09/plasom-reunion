@@ -1,6 +1,6 @@
 package cs211.project.controllers;
 
-import cs211.project.services.LoadTopbarComponent;
+import cs211.project.services.LoadTopBarComponent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,7 +16,7 @@ public class ProfileDeveloperController {
     @FXML private AnchorPane topBarAnchorPane;
 
     @FXML private void initialize() {
-        new LoadTopbarComponent(topBarAnchorPane);
+        new LoadTopBarComponent(topBarAnchorPane);
         showProfile();
     }
 

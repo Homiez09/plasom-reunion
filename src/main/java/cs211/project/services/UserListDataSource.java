@@ -1,19 +1,14 @@
 package cs211.project.services;
 
-import cs211.project.models.Event;
 import cs211.project.models.User;
-import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 public class UserListDataSource implements Datasource<UserList> {
-    private String directoryName;
-    private String fileName;
-
-    private Datasource<UserList> datasource;
+    private final String directoryName;
+    private final String fileName;
     private UserList userList;
 
     public UserListDataSource(String directoryName, String fileName){
