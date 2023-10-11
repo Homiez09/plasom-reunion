@@ -55,7 +55,7 @@ public class CardUpcoming {
     }
 
     private void showImage(int pageNumber) {
-        Event event = null;
+        Event event;
         Image image;
 
         if (!eventList.getEvents().isEmpty()) {
@@ -64,7 +64,6 @@ public class CardUpcoming {
             } else {
                 event = eventList.getEvents().get(pageNumber);
             }
-
 
             if (event.getEventImagePath().equals("null"))
                 image = new Image(getClass().getResourceAsStream("/images/events/event-default-auth.png"));
