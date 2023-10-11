@@ -12,7 +12,6 @@ public class ProfileDeveloperController {
     @FXML private Label nickLabel, nickLabel1, nickLabel2, nickLabel3;
     @FXML private Label studentIdLabel, studentIdLabel1, studentIdLabel2, studentIdLabel3;
     @FXML private ImageView profileImageView, profileImageView1, profileImageView2, profileImageView3;
-
     @FXML private AnchorPane topBarAnchorPane;
 
     @FXML private void initialize() {

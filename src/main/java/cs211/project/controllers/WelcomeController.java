@@ -15,7 +15,7 @@ public class WelcomeController {
         new LoadTopBarComponent(topBarAnchorPane, true);
     }
 
-    @FXML protected void onSignInButtonClick()  throws IOException {
+    @FXML private void onSignInButtonClick()  throws IOException {
         FXRouter.goTo("sign-in");
     }
 }

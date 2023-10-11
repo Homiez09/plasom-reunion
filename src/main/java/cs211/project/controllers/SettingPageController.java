@@ -28,10 +28,10 @@ public class SettingPageController {
     @FXML
     Hyperlink privalcyHyperlink;
 
-    private User user = (User) FXRouter.getData();
+    private final User user = (User) FXRouter.getData();
 
     @FXML
-    public void initialize(){
+    private void initialize(){
         hidePane();
         loginPane.setVisible(true);
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -39,7 +39,7 @@ public class SettingPageController {
 
     }
 
-    public void hidePane(){
+    private void hidePane(){
         loginPane.setVisible(false);
         themePane.setVisible(false);
         privacyPane.setVisible(false);
@@ -56,7 +56,8 @@ public class SettingPageController {
     }
 
     // login page
-    public void onLoginButton(ActionEvent actionEvent) {
+    @FXML
+    private void onLoginButton() {
         hidePane();
         mainPane.setVisible(false);
         loginPane.setVisible(true);
@@ -64,14 +65,16 @@ public class SettingPageController {
     }
 
     // interface page
-    public void onThemeButton(ActionEvent actionEvent) {
+    @FXML
+    private void onThemeButton() {
         hidePane();
         mainPane.setVisible(false);
         themePane.setVisible(true);
 
     }
 
-    public void onPrivacyButton(ActionEvent actionEvent) {
+    @FXML
+    private void onPrivacyButton() {
         hidePane();
         mainPane.setVisible(false);
         privacyPane.setVisible(true);
@@ -80,7 +83,7 @@ public class SettingPageController {
     }
 
     @FXML
-    private void openDocxFile(ActionEvent actionEvent) {
+    private void openDocxFile() {
         File docxFile = new File("src/main/resources/data/Privacy.docx");
         try {
             Desktop.getDesktop().open(docxFile);
@@ -89,7 +92,7 @@ public class SettingPageController {
         }
     }
 
-    public void onContactButton(ActionEvent actionEvent) {
+    @FXML private void onContactButton() {
         hidePane();
         mainPane.setVisible(false);
         contactPane.setVisible(true);
@@ -97,42 +100,35 @@ public class SettingPageController {
     }
 
     // toggle switch
-    public void onToggleButton(ActionEvent actionEvent) {
+    @FXML
+    private void onToggleButton() {
         if (toggleButton.isSelected()) {
             ToggleOn();
         } else {
             ToggleOff();
         }
     }
-    public void ToggleOn(){
+    @FXML
+    private void ToggleOn(){
         offImageView.setVisible(false);
         onImageView.setVisible(true);
         switchImageView.setLayoutX(30);
     }
 
-    public void ToggleOff(){
+    @FXML
+    private void ToggleOff(){
         offImageView.setVisible(true);
         onImageView.setVisible(false);
         switchImageView.setLayoutX(0);
     }
 
 
-    public void onLogoutButton(ActionEvent actionEvent) {
+    @FXML
+    private void onLogoutButton() {
         try {
             FXRouter.goTo("welcome");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    public void onLightAction(ActionEvent actionEvent) {
-
-
-    }
-    public void onDarkAction(ActionEvent actionEvent) {
-
-
-
     }
 }

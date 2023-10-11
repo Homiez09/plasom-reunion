@@ -18,8 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class EditActivityController {
-    private User user = (User) FXRouter.getData();
-    private Event event = (Event) FXRouter.getData2();
+    private final User user = (User) FXRouter.getData();
+    private final Event event = (Event) FXRouter.getData2();
+
     @FXML private AnchorPane navbarAnchorPane,editActivityAnchorPane;
     @FXML private TableView editActivityTableview;
     @FXML private void initialize() {

@@ -17,13 +17,12 @@ import java.io.IOException;
 public class navbarController {
     @FXML private ImageView profileImageView;
     @FXML private ComboBox<String> toggleComboBox;
-    private User user = (User) FXRouter.getData();
-
-    UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
+    private final User user = (User) FXRouter.getData();
+    private final UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
     private UserList userList;
 
     @FXML private void initialize() {
-        String menu[] = {"profile", "setting", "logout"};
+        String[] menu = {"profile", "setting", "logout"};
 
         toggleComboBox.getItems().addAll(menu);
         toggleComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
@@ -51,15 +50,15 @@ public class navbarController {
         }
     }
 
-    @FXML protected void onHomeButtonClick() throws IOException {
+    @FXML private void onHomeButtonClick() throws IOException {
         FXRouter.goTo("home", user);
     }
 
-    @FXML public void onEventsButton() throws IOException {
+    @FXML private void onEventsButton() throws IOException {
         FXRouter.goTo("my-event", user);
     }
 
-    @FXML protected void onToggleProfileMenuClick() {
+    @FXML private void onToggleProfileMenuClick() {
         toggleComboBox.show();
     }
 

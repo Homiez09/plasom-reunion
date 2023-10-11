@@ -1,13 +1,10 @@
 package cs211.project.controllers;
 
-import cs211.project.componentControllers.EventTileController;
 import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.models.collections.EventList;
 import cs211.project.services.*;
-import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +12,6 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +26,7 @@ public class HomeController {
             recTileAnchorPane4,recTileAnchorPane5,recTileAnchorPane6;
     @FXML private MenuButton categoryButton,recSortMenuButton;
     @FXML private ImageView categoryButtonImage;
-    private User user = (User) FXRouter.getData();
+    private final User user = (User) FXRouter.getData();
     private Datasource<EventList> datasource;
     private EventList eventList,recEventList,newEventList,upEventList;
 

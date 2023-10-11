@@ -48,8 +48,8 @@ public class UserProfileController {
     private String displayName, password, contactNumber, bioText, previousDisplayName, previousContactNumber , previousBioText;
     private Boolean displayNameRequirement = false ,isValid = false, isValidContactNumber = false;
 
-    protected String userId ,username, previousBioCount, imagePath;
-    protected int row = 0, column = 0;
+    private String userId ,username, previousBioCount, imagePath;
+    private int row = 0, column = 0;
 
     private final int MAX_PASSWORD_LIMIT = 27,  MAX_DISPLAY_NAME_LIMIT = 24, MAX_CONTACT_LIMIT = 10, MAX_BIO_LIMIT = 300;
     private final User user = (User) FXRouter.getData();
@@ -119,6 +119,7 @@ public class UserProfileController {
         passwordField.setOnKeyPressed(enterEventHandler);
         showPasswordTextField.setOnKeyPressed(enterEventHandler);
     }
+
     private void maximumLengthField(){
         displayNameTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue.length() > MAX_DISPLAY_NAME_LIMIT) {
@@ -155,11 +156,13 @@ public class UserProfileController {
             }
         });
     }
+
     private void setRequirementLabel(){
         displayNameReq.setVisible(false);
         contactNumberReq.setVisible(false);
         passwordReq.setVisible(false);
     }
+
     private void showFocusRequirement() {
         displayNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
@@ -186,7 +189,6 @@ public class UserProfileController {
         bioTextArea.textProperty().addListener((observable, oldValue, newValue) -> bioProfileLabel.setText(newValue));
     }
 
-
     @FXML private void loadPasswordFieldAndButtonProfile() {
         displayNameReq.setVisible(false);
         passwordReq.setVisible(false);
@@ -202,6 +204,7 @@ public class UserProfileController {
         countBioLabel.setVisible(false);
         maximumCountBioLabel.setVisible(false);
     }
+
     @FXML private void loadPasswordFieldAndButtonEditProfile() {
         passwordField.setVisible(true);
         showPasswordTextField.setVisible(false);
@@ -214,6 +217,7 @@ public class UserProfileController {
         countBioLabel.setVisible(true);
         maximumCountBioLabel.setVisible(true);
     }
+
     @FXML private void loadIconImageProfile(){
         visiblePasswordImageView.setVisible(false);
         passwordIconImageView.setVisible(false);
@@ -221,6 +225,7 @@ public class UserProfileController {
         contactIconImageView.setVisible(false);
         avatarChangeView.setVisible(false);
     }
+
     @FXML private void loadIconImageEditProfile(){
         visiblePasswordImageView.setVisible(true);
         visiblePasswordImageView.setImage(hidePasswordImage);
@@ -239,6 +244,7 @@ public class UserProfileController {
             user.setShowContact(false);
         }
     }
+
     @FXML private void onContactExited(){
         hoverShowContactAnchorPane.setVisible(false);
     }
@@ -247,6 +253,7 @@ public class UserProfileController {
         setDefaultAvatarHover("true");
         checkCurrentTab();
     }
+
     @FXML private void onDefaultAvatarExited(){
         setDefaultAvatarHover("false");
         checkCurrentTab();
@@ -256,6 +263,7 @@ public class UserProfileController {
         checkCurrentTab();
         setDeviceAvatarHover("true");
     }
+
     @FXML private void onDeviceAvatarExited(){
         checkCurrentTab();
         setDeviceAvatarHover("false");
@@ -264,6 +272,7 @@ public class UserProfileController {
     @FXML private void onHoverAvatarChangeEntered(){
         hoverAvatarChangeAnchorPane.setVisible(avatarChangeView.isVisible());
     }
+
     @FXML private void onHoverAvatarChangeExited(){
         hoverAvatarChangeAnchorPane.setVisible(false);
     }
@@ -271,6 +280,7 @@ public class UserProfileController {
     @FXML private void onUploadAvatarEntered(){
         deviceProfileButtonImageView.setImage(hoverDeviceAvatarButtonIcon);
     }
+
     @FXML private void onUploadAvatarExited(){
         deviceProfileButtonImageView.setImage(deviceAvatarButtonIcon);
     }
@@ -280,16 +290,19 @@ public class UserProfileController {
         userList.updateUserShowContact(user.getUsername(), user.isShowContact());
         datasource.writeData(userList);
     }
+
     @FXML private void onBackClick(){
         profileAnchorPane.setDisable(false);
         profileAnchorPane.setEffect(null);
         changeAvatarAnchorPane.setVisible(false);
     }
+
     @FXML private void onAvatarChangeViewClick(){
         profileAnchorPane.setDisable(true);
         profileAnchorPane.setEffect(new BoxBlur(6, 5, 2));
         changeAvatarAnchorPane.setVisible(true);
     }
+
     @FXML private void onDefaultAvatarClick(){
         deviceAvatarAnchorPane.setVisible(false);
         defaultAvatarAnchorPane.setVisible(true);
@@ -301,6 +314,7 @@ public class UserProfileController {
         checkCurrentTab();
         onShowDefaultAvatar();
     }
+
     @FXML private void onDeviceAvatarClick(){
         deviceAvatarAnchorPane.setVisible(true);
         defaultAvatarAnchorPane.setVisible(false);
@@ -312,6 +326,7 @@ public class UserProfileController {
         checkCurrentTab();
         onShowDeviceAvatar();
     }
+
     @FXML private void onEditProfileButtonClick() {
         hoverAvatarChangeAnchorPane.setDisable(false);
 
@@ -335,6 +350,7 @@ public class UserProfileController {
         contactCheckBox.setVisible(false);
 
     }
+
     @FXML private void onCancelButtonClick() {
         contactCheckBox.setVisible(true);
         hoverAvatarChangeAnchorPane.setDisable(true);
@@ -371,6 +387,7 @@ public class UserProfileController {
             throw new RuntimeException(e);
         }
     }
+
     @FXML private void onVisiblePasswordClick() {
         if (visiblePasswordImageView.getImage() == hidePasswordImage) {
             passwordField.setVisible(false);
@@ -382,6 +399,7 @@ public class UserProfileController {
             visiblePasswordImageView.setImage(hidePasswordImage);
         }
     }
+
     @FXML private void onSaveButtonClick() {
         validateData();
         if (isValid) {
@@ -525,9 +543,11 @@ public class UserProfileController {
     @FXML private void onKeyDisplayName(){
         checkDisplayNameReq();
     }
+
     @FXML private void onKeyContactNumber(){
         checkContactNumberReq();
     }
+
     @FXML private void onKeyBioCountText(){
         if (saveButton.isVisible()) {
             bioText = bioTextArea.getText();
@@ -549,6 +569,7 @@ public class UserProfileController {
             dragEvent.acceptTransferModes(TransferMode.ANY);
         }
     }
+
     @FXML private void onHandleDrop(DragEvent dragEvent) {
         List<File> files = dragEvent.getDragboard().getFiles();
         if (!files.isEmpty()) {
@@ -590,7 +611,6 @@ public class UserProfileController {
         defaultAvatarContainerProfile();
 
     }
-
 
     private void loadImage() {
         Image contactIconProfile = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconProfile.png"));
@@ -640,9 +660,8 @@ public class UserProfileController {
 
         showPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
         hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
-
-
     }
+
     private void changeAvatarPopUp(){
         defaultAvatarContainerProfile();
 
@@ -654,6 +673,7 @@ public class UserProfileController {
         hoverAvatarChangeAnchorPane.setVisible(false);
         hoverShowContactAnchorPane.setVisible(false);
     }
+
     private void checkCurrentTab(){
         if(defaultAvatarAnchorPane.isVisible()){
             onShowDefaultAvatar();
@@ -699,6 +719,7 @@ public class UserProfileController {
         row = 0;
         column = 0;
     }
+
     private void setDefaultAvatarHover(String hover){
         if (hover.equals("false")) {
             defaultAvatarHover.setVisible(false);
@@ -712,6 +733,7 @@ public class UserProfileController {
             defaultAvatarImageView.setImage(hoverAvatarIcon);
         }
     }
+
     private void setDeviceAvatarHover(String hover){
         if (hover.equals("false")) {
             deviceAvatarHover.setVisible(false);
@@ -725,12 +747,14 @@ public class UserProfileController {
             deviceAvatarImageView.setImage(hoverDeviceAvatarIcon);
         }
     }
+
     private void onShowDefaultAvatar(){
         defaultAvatarLine.setVisible(true);
         defaultAvatarImageView.setImage(clickAvatarIcon);
         defaultAvatarLabel.setStyle("");
         defaultAvatarLabel.setStyle("-fx-text-fill: #F90");
     }
+
     private void onShowDeviceAvatar(){
         deviceAvatarLine.setVisible(true);
         deviceAvatarImageView.setImage(clickDeviceAvatarIcon);
@@ -752,11 +776,13 @@ public class UserProfileController {
             contactCheckBox.setSelected(false);
         }
     }
+
     private void validateData(){
         checkDisplayNameReq();
         checkContactNumberReq();
         isValid = displayNameRequirement && isValidContactNumber && bioTextArea.getText().length() <= 280 && checkValidatePassword();
     }
+
     private boolean checkValidatePassword(){
         if(password != null){
             return user.validatePassword(password);
@@ -764,6 +790,7 @@ public class UserProfileController {
             return false;
         }
     }
+
     private void checkDisplayNameReq(){
         displayNameRequirement = false;
         displayName = displayNameTextField.getText();
@@ -786,6 +813,7 @@ public class UserProfileController {
             }
         }
     }
+
     private void checkContactNumberReq(){
         isValidContactNumber = false;
         boolean isDigit = false,  isLength = false;
@@ -817,6 +845,7 @@ public class UserProfileController {
         bioTextArea.setEditable(editable);
         setStylesEditable(true);
     }
+
     private void setStylesEditable(boolean stylesEditable) {
         if (stylesEditable) {
             displayNameTextField.getStyleClass().clear();
@@ -848,6 +877,5 @@ public class UserProfileController {
         }
         return color;
     }
-
 }
 

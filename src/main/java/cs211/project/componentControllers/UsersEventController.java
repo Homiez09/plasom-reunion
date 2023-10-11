@@ -8,7 +8,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -17,23 +16,18 @@ import javafx.stage.Popup;
 
 import java.util.HashMap;
 
-
 public class UsersEventController extends CardMyEventController{
-    @FXML TableView<User> TableUsers;
-    @FXML TableColumn<User,String> statusColumn;
-    @FXML TableColumn<User,String> nameColumn;
-    @FXML TableColumn<User,String> usernameColumn;
-    @FXML TableColumn<User, ImageView> profileColumn;
-    @FXML TableColumn<User,Void> actionColumn;
-    @FXML Button statusButton;
-    @FXML Label eventNameLabel,userSizeLabel,statusLabel,totalLabel,inLabel;
-    @FXML Popup popup;
+    @FXML private TableView<User> TableUsers;
+    @FXML private TableColumn<User,String> statusColumn, nameColumn, usernameColumn;
+    @FXML private TableColumn<User, ImageView> profileColumn;
+    @FXML private TableColumn<User,Void> actionColumn;
+    @FXML private Button statusButton;
+    @FXML private Label eventNameLabel,userSizeLabel,statusLabel,totalLabel,inLabel;
+    @FXML private Popup popup;
     private JoinEventMap MapUserJoinEvent;
     private Event currentEvent;
     private ObservableList<User> banUserObservableList;
 
-    @FXML
-    public void initialize() {}
     public void setupData(Popup popup, Event event) {
         this.currentEvent = event;
         this.MapUserJoinEvent = new JoinEventMap();
@@ -60,6 +54,7 @@ public class UsersEventController extends CardMyEventController{
         statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
         showTable(userObservableList);
     }
+
     private void showTable(ObservableList<User> observableList) {
         // กำหนด column
 
@@ -87,12 +82,8 @@ public class UsersEventController extends CardMyEventController{
             return null;
         });
 
-        usernameColumn.setCellValueFactory(cellData -> {
-            return new SimpleStringProperty(cellData.getValue().getUsername());
-        });
-        nameColumn.setCellValueFactory(cellData -> {
-            return new SimpleStringProperty(cellData.getValue().getDisplayName());
-        });
+        usernameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDisplayName()));
         statusColumn.setCellValueFactory(cellData -> {
             // ในส่วนนี้คุณสามารถกำหนดวิธีการเข้าถึงข้อมูลแบบกำหนดเอง
             User user = cellData.getValue();
@@ -138,7 +129,8 @@ public class UsersEventController extends CardMyEventController{
         TableUsers.setItems(observableList);
 
     }
-    public void onComboBoxSelectionChanged(User user, String selectedOption,ObservableList<User> observableList) {
+
+    private void onComboBoxSelectionChanged(User user, String selectedOption,ObservableList<User> observableList) {
         if (user != null) {
             BanUser data = new BanUser();
             HashMap<User,EventList> getBan = data.readData();
@@ -188,7 +180,8 @@ public class UsersEventController extends CardMyEventController{
                 }
         }
     }
-    public void onStatusButton(ActionEvent actionEvent) {
+
+    @FXML private void onStatusButton() {
         Datasource<EventList> eventListDatasource = new EventListDataSource();
         EventList eventList = eventListDatasource.readData();
         eventList.changeStatus(currentEvent,!currentEvent.isJoinEvent());

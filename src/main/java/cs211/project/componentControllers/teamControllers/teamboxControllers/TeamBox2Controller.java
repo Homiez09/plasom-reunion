@@ -13,31 +13,27 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class TeamBox2Controller {
-
     @FXML private ImageView peopleImageView, roleImageView, activeImageView, faceImageView, bookMarkImageView, manageTeamImageView;
     @FXML private Label onlineLabel, teamNameLabel, teamIdLabel, roleLabel, bookmarkLabel, participantsLabel;
     @FXML private AnchorPane memberShipAnchorPane;
     @FXML private ComboBox menuDropDown;
     private Image unBookMarkIcon, bookMarkIcon;
-    private User user = (User) FXRouter.getData();
-    private Event event = (Event) FXRouter.getData2();
+    private final User user = (User) FXRouter.getData();
+    private final Event event = (Event) FXRouter.getData2();
     private boolean bookmarked = false, initBookMarkCheck = false;
-    JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, TeamList> teamListHashMap;
-    TeamList teamList;
-    SelectTeamController selectTeamController;
-
+    private JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private HashMap<String, TeamList> teamListHashMap;
+    private TeamList teamList;
+    private SelectTeamController selectTeamController;
 
     @FXML private void initialize() {
         loadIcon();
-
         memberShipAnchorPane.setVisible(false);
     }
 
@@ -60,12 +56,12 @@ public class TeamBox2Controller {
         initBookmark();
     }
     @FXML
-    private void onRoleEntered(MouseEvent event){
+    private void onRoleEntered(){
         memberShipAnchorPane.setVisible(true);
     }
 
     @FXML
-    private void onRoleExited(MouseEvent event){
+    private void onRoleExited(){
         memberShipAnchorPane.setVisible(false);
     }
 
@@ -148,29 +144,10 @@ public class TeamBox2Controller {
 
     private void initBookmark() {
         if (initBookMarkCheck) return;
-        if (bookmarkLabel.getText().equals("true")) {
-            bookmarked = true;
-        } else {
-            bookmarked = false;
-        }
+        bookmarked = bookmarkLabel.getText().equals("true");
         initBookMarkCheck = true;
     }
 
-    private void goTo(String page, Team team) throws IOException {
-        switch(page) {
-            case "Manage Team":
-//                selectTeamController.startManageTeam(team);
-                break;
-            case "Delete Team":
-                deleteTeam();
-                break;
-            case "Leave Team":
-                leaveTeam();
-                break;
-        }
-        menuDropDown.getSelectionModel().clearSelection();
-        FXRouter.goTo("select-team", user, event);
-    }
     private void deleteTeam(){
         TeamListDataSource dataSource = new TeamListDataSource("data","team-list.csv");
         TeamList teamList = dataSource.readData();

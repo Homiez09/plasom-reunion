@@ -7,18 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.time.LocalDate;
-
 public class CardJoinTeamController {
 
     @FXML private Label teamNameLabel, descriptionLabel, startDateLabel, endDateLabel, numberOfParticipantsLabel, maxParticipantsCapacityLabel;
     @FXML private ImageView joinTeamImageView, calendarImageView, participantsImageView;
-
-    protected Image joinTeamIcon, calendarIcon, participantsIcon;
-    protected LocalDate date;
-
-    Team team;
-    JoinTeamController joinTeamController;
+    private Image joinTeamIcon, calendarIcon, participantsIcon;
+    private Team team;
+    private JoinTeamController joinTeamController;
 
     @FXML private void initialize(){
         loadImageInit();
@@ -32,6 +27,7 @@ public class CardJoinTeamController {
         numberOfParticipantsLabel.setText(String.valueOf(team.getMemberList().getUsers().size()));
         maxParticipantsCapacityLabel.setText(String.valueOf(team.getMaxSlotTeamMember()));
     }
+
     private void loadImageInit(){
         joinTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group.png"));
         joinTeamImageView.setImage(joinTeamIcon);
@@ -46,6 +42,7 @@ public class CardJoinTeamController {
     public void setJoinTeamController(JoinTeamController joinTeamController) {
         this.joinTeamController = joinTeamController;
     }
+
     public void setTeam(Team team) {
         this.team = team;
     }

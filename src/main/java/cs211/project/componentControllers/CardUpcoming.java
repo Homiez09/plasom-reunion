@@ -16,15 +16,14 @@ public class CardUpcoming {
     @FXML private ImageView upComingEventsImageView;
     @FXML private Label eventUpComingDate, eventUpComingName, eventUpComingPlace;
 
-    EventListDataSource eventDatasource;
-    EventList eventList;
+    private final EventListDataSource eventDatasource = new EventListDataSource();
+    private EventList eventList;
 
     private int page = 0;
     private int maxPage;
 
     @FXML
     private void initialize() {
-        eventDatasource = new EventListDataSource();
         eventList = eventDatasource.readData();
         maxPage = (eventList.getUpcomingEvent().size() != 0) ? eventList.getUpcomingEvent().size() - 1 : eventList.getEvents().size() - 1;
         maxPage = Math.min(maxPage, 5);

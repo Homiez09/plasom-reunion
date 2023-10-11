@@ -1,6 +1,5 @@
 package cs211.project.controllers.team;
 
-import cs211.project.componentControllers.UserCardProfileController;
 import cs211.project.componentControllers.alertBox.DeleteTeamAlertBoxController;
 import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
 import cs211.project.componentControllers.teamControllers.manageTeamController.ManageMemberTeamListController;
@@ -48,7 +47,6 @@ public class ManageTeamController {
     @FXML private Label membersLabel, settingLabel;
     @FXML private ImageView nameImageView, roleImageView, statusImageView;
     @FXML private AnchorPane userCardProfileAnchorPane, manageTeamExitAnchorPane, manageTeamDisbleAnchorPane;
-
     @FXML private ImageView teamNameReqImageView, visiblePasswordImageView, passwordIconView;
     @FXML private Label teamIdLabel, dateRequirementLabel, countDescriptionLabel, nameRequirementLabel, summaryPeriodLabel, passwordReq, errorContinueLabel;
     @FXML private TextField teamNameTextField, showPasswordTextField;
@@ -60,33 +58,32 @@ public class ManageTeamController {
 
     private String description = "" , teamName = "", startDateFormat, endDateFormat, password="", teamID;
 
-    protected String[] time = {"AM", "PM"};
-    protected String[] startParts, endParts, startDateParts, endDateParts, startTimeParts, endTimeParts;
-
+    private final String[] time = {"AM", "PM"};
+    private String[] startParts, endParts, startDateParts, endDateParts, startTimeParts, endTimeParts;
     private LocalDateTime beforeStartDateTime ;
-    protected LocalDateTime beforeEndDateTime,afterStartDateTime , afterEndDateTime;
+    private LocalDateTime beforeEndDateTime,afterStartDateTime , afterEndDateTime;
     private LocalDate startDate, endDate;
 
     private final int MAX_TEAM_NAME_LIMIT = 35, MAX_DESCRIPTION_LIMIT = 280, MAX_PASSWORD_LIMIT = 27;
-    protected int minimumMember;
+    private int minimumMember;
 
-    protected Image nameIcon, roleIcon, statusIcon, showPasswordImage, hidePasswordImage;
+    private Image nameIcon, roleIcon, statusIcon, showPasswordImage, hidePasswordImage;
     private boolean teamNameRequirement = true, dateValidateRequirement = true;
     private boolean nameSort, roleSort, statusSort;
 
 
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
-    protected SpinnerValueFactory<Integer> numMemberSpin;
+    private SpinnerValueFactory<Integer> numMemberSpin;
 
 
-    TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
-    TeamList teamList = teamListDataSource.readData();
-    JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, UserList> hashMap;
+    private final TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+    private TeamList teamList = teamListDataSource.readData();
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private HashMap<String, UserList> hashMap;
 
-    UserListDataSource datasource;
-    UserList userList;
-    LoadSideBarComponent sideBarAnchorPaneLoad;
+    private UserListDataSource datasource;
+    private UserList userList;
+    private LoadSideBarComponent sideBarAnchorPaneLoad;
 
 
     @FXML
@@ -197,7 +194,7 @@ public class ManageTeamController {
             settingAnchorPane.setVisible(true);
         }
     }
-    protected void setSideBar() {
+    private void setSideBar() {
         SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
         sideBarTeamController.setHoverManageTeam();
     }
@@ -559,16 +556,16 @@ public class ManageTeamController {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
     }
+
     @FXML private void onKeyShowPassword() {
         passwordReq.setVisible(false);
         password = showPasswordTextField.getText();
         passwordField.setText(password);
     }
+
     @FXML private void onKeyTeamName(){
         checkTeamNameReq();
     }
-
-
 
     @FXML private void onKeyDescription(){
         description = teamDescriptionTextArea.getText();
@@ -583,8 +580,6 @@ public class ManageTeamController {
             countDescriptionLabel.setStyle("");
         }
     }
-
-
 
     private void maximumLengthField(){
         teamNameTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -679,6 +674,7 @@ public class ManageTeamController {
         numMemberSpin =new SpinnerValueFactory.IntegerSpinnerValueFactory(minimumMember, 1000000000, team.getMaxSlotTeamMember());
         numMemberSpinner.setValueFactory(numMemberSpin);
     }
+
     private void loadIcon() {
         nameIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
         roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
@@ -695,13 +691,12 @@ public class ManageTeamController {
 
         visiblePasswordImageView.setImage(hidePasswordImage);
     }
+
     public void closeAlertBox() {
         alertBoxAnchorPane.setVisible(false);
         manageTeamDisbleAnchorPane.setEffect(null);
         manageTeamDisbleAnchorPane.setDisable(false);
     }
-
-
 
     private void validatePeriod(){
         int startHour, startMinute;

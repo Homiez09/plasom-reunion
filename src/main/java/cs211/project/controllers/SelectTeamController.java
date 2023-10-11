@@ -42,19 +42,16 @@ public class SelectTeamController {
 
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
-
-    JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, TeamList> teamHashMap;
-
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private HashMap<String, TeamList> teamHashMap;
     private String filter = "All";
     private String teamBox ;
-
     private final String[] menu = {"Manage Teams", "Switch View"};
     private final String[] filters = {"All", "Favorite", "Owner", "Leader", "Member"};
-    Image create = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
-    Image createHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon_hover.png"));
-    Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
-    Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
+    private final Image create = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon.png"));
+    private final Image createHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/create_icon_hover.png"));
+    private final Image setting = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon.png"));
+    private final Image settingHover = new Image(getClass().getResourceAsStream("/images/icons/select-team/setting_icon_hover.png"));
 
     String teamSelectedComponentID = "";
     @FXML
@@ -153,12 +150,12 @@ public class SelectTeamController {
     }
 
     @FXML
-    protected void onSettingEntered() {
+    private void onSettingEntered() {
         settingImageView.setImage(settingHover);
     }
 
     @FXML
-    protected void onSettingExited() {
+    private void onSettingExited() {
         settingImageView.setImage(setting);
     }
 
@@ -322,7 +319,7 @@ public class SelectTeamController {
                 selectTeamAnchorPane.setDisable(true);
             }
         }
-        // this code will show warning, but it's work (IndexOutOfBoundsException) [todo : fix this warning]
+
         settingMenuComboBox.getSelectionModel().clearSelection();
     }
 

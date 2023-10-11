@@ -55,13 +55,9 @@ public class CreateActivityController {
         dateTimeErrorLabel.setVisible(false);
         limitCharacter();
 
-        if (activityNameTextField.getText() == "" || activityDescriptionTextField.getText() == "") {saveButton.setDisable(true);}
-        activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
-        });
-        activityDescriptionTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton);
-        });
+        if (activityNameTextField.getText().isEmpty() || activityDescriptionTextField.getText().isEmpty()) {saveButton.setDisable(true);}
+        activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton));
+        activityDescriptionTextField.textProperty().addListener((observable, oldValue, newValue) -> updateSaveButtonState(activityNameTextField, activityDescriptionTextField, saveButton));
     }
 
     // button to another page
@@ -178,11 +174,7 @@ public class CreateActivityController {
     }
 
     private void updateSaveButtonState(TextField name, TextField description, Button save) {
-        if (!name.getText().isEmpty() && !description.getText().isEmpty()) {
-            save.setDisable(false);
-        } else {
-            save.setDisable(true);
-        }
+        save.setDisable(name.getText().isEmpty() || description.getText().isEmpty());
     }
     private void limitCharacter() {
         activityNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {

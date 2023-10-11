@@ -52,24 +52,24 @@ public class TeamActivityController {
     private final ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
     private ActivityTeamList activityTeamList;
 
-    protected LocalDateTime startDateTime, endDateTime, beforeStartDateTime;
+    private LocalDateTime startDateTime, endDateTime, beforeStartDateTime;
     private LocalDateTime currentDateTime = LocalDateTime.now();
-    protected LocalDate startDate, endDate;
+    private LocalDate startDate, endDate;
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
 
-    protected String[] startTimeParts = {}, endTimeParts = {}, startParts = {}, endParts = {};
+    private String[] startTimeParts = {}, endTimeParts = {}, startParts = {}, endParts = {};
     private String startDateFormat, endDateFormat, description, beforeEditActivityName;
-    protected String activityName;
-    protected String formattedCurrentHour, startAmPm, endAmPm, beforeStartDateEditFormat, startDateFromCSV, endDateFromCSV;
+    private String activityName;
+    private String formattedCurrentHour, startAmPm, endAmPm, beforeStartDateEditFormat, startDateFromCSV, endDateFromCSV;
     private int beforeEditStartHour, beforeEditStartMinute;
     private int startHour, endHour,countInit = 0;
-    protected int currentMinute, startMinute, endMinute;
+    private int currentMinute, startMinute, endMinute;
     private int current_page = 0, max_page;
     private boolean activityNameRequirement = false, dateValidateRequirement = false, editor;
 
     private LoadSideBarComponent sideBarAnchorPaneLoad;
-    protected Image chat = new Image(getClass().getResourceAsStream("/images/icons/activity/chat.png"));
-    protected Image chat_hover = new Image(getClass().getResourceAsStream("/images/icons/activity/chat_hover.png"));
+    private final Image chat = new Image(getClass().getResourceAsStream("/images/icons/activity/chat.png"));
+    private final Image chat_hover = new Image(getClass().getResourceAsStream("/images/icons/activity/chat_hover.png"));
     private ActivityTeam activityTeamSelect;
 
     @FXML void initialize(){
@@ -110,7 +110,7 @@ public class TeamActivityController {
         }
     }
 
-    @FXML protected void onSaveActivityButtonClick() {
+    @FXML private void onSaveActivityButtonClick() {
         activityNameRequirement = false;
         checkActivityNameReq();
         checkDateReq();
@@ -143,7 +143,8 @@ public class TeamActivityController {
             }
         }
     }
-    @FXML protected void onDeleteActivityButtonClick() {
+
+    @FXML private void onDeleteActivityButtonClick() {
         ActivityTeam activityTeam = (ActivityTeam) activityTableView.getSelectionModel().getSelectedItem();
         activityTeamList.getActivities().remove(activityTeam);
         activityTeamListDataSource.writeData(activityTeamList);
@@ -153,24 +154,28 @@ public class TeamActivityController {
             throw new RuntimeException(e);
         }
     }
-    @FXML protected void onBackClick() {
+
+    @FXML private void onBackClick() {
         try {
             FXRouter.goTo("team-activity", user, event, team);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML protected void onCreateButtonClick() {
+
+    @FXML private void onCreateButtonClick() {
         showCreateActivity();
     }
-    @FXML protected void onCancelButtonClick() throws IOException {
+
+    @FXML private void onCancelButtonClick() throws IOException {
         FXRouter.goTo("team-activity", user, event, team);
     }
 
     @FXML private void onKeyActivityName(){
         checkActivityNameReq();
     }
-    @FXML protected void onKeyDescriptionCountText(){
+
+    @FXML private void onKeyDescriptionCountText(){
         description = descriptionTextArea.getText();
         countDescriptionLabel.setText(String.valueOf((int) description.length()));
         if (description.length() >= 280) {
@@ -201,11 +206,10 @@ public class TeamActivityController {
         previousImageView.setVisible(current_page != 0);
     }
 
-    protected void setSideBar(){
+    private void setSideBar(){
         SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
         sideBarTeamController.setHoverActivity();
     }
-
 
     private void dataInit(){
         dateRequirementLabel.setVisible(false);
@@ -217,6 +221,7 @@ public class TeamActivityController {
         Image checkBoxIcon = new Image(getClass().getResourceAsStream("/images/icons/team/create-team/check_box.png"));
         teamNameReqImageView.setImage(checkBoxIcon);
     }
+
     private void timeInit() {
         formattedCurrentHour = currentDateTime.format(DateTimeFormatter.ofPattern("hh").withLocale(Locale.US));
         if (currentDateTime.getHour() > 11) {
@@ -279,6 +284,7 @@ public class TeamActivityController {
             endMinuteSpinner.getValueFactory().setValue(0);
         }
     }
+
     private void choiceBoxInit() {
         startDateChoiceBox.getItems().addAll(time);
         endDateChoiceBox.getItems().addAll(time);
@@ -294,6 +300,7 @@ public class TeamActivityController {
             description = descriptionTextArea.getText();
         }
     }
+
     private void checkDateReq(){
         startDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> validatePeriod());
         endDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> validatePeriod());
@@ -304,6 +311,7 @@ public class TeamActivityController {
         startDateChoiceBox.valueProperty().addListener((observable, oldValue, newValue) -> validatePeriod());
         endDateChoiceBox.valueProperty().addListener((observable, oldValue, newValue) -> validatePeriod());
     }
+
     private void checkActivityNameReq() {
         activityName = activityNameTextField.getText();
         if (activityName.isEmpty()) {
@@ -323,6 +331,7 @@ public class TeamActivityController {
             setValidateNameRequirement(true);
         }
     }
+
     private void showFocusRequirement(){
         activityNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
@@ -361,6 +370,7 @@ public class TeamActivityController {
     private void userInit() {
         if (user.getRole().equals("Member")) createActivityButton.setVisible(false);
     }
+
     private void initStatus(ActivityTeam activityTeam) {
         statusComboBox.getItems().addAll(status);
         statusComboBox.getSelectionModel().select((activityTeam.getStatus() ? 1 : 0));

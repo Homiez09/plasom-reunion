@@ -26,8 +26,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.zip.DataFormatException;
 
 public class CreateEventController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -39,9 +37,9 @@ public class CreateEventController {
     @FXML private DatePicker eventStartDatePick,eventEndDatePick;
     @FXML private Spinner<Integer> eventStartHourSpinner,eventEndHourSpinner, eventStartMinuteSpinner,eventEndMinuteSpinner;
     @FXML private Button submitButton;
-    private String from = (String) FXRouter.getData3();
-    private Event thisEvent = (Event) FXRouter.getData2();
-    private User user = (User) FXRouter.getData();
+    private final String from = (String) FXRouter.getData3();
+    private final Event thisEvent = (Event) FXRouter.getData2();
+    private final User user = (User) FXRouter.getData();
     private String newEventImagePath = null;
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
@@ -224,13 +222,14 @@ public class CreateEventController {
     }
 
     private void showEventDetail(Event event) {
+        LocalDateTime eventStartDateTime = event.getDateStartAsDate();
+        LocalDateTime eventEndDateTime = event.getDateEndAsDate();
+
         eventNameTextField.setText(event.getEventName());
         eventLocationTextField.setText(event.getEventLocation());
         eventTagChoiceBox.setValue(event.getEventTag());
         eventDescriptionTextArea.setText(event.getEventDescription());
         eventCapTextField.setText(Integer.toString(event.getSlotMember()));
-        LocalDateTime eventStartDateTime = event.getDateStartAsDate();
-        LocalDateTime eventEndDateTime = event.getDateEndAsDate();
         eventStartDatePick.setValue(eventStartDateTime.toLocalDate());
         eventStartHourSpinner.getValueFactory().setValue(eventStartDateTime.getHour());
         eventStartMinuteSpinner.getValueFactory().setValue(eventStartDateTime.getMinute());

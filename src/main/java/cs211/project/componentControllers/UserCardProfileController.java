@@ -7,14 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class UserCardProfileController {
     @FXML private ImageView avatarProfileImageView, contactIconProfileImageView,  frameIconImageView, ellipseIconImageView;
     @FXML private Label bioProfileLabel, displayNameProfileLabel, idProfileLabel, usernameProfileLabel, contactProfileLabel;
     @FXML private AnchorPane hoverShowContactAnchorPane;
-    protected Image contactIcon, ellipseIcon, frameIcon;
+    private Image contactIcon, ellipseIcon, frameIcon;
 
     @FXML private void initialize(){
         loadIconInit();
@@ -41,10 +40,10 @@ public class UserCardProfileController {
     }
 
 
-    @FXML void onContactEntered(MouseEvent event) {
+    @FXML void onContactEntered() {
         hoverShowContactAnchorPane.setVisible(true);
     }
-    @FXML void onContactExited(MouseEvent event) {
+    @FXML void onContactExited() {
         hoverShowContactAnchorPane.setVisible(false);
     }
 

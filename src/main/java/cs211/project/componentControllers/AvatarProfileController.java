@@ -8,17 +8,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
-import java.io.IOException;
-
 public class AvatarProfileController {
     UserListDataSource datasource ;
     UserList userList ;
 
     @FXML private ImageView avatarProfileImageView;
-    @FXML protected AnchorPane currentAvatarAnchorPane;
+    @FXML private AnchorPane currentAvatarAnchorPane;
     @FXML private Shape hoverAvatarProfile;
 
-    @FXML private void initialize() throws IOException {
+    @FXML private void initialize() {
         datasource = new UserListDataSource("data","user-list.csv");
         userList = datasource.readData();
 
@@ -37,6 +35,7 @@ public class AvatarProfileController {
     public void setImage(Image defaultAvatarProfile) {
         avatarProfileImageView.setImage(defaultAvatarProfile);
     }
+
     public void currentAvatarCheckBox(Boolean currentImage){
         currentAvatarAnchorPane.setVisible(currentImage);
     }

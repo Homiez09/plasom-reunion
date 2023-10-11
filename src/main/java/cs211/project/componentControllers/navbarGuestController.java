@@ -10,7 +10,8 @@ public class navbarGuestController {
     private void initialize() {
     }
 
-    @FXML protected void onHomeButtonClick() {
+    @FXML
+    private void onHomeButtonClick() {
         try {
             FXRouter.goTo("home");
         } catch (IOException e) {
@@ -18,7 +19,7 @@ public class navbarGuestController {
         }
     }
     @FXML
-    protected void onSignUpButtonClick() {
+    private void onSignUpButtonClick() {
         try {
             FXRouter.goTo("sign-up");
         } catch (IOException e) {
@@ -26,7 +27,7 @@ public class navbarGuestController {
         }
     }
     @FXML
-    protected void onSignInButtonClick() {
+    private void onSignInButtonClick() {
         try {
             FXRouter.goTo("sign-in");
         } catch (IOException e) {
