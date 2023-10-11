@@ -68,7 +68,13 @@ public class EventPageController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }else {
+        }else if (from.equals("tile")) {
+            try {
+                FXRouter.goTo("home",user,null);
+            }catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
             try {
                 FXRouter.goTo("all-events",user,null);
             }catch (IOException e) {
