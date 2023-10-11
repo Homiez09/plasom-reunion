@@ -91,7 +91,7 @@
             <HBox alignment="CENTER_RIGHT" spacing="25.0">
                <children>
                   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButton" styleClass="delete-button" stylesheets="@../../../../css/event.css" text="Delete" />
-                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveButton" styleClass="page-button" stylesheets="@../../../../css/event.css" text="Save" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveButton" styleClass="save-button" stylesheets="@../../../../css/event.css" text="Save" />
                </children>
             </HBox>
          </children>

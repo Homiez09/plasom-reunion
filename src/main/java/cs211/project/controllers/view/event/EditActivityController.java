@@ -12,16 +12,14 @@ import cs211.project.services.LoadNavbarComponent;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
@@ -36,30 +34,29 @@ public class EditActivityController {
         ActivityList activityList = event.getActivityList();
 
         activityObservableList = FXCollections.observableList(event.getActivityList().sortActivity(activityList).getActivities());
+        editActivityTableview.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2 ) {
+                    Activity activity = (Activity) editActivityTableview.getSelectionModel().getSelectedItem();
+                    FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
+                    try {
+                        AnchorPane editActivityPage = createActivityLoader.load();
+                        editActivityAnchorPane.getChildren().add(editActivityPage);
+                        CreateActivityController createActivityController = createActivityLoader.getController();
+                        createActivityController.initEdit(user,event,activityObservableList,activity);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
 
         showTable(activityObservableList);
-//        editActivityTableview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Activity>() {
-//            @Override
-//            public void changed(ObservableValue observableValue, Activity oldValue, Activity newValue) {
-//                if(newValue != null) {
-//                    FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
-//                    try {
-//                        AnchorPane editActivityPage = createActivityLoader.load();
-//                        editActivityAnchorPane.getChildren().add(editActivityPage);
-//                        CreateActivityController createActivityController = createActivityLoader.getController();
-//                        createActivityController.initEdit(user,event,newValue.getActivityID());
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                }
-//            }
-//        });
 
     }
 
     private void showTable(ObservableList<Activity> observableList) {
-
-
         TableColumn<Activity,String> nameColumn = new TableColumn<>("Activity name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Activity,String> startTimeColumn = new TableColumn<>("Activity start");
@@ -175,7 +172,6 @@ public class EditActivityController {
         }
     }
     @FXML private void onBackClick() {
-
         try {
             FXRouter.goTo("event",user,event);
         } catch (IOException e) {

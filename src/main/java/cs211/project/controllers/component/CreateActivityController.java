@@ -7,6 +7,7 @@ import cs211.project.models.collections.ActivityList;
 import cs211.project.services.ActivityListDataSource;
 import cs211.project.services.Datasource;
 import cs211.project.services.FXRouter;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -19,26 +20,32 @@ import java.time.format.DateTimeFormatter;
 public class CreateActivityController {
     private User user;
     private Event event;
-    private Activity activity;
+    private Activity currentActivity;
     @FXML private Button deleteButton,saveButton;
     @FXML private TextField activityNameTextField,activityDescriptionTextField;
     @FXML private DatePicker activityStartDatePick,activityEndDatePick;
     @FXML private Label dateTimeErrorLabel;
     @FXML private Spinner<Integer> activityStartHourSpinner,activityEndHourSpinner, activityStartMinuteSpinner,activityEndMinuteSpinner;
     private Datasource<ActivityList> activityListDatasource;
+    private ObservableList<Activity> activityObservableList;
     private ActivityList activityList;
 
-    public void initEdit(User user,Event event,String activityID ) {
+    public void initEdit(User user, Event event, ObservableList<Activity> observableList, Activity activity ) {
         this.user = user;
         this.event = event;
-        this.activity = activityList.findActivity(activityID);
+        for (Activity current:observableList) {
+            if (current.getActivityID().equals(activity.getActivityID())) {
+                this.currentActivity = current;
+            }
+        }
+        this.activityObservableList = observableList;
         showActivity();
         deleteButton.setVisible(true);
     }
     public void initCreate(User user,Event event) {
         this.user = user;
         this.event = event;
-        this.activity = null;
+        this.currentActivity = null;
         showEventTime(event);
     }
 
@@ -69,8 +76,8 @@ public class CreateActivityController {
         }
     }
     @FXML private void onDeleteButton() {
-        activityList.removeActivity(activity.getActivityID());
-        event.getActivityList().removeActivity(activity.getActivityID());
+        activityList.removeActivity(currentActivity.getActivityID());
+        event.getActivityList().getActivities().remove(currentActivity);
         activityListDatasource.writeData(activityList);
         try {
             FXRouter.goTo("edit-event-activity",user,event);
@@ -96,17 +103,18 @@ public class CreateActivityController {
             return;
         }
 
-        if (activity == null) {
+        if (currentActivity == null) {
             Activity newActivity = new Activity(event.getEventID(),activityName,activityDescription,activityStart,activityEnd);
             event.getActivityList().addActivity(newActivity);
             activityList.addActivity(newActivity);
         } else {
-            activityList.findActivity(activity.getActivityID()).setDescription(activityDescription);
-            activityList.findActivity(activity.getActivityID()).setStartTime(activityStart);
-            activityList.findActivity(activity.getActivityID()).setEndTime(activityEnd);
-            activityList.findActivity(activity.getActivityID()).setName(activityName);
-        }
 
+            currentActivity.setDescription(activityDescription);
+            currentActivity.setStartTime(activityStart);
+            currentActivity.setEndTime(activityEnd);
+            currentActivity.setName(activityName);
+        }
+        activityList.changeData(currentActivity);
         activityListDatasource.writeData(activityList);
 
         try {
@@ -129,11 +137,11 @@ public class CreateActivityController {
         activityEndMinuteSpinner.getValueFactory().setValue(eventEndDateTime.getMinute());
     }
     private void showActivity() {
-        activityNameTextField.setText(activity.getName());
-        activityDescriptionTextField.setText(activity.getDescription());
+        activityNameTextField.setText(currentActivity.getName());
+        activityDescriptionTextField.setText(currentActivity.getDescription());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime activityStartDateTime = LocalDateTime.parse(activity.getStartTime(),formatter);
-        LocalDateTime activityEndDateTime = LocalDateTime.parse(activity.getEndTime(),formatter);
+        LocalDateTime activityStartDateTime = LocalDateTime.parse(currentActivity.getStartTime(),formatter);
+        LocalDateTime activityEndDateTime = LocalDateTime.parse(currentActivity.getEndTime(),formatter);
         activityStartDatePick.setValue(activityStartDateTime.toLocalDate());
         activityStartHourSpinner.getValueFactory().setValue(activityStartDateTime.getHour());
         activityStartMinuteSpinner.getValueFactory().setValue(activityStartDateTime.getMinute());
