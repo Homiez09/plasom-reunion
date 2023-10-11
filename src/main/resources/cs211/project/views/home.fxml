@@ -17,8 +17,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
-      <ScrollPane fx:id="homeScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="-6.0" layoutY="75.0" prefHeight="768.0" prefWidth="1164.0" styleClass="scroll-bar" stylesheets="@../../../css/event.css">
+<AnchorPane maxHeight="-Infinity" styleClass="bgProfile1" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
+      <ScrollPane fx:id="homeScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="-6.0" layoutY="75.0" prefHeight="689.0" prefWidth="1152.0" stylesheets="@../../../css/event.css">
           <content>
               <VBox fx:id="homeVbox" alignment="TOP_CENTER" prefHeight="2550.0" styleClass="bg">
                   <children>
@@ -66,7 +66,7 @@
                      <AnchorPane prefHeight="74.0" prefWidth="1147.0">
                         <children>
                                       <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                      <Label alignment="CENTER" layoutX="54.0" layoutY="38.0" prefHeight="43.0" prefWidth="344.0" text="Upcoming Events" AnchorPane.bottomAnchor="17.0">
+                                      <Label alignment="CENTER" layoutX="-23.0" layoutY="17.0" prefHeight="43.0" prefWidth="344.0" text="Upcoming Events" AnchorPane.bottomAnchor="15.0">
                                           <font>
                                               <Font size="16.0" />
                                           </font>
@@ -90,13 +90,17 @@
                                  <Font name="System Bold" size="24.0" />
                               </font>
                            </Button>
-                           <ScrollPane fx:id="upScrollPane" prefHeight="500.0" prefWidth="900.0" vbarPolicy="NEVER">
+                           <ScrollPane fx:id="upScrollPane" prefHeight="500.0" prefWidth="900.0" styleClass="scroll-bar" vbarPolicy="NEVER">
                               <content>
-                                              <HBox fx:id="upScrollHbox" alignment="CENTER" fillHeight="false" prefHeight="400.0" prefWidth="80.0" spacing="40.0" styleClass="bg">
-                                    <padding>
-                                       <Insets left="60.0" right="60.0" />
-                                    </padding>
-                                              </HBox>
+                                 <AnchorPane prefHeight="400.0" prefWidth="903.0" styleClass="bgProfile1">
+                                    <children>
+                                                    <HBox fx:id="upScrollHbox" alignment="CENTER" fillHeight="false" prefHeight="400.0" prefWidth="44.0" spacing="40.0" styleClass="bg">
+                                          <padding>
+                                             <Insets left="60.0" right="60.0" />
+                                          </padding>
+                                                    </HBox>
+                                    </children>
+                                 </AnchorPane>
                               </content>
                            </ScrollPane>
                            <Button fx:id="upRightButton" mnemonicParsing="false" onAction="#onUpRightButton" styleClass="tile-button" text="&gt;" textAlignment="CENTER">
@@ -113,10 +117,15 @@
                      <AnchorPane prefHeight="59.0" prefWidth="1136.0">
                         <children>
                                       <Separator opacity="0.0" orientation="VERTICAL" prefHeight="61.0" prefWidth="40.0" />
-                                      <Label layoutX="40.0" layoutY="15.199999809265137" styleClass="h1" text="New Events">
+                                      <Label layoutX="87.0" layoutY="19.0" text="New Events">
                                           <font>
                                               <Font name="Leelawadee UI Bold" size="24.0" />
                                           </font>
+                              <styleClass>
+                                 <String fx:value="up-coming-header" />
+                                 <String fx:value="font" />
+                                 <String fx:value="color-black" />
+                              </styleClass>
                                       </Label>
                            <Text layoutX="871.2000122070312" layoutY="44.28437423706055" onMouseClicked="#onNewExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
                               <font>
@@ -132,13 +141,17 @@
                                                 <Font name="System Bold" size="24.0" />
                                             </font>
                                         </Button>
-                           <ScrollPane fx:id="newScrollPane" prefHeight="460.0" prefWidth="900.0" vbarPolicy="NEVER">
+                           <ScrollPane fx:id="newScrollPane" prefHeight="460.0" prefWidth="900.0" styleClass="scroll-bar" vbarPolicy="NEVER">
                               <content>
-                                 <HBox fx:id="newScrollHbox" alignment="CENTER" fillHeight="false" prefHeight="400.0" prefWidth="80.0" spacing="40.0" styleClass="bg">
-                                    <padding>
-                                       <Insets left="60.0" right="60.0" />
-                                    </padding>
-                                 </HBox>
+                                 <AnchorPane prefHeight="400.0" prefWidth="899.0" styleClass="bgProfile1">
+                                    <children>
+                                       <HBox fx:id="newScrollHbox" alignment="CENTER" fillHeight="false" prefHeight="400.0" prefWidth="31.0" spacing="40.0" styleClass="bg">
+                                          <padding>
+                                             <Insets left="60.0" right="60.0" />
+                                          </padding>
+                                       </HBox>
+                                    </children>
+                                 </AnchorPane>
                               </content>
                            </ScrollPane>
                                         <Button fx:id="newRightButton" mnemonicParsing="false" onAction="#onNewRightButton" styleClass="tile-button" text="&gt;" textAlignment="CENTER">
@@ -160,10 +173,15 @@
                      <AnchorPane prefHeight="75.0" prefWidth="1152.0">
                         <children>
                            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                           <Label layoutX="40.0" layoutY="15.199999809265137" styleClass="h1" text="Recommended Events">
+                           <Label layoutX="72.0" layoutY="22.0" text="Recommended Events">
                               <font>
                                  <Font name="Leelawadee UI Bold" size="24.0" />
                               </font>
+                              <styleClass>
+                                 <String fx:value="up-coming-header" />
+                                 <String fx:value="font" />
+                                 <String fx:value="color-black" />
+                              </styleClass>
                            </Label>
                            <Text layoutX="288.79998779296875" layoutY="44.28437423706055" onMouseClicked="#onRecExploreClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="explore" text="EXPLORE MORE" textAlignment="RIGHT" AnchorPane.rightAnchor="50.0">
                               <font>
