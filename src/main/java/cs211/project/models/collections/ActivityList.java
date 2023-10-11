@@ -48,14 +48,11 @@ public class ActivityList {
         for (int i = 0; i < activities.size(); i++) {
             Activity oldData = activities.get(i);
             if (oldData.getActivityID().equals(newData.getActivityID())) {
-                // เมื่อคุณพบกิจกรรมที่ต้องการแทนที่
-                // คุณสามารถอัปเดตข้อมูลโดยใช้ newData
                 activities.set(i, newData);
-                break; // หยุดหากคุณเจอและอัปเดตกิจกรรมแล้ว
+                break;
             }
         }
     }
-
 
     public ArrayList<Activity> getActivities() {
         return activities;

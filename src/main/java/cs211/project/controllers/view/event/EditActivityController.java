@@ -27,7 +27,6 @@ public class EditActivityController {
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private ObservableList<Activity> activityObservableList;
-    private Activity select = null;
     @FXML private AnchorPane navbarAnchorPane,editActivityAnchorPane;
     @FXML private TableView editActivityTableview;
     @FXML private void initialize() {
@@ -40,11 +39,6 @@ public class EditActivityController {
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2 ) {
                     Activity activity = (Activity) editActivityTableview.getSelectionModel().getSelectedItem();
-                    for (Activity compare:activityObservableList) {
-                        if (compare.getActivityID().equals(activity.getActivityID())){
-                            select = compare;
-                        }
-                    }
                     FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
                     try {
                         AnchorPane editActivityPage = createActivityLoader.load();
