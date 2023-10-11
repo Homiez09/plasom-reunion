@@ -190,7 +190,7 @@ public class EventPageController {
         editEventButton.setVisible(event.isHostEvent(user));
         editActivityButton.setVisible(event.isHostEvent(user));
 
-        TeamList teamTempCheck = (joinTeamMap.containsKey(user.getUsername())) ? joinTeamMap.get(user.getUsername()) : new TeamList();
+        TeamList teamTempCheck = (user != null && joinTeamMap.containsKey(user.getUsername())) ? joinTeamMap.get(user.getUsername()) : new TeamList();
         joinEventButton.setVisible( user != null && event.isJoinEvent() &&
                                     !event.isFull() && !event.isEnd() &&
                                     !event.getUserList().getUsers().contains(user) &&
