@@ -33,7 +33,7 @@ public class EventPageController {
     @FXML private ImageView eventImageView;
     @FXML private Tab eventActivityTab;
     @FXML private TableView<Activity> eventActivityTableView;
-    @FXML private Text statusText;
+
     private final Event event = (Event) FXRouter.getData2();
     private final User user = (User) FXRouter.getData();
     private final String from = (String) FXRouter.getData3();
@@ -118,18 +118,6 @@ public class EventPageController {
     }
     // set up page
     private void showEventData() {
-        if (event.isJoinEvent()) {
-            if (event.isFull()) {
-                statusText.setText("Full");
-            }else {
-                statusText.setStyle("-fx-fill: #50e150;");
-                statusText.setText("Open");
-            }
-        }else {
-            statusText.setStyle("-fx-fill: #ff5959;");
-            statusText.setText("Closed");
-        }
-
         String date = event.getEventDateStart()+" - " + event.getEventDateEnd();
         eventNameLabel.setText(event.getEventName());
         eventDateLabel.setText(date);

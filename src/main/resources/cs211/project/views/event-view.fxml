@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -128,12 +127,6 @@
                                        </padding>
                                     </VBox>
                                     <StackPane layoutX="213.0" layoutY="13.0" styleClass="stack-pane-label" />
-                                    <Text fx:id="statusText" layoutX="174.0" layoutY="63.0" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="160.13671875">
-                                       <styleClass>
-                                          <String fx:value="font" />
-                                          <String fx:value="text-2xl" />
-                                          <String fx:value="weight-bold" />
-                                       </styleClass></Text>
                                  </children>
                               </AnchorPane>
                               <TabPane prefWidth="1152.0" styleClass="page-bg" tabClosingPolicy="UNAVAILABLE">
