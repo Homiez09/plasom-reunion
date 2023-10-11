@@ -1,6 +1,6 @@
 package cs211.project.services.team;
 
-import cs211.project.componentControllers.sideBarControllers.SideBarTeamController;
+import cs211.project.controllers.component.sideBarControllers.SideBarTeamController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 

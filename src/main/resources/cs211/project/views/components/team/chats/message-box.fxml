@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="61.0" prefWidth="579.0" stylesheets="@../../../../../../css/team/team-chat.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.team.MessageBoxController">
+<AnchorPane prefHeight="61.0" prefWidth="579.0" stylesheets="@../../../../../../css/team/team-chat.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.team.MessageBoxController">
    <children>
       <AnchorPane fx:id="otherAnchorPane" disable="true" layoutX="21.0" prefHeight="61.0" prefWidth="375.0" visible="false">
          <children>

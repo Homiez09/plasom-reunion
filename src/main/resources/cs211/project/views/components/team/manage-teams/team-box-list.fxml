@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="50.0" prefWidth="785.0" style="-fx-background-color: #F5E7D1;" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.manageTeamsController.ManageTeamsBoxController">
+<AnchorPane prefHeight="50.0" prefWidth="785.0" style="-fx-background-color: #F5E7D1;" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.teamControllers.manageTeamsController.ManageTeamsBoxController">
    <children>
       <ComboBox fx:id="menuDropDown" layoutX="572.0" layoutY="-2.0" prefWidth="150.0" styleClass="setting-select-team-dropdown" />
       <Label fx:id="teamNameLabel" layoutX="24.0" layoutY="14.0" prefHeight="22.0" prefWidth="177.0" text="teamNameLabel">

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="325.0" prefWidth="250.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.EventTileController">
+<AnchorPane prefHeight="325.0" prefWidth="250.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.EventTileController">
    <children>
       <AnchorPane prefHeight="325.0" prefWidth="250.0" styleClass="event-card" onMouseClicked="#onEventTileClick">
          <children>

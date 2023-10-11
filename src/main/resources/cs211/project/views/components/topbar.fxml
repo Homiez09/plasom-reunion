@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="60.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.topBarController">
+<AnchorPane prefHeight="60.0" prefWidth="1152.0" stylesheets="@../../../../css/style2.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.topBarController">
       <children>
       <Button fx:id="backButton" layoutX="103.0" layoutY="12.0" mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="top-bar-items" text="&lt; Back" />
          <HBox alignment="CENTER_RIGHT" layoutX="544.0" layoutY="11.0" prefHeight="38.0" prefWidth="575.0">
