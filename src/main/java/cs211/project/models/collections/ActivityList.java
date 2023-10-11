@@ -38,6 +38,12 @@ public class ActivityList {
         return null;
     }
 
+    public void swapDate(Activity activity){
+        Activity data = findActivity(activity.getActivityID());
+        data.setStartTime(activity.getStartTime());
+        data.setEndTime(activity.getEndTime());
+    }
+
     public ArrayList<Activity> getActivities() {
         return activities;
     }
