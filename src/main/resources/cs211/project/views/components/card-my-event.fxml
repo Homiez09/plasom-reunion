@@ -41,7 +41,7 @@
                   <Separator opacity="0.0" prefHeight="8.0" />
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Label fx:id="startDateLabel" styleClass="font" text="TUE, 22/11/2022 | 12:00:00 PM">
+                        <Label fx:id="startDateLabel" prefHeight="25.0" prefWidth="253.0" styleClass="font" text="TUE, 22/11/2022 | 12:00:00 PM">
                            <graphic>
                               <ImageView fx:id="personIconImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -101,7 +101,7 @@
                            </children>
                         </HBox>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="20.0" />
-                        <Button fx:id="forStaffButton" mnemonicParsing="false" onAction="#onForStaffButton" styleClass="button-staff" text="Staff">
+                        <Button fx:id="forStaffButton" mnemonicParsing="false" onAction="#onForStaffButton" styleClass="edit-profile-button" text="Staff" textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -114,7 +114,7 @@
                            </font>
                         </Button>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="11.0" />
-                        <Button fx:id="manageUserButton" mnemonicParsing="false" onAction="#onManageUserButton" styleClass="button-manage" text="Manage User">
+                        <Button fx:id="manageUserButton" mnemonicParsing="false" onAction="#onManageUserButton" styleClass="ok-join-team-button" text="Manage User">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -124,7 +124,7 @@
                            </graphic>
                         </Button>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="11.0" />
-                        <Button fx:id="leaveEventButton" mnemonicParsing="false" onAction="#onLeaveEventButton" styleClass="button-leave" text="Leave">
+                        <Button fx:id="leaveEventButton" mnemonicParsing="false" onAction="#onLeaveEventButton" prefHeight="33.0" prefWidth="82.0" styleClass="button-leave" text="Leave">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

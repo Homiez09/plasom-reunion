@@ -1213,8 +1213,8 @@
 }
 
 .my-event-card .button-leave{
-    -fx-background-color: linear-gradient(#EF7B57,#f29578);
-    -fx-background-radius: 14px;
+    -fx-background-color: #EF7B57;
+    -fx-background-radius: 12;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
     -fx-text-fill: #FFFFFF;
     -fx-scale-x: 1;
@@ -1223,17 +1223,17 @@
 
 }
 .my-event-card .button-leave:hover{
-    -fx-background-color: linear-gradient(#f5af9a,#f8cabb);
-    -fx-background-radius: 14px;
+    -fx-background-color: #FB8560;
+    -fx-background-radius: 12;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
     -fx-text-fill: #FFFFFF;
 
 }
 .my-event-card .button-leave:pressed{
-    -fx-background-color: linear-gradient(#bcbcbc, #eeeeee);
-    -fx-background-radius: 14px;
+    -fx-background-color: #F98F6E;
+    -fx-background-radius: 12;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
-    -fx-text-fill: #bcbcbc;
+    -fx-text-fill: #FFFFFF;
     -fx-scale-x: 0.9;
     -fx-scale-y: 0.9;
     -fx-transition-duration: 0.3s;

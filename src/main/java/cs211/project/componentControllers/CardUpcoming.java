@@ -20,12 +20,13 @@ public class CardUpcoming {
     EventList eventList;
 
     private int page = 0;
-    private final int maxPage = 5;
+    private int maxPage;
 
     @FXML
     private void initialize() {
         eventDatasource = new EventListDataSource();
         eventList = eventDatasource.readData();
+        maxPage = (eventList.getUpcomingEvent().size() != 0) ? eventList.getUpcomingEvent().size() - 1 : eventList.getEvents().size() - 1;
 
         showImage(page);
         updateVisibleButton();

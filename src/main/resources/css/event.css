@@ -5,10 +5,10 @@
 -fx-background-color: #FFF5E5;
 }
 .page-button{
-    -fx-font-size: 12;
-    -fx-background-color: #f8bc59;
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
+    -fx-font-size: 14;
+    -fx-background-color: transparent;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
     -fx-border-color: #F6F4EE;
     -fx-border-width: 2;
     -fx-text-fill: #413B3B;
@@ -16,19 +16,19 @@
     -fx-scale-y: 1;
 }
 .page-button:hover{
-    -fx-font-size: 12;
-    -fx-background-color: #f9c97a;
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
+    -fx-font-size: 14;
+    -fx-background-color: transparent;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
     -fx-border-color: #f6f5ef;
     -fx-border-width: 2;
     -fx-text-fill: #413B3B;
 }
 .page-button:pressed{
-    -fx-font-size: 12;
-    -fx-background-color: #dfa950;
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
+    -fx-font-size: 14;
+    -fx-background-color: transparent;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
     -fx-border-color: #F6F4EE;
     -fx-border-width: 2;
     -fx-text-fill: #413B3B;

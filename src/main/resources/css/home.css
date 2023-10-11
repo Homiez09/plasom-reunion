@@ -9,7 +9,7 @@
  -fx-background-color:  #FF971D;
 }
 .top-banner{
--fx-background-color: linear-gradient(to right,#FF971D, #F9F6F7);
+-fx-background-color: linear-gradient(to right,#FFA31A,#FFC473,#FFC473,#FFC473);
 }
 .tile-button{
 -fx-font-family: Consolas;
@@ -77,6 +77,11 @@
 }
 
 .h1{
+ -fx-font-size: 18;
+ -fx-font-weight: bold;
+}
+
+.up-coming-header{
  -fx-font-size: 18;
  -fx-font-weight: bold;
 }
