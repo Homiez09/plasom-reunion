@@ -36,9 +36,10 @@ public class EditActivityController {
     @FXML private TableView editActivityTableview;
     @FXML private void initialize() {
         new LoadNavbarComponent(user, navbarAnchorPane);
+        ActivityList activityList = event.getActivityList();
 
-        activityObservableList = FXCollections.observableList(event.getActivityList().getActivities());
-        activityObservableList.sort(Comparator.comparing(Activity::getStartTime));
+        activityObservableList = FXCollections.observableList(event.getActivityList().sortActivity(activityList).getActivities());
+
         showTable(activityObservableList);
 //        editActivityTableview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Activity>() {
 //            @Override
@@ -139,6 +140,7 @@ public class EditActivityController {
 
 
             row.setOnDragExited(event -> {
+                saveData();
                 editActivityTableview.getSelectionModel().clearSelection();
                 row.setStyle("");
             });
@@ -165,7 +167,6 @@ public class EditActivityController {
     }
 
     @FXML private void onCreateActivityButtonClick() {
-        saveData();
         FXMLLoader createActivityLoader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/create-event-activity.fxml"));
         try {
             AnchorPane editActivityPage = createActivityLoader.load();
@@ -177,7 +178,7 @@ public class EditActivityController {
         }
     }
     @FXML private void onBackClick() {
-        saveData();
+
         try {
             FXRouter.goTo("event",user,event);
         } catch (IOException e) {
