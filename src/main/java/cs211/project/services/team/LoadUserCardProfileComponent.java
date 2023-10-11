@@ -1,6 +1,6 @@
 package cs211.project.services.team;
 
-import cs211.project.componentControllers.UserCardProfileController;
+import cs211.project.controllers.component.UserCardProfileController;
 import cs211.project.models.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;

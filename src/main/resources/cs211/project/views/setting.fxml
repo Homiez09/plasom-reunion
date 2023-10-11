@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.SettingPageController">
+<VBox alignment="CENTER" focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.SettingPageController">
    <children>
       <AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="all-event-background">
          <children>

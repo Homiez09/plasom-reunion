@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="signIn-signup-background1" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.SignUpController">
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="signIn-signup-background1" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.auth.SignUpController">
    <children>
       <ImageView fx:id="signBackgroundImageView" fitHeight="768.0" fitWidth="615.0" layoutY="1.0" />
       <BorderPane fx:id="eventListImageView" prefHeight="768.0" prefWidth="610.0">

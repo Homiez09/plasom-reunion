@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventAnchorPane" onMouseClicked="#onClickCard" styleClass="my-event-card" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardMyEventController">
+<AnchorPane fx:id="eventAnchorPane" onMouseClicked="#onClickCard" styleClass="my-event-card" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.CardMyEventController">
    <opaqueInsets>
       <Insets bottom="5.0" top="5.0" />
    </opaqueInsets>
