@@ -59,10 +59,10 @@ public class CardUpcoming {
         Image image;
 
         if (!eventList.getEvents().isEmpty()) {
-            if (eventList.getUpcomingEvent().size() == 0) {
+            if (eventList.getUpcomingEvent().size() != 0) {
                 event = eventList.getUpcomingEvent().get(pageNumber);
             } else {
-                event = eventList.getUpcomingEvent().get(pageNumber);
+                event = eventList.getEvents().get(pageNumber);
             }
 
 
