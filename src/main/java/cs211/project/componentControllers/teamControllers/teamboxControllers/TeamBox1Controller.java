@@ -13,10 +13,8 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -62,13 +60,13 @@ public class TeamBox1Controller {
         initBookmark();
     }
     @FXML
-    private void onRoleEntered(MouseEvent event){
+    private void onRoleEntered(){
         memberShipAnchorPane.setVisible(true);
         participantsAnchorPane.setVisible(false);
     }
 
     @FXML
-    private void onRoleExited(MouseEvent event){
+    private void onRoleExited(){
         memberShipAnchorPane.setVisible(false);
     }
 
@@ -91,12 +89,12 @@ public class TeamBox1Controller {
         }
     }
 
-    @FXML private void onParticipantsEntered(MouseEvent event){
+    @FXML private void onParticipantsEntered(){
         participantsAnchorPane.setVisible(true);
         memberShipAnchorPane.setVisible(false);
     }
 
-    @FXML private void onParticipantsExited(MouseEvent event){
+    @FXML private void onParticipantsExited(){
         participantsAnchorPane.setVisible(false);
     }
 
@@ -160,11 +158,7 @@ public class TeamBox1Controller {
 
     private void initBookmark() {
         if (initBookMarkCheck) return;
-        if (bookmarkLabel.getText().equals("true")) {
-            bookmarked = true;
-        } else {
-            bookmarked = false;
-        }
+        bookmarked = bookmarkLabel.getText().equals("true");
         initBookMarkCheck = true;
     }
 

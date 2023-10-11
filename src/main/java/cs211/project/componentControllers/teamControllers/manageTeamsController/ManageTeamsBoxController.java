@@ -19,7 +19,7 @@ public class ManageTeamsBoxController {
     @FXML private ImageView bookMarkImageView, roleImageView, menuImageView;
     @FXML private Label teamNameLabel, roleLabel, teamSizeLabel;
     @FXML private ComboBox menuDropDown;
-    private User user = (User) FXRouter.getData();
+    private final User user = (User) FXRouter.getData();
     private boolean bookmarked = false, initBookMarkCheck = false;
     private Image unBookMarkIcon, bookMarkIcon;
     private JoinTeamMap joinTeamMap = new JoinTeamMap();
@@ -63,7 +63,6 @@ public class ManageTeamsBoxController {
         }
     }
 
-
     @FXML
     private void onBookMarkExited() {
         if(bookmarked) {
@@ -71,11 +70,6 @@ public class ManageTeamsBoxController {
         } else {
             bookMarkImageView.setImage(unBookMarkIcon);
         }
-    }
-
-    @FXML
-    protected void onMenuDropDownComponentClick() {
-        menuDropDown.show();
     }
 
     public void setSelectTeamController(SelectTeamController selectTeamController) {

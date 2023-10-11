@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -19,6 +18,7 @@ public class CardEventController {
     private final User currentUser = (User) FXRouter.getData();
     @FXML
     private void initialize() {}
+
     public void setEvent(Event data) {
         this.event = data;
         if (event != null) {
@@ -53,7 +53,7 @@ public class CardEventController {
         }
     }
 
-    public void onClickCard(MouseEvent mouseEvent) {
+    @FXML private void onClickCard() {
             try {
                 FXRouter.goTo("event",currentUser,event,"card-event");
             } catch (IOException e) {

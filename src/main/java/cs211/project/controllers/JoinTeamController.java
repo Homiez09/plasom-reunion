@@ -39,8 +39,8 @@ public class JoinTeamController {
     private String sortComboBoxValue = "A-Z";
     private final int MAX_SEARCH_TEAM_NAME_LIMIT = 40;
 
-    protected User user = (User) FXRouter.getData();
-    protected Event event = (Event) FXRouter.getData2();
+    private final User user = (User) FXRouter.getData();
+    private final Event event = (Event) FXRouter.getData2();
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
     TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
@@ -116,8 +116,8 @@ public class JoinTeamController {
         teamContainer.getChildren().clear();
         loadCardTeamInit();
         sortComboBox.getSelectionModel().clearSelection();
-
     }
+
     private void setSortType(){
         switch (sortComboBoxValue) {
             case "A-Z" -> {
@@ -138,6 +138,7 @@ public class JoinTeamController {
             }
         }
     }
+
     private void setStaffButtonVisible(){
         if (teamListHashMap.containsKey(user.getUsername())) {
             TeamList teamList = teamListHashMap.get(user.getUsername());
@@ -158,6 +159,7 @@ public class JoinTeamController {
         joinTeamAnchorPane.setVisible(false);
         sortComboBox.setVisible(false);
     }
+
     @FXML void onBackClick() {
         try {
             FXRouter.goTo("event",user,event);

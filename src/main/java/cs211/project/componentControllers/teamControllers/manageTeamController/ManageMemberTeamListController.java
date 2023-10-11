@@ -21,11 +21,11 @@ public class ManageMemberTeamListController {
     @FXML private ImageView roleImageView, statusImageView, menuImageView;
     @FXML private Label userIdLabel;
     @FXML private ComboBox menuComboBox;
-    protected Image roleIcon, statusIcon, menuIcon;
-    BanTeamMap banHashMap = new BanTeamMap();
-    JoinTeamMap joinTeamMap = new JoinTeamMap();
-    ManageTeamComponentController manageTeamComponentController;
-    ManageTeamController manageTeamController;
+    private Image roleIcon, statusIcon, menuIcon;
+    private BanTeamMap banHashMap = new BanTeamMap();
+    private JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private ManageTeamComponentController manageTeamComponentController;
+    private ManageTeamController manageTeamController;
 
     @FXML private void initialize() {
         loadImageInit();

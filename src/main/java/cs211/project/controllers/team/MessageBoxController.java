@@ -13,9 +13,9 @@ import javafx.scene.text.Text;
 
 public class MessageBoxController {
     @FXML private Text messageText, messageText2, messageText3;
-    @FXML protected Label nameLabel, timeLabel, timeLabel2, timeLabel3;
-    @FXML protected ImageView profileImageView;
-    @FXML protected AnchorPane otherAnchorPane, midAnchorPane, selfAnchorPane;
+    @FXML private Label nameLabel, timeLabel, timeLabel2, timeLabel3;
+    @FXML private ImageView profileImageView;
+    @FXML private AnchorPane otherAnchorPane, midAnchorPane, selfAnchorPane;
     private User user;
 
     protected void setChat(Chat chat) {

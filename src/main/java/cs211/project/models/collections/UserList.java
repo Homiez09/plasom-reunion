@@ -157,16 +157,13 @@ public class UserList {
 
         return userHashMapTemp;
     }
-    public ArrayList<User> getUserOfEvent(Event event) {
-        String eventID = event.getEventID();
+    public ArrayList<User> getUserOfEvent(String event) {
         ArrayList<User> userList = new ArrayList<>();
         HashMap<String, UserList> joinEventMap = new JoinEventMap().readData();
 
-        if (joinEventMap.containsKey(eventID)){
-            userList.addAll(joinEventMap.get(eventID).getUsers());
+        if (joinEventMap.containsKey(event)){
+            userList.addAll(joinEventMap.get(event).getUsers());
         }
-
-
         return userList;
     }
 

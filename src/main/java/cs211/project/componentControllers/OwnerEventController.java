@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,12 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.function.Predicate;
-
 
 public class OwnerEventController {
     @FXML
-    TableView TableEvents;
+    TableView tableEvents;
     @FXML
     TableColumn<Event,String> eventNameColumn;
     @FXML
@@ -77,7 +74,7 @@ public class OwnerEventController {
         memberColumn.setReorderable(false);
         statusColumn.setReorderable(false);
         buttonColumn.setReorderable(false);
-        TableEvents.setPlaceholder(new Label("No Event"));
+        tableEvents.setPlaceholder(new Label("No Event"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateStart"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateEnd"));
@@ -113,8 +110,8 @@ public class OwnerEventController {
 
         statusColumn.setCellFactory(column ->new TableCellCenter<>().CellAsBoolean(statusColumn));
 
-
-        TableEvents.setItems(observableList);
+        tableEvents.setFixedCellSize(40);
+        tableEvents.setItems(observableList);
 
     }
 
@@ -168,7 +165,7 @@ public class OwnerEventController {
                         eventListDatasource.writeData(eventList);
                         teamList.removeTeamByEvent(eventToModify);
                         joinEventMap.writeData(deleteEvent);
-                        TableEvents.refresh();
+                        tableEvents.refresh();
                         break;
                 }
             }

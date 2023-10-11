@@ -17,23 +17,16 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class JoinTeamAlertBoxController {
-
     @FXML private AnchorPane correctAnchorPane, wrongAnchorPane, staffButtonAnchorPane;
-
     @FXML private ImageView correctImageView, wrongImageView, staffImageView;
-
     @FXML private Button correctOkButtonClick, errorOkButtonClick;
-
     @FXML private Label notificationLabel;
-
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private final JoinTeamMap joinTeamMap = new JoinTeamMap();
-    protected Image correctIcon, wrongIcon, staffIcon;
-
+    private Image correctIcon, wrongIcon, staffIcon;
     private boolean isValidate;
-    Team team;
-
+    private Team team;
 
     @FXML private void initialize(){
         loadImageInit();

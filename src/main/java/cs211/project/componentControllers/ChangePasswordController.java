@@ -13,32 +13,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class ChangePasswordController {
-
     @FXML private PasswordField currentPasswordField, newPasswordField, reNewPasswordField;
-
     @FXML private TextField currentPasswordTextField, newPasswordTextField, reNewPasswordTextField;
-
     @FXML private Label errorLabel, passwordLengthReq, passwordLowerCaseReq, passwordNumReq, passwordSpecialReq, passwordUpperCaseReq;
-
     @FXML private ImageView newPasswordCheckImageView, reNewPasswordCheckImageView, visibleCurrentPasswordImageView, visibleNewPasswordImageView, visibleReNewPasswordImageView;
-
     @FXML private AnchorPane passwordReq;
-
     private final int maxPasswordLimit = 27;
     private String currentPassword = "" , newPassword = "", reNewPassword = "";
     private boolean passwordMatching;
     private Image visibleIcon, inVisibleIcon;
-    protected Image checkBoxPasswordImage;
-
+    private Image checkBoxPasswordImage;
     private final User user = (User) FXRouter.getData();
-    UserListDataSource datasource;
-    UserList userList;
+    private UserListDataSource datasource;
+    private UserList userList;
 
     @FXML private void initialize() {
         datasource = new UserListDataSource("data", "user-list.csv");
@@ -49,9 +41,7 @@ public class ChangePasswordController {
         maximumLengthField();
 
         showFocusRequirementsPassword();
-
         eventHandleEnter();
-
     }
 
     private void eventHandleEnter(){
@@ -72,7 +62,6 @@ public class ChangePasswordController {
         newPasswordField.setOnKeyPressed(enterEventHandler);
         newPasswordTextField.setOnKeyPressed(enterEventHandler);
     }
-
 
     @FXML private void onResetPasswordClick(){
         checkPasswordRequirement();
@@ -100,7 +89,7 @@ public class ChangePasswordController {
         }
     }
 
-    @FXML private void onVisibleCurrentPasswordClick(MouseEvent event) {
+    @FXML private void onVisibleCurrentPasswordClick() {
         getPassword();
         if (currentPasswordField.isVisible()) {
             currentPasswordTextField.setText(currentPassword);
@@ -114,7 +103,8 @@ public class ChangePasswordController {
             visibleCurrentPasswordImageView.setImage(visibleIcon);
         }
     }
-    @FXML private void onVisibleNewPasswordClick(MouseEvent event) {
+
+    @FXML private void onVisibleNewPasswordClick() {
         getPassword();
         if (newPasswordField.isVisible()) {
             newPasswordTextField.setText(newPassword);
@@ -128,7 +118,8 @@ public class ChangePasswordController {
             visibleNewPasswordImageView.setImage(visibleIcon);
         }
     }
-    @FXML private void onVisibleReNewPasswordClick(MouseEvent event) {
+
+    @FXML private void onVisibleReNewPasswordClick() {
         getPassword();
         if (reNewPasswordField.isVisible()) {
             reNewPasswordTextField.setText(reNewPassword);
@@ -144,7 +135,6 @@ public class ChangePasswordController {
         }
     }
 
-
     private void textFieldAndImageViewInit() {
         currentPasswordTextField.setVisible(false);
         newPasswordTextField.setVisible(false);
@@ -157,6 +147,7 @@ public class ChangePasswordController {
         errorLabel.setVisible(false);
         errorLabel.setText("Wrong password, Please try again.");
     }
+
     private void loadVisibleImageInit() {
         visibleIcon = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
         inVisibleIcon = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
@@ -169,6 +160,7 @@ public class ChangePasswordController {
         visibleNewPasswordImageView.setImage(visibleIcon);
         visibleReNewPasswordImageView.setImage(visibleIcon);
     }
+
     private void maximumLengthField() {
         currentPasswordField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue.length() > maxPasswordLimit) {
@@ -208,8 +200,6 @@ public class ChangePasswordController {
         }));
     }
 
-
-
     private void getPassword(){
         if (currentPasswordField.isVisible()) {
             currentPassword = currentPasswordField.getText();
@@ -228,8 +218,6 @@ public class ChangePasswordController {
         } else {
             reNewPassword = reNewPasswordTextField.getText();
         }
-
-
     }
 
     private void showFocusRequirementsPassword() {
@@ -258,6 +246,7 @@ public class ChangePasswordController {
             }
         });
     }
+
     private void checkPasswordRequirement() {
         passwordMatching = false;
         boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasSpecialCharacter = false, hasFitLength = false;
@@ -299,18 +288,16 @@ public class ChangePasswordController {
         }
     }
 
-
     @FXML private void onKeyHidePassword() {
         getPassword();
         checkPasswordRequirement();
     }
+
     @FXML
     private void onKeyShowPassword() {
         getPassword();
         checkPasswordRequirement();
     }
-
-
 
     private void resetErrorLabel(){
         currentPasswordTextField.textProperty().addListener((observableValue, oldValue , newValue) -> {
@@ -348,6 +335,7 @@ public class ChangePasswordController {
             }
         });
     }
+
     private String setColorTextFill(String color){
         switch (color) {
             case "black" -> color = "-fx-text-fill: #413b3b";

@@ -16,19 +16,16 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.HashMap;
 
-
 public class DeleteTeamAlertBoxController {
     @FXML private ImageView notificationImageView;
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
-
-    ManageTeamController manageTeamController;
-
-    TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
-    TeamList teamList = teamListDataSource.readData();
-    JoinTeamMap joinTeamMap = new JoinTeamMap();
-    HashMap<String, UserList> hashMap;
-    Team team;
+    private ManageTeamController manageTeamController;
+    private final TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+    private final TeamList teamList = teamListDataSource.readData();
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private HashMap<String, UserList> hashMap;
+    private Team team;
 
     @FXML private void initialize() {
         hashMap = joinTeamMap.roleReadData();

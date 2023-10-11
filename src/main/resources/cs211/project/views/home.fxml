@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" minHeight="768.0" minWidth="1152.0" styleClass="bgProfile1" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.HomeController">
-      <ScrollPane fx:id="homeScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="-6.0" layoutY="75.0" prefHeight="689.0" prefWidth="1158.0" stylesheets="@../../../css/event.css">
+      <ScrollPane fx:id="homeScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="-6.0" layoutY="75.0" prefHeight="768.0" prefWidth="1158.0" stylesheets="@../../../css/event.css">
           <content>
               <VBox fx:id="homeVbox" alignment="TOP_CENTER" prefHeight="2550.0" styleClass="bg">
                   <children>
@@ -61,12 +61,12 @@
                      </VBox>
                   </children>
                       </HBox>
-                      <VBox alignment="CENTER" prefHeight="550.0" prefWidth="1150.0">
+                      <VBox alignment="CENTER" prefHeight="490.0" prefWidth="1142.0">
                           <children>
                      <AnchorPane prefHeight="74.0" prefWidth="1147.0">
                         <children>
                                       <Separator opacity="0.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="40.0" />
-                                      <Label alignment="CENTER" layoutX="-23.0" layoutY="17.0" prefHeight="43.0" prefWidth="344.0" text="Upcoming Events" AnchorPane.bottomAnchor="15.0">
+                                      <Label layoutX="80.0" layoutY="16.0" prefHeight="43.0" prefWidth="344.0" text="Upcoming Events" AnchorPane.bottomAnchor="16.0">
                                           <font>
                                               <Font size="16.0" />
                                           </font>
@@ -112,12 +112,12 @@
                               </HBox>
                           </children>
                       </VBox>
-                      <VBox alignment="CENTER" prefHeight="550.0">
+                      <VBox alignment="CENTER" prefHeight="458.0" prefWidth="1142.0">
                           <children>
                      <AnchorPane prefHeight="59.0" prefWidth="1136.0">
                         <children>
                                       <Separator opacity="0.0" orientation="VERTICAL" prefHeight="61.0" prefWidth="40.0" />
-                                      <Label layoutX="87.0" layoutY="19.0" text="New Events">
+                                      <Label layoutX="86.0" layoutY="21.0" text="New Events">
                                           <font>
                                               <Font name="Leelawadee UI Bold" size="24.0" />
                                           </font>
@@ -166,8 +166,6 @@
                               </HBox>
                           </children>
                       </VBox>
-                      <Separator opacity="0.0" prefHeight="30.0" />
-               <Separator layoutX="10.0" layoutY="836.0" opacity="0.0" prefHeight="30.0" />
                <VBox alignment="CENTER" spacing="15.0">
                   <children>
                      <AnchorPane prefHeight="75.0" prefWidth="1152.0">

@@ -20,11 +20,11 @@ public class UnbanUserTeamController {
     @FXML private Button unbanButton;
 
     private Team team;
-    private BanTeamMap banTeamMap = new BanTeamMap();
-    private UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
-    private HashMap<String, User> userIdHashMap = userListDataSource.readData().userIdHashMap();
-    private HashMap<String, Set<String>> hashMap = banTeamMap.readData();
-    Set<String> userListID;
+    private final BanTeamMap banTeamMap = new BanTeamMap();
+    private final UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
+    private final HashMap<String, User> userIdHashMap = userListDataSource.readData().userIdHashMap();
+    private final HashMap<String, Set<String>> hashMap = banTeamMap.readData();
+    private Set<String> userListID;
     private String userSelected;
 
     @FXML private void initialize() {
@@ -61,8 +61,7 @@ public class UnbanUserTeamController {
         if (userListID == null) return;
 
         userListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            String userID = (String) newValue.getProperties().get("userID");
-            userSelected = userID;
+            userSelected = (String) newValue.getProperties().get("userID");
             checkSelected();
         });
 

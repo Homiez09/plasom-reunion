@@ -16,18 +16,17 @@ public class CardUpcoming {
     @FXML private ImageView upComingEventsImageView;
     @FXML private Label eventUpComingDate, eventUpComingName, eventUpComingPlace;
 
-    EventListDataSource eventDatasource;
-    EventList eventList;
+    private final EventListDataSource eventDatasource = new EventListDataSource();
+    private EventList eventList;
 
     private int page = 0;
     private int maxPage;
 
     @FXML
     private void initialize() {
-        eventDatasource = new EventListDataSource();
         eventList = eventDatasource.readData();
         maxPage = (eventList.getUpcomingEvent().size() != 0) ? eventList.getUpcomingEvent().size() - 1 : eventList.getEvents().size() - 1;
-
+        maxPage = Math.min(maxPage, 5);
         showImage(page);
         updateVisibleButton();
     }
@@ -55,16 +54,15 @@ public class CardUpcoming {
     }
 
     private void showImage(int pageNumber) {
-        Event event = null;
+        Event event;
         Image image;
 
         if (!eventList.getEvents().isEmpty()) {
-            if (eventList.getUpcomingEvent().size() == 0) {
+            if (eventList.getUpcomingEvent().size() != 0) {
                 event = eventList.getUpcomingEvent().get(pageNumber);
             } else {
-                event = eventList.getUpcomingEvent().get(pageNumber);
+                event = eventList.getEvents().get(pageNumber);
             }
-
 
             if (event.getEventImagePath().equals("null"))
                 image = new Image(getClass().getResourceAsStream("/images/events/event-default-auth.png"));

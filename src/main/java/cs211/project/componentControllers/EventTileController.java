@@ -17,9 +17,9 @@ public class EventTileController {
     @FXML private ImageView eventTileImageView;
     @FXML private StackPane imageStackPane;
     @FXML private Label eventNameLabel,eventDateLabel,eventPlaceLabel,eventMemberLabel;
-    private User currentUser = (User) FXRouter.getData();
-    private Image image;
+    private final User currentUser = (User) FXRouter.getData();
     private  Event thisEvent;
+
     @FXML private void initialize() {}
 
     public void showEventTile(Event event) {
@@ -34,7 +34,7 @@ public class EventTileController {
             }else {
                 eventMemberLabel.setText(event.getUserInEvent() + "/" + event.getSlotMember());
             }
-            image = new Image("file:"+event.getEventImagePath(),1280,1280,false,false);
+            Image image = new Image("file:" + event.getEventImagePath(), 1280, 1280, false, false);
             if(event.getEventImagePath().equals("null")){
                 String imgpath = "/images/events/event-default-auth.png";
                 image = new Image(getClass().getResourceAsStream(imgpath),1280,1280,false,false);
@@ -47,7 +47,6 @@ public class EventTileController {
             Region transparentBackground = new Region();
             transparentBackground.setStyle("-fx-background-color: transparent;");
             imageStackPane.getChildren().addAll(transparentBackground);
-
         }
     }
 

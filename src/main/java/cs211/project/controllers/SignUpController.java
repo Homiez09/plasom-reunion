@@ -22,7 +22,6 @@ import java.io.IOException;
 public class SignUpController {
     private final int MAX_PASSWORD_LIMIT = 27, MAX_USERNAME_LIMIT = 20, MAX_DISPLAY_NAME_LIMIT = 24;
 
-
     @FXML private AnchorPane upcomingZoneAnchorPane;
     @FXML private ImageView signBackgroundImageView, upComingEventsBackgroundImageView;
     @FXML private ImageView fullNameIconView, usernameIconView, passwordIconView, confirmPasswordIconView, visiblePasswordImageView,checkBoxPasswordImageView,checkBoxConfirmPasswordImageView;private Image showPasswordImage, hidePasswordImage,checkBoxPasswordImage;
@@ -30,15 +29,12 @@ public class SignUpController {
     @FXML private Label passwordRequireLabel, passwordLengthReq, passwordUpperCaseReq, passwordLowerCaseReq, passwordSpecialReq, passwordNumReq, usernameReq, displayNameReq, errorLabel;
     @FXML private PasswordField passwordField, confirmPasswordField;
     @FXML private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
-
     private String password, confirmPassword, displayName, username;
     private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false, findDisplayNameValidate = false;
-    protected char firstUsernameChar;
-
-    protected User user, findUsername, findDisplayName;
-    UserListDataSource datasource ;
-    UserList userList ;
-
+    private char firstUsernameChar;
+    private User findUsername, findDisplayName;
+    private UserListDataSource datasource ;
+    private UserList userList ;
 
     @FXML
     void initialize() {
@@ -140,9 +136,6 @@ public class SignUpController {
             throw new RuntimeException(e);
         }
     }
-
-
-
 
     private boolean validateConfirmation(){
         findUsername = userList.findUsername(username);

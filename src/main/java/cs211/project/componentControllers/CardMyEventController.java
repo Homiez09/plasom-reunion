@@ -3,18 +3,15 @@ package cs211.project.componentControllers;
 import cs211.project.models.*;
 import cs211.project.models.collections.*;
 import cs211.project.services.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
-
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -22,16 +19,11 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class CardMyEventController {
-    @FXML
-    Label eventNameLabel,startDateLabel,locationLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
-    @FXML
-    ImageView eventImageView,profileImageView;
-    @FXML
-    AnchorPane eventAnchorPane;
-    @FXML
-    Button forStaffButton, manageUserButton,leaveEventButton;
-    private User currentUser = (User) FXRouter.getData();
-    private TeamList teamList;
+    @FXML Label eventNameLabel,startDateLabel,locationLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
+    @FXML ImageView eventImageView,profileImageView;
+    @FXML AnchorPane eventAnchorPane;
+    @FXML Button staffButton, manageUserButton,leaveEventButton;
+    private final User currentUser = (User) FXRouter.getData();
     private JoinTeamMap joinTeamMap = new JoinTeamMap();
     private HashMap<String, TeamList> teamHashMap = new HashMap<>();
     private Datasource<EventList> eventListDatasource;
@@ -44,7 +36,6 @@ public class CardMyEventController {
     @FXML
     private void initialize() {
         setupDataPage();
-        buttonVisible(true);
     }
 
     private void setupDataPage(){
@@ -53,10 +44,11 @@ public class CardMyEventController {
         this.joinEventMap = new HashMap<>();
         this.joinEventDatasource = new JoinEventMap();
         this.joinEventMap = joinEventDatasource.readData();
+
     }
 
     @FXML
-    private void onLeaveEventButton(ActionEvent actionEvent) {
+    private void onLeaveEventButton() {
         if (joinEventMap.containsKey(currentEvent.getEventID())) {
             userList = joinEventMap.get(currentEvent.getEventID());
         }
@@ -72,6 +64,7 @@ public class CardMyEventController {
 
     public void setEventData(Event event) {
         setupDataPage();
+        buttonVisible(true);
         if (event !=null) {
             currentEvent = eventList.findEventById(event.getEventID());
             Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
@@ -79,7 +72,7 @@ public class CardMyEventController {
 
             buttonVisible(event.isEnd());
             if (event.getUserList().getUsers().contains(currentUser)) {
-                forStaffButton.setVisible(false);
+                staffButton.setVisible(false);
                 manageUserButton.setVisible(false);
             }
             if (event.getEventHostUser().equals(currentUser)) {
@@ -121,12 +114,13 @@ public class CardMyEventController {
     }
 
     private void buttonVisible(Boolean is){
-        forStaffButton.setVisible(!is);
+        staffButton.setVisible(!is);
         manageUserButton.setVisible(!is);
         leaveEventButton.setVisible(!is);
     }
+
     @FXML
-    private void onForStaffButton(ActionEvent actionEvent) {
+    private void onStaffButton() {
         joinTeamMap = new JoinTeamMap();
         teamHashMap = joinTeamMap.readData();
         if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser)){
@@ -137,8 +131,9 @@ public class CardMyEventController {
             }
         }
     }
+
     @FXML
-    private void onManageUserButton(ActionEvent actionEvent) {
+    private void onManageUserButton() {
         Popup popup = new Popup();
         VBox popupContent = new VBox();
         popup.setAutoHide(true);
@@ -147,7 +142,7 @@ public class CardMyEventController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/users-event.fxml"));
             VBox loaded = loader.load();
             UsersEventController usersEventController = loader.getController();
-            usersEventController.setupData(popup, currentEvent);
+            usersEventController.setupData(currentEvent);
             box.getChildren().setAll(loaded);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -159,15 +154,11 @@ public class CardMyEventController {
     }
 
     @FXML
-    private void onClickCard(MouseEvent mouseEvent) {
-            try {
-                FXRouter.goTo("event",currentUser, currentEvent,"my-event");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-
+    private void onClickCard() {
+        try {
+            FXRouter.goTo("event",currentUser, currentEvent,"my-event");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
 }

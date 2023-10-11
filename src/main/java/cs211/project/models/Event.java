@@ -180,7 +180,7 @@ public class Event implements Comparable<Event>{
                 +   eventLocation + ','
                 +   slotMember +','
                 +   timestamp+','
-                +   joinEvent+',';
+                +   joinEvent;
 
     }
 

@@ -95,7 +95,7 @@ public class EventListDataSource implements Datasource<EventList> {
                     eventList.findEventById(eventId).getActivityList().addActivity(activity);
                 }
 
-                for (User user: userList.getUserOfEvent(eventList.findEventById(eventId))){
+                for (User user: userList.getUserOfEvent(eventId)){
                     eventList.findEventById(eventId).getUserList().addUser(user);
                 }
 

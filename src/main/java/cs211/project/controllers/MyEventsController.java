@@ -22,13 +22,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.util.Callback;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,15 +42,14 @@ public class MyEventsController{
     @FXML ListView<Node> listViewMain;
     @FXML TextField searchbarTextField;
     //----------------------------
-    private User currentUser = (User) FXRouter.getData();
-    private String from = (String) FXRouter.getData2();
+    private final User currentUser = (User) FXRouter.getData();
+    private final String from = (String) FXRouter.getData2();
     private ObservableList<Event> eventObservableList;
     private Datasource<EventList> eventDatasource;
     private EventList eventList;
     private Predicate<Event> selectedPredicate = null;
     private ObservableList<Node> nodes;
     private ScrollBar scrollBar ;
-
 
     @FXML
     private void initialize() {
@@ -108,7 +103,6 @@ public class MyEventsController{
         FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
         LoadComponent(filteredList, 1);
     }
-
     private void LoadComponent(FilteredList<Event> filteredList, int maxItemsPerLoad) {
         int itemsLoaded = 0;
         for (Event event : filteredList) {
@@ -129,7 +123,6 @@ public class MyEventsController{
             scrollBar.setValue(0.5);
         }
     }
-
 
     @FXML
     private void setupScrollBar() {
@@ -157,7 +150,7 @@ public class MyEventsController{
                 nodesToRemove.add(node);
             }
         }
-//        listViewMain.getItems().removeAll(nodesToRemove);
+
         nodes.removeAll(nodesToRemove);
     }
 

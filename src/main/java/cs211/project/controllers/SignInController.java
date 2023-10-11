@@ -1,9 +1,7 @@
 package cs211.project.controllers;
 
 import cs211.project.models.User;
-import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
-import cs211.project.services.EventListDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.LoadCardEventUpcomingForAuth;
 import cs211.project.services.UserListDataSource;
@@ -25,7 +23,6 @@ public class SignInController {
 
     @FXML private PasswordField passwordField;
     @FXML private TextField showPasswordTextField, usernameTextField;
-
     @FXML private ImageView signBackgroundImageView, upComingEventsBackgroundImageView;
     @FXML private ImageView usernameIconView, passwordIconView, visiblePasswordImageView, profileImageView;
     @FXML private Label errorLabel;
@@ -35,7 +32,7 @@ public class SignInController {
     private String password, username;
     private UserListDataSource datasource;
     private UserList userList;
-    protected User matchingUsername,user;
+    private User matchingUsername,user;
 
     @FXML
     void initialize() {
@@ -142,8 +139,6 @@ public class SignInController {
         }
     }
 
-
-
     private String setColorBorderTextField(String color){
         switch (color) {
             case "red" -> color = "-fx-border-color: red";
@@ -151,7 +146,6 @@ public class SignInController {
         }
         return color;
     }
-
 
     private void setBorderColorTextField(){
         username = usernameTextField.getText();
@@ -187,11 +181,11 @@ public class SignInController {
         password = passwordField.getText();
         showPasswordTextField.setText(password);
     }
+
     @FXML private void onKeyShowPassword() {
         password = showPasswordTextField.getText();
         passwordField.setText(password);
     }
-
 
     private void loadImage() {
         Image upComingBackground = new Image(getClass().getResourceAsStream("/images/backgrounds/login/sign_event_bg1.png"));
@@ -208,7 +202,6 @@ public class SignInController {
 
         Image profileImage = new Image(getClass().getResourceAsStream("/images/profile/sign-in/sign-in-avatar.png"));
         profileImageView.setImage(profileImage);
-
 
         showPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
         hidePasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));

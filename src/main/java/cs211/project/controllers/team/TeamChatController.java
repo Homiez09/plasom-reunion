@@ -33,20 +33,18 @@ public class TeamChatController {
     @FXML private GridPane chatContainer;
     @FXML private ScrollPane chatScrollPane;
     private final User user = (User) FXRouter.getData();
-    private final Event event = (Event) FXRouter.getData2();
     private final Team team = (Team) FXRouter.getData3();
     private final ActivityTeam activityTeam = (ActivityTeam) FXRouter.getData4();
-    private ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
+    private final ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
     private ActivityTeamList activityTeamList = activityTeamListDataSource.readData();
-    private ChatHistoryDataSource chatHistoryDataSource = new ChatHistoryDataSource("data", "chat-history.csv");
-    private ChatHistory chatHistory = chatHistoryDataSource.readData();
+    private final ChatHistoryDataSource chatHistoryDataSource = new ChatHistoryDataSource("data", "chat-history.csv");
+    private final ChatHistory chatHistory = chatHistoryDataSource.readData();
     private User userChatTemp;
     private ActivityTeam activitySelectTemp;
     private LoadSideBarComponent sideBarAnchorPaneLoad;
     private int row = 0;
-
-    UploadMessageThread uploadMessageThread = new UploadMessageThread();
-    Thread thread = new Thread(uploadMessageThread);
+    private final UploadMessageThread uploadMessageThread = new UploadMessageThread();
+    private final Thread thread = new Thread(uploadMessageThread);
 
     @FXML void initialize(){
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -64,25 +62,23 @@ public class TeamChatController {
     }
 
     @FXML
-    protected void onSendMessageButtonClick() {
+    private void onSendMessageButtonClick() {
         if (activitySelectTemp == null) return;
         if (typeMessageTextField.getText().isEmpty()) return;
-
         Chat chatTemp = new Chat(typeMessageTextField.getText(), user, activitySelectTemp.getActivityID());
 
         uploadMessageThread.uploadMessage(chatTemp);
-
         typeMessageTextField.clear();
 
         loadChatCache(chatTemp);
     }
 
-    protected void setSideBar(){
+    private void setSideBar(){
         SideBarTeamController sideBarTeamController = sideBarAnchorPaneLoad.getController();
         sideBarTeamController.setHoverChat();
     }
 
-    protected void loadChatCache(Chat chat) {
+    private void loadChatCache(Chat chat) {
         loadMessageBox(chat, row++);
         goToLastMessage();
     }
@@ -162,8 +158,7 @@ public class TeamChatController {
     }
 
     private void checkActivitySelect() {
-        if (activitySelectTemp == null) typeMessageTextField.setDisable(true);
-        else typeMessageTextField.setDisable(false);
+        typeMessageTextField.setDisable(activitySelectTemp == null);
     }
 
     private void goToLastMessage() {

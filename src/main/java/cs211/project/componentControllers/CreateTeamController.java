@@ -32,33 +32,33 @@ public class CreateTeamController {
     @FXML private Label countDescriptionLabel,dateRequirementLabel, summaryPeriodLabel, errorContinueLabel, nameRequirementLabel;
     @FXML private ImageView teamNameReqImageView;
 
-    protected String formattedCurrentHour, startAmPm, endAmPm, startDateFormat, endDateFormat;
-    protected String teamName, description;
+    private String formattedCurrentHour, startAmPm, endAmPm, startDateFormat, endDateFormat;
+    private String teamName, description;
 
-    protected String[] time = {"AM", "PM"};
+    private String[] time = {"AM", "PM"};
 
     private LocalDateTime currentDateTime = LocalDateTime.now();
-    protected LocalDateTime startDateTime, endDateTime;
-    protected LocalDate startDate, endDate;
+    private LocalDateTime startDateTime, endDateTime;
+    private LocalDate startDate, endDate;
 
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
-    protected SpinnerValueFactory<Integer> numMemberSpin;
+    private SpinnerValueFactory<Integer> numMemberSpin;
 
     private final int MAX_TEAM_NAME_LIMIT = 35, MAX_DESCRIPTION_LIMIT = 280;
-    protected int currentMinute, startHour, startMinute, endHour, endMinute;
-    protected int countInit = 0;
+    private int currentMinute, startHour, startMinute, endHour, endMinute;
+    private int countInit = 0;
 
     private boolean teamNameRequirement = false, dateValidateRequirement = false;
 
 
-    TeamListDataSource datasource;
-    TeamList teamList;
+    private TeamListDataSource datasource;
+    private TeamList teamList;
 
-    User user = (User) FXRouter.getData();
-    Event event = (Event) FXRouter.getData2();
+    private final User user = (User) FXRouter.getData();
+    private final Event event = (Event) FXRouter.getData2();
 
-    JoinTeamMap joinTeamMap = new JoinTeamMap();
-    TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
+    private JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private final TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
 
     @FXML
     private void initialize() {
@@ -89,6 +89,7 @@ public class CreateTeamController {
             }
         });
     }
+
     private void checkTeamNameReq(){
         teamName = teamNameTextField.getText();
         teamNameRequirement = !teamName.isEmpty() && teamList.findTeamByNameInEvent(teamName, event.getEventID()) == null;
@@ -135,6 +136,7 @@ public class CreateTeamController {
         startMinuteSpinner.setValueFactory(minute);
         endMinuteSpinner.setValueFactory(endMinute);
     }
+
     private void validatePeriod() {
         errorContinueLabel.setVisible(false);
         dateValidateRequirement = false;
@@ -193,6 +195,7 @@ public class CreateTeamController {
             summaryPeriodLabel.setText("This team will take place on " + formattedStartDate + " until " + formattedEndDate);
         }
     }
+
     private void checkDateReq(){
         startDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> validatePeriod());
         endDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> validatePeriod());
@@ -226,6 +229,7 @@ public class CreateTeamController {
     @FXML private void onKeyTeamName(){
         checkTeamNameReq();
     }
+
     @FXML protected void onKeyDescriptionCountText(){
             description = descriptionTextArea.getText();
             countDescriptionLabel.setText(String.valueOf((int) description.length()));
@@ -240,13 +244,13 @@ public class CreateTeamController {
             }
     }
 
-
     @FXML private void onCancelButtonClick() throws IOException {
         teamNameTextField.setText("");
         descriptionTextArea.setText("");
 
         FXRouter.goTo("select-team", user, event);
     }
+
     @FXML private void onContinueButtonClick(){
         checkTeamNameReq();
         checkDateReq();
@@ -269,6 +273,7 @@ public class CreateTeamController {
             }
         }
     }
+
     @FXML protected void onCreateTeamButtonClick() throws IOException {
         checkTeamNameReq();
         if(teamNameRequirement) {
@@ -301,8 +306,6 @@ public class CreateTeamController {
         secondPage.setVisible(false);
     }
 
-
-
     private void dataInit(){
         secondPage.setVisible(false);
         errorContinueLabel.setVisible(false);
@@ -314,6 +317,7 @@ public class CreateTeamController {
         Image checkBoxIcon = new Image(getClass().getResourceAsStream("/images/icons/team/create-team/check_box.png"));
         teamNameReqImageView.setImage(checkBoxIcon);
     }
+
     private void timeInit() {
         formattedCurrentHour = currentDateTime.format(DateTimeFormatter.ofPattern("hh").withLocale(Locale.US));
         if (currentDateTime.getHour() > 11) {

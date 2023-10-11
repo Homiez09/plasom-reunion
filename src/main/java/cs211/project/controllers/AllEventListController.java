@@ -38,9 +38,9 @@ public class AllEventListController {
     @FXML
     ImageView searchImageView;
     //---------------------------------------------------
-    private User currentUser = (User) FXRouter.getData();
-    private String from = (String) FXRouter.getData2();
-    private String getFrom = (String) FXRouter.getData3();
+    private final User currentUser = (User) FXRouter.getData();
+    private final String from = (String) FXRouter.getData2();
+    private final String getFrom = (String) FXRouter.getData3();
     private ObservableList<Event> eventObservableList;
     private EventList eventList;
     private Predicate<Event> selectedPredicate = null;
@@ -209,7 +209,7 @@ public class AllEventListController {
     }
 
     private void initCategory(){
-        String category[] = {   "Animal","Art","Business",
+        String[] category = {   "Animal","Art","Business",
                                 "Conference","Education","Food & Drink",
                                 "Music","Performance","Seminar",
                                 "Sport","Workshop"};
@@ -220,7 +220,7 @@ public class AllEventListController {
     }
 
     private void initSort(){
-        String sort[] = {"A - Z","Start Date","Popularity","End Date"};
+        String[] sort = {"A - Z","Start Date","Popularity","End Date"};
         sortComboBox.getItems().addAll(sort);
         sortComboBox.setValue("");
     }
