@@ -14,6 +14,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -160,6 +164,56 @@ public class EventPageController {
             String status = activity.getActivityStatus();
             return new SimpleStringProperty(status);
         });
+        eventActivityTableView.setRowFactory(tv -> {
+            TableRow<Activity> row = new TableRow<>();
+
+            row.setOnDragDetected(event -> {
+                if (!row.isEmpty()) {
+                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
+                    ClipboardContent content = new ClipboardContent();
+                    content.put(DataFormat.PLAIN_TEXT, row.getIndex());
+                    db.setContent(content);
+                    event.consume();
+                }
+            });
+            row.setOnDragEntered(event -> {
+                row.setStyle("-fx-background-color: #f2f2f2;");
+            });
+
+            row.setOnDragOver(event -> {
+                if (event.getDragboard().hasContent(DataFormat.PLAIN_TEXT)) {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+                event.consume();
+            });
+
+            row.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasContent(DataFormat.PLAIN_TEXT)) {
+                    int draggedIndex = Integer.parseInt(db.getContent(DataFormat.PLAIN_TEXT).toString());
+                    Activity draggedActivity = eventActivityTableView.getItems().remove(draggedIndex);
+
+                    int dropIndex;
+
+                    if (row.isEmpty()) {
+                        dropIndex = eventActivityTableView.getItems().size();
+                    } else {
+                        dropIndex = row.getIndex();
+                    }
+
+                    eventActivityTableView.getItems().add(dropIndex, draggedActivity);
+                    event.consume();
+                }
+            });
+
+            row.setOnDragExited(event -> {
+                eventActivityTableView.getSelectionModel().clearSelection();
+                row.setStyle("");
+            });
+
+            return row;
+        });
+
         eventActivityTableView.getColumns().clear();
         eventActivityTableView.getColumns().add(nameColumn);
         eventActivityTableView.getColumns().add(startTimeColumn);
@@ -167,15 +221,19 @@ public class EventPageController {
         eventActivityTableView.getColumns().add(statusColumn);
         eventActivityTableView.getColumns().add(descriptionColumn);
         eventActivityTableView.getItems().clear();
+
         nameColumn.setPrefWidth(180);
         startTimeColumn.setPrefWidth(120);
         endTimeColumn.setPrefWidth(120);
         statusColumn.setPrefWidth(100);
+
         descriptionColumn.prefWidthProperty().bind(eventActivityTableView.prefWidthProperty().subtract(nameColumn.widthProperty())
                 .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()).subtract(statusColumn.widthProperty()));
         for (Activity activity: activityList.sortActivity(activityList).getActivityOfEvent(event.getEventID())) {
             eventActivityTableView.getItems().add(activity);
         }
+
+
         eventActivityTableView.setFixedCellSize(40);
     }
     private void initButton(){
