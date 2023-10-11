@@ -164,55 +164,6 @@ public class EventPageController {
             String status = activity.getActivityStatus();
             return new SimpleStringProperty(status);
         });
-        eventActivityTableView.setRowFactory(tv -> {
-            TableRow<Activity> row = new TableRow<>();
-
-            row.setOnDragDetected(event -> {
-                if (!row.isEmpty()) {
-                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
-                    ClipboardContent content = new ClipboardContent();
-                    content.put(DataFormat.PLAIN_TEXT, row.getIndex());
-                    db.setContent(content);
-                    event.consume();
-                }
-            });
-            row.setOnDragEntered(event -> {
-                row.setStyle("-fx-background-color: #f2f2f2;");
-            });
-
-            row.setOnDragOver(event -> {
-                if (event.getDragboard().hasContent(DataFormat.PLAIN_TEXT)) {
-                    event.acceptTransferModes(TransferMode.MOVE);
-                }
-                event.consume();
-            });
-
-            row.setOnDragDropped(event -> {
-                Dragboard db = event.getDragboard();
-                if (db.hasContent(DataFormat.PLAIN_TEXT)) {
-                    int draggedIndex = Integer.parseInt(db.getContent(DataFormat.PLAIN_TEXT).toString());
-                    Activity draggedActivity = eventActivityTableView.getItems().remove(draggedIndex);
-
-                    int dropIndex;
-
-                    if (row.isEmpty()) {
-                        dropIndex = eventActivityTableView.getItems().size();
-                    } else {
-                        dropIndex = row.getIndex();
-                    }
-
-                    eventActivityTableView.getItems().add(dropIndex, draggedActivity);
-                    event.consume();
-                }
-            });
-
-            row.setOnDragExited(event -> {
-                eventActivityTableView.getSelectionModel().clearSelection();
-                row.setStyle("");
-            });
-
-            return row;
-        });
 
         eventActivityTableView.getColumns().clear();
         eventActivityTableView.getColumns().add(nameColumn);
