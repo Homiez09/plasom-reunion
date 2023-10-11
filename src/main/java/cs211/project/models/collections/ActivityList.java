@@ -38,11 +38,24 @@ public class ActivityList {
         return null;
     }
 
-    public void swapDate(Activity activity){
-        Activity data = findActivity(activity.getActivityID());
-        data.setStartTime(activity.getStartTime());
-        data.setEndTime(activity.getEndTime());
+    public void swapDate(Activity newDate){
+        Activity oldDate = findActivity(newDate.getActivityID());
+        oldDate.setStartTime(newDate.getStartTime());
+        oldDate.setEndTime(newDate.getEndTime());
     }
+
+    public void changeData(Activity newData) {
+        for (int i = 0; i < activities.size(); i++) {
+            Activity oldData = activities.get(i);
+            if (oldData.getActivityID().equals(newData.getActivityID())) {
+                // เมื่อคุณพบกิจกรรมที่ต้องการแทนที่
+                // คุณสามารถอัปเดตข้อมูลโดยใช้ newData
+                activities.set(i, newData);
+                break; // หยุดหากคุณเจอและอัปเดตกิจกรรมแล้ว
+            }
+        }
+    }
+
 
     public ArrayList<Activity> getActivities() {
         return activities;
