@@ -1,10 +1,9 @@
-module cs211.project.cs211661project {
+module cs211.project {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
     requires bcrypt;
     requires java.sql;
-
 
     opens cs211.project.cs211661project to javafx.fxml;
     exports cs211.project.cs211661project;
