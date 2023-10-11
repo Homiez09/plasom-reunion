@@ -113,8 +113,9 @@ public class CreateActivityController {
             currentActivity.setStartTime(activityStart);
             currentActivity.setEndTime(activityEnd);
             currentActivity.setName(activityName);
+            activityList.changeData(currentActivity);
         }
-        activityList.changeData(currentActivity);
+
         activityListDatasource.writeData(activityList);
 
         try {
