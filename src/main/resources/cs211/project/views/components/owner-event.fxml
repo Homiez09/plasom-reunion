@@ -35,7 +35,7 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <TableView fx:id="TableEvents" prefHeight="500.0" prefWidth="725.0" styleClass="owner-event-table-view" HBox.hgrow="NEVER">
+                        <TableView fx:id="tableEvents" prefHeight="500.0" prefWidth="725.0" styleClass="owner-event-table-view" HBox.hgrow="NEVER">
                            <columns>
                               <TableColumn fx:id="eventNameColumn" editable="false" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" sortable="false" styleClass="owner-event-table-view" text="Event Name" />
                               <TableColumn fx:id="startDateColumn" editable="false" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" sortable="false" styleClass="owner-event-table-view" text="Start" />

@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 public class OwnerEventController {
     @FXML
-    TableView TableEvents;
+    TableView tableEvents;
     @FXML
     TableColumn<Event,String> eventNameColumn;
     @FXML
@@ -74,7 +74,7 @@ public class OwnerEventController {
         memberColumn.setReorderable(false);
         statusColumn.setReorderable(false);
         buttonColumn.setReorderable(false);
-        TableEvents.setPlaceholder(new Label("No Event"));
+        tableEvents.setPlaceholder(new Label("No Event"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateStart"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDateEnd"));
@@ -110,8 +110,8 @@ public class OwnerEventController {
 
         statusColumn.setCellFactory(column ->new TableCellCenter<>().CellAsBoolean(statusColumn));
 
-
-        TableEvents.setItems(observableList);
+        tableEvents.setFixedCellSize(40);
+        tableEvents.setItems(observableList);
 
     }
 
@@ -165,7 +165,7 @@ public class OwnerEventController {
                         eventListDatasource.writeData(eventList);
                         teamList.removeTeamByEvent(eventToModify);
                         joinEventMap.writeData(deleteEvent);
-                        TableEvents.refresh();
+                        tableEvents.refresh();
                         break;
                 }
             }

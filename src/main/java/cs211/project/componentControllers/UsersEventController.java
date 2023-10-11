@@ -12,12 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Popup;
 
 import java.util.HashMap;
 
 public class UsersEventController extends CardMyEventController{
-    @FXML private TableView<User> TableUsers;
+    @FXML private TableView<User> tableUsers;
     @FXML private TableColumn<User,String> statusColumn, nameColumn, usernameColumn;
     @FXML private TableColumn<User, ImageView> profileColumn;
     @FXML private TableColumn<User,Void> actionColumn;
@@ -58,7 +57,7 @@ public class UsersEventController extends CardMyEventController{
     private void showTable(ObservableList<User> observableList) {
         // กำหนด column
 
-        TableUsers.setPlaceholder(new Label("No User"));
+        tableUsers.setPlaceholder(new Label("No User"));
         profileColumn.setReorderable(false);
         usernameColumn.setReorderable(false);
         nameColumn.setReorderable(false);
@@ -123,7 +122,8 @@ public class UsersEventController extends CardMyEventController{
         usernameColumn.setCellFactory(column -> new TableCellCenter<>().CellAsString(usernameColumn));
         nameColumn.setCellFactory(column ->  new TableCellCenter<>().CellAsString(nameColumn));
         statusColumn.setCellFactory(column ->  new TableCellCenter<>().CellAsString(statusColumn));
-        TableUsers.setItems(observableList);
+        tableUsers.setFixedCellSize(40);
+        tableUsers.setItems(observableList);
 
     }
 
@@ -148,7 +148,7 @@ public class UsersEventController extends CardMyEventController{
                         banUserObservableList.add(user);
                         getBan.put(user,list);
                         data.writeData(getBan);
-                        TableUsers.refresh();
+                        tableUsers.refresh();
                         break;
                     case"UnBan":
                         list = getBan.get(user);
@@ -156,7 +156,7 @@ public class UsersEventController extends CardMyEventController{
                         banUserObservableList.remove(user);
                         getBan.put(user,list);
                         data.writeData(getBan);
-                        TableUsers.refresh();
+                        tableUsers.refresh();
                         break;
                     case "Kick":
                         data = new BanUser();
@@ -172,7 +172,7 @@ public class UsersEventController extends CardMyEventController{
                         joinEvent.put(currentEvent.getEventID(),deleteUser);
                         userSizeLabel.setText(observableList.size()+"");
                         MapUserJoinEvent.writeData(joinEvent);
-                        TableUsers.refresh();
+                        tableUsers.refresh();
                         break;
                 }
         }
