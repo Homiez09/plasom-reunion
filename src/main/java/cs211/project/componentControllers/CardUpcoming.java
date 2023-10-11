@@ -27,7 +27,7 @@ public class CardUpcoming {
         eventDatasource = new EventListDataSource();
         eventList = eventDatasource.readData();
         maxPage = (eventList.getUpcomingEvent().size() != 0) ? eventList.getUpcomingEvent().size() - 1 : eventList.getEvents().size() - 1;
-
+        maxPage = Math.min(maxPage, 5);
         showImage(page);
         updateVisibleButton();
     }
