@@ -51,7 +51,6 @@ public class MyEventsController{
     private ObservableList<Node> nodes;
     private ScrollBar scrollBar ;
 
-
     @FXML
     private void initialize() {
         new LoadNavbarComponent(currentUser, navbarAnchorPane);
@@ -104,7 +103,6 @@ public class MyEventsController{
         FilteredList<Event> filteredList = new FilteredList<>(eventObservableList, selectedPredicate);
         LoadComponent(filteredList, 1);
     }
-
     private void LoadComponent(FilteredList<Event> filteredList, int maxItemsPerLoad) {
         int itemsLoaded = 0;
         for (Event event : filteredList) {
@@ -125,7 +123,6 @@ public class MyEventsController{
             scrollBar.setValue(0.5);
         }
     }
-
 
     @FXML
     private void setupScrollBar() {

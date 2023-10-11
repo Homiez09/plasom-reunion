@@ -160,6 +160,7 @@ public class EventPageController {
             String status = activity.getActivityStatus();
             return new SimpleStringProperty(status);
         });
+
         eventActivityTableView.getColumns().clear();
         eventActivityTableView.getColumns().add(nameColumn);
         eventActivityTableView.getColumns().add(startTimeColumn);
@@ -167,15 +168,18 @@ public class EventPageController {
         eventActivityTableView.getColumns().add(statusColumn);
         eventActivityTableView.getColumns().add(descriptionColumn);
         eventActivityTableView.getItems().clear();
+
         nameColumn.setPrefWidth(180);
         startTimeColumn.setPrefWidth(120);
         endTimeColumn.setPrefWidth(120);
         statusColumn.setPrefWidth(100);
+
         descriptionColumn.prefWidthProperty().bind(eventActivityTableView.prefWidthProperty().subtract(nameColumn.widthProperty())
                 .subtract(startTimeColumn.widthProperty()).subtract(endTimeColumn.widthProperty()).subtract(statusColumn.widthProperty()));
         for (Activity activity: activityList.sortActivity(activityList).getActivityOfEvent(event.getEventID())) {
             eventActivityTableView.getItems().add(activity);
         }
+
         eventActivityTableView.setFixedCellSize(40);
     }
     private void initButton(){

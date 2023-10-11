@@ -22,7 +22,7 @@ public class CardMyEventController {
     @FXML Label eventNameLabel,startDateLabel,locationLabel,descriptionLabel,hostUserNameLabel,hostDisplayNameLabel;
     @FXML ImageView eventImageView,profileImageView;
     @FXML AnchorPane eventAnchorPane;
-    @FXML Button forStaffButton, manageUserButton,leaveEventButton;
+    @FXML Button staffButton, manageUserButton,leaveEventButton;
     private final User currentUser = (User) FXRouter.getData();
     private JoinTeamMap joinTeamMap = new JoinTeamMap();
     private HashMap<String, TeamList> teamHashMap = new HashMap<>();
@@ -36,7 +36,6 @@ public class CardMyEventController {
     @FXML
     private void initialize() {
         setupDataPage();
-        buttonVisible(true);
     }
 
     private void setupDataPage(){
@@ -45,6 +44,7 @@ public class CardMyEventController {
         this.joinEventMap = new HashMap<>();
         this.joinEventDatasource = new JoinEventMap();
         this.joinEventMap = joinEventDatasource.readData();
+
     }
 
     @FXML
@@ -64,6 +64,7 @@ public class CardMyEventController {
 
     public void setEventData(Event event) {
         setupDataPage();
+        buttonVisible(true);
         if (event !=null) {
             currentEvent = eventList.findEventById(event.getEventID());
             Datasource<TeamList> teamListDatasource = new TeamListDataSource("data","team-list.csv");
@@ -71,7 +72,7 @@ public class CardMyEventController {
 
             buttonVisible(event.isEnd());
             if (event.getUserList().getUsers().contains(currentUser)) {
-                forStaffButton.setVisible(false);
+                staffButton.setVisible(false);
                 manageUserButton.setVisible(false);
             }
             if (event.getEventHostUser().equals(currentUser)) {
@@ -113,13 +114,13 @@ public class CardMyEventController {
     }
 
     private void buttonVisible(Boolean is){
-        forStaffButton.setVisible(!is);
+        staffButton.setVisible(!is);
         manageUserButton.setVisible(!is);
         leaveEventButton.setVisible(!is);
     }
 
     @FXML
-    private void onForStaffButton() {
+    private void onStaffButton() {
         joinTeamMap = new JoinTeamMap();
         teamHashMap = joinTeamMap.readData();
         if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser)){
@@ -141,7 +142,7 @@ public class CardMyEventController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs211/project/views/components/users-event.fxml"));
             VBox loaded = loader.load();
             UsersEventController usersEventController = loader.getController();
-            usersEventController.setupData(popup, currentEvent);
+            usersEventController.setupData(currentEvent);
             box.getChildren().setAll(loaded);
         } catch (IOException e) {
             throw new RuntimeException(e);

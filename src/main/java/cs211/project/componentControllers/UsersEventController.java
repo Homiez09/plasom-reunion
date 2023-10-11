@@ -23,22 +23,22 @@ public class UsersEventController extends CardMyEventController{
     @FXML private TableColumn<User,Void> actionColumn;
     @FXML private Button statusButton;
     @FXML private Label eventNameLabel,userSizeLabel,statusLabel,totalLabel,inLabel;
-    @FXML private Popup popup;
+
     private JoinEventMap MapUserJoinEvent;
     private Event currentEvent;
+    private ObservableList<User> userObservableList;
     private ObservableList<User> banUserObservableList;
 
-    public void setupData(Popup popup, Event event) {
+    public void setupData(Event event) {
         this.currentEvent = event;
         this.MapUserJoinEvent = new JoinEventMap();
-        this.popup = popup;
         BanUser data = new BanUser();
         HashMap<User,EventList> getBan = data.readData();
         UserList banList = new UserList();
         for (User user: getBan.keySet()){
             banList.getUsers().add(user);
         }
-        ObservableList<User> userObservableList = FXCollections.observableArrayList(event.getUserList().getUsers());
+        userObservableList = FXCollections.observableArrayList(event.getUserList().getUsers());
         banUserObservableList = FXCollections.observableArrayList(banList.getUsers());
 
         eventNameLabel.setText(currentEvent.getEventName());
@@ -81,11 +81,9 @@ public class UsersEventController extends CardMyEventController{
             }
             return null;
         });
-
         usernameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDisplayName()));
         statusColumn.setCellValueFactory(cellData -> {
-            // ในส่วนนี้คุณสามารถกำหนดวิธีการเข้าถึงข้อมูลแบบกำหนดเอง
             User user = cellData.getValue();
             BanUser data = new BanUser();
             HashMap<User,EventList> getBan = data.readData();
@@ -95,7 +93,6 @@ public class UsersEventController extends CardMyEventController{
             }
             return new SimpleStringProperty(!banUserObservableList.contains(user) && !findEvent.getEvents().contains(currentEvent)? "Member":"Ban");
         });
-
         actionColumn.setCellFactory(param -> new TableCell<>() {
             private final ComboBox<String> comboBox = new ComboBox<>();
 
