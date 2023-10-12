@@ -11,6 +11,13 @@
     -fx-font-style: normal;
     -fx-text-fill: black;
 }
+.label-header{
+    -fx-font-size: 40;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+    -fx-font-style: normal;
+    -fx-text-fill: black;
+}
 .font-Label{
     -fx-font-size: 18;
     -fx-font-family: Leelawadee;

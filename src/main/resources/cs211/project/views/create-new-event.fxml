@@ -18,12 +18,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0" styleClass="bg" stylesheets="@../../../css/create-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.event.CreateEventController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="bg" stylesheets="@../../../css/create-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.event.CreateEventController">
    <children>
-      <VBox>
+      <VBox prefHeight="768.0" prefWidth="1152.0">
          <children>
             <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
-            <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="1152.0" styleClass="bg">
+            <Separator opacity="0.0" prefHeight="20.0" />
+            <VBox alignment="TOP_CENTER" styleClass="bg">
                <children>
                   <HBox>
                      <VBox.margin>
@@ -43,15 +44,15 @@
                         <Insets />
                      </VBox.margin>
                      <children>
-                        <Label fx:id="headCreateEventLabel" prefWidth="503.0" text="headCreateEventLabel">
+                        <Label fx:id="headCreateEventLabel" alignment="CENTER" styleClass="label-header" text="headCreateEventLabel" textAlignment="CENTER">
                            <font>
                               <Font name="Leelawadee Bold" size="48.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <Separator opacity="0.0" prefHeight="30.0" />
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg" vbarPolicy="ALWAYS" vvalue="0.76">
+                  <Separator opacity="0.0" prefHeight="20.0" />
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg" vbarPolicy="ALWAYS">
                     <content>
                         <VBox prefWidth="1000.0" spacing="15.0" styleClass="inbox-bg">
                            <children>
@@ -60,7 +61,7 @@
                                     <Label styleClass="font-Label-Head" text="Basic information" />
                                  </children>
                                  <VBox.margin>
-                                    <Insets left="25.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </HBox>
                               <VBox>
@@ -71,7 +72,7 @@
                                           <Label styleClass="font-Label" text="Upload event image" />
                                           <HBox alignment="CENTER" prefHeight="320.0" prefWidth="650.0">
                                              <children>
-                                                <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="uploadImageView" fitHeight="384.0" fitWidth="384.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../../images/home/event2.png" />
                                                    </image>

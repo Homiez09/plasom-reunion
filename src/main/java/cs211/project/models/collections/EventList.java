@@ -14,34 +14,35 @@ public class EventList {
 
     public void createEvent(String eventName, User eventHost, String eventImagePath,
                             String eventTag, String eventDateStart, String eventDateEnd,
-                            String eventDescription, String eventLocation) {
+                            String eventDescription, String eventLocation, int slotMember) {
         eventName = eventName.trim();
         if (!eventName.equals("") && eventHost != null){
             events.add(new Event(eventName,eventHost,eventImagePath,eventTag,
-                                eventDateStart,eventDateEnd,eventDescription,eventLocation));
+                                eventDateStart,eventDateEnd,eventDescription,eventLocation,slotMember));
         }
     }
     public void createEvent(String eventName, User eventHost, String eventImagePath,
                             String eventTag, String eventDateStart, String eventDateEnd,
-                            String eventDescription, String eventLocation, int slotMember) {
+                            String eventDescription, String eventLocation, int slotMember,
+                            String joinStart, String joinEnd) {
         eventName = eventName.trim();
 
         if (!eventName.equals("") && eventHost != null) {
             events.add(new Event(   eventName,eventHost, eventImagePath,eventTag, eventDateStart, eventDateEnd,
-                                    eventDescription,eventLocation,slotMember));
+                                    eventDescription,eventLocation,slotMember,joinStart,joinEnd));
         }
     }
     public void addEvent(String eventId, User eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
-                         int slotMember,String timeStamp,boolean joinEvent,String joinTimeStart,String joinTimeEnd) {
+                         int slotMember,String timeStamp,String joinTimeStart,String joinTimeEnd) {
         eventId = eventId.trim();
         eventName = eventName.trim();
 
         Event exist = findEventById(eventId);
         if (exist == null && !eventName.equals("") && eventHost != null){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
-                                    eventLocation,slotMember,timeStamp,joinEvent,joinTimeStart,joinTimeEnd));
+                                    eventLocation,slotMember,timeStamp,joinTimeStart,joinTimeEnd));
         }
     }
 

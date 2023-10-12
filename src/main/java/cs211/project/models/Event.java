@@ -29,7 +29,7 @@ public class Event implements Comparable<Event>{
                  String eventDateStart,
                  String eventDateEnd,
                  String eventDescription,
-                 String eventLocation) {
+                 String eventLocation,int slotMember) {
         this.eventID = generateEventID();
         this.eventName = eventName;
         this.eventHostUser = eventHostUser;
@@ -39,13 +39,13 @@ public class Event implements Comparable<Event>{
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
-        this.slotMember = -1;
+        this.slotMember = slotMember;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.activityList = new ActivityList();
         this.userList = new UserList();
-        this.joinEvent = true;
         this.joinTimeStart = eventDateStart;
         this.joinTimeEnd = eventDateEnd;
+        this.joinEvent = isJoinEventNow();
     }
 
     public Event(String eventName,
@@ -56,7 +56,9 @@ public class Event implements Comparable<Event>{
                  String eventDateEnd,
                  String eventDescription,
                  String eventLocation,
-                 int slotMember) {
+                 int slotMember,
+                 String joinTimeStart,
+                 String joinTimeEnd) {
         this.eventID = generateEventID();
         this.eventHostUser = eventHostUser;
         this.eventName = eventName;
@@ -70,9 +72,9 @@ public class Event implements Comparable<Event>{
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.activityList = new ActivityList();
         this.userList = new UserList();
-        this.joinEvent = true;
-        this.joinTimeStart = eventDateStart;
-        this.joinTimeEnd = eventDateEnd;
+        this.joinTimeStart = joinTimeStart;
+        this.joinTimeEnd = joinTimeEnd;
+        this.joinEvent = isJoinEventNow();
     }
     //---------------- Read CSV ----------------\\
     public Event(String eventID,
@@ -86,7 +88,6 @@ public class Event implements Comparable<Event>{
                  String eventLocation,
                  int slotMember,
                  String timestamp,
-                 boolean joinEvent,
                  String joinTimeStart,
                  String joinTimeEnd) {
         this.eventID = eventID;
@@ -102,9 +103,9 @@ public class Event implements Comparable<Event>{
         this.timestamp =timestamp;
         this.activityList = new ActivityList();
         this.userList = new UserList();
-        this.joinEvent = joinEvent;
         this.joinTimeStart = joinTimeStart;
         this.joinTimeEnd = joinTimeEnd;
+        this.joinEvent = isJoinEventNow();
     }
     //---------------- Read CSV ----------------\\
     public String getEventID() {return eventID;}
@@ -198,6 +199,9 @@ public class Event implements Comparable<Event>{
     public boolean isHostEvent(User user) {
         return eventHostUser.equals(user);
     }
+    private boolean isJoinEventNow() {
+        return LocalDateTime.now().isAfter(getJoinTimeStartAsDate()) && LocalDateTime.now().isBefore(getJoinTimeEndAsDate());
+    }
 
     @Override
     public String toString() {
@@ -212,7 +216,6 @@ public class Event implements Comparable<Event>{
                 +   eventLocation + ','
                 +   slotMember +','
                 +   timestamp+','
-                +   joinEvent+","
                 +   joinTimeStart+","
                 +   joinTimeEnd;
 
