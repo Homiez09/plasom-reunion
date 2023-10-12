@@ -48,8 +48,8 @@ public class UsersEventController extends CardMyEventController{
             inLabel.setVisible(false);
         }
 
-        statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
-        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
+        statusButton.setText(currentEvent.isJoinEvent() ? "Closed" : "Open");
+        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Closed");
         showTable(userObservableList);
     }
 
