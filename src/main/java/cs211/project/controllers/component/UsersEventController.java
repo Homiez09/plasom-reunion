@@ -182,8 +182,8 @@ public class UsersEventController extends CardMyEventController{
         EventList eventList = eventListDatasource.readData();
         eventList.changeStatus(currentEvent,!currentEvent.isJoinEvent());
         currentEvent.setJoinEvent(!currentEvent.isJoinEvent());
-        statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
-        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
+        statusButton.setText(currentEvent.isJoinEvent() ? "Closed" : "Open");
+        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Closed");
         eventListDatasource.writeData(eventList);
     }
 
