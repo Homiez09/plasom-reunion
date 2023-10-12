@@ -9,7 +9,6 @@ import java.nio.charset.StandardCharsets;
 public class UserListDataSource implements Datasource<UserList> {
     private final String directoryName;
     private final String fileName;
-    private UserList userList;
 
     public UserListDataSource(String directoryName, String fileName){
         this.directoryName = directoryName;
@@ -35,7 +34,7 @@ public class UserListDataSource implements Datasource<UserList> {
 
     @Override
     public UserList readData() {
-        userList = new UserList();
+        UserList userList = new UserList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 

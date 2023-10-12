@@ -7,8 +7,8 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class ActivityTeamListDataSource implements Datasource<ActivityTeamList>{
-    protected String directoryName;
-    protected String fileName;
+    private final String directoryName;
+    private final String fileName;
 
     public ActivityTeamListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;

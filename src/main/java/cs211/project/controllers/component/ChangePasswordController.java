@@ -27,7 +27,6 @@ public class ChangePasswordController {
     private String currentPassword = "" , newPassword = "", reNewPassword = "";
     private boolean passwordMatching;
     private Image visibleIcon, inVisibleIcon;
-    private Image checkBoxPasswordImage;
     private final User user = (User) FXRouter.getData();
     private UserListDataSource datasource;
     private UserList userList;
@@ -151,7 +150,7 @@ public class ChangePasswordController {
     private void loadVisibleImageInit() {
         visibleIcon = new Image(getClass().getResourceAsStream("/images/icons/login/show_password.png"));
         inVisibleIcon = new Image(getClass().getResourceAsStream("/images/icons/login/hide_password.png"));
-        checkBoxPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/checkbox_password.png"));
+        Image checkBoxPasswordImage = new Image(getClass().getResourceAsStream("/images/icons/login/checkbox_password.png"));
 
         newPasswordCheckImageView.setImage(checkBoxPasswordImage);
         reNewPasswordCheckImageView.setImage(checkBoxPasswordImage);

@@ -47,10 +47,7 @@ public class UserProfileController {
     private Image  showPasswordImage, hidePasswordImage;
     private String displayName, password, contactNumber, bioText, previousDisplayName, previousContactNumber , previousBioText;
     private Boolean displayNameRequirement = false ,isValid = false, isValidContactNumber = false;
-
-    private String userId ,username, previousBioCount, imagePath;
     private int row = 0, column = 0;
-
     private final int MAX_PASSWORD_LIMIT = 27,  MAX_DISPLAY_NAME_LIMIT = 24, MAX_CONTACT_LIMIT = 10, MAX_BIO_LIMIT = 300;
     private final User user = (User) FXRouter.getData();
 
@@ -85,10 +82,10 @@ public class UserProfileController {
     }
 
     private void userDataInit(){
-        username = user.getUsername();
+        String username = user.getUsername();
         displayName = user.getDisplayName();
         bioText = user.getBio();
-        userId = user.getUserId();
+        String userId = user.getUserId();
         contactNumber = user.getContactNumber();
 
         usernameLabel.setText(username);
@@ -334,7 +331,7 @@ public class UserProfileController {
         loadIconImageEditProfile();
 
         previousBioText = bioTextArea.getText();
-        previousBioCount = String.valueOf(previousBioText.length());
+        String previousBioCount = String.valueOf(previousBioText.length());
 
         previousDisplayName = displayNameTextField.getText();
         previousContactNumber = contactNumberTextField.getText();
@@ -408,7 +405,7 @@ public class UserProfileController {
             loadPasswordFieldAndButtonProfile();
             loadIconImageProfile();
 
-            imagePath = user.getNewImagePath();
+            String imagePath = user.getNewImagePath();
             if (imagePath == null) {
                 imagePath = user.getImagePath();
             } else {

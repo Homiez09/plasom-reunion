@@ -43,7 +43,6 @@ public class SelectTeamController {
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private final JoinTeamMap joinTeamMap = new JoinTeamMap();
-    private HashMap<String, TeamList> teamHashMap;
     private String filter = "All";
     private String teamBox ;
     private final String[] menu = {"Manage Teams", "Switch View"};
@@ -196,7 +195,7 @@ public class SelectTeamController {
     }
 
     public void teamBoxView(String teamBox) {
-        teamHashMap = joinTeamMap.readData();
+        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
         int row = 0, column = 0, row2 = 0;
 
         TeamList teamListSort = (teamHashMap.get(user.getUsername()) != null) ? new TeamList(teamHashMap.get(user.getUsername())) : new TeamList();

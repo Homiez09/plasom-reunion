@@ -21,9 +21,8 @@ public class ManageMemberTeamListController {
     @FXML private ImageView roleImageView, statusImageView, menuImageView;
     @FXML private Label userIdLabel;
     @FXML private ComboBox menuComboBox;
-    private Image roleIcon, statusIcon, menuIcon;
-    private BanTeamMap banHashMap = new BanTeamMap();
-    private JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private final BanTeamMap banHashMap = new BanTeamMap();
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
     private ManageTeamComponentController manageTeamComponentController;
     private ManageTeamController manageTeamController;
 
@@ -32,9 +31,9 @@ public class ManageMemberTeamListController {
     }
 
     private void loadImageInit(){
-        roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/role/Leader.png"));
-        statusIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/active_icon.png"));
-        menuIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/dot_icon.png"));
+        Image roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/role/Leader.png"));
+        Image statusIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/active_icon.png"));
+        Image menuIcon = new Image(getClass().getResourceAsStream("/images/icons/team-box/dot_icon.png"));
 
         roleImageView.setImage(roleIcon);
         statusImageView.setImage(statusIcon);

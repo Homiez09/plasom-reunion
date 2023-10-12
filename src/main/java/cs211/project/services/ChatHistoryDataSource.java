@@ -11,9 +11,6 @@ import java.nio.charset.StandardCharsets;
 public class ChatHistoryDataSource implements Datasource<ChatHistory> {
     private final String directoryName;
     private final String fileName;
-    private ChatHistory chatHistory;
-    private UserList userList;
-    private UserListDataSource userListDataSource;
 
     public ChatHistoryDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
@@ -40,9 +37,9 @@ public class ChatHistoryDataSource implements Datasource<ChatHistory> {
 
     @Override
     public ChatHistory readData() {
-        chatHistory = new ChatHistory();
-        userListDataSource = new UserListDataSource("data","user-list.csv");
-        userList = userListDataSource.readData();
+        ChatHistory chatHistory = new ChatHistory();
+        UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
+        UserList userList = userListDataSource.readData();
 
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);

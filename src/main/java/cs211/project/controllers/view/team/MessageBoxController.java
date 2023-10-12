@@ -16,10 +16,9 @@ public class MessageBoxController {
     @FXML private Label nameLabel, timeLabel, timeLabel2, timeLabel3;
     @FXML private ImageView profileImageView;
     @FXML private AnchorPane otherAnchorPane, midAnchorPane, selfAnchorPane;
-    private User user;
 
     protected void setChat(Chat chat) {
-        user = chat.getSender();
+        User user = chat.getSender();
         nameLabel.setText(user.getDisplayName());
         setMessageText(chat.getMessage());
         setTime(chat.getTime());

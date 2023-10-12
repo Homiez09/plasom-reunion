@@ -31,8 +31,6 @@ public class SignUpController {
     @FXML private TextField showPasswordTextField, showConfirmPasswordTextField, displayNameTextfield, usernameTextField;
     private String password, confirmPassword, displayName, username;
     private boolean passwordMatching =false, usernameRequirement = false, displayNameRequirement= false, findUsernameValidate = false, findDisplayNameValidate = false;
-    private char firstUsernameChar;
-    private User findUsername, findDisplayName;
     private UserListDataSource datasource ;
     private UserList userList ;
 
@@ -138,11 +136,11 @@ public class SignUpController {
     }
 
     private boolean validateConfirmation(){
-        findUsername = userList.findUsername(username);
+        User findUsername = userList.findUsername(username);
         if(findUsername != null){
             findUsernameValidate = true;
         }
-        findDisplayName = userList.findDisplayName(displayName);
+        User findDisplayName = userList.findDisplayName(displayName);
         if(findDisplayName != null){
             findDisplayNameValidate = true;
         }
@@ -161,7 +159,7 @@ public class SignUpController {
         boolean isValid = true, hasFirstAlphabetic;
         username = usernameTextField.getText();
         if (!username.isEmpty()){
-            firstUsernameChar = username.charAt(0);
+            char firstUsernameChar = username.charAt(0);
             hasFirstAlphabetic = Character.isAlphabetic(firstUsernameChar);
         }else {
             hasFirstAlphabetic = false;

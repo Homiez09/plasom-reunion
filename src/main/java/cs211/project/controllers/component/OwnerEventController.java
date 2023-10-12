@@ -39,7 +39,6 @@ public class OwnerEventController {
     @FXML
     Popup popup;
     private Datasource<EventList> eventListDatasource;
-    private Datasource<TeamList> teamListDatasource;
     private JoinEventMap joinEventMap;
     private User currentUser;
     private EventList eventList;
@@ -53,7 +52,7 @@ public class OwnerEventController {
         backButton.setOnAction(e -> popup.hide());
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
-        this.teamListDatasource = new TeamListDataSource("data", "team-list.csv");
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data", "team-list.csv");
         this.teamList = teamListDatasource.readData();
         this.joinEventMap = new JoinEventMap();
         this.currentUser = user;

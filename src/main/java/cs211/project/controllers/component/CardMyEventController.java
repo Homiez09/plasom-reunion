@@ -24,9 +24,6 @@ public class CardMyEventController {
     @FXML AnchorPane eventAnchorPane;
     @FXML Button staffButton, manageUserButton,leaveEventButton;
     private final User currentUser = (User) FXRouter.getData();
-    private JoinTeamMap joinTeamMap = new JoinTeamMap();
-    private HashMap<String, TeamList> teamHashMap = new HashMap<>();
-    private Datasource<EventList> eventListDatasource;
     private EventList eventList;
     private JoinEventMap joinEventDatasource;
     private HashMap<String, UserList> joinEventMap; // Collect EventID
@@ -39,12 +36,11 @@ public class CardMyEventController {
     }
 
     private void setupDataPage(){
-        this.eventListDatasource = new EventListDataSource();
+        Datasource<EventList> eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         this.joinEventMap = new HashMap<>();
         this.joinEventDatasource = new JoinEventMap();
         this.joinEventMap = joinEventDatasource.readData();
-
     }
 
     @FXML
@@ -107,9 +103,8 @@ public class CardMyEventController {
 
             hostUserNameLabel.setText(event.getEventHostUser().getUsername());
             hostDisplayNameLabel.setText(event.getEventHostUser().getDisplayName());
-            String descrip = event.getEventDescription().replaceAll("\n", " ");
-            descriptionLabel.setText(descrip);
-
+            String description = event.getEventDescription().replaceAll("\n", " ");
+            descriptionLabel.setText(description);
         }
     }
 
@@ -121,8 +116,8 @@ public class CardMyEventController {
 
     @FXML
     private void onStaffButton() {
-        joinTeamMap = new JoinTeamMap();
-        teamHashMap = joinTeamMap.readData();
+        JoinTeamMap joinTeamMap = new JoinTeamMap();
+        HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
         if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser)){
             try {
                 FXRouter.goTo("select-team",currentUser, currentEvent);

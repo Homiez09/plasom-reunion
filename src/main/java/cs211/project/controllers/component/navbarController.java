@@ -19,7 +19,6 @@ public class navbarController {
     @FXML private ComboBox<String> toggleComboBox;
     private final User user = (User) FXRouter.getData();
     private final UserListDataSource datasource = new UserListDataSource("data","user-list.csv");
-    private UserList userList;
 
     @FXML private void initialize() {
         String[] menu = {"profile", "setting", "logout"};
@@ -41,7 +40,7 @@ public class navbarController {
             case "profile" -> FXRouter.goTo("user-profile", user);
             case "setting" -> FXRouter.goTo("setting", user);
             case "logout" -> {
-                userList = datasource.readData();
+                UserList userList = datasource.readData();
                 userList.logout(user);
                 datasource.writeData(userList);
 

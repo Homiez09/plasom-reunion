@@ -52,18 +52,15 @@ public class TeamActivityController {
     private final ActivityTeamListDataSource activityTeamListDataSource = new ActivityTeamListDataSource("data", "team-activity.csv");
     private ActivityTeamList activityTeamList;
 
-    private LocalDateTime startDateTime, endDateTime, beforeStartDateTime;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
     private LocalDateTime currentDateTime = LocalDateTime.now();
-    private LocalDate startDate, endDate;
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
 
-    private String[] startTimeParts = {}, endTimeParts = {}, startParts = {}, endParts = {};
+    private String[] startParts = {};
     private String startDateFormat, endDateFormat, description, beforeEditActivityName;
-    private String activityName;
-    private String formattedCurrentHour, startAmPm, endAmPm, beforeStartDateEditFormat, startDateFromCSV, endDateFromCSV;
     private int beforeEditStartHour, beforeEditStartMinute;
     private int startHour, endHour,countInit = 0;
-    private int currentMinute, startMinute, endMinute;
     private int current_page = 0, max_page;
     private boolean activityNameRequirement = false, dateValidateRequirement = false, editor;
 
@@ -223,7 +220,7 @@ public class TeamActivityController {
     }
 
     private void timeInit() {
-        formattedCurrentHour = currentDateTime.format(DateTimeFormatter.ofPattern("hh").withLocale(Locale.US));
+        String formattedCurrentHour = currentDateTime.format(DateTimeFormatter.ofPattern("hh").withLocale(Locale.US));
         if (currentDateTime.getHour() > 11) {
             startDateChoiceBox.setValue("PM");
             endDateChoiceBox.setValue("PM");
@@ -233,18 +230,18 @@ public class TeamActivityController {
         }
         if (editor) {
             ActivityTeam activityTeam = activityTeamList.findActivityByName(activityNameTextField.getText());
-            startDateFromCSV = activityTeam.getStartTime();
-            endDateFromCSV = activityTeam.getEndTime();
+            String startDateFromCSV = activityTeam.getStartTime();
+            String endDateFromCSV = activityTeam.getEndTime();
 
             startParts = startDateFromCSV.split("\\.");
-            endParts = endDateFromCSV.split("\\.");
+            String[] endParts = endDateFromCSV.split("\\.");
 
             LocalDate startDate = LocalDate.parse(startParts[0]);
             LocalDate endDate = LocalDate.parse(endParts[0]);
             startDatePicker.setValue(startDate);
             endDatePicker.setValue(endDate);
-            startTimeParts = startParts[1].split(":");
-            endTimeParts = endParts[1].split(":");
+            String[] startTimeParts = startParts[1].split(":");
+            String[] endTimeParts = endParts[1].split(":");
 
             startHour = Integer.parseInt(startTimeParts[0]);
             endHour = Integer.parseInt(endTimeParts[0]);
@@ -276,7 +273,7 @@ public class TeamActivityController {
         }else{
             startDatePicker.setValue(LocalDate.now());
             startHourSpinner.getValueFactory().setValue(Integer.parseInt(formattedCurrentHour));
-            currentMinute = currentDateTime.getMinute();
+            int currentMinute = currentDateTime.getMinute();
             startMinuteSpinner.getValueFactory().setValue(currentMinute);
 
             endDatePicker.setValue(LocalDate.now());
@@ -313,7 +310,7 @@ public class TeamActivityController {
     }
 
     private void checkActivityNameReq() {
-        activityName = activityNameTextField.getText();
+        String activityName = activityNameTextField.getText();
         if (activityName.isEmpty()) {
             setValidateNameRequirement(false);
             nameRequirementLabel.setText("Incorrect Activity name.");
@@ -519,17 +516,17 @@ public class TeamActivityController {
         errorContinueLabel.setVisible(false);
         dateValidateRequirement = false;
 
-        startDate = startDatePicker.getValue();
-        endDate = endDatePicker.getValue();
+        LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
 
         if (startDate != null && endDate != null && startHourSpinner != null && startMinuteSpinner != null && endHourSpinner != null && endMinuteSpinner != null && startDateChoiceBox != null && endDateChoiceBox != null) {
             startHour = startHourSpinner.getValue();
-            startMinute = startMinuteSpinner.getValue();
+            int startMinute = startMinuteSpinner.getValue();
             endHour = endHourSpinner.getValue();
-            endMinute = endMinuteSpinner.getValue();
+            int endMinute = endMinuteSpinner.getValue();
 
-            startAmPm = startDateChoiceBox.getValue();
-            endAmPm = endDateChoiceBox.getValue();
+            String startAmPm = startDateChoiceBox.getValue();
+            String endAmPm = endDateChoiceBox.getValue();
 
             if (startAmPm != null && endAmPm != null) {
                 if (startAmPm.equals("PM")) {
@@ -557,8 +554,7 @@ public class TeamActivityController {
 
                 ++countInit;
                 if(editor){
-                    beforeStartDateTime = LocalDateTime.of(LocalDate.parse(startParts[0]), LocalTime.of(beforeEditStartHour, beforeEditStartMinute));
-                    beforeStartDateEditFormat = beforeStartDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm").withLocale(Locale.US));
+                    LocalDateTime beforeStartDateTime = LocalDateTime.of(LocalDate.parse(startParts[0]), LocalTime.of(beforeEditStartHour, beforeEditStartMinute));
                     currentDateTime = beforeStartDateTime;
 
                     setDateValidateRequirement();

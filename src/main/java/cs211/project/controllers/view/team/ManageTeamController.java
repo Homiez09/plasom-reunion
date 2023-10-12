@@ -57,17 +57,12 @@ public class ManageTeamController {
     @FXML private DatePicker startDatePicker, endDatePicker;
 
     private String description = "" , teamName = "", startDateFormat, endDateFormat, password="", teamID;
-
     private final String[] time = {"AM", "PM"};
-    private String[] startParts, endParts, startDateParts, endDateParts, startTimeParts, endTimeParts;
-    private LocalDateTime beforeStartDateTime ;
-    private LocalDateTime beforeEndDateTime,afterStartDateTime , afterEndDateTime;
+    private LocalDateTime beforeStartDateTime;
     private LocalDate startDate, endDate;
-
     private final int MAX_TEAM_NAME_LIMIT = 35, MAX_DESCRIPTION_LIMIT = 280, MAX_PASSWORD_LIMIT = 27;
-    private int minimumMember;
-
-    private Image nameIcon, roleIcon, statusIcon, showPasswordImage, hidePasswordImage;
+    private Image showPasswordImage;
+    private Image hidePasswordImage;
     private boolean teamNameRequirement = true, dateValidateRequirement = true;
     private boolean nameSort, roleSort, statusSort;
 
@@ -484,13 +479,13 @@ public class ManageTeamController {
     private void setDatePicker(){
         int startYear, startMonth, startDay, startHour, startMinute;
         int endYear, endMonth, endDay, endHour, endMinute;
-        startParts = team.getStartDateTime().split(" | ");
-        startDateParts = startParts[0].split("/");
-        startTimeParts = startParts[2].split(":");
+        String[] startParts = team.getStartDateTime().split(" | ");
+        String[] startDateParts = startParts[0].split("/");
+        String[] startTimeParts = startParts[2].split(":");
 
-        endParts = team.getEndDateTime().split(" | ");
-        endDateParts = endParts[0].split("/");
-        endTimeParts = endParts[2].split(":");
+        String[] endParts = team.getEndDateTime().split(" | ");
+        String[] endDateParts = endParts[0].split("/");
+        String[] endTimeParts = endParts[2].split(":");
 
         startYear = Integer.parseInt(startDateParts[2]);
         startMonth = Integer.parseInt(startDateParts[1]);
@@ -547,8 +542,6 @@ public class ManageTeamController {
         }
 
         beforeStartDateTime = LocalDateTime.of(startYear, startMonth, startDay, startHour, startMinute);
-        beforeEndDateTime = LocalDateTime.of(endYear, endMonth, startDay, endHour, endMinute);
-
     }
 
     @FXML private void onKeyHidePassword() {
@@ -669,16 +662,16 @@ public class ManageTeamController {
     }
 
     private void numMemberReq(){
-        minimumMember = team.getMemberList().getUsers().size();
+        int minimumMember = team.getMemberList().getUsers().size();
         if(minimumMember == 1) minimumMember = 2;
         numMemberSpin =new SpinnerValueFactory.IntegerSpinnerValueFactory(minimumMember, 1000000000, team.getMaxSlotTeamMember());
         numMemberSpinner.setValueFactory(numMemberSpin);
     }
 
     private void loadIcon() {
-        nameIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
-        roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
-        statusIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
+        Image nameIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
+        Image roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
+        Image statusIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
         nameImageView.setImage(nameIcon);
         roleImageView.setImage(roleIcon);
         statusImageView.setImage(statusIcon);
@@ -731,8 +724,8 @@ public class ManageTeamController {
             endHour = 0;
         }
 
-        afterStartDateTime = LocalDateTime.of(startDate, LocalTime.of(startHour, startMinute));
-        afterEndDateTime = LocalDateTime.of(endDate, LocalTime.of(endHour, endMinute));
+        LocalDateTime afterStartDateTime = LocalDateTime.of(startDate, LocalTime.of(startHour, startMinute));
+        LocalDateTime afterEndDateTime = LocalDateTime.of(endDate, LocalTime.of(endHour, endMinute));
 
         startDateFormat = afterStartDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm").withLocale(Locale.US));
         endDateFormat = afterEndDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm").withLocale(Locale.US));

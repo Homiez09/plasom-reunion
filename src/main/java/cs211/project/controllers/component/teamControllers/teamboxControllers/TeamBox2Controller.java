@@ -27,9 +27,8 @@ public class TeamBox2Controller {
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private boolean bookmarked = false, initBookMarkCheck = false;
-    private JoinTeamMap joinTeamMap = new JoinTeamMap();
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
     private HashMap<String, TeamList> teamListHashMap;
-    private TeamList teamList;
     private SelectTeamController selectTeamController;
 
     @FXML private void initialize() {
@@ -40,7 +39,7 @@ public class TeamBox2Controller {
     @FXML
     private void onBookMarkClick(){
         teamListHashMap = joinTeamMap.readData();
-        teamList = teamListHashMap.get(user.getUsername());
+        TeamList teamList = teamListHashMap.get(user.getUsername());
         Team team = teamList.findTeamByID(teamIdLabel.getText());
 
         if (bookmarked) {

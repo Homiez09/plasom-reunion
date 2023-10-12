@@ -10,7 +10,7 @@ import java.util.*;
 public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
     private final String directoryName = "data";
     private final String fileName = "join-event.csv";
-    private HashMap<String,UserList> hashMap;
+
     public JoinEventMap(){
         checkFileIsExisted();
     }
@@ -33,7 +33,7 @@ public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
 
     @Override
     public HashMap<String, UserList> readData() {
-        hashMap = new HashMap<>();
+        HashMap<String, UserList> hashMap = new HashMap<>();
         UserList userList ;
 
         String filePath = directoryName + File.separator + fileName;
