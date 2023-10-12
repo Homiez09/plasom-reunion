@@ -221,17 +221,6 @@
                         <String fx:value="text-xl" />
                      </styleClass>
                   </Label>
-                  <Label fx:id="menu2Label" lineSpacing="2.0" prefHeight="18.0" prefWidth="151.0" text="Pending Invites" textFill="#858585">
-                     <font>
-                        <Font name="FreesiaUPC" size="20.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="spacing1" />
-                        <String fx:value="weight-bold" />
-                        <String fx:value="font" />
-                        <String fx:value="text-xl" />
-                     </styleClass>
-                  </Label>
                </children>
             </HBox>
             <AnchorPane layoutX="66.0" layoutY="109.0" prefHeight="399.0" prefWidth="782.0">
@@ -263,7 +252,6 @@
                </children>
             </AnchorPane>
             <Line fx:id="selectMenu1" endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-3.0" layoutY="3.0" startX="232.39999389648438" startY="104.0" stroke="#ff9900" strokeWidth="3.0" />
-            <Line fx:id="selectMenu2" endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="196.0" layoutY="3.0" startX="232.39999389648438" startY="104.0" stroke="#ff9900" strokeWidth="3.0" />
             <ScrollPane layoutX="60.0" layoutY="161.0" prefHeight="360.0" prefWidth="786.0">
                <content>
                   <AnchorPane prefHeight="402.0" prefWidth="771.0" style="-fx-background-color: #F6F4EE;">
