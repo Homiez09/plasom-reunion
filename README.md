@@ -31,64 +31,78 @@
   - user-list.csv
 - image
   - events
+    - 2023-10-10_1696933405354.jpg
+    - 2023-10-10_1696945107839.png
+    - 2023-10-11_1696958256883.jpg
+    - 2023-10-11_1697000484221.png
+    - 2023-10-11_1697000581604.png
+    - 2023-10-11_1697001425138.png
+    - 2023-10-11_1697025932586.jpg
+    - 2023-10-12_1697083521018.jpg
   - user-avatar
+    - user-DEV010245_mrowlvi.png
+    - user-MOq928049_kikie11.png
+    - user-ZKt668157_mingmmie.png
 - src
   - main
     - java
       - cs211.project
-        - componentControllers
-          - alertBox
-            - DeleteTeamAlertBoxController
-            - JoinTeamAlertBoxController
-          - sideBarControllers
-            - SideBarTeamController
-          - teamControllers
-            - manageTeamController
-              - ManageMemberTeamListController
-              - ManageTeamComponentController
-              - UnbanUserTeamController
-            - manageTeamsController
-              - ManageTeamsBoxController
-            - teamboxControllers
-              - TeamBox1Controller
-              - TeamBox2Controller
-            - AvatarProfileController
-            - CardEventController
-            - CardJoinTeamController
-            - CardMyEventController
-            - CardUpcoming
-            - ChangePasswordController
-            - CreateActivityController
-            - CreateTeamController
-            - EventTileController
-            - navbarController
-            - navbarGuestController
-            - OwnerEventController
-            - topBarController
-            - UserCardProfileController
-            - UsersEventController
         - controllers
-          - admin
-            - AdminDashboardController
-          - team
-            - ManageTeamController
-            - MessageBoxController
-            - TeamActivityController
-            - TeamChatController
-          - AllEventListController
-          - CreateEventController
-          - EditActivityController
-          - EventPageController
-          - HomeController
-          - JoinTeamController
-          - MyEventsController
-          - ProfileDeveloperController
-          - SelectTeamController
-          - SettingPageController
-          - SignInController
-          - SignUpController
-          - UserProfileController
-          - WelcomeController
+          - component
+            - alertBox
+              - DeleteTeamAlertBoxController
+              - JoinTeamAlertBoxController
+            - sideBarControllers
+              - SideBarTeamController
+            - teamControllers
+              - manageTeamController
+                - ManageMemberTeamListController
+                - ManageTeamComponentController
+                - UnbanUserTeamController
+              - manageTeamsController
+                - ManageTeamsBoxController
+              - teamboxControllers
+                - TeamBox1Controller
+                - TeamBox2Controller
+              - AvatarProfileController
+              - CardEventController
+              - CardJoinTeamController
+              - CardMyEventController
+              - CardUpcoming
+              - ChangePasswordController
+              - CreateActivityController
+              - CreateTeamController
+              - EventTileController
+              - navbarController
+              - navbarGuestController
+              - OwnerEventController
+              - topBarController
+              - UserCardProfileController
+              - UsersEventController
+          - view
+            - admin
+              - AdminDashboardController
+            - auth
+              - SignInController
+              - SignUpController
+            - event
+              - AllEventListController
+              - CreateEventController
+              - EditActivityController
+              - EventPageController
+              - MyEventsController
+            - team
+              - AllTeamController
+              - JoinTeamController
+              - ManageTeamController
+              - MessageBoxController
+              - TeamActivityController
+              - TeamChatController
+            - HomeController
+            - ProfileDeveloperController
+            - SettingPageController
+            - UserProfileController
+            - WelcomeController
         - cs211661project
           - HelloApplication
         - models
@@ -161,39 +175,44 @@
         - team-box
           - team-box-1.fxml
           - team-box-2.fxml
-      - avatar-profile.fxml
-      - card-event.fxml
-      - card-join-team.fxml
-      - card-my-event.fxml
-      - card-upcoming.fxml
-      - change-password.fxml
-      - create-event-activity.fxml
-      - create-team.fxml
-      - event-tile.fxml
-      - event-tile-new.fxml
-      - navbar.fxml
-      - navbar-guest.fxml
-      - owner-event.fxml
-      - profile-card.fxml
-      - topbar.fxml
-      - user-card-profile.fxml
-      - users-event.fxml
-    - admin-dashboard.fxml
-    - all-events.fxml
-    - create-new-event.fxml
-    - develop-profile.fxml
-    - edit-event-activity.fxml
-    - event-view.fxml
-    - home.fxml
-    - join-team.fxml
-    - my-event.fxml
-    - select-team.fxml
-    - setting.fxml
-    - sign-in.fxml
-    - sign-up.fxml
-    - user-profile.fxml
-    - welcome.fxml
-    - welcome-new.fxml
+        - avatar-profile.fxml
+        - card-event.fxml
+        - card-join-team.fxml
+        - card-my-event.fxml
+        - card-upcoming.fxml
+        - change-password.fxml
+        - create-event-activity.fxml
+        - create-team.fxml
+        - event-tile-new.fxml
+        - event-tile.fxml
+        - navbar-guest.fxml
+        - navbar.fxml
+        - owner-event.fxml
+        - profile-card.fxml
+        - topbar.fxml
+        - user-card-profile.fxml
+        - users-event.fxml
+      - team
+        - team-activity.fxml
+        - team-chat.fxml
+        - team-manage.fxml
+        - team-template.fxml
+      - admin-dashboard.fxml
+      - all-events.fxml
+      - all-team.fxml
+      - create-new-event.fxml
+      - develop-profile.fxml
+      - edit-event-activity.fxml
+      - event-view.fxml
+      - home.fxml
+      - join-team.fxml
+      - my-event.fxml
+      - setting.fxml
+      - sign-in.fxml
+      - sign-up.fxml
+      - user-profile.fxml
+      - welcome-new.fxml
+      - welcome.fxml
     - css
       - team
         - create-team.css
@@ -247,7 +266,7 @@
         - Icon.png
         - sort-ascending.png
         - sort-descending.png
-        -sort.png
+        - sort.png
       - icons
         - activity
           - back_arrow.png
@@ -406,27 +425,20 @@
 | queasyguy    | Testunit0! | User  |
 | mk           | Testunit0! | User  |
 
-
-สรุปรายละเอียดการพัฒนาในการส่งงานแต่ละครั้ง
-==================================
+## สรุปรายละเอียดการพัฒนาในการส่งงานแต่ละครั้ง ##
 
 ### ครั้งที่ 1 ( ส่งก่อนวันที่ 11 ส.ค. 2566 17:00 น.)
-> 
-> 
-> 
-> 
-> 
+>
+>
 
 ### ครั้งที่ 2 ( ส่งก่อนวันที่ 1 ก.ย. 2566 17:00 น.)
 >
-> 
-> 
+>
+>
 >
 
-
-
 ### ครั้งที่ 3 ( ส่งก่อนวันที่ 22 ก.ย. 2566 17:00 น.)
-> 
+>
 >
 
 ### ครั้งที่ 4 ( ส่งก่อนวันที่ 13 ต.ค. 2566 17:00 น.)
