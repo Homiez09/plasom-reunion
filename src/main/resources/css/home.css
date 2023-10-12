@@ -41,9 +41,14 @@
 -fx-text-fill: #413B3B;
 }
 .cat-button .menu-item {
--fx-background-color: #F9F6F7;
--fx-border-color: #413B3B;
--fx-border-opacity: 40%;
+-fx-background-color: transparent;
+-fx-padding: 10 3 10 5;
+-fx-font-family: Leelawadee;
+-fx-background-radius: 5;
+-fx-font-size: 14;
+-fx-border-radius: 5;
+-fx-text-fill: #666666;
+-fx-alignment: center;
 }
 .cat-button .menu-item .label{
 -fx-text-fill: #413B3B;
@@ -55,10 +60,14 @@
 -fx-text-fill: #FFF5E5;
 }
 .cat-button .menu-item:hover {
--fx-background-color: #FFE8D6;
+-fx-background-color: rgba(255, 153, 0, 0.37);
 }
 .cat-button .context-menu {
--fx-background-color: transparent;
+-fx-font-size: 14;
+-fx-text-fill: #413B3B;
+-fx-background-color: #F6F4EE;
+-fx-text-alignment: center;
+-fx-alignment: center;
 }
 .explore:hover {
 -fx-underline: true;
