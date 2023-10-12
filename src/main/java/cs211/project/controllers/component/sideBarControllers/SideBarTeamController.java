@@ -4,16 +4,21 @@ package cs211.project.controllers.component.sideBarControllers;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
+import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
+import cs211.project.services.JoinTeamMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class SideBarTeamController {
+    @FXML AnchorPane leaveTeamAnchorPane;
     @FXML Label activityLabel, teamChatLabel, manageTeamLabel;
     @FXML Shape   hoverActivityShape, hoverTeamChatShape, hoverManageTeamShape;
     @FXML ImageView  activityImageView, teamChatImageView, manageTeamImageView;
@@ -26,6 +31,12 @@ public class SideBarTeamController {
     @FXML
     private void initialize() {
         loadInitImage();
+        setVisibleLeaveTeam();
+    }
+    private void setVisibleLeaveTeam(){
+        if(team.getTeamHostUser().equals(user)){
+            leaveTeamAnchorPane.setVisible(false);
+        }
     }
 
     private void loadInitImage() {
@@ -174,6 +185,22 @@ public class SideBarTeamController {
     @FXML private void onTeamChatClick(){
         try {
             FXRouter.goTo("team-chat", user, event, team);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML private void onLeaveTeamClick(){
+        try {
+            JoinTeamMap joinTeamMap = new JoinTeamMap();
+            HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
+            TeamList teamList = teamListHashMap.get(user.getUsername());
+            teamList.removeTeam(team);
+            if(teamList.getTeams().size() == 0){
+                teamListHashMap.remove(user.getUsername());
+            }
+            joinTeamMap.writeData(teamListHashMap);
+            FXRouter.goTo("all-team",user, event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
