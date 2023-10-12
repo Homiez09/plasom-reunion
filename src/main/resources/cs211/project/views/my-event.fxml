@@ -44,7 +44,7 @@
                      </children>
                   </VBox>
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="46.0" prefWidth="594.0" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onManageEventButton" prefHeight="57.0" prefWidth="109.0" styleClass="my-event-button-manage" text="Manage Event" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onManageEventButton" prefHeight="39.0" prefWidth="118.0" styleClass="my-event-button-manage" text="Manage Events" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="15.0" />
                   <Button fx:id="createAction" mnemonicParsing="false" onAction="#onCreateAction" prefHeight="39.0" prefWidth="118.0" text="+ Create Event" textFill="WHITE">
                      <styleClass>
