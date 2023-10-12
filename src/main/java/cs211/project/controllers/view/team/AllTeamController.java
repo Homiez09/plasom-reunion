@@ -36,8 +36,8 @@ public class AllTeamController {
     @FXML private ImageView joinTeamImageView, settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
     @FXML private ComboBox settingMenuComboBox, filterMenuComboBox;
     @FXML private CheckBox teamBox1CheckBox, teamBox2CheckBox;
-    @FXML private Label menu1Label, menu2Label;
-    @FXML private Shape selectMenu1, selectMenu2;
+    @FXML private Label menu1Label;
+    @FXML private Shape selectMenu1;
     @FXML private Button createButton, joinButton;
 
     private final User user = (User) FXRouter.getData();
@@ -63,7 +63,7 @@ public class AllTeamController {
         manageTeamAnchorPane.setVisible(false);
 
         teamBoxView(teamBox);
-        manageTeamSelectMenuGraphic(1);
+        manageTeamSelectMenuGraphic();
 
         new LoadNavbarComponent(user, navbarAnchorPane);
         loadIconImage();
@@ -251,7 +251,7 @@ public class AllTeamController {
     }
 
     public void startManageTeam(Team team) {
-        manageTeamSelectMenuGraphic(1);
+        manageTeamSelectMenuGraphic();
 
         manageTeamAnchorPane.setVisible(true);
         selectTeamAnchorPane.setEffect(new BoxBlur(6, 5, 2));
@@ -344,27 +344,17 @@ public class AllTeamController {
         managerContainer.add(teamBoxComponent, col, row);
     }
 
-    private void manageTeamSelectMenuGraphic(int page) {
+    private void manageTeamSelectMenuGraphic() {
         initManageTeamSelectMenuGraphic();
         String selectColor = "-fx-text-fill: #413B3B;";
-        switch (page) {
-            case 1 -> {
-                menu1Label.setStyle(selectColor);
-                selectMenu1.setVisible(true);
-            }
-            case 2 -> {
-                menu2Label.setStyle(selectColor);
-                selectMenu2.setVisible(true);
-            }
-        }
+        menu1Label.setStyle(selectColor);
+        selectMenu1.setVisible(true);
     }
 
     private void initManageTeamSelectMenuGraphic() {
         String style = "";
         menu1Label.setStyle(style);
         selectMenu1.setVisible(false);
-        menu2Label.setStyle(style);
-        selectMenu2.setVisible(false);
     }
 }
 

@@ -17,7 +17,11 @@ public class topBarController {
     }
 
     @FXML private void onInstructionButtonClick() {
-        System.out.println("Instruction Clicked");
+        try {
+            FXRouter.goTo("instruction");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML private void onCurrentEventButtonClick() {
