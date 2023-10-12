@@ -16,7 +16,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="10.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                  <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="10.0" prefWidth="10.0" />
                   <VBox>
                      <children>
                         <HBox alignment="CENTER_LEFT">
@@ -31,31 +31,31 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefWidth="25.0" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefWidth="25.0" />
                               <Label alignment="CENTER" styleClass="users-event-font" text="Users " textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" />
                               <Label fx:id="userSizeLabel" alignment="CENTER" styleClass="users-event-font" text="size" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" />
                               <Label fx:id="inLabel" alignment="CENTER" styleClass="users-event-font" text="in" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" />
                               <Label fx:id="totalLabel" alignment="CENTER" styleClass="users-event-font" text="total" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="230.0" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="230.0" />
                               <HBox alignment="CENTER_LEFT">
                                  <children>
                                     <Label alignment="CENTER" styleClass="users-event-font" text="Status" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
@@ -71,15 +71,15 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />
                               <Button fx:id="statusButton" mnemonicParsing="false" onAction="#onStatusButton" styleClass="users-event-button-close" text="Button" />
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />
                            </children>
                         </HBox>
                         <Separator prefHeight="16.0" styleClass="users-event-separator" />
                         <HBox alignment="CENTER">
                            <children>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />
                               <TableView fx:id="tableUsers" styleClass="users-event-table-view">
                                  <columns>
                                     <TableColumn fx:id="profileColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" sortable="false" styleClass="users-event-table-view" text="Profile" />
@@ -92,13 +92,13 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />
                            </children>
                         </HBox>
                         <Separator opacity="0.0" prefHeight="10.0" />
                      </children>
                   </VBox>
-                  <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="10.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                  <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="10.0" prefWidth="10.0" />
                </children>
             </HBox>
          </children>
