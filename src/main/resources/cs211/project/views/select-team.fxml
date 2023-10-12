@@ -248,7 +248,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="22.0" prefWidth="54.0" text="People">
+                        <Label prefHeight="26.0" prefWidth="91.0" text="Participants">
                            <font>
                               <Font size="16.0" />
                            </font>

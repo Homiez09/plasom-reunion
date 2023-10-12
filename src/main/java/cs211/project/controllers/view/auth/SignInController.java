@@ -32,7 +32,6 @@ public class SignInController {
     private String password, username;
     private UserListDataSource datasource;
     private UserList userList;
-    private User matchingUsername,user;
 
     @FXML
     void initialize() {
@@ -87,8 +86,8 @@ public class SignInController {
     @FXML private void onLoginButton() {
         username = usernameTextField.getText();
         password = passwordField.getText();
-        user = userList.login(username, password);
-        matchingUsername = userList.findUsername(username);
+        User user = userList.login(username, password);
+        User matchingUsername = userList.findUsername(username);
         if (user != null) {
             user.updateAfterLogin();
             datasource.writeData(userList);

@@ -49,7 +49,7 @@ public class TableCellCenter<S,T> extends TableCell<S,T> {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item ? "Open" : "Close");
+                    setText(item ? "Open" : "Closed");
 
                 }
 

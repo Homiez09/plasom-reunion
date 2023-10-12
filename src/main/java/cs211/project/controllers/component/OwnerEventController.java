@@ -39,7 +39,6 @@ public class OwnerEventController {
     @FXML
     Popup popup;
     private Datasource<EventList> eventListDatasource;
-    private Datasource<TeamList> teamListDatasource;
     private JoinEventMap joinEventMap;
     private User currentUser;
     private EventList eventList;
@@ -53,7 +52,7 @@ public class OwnerEventController {
         backButton.setOnAction(e -> popup.hide());
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
-        this.teamListDatasource = new TeamListDataSource("data", "team-list.csv");
+        Datasource<TeamList> teamListDatasource = new TeamListDataSource("data", "team-list.csv");
         this.teamList = teamListDatasource.readData();
         this.joinEventMap = new JoinEventMap();
         this.currentUser = user;
@@ -89,7 +88,7 @@ public class OwnerEventController {
             {
                 comboBox.getStyleClass().add("owner-event-combobox");
                 comboBox.setValue("Action");
-                comboBox.getItems().addAll("Manage", "View", "Delete");
+                comboBox.getItems().addAll("Edit", "View", "Delete");
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
                     Event eventToModify = getTableView().getItems().get(getIndex());
@@ -146,9 +145,9 @@ public class OwnerEventController {
                         // ลบไฟล์
                         if (fileToDelete.exists()) {
                             if (fileToDelete.delete()) {
-                                System.err.println("Succes Delete");
+                                System.err.println("Success Delete");
                             } else {
-                                System.err.println("Cant Delete");
+                                System.err.println("Can't Delete");
                             }
                         } else {
                             System.err.println("Not Found");

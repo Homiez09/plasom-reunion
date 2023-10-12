@@ -25,7 +25,6 @@ public class UsersEventController extends CardMyEventController{
 
     private JoinEventMap MapUserJoinEvent;
     private Event currentEvent;
-    private ObservableList<User> userObservableList;
     private ObservableList<User> banUserObservableList;
 
     public void setupData(Event event) {
@@ -37,7 +36,7 @@ public class UsersEventController extends CardMyEventController{
         for (User user: getBan.keySet()){
             banList.getUsers().add(user);
         }
-        userObservableList = FXCollections.observableArrayList(event.getUserList().getUsers());
+        ObservableList<User> userObservableList = FXCollections.observableArrayList(event.getUserList().getUsers());
         banUserObservableList = FXCollections.observableArrayList(banList.getUsers());
 
         eventNameLabel.setText(currentEvent.getEventName());
@@ -49,8 +48,8 @@ public class UsersEventController extends CardMyEventController{
             inLabel.setVisible(false);
         }
 
-        statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
-        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
+        statusButton.setText(currentEvent.isJoinEvent() ? "Closed" : "Open");
+        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Closed");
         showTable(userObservableList);
     }
 
@@ -98,7 +97,7 @@ public class UsersEventController extends CardMyEventController{
             {
                 comboBox.getStyleClass().add("users-event-combobox");
                 comboBox.setValue("Action");
-                comboBox.getItems().addAll("Ban","UnBan", "Kick");
+                comboBox.getItems().addAll("Ban","Unban", "Kick");
 
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
@@ -188,8 +187,8 @@ public class UsersEventController extends CardMyEventController{
         EventList eventList = eventListDatasource.readData();
         eventList.changeStatus(currentEvent,!currentEvent.isJoinEvent());
         currentEvent.setJoinEvent(!currentEvent.isJoinEvent());
-        statusButton.setText(currentEvent.isJoinEvent() ? "Close" : "Open");
-        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Close");
+        statusButton.setText(currentEvent.isJoinEvent() ? "Closed" : "Open");
+        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Closed");
         eventListDatasource.writeData(eventList);
     }
 

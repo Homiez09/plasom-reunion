@@ -14,7 +14,6 @@ import java.util.Map;
 public class BanUser implements Datasource<HashMap<User, EventList>>{
     private final String directoryName = "data";
     private final String fileName = "ban-user.csv";
-    private HashMap<User,EventList> hashMap ;
 
     public BanUser() {
         checkFileIsExisted();
@@ -38,7 +37,7 @@ public class BanUser implements Datasource<HashMap<User, EventList>>{
 
     @Override
     public HashMap<User, EventList> readData() {
-        hashMap = new HashMap<>();
+        HashMap<User, EventList> hashMap = new HashMap<>();
         EventList banList ;
         String filePath = directoryName + File.separator + fileName;
 

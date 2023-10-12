@@ -32,15 +32,11 @@ public class CreateTeamController {
     @FXML private Label countDescriptionLabel,dateRequirementLabel, summaryPeriodLabel, errorContinueLabel, nameRequirementLabel;
     @FXML private ImageView teamNameReqImageView;
 
-    private String formattedCurrentHour, startAmPm, endAmPm, startDateFormat, endDateFormat;
-    private String teamName, description;
+    private String startDateFormat;
+    private String endDateFormat;
 
-    private String[] time = {"AM", "PM"};
-
+    private final String[] time = {"AM", "PM"};
     private LocalDateTime currentDateTime = LocalDateTime.now();
-    private LocalDateTime startDateTime, endDateTime;
-    private LocalDate startDate, endDate;
-
     private SpinnerValueFactory<Integer> startHourSpin, endHourSpin;
     private SpinnerValueFactory<Integer> numMemberSpin;
 
@@ -91,7 +87,7 @@ public class CreateTeamController {
     }
 
     private void checkTeamNameReq(){
-        teamName = teamNameTextField.getText();
+        String teamName = teamNameTextField.getText();
         teamNameRequirement = !teamName.isEmpty() && teamList.findTeamByNameInEvent(teamName, event.getEventID()) == null;
         if(teamName.isEmpty()){
             teamNameReqImageView.setVisible(false);
@@ -140,16 +136,16 @@ public class CreateTeamController {
     private void validatePeriod() {
         errorContinueLabel.setVisible(false);
         dateValidateRequirement = false;
-        startDate = startDatePicker.getValue();
-        endDate = endDatePicker.getValue();
+        LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
 
         startHour = startHourSpinner.getValue();
         startMinute = startMinuteSpinner.getValue();
         endHour = endHourSpinner.getValue();
         endMinute = endMinuteSpinner.getValue();
 
-        startAmPm = startDateChoiceBox.getValue();
-        endAmPm = endDateChoiceBox.getValue();
+        String startAmPm = startDateChoiceBox.getValue();
+        String endAmPm = endDateChoiceBox.getValue();
 
         if (startAmPm.equals("PM")) {
             if (startHour != 12) {
@@ -168,8 +164,8 @@ public class CreateTeamController {
         }
 
         currentDateTime = LocalDateTime.now().withSecond(0).withNano(0);
-        startDateTime = LocalDateTime.of(startDate, LocalTime.of(startHour, startMinute));
-        endDateTime = LocalDateTime.of(endDate, LocalTime.of(endHour, endMinute));
+        LocalDateTime startDateTime = LocalDateTime.of(startDate, LocalTime.of(startHour, startMinute));
+        LocalDateTime endDateTime = LocalDateTime.of(endDate, LocalTime.of(endHour, endMinute));
 
         startDateFormat = startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm").withLocale(Locale.US));
         endDateFormat = endDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm").withLocale(Locale.US));
@@ -231,7 +227,7 @@ public class CreateTeamController {
     }
 
     @FXML protected void onKeyDescriptionCountText(){
-            description = descriptionTextArea.getText();
+        String description = descriptionTextArea.getText();
             countDescriptionLabel.setText(String.valueOf((int) description.length()));
             if (description.length() >= 280) {
                 if (description.length() > 280) {
@@ -319,7 +315,7 @@ public class CreateTeamController {
     }
 
     private void timeInit() {
-        formattedCurrentHour = currentDateTime.format(DateTimeFormatter.ofPattern("hh").withLocale(Locale.US));
+        String formattedCurrentHour = currentDateTime.format(DateTimeFormatter.ofPattern("hh").withLocale(Locale.US));
         if (currentDateTime.getHour() > 11) {
             startDateChoiceBox.setValue("PM");
             endDateChoiceBox.setValue("PM");

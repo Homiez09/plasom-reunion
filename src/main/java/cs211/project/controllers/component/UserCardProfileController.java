@@ -13,7 +13,6 @@ public class UserCardProfileController {
     @FXML private ImageView avatarProfileImageView, contactIconProfileImageView,  frameIconImageView, ellipseIconImageView;
     @FXML private Label bioProfileLabel, displayNameProfileLabel, idProfileLabel, usernameProfileLabel, contactProfileLabel;
     @FXML private AnchorPane hoverShowContactAnchorPane;
-    private Image contactIcon, ellipseIcon, frameIcon;
 
     @FXML private void initialize(){
         loadIconInit();
@@ -49,9 +48,9 @@ public class UserCardProfileController {
 
 
     private void loadIconInit(){
-        contactIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconProfile.png"));
-        ellipseIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconEllipse.png"));
-        frameIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconFrame.png"));
+        Image contactIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconProfile.png"));
+        Image ellipseIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconEllipse.png"));
+        Image frameIcon = new Image(getClass().getResourceAsStream("/images/icons/user-profile/iconFrame.png"));
 
         frameIconImageView.setImage(frameIcon);
         contactIconProfileImageView.setImage(contactIcon);

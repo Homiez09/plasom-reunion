@@ -27,7 +27,6 @@ public class ManageTeamComponentController {
     @FXML private GridPane memberContainer;
     @FXML private ImageView nameImageView, roleImageView, statusImageView;
     @FXML private AnchorPane userCardProfileAnchorPane, manageTeamDisableAnchorPane, manageTeamExitAnchorPane;
-    private Image nameIcon, roleIcon, statusIcon;
 
     private final TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
     private final TeamList teamList = teamListDataSource.readData();
@@ -223,9 +222,9 @@ public class ManageTeamComponentController {
     }
 
     private void loadIcon(){
-        nameIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
-        roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
-        statusIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
+        Image nameIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
+        Image roleIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
+        Image statusIcon = new Image(getClass().getResourceAsStream("/images/icons/team/sortIcon.png"));
 
         nameImageView.setImage(nameIcon);
         roleImageView.setImage(roleIcon);
