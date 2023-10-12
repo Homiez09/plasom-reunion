@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="768.0" prefWidth="536.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardUpcoming">
+<AnchorPane prefHeight="768.0" prefWidth="536.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.CardUpcoming">
    <children>
       <VBox layoutY="7.0" prefHeight="768.0" prefWidth="536.0">
          <children>

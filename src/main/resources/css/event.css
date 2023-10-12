@@ -35,6 +35,68 @@
     -fx-scale-x: 0.9;
     -fx-scale-y: 0.9;
 }
+.delete-button{
+    -fx-font-size: 14;
+    -fx-background-color: #FF5F5F;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+    -fx-border-color: #F6F4EE;
+    -fx-border-width: 2;
+    -fx-text-fill: #413B3B;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+.delete-button:hover{
+    -fx-font-size: 14;
+    -fx-background-color: #ff7e7e;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+    -fx-border-color: #f6f5ef;
+    -fx-border-width: 2;
+    -fx-text-fill: #666262;
+}
+.delete-button:pressed{
+    -fx-font-size: 14;
+    -fx-background-color: #cc4c4c;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+    -fx-border-color: #F6F4EE;
+    -fx-border-width: 2;
+    -fx-text-fill: #342f2f;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+}
+.save-button{
+    -fx-font-size: 14;
+    -fx-background-color: #FAA24E;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+    -fx-border-color: #F6F4EE;
+    -fx-border-width: 2;
+    -fx-text-fill: #413B3B;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+.save-button:hover{
+    -fx-font-size: 14;
+    -fx-background-color: #fbb471;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+    -fx-border-color: #f6f5ef;
+    -fx-border-width: 2;
+    -fx-text-fill: #666262;
+}
+.save-button:pressed{
+    -fx-font-size: 14;
+    -fx-background-color: #c8813e;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+    -fx-border-color: #F6F4EE;
+    -fx-border-width: 2;
+    -fx-text-fill: #342f2f;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+}
 .status-label{
     -fx-font-size: 36;
     -fx-font-weight: 700;

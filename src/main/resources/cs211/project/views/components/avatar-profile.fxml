@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="defaultProfileAnchorPane" onMouseEntered="#onDefaultProfileEntered" onMouseExited="#onDefaultProfileExit" prefHeight="150.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.AvatarProfileController">
+<AnchorPane fx:id="defaultProfileAnchorPane" onMouseEntered="#onDefaultProfileEntered" onMouseExited="#onDefaultProfileExit" prefHeight="150.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.AvatarProfileController">
    <children>
       <Circle fx:id="hoverAvatarProfile" fill="#ff9900" layoutX="55.0" layoutY="55.0" radius="59.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <ImageView fx:id="avatarProfileImageView" fitHeight="110.0" fitWidth="110.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">

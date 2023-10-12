@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="278.0" prefWidth="943.0" styleClass="bg-transparent" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardJoinTeamController">
+<AnchorPane prefHeight="278.0" prefWidth="943.0" styleClass="bg-transparent" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.CardJoinTeamController">
    <children>
       <AnchorPane prefWidth="883.0" styleClass="join-team-card-box">
          <children>

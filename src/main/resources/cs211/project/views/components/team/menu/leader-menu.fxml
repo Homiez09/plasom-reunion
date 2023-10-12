@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="173.0" prefWidth="257.0" styleClass="bg-transparent" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.teamboxControllers.TeamBox1Controller">
+<AnchorPane prefHeight="173.0" prefWidth="257.0" styleClass="bg-transparent" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.teamControllers.teamboxControllers.TeamBox1Controller">
    <children>
       <AnchorPane fx:id="menuAnchorPane" layoutX="117.0" layoutY="4.0" prefHeight="170.0" prefWidth="153.0" styleClass="menu-background-check-box" stylesheets="@../../../../../../css/style.css">
          <children>

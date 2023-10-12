@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="admin-bg" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.admin.AdminDashboardController">
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="admin-bg" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.admin.AdminDashboardController">
    <children>
       <AnchorPane fx:id="adminDashBoardAnchorPane" layoutY="-30.0">
          <children>

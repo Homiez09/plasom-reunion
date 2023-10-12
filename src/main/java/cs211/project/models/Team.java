@@ -175,7 +175,6 @@ public class Team implements Comparable<Team> {
         return this.teamName.equals(teamName);
     }
 
-
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }

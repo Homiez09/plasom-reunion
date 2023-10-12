@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="manageTeamsAnchorPane" prefHeight="542.0" prefWidth="913.0" style="-fx-background-color: #F6F4EE;" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.teamControllers.manageTeamController.ManageTeamComponentController">
+<AnchorPane fx:id="manageTeamsAnchorPane" prefHeight="542.0" prefWidth="913.0" style="-fx-background-color: #F6F4EE;" stylesheets="@../../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.teamControllers.manageTeamController.ManageTeamComponentController">
    <children>
       <Label layoutX="32.0" layoutY="27.0" lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="24.0" prefWidth="111.0" text="&lt; back" textFill="#413b3b">
          <font>

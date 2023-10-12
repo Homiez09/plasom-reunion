@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="userProfileAnchorPane" prefHeight="435.0" prefWidth="358.0" styleClass="bg-transparent" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.UserCardProfileController">
+<AnchorPane fx:id="userProfileAnchorPane" prefHeight="435.0" prefWidth="358.0" styleClass="bg-transparent" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.UserCardProfileController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="435.0" layoutX="17.0" stroke="TRANSPARENT" strokeType="INSIDE" width="324.0">
          <styleClass>
