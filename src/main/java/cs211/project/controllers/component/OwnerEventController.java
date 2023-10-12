@@ -118,7 +118,7 @@ public class OwnerEventController {
         if (eventToModify != null) {
             if (eventToModify.getEventHostUser().getUserId().equals(currentUser.getUserId())) {
                 switch (selectedOption){
-                    case"Manage":
+                    case"Edit":
                         popup.hide();
                         try {
                             FXRouter.goTo("create-event",currentUser,eventToModify,"my-event");
