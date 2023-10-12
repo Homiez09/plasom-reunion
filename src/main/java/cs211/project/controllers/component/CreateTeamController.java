@@ -244,7 +244,7 @@ public class CreateTeamController {
         teamNameTextField.setText("");
         descriptionTextArea.setText("");
 
-        FXRouter.goTo("select-team", user, event);
+        FXRouter.goTo("all-team", user, event);
     }
 
     @FXML private void onContinueButtonClick(){
@@ -291,7 +291,7 @@ public class CreateTeamController {
 
             teamListDataSource.writeData(teamList);
             joinTeamMap.writeData(teamListHashMap);
-            FXRouter.goTo("select-team", user, event);
+            FXRouter.goTo("all-team", user, event);
         }else{
             checkTeamNameReq();
         }

@@ -1,6 +1,6 @@
 package cs211.project.controllers.component.teamControllers.manageTeamsController;
 
-import cs211.project.controllers.view.team.SelectTeamController;
+import cs211.project.controllers.view.team.AllTeamController;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.models.collections.TeamList;
@@ -24,7 +24,7 @@ public class ManageTeamsBoxController {
     private Image unBookMarkIcon, bookMarkIcon;
     private final JoinTeamMap joinTeamMap = new JoinTeamMap();
     private Team team;
-    private SelectTeamController selectTeamController;
+    private AllTeamController allTeamController;
 
     @FXML
     private void initialize() {
@@ -70,8 +70,8 @@ public class ManageTeamsBoxController {
         }
     }
 
-    public void setSelectTeamController(SelectTeamController selectTeamController) {
-        this.selectTeamController = selectTeamController;
+    public void setSelectTeamController(AllTeamController allTeamController) {
+        this.allTeamController = allTeamController;
     }
 
     public void setTeamData(Team team) {
@@ -100,7 +100,7 @@ public class ManageTeamsBoxController {
 
             try {
                 if (newValue.equals("Manage Team")) {
-                    selectTeamController.startManageTeam(team);
+                    allTeamController.startManageTeam(team);
                 } else if (newValue.equals("Delete Team")) {
                     deleteTeam();
                 } else if (newValue.equals("Leave Team")) {
@@ -137,7 +137,7 @@ public class ManageTeamsBoxController {
         joinTeamMap.writeData(teamHashMap);
         dataSource.writeData(teamList);
 
-        selectTeamController.teamBoxView("teamBox1");
+        allTeamController.teamBoxView("teamBox1");
     }
 
     private void leaveTeam(){
@@ -145,7 +145,7 @@ public class ManageTeamsBoxController {
         if (teamHashMap.containsKey(user.getUsername())) {
             teamHashMap.get(user.getUsername()).removeTeam(team.getTeamID());
         }joinTeamMap.writeData(teamHashMap);
-        selectTeamController.teamBoxView("teamBox1");
+        allTeamController.teamBoxView("teamBox1");
     }
 
     private void initBookmark() {

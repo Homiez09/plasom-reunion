@@ -30,7 +30,7 @@ import javafx.scene.shape.Shape;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class SelectTeamController {
+public class AllTeamController {
     @FXML private AnchorPane createTeamAnchorPane, navbarAnchorPane, switchViewAnchorPane, selectTeamAnchorPane, manageTeamsAnchorPane, manageTeamAnchorPane;
     @FXML private GridPane teamContainer, managerContainer;
     @FXML private ImageView joinTeamImageView, settingImageView, sortImageView, createTeamImageView, teamBox1ImageView, teamBox2ImageView;
