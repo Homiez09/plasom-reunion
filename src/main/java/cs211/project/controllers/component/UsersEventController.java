@@ -25,7 +25,6 @@ public class UsersEventController extends CardMyEventController{
 
     private JoinEventMap MapUserJoinEvent;
     private Event currentEvent;
-    private ObservableList<User> userObservableList;
     private ObservableList<User> banUserObservableList;
 
     public void setupData(Event event) {
@@ -37,7 +36,7 @@ public class UsersEventController extends CardMyEventController{
         for (User user: getBan.keySet()){
             banList.getUsers().add(user);
         }
-        userObservableList = FXCollections.observableArrayList(event.getUserList().getUsers());
+        ObservableList<User> userObservableList = FXCollections.observableArrayList(event.getUserList().getUsers());
         banUserObservableList = FXCollections.observableArrayList(banList.getUsers());
 
         eventNameLabel.setText(currentEvent.getEventName());

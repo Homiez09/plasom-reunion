@@ -9,7 +9,6 @@ import java.nio.charset.StandardCharsets;
 public class EventListDataSource implements Datasource<EventList> {
     private final String directoryName = "data";
     private final String fileName = "event-list.csv";
-    private EventList eventList;
 
     public EventListDataSource() {
         checkFileIsExisted();
@@ -62,6 +61,7 @@ public class EventListDataSource implements Datasource<EventList> {
 
         String line = "";
 
+        EventList eventList;
         try {
             eventList = new EventList();
             // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด

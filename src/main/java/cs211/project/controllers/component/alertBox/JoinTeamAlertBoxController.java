@@ -24,7 +24,6 @@ public class JoinTeamAlertBoxController {
     private final User user = (User) FXRouter.getData();
     private final Event event = (Event) FXRouter.getData2();
     private final JoinTeamMap joinTeamMap = new JoinTeamMap();
-    private Image correctIcon, wrongIcon, staffIcon;
     private boolean isValidate;
     private Team team;
 
@@ -37,13 +36,13 @@ public class JoinTeamAlertBoxController {
     }
 
     private void loadImageInit(){
-        correctIcon = new Image(getClass().getResourceAsStream("/images/icons/alert/correct.png"));
+        Image correctIcon = new Image(getClass().getResourceAsStream("/images/icons/alert/correct.png"));
         correctImageView.setImage(correctIcon);
 
-        wrongIcon = new Image(getClass().getResourceAsStream("/images/icons/alert/wrong.png"));
+        Image wrongIcon = new Image(getClass().getResourceAsStream("/images/icons/alert/wrong.png"));
         wrongImageView.setImage(wrongIcon);
 
-        staffIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group.png"));
+        Image staffIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group.png"));
         staffImageView.setImage(staffIcon);
     }
 

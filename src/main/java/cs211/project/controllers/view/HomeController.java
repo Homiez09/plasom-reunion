@@ -27,24 +27,23 @@ public class HomeController {
     @FXML private MenuButton categoryButton,recSortMenuButton;
     @FXML private ImageView categoryButtonImage;
     private final User user = (User) FXRouter.getData();
-    private Datasource<EventList> datasource;
-    private EventList eventList,recEventList,newEventList,upEventList;
+    private EventList eventList, recEventList;
 
     @FXML private void initialize() {
-        datasource = new EventListDataSource();
+        Datasource<EventList> datasource = new EventListDataSource();
         eventList = datasource.readData().getAvailableEvent();
 
         new LoadNavbarComponent(user, navbarAnchorPane);
-        upEventList = eventList.sortUpcoming(eventList);
-        newEventList = eventList.sortNewEvent(eventList);
+        EventList upEventList = eventList.sortUpcoming(eventList);
+        EventList newEventList = eventList.sortNewEvent(eventList);
         recEventList = eventList.suffleEvent(eventList);
         setCategoryButtonImage();
         setUpCategoryButton();
         setUpSortMenuButton();
         showRecommendedEvent();
 
-        addScrollEventTile(upScrollHbox,upScrollPane,upEventList);
-        addScrollEventTile(newScrollHbox,newScrollPane,newEventList);
+        addScrollEventTile(upScrollHbox,upScrollPane, upEventList);
+        addScrollEventTile(newScrollHbox,newScrollPane, newEventList);
     }
 
     // button to another page

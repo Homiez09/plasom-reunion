@@ -27,7 +27,6 @@ public class CreateActivityController {
     @FXML private Label dateTimeErrorLabel;
     @FXML private Spinner<Integer> activityStartHourSpinner,activityEndHourSpinner, activityStartMinuteSpinner,activityEndMinuteSpinner;
     private Datasource<ActivityList> activityListDatasource;
-    private ObservableList<Activity> activityObservableList;
     private ActivityList activityList;
 
     public void initEdit(User user, Event event, ObservableList<Activity> observableList, Activity activity ) {
@@ -38,7 +37,6 @@ public class CreateActivityController {
                 this.currentActivity = current;
             }
         }
-        this.activityObservableList = observableList;
         showActivity();
         deleteButton.setVisible(true);
     }

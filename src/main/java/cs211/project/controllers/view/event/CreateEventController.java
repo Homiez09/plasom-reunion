@@ -44,7 +44,7 @@ public class CreateEventController {
     private Datasource<EventList> eventListDatasource;
     private EventList eventList;
 
-    @FXML private   void initialize() {
+    @FXML private void initialize() {
         this.eventListDatasource = new EventListDataSource();
         this.eventList = eventListDatasource.readData();
         new LoadNavbarComponent(user, navbarAnchorPane);
@@ -282,7 +282,7 @@ public class CreateEventController {
         int endHour = eventEndHourSpinner.getValue();
         int startMinute = eventStartMinuteSpinner.getValue();
         int endMinute = eventEndMinuteSpinner.getValue();
-        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime currentDateTime = (thisEvent == null) ? LocalDateTime.now() : thisEvent.getDateStartAsDate();
 
         LocalDate startDate = eventStartDatePick.getValue();
         LocalDate endDate = eventEndDatePick.getValue();

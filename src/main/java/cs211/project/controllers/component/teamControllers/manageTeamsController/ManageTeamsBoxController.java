@@ -22,9 +22,7 @@ public class ManageTeamsBoxController {
     private final User user = (User) FXRouter.getData();
     private boolean bookmarked = false, initBookMarkCheck = false;
     private Image unBookMarkIcon, bookMarkIcon;
-    private JoinTeamMap joinTeamMap = new JoinTeamMap();
-    private HashMap<String, TeamList> teamListHashMap;
-    private TeamList teamList;
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
     private Team team;
     private SelectTeamController selectTeamController;
 
@@ -36,8 +34,8 @@ public class ManageTeamsBoxController {
 
     @FXML
     private void onBookMarkClick(){
-        teamListHashMap = joinTeamMap.readData();
-        teamList = teamListHashMap.get(user.getUsername());
+        HashMap<String, TeamList> teamListHashMap = joinTeamMap.readData();
+        TeamList teamList = teamListHashMap.get(user.getUsername());
 
         if (bookmarked) {
             bookMarkImageView.setImage(unBookMarkIcon);

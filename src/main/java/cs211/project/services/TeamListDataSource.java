@@ -10,13 +10,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 public class TeamListDataSource implements Datasource<TeamList> {
-    private String directoryName;
-    private String fileName;
-    private TeamList teamList;
-    private UserList userList;
-    private UserListDataSource userListDataSource;
-    private JoinTeamMap joinTeamMap = new JoinTeamMap();
-    private HashMap<String, UserList> joinTeamMapHashMap = new HashMap<>();
+    private final String directoryName;
+    private final String fileName;
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
 
 
     public TeamListDataSource(String directoryName, String fileName) {
@@ -44,12 +40,12 @@ public class TeamListDataSource implements Datasource<TeamList> {
 
     @Override
     public TeamList readData() {
-        teamList = new TeamList();
+        TeamList teamList = new TeamList();
 
-        userListDataSource = new UserListDataSource("data","user-list.csv");
-        userList = userListDataSource.readData();
+        UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
+        UserList userList = userListDataSource.readData();
 
-        joinTeamMapHashMap = joinTeamMap.roleReadData();
+        HashMap<String, UserList> joinTeamMapHashMap = joinTeamMap.roleReadData();
 
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);

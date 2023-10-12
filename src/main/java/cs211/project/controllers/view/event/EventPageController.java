@@ -37,14 +37,12 @@ public class EventPageController {
     private final Event event = (Event) FXRouter.getData2();
     private final User user = (User) FXRouter.getData();
     private final String from = (String) FXRouter.getData3();
-    private Datasource<ActivityList> eventActivityDatasource;
     private ActivityList activityList;
     private HashMap<String, UserList> hashMap;
     private JoinEventMap joinEventMap;
-    private UserList userList;
 
     @FXML private void initialize() {
-        this.eventActivityDatasource = new ActivityListDataSource("data","event-activity-list.csv");
+        Datasource<ActivityList> eventActivityDatasource = new ActivityListDataSource("data", "event-activity-list.csv");
         this.activityList = eventActivityDatasource.readData();
         this.joinEventMap = new JoinEventMap();
         this.hashMap = joinEventMap.readData();
@@ -98,6 +96,7 @@ public class EventPageController {
     }
     @FXML private void onJoinEventAction() {
         /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
+        UserList userList;
         if (hashMap.containsKey(event.getEventID())) {
             userList = hashMap.get(event.getEventID());
         }else {

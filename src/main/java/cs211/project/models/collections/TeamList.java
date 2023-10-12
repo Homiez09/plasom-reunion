@@ -5,7 +5,6 @@ import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.services.JoinTeamMap;
 
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;

@@ -11,7 +11,6 @@ public class CardJoinTeamController {
 
     @FXML private Label teamNameLabel, descriptionLabel, startDateLabel, endDateLabel, numberOfParticipantsLabel, maxParticipantsCapacityLabel;
     @FXML private ImageView joinTeamImageView, calendarImageView, participantsImageView;
-    private Image joinTeamIcon, calendarIcon, participantsIcon;
     private Team team;
     private JoinTeamController joinTeamController;
 
@@ -29,13 +28,13 @@ public class CardJoinTeamController {
     }
 
     private void loadImageInit(){
-        joinTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group.png"));
+        Image joinTeamIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group.png"));
         joinTeamImageView.setImage(joinTeamIcon);
 
-        calendarIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/calendar.png"));
+        Image calendarIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/calendar.png"));
         calendarImageView.setImage(calendarIcon);
 
-        participantsIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group_orange.png"));
+        Image participantsIcon = new Image(getClass().getResourceAsStream("/images/icons/join-team/users_group_orange.png"));
         participantsImageView.setImage(participantsIcon);
     }
 
@@ -51,8 +50,5 @@ public class CardJoinTeamController {
         joinTeamController.loadAlertBox(team);
 
     }
-
-
-
 }
 
