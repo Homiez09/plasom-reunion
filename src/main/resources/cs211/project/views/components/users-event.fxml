@@ -84,7 +84,7 @@
                                  <columns>
                                     <TableColumn fx:id="profileColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" sortable="false" styleClass="users-event-table-view" text="Profile" />
                                     <TableColumn fx:id="usernameColumn" editable="false" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" sortable="false" styleClass="users-event-table-view" text="Username" />
-                                    <TableColumn fx:id="nameColumn" editable="false" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" sortable="false" styleClass="users-event-table-view" text="Name" />
+                                    <TableColumn fx:id="nameColumn" editable="false" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" sortable="false" styleClass="users-event-table-view" text="Display Name" />
                                     <TableColumn fx:id="statusColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" sortable="false" styleClass="users-event-table-view" text="Status" />
                                     <TableColumn fx:id="actionColumn" editable="false" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" sortable="false" styleClass="users-event-table-view" text="Action" />
                                  </columns>

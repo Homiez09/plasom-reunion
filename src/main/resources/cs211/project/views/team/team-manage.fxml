@@ -40,7 +40,7 @@
                                        <children>
                                           <AnchorPane fx:id="nameAnchorPane" layoutX="27.0" layoutY="3.0" onMouseClicked="#onSortNameClick" prefHeight="21.0" prefWidth="260.0">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="260.0" text="Name">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="260.0" text="Display Name">
                                                    <styleClass>
                                                       <String fx:value="text-base" />
                                                       <String fx:value="weight-bold" />

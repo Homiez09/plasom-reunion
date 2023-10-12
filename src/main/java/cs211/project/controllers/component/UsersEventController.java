@@ -97,7 +97,7 @@ public class UsersEventController extends CardMyEventController{
             {
                 comboBox.getStyleClass().add("users-event-combobox");
                 comboBox.setValue("Action");
-                comboBox.getItems().addAll("Ban","UnBan", "Kick");
+                comboBox.getItems().addAll("Ban","Unban", "Kick");
 
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
