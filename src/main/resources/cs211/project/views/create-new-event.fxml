@@ -6,6 +6,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -19,211 +20,269 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0" styleClass="bg" stylesheets="@../../../css/create-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.event.CreateEventController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="1152.0" spacing="20.0" AnchorPane.topAnchor="75.0">
+      <VBox>
          <children>
-            <HBox>
-               <VBox.margin>
-                  <Insets left="15.0" top="10.0" />
-               </VBox.margin>
+            <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
+            <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="1152.0" styleClass="bg">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="&lt;Back">
-                     <font>
-                        <Font name="Leelawadee" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <Label fx:id="headCreateEventLabel" text="headCreateEventLabel">
-               <font>
-                  <Font name="Leelawadee Bold" size="48.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg">
-              <content>
-                  <VBox prefWidth="1000.0" spacing="15.0" styleClass="inbox-bg">
+                  <HBox>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                      <children>
-                        <HBox style="-fx-background-color: transparent;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Basic information">
-                                 <font>
-                                    <Font name="Leelawadee Bold" size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="25.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutX="20.0" layoutY="30.026561737060547" strokeType="OUTSIDE" strokeWidth="0.0" text="Event name" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="eventNameTextField" layoutX="128.0" layoutY="10.399999618530273" prefHeight="26.0" prefWidth="400.0" promptText="Name is limited to 30 characters or fewer." styleClass="text-field-bg" AnchorPane.leftAnchor="200.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Event tag" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <ChoiceBox fx:id="eventTagChoiceBox" layoutX="74.4000015258789" prefWidth="150.0" styleClass="event-choice-box" AnchorPane.leftAnchor="200.0" />
-                              <Text layoutX="224.8000030517578" layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Event capacity" AnchorPane.leftAnchor="420.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="eventCapTextField" layoutX="338.3999938964844" prefHeight="26.0" prefWidth="100.0" styleClass="text-field-bg" AnchorPane.leftAnchor="550.0" />
-                              <ImageView fx:id="eventImageView" fitHeight="25.0" fitWidth="25.0" layoutX="438.3999938964844" layoutY="0.800000011920929" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0">
-                                 <image>
-                                    <Image url="@../../../images/events/person.png" />
-                                 </image>
-                              </ImageView>
-                              <Label fx:id="errorCapacityLabel" layoutX="704.0" layoutY="8.0" text="errorCapacityLabel" textFill="RED">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutY="17.2265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Event location" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="eventLocationTextField" layoutX="112.80000305175781" prefWidth="400.0" promptText="Location is limited to 50 characters or fewer." styleClass="text-field-bg" AnchorPane.leftAnchor="200.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="12.0" />
-                                 </font></TextField>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="startDatePick">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <children>
-                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <DatePicker fx:id="eventStartDatePick" layoutX="92.80000305175781" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" AnchorPane.leftAnchor="200.0" />
-                              <Text layoutX="530.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" AnchorPane.leftAnchor="532.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Label fx:id="errorStartLabel" layoutX="400.0" layoutY="5.0" text="errorLabel" textFill="RED">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Spinner fx:id="eventStartHourSpinner" layoutX="620.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
-                              <Text layoutX="722.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Spinner fx:id="eventStartMinuteSpinner" layoutX="740.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
-                              <Label fx:id="errorTimeLabel" layoutX="845.0" layoutY="5.0" text="errorLabel" textFill="RED">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="10.0" layoutY="158.0">
-                           <children>
-                              <Text layoutY="19.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <DatePicker fx:id="eventEndDatePick" layoutX="92.80000305175781" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" AnchorPane.leftAnchor="200.0" />
-                              <Text layoutX="530.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End time" AnchorPane.leftAnchor="533.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Spinner fx:id="eventEndHourSpinner" layoutX="620.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
-                              <Text layoutX="723.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Spinner fx:id="eventEndMinuteSpinner" layoutX="740.0" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
-                              <Label fx:id="errorEndLabel" layoutX="400.0" layoutY="5.0" text="errorLabel" textFill="RED">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutX="20.0" layoutY="27.626562118530273" strokeType="OUTSIDE" strokeWidth="0.0" text="Event description" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextArea fx:id="eventDescriptionTextArea" layoutX="172.8000030517578" layoutY="10.399999618530273" prefHeight="200.0" prefWidth="600.0" styleClass="event-text-area" stylesheets="@../../../css/create-event.css" wrapText="true" AnchorPane.leftAnchor="200.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="14.0" />
-                                 </font></TextArea>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Text layoutY="17.2265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload event image" AnchorPane.leftAnchor="20.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="18.0" />
-                                 </font>
-                              </Text>
-                              <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" layoutX="38.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="40.0">
-                                 <image>
-                                    <Image url="@../../../images/home/event2.png" />
-                                 </image></ImageView>
-                              <Text fill="RED" layoutX="360.79998779296875" layoutY="13.3984375" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose .jpg, .jpeg or .png image file." AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="265.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="14.0" />
-                                 </font>
-                              </Text>
-                              <Button layoutX="570.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleUploadButton" styleClass="page-button" stylesheets="@../../../css/event.css" text="Upload" AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="225.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="12.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                        <Button fx:id="submitButton" mnemonicParsing="false" onAction="#onSubmitBasicInformationClick" styleClass="page-button" stylesheets="@../../../css/event.css" text="submit">
+                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                        <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="save-button" stylesheets="@../../../css/event.css" text="&lt;Back">
                            <font>
-                              <Font name="Leelawadee" size="14.0" />
+                              <Font name="Leelawadee" size="12.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets left="900.0" right="25.0" />
-                           </VBox.margin>
                         </Button>
                      </children>
-                  </VBox>
-              </content>
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </ScrollPane>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Label fx:id="headCreateEventLabel" prefWidth="503.0" text="headCreateEventLabel">
+                           <font>
+                              <Font name="Leelawadee Bold" size="48.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Separator opacity="0.0" prefHeight="30.0" />
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="550.0" prefWidth="1052.0" styleClass="eventbox-bg" vbarPolicy="ALWAYS" vvalue="0.76">
+                    <content>
+                        <VBox prefWidth="1000.0" spacing="15.0" styleClass="inbox-bg">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" style="-fx-background-color: transparent;">
+                                 <children>
+                                    <Label styleClass="font-Label-Head" text="Basic information" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="25.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox>
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                          <Label styleClass="font-Label" text="Upload event image" />
+                                          <HBox alignment="CENTER" prefHeight="320.0" prefWidth="650.0">
+                                             <children>
+                                                <ImageView fx:id="uploadImageView" fitHeight="318.0" fitWidth="512.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../images/home/event2.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <Separator opacity="0.0" prefHeight="10.0" prefWidth="200.0" />
+                                    <HBox alignment="CENTER_RIGHT">
+                                       <children>
+                                          <Label styleClass="font-Label-upload" text="Please choose .jpg, .jpeg or .png image file." />
+                                          <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="260.0" />
+                                          <Button mnemonicParsing="false" onAction="#handleUploadButton" styleClass="save-button" stylesheets="@../../../css/event.css" text="Upload">
+                                             <font>
+                                                <Font name="Leelawadee" size="12.0" />
+                                             </font>
+                                          </Button>
+                                          <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="30.0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="Event name" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <TextField fx:id="eventNameTextField" prefHeight="26.0" prefWidth="400.0" promptText="Name is limited to 30 characters or fewer." styleClass="text-field-bg" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="Event tag" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <ChoiceBox fx:id="eventTagChoiceBox" prefWidth="150.0" styleClass="event-choice-box" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="98.0" />
+                                    <Label prefHeight="23.0" prefWidth="130.0" styleClass="font-Label" text="Event capacity" />
+                                    <TextField fx:id="eventCapTextField" prefHeight="26.0" prefWidth="100.0" styleClass="text-field-bg" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
+                                    <ImageView fx:id="eventImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/events/person.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <Label fx:id="errorCapacityLabel" text="errorCapacityLabel" textFill="RED">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="Join date start" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <DatePicker fx:id="joinStartDatePick" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label fx:id="errorJoinStartLabel" text="errorLabel" textFill="RED">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="90.0" styleClass="font-Label" text="Start time" />
+                                    <Spinner fx:id="joinStartHourSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                       <font>
+                                          <Font name="Leelawadee" size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Spinner fx:id="joinStartMinuteSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Label fx:id="errorJoinTimeLabel" text="errorLabel" textFill="RED">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="Join date end" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <DatePicker fx:id="joinEndDatePick" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label fx:id="errorJoinEndLabel" text="errorLabel" textFill="RED">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="90.0" styleClass="font-Label" text="End time" />
+                                    <Spinner fx:id="joinEndHourSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                       <font>
+                                          <Font name="Leelawadee" size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Spinner fx:id="joinEndMinuteSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="Event location" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <TextField fx:id="eventLocationTextField" prefWidth="400.0" promptText="Location is limited to 50 characters or fewer." styleClass="text-field-bg">
+                                       <font>
+                                          <Font name="Leelawadee" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="Start date" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <DatePicker fx:id="eventStartDatePick" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label fx:id="errorStartLabel" text="errorLabel" textFill="RED">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="90.0" styleClass="font-Label" text="Start time" />
+                                    <Spinner fx:id="eventStartHourSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                       <font>
+                                          <Font name="Leelawadee" size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Spinner fx:id="eventStartMinuteSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Label fx:id="errorTimeLabel" text="errorLabel" textFill="RED">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="End date" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <DatePicker fx:id="eventEndDatePick" styleClass="date-picker" stylesheets="@../../../css/team/create-team.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label fx:id="errorEndLabel" text="errorLabel" textFill="RED">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="90.0" styleClass="font-Label" text="End time" />
+                                    <Spinner fx:id="eventEndHourSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                                       <font>
+                                          <Font name="Leelawadee" size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Separator opacity="0.0" orientation="VERTICAL" />
+                                    <Spinner fx:id="eventEndMinuteSpinner" prefWidth="90.0" styleClass="create-team-spinner" stylesheets="@../../../css/style.css" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" />
+                                    <Label prefWidth="140.0" styleClass="font-Label" text="Event description" />
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                    <TextArea fx:id="eventDescriptionTextArea" styleClass="event-text-area" stylesheets="@../../../css/create-event.css" wrapText="true">
+                                       <font>
+                                          <Font name="Leelawadee" size="14.0" />
+                                       </font>
+                                    </TextArea>
+                                 </children>
+                              </HBox>
+                              <Button fx:id="submitButton" mnemonicParsing="false" onAction="#onSubmitBasicInformationClick" styleClass="save-button" stylesheets="@../../../css/event.css" text="submit">
+                                 <font>
+                                    <Font name="Leelawadee" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="900.0" right="25.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                    </content>
+                     <VBox.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </ScrollPane>
+               </children>
+            </VBox>
          </children>
       </VBox>
-      <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" />
    </children>
 </AnchorPane>

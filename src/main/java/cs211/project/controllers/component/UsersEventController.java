@@ -182,7 +182,7 @@ public class UsersEventController extends CardMyEventController{
         }
     }
 
-    @FXML private void onStatusButton() {
+    @FXML private void joinStatus() {
         Datasource<EventList> eventListDatasource = new EventListDataSource();
         EventList eventList = eventListDatasource.readData();
         eventList.changeStatus(currentEvent,!currentEvent.isJoinEvent());

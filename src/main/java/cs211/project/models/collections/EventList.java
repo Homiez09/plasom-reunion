@@ -34,14 +34,14 @@ public class EventList {
     public void addEvent(String eventId, User eventHost, String eventName, String imagePath,
                          String eventTag, String eventStart, String eventEnd,
                          String eventDescription, String eventLocation,
-                         int slotMember,String timeStamp,boolean joinEvent) {
+                         int slotMember,String timeStamp,boolean joinEvent,String joinTimeStart,String joinTimeEnd) {
         eventId = eventId.trim();
         eventName = eventName.trim();
 
         Event exist = findEventById(eventId);
         if (exist == null && !eventName.equals("") && eventHost != null){
             events.add(new Event(   eventId,eventHost,eventName,imagePath,eventTag,eventStart,eventEnd,eventDescription,
-                                    eventLocation,slotMember,timeStamp,joinEvent));
+                                    eventLocation,slotMember,timeStamp,joinEvent,joinTimeStart,joinTimeEnd));
         }
     }
 
@@ -103,6 +103,15 @@ public class EventList {
         changeEvent.setJoinEvent(join);
     }
 
+    public void changeJoinTimeStart(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeJoinTimeStart(change);
+    }
+    public void changeJoinTimeEnd(Event event,String change){
+        Event changeEvent = findEventById(event.getEventID());
+        changeEvent.changeJoinTimeEnd(change);
+    }
+
     public void sort(){
         Collections.sort(events);
     }
@@ -116,7 +125,7 @@ public class EventList {
     }
 
     public EventList sortNewEvent(EventList eventList){
-        return getListCompare(eventList, Comparator.comparing(Event::getTimestampAsDate));
+        return getListCompare(eventList, Comparator.comparing(Event::getTimestamp));
     }
 
     private EventList getListCompare(EventList eventList, Comparator<Event> cmp) {
@@ -263,7 +272,7 @@ public class EventList {
                 list.add(event);
             }
         }
-        list.sort(Comparator.comparing(Event::getTimestampAsDate));
+        list.sort(Comparator.comparing(Event::getTimestamp));
         Collections.reverse(list);
         return  list;
     }
