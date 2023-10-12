@@ -109,7 +109,7 @@ public class JoinTeamAlertBoxController {
 
     @FXML void onStaffClick() {
         try {
-            FXRouter.goTo("select-team",user,event);
+            FXRouter.goTo("all-team",user,event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

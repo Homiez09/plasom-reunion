@@ -43,7 +43,7 @@ public class DeleteTeamAlertBoxController {
             teamListDataSource.writeData(teamList);
             joinTeamMap.roleWriteData(hashMap);
 
-            FXRouter.goTo("select-team", user, event);
+            FXRouter.goTo("all-team", user, event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

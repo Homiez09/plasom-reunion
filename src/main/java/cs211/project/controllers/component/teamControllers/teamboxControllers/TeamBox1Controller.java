@@ -1,6 +1,6 @@
 package cs211.project.controllers.component.teamControllers.teamboxControllers;
 
-import cs211.project.controllers.view.team.SelectTeamController;
+import cs211.project.controllers.view.team.AllTeamController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -33,7 +33,7 @@ public class TeamBox1Controller {
     JoinTeamMap joinTeamMap = new JoinTeamMap();
     HashMap<String, TeamList> teamListHashMap;
     TeamList teamList;
-    SelectTeamController selectTeamController;
+    AllTeamController allTeamController;
 
     @FXML private void initialize() {
         loadIcon();
@@ -103,8 +103,8 @@ public class TeamBox1Controller {
         menuDropDown.show();
     }
 
-    public void setSelectTeamController(SelectTeamController selectTeamController) {
-        this.selectTeamController = selectTeamController;
+    public void setSelectTeamController(AllTeamController allTeamController) {
+        this.allTeamController = allTeamController;
     }
 
     public void setTeamData(Team team) {
@@ -134,7 +134,7 @@ public class TeamBox1Controller {
 
             try {
                 if (newValue.equals("Manage Team")) {
-                    selectTeamController.startManageTeam(team);
+                    allTeamController.startManageTeam(team);
                 } else if (newValue.equals("Delete Team")) {
                     deleteTeam();
                 } else if (newValue.equals("Leave Team")) {
@@ -177,7 +177,7 @@ public class TeamBox1Controller {
         joinTeamMap.writeData(teamHashMap);
         dataSource.writeData(teamList);
 
-        selectTeamController.teamBoxView("teamBox1");
+        allTeamController.teamBoxView("teamBox1");
     }
 
     private void leaveTeam(){
@@ -185,7 +185,7 @@ public class TeamBox1Controller {
         if (teamHashMap.containsKey(user.getUsername())) {
             teamHashMap.get(user.getUsername()).removeTeam(teamIdLabel.getText());
         }joinTeamMap.writeData(teamHashMap);
-        selectTeamController.teamBoxView("teamBox1");
+        allTeamController.teamBoxView("teamBox1");
     }
 
     private void loadIcon() {

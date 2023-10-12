@@ -101,7 +101,7 @@ public class SideBarTeamController {
 
     @FXML private void onAllTeamsBackClick(){
         try {
-            FXRouter.goTo("select-team");
+            FXRouter.goTo("all-team");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

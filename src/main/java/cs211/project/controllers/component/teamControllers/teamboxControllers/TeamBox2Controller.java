@@ -1,6 +1,6 @@
 package cs211.project.controllers.component.teamControllers.teamboxControllers;
 
-import cs211.project.controllers.view.team.SelectTeamController;
+import cs211.project.controllers.view.team.AllTeamController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -29,7 +29,7 @@ public class TeamBox2Controller {
     private boolean bookmarked = false, initBookMarkCheck = false;
     private final JoinTeamMap joinTeamMap = new JoinTeamMap();
     private HashMap<String, TeamList> teamListHashMap;
-    private SelectTeamController selectTeamController;
+    private AllTeamController allTeamController;
 
     @FXML private void initialize() {
         loadIcon();
@@ -115,7 +115,7 @@ public class TeamBox2Controller {
 
             try {
                 if (newValue.equals("Manage Team")) {
-                    selectTeamController.startManageTeam(team);
+                    allTeamController.startManageTeam(team);
                 } else if (newValue.equals("Delete Team")) {
                     deleteTeam();
                 } else if (newValue.equals("Leave Team")) {
@@ -137,8 +137,8 @@ public class TeamBox2Controller {
         roleImageView.setImage(new Image(getClass().getResourceAsStream("/images/icons/team-box/role/" + team.getRole() + ".png")));
     }
 
-    public void setSelectTeamController(SelectTeamController selectTeamController) {
-        this.selectTeamController = selectTeamController;
+    public void setSelectTeamController(AllTeamController allTeamController) {
+        this.allTeamController = allTeamController;
     }
 
     private void initBookmark() {
@@ -165,7 +165,7 @@ public class TeamBox2Controller {
         }joinTeamMap.writeData(teamHashMap);
         menuDropDown.getSelectionModel().clearSelection();
         try {
-            FXRouter.goTo("select-team", user, event);
+            FXRouter.goTo("all-team", user, event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -120,7 +120,7 @@ public class CardMyEventController {
         HashMap<String, TeamList> teamHashMap = joinTeamMap.readData();
         if (teamHashMap.containsKey(currentUser.getUsername()) || currentEvent.isHostEvent(currentUser)){
             try {
-                FXRouter.goTo("select-team",currentUser, currentEvent);
+                FXRouter.goTo("all-team",currentUser, currentEvent);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
