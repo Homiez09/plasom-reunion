@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -20,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
@@ -170,7 +168,7 @@ public class MyEventsController{
     }
 
     @FXML
-    private void onCreateAction(ActionEvent actionEvent) {
+    private void onCreateAction() {
         try {
             FXRouter.goTo("create-event",currentUser,null,"my-event");
         } catch (IOException e) {
@@ -179,7 +177,7 @@ public class MyEventsController{
     }
 
     @FXML
-    private void onAllAction(ActionEvent actionEvent) {
+    private void onAllAction() {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserEvent(currentUser));
 
@@ -188,7 +186,7 @@ public class MyEventsController{
     }
 
     @FXML
-    public void onCompleteAction(ActionEvent actionEvent) {
+    public void onCompleteAction() {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getCompleteEvent(currentUser));
 
@@ -197,7 +195,7 @@ public class MyEventsController{
     }
 
     @FXML
-    private void onOwnerEventAction(ActionEvent actionEvent) {
+    private void onOwnerEventAction() {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getOwnerEvent(currentUser));
 
@@ -206,7 +204,7 @@ public class MyEventsController{
     }
 
     @FXML
-    private void onMemberAction(ActionEvent actionEvent) {
+    private void onMemberAction() {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getUserInEvent(currentUser));
 
@@ -215,7 +213,7 @@ public class MyEventsController{
     }
 
     @FXML
-    private void onStaffAction(ActionEvent actionEvent) {
+    private void onStaffAction() {
         reset();
         eventObservableList = FXCollections.observableArrayList(eventList.getTeamEvent(currentUser));
 
@@ -224,7 +222,7 @@ public class MyEventsController{
     }
 
     @FXML
-    private void onManageEventButton(ActionEvent actionEvent) {
+    private void onManageEventButton() {
         Popup popup = new Popup();
         VBox popupContent = new VBox();
         popup.setAutoHide(true);
@@ -278,7 +276,7 @@ public class MyEventsController{
         });
     }
 
-    public void onEventsClick(MouseEvent mouseEvent) {
+    public void onEventsClick() {
         try {
             FXRouter.goTo("all-events",currentUser);
         } catch (IOException e) {
@@ -286,7 +284,7 @@ public class MyEventsController{
         }
     }
 
-    public void onSortName(ActionEvent actionEvent) {
+    public void onSortName() {
         listViewMain.getItems().clear();
         Comparator<Event> eventComparator = Comparator.comparing(Event::getEventName);
         eventObservableList.sort(eventComparator);
@@ -295,7 +293,7 @@ public class MyEventsController{
         searchbarTextField.setText("");
     }
 
-    public void onSortStart(ActionEvent actionEvent) {
+    public void onSortStart() {
         listViewMain.getItems().clear();
         Comparator<Event> eventComparator = Comparator.comparing(Event::getDateStartAsDate);
         eventObservableList.sort(eventComparator);
@@ -304,7 +302,7 @@ public class MyEventsController{
         searchbarTextField.setText("");
     }
 
-    public void onSortPopularity(ActionEvent actionEvent) {
+    public void onSortPopularity() {
         listViewMain.getItems().clear();
         Comparator<Event> eventComparator = Comparator.comparing(Event::getUserInEvent);
         eventObservableList.sort(eventComparator);
@@ -314,7 +312,7 @@ public class MyEventsController{
         searchbarTextField.setText("");
     }
 
-    public void onSortEnd(ActionEvent actionEvent) {
+    public void onSortEnd() {
         listViewMain.getItems().clear();
         Comparator<Event> eventComparator = Comparator.comparing(Event::getDateEndAsDate);
         eventObservableList.sort(eventComparator);

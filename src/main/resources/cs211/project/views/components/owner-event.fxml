@@ -35,12 +35,12 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <TableView fx:id="tableEvents" prefHeight="500.0" prefWidth="725.0" styleClass="owner-event-table-view" HBox.hgrow="NEVER">
+                        <TableView fx:id="tableEvents" prefHeight="500.0" prefWidth="725.0" styleClass="users-event-table-view" HBox.hgrow="NEVER">
                            <columns>
                               <TableColumn fx:id="eventNameColumn" editable="false" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" sortable="false" styleClass="owner-event-table-view" text="Event Name" />
                               <TableColumn fx:id="startDateColumn" editable="false" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" sortable="false" styleClass="owner-event-table-view" text="Start" />
                               <TableColumn fx:id="endDateColumn" editable="false" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" sortable="false" styleClass="owner-event-table-view" text="End" />
-                              <TableColumn fx:id="memberColumn" editable="false" maxWidth="100.0" minWidth="85.0" prefWidth="85.0" sortable="false" styleClass="owner-event-table-view" text="People" />
+                              <TableColumn fx:id="memberColumn" editable="false" maxWidth="100.0" minWidth="85.0" prefWidth="85.0" sortable="false" styleClass="owner-event-table-view" text="Participants" />
                               <TableColumn fx:id="statusColumn" editable="false" maxWidth="99.0" minWidth="90.0" prefWidth="99.0" sortable="false" styleClass="owner-event-table-view" text="Status" />
                               <TableColumn fx:id="buttonColumn" editable="false" maxWidth="111.0" minWidth="105.0" prefWidth="111.0" resizable="false" sortable="false" styleClass="owner-event-table-view" text="Action" />
                            </columns>

@@ -145,9 +145,9 @@ public class OwnerEventController {
                         // ลบไฟล์
                         if (fileToDelete.exists()) {
                             if (fileToDelete.delete()) {
-                                System.err.println("Succes Delete");
+                                System.err.println("Success Delete");
                             } else {
-                                System.err.println("Cant Delete");
+                                System.err.println("Can't Delete");
                             }
                         } else {
                             System.err.println("Not Found");
