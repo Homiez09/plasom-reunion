@@ -203,8 +203,8 @@ public class EventPageController {
                                 teamList.getTeamOfEvent(event) != null &&
                                 !teamList.getTeamOfEvent(event).isEmpty() &&
                                 !event.isHostEvent(user) &&
-                                !event.getUserList().getUsers().contains(user)&&
-                                teamTempCheck.getTeamOfEvent(event).size() == 0);
+                                !event.getUserList().getUsers().contains(user)
+        );
         eventActivityTab.setDisable((user == null || !event.getUserList().getUsers().contains(user)
                 || banList.containsKey(user) && eventList.getEvents().contains(event) )
                 && !event.isHostEvent(user));
