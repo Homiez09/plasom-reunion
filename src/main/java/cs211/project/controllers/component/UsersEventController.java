@@ -103,6 +103,7 @@ public class UsersEventController extends CardMyEventController{
                     String selectedOption = comboBox.getValue();
                     User user = getTableView().getItems().get(getIndex());
                     onComboBoxSelectionChanged(user, selectedOption,observableList);
+
                 });
             }
 
@@ -150,12 +151,16 @@ public class UsersEventController extends CardMyEventController{
                         tableUsers.refresh();
                         break;
                     case"UnBan":
-                        list = getBan.get(user);
-                        list.getEvents().remove(currentEvent);
-                        banUserObservableList.remove(user);
-                        getBan.put(user,list);
-                        data.writeData(getBan);
-                        tableUsers.refresh();
+                        try {
+                            list = getBan.get(user);
+                            list.getEvents().remove(currentEvent);
+                            banUserObservableList.remove(user);
+                            getBan.put(user, list);
+                            data.writeData(getBan);
+                            tableUsers.refresh();
+                        }catch (NullPointerException e){
+                            System.err.println("Not Have in list");
+                        }
                         break;
                     case "Kick":
                         data = new BanUser();
