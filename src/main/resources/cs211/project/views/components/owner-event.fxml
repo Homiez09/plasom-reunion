@@ -19,18 +19,18 @@
                   <Separator opacity="0.0" prefHeight="45.0" />
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="40.0" style="-fx-border-color: #FFFFF;" />
+                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="40.0" />
                         <Label fx:id="eventNameLabel" alignment="CENTER" styleClass="font-head" text="Manage Events " textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="400.0" style="-fx-border-color: #FFFFF;" />
+                        <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="400.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Separator prefHeight="16.0" prefWidth="725.0" styleClass="owner-event-separator" />
+                        <Separator prefHeight="16.0" prefWidth="725.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">

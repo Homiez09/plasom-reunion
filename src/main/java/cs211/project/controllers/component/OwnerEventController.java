@@ -88,7 +88,7 @@ public class OwnerEventController {
             {
                 comboBox.getStyleClass().add("owner-event-combobox");
                 comboBox.setValue("Action");
-                comboBox.getItems().addAll("Manage", "View", "Delete");
+                comboBox.getItems().addAll("Edit", "View", "Delete");
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
                     Event eventToModify = getTableView().getItems().get(getIndex());
