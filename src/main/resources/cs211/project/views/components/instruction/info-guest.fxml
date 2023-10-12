@@ -97,13 +97,75 @@
                   </Text>
                </children>
             </AnchorPane>
-            <VBox spacing="5.0">
+            <TextFlow>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. ปุ่ม Instruction จะบอกข้อมูล และวิธีการใช้งานแอปพลิเคชั่น Plasom">
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. ปุ่ม Instruction จะบอกข้อมูล และวิธีการใช้งานแอปพลิเคชั่น Plasom โดยแบ่งเป็น 4 หมวดหมู่ สามารถเลือกดูได้ตามภาพด้านล่าง(5)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- About Application &amp; Instruction for guest : แสดงข้อมูลเบื้องต้นเกี่ยวกับแอปพลิเคชั่น และข้อมูลเกี่ยวกับหน้าที่ผู้ใช้ภายนอกสามารถเข้าถึงได้ การสร้างบัญชีและเข้าสู่ระบบ" wrappingWidth="750.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="135.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Instruction for user : แสดงข้อมูลเกี่ยวกับการจัดการบัญชีของผู้ใช้ทั่วไป การเข้าร่วมอีเว้นต์ และจัดการอีเว้นต์ของตนเอง">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Instruction for organizer : แสดงข้อมูลเกี่ยวกับการสร้างอีเว้นต์ และ การจัดการสิ่งที่เกี่ยวข้องกับอีเว้นต์ เช่น กิจกรรมอีเว้นต์ ทีมช่วยจัดอีเว้นต์ ผู้เข้าร่วมอีเว้นต์" wrappingWidth="750.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Instruction for team staff : แสดงข้อมูลเกี่ยวกับทีมสตาฟผู้ช่วยจัดอีเว้นต์ ระบบต่าง ๆ ในทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/guest/instruct.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="342.0" layoutX="166.0" layoutY="46.0" stroke="RED" strokeType="INSIDE" strokeWidth="5.0" width="94.0" />
+                  <Circle fill="RED" layoutX="162.0" layoutY="50.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="155.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
                      <font>
-                        <Font name="Leelawadee" size="16.0" />
+                        <Font name="Leelawadee Bold" size="24.0" />
                      </font>
                   </Text>
+               </children>
+            </AnchorPane>
+            <VBox spacing="5.0">
+               <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. ปุ่ม Current Event  จะพาไปยังหน้า Home ของแอปพลิเคชั่นโดยไม่ต้อง Sign in หรือสมัครสมาชิก สามารถเลือกดูข้อมูลของอีเวนต์ต่าง ๆ ได้อย่างมีข้อจำกัด" wrappingWidth="800.0">
                      <font>
                         <Font name="Leelawadee" size="16.0" />
