@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
@@ -100,23 +99,6 @@
                   <String fx:value="sidebar-black" />
                </styleClass>
             </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="26.0" layoutY="710.0">
-         <children>
-            <Label contentDisplay="CENTER" layoutX="32.0" layoutY="8.0" prefHeight="21.0" prefWidth="78.0" text="leave team">
-               <styleClass>
-                  <String fx:value="font" />
-                  <String fx:value="text-base" />
-                  <String fx:value="shadow" />
-                  <String fx:value="next-page-shadow" />
-               </styleClass>
-            </Label>
-            <ImageView fitHeight="28.0" fitWidth="35.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../images/icons/team/side-bar/leave_team.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="21.0" layoutY="93.0">

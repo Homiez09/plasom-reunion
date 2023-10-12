@@ -1,19 +1,23 @@
 package cs211.project.controllers.component.sideBarControllers;
 
 
+import cs211.project.controllers.component.teamControllers.manageTeamController.ManageMemberTeamListController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 
 public class SideBarTeamController {
+
     @FXML Label activityLabel, teamChatLabel, manageTeamLabel;
     @FXML Shape   hoverActivityShape, hoverTeamChatShape, hoverManageTeamShape;
     @FXML ImageView  activityImageView, teamChatImageView, manageTeamImageView;
