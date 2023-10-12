@@ -1,6 +1,7 @@
 package cs211.project.controllers.component.sideBarControllers;
 
 
+import cs211.project.controllers.component.teamControllers.manageTeamController.ManageMemberTeamListController;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
@@ -8,6 +9,7 @@ import cs211.project.models.collections.TeamList;
 import cs211.project.services.FXRouter;
 import cs211.project.services.JoinTeamMap;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
