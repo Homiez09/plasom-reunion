@@ -5,8 +5,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -308,6 +310,656 @@
                </children>
             </TextFlow>
             <Separator prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="10.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Your Teams" textAlignment="CENTER">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="1593.0">
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/team-card.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="70.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/team-rank.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="173.0" layoutX="3.0" layoutY="4.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="400.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="29.0" layoutX="45.0" layoutY="92.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="112.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="38.0" layoutX="257.0" layoutY="101.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="112.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="38.0" layoutX="238.0" layoutY="15.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="38.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="38.0" layoutX="50.0" layoutY="120.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="38.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="23.0" layoutX="220.0" layoutY="139.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="88.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="23.0" layoutX="308.0" layoutY="139.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="88.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="49.0" layoutX="126.0" layoutY="12.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="38.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="23.0" layoutX="111.0" layoutY="149.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="88.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="49.0" layoutX="350.0" layoutY="12.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="38.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="138.0" layoutX="413.0" layoutY="10.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="493.0" />
+                  <Circle fill="RED" layoutX="40.0" layoutY="96.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="26.0" layoutY="23.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="45.0" layoutY="148.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="238.0" layoutY="53.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="164.0" layoutY="61.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="369.0" layoutY="67.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="185.0" layoutY="158.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="224.0" layoutY="148.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="327.0" layoutY="161.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="434.0" layoutY="39.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Line endX="-45.80000305175781" endY="-9.800048828125" layoutX="301.0" layoutY="120.0" startX="-144.1999969482422" startY="-9.800048828125" stroke="RED" strokeWidth="3.0" />
+                  <Text fill="WHITE" layoutX="21.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="35.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="40.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="159.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="232.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="180.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="219.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="322.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="364.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="429.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="1076.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Your Teams เป็นหน้าที่แสดงข้อมูลของทีมที่เป็นสมาชิกอยู่ โดยทีมจะถูกแสดงผลตามรูปแบบในกรอบ(1) ซึ่งประกอบไปด้วย" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. ชื่อทีม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. สถานะของสมาชิก แบ่งเป็น 3 ขั้น คือ สมาชิกทั่วไป หัวหน้า และ เจ้าของอีเว้นต์ แต่ละระดับมีสิทธิ์ในการจัดการอีเว้นต์ไม่เท่ากัน" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. จำนวนคนที่มีสถานะออนไลน์ในทีม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. จำนวนสมาชิกทีมในปัจจุบัน / จำนวนที่เปิดรับ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6. (ล่าง) บุ๊กมาร์ก บันทึกอีเว้นต์ที่ชอบ (บน) ตัวเลือกเพิ่มเติม ดังนี้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Manage Team : จัดการทีม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Delete Team : ลบทีม (เฉพาะเจ้าของอีเว้นต์เท่านั้นที่เห็นตัวเลือกนี้)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Leave Team : อากจากทีม (เฉพาะสมาชิก และ หัวหน้าที่เห็นตัวเลือกนี้)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/your-team.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="173.0" layoutX="98.0" layoutY="99.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="185.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="49.0" layoutX="631.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="47.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="49.0" layoutX="716.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="125.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="49.0" layoutX="678.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="38.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="173.0" layoutX="639.0" layoutY="49.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="137.0" />
+                  <Circle fill="RED" layoutX="98.0" layoutY="99.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="625.0" layoutY="14.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="678.0" layoutY="14.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="722.0" layoutY="14.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="639.0" layoutY="135.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="92.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="634.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="673.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="722.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="620.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="2229.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Your Teams ประกอบไปด้วย" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. กล่องแสดงทีม สามารถกดเพื่อไปยังหน้า Team Page ได้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. ปุ่ม Filter เลือกแสดงผลทีมที่อยู่" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- All : ทีมทั้งหมด" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Favorite : ทีมที่ชื่นชอบ (Bookmarked)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Owner : ทีมที่มีตำแหน่งเป็นเจ้าของอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Leader : ทีมที่มีตำแหน่งเป็นหัวหน้าทีม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Member : ทีมที่มีตำแหน่งเป็นสมาชิก" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. ปุ่ม Manage Team มีตัวเลือกให้ทำ 2 อย่าง" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- จัดการทีมของตัวเอง" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="2510.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/manage-team.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="173.0" layoutX="677.0" layoutY="199.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="177.0" />
+                  <Text fill="WHITE" layoutX="92.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="10.353515624999943">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="2828.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ที่ 3.5 Actions นั้น มีตัวเลือกที่ทำได้ต่างกันไปตามตำแหน่งของผู้ใช้ในทีม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- การลบทีม ทำได้เฉพาะผู้จัดอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="150.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- การออกจากทีม ทำได้เฉพาะสมาชิกทั่วไป และ หัวหน้า" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="150.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- การดูโปรไฟล์ผู้ร่วมทีม ทำได้ทุกคน" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="150.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Switch view เปลี่ยนรูปแบบการแสดงทีมในหน้า เลือกได้ 2 แบบ ตามภาพด้านล่าง" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="3140.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/team-card.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4. ปุ่ม Join Team ไปยังหน้า Join Tean">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="75.0" />
+               </VBox.margin>
+            </Text>
+            <Separator layoutX="10.0" layoutY="1940.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="1968.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Team Page" textAlignment="CENTER">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/sidebar.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Team Page ถูกเข้าถึงได้จากกล่องทีมในหน้า Your Teams ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Team Page จะมีแถบทางซ้ายซึ่งจะแสดงข้อมูลที่แตกต่างกัน">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Activity : แสดงตารางกิจกรรมของทีมนั้น ๆ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Team Chat : เป็นช่องทางสื่อสารกันของสมาชิกในทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Manage Team : จัดการทีม สมาชิกในทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </HBox>
+            <TextFlow layoutX="10.0" layoutY="3563.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Team Activity แสดงข้อมูลของกิจกรรมในรูปแบบตาราง หากคลิกที่ชื่อของกิจกรรม จะแสดงข้อมูลที่ด้านล่างของตาราง(6)" wrappingWidth="810.4000244140625">
+                           <font>
+                              <Font name="Leelawadee" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ข้อมูลในตาราง ประกอบไปด้วย" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ชื่อของกิจกรรม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- เวลาเริ่มต้นของกิจกรรม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- เวลาสิ้นสุดกิจกรรม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- สถานะของกิจกรรม  (กำลังดำเนินการ / สิ้นสุด)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- รายละเอียดของกิจกรรม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="3726.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/team-act.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="173.0" layoutX="257.0" layoutY="227.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="455.0" />
+                  <Text fill="RED" layoutX="225.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6.">
+                     <font>
+                        <Font name="Leelawadee Bold" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Team Chat เป็นช่องทางสำหรับสื่อสารภายในทีม โดยสามารถเข้าห้องแชทตามกิจกรรมของทีมได้" wrappingWidth="800.0">
+               <font>
+                  <Font name="Leelawadee" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="4652.0">
+               <children>
+                  <ImageView fitHeight="500.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/chat-room.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="4429.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Activity Chat : ข้อมูลจากตารางกิจกรรมของทีม ทำหน้าที่เป็นห้องแชทที่แยกตามหัวข้อ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Chat Box : พื้นที่สำหรับส่งข้อความสื่อสารกัน" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Message Box : พื้นที่สำหรับพิมพ์ข้อความเพื่อที่จะส่งไปในช่องแชท" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Text layoutX="70.0" layoutY="5118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Team เป็นพื้นที่สำหรับจัดการทีม สามารถอ่านเพิ่มเติมได้ใน Instruction for organizer" wrappingWidth="800.0">
+               <font>
+                  <Font name="Leelawadee" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="5147.0">
+               <children>
+                  <ImageView fitHeight="500.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/manage-team-page.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="5478.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Members : แสดงข้อมูลของสมาชิกในทีม สมาชิกตำแหน่งต่างกันจะจัดการสมาชิดได้ในระดับที่ไม่เท่ากัน" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- สมาชิกทั่วไปทำได้แค่ดูข้อมูลโปรไฟล์ของสมาชิกคนอื่น" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-สมาชิกที่เป็นหัวหน้ามีอำนาจแบน / เตะคนออกจากทีม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-สมาชิกที่เป็นเจ้าของอีเว้นต์มอบตำแหน่งหัวหน้าให้สมาชิกคนอื่นได้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Settings : แก้ไขรายละเอียดของทีมได้ (อ่านเพิ่มเติมได้ใน Instruction for Organizer)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="4023.0" prefWidth="200.0" />
             </children>
         </VBox>
     </children>
