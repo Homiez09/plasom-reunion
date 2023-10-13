@@ -7,6 +7,10 @@
 3. นําไฟล์ Zip มาแตกไฟล์ให้ได้ไฟล์ .jar
 4. ทำการรันไฟล์ .jar
 
+## Uml Class 
+  + [Controller](./release/controller.png)
+  + [Models](./release/models.png)
+  + [Services](./release/services.png)
 ## Group Members
 
 | ชื่อ-นามสกุล                 |   รหัสนิสิต    |  GitHub Username  |    หมู่ |
@@ -44,6 +48,10 @@
     - user-DEV010245_mrowlvi.png
     - user-MOq928049_kikie11.png
     - user-ZKt668157_mingmmie.png
+  - release
+    - controller.png
+    - models.png
+    - services.png
 - src
   - main
     - java
@@ -426,6 +434,9 @@
 | queasyguy    | Testunit0! | User  |
 | mk           | Testunit0! | User  |
 | Piya.k       | Testunit0! | User  |
+| owlvi        | Testunit0! | User  |
+| Ted          | Testunit0! | User  |
+
 
 
 ## สรุปรายละเอียดการพัฒนาในการส่งงานแต่ละครั้ง ##
