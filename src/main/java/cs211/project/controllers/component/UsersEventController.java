@@ -14,19 +14,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class UsersEventController extends CardMyEventController{
     @FXML private TableView<User> tableUsers;
     @FXML private TableColumn<User,String> statusColumn, nameColumn, usernameColumn;
     @FXML private TableColumn<User, ImageView> profileColumn;
     @FXML private TableColumn<User,Void> actionColumn;
-    @FXML private Button statusButton;
-    @FXML private Label eventNameLabel,userSizeLabel,statusLabel,totalLabel,inLabel;
-
+    @FXML private Label eventNameLabel,userSizeLabel,statusLabel,totalLabel,inLabel,joinStartLabel,joinEndLabel;
     private JoinEventMap MapUserJoinEvent;
     private Event currentEvent;
     private ObservableList<User> banUserObservableList;
-
     public void setupData(Event event) {
         this.currentEvent = event;
         this.MapUserJoinEvent = new JoinEventMap();
@@ -47,22 +48,20 @@ public class UsersEventController extends CardMyEventController{
             totalLabel.setVisible(false);
             inLabel.setVisible(false);
         }
+        joinStartLabel.setText(event.getJoinTimeStart());
+        joinEndLabel.setText(event.getJoinTimeEnd());
 
-        statusButton.setText(currentEvent.isJoinEvent() ? "Closed" : "Open");
         statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Closed");
         showTable(userObservableList);
     }
-
     private void showTable(ObservableList<User> observableList) {
         // กำหนด column
-
         tableUsers.setPlaceholder(new Label("No User"));
         profileColumn.setReorderable(false);
         usernameColumn.setReorderable(false);
         nameColumn.setReorderable(false);
         statusColumn.setReorderable(false);
         actionColumn.setReorderable(false);
-
         profileColumn.setCellValueFactory(cellData -> {
             User user = cellData.getValue();
             if (user!=null) {
@@ -93,12 +92,10 @@ public class UsersEventController extends CardMyEventController{
         });
         actionColumn.setCellFactory(param -> new TableCell<>() {
             private final ComboBox<String> comboBox = new ComboBox<>();
-
             {
                 comboBox.getStyleClass().add("users-event-combobox");
                 comboBox.setValue("Action");
                 comboBox.getItems().addAll("Ban","Unban", "Kick");
-
                 comboBox.setOnAction(event -> {
                     String selectedOption = comboBox.getValue();
                     User user = getTableView().getItems().get(getIndex());
@@ -106,7 +103,6 @@ public class UsersEventController extends CardMyEventController{
 
                 });
             }
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
@@ -117,14 +113,12 @@ public class UsersEventController extends CardMyEventController{
                 }
             }
         });
-
         profileColumn.setCellFactory(column ->new TableCellCenter<>().CellAsImageView(profileColumn));
         usernameColumn.setCellFactory(column -> new TableCellCenter<>().CellAsString(usernameColumn));
         nameColumn.setCellFactory(column ->  new TableCellCenter<>().CellAsString(nameColumn));
         statusColumn.setCellFactory(column ->  new TableCellCenter<>().CellAsString(statusColumn));
         tableUsers.setFixedCellSize(40);
         tableUsers.setItems(observableList);
-
     }
 
     private void onComboBoxSelectionChanged(User user, String selectedOption,ObservableList<User> observableList) {
@@ -140,7 +134,6 @@ public class UsersEventController extends CardMyEventController{
                             list = getBan.get(user);
                         }else {
                             list = new EventList();
-
                         }
                         if (!list.getEvents().contains(currentEvent)) {
                             list.getEvents().add(currentEvent);
@@ -181,16 +174,5 @@ public class UsersEventController extends CardMyEventController{
                 }
         }
     }
-
-    @FXML private void onStatusButton() {
-        Datasource<EventList> eventListDatasource = new EventListDataSource();
-        EventList eventList = eventListDatasource.readData();
-        eventList.changeStatus(currentEvent,!currentEvent.isJoinEvent());
-        currentEvent.setJoinEvent(!currentEvent.isJoinEvent());
-        statusButton.setText(currentEvent.isJoinEvent() ? "Closed" : "Open");
-        statusLabel.setText(currentEvent.isJoinEvent() ? "Open" : "Closed");
-        eventListDatasource.writeData(eventList);
-    }
-
 
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -37,7 +36,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="32.0" />
                               <Label fx:id="userSizeLabel" alignment="CENTER" styleClass="users-event-font" text="size" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
                                  <font>
                                     <Font size="18.0" />
@@ -55,7 +54,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="230.0" />
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="312.0" />
                               <HBox alignment="CENTER_LEFT">
                                  <children>
                                     <Label alignment="CENTER" styleClass="users-event-font" text="Status" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
@@ -72,7 +71,40 @@
                                  </children>
                               </HBox>
                               <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />
-                              <Button fx:id="statusButton" mnemonicParsing="false" onAction="#onStatusButton" styleClass="users-event-button-close" text="Button" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefWidth="25.0" />
+                              <Label alignment="CENTER" styleClass="users-event-font" text="Join Date" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" />
+                              <Label fx:id="joinStartLabel" alignment="CENTER" styleClass="users-event-font" text="Date" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" />
+                              <Label alignment="CENTER" styleClass="users-event-font" text="-" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" />
+                              <Label fx:id="joinEndLabel" alignment="CENTER" styleClass="users-event-font" text="Date" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" style="-fx-border-color: #FFFFF;" />
+                                 </children>
+                              </HBox>
+                              <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />
                               <Separator mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="10.0" />
                            </children>
                         </HBox>
@@ -83,8 +115,8 @@
                               <TableView fx:id="tableUsers" styleClass="users-event-table-view">
                                  <columns>
                                     <TableColumn fx:id="profileColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" sortable="false" styleClass="users-event-table-view" text="Profile" />
-                                    <TableColumn fx:id="usernameColumn" editable="false" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" sortable="false" styleClass="users-event-table-view" text="Username" />
-                                    <TableColumn fx:id="nameColumn" editable="false" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" sortable="false" styleClass="users-event-table-view" text="Display Name" />
+                                    <TableColumn fx:id="usernameColumn" editable="false" maxWidth="125.0" minWidth="150.0" prefWidth="125.0" sortable="false" styleClass="users-event-table-view" text="Username" />
+                                    <TableColumn fx:id="nameColumn" editable="false" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" sortable="false" styleClass="users-event-table-view" text="Display Name" />
                                     <TableColumn fx:id="statusColumn" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" sortable="false" styleClass="users-event-table-view" text="Status" />
                                     <TableColumn fx:id="actionColumn" editable="false" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" sortable="false" styleClass="users-event-table-view" text="Action" />
                                  </columns>

@@ -1,5 +1,32 @@
+.bg{
+    -fx-background-color: #FFF5E5;
+}
 .scroll-pane {
     -fx-background-color: black;
+}
+.font-Label-Head{
+    -fx-font-size: 24;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+    -fx-font-style: normal;
+    -fx-text-fill: black;
+}
+.label-header{
+    -fx-font-size: 40;
+    -fx-font-weight: 700;
+    -fx-font-family: Leelawadee;
+    -fx-font-style: normal;
+    -fx-text-fill: black;
+}
+.font-Label{
+    -fx-font-size: 18;
+    -fx-font-family: Leelawadee;
+    -fx-text-fill: black;
+}
+.font-Label-upload{
+    -fx-font-size: 14;
+    -fx-font-family: Leelawadee;
+    -fx-text-fill: red;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{
@@ -29,13 +56,15 @@
 }
 
 .eventbox-bg{
--fx-background-color: #FF971D;
+-fx-background-color: #ffac4d;
 -fx-border-radius: 18px;
 -fx-border-color: black;
 -fx-background-radius: 20px;
 -fx-border-width: 3px;
 }
-
+.inbox-bg{
+    -fx-background-color: #ffac4d;
+}
 .text-field-bg{
 -fx-background-color: #F9F6F7;
 -fx-border-radius: 10px;
@@ -75,6 +104,3 @@
 .event-choice-box .menu-item > .label { -fx-text-fill: black; }
 .event-choice-box .menu-item:focused > .label { -fx-text-fill: black; }
 
-.inbox-bg{
--fx-background-color: #FF971D;
-}
