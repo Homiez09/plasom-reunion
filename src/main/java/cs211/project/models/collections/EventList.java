@@ -14,15 +14,6 @@ public class EventList {
 
     public void createEvent(String eventName, User eventHost, String eventImagePath,
                             String eventTag, String eventDateStart, String eventDateEnd,
-                            String eventDescription, String eventLocation, int slotMember) {
-        eventName = eventName.trim();
-        if (!eventName.equals("") && eventHost != null){
-            events.add(new Event(eventName,eventHost,eventImagePath,eventTag,
-                                eventDateStart,eventDateEnd,eventDescription,eventLocation,slotMember));
-        }
-    }
-    public void createEvent(String eventName, User eventHost, String eventImagePath,
-                            String eventTag, String eventDateStart, String eventDateEnd,
                             String eventDescription, String eventLocation, int slotMember,
                             String joinStart, String joinEnd) {
         eventName = eventName.trim();
@@ -98,10 +89,6 @@ public class EventList {
     public void changeLocation(Event event,String change){
         Event changeEvent = findEventById(event.getEventID());
         changeEvent.changeLocation(change);
-    }
-    public void changeStatus(Event event,boolean join){
-        Event changeEvent = findEventById(event.getEventID());
-        changeEvent.setJoinEvent(join);
     }
 
     public void changeJoinTimeStart(Event event,String change){

@@ -180,7 +180,6 @@ public class Event implements Comparable<Event>{
     public void changeJoinTimeEnd(String newTime){this.joinTimeEnd = newTime;}
     public void setActivity(ActivityList activityList) {this.activityList = activityList;}
     public void setUserList(UserList userList){ this.userList = userList;}
-    public void setJoinEvent (boolean joinEvent){this.joinEvent = joinEvent;}
     public boolean isFull(){return slotMember == userList.getUsers().size();}
 
     private String generateEventID() {
