@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cs211.project</groupId>
-    <artifactId>javafx-starter</artifactId>
+    <artifactId>Plasom-reunion</artifactId>
     <version>1.0</version>
-    <name>javafx-starter</name>
+    <name>Plasom-reunion</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
