@@ -17,7 +17,6 @@
 | **นางสาวปุญญิศา ธัญญพงษ์**   | **6510450674** |   **MalaMing**    | **200** |
 
 ## การจัดวางโครงสร้างไฟล์
-
 - data
   - ban-team.csv
   - ban-user.csv
@@ -428,19 +427,70 @@
 ## สรุปรายละเอียดการพัฒนาในการส่งงานแต่ละครั้ง ##
 
 ### ครั้งที่ 1 ( ส่งก่อนวันที่ 11 ส.ค. 2566 17:00 น.)
->
->
+#### ภูมิระพี เสริญวณิชกุล 6510405750 (HomieZ09)
+> - เพิ่ม UI ของหน้า Welcome Page, Developer Profile Page
+> - เพิ่ม Navigation Bar Component สำหรับของ User และ Guest
+>   - ของ User จะแสดงรูป Avatar Profile และแถบทำทางไปยังหน้า Home และ My Event
+>   - ของ Guest จะแสดงแถบนำทางให้ไปยัง Sign-In, Sing-Up
+> - เพิ่ม Top Bar Component ที่ใช้ในหน้า Welcome, Develop, Instruction
+> - ลิงก์ปุ่มไปยังหน้าต่างๆใน Welcome Page
 
 ### ครั้งที่ 2 ( ส่งก่อนวันที่ 1 ก.ย. 2566 17:00 น.)
->
->
->
->
+#### ภูมิระพี เสริญวณิชกุล 6510405750 (HomieZ09)
+> - เพิ่ม Team Model และ TeamList ที่ใช้สำหรับเก็บข้อมูลของ Team Model
+> - เพิ่ม TeamListDatasourceHardcode เพื่อใช้ทดสอบการแสดงผลของทีม
+> - เพิ่มหน้า Admin Dashboard ที่สามารถดูการเข้าสู่ระบบของ User ได้ โดยจะเรียงจากผู้ที่เข้าสู่ระบบคนล่าสุดเป็นคนแรกโดยไม่นับ Admin
+> - เพิ่มเงื่อนไขให้ Navigation Bar เพื่อทำการเช็กว่าเป็น User หรือเป็น Guest
+> - ย้ายการเรียกใช้ Navigation Bar ของหลายๆหน้ามาเขียนเป็น Service เพื่อให้หน้าอื่นๆสามารถเรียกใช้ได้ง่าย
+> - แก้ไข UI ของหน้า Welcome Page
+> - แก้ไข UI ของ Top Bar Component
 
 ### ครั้งที่ 3 ( ส่งก่อนวันที่ 22 ก.ย. 2566 17:00 น.)
->
->
+#### ภูมิระพี เสริญวณิชกุล 6510405750 (HomieZ09)
+> ได้รับมอบหมายให้ทำหน้า All-Team ต่อจากความก้าวหน้าครั้งที่สองของหมิง (ทำร่วมกับ MalaMing)
+> - เพิ่ม Service ImagePathFormat เพื่อใช้ Format image path ของ User(เพราะเนื่องจากว่า user บางคนใช้ Default Avatar บางคนใช้การอัปโหลดรูปจากเครื่อง)
+> - แก้ไข All-Team
+>   - เพิ่มการส่งข้อมูลเข้าไปใน Team-Box-Component ในหน้า All-Team (100%)
+>     - ชื่อทีม
+>     - Role (ของ User)
+>     - Participant // ทำเสร็จแล้วในโครงงานที่เสร็จสมบูรณ์
+>     - Online Team Users // ทำเสร็จแล้วในโครงงานที่เสร็จสมบูรณ์
+>     - Bookmark
+>   - เพิ่มระบบ Filter
+>   - เพิ่มการกด bookmark ทีมที่ชื่นชอบ
+>   - เพิ่ม Manage Teams แบบด่วน (จะเห็นทีมในมุมมองของลิสลงมาทำให้จัดการได้เร็วและง่ายขึ้นเหมาะสำหรับเมื่อต้องการ	จัดการหลายๆทีมพร้อมๆกัน) สามารถกดได้จากรูปเฟืองข้างๆ Filter
+>   - เพิ่ม Sort Teams ตามเวลาที่สร้าง
+> - แก้ไข Admin Dashboard
+>   - เพิ่มแสดงสถานะออนไลน์ของ Users
+>   - เพิ่มแสดงสถานะออฟไลน์ของ Users
+>   - เพิ่มแสดงจำนวนอีเวนต์ทั้งหมดและที่จบลง
+>   - แก้ไข UI หน้า Admin Dashboard
+> - แก้ไข Team Model
+>   - เพิ่มเมธอดเปลี่ยนเวลาเป็น Timestamp และเมธอดเปลี่ยนกลับ
 
 ### ครั้งที่ 4 ( ส่งก่อนวันที่ 13 ต.ค. 2566 17:00 น.)
->
->
+#### ภูมิระพี เสริญวณิชกุล 6510405750 (HomieZ09)
+> - เพิ่ม ActivityTeam Model และ ActivityTeamList ที่ใช้สำหรับเก็บข้อมูลของ ActivityTeam Model (โดย Inheritance มาจาก Activity Model)
+> - เพิ่มหน้า Team Activity
+>   - เพิ่ม UI ของหน้า Team Activity
+>   - เพิ่มการสร้าง Activity
+>   - เพิ่มการแก้ไข Activity ด้วยการดับเบิลคลิก
+>   - เพิ่มการลบ Activity
+>   - เพิ่มปุ่มกดไปยัง Activity ถัดไป/ก่อนหน้า
+>   - เพิ่ม Search Bar สำหรับค้นหา Activity
+>   - เพิ่มการแสดงผลของการ Search
+>   - เพิ่มการลิงก์ไปยังช่องแชตของ Activity นั้น
+> - เพิ่มหน้า Chat Activity
+>   - เพิ่ม UI ของหน้า Chat Activity
+>   - เพิ่ม Group Activity ที่สามารถเข้าร่วมแชตได้
+>   - เพิ่มการกด Enter สำหรับการส่งข้อความ
+>   - เพิ่มเช็กถ้าไม่มีการพิมพ์ใดๆในช่องแชตจะไม่สามารถส่งข้อความได้ปุ่มจะถูก Disable
+>   - เพิ่ม Service สำหรับ Write Data ลงใน CSV (Optimize ด้วย Runnable)
+> - แก้ไขหน้า Manage Team
+>   - เพิ่ม Unban สำหรับการปลดแบน User ที่เคยแบนไปในทีม
+> - แก้ไขหน้า Home
+>   - เพิ่ม Event Card Component สำหรับแสดง Event ที่เป็น Upcoming Event, New Event, และ Recommend Event
+> - แก้ไขหน้า All Event
+>   - แก้ไข Card Component ให้มีขนาดที่เหมาะสม
+> - แก้ไขหน้า Sign-In, Sign-Up
+>   - เพิ่ม Upcoming Event Card Component สำหรับแสดง Event ที่เป็น Upcoming Event
