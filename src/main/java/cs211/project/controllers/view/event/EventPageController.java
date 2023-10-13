@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class EventPageController {
     @FXML private AnchorPane navbarAnchorPane;
@@ -38,14 +39,12 @@ public class EventPageController {
     private final User user = (User) FXRouter.getData();
     private final String from = (String) FXRouter.getData3();
     private ActivityList activityList;
-    private HashMap<String, UserList> hashMap;
-    private JoinEventMap joinEventMap;
 
     @FXML private void initialize() {
         Datasource<ActivityList> eventActivityDatasource = new ActivityListDataSource("data", "event-activity-list.csv");
         this.activityList = eventActivityDatasource.readData();
-        this.joinEventMap = new JoinEventMap();
-        this.hashMap = joinEventMap.readData();
+        JoinEventMap joinEventMap = new JoinEventMap();
+        HashMap<String, UserList> hashMap = joinEventMap.readData();
 
         new LoadNavbarComponent(user, navbarAnchorPane);
         initButton();
@@ -95,24 +94,18 @@ public class EventPageController {
         }
     }
     @FXML private void onJoinEventAction() {
-        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
-        UserList userList;
-        if (hashMap.containsKey(event.getEventID())) {
-            userList = hashMap.get(event.getEventID());
-        }else {
-            userList = new UserList();
-        }
-        /* ใช้สำหรับ User ที่เข้าร่วมอีเว้นแล้วและเพื่อไม่ให้เข้าร่วมซํ้า*/
 
-        if (userList.getUsers().contains(user) || user.getUserId().equals(event.getEventHostUser().getUserId())){
+        if (event.getUserList().getUsers().contains(user) || event.isHostEvent(user)){
             try {
                 FXRouter.goTo("event",user,event);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }else {
-            userList.getUsers().add(user);
-            hashMap.put(event.getEventID(), userList);
+            event.getUserList().getUsers().add(user);
+            JoinEventMap joinEventMap = new JoinEventMap();
+            HashMap<String, UserList>  hashMap = joinEventMap.readData();
+            hashMap.put(event.getEventID(), event.getUserList());
             joinEventMap.writeData(hashMap);
             try {
                 FXRouter.goTo("my-event", user,"event");

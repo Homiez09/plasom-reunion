@@ -48,8 +48,8 @@ public class CardMyEventController {
         if (joinEventMap.containsKey(currentEvent.getEventID())) {
             userList = joinEventMap.get(currentEvent.getEventID());
         }
-        userList.getUsers().remove(currentUser);
-        joinEventMap.put(currentEvent.getEventID(), userList);
+        currentEvent.getUserList().getUsers().remove(currentUser);
+        joinEventMap.put(currentEvent.getEventID(), currentEvent.getUserList());
         joinEventDatasource.writeData(joinEventMap);
         try {
             FXRouter.goTo("my-event",currentUser,"card");

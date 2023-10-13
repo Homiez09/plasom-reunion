@@ -3,9 +3,12 @@ package cs211.project.services;
 import cs211.project.models.User;
 import cs211.project.models.collections.UserList;
 
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class JoinEventMap implements Datasource<HashMap<String, UserList>>{
     private final String directoryName = "data";

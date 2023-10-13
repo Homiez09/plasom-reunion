@@ -143,7 +143,7 @@ public class UsersEventController extends CardMyEventController{
                         data.writeData(getBan);
                         tableUsers.refresh();
                         break;
-                    case"UnBan":
+                    case"Unban":
                         try {
                             list = getBan.get(user);
                             list.getEvents().remove(currentEvent);
