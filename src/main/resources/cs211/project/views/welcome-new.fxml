@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/welcome.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.WelcomeController">
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/welcome.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.WelcomeController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1152.0">
          <image>
@@ -45,7 +45,7 @@
          <styleClass>
             <String fx:value="h3" />
             <String fx:value="text-color-white" />
-            <String fx:value="bold700" />
+            <String fx:value="weight-bold" />
             <String fx:value="text-shadow" />
          </styleClass>
       </Text>

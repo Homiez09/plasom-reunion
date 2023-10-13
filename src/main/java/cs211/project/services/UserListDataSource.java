@@ -1,20 +1,14 @@
 package cs211.project.services;
 
-import cs211.project.models.Event;
 import cs211.project.models.User;
-import cs211.project.models.collections.EventList;
 import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 public class UserListDataSource implements Datasource<UserList> {
-    private String directoryName;
-    private String fileName;
-
-    private Datasource<UserList> datasource;
-    private UserList userList;
+    private final String directoryName;
+    private final String fileName;
 
     public UserListDataSource(String directoryName, String fileName){
         this.directoryName = directoryName;
@@ -40,7 +34,7 @@ public class UserListDataSource implements Datasource<UserList> {
 
     @Override
     public UserList readData() {
-        userList = new UserList();
+        UserList userList = new UserList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -75,12 +69,11 @@ public class UserListDataSource implements Datasource<UserList> {
                 String registerDate = data[5];
                 String contactNumber = data[4];
                 String lastedLogin = data[6];
-                String bio = data[8];
+                String bio = data[8].trim();
                 boolean showContactNumber = Boolean.parseBoolean(data[11]);
                 boolean status = Boolean.parseBoolean(data[9]);
                 boolean admin = Boolean.parseBoolean(data[10].trim());
                 userList.addUser(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, bio, status, admin, showContactNumber);
-
 
             }
         } catch (IOException e) {

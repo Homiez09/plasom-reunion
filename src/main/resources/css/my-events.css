@@ -50,3 +50,17 @@
     -fx-background-color: #FFF4E2;
 
 }
+
+.hide-button .button{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.hide-button .button:showing{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.hide-button .button:hover{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}

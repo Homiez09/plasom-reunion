@@ -1,29 +1,27 @@
 package cs211.project.models;
 
 import cs211.project.models.collections.ActivityList;
-import cs211.project.models.collections.TeamList;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.GenerateRandomID;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Random;
 
-public class Event {
+public class Event implements Comparable<Event>{
     private final String eventID;
-    private User eventHostUser;
+    private final User eventHostUser;
     private String eventName;
     private String eventImagePath;
     private String eventTag,eventDateStart, eventDateEnd;
-    private String eventDescription, eventLocation;
-    private int member = 0 ,slotMember;
+    private String eventDescription;
+    private String eventLocation;
+    private int slotMember;
     private final String timestamp;
-    private boolean joinEvent = false,joinTeam = false;
-    private BooleanProperty isSelected ;
-
-    private ActivityList activities;
-    private TeamList teamList;
+    private boolean joinEvent;
+    private String joinTimeStart;
+    private String joinTimeEnd;
+    private ActivityList activityList;
+    private UserList userList;
     public Event(String eventName,
                  User eventHostUser,
                  String eventImagePath,
@@ -31,7 +29,7 @@ public class Event {
                  String eventDateStart,
                  String eventDateEnd,
                  String eventDescription,
-                 String eventLocation) {
+                 String eventLocation,int slotMember) {
         this.eventID = generateEventID();
         this.eventName = eventName;
         this.eventHostUser = eventHostUser;
@@ -41,13 +39,13 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
-        this.member = 0;
-        this.slotMember = -1;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-        this.isSelected = new SimpleBooleanProperty(false);
-        this.activities = new ActivityList();
-        this.joinEvent = true;
-        this.joinTeam = true;
+        this.slotMember = slotMember;
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        this.activityList = new ActivityList();
+        this.userList = new UserList();
+        this.joinTimeStart = eventDateStart;
+        this.joinTimeEnd = eventDateEnd;
+        this.joinEvent = isJoinEventNow();
     }
 
     public Event(String eventName,
@@ -58,7 +56,9 @@ public class Event {
                  String eventDateEnd,
                  String eventDescription,
                  String eventLocation,
-                 int slotMember) {
+                 int slotMember,
+                 String joinTimeStart,
+                 String joinTimeEnd) {
         this.eventID = generateEventID();
         this.eventHostUser = eventHostUser;
         this.eventName = eventName;
@@ -68,15 +68,15 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
-        this.member = 0;
         this.slotMember = slotMember;
-        this.isSelected = new SimpleBooleanProperty(false);
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
-        this.activities = new ActivityList();
-        this.joinEvent = true;
-        this.joinTeam = true;
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        this.activityList = new ActivityList();
+        this.userList = new UserList();
+        this.joinTimeStart = joinTimeStart;
+        this.joinTimeEnd = joinTimeEnd;
+        this.joinEvent = isJoinEventNow();
     }
-
+    //---------------- Read CSV ----------------\\
     public Event(String eventID,
                  User eventHostUser,
                  String eventName,
@@ -86,11 +86,10 @@ public class Event {
                  String eventDateEnd,
                  String eventDescription,
                  String eventLocation,
-                 int member,
                  int slotMember,
                  String timestamp,
-                 boolean joinEvent,
-                 boolean joinTeam) {
+                 String joinTimeStart,
+                 String joinTimeEnd) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventImagePath = eventImagePath;
@@ -99,34 +98,76 @@ public class Event {
         this.eventDateEnd = eventDateEnd;
         this.eventDescription = eventDescription;
         this.eventLocation = eventLocation;
-        this.member = member;
         this.slotMember = slotMember;
         this.eventHostUser = eventHostUser;
         this.timestamp =timestamp;
-        this.activities = new ActivityList();
-        this.joinEvent = joinEvent;
-        this.joinTeam = joinTeam;
+        this.activityList = new ActivityList();
+        this.userList = new UserList();
+        this.joinTimeStart = joinTimeStart;
+        this.joinTimeEnd = joinTimeEnd;
+        this.joinEvent = isJoinEventNow();
     }
-
-
-
+    //---------------- Read CSV ----------------\\
     public String getEventID() {return eventID;}
     public User getEventHostUser() {return eventHostUser;}
     public String getEventName() {return eventName;}
     public String getEventImagePath() {return eventImagePath;}
     public String getEventTag() {return eventTag;}
-    public String getEventDateStart() {return eventDateStart;}
-    public String getEventDateEnd() {return eventDateEnd;}
+    public String getEventDateStart() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(eventDateStart, inputFormatter);
+        return dateTime.format(outputFormatter);
+    }
+    public String getEventDateEnd() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(eventDateEnd, inputFormatter);
+        return dateTime.format(outputFormatter);
+    }
     public String getEventDescription() {return eventDescription;}
     public int getSlotMember() {return slotMember;}
-    public int getMember() {return member;}
+    public int getUserInEvent() {return userList.getUsers().size();}
     public String getEventLocation() { return eventLocation; }
-    public ActivityList getActivities() { return activities; }
-    public TeamList getTeamList() { return teamList; }
-    public String getTimestamp() {return timestamp;}
-    public boolean isJoinEvent() {return joinEvent;}
-    public boolean isJoinTeam() {return joinTeam;}
+    public ActivityList getActivityList() { return activityList; }
+    public UserList getUserList(){return userList;}
 
+    public String getJoinTimeStart() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(joinTimeStart, inputFormatter);
+        return dateTime.format(outputFormatter);
+    }
+
+    public String getJoinTimeEnd() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(joinTimeEnd, inputFormatter);
+        return dateTime.format(outputFormatter);
+    }
+    public LocalDateTime getJoinTimeStartAsDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return  LocalDateTime.parse(joinTimeStart, formatter);    }
+
+    public LocalDateTime getJoinTimeEndAsDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return  LocalDateTime.parse(joinTimeEnd, formatter);    }
+
+    public LocalDateTime getDateStartAsDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return  LocalDateTime.parse(eventDateStart, formatter);
+    }
+    public LocalDateTime getDateEndAsDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return  LocalDateTime.parse(eventDateEnd, formatter);
+    }
+    public LocalDateTime getTimestamp(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return  LocalDateTime.parse(timestamp, formatter);
+
+    }
+
+    public boolean isJoinEvent() {return joinEvent;}
     public void changeDateStart(String newDate){this.eventDateStart = newDate;}
     public void changeDateEnd(String newDate){this.eventDateEnd = newDate;}
     public void changeName(String newName){this.eventName = newName;}
@@ -134,81 +175,33 @@ public class Event {
     public void changeSlotMember(int slotMember){this.slotMember = slotMember;}
     public void changeTag(String newTag) {this.eventTag = newTag;}
     public void changeEventImagePath(String newImagePath) {this.eventImagePath = newImagePath;}
-    public void setMember(int n){
-        this.member = n;
-    }
-    public void setTeamList(TeamList teamList){
-        this.teamList = teamList;
-    }
-    public void addMember(){if(!isFull())this.member++;}
-    public void delMember(){if(member >0) this.member--;}
-
+    public void changeLocation(String newLocation){this.eventLocation = newLocation;}
+    public void changeJoinTimeStart(String newTime){this.joinTimeStart = newTime;}
+    public void changeJoinTimeEnd(String newTime){this.joinTimeEnd = newTime;}
+    public void setActivity(ActivityList activityList) {this.activityList = activityList;}
+    public void setUserList(UserList userList){ this.userList = userList;}
+    public boolean isFull(){return slotMember == userList.getUsers().size();}
 
     private String generateEventID() {
-        Random random = new Random();
-
         String id = "event-";
-        int ranInt = random.nextInt(1000000);
-        String ranText = generateRandomText();
-
-        id = id + ranText + ranInt;
-
+        id += new GenerateRandomID().getRandomText();
         return id;
     }
-    public boolean isFull(){return slotMember == member;}
-    public boolean isUpComming(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime eventDate = LocalDateTime.parse(eventDateStart, formatter);
-        LocalDateTime currentTime = LocalDateTime.now();
-        if (!eventDate.isBefore(currentTime) && !eventDate.isAfter(currentTime.plusDays(20))) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isNewEvent() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-        // แปลงสตริงวันที่และเวลาเป็น LocalDateTime
-        LocalDateTime eventStartDate = LocalDateTime.parse(eventDateStart, formatter);
-        LocalDateTime timeStamp = LocalDateTime.parse(timestamp,formatter);
-        LocalDateTime currentTime = LocalDateTime.now();
-
-        // คำนวณความต่างของวันระหว่างวันที่เริ่มต้นของอีเวนต์กับวันปัจจุบัน
-        long timeStartDiff = ChronoUnit.DAYS.between(eventStartDate, currentTime);
-        long timeStampDiff = ChronoUnit.DAYS.between(timeStamp, currentTime);
-
-        // ตรวจสอบว่า Time Stamp ไม่เกิน 7 วันและวันเริ่มต้นไม่เกิน 7 วัน
-        return (timeStartDiff <= 7 && timeStampDiff <= 7 );
-    }
-
 
     public boolean isEnd() {
         LocalDateTime currentDateTime = LocalDateTime.now();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime parsedEventDateEnd = LocalDateTime.parse(eventDateEnd, formatter);
-
         return currentDateTime.isAfter(parsedEventDateEnd);
     }
 
-    public boolean isHostEvent(String currentUserId) {
-        return eventHostUser.getUserId().equals(currentUserId);
+    public boolean isHostEvent(User user) {
+        return eventHostUser.equals(user);
+    }
+    private boolean isJoinEventNow() {
+        return LocalDateTime.now().isAfter(getJoinTimeStartAsDate()) && LocalDateTime.now().isBefore(getJoinTimeEndAsDate());
     }
 
-    private String generateRandomText() {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder randomText = new StringBuilder();
-
-        Random random = new Random();
-
-        for (int i = 0; i < 3; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomText.append(randomChar);
-        }
-        return randomText.toString();
-    }
     @Override
     public String toString() {
         return      eventID + ','
@@ -218,15 +211,33 @@ public class Event {
                 +   eventTag + ','
                 +   eventDateStart + ','
                 +   eventDateEnd + ','
-                +   eventDescription.replaceAll("\n"," ") + ','
+                +   eventDescription.replaceAll("\n"," ").replaceAll(",", " ") + ','
                 +   eventLocation + ','
-                +   member + ','
                 +   slotMember +','
                 +   timestamp+','
-                +   joinEvent+','
-                +   joinTeam;
+                +   joinTimeStart+","
+                +   joinTimeEnd;
 
     }
 
+    @Override
+    public int compareTo(Event o) {
+        return eventName.compareTo(o.eventName);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        return eventID.equals(event.eventID);
+    }
+
+    @Override
+    public int hashCode() {
+        return eventID.hashCode();
+    }
 }
 

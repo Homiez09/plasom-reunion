@@ -11,8 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
-    private String directoryName = "data";
-    private String fileName = "join-team.csv";
+    private final String directoryName = "data";
+    private final String fileName = "join-team.csv";
     public JoinTeamMap() {
         checkFileIsExisted();
     }
@@ -38,7 +38,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
         HashMap<String, TeamList> hashMap = new HashMap<>();
 
         TeamListDataSource teamListDataSource = new TeamListDataSource("data", "team-list.csv");
-        HashMap<String, Team> teamHashMap = teamListDataSource.readData().teamHashMap();
+        TeamList teamListForSearch;
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -65,6 +65,8 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
             while ((line = buffer.readLine()) != null) {
                 if (line.equals("")) continue;
 
+                teamListForSearch = teamListDataSource.readData();
+
                 String[] data = line.split(",");
                 String username = data[0];
                 String teamID = data[1];
@@ -73,14 +75,14 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
 
                 if (hashMap.containsKey(username)) {
                     TeamList teamList = hashMap.get(username);
-                    Team team = teamHashMap.get(teamID);
+                    Team team = teamListForSearch.findTeamByID(teamID);
                     team.setRole(role);
                     team.setBookmarked(isBookmarked);
                     teamList.addTeam(team);
                     hashMap.put(username, teamList);
                 } else {
                     TeamList teamList = new TeamList();
-                    Team team = teamHashMap.get(teamID);
+                    Team team = teamListForSearch.findTeamByID(teamID);
                     team.setRole(role);
                     team.setBookmarked(isBookmarked);
                     teamList.addTeam(team);
@@ -177,7 +179,6 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
         HashMap<String, UserList> hashMap = new HashMap<>();
 
         UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
-        HashMap<String, User> userHashMap = userListDataSource.readData().userHashMap(); // key : username, value : User
 
         String filePath = directoryName + File.separator + fileName;
 
@@ -203,6 +204,7 @@ public class JoinTeamMap implements Datasource<HashMap<String, TeamList>> {
         try {
             while ((line = buffer.readLine()) != null) {
                 if (line.equals("")) continue;
+                HashMap<String, User> userHashMap = userListDataSource.readData().userHashMap();
 
                 String[] data = line.split(",");
                 String username = data[0];

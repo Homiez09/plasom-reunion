@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.navbarGuestController">
+<AnchorPane fx:id="searchBoxTextField" prefHeight="75.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.navbarGuestController">
     <children>
         <AnchorPane prefHeight="75.0" prefWidth="1152.0" styleClass="Nav">
             <children>
-                <TextField layoutX="156.0" layoutY="20.0" prefHeight="36.0" prefWidth="399.0" promptText="Searching..." styleClass="search-box">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </TextField>
-                <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="164.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../../images/icons/navbar/search.png" />
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="525.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../../images/icons/navbar/exit.png" />
-                    </image>
-                </ImageView>
-                <HBox layoutX="894.0" prefHeight="75.0" prefWidth="221.0" styleClass="container">
+                <HBox layoutX="838.0" prefHeight="75.0" prefWidth="300.0" styleClass="container">
                     <children>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="75.0" prefWidth="100.0" styleClass="items" text="Home" textFill="#413b3b" />
                         <Button mnemonicParsing="false" onAction="#onSignInButtonClick" prefHeight="75.0" prefWidth="102.0" styleClass="items" text="Sign in" textFill="#413b3b" />
                         <Button mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="75.0" prefWidth="113.0" styleClass="items" text="Sign up" textFill="#413b3b" />
                     </children>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,46 +13,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="eventAnchorPane" cache="true" onMouseClicked="#onClickCard" styleClass="card-my-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardMyEventController">
+<AnchorPane fx:id="eventAnchorPane" onMouseClicked="#onClickCard" styleClass="my-event-card" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.CardMyEventController">
    <opaqueInsets>
       <Insets bottom="5.0" top="5.0" />
    </opaqueInsets>
-   <effect>
-      <Blend />
-   </effect>
    <children>
-      <HBox alignment="CENTER_LEFT" layoutY="-6.0" styleClass="card-my-event">
+      <HBox alignment="CENTER_LEFT" layoutY="-6.0" styleClass="background">
          <children>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="261.0" prefWidth="19.0" />
-            <VBox alignment="CENTER">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <children>
-                  <ImageView fx:id="eventImageView" cache="true" cacheHint="QUALITY" depthTest="DISABLE" fitHeight="240.0" fitWidth="230.0" pickOnBounds="true">
-                     <viewport>
-                        <Rectangle2D height="240.0" width="230.0" />
-                     </viewport>
-                  </ImageView>
-               </children>
-            </VBox>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="261.0" prefWidth="19.0" />
+            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
+            <ImageView fx:id="eventImageView" depthTest="DISABLE" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="image-card" HBox.hgrow="NEVER">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </ImageView>
+            <Separator halignment="RIGHT" opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
             <VBox>
                <children>
-                  <Separator opacity="0.0" prefHeight="19.0" />
+                  <Separator opacity="0.0" prefHeight="10.0" />
+                  <Label fx:id="eventNameLabel" graphicTextGap="0.0" prefHeight="39.0" prefWidth="500.0" styleClass="font-head" text="Party Festival Event">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <Separator opacity="0.0" prefHeight="8.0" />
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Label fx:id="eventNameLabel" text="Party Festival Event">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Separator opacity="0.0" prefHeight="15.0" prefWidth="200.0" />
-                  <HBox alignment="CENTER_LEFT">
-                     <children>
-                        <Label fx:id="startDateLabel" text="TUE, 22/11/2022 | 12:00:00 PM">
+                        <Label fx:id="startDateLabel" prefHeight="25.0" prefWidth="253.0" styleClass="font" text="TUE, 22/11/2022 | 12:00:00 PM">
                            <graphic>
                               <ImageView fx:id="personIconImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -65,25 +53,11 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
-                        <Label fx:id="locationLabel" text="Location">
+                        <Label fx:id="locationLabel" prefHeight="25.0" prefWidth="280.0" styleClass="font" text="Location">
                            <graphic>
                               <ImageView fx:id="locationImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../images/events/pin%20small.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="21.0" />
-                        <Label fx:id="memberCountLabel" text="10/15">
-                           <graphic>
-                              <ImageView fx:id="calendaImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../images/events/user-group.png" />
+                                    <Image url="@../../../../images/events/pinsmall.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -93,43 +67,45 @@
                         </Label>
                      </children>
                   </HBox>
+                  <Separator opacity="0.0" prefHeight="7.0" />
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="80.0" prefWidth="35.0" />
-                        <Label fx:id="descriptionLabel" alignment="TOP_LEFT" prefHeight="80.0" prefWidth="460.0" text="descriptionLabel" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+                        <Label fx:id="descriptionLabel" alignment="TOP_LEFT" prefHeight="80.0" prefWidth="495.0" styleClass="font" text="descriptionLabel" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                            <font>
                               <Font size="15.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
-                  <Separator opacity="0.0" prefHeight="10.0" prefWidth="620.0" />
+                  <Separator opacity="0.0" prefHeight="7.0" />
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Separator opacity="0.0" orientation="VERTICAL" />
-                        <ImageView fx:id="profileImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                        <Separator opacity="0.0" orientation="VERTICAL" />
-                        <VBox>
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <Label fx:id="hostUserNameLabel" text="\@mingmmie">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font></Label>
-                              <Label fx:id="hostDisplayNameLabel" text="PINKPPANTHER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font></Label>
+                              <ImageView fx:id="profileImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <Separator opacity="0.0" orientation="VERTICAL" />
+                              <VBox>
+                                 <children>
+                                    <Label fx:id="hostUserNameLabel" prefHeight="20.0" prefWidth="150.0" styleClass="font-username" text="\@mingmmie">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="hostDisplayNameLabel" prefHeight="21.0" prefWidth="150.0" styleClass="font" text="PINKPPANTHER" textOverrun="WORD_ELLIPSIS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT">
-                     <children>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="232.0" />
-                        <Button fx:id="forStaffButton" mnemonicParsing="false" onAction="#onForStaffButton" text="staff">
+                        </HBox>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="20.0" />
+                        <Button fx:id="staffButton" mnemonicParsing="false" onAction="#onStaffButton" styleClass="edit-profile-button" text="Staff" textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../images/icons/navbar/user-group.png" />
+                                    <Image url="@../../../../images/eventcomponent/user-group.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -137,8 +113,8 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="28.0" />
-                        <Button fx:id="manageEventButton" mnemonicParsing="false" onAction="#onManageEventButton" text="manage user">
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="11.0" />
+                        <Button fx:id="manageUserButton" mnemonicParsing="false" onAction="#onManageUserButton" styleClass="ok-join-team-button" text="Manage User">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -147,8 +123,8 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="28.0" />
-                        <Button fx:id="leaveEventButton" mnemonicParsing="false" onAction="#onLeaveEventButton" text="leave event">
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="11.0" />
+                        <Button fx:id="leaveEventButton" mnemonicParsing="false" onAction="#onLeaveEventButton" prefHeight="33.0" prefWidth="82.0" styleClass="button-leave" text="Leave">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -157,16 +133,12 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="29.0" />
                      </children>
                   </HBox>
-                  <Separator opacity="0.0" prefHeight="10.0" prefWidth="620.0" />
+                  <Separator opacity="0.0" prefHeight="10.0" />
                </children>
             </VBox>
          </children>
       </HBox>
    </children>
-   <rotationAxis>
-      <Point3D />
-   </rotationAxis>
 </AnchorPane>

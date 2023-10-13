@@ -3,13 +3,14 @@ package cs211.project.models.collections;
 import cs211.project.models.Event;
 import cs211.project.models.Team;
 import cs211.project.models.User;
-
+import cs211.project.services.JoinTeamMap;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class TeamList {
-    private ArrayList<Team> teams;
+    private final ArrayList<Team> teams;
 
     public TeamList() {
         teams = new ArrayList<>();
@@ -24,22 +25,50 @@ public class TeamList {
 
     public TeamList(TeamList teamList) {
         teams = new ArrayList<>();
-        for (Team team: teamList.getTeams()) {
-            teams.add(team);
-        }
+        teams.addAll(teamList.getTeams());
     }
 
     public TeamList(ArrayList<Team> teams) {
         this.teams = teams;
     }
 
-    public Team findTeamByName(String teamName) {
-        for (Team team: teams) {
-            if (team.isName(teamName)) {
-                return team;
-            }
+    public void addTeam(Team team) {
+        teams.add(team);
+    }
+
+    public Team addTeam(String eventID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember) {
+        // create team
+        teamName = teamName.trim();
+        teamDescription = teamDescription.trim();
+        Team team = new Team (eventID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember);
+        teams.add(team);
+        return team;
+    }
+
+    public void addTeam(String teamID, User teamHostUser, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID, UserList memberList) {
+        // load from file
+        teamName = teamName.trim();
+        teamDescription = teamDescription.trim();
+        Team team = new Team (teamID, teamHostUser, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID, memberList);
+        teams.add(team);
+    }
+
+    public void updateRole(String teamID, String role) {
+        Team teamExist = findTeamByID(teamID);
+        if (teamExist != null) {
+            teamExist.setRole(role);
         }
-        return null;
+    }
+
+    public void updateTeam(String teamID, String teamName, int maxSlotTeamMember, String startDate, String endDate, String description){
+        Team teamExist = findTeamByID(teamID);
+        if (teamExist != null) {
+            teamExist.setTeamName(teamName);
+            teamExist.setMaxSlotTeamMember(maxSlotTeamMember);
+            teamExist.setStartDate(startDate);
+            teamExist.setEndDate(endDate);
+            teamExist.setTeamDescription(description);
+        }
     }
 
     public Team findTeamByID(String teamID) {
@@ -61,47 +90,42 @@ public class TeamList {
     }
 
     public void removeTeamByEvent(Event event) {
-        teams.removeIf(team -> team.getEventID().equals(event.getEventID()));
+        teams.removeIf(team -> {
+            JoinTeamMap joinTeamMap = new JoinTeamMap();
+            HashMap<String, UserList> hashMap = joinTeamMap.roleReadData();
+            hashMap.remove(team.getTeamID());
+            joinTeamMap.roleWriteData(hashMap);
+            return team.getEventID().equals(event.getEventID());
+        });
+
     }
 
     public void removeTeam(String teamID) {
         teams.removeIf(team -> team.getTeamID().equals(teamID));
     }
 
-    public void addTeam(Team team) {
-        teams.add(team);
+    public void removeTeam(Team teamSelect) {
+        String teamID = teamSelect.getTeamID();
+        teams.removeIf(team -> team.getTeamID().equals(teamID));
     }
 
-    public void addTeam(String eventID, String teamName, String startDate, String endDate, int maxSlotTeamMember, String teamDescription){
-        teamName = teamName.trim();
-        teamDescription = teamDescription.trim();
-        Team exist = findTeamByName(teamName);
-        if(exist == null){
-            Team team = new Team (eventID, teamName, startDate, endDate, maxSlotTeamMember, teamDescription);
-            teams.add(team);
-        }
-    }
-
-    public void addTeam(String teamID, String teamName, String teamDescription, String startDate, String endDate, int maxSlotTeamMember, String createdAt, String eventID){
-        // load from file
-        teamName = teamName.trim();
-        teamDescription = teamDescription.trim();
-        Team team = new Team (teamID, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
-        teams.add(team);
-    }
-
-    public void sortTeamByNewCreatedAt() { // from new to old (Default)
+    public void sortTeamByNewCreatedAt() {
         teams.sort((team1, team2) -> team2.getCreatedAt().compareTo(team1.getCreatedAt()));
     }
 
-    public void sortTeamByOldCreatedAt() { // from old to new
-        teams.sort((team1, team2) -> team1.getCreatedAt().compareTo(team2.getCreatedAt()));
+    public void sortTeamByOldCreatedAt() {
+        teams.sort(Comparator.comparing(Team::getCreatedAt));
     }
 
-    public void filterByAll() {
-        if (teams == null) return;
-        return;
+    public void sortTeamByNameA() {
+        teams.sort(Comparator.comparing(Team::getTeamName));
     }
+
+    public void sortTeamByNameZ() {
+        teams.sort(Comparator.comparing(Team::getTeamName).reversed());
+    }
+
+    public void filterByAll() {}
 
     public void filterByRole(String role) {
         if (teams == null) return;
@@ -113,7 +137,6 @@ public class TeamList {
         teams.removeIf(team -> !team.isBookmarked());
     }
 
-    // find teamlist by event id and user correct
     public ArrayList<Team> getTeamOfEvent(Event event) {
         String eventID = event.getEventID();
         ArrayList<Team> teamOfEvent = new ArrayList<>();
@@ -123,15 +146,6 @@ public class TeamList {
             }
         }
         return teamOfEvent;
-    }
-
-    public HashMap<String, Team> teamHashMap() {
-        HashMap<String, Team> teamHashMapTemp= new HashMap<>();
-        for (Team team: teams) {
-            teamHashMapTemp.put(team.getTeamID(), team);
-        }
-
-        return teamHashMapTemp;
     }
 
     public ArrayList<Team> getTeams() {

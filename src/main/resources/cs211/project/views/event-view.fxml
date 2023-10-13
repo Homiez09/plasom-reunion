@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -17,45 +19,46 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../css/event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.event.EventPageController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" layoutY="75.0" AnchorPane.topAnchor="75.0">
-         <content>
-            <AnchorPane prefHeight="693.0" prefWidth="1152.0" styleClass="bg">
-               <children>
-                  <VBox prefWidth="1152.0">
+      <VBox prefHeight="768.0" prefWidth="1152.0">
+         <children>
+            <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
+            <ScrollPane hbarPolicy="NEVER">
+               <content>
+                  <AnchorPane prefHeight="693.0" prefWidth="1152.0" styleClass="page-bg">
                      <children>
-                        <AnchorPane prefHeight="400.0" prefWidth="1152.0" styleClass="top-bg">
+                        <VBox prefWidth="1152.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="page-button" text="&lt;Back" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
-                                 <font>
-                                    <Font name="Leelawadee" size="12.0" />
-                                 </font>
-                              </Button>
-                              <StackPane fx:id="imageStackPane" layoutX="100.0" layoutY="20.0" prefHeight="350.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0">
+                              <AnchorPane prefHeight="400.0" prefWidth="1152.0" styleClass="top-bg">
                                  <children>
-                                    <ImageView fx:id="eventImageView" fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </StackPane>
-                              <VBox prefHeight="400.0" spacing="25.0" AnchorPane.leftAnchor="500.0">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" spacing="30.0">
+                                    <Button layoutX="25.0" layoutY="19.0" mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="edit-create-button" text="&lt;Back" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="19.0">
+                                       <font>
+                                          <Font name="Leelawadee" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <VBox alignment="CENTER" layoutX="78.0" layoutY="86.0">
                                        <children>
-                                          <Label fx:id="eventNameLabel" text="eventNameLabel">
+                                          <ImageView fx:id="eventImageView" fitHeight="302.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </VBox>
+                                    <HBox alignment="CENTER_LEFT" layoutX="500.0" layoutY="10.0" spacing="30.0">
+                                       <children>
+                                          <Label fx:id="eventNameLabel" prefWidth="600.0" text="eventNameLabel" wrapText="true">
                                              <font>
                                                 <Font name="Leelawadee Bold" size="36.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="editEventButton" mnemonicParsing="false" onAction="#onEditButtonClick" styleClass="page-button" text="Edit event" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                    <HBox alignment="CENTER_LEFT" layoutX="500.0" layoutY="80.0">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../../images/events/calendar.png" />
                                              </image>
                                           </ImageView>
+                                          <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="25.0" />
                                           <Label fx:id="eventDateLabel" text="eventDateLabel">
                                              <font>
                                                 <Font size="14.0" />
@@ -63,13 +66,14 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                    <HBox alignment="CENTER_LEFT" layoutX="500.0" layoutY="130.0">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../../images/events/pin.png" />
                                              </image>
                                           </ImageView>
+                                          <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="25.0" />
                                           <Label fx:id="eventLocationLabel" text="eventLocationLabel">
                                              <font>
                                                 <Font name="Leelawadee" size="14.0" />
@@ -77,13 +81,14 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="BOTTOM_LEFT" spacing="20.0">
+                                    <HBox alignment="CENTER_LEFT" layoutX="500.0" layoutY="180.0">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../../images/events/person.png" />
                                              </image>
                                           </ImageView>
+                                          <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="25.0" />
                                           <Label fx:id="currentParticipantsLabel" text="currentParticipantsLabel">
                                              <font>
                                                 <Font name="Leelawadee" size="14.0" />
@@ -91,80 +96,93 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <Label fx:id="eventTagLabel" text="eventTagLabel" />
-                                    <Button fx:id="joinEventButton" mnemonicParsing="false" onAction="#onJoinEventAcition" styleClass="page-button" text="Add to Calendar" />
-                                    <VBox fx:id="teamApplyBox" alignment="CENTER" prefWidth="200.0" spacing="10.0" styleClass="staff-apply-box">
+                                    <HBox alignment="CENTER_LEFT" layoutX="500.0" layoutY="230.0">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../images/eventcomponent/tag.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Separator opacity="0.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="25.0" />
+                                          <Label fx:id="eventTagLabel" text="eventTagLabel" />
+                                       </children>
+                                    </HBox>
+                                    <StackPane fx:id="buttonStackPane" alignment="CENTER_LEFT" layoutX="500.0" layoutY="280.0">
+                                       <children>
+                                          <Button fx:id="joinEventButton" mnemonicParsing="false" onAction="#onJoinEventAction" styleClass="edit-create-button" text="Add to Calendar" textFill="WHITE" />
+                                          <Button fx:id="editEventButton" mnemonicParsing="false" onAction="#onEditButtonClick" styleClass="edit-create-button" text="Edit event" textFill="WHITE" />
+                                       </children>
+                                    </StackPane>
+                                    <VBox fx:id="teamApplyBox" alignment="CENTER" layoutX="500.0" layoutY="311.0" maxWidth="390.0" prefHeight="74.0" prefWidth="390.0" spacing="10.0" styleClass="staff-apply-box">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This event is open for staff application!">
                                              <font>
                                                 <Font name="Leelawadee" size="14.0" />
                                              </font>
                                           </Text>
-                                          <Button mnemonicParsing="false" onAction="#onApplyStaffButtonClick" styleClass="page-button" text="Apply for staff" />
+                                          <Button mnemonicParsing="false" onAction="#onApplyStaffButtonClick" styleClass="page-button" text="Apply for staff" textFill="WHITE" />
                                        </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
                                        <padding>
                                           <Insets bottom="10.0" top="10.0" />
                                        </padding>
                                     </VBox>
+                                    <StackPane layoutX="213.0" layoutY="13.0" styleClass="stack-pane-label" />
                                  </children>
-                                 <padding>
-                                    <Insets bottom="15.0" top="30.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                        <TabPane prefWidth="200.0" styleClass="bg" tabClosingPolicy="UNAVAILABLE">
-                          <tabs>
-                            <Tab text="Event info">
-                              <content>
-                                    <VBox>
-                                       <children>
-                                          <Text fx:id="eventInformationText" strokeType="OUTSIDE" strokeWidth="0.0" text="eventInformationText">
-                                             <font>
-                                                <Font name="Leelawadee" size="14.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets left="100.0" top="70.0" />
-                                             </VBox.margin>
-                                          </Text>
-                                       </children>
-                                    </VBox>
-                              </content>
-                            </Tab>
-                            <Tab text="Event Schedule">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0">
-                                       <children>
-                                          <VBox alignment="TOP_RIGHT" layoutX="100.0" layoutY="14.0" spacing="15.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                              </AnchorPane>
+                              <TabPane prefWidth="1152.0" styleClass="page-bg" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Event info">
+                                    <content>
+                                          <VBox>
                                              <children>
-                                                <Button fx:id="editActivityButton" mnemonicParsing="false" onAction="#onEditActivityButtonClick" styleClass="page-button" text="Manage activity">
+                                                <Text fx:id="eventInformationText" strokeType="OUTSIDE" strokeWidth="0.0" text="eventInformationText">
+                                                   <font>
+                                                      <Font name="Leelawadee" size="14.0" />
+                                                   </font>
                                                    <VBox.margin>
-                                                      <Insets top="20.0" />
-                                                   </VBox.margin></Button>
-                                                <TableView fx:id="eventActivityTableView" prefWidth="952.0">
-                                                  <columns>
-                                                    <TableColumn prefWidth="100.0" text="C1" />
-                                                    <TableColumn prefWidth="-1.0" text="C2" />
-                                                  </columns>
-                                                </TableView>
+                                                      <Insets left="100.0" top="70.0" />
+                                                   </VBox.margin>
+                                                </Text>
                                              </children>
                                           </VBox>
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                          </tabs>
-                        </TabPane>
+                                    </content>
+                                  </Tab>
+                                  <Tab fx:id="eventActivityTab" text="Event Schedule">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                                             <children>
+                                                <VBox alignment="TOP_RIGHT" layoutX="100.0" layoutY="14.0" spacing="15.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                                                   <children>
+                                                      <Button fx:id="editActivityButton" mnemonicParsing="false" onAction="#onEditActivityButtonClick" styleClass="edit-create-button" text="Manage activity" textFill="WHITE">
+                                                         <VBox.margin>
+                                                            <Insets top="20.0" />
+                                                         </VBox.margin>
+                                                      </Button>
+                                                      <TableView fx:id="eventActivityTableView" prefWidth="952.0" stylesheets="@../../../css/team/team-activity-table.css">
+                                                        <columns>
+                                                          <TableColumn prefWidth="100.0" text="C1" />
+                                                          <TableColumn prefWidth="-1.0" text="C2" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
-      <AnchorPane fx:id="navbarAnchorPane" prefHeight="75.0" prefWidth="1152.0" />
-      <AnchorPane fx:id="staffApplicationAnchorPane" prefHeight="768.0" prefWidth="1152.0" />
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../../../css/event.css" />
+      <URL value="@../../../css/style.css" />
+   </stylesheets>
 </AnchorPane>

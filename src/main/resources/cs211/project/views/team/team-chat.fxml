@@ -1,10 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.team.TeamChatController">
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="bgProfile1" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.team.TeamChatController">
    <children>
-      <AnchorPane fx:id="sideBarAnchorPane" prefHeight="825.0" prefWidth="162.0" />
+      <AnchorPane fx:id="sideBarAnchorPane" prefHeight="768.0" prefWidth="162.0" />
       <AnchorPane fx:id="navbarAnchorPane" prefHeight="72.0" prefWidth="1152.0" />
+      <AnchorPane layoutX="162.0" layoutY="99.0" prefWidth="259.0">
+         <children>
+            <Rectangle arcHeight="17.0" arcWidth="17.0" fill="#f6f4ee" height="619.0" layoutY="22.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="activity-shadow" width="259.0" />
+            <TableView fx:id="groupTableView" layoutX="16.0" layoutY="42.0" prefHeight="578.0" prefWidth="230.0">
+              <columns>
+                <TableColumn fx:id="groupTableColumn" prefWidth="229.5999969482422" text="Activity Chat" />
+              </columns>
+               <styleClass>
+                  <String fx:value="activity-shadow" />
+                  <String fx:value="group-chat" />
+               </styleClass>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="435.0" layoutY="121.0" prefHeight="619.0" prefWidth="692.0" styleClass="bgBody">
+         <children>
+            <Rectangle arcHeight="17.0" arcWidth="17.0" fill="#f6f4ee" height="619.0" layoutX="2.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="activity-shadow" width="689.0" />
+            <Label fx:id="activityNameLabel" layoutX="29.0" layoutY="33.0" text="Team chat">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="bold-700" />
+                  <String fx:value="activity-shadow" />
+                  <String fx:value="text-3xl" />
+                  <String fx:value="color-black" />
+                  <String fx:value="font" />
+               </styleClass>
+            </Label>
+            <Line endX="529.5999755859375" endY="-5.0" layoutX="128.0" layoutY="90.0" opacity="0.3" startX="-100.0" startY="-5.0" />
+            <AnchorPane layoutX="34.0" layoutY="558.0" prefHeight="56.0" prefWidth="618.0">
+               <children>
+                  <TextField fx:id="typeMessageTextField" layoutX="16.0" layoutY="-7.0" prefHeight="42.0" prefWidth="585.0" promptText="message here...">
+                     <styleClass>
+                        <String fx:value="activity-shadow" />
+                        <String fx:value="typing-message" />
+                     </styleClass>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="49.0" fitWidth="59.0" layoutX="545.0" layoutY="-10.0" onMouseClicked="#onSendMessageButtonClick">
+                     <image>
+                        <Image url="@../../../../images/icons/chat/send-message-button.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ScrollPane fx:id="chatScrollPane" layoutX="29.0" layoutY="103.0" prefHeight="420.0" prefWidth="634.0" styleClass="mainScrollPane">
+              <content>
+                <AnchorPane fx:id="mainAnchorPane" prefHeight="418.0" prefWidth="614.0" styleClass="bgBody">
+                     <children>
+                        <GridPane fx:id="chatContainer" layoutX="-4.0" prefHeight="100.0" prefWidth="618.0">
+                          <columnConstraints>
+                            <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../../../../css/team/team-chat.css" />
+      <URL value="@../../../../css/style.css" />
+   </stylesheets>
 </AnchorPane>

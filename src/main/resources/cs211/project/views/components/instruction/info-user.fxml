@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="950.0" spacing="25.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <TextFlow textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Navigation bar สำหรับสมาชิก">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/navbar.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="46.0" layoutX="601.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="68.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="46.0" layoutX="669.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="68.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="46.0" layoutX="737.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="68.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="102.0" layoutX="687.0" layoutY="46.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="113.0" />
+                  <Circle fill="RED" layoutX="601.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="703.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="800.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="800.0" layoutY="89.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="595.0" layoutY="6.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="698.0" layoutY="6.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="795.0" layoutY="6.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="795.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow>
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Navigation bar ของสมาชิกต่างจากผู้ใช้ภายนอก ซึ่งประกอบด้วย">
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. ปุ่ม Home เมื่อกดแล้วจะไปที่ตำแหน่งบนสุดของหน้าโฮม ซึ่งหน้าโฮมของทั้งผู้ใช้ภายนอกและสมาชิกนั้นไม่แตกต่างกัน">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. ปุ่ม My Event เมื่อกดแล้วจะไปที่หน้า My Event ซึ่งเป็นหน้าที่แสดงข้อมูลอีเว้นต์ของผู้ใช้ทั้งที่เข้าร่วม และ เป็นเจ้าของ (หน้า My Event จะถูกอธิบายเพิ่มเติมด้านล่าง)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. รูปโปรไฟล์ของผู้ใช้ หากเพิ่งสมัครบัญชีใหม่แล้วเข้าแอปครั้งแรก จะเป็นรูป default เมื่อกดที่รูป จะมีตัวเลือกให้เลือกทำตามข้อ (4)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="139.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. ตัวเลือกที่ผู้ใช้เลือกทำได้ ประกอบด้วย" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="169.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- profile : ไปที่หน้าโปรไฟล์ของตัวเอง สามารถดู แก้ไข ข้อมูลส่วนตัวได้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="199.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- setting : ไปที่หน้าการตั้งค่า" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="231.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- logout : ออกจากระบบ กลับไปที่หน้า Welcome" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="10.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile หน้าโปรไฟล์">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/profile.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="43.0" layoutX="629.0" layoutY="293.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="124.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="235.0" layoutY="296.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="107.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="576.0" layoutY="56.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="157.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="112.0" layoutX="419.0" layoutY="176.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="317.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="53.0" layoutX="419.0" layoutY="128.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="290.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="419.0" layoutY="89.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="237.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="419.0" layoutY="52.0" stroke="#9e00ff" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="102.0" layoutX="220.0" layoutY="63.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="22.0" layoutX="220.0" layoutY="165.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="22.0" layoutX="220.0" layoutY="183.0" stroke="#9e00ff" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Circle fill="RED" layoutX="235.0" layoutY="62.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="413.0" layoutY="109.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="#9e00ff" layoutX="413.0" layoutY="56.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="578.0" layoutY="56.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="705.0" layoutY="128.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="392.0" layoutY="234.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="220.0" layoutY="205.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Circle fill="RED" layoutX="342.0" layoutY="293.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="753.0" layoutY="296.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="408.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="229.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="571.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="408.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="700.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="337.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="748.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Line endX="405.60003662109375" endY="56.599998474121094" startX="357.6929016113281" startY="197.40005493164062" stroke="#9e00ff" strokeWidth="3.0" />
+                  <Line endX="400.4000244140625" endY="107.39998626708984" layoutX="10.0" layoutY="10.0" startX="344.4000244140625" startY="167.39999389648438" stroke="RED" strokeWidth="3.0" />
+                  <Line endX="412.4000244140625" endY="153.00003051757812" layoutX="10.0" layoutY="82.0" startX="346.800048828125" startY="139.40005493164062" stroke="RED" strokeWidth="3.0" />
+                  <Text fill="WHITE" layoutX="387.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="239.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Profile จะแสดงข้อมูลส่วนตัวของผู้ใช้ ประกอบด้วย">
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. รูปโปรไฟล์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. username สำหรับเข้าระบบ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. UID ของผู้ใช้ เป็นเหมือนรหัสประจำตัว" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="139.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. display name ชื่อของผู้ใช้ที่จะถูกแสดงในแอป" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="144.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. เบอร์โทรศัพท์ของผู้ใช้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="173.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6. Bio ข้อมูลเพิ่มเติมเกี่ยวกับผู้ใช้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="203.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. ปุ่ม Edit Profile สามารถกดเพื่อแก้ไขข้อมูลโปรไฟล์ของตัวเองได้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/profile-edit.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="102.0" layoutX="239.0" layoutY="65.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="46.0" layoutX="422.0" layoutY="87.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="237.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="46.0" layoutX="422.0" layoutY="133.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="237.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="102.0" layoutX="422.0" layoutY="179.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="317.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="53.0" layoutX="422.0" layoutY="281.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="192.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="53.0" layoutX="614.0" layoutY="281.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="60.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="53.0" layoutX="674.0" layoutY="281.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="68.0" />
+                  <Circle fill="RED" layoutX="239.0" layoutY="101.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="659.0" layoutY="96.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="659.0" layoutY="156.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="742.0" layoutY="216.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="422.0" layoutY="308.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="645.0" layoutY="347.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="708.0" layoutY="347.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="654.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="654.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="737.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="234.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="417.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="703.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="640.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="976.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่อกดปุ่ม Edit Profile จะเข้าสู่หน้าแก้ไขข้อมูลโปรไฟล์ ตามภาพด้านบน โดยข้อมูลที่สามารถแก้ไขได้ คือ">
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. display name">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. contact number เบอร์โทรศัพท์ติดต่อ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Bio ข้อมูลเพิ่มเติมเกี่ยวกับผู้ใช้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="139.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. รูปโปรไฟล์ โดยสามารถกดเข้าไปที่รูปเพื่อแก้ไข มีตัวเลือกรูปโปรไฟล์ให้ 2 รูปแบบ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="350.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/profilpic-default.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="350.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="80.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/profilepic.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="68.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A.">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="520.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B.">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="1614.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- แบบ A เลือกรูปอวตาร์แบบพื้นฐานที่แอปมีให้เลือก">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- แบบ B เลือกรูปจากอุปกรณ์ของตัวเอง">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่อใส่ข้อมูลครบแล้วต้องการบันทึกข้อมูล จะต้องใส่รหัสผ่านเพื่อยืนยันตัวตนผู้ใช้ที่ (5) ก่อน จากนั้นจึงกดบันทึกที่ Save(7) ได้ หรือหากผู้ใช้ตัดสินใจไม่เปลี่ยนแปลงข้อมูล ก็สามารถกดยกเลิกที่ Cancel(6) ได้เช่นกัน" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="515.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="543.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Setting หน้าการตั้งค่า">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/setting.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="43.0" layoutX="151.0" layoutY="327.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="43.0" layoutX="352.0" layoutY="103.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="251.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="95.0" layoutX="352.0" layoutY="146.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="251.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="53.0" layoutX="408.0" layoutY="241.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="138.0" />
+                  <Circle fill="RED" layoutX="151.0" layoutY="327.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="352.0" layoutY="103.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="344.0" layoutY="188.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="408.0" layoutY="294.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="346.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="339.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="403.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="146.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="1614.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Setting ผู้ใช้สามารถแก้ไขรหัสผ่านของตนเองได้ โดย">
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. กรอกรหัสผ่านปัจจุบันลงในช่องบริเวณหมายเลข (1)">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. กรอกรหัสผ่านที่ต้องการเปลี่ยนลงในช่องบริเวณหมายเลข (2)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. กด Reset Password เพื่อยืนยันการเปลี่ยนรหัสผ่านที่ (3)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="139.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ผู้ใช้สามารถกดปุ่ม Logout เพื่อออกจากระบบได้ที่ (4)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="2181.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="2209.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Event Page สำหรับสมาชิก">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="500.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/event-page.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="28.0" layoutX="422.0" layoutY="183.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="78.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="64.0" layoutX="422.0" layoutY="211.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="279.0" />
+                  <Circle fill="RED" layoutX="500.0" layoutY="183.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="701.0" layoutY="211.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="695.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="495.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="46.0" layoutX="182.0" layoutY="270.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="93.0" />
+                  <Circle fill="RED" layoutX="275.0" layoutY="270.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="270.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="2690.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Event Page ของผู้ใช้งานที่เป็นสมาชิกแสดงข้อมูลเหมือนกับหน้า Event Page ทุกประการ แต่จะมีปุ่มเพิ่มขึ้นมา คือ">
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. ปุ่ม Add to Calendar กดเพื่อเข้าร่วมอีเว้นต์ โดยปุ่มนี้จะขึ้นมาให้ผู้ใช้กดได้หากตรงตามเงื่อนไข คือ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- จำนวนผู้เข้าร่วมยังไม่ถึงจำนวนที่ผู้จัดอีเว้นท์จำกัดไว้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- อยู่ในช่วงเวลาเปิดรับผู้เข้าร่วม และผู้จัดอีเว้นต์เปิดรับผู้เข้าร่วมอยู่" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="114.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ผู้ใช้ยังไม่เคยเข้าร่วมอีเว้นท์นี้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. ปุ่ม Apply for Staff กดเพื่อเข้าร่วมทีมผู้ช่วยจัดอีเว้นต์ โดยปุ่มนี้จะขึ้นมาให้ผู้ใช้กดได้หากตรงตามเงื่อนไข คือ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="114.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- อยู่ในช่วงเวลาเปิดรับผู้เข้าร่วม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="114.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ในอีเว้นต์นั้นมีทีมสตาฟที่เปิดรับสมัครอยู่" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="203.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*สามารถดูข้อมูลเพิ่มเติมเกี่ยวกับทีมสตาฟได้ที่ Instruction for team staff" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่อเข้าร่วมอีเว้นต์แล้ว จะสามารถกดเข้าไปดูตารางกิจกรรมของอีเว้นต์ได้ที่ Event Schedule(3) แล้วตารางกิจกรรมจะแสดงขึ้นมา ดังรูปด้านล่าง">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/activity.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Separator layoutX="10.0" layoutY="2180.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="2881.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="My Event สำหรับสมาชิกทั่วไป">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="3677.0">
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/my-event.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="100.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="78.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="100.0" layoutY="37.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="290.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="37.0" layoutX="390.0" layoutY="37.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="325.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="131.0" layoutX="715.0" layoutY="37.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="124.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="185.0" layoutX="192.0" layoutY="74.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="525.0" />
+                  <Circle fill="RED" layoutX="92.0" layoutY="18.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="100.0" layoutY="74.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="192.0" layoutY="234.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="688.0" layoutY="37.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="839.0" layoutY="103.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="95.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="87.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="683.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="834.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="186.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="43.0" layoutX="624.0" layoutY="195.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="93.0" />
+                  <Circle fill="RED" layoutX="624.0" layoutY="220.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="619.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="3368.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า My Event แสดงข้อมูลของอีเว้นต์ที่ผู้ใช้เข้าร่วม หรือ เป็นเจ้าของ โดยในหน้าประกอบไปด้วย">
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. ปุ่มย้อนกลับไปที่หน้า All Events">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. ปุ่มเลือกดูอีเว้นต์ตามเงื่อนไขที่ต้องการ ประกอบด้วย" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- All : แสดงอีเว้นต์ทั้งหมด" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Complete : แสดงอีเว้นต์ที่จบไปแล้ว" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="114.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Owner : แสดงอีเว้นต์ที่เป็นผู้จัดอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="114.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Member : แสดงอีเว้นต์ที่เข้าร่วม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="114.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Staff : แสดงอีเว้นต์ที่เป็นทีมผู้ช่วยจัดอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="85.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. ช่องสำหรับพิมพ์ค้นหาอีเว้นต์ด้วยชื่อ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="262.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. ปุ่ม Sort By : เลือกเรียงลำดับอีเว้นต์ตามต้องการ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="114.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- A - Z : เรียงตามลำดับตัวอักษร" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="322.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Start Date : เรียงตามวันที่เริ่มต้นของอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="384.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Popularity : เรียงตามจำนวนผู้เข้าร่วมอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="384.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- End Date : เรียงตามวันที่สิ้นสุดอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. กล่องแสดงข้อมูลของอีเว้นต์ ประกอบไปด้วย (เรียงจากบนลงล่าง ซ้ายไปขวา)">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="321.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- รูปของอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="469.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ชื่อของอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="499.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- วัน และ เวลาเริ่มต้นของอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="499.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- สถานที่จัดอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="529.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- รายละเอียดของอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="529.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ผู้จัดอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="499.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ปุ่ม Leave(6) สำหรับกดเพื่อออกจากอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="2853.0" prefWidth="200.0" />
+         </children>
+        </VBox>
+    </children>
+</AnchorPane>

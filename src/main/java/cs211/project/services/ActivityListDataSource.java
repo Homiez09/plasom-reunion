@@ -2,15 +2,12 @@ package cs211.project.services;
 
 import cs211.project.models.Activity;
 import cs211.project.models.collections.ActivityList;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class ActivityListDataSource implements Datasource<ActivityList>{
-    private String directoryName;
-    private String fileName;
-    private Datasource<ActivityList> datasource;
-    private ActivityList activityList;
+    private final String directoryName;
+    private final String fileName;
 
     public ActivityListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
@@ -18,7 +15,6 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
         checkFileIsExisted();
     }
 
-    // ตรวจสอบว่ามีไฟล์ให้อ่านหรือไม่ ถ้าไม่มีให้สร้างไฟล์เปล่า
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -42,7 +38,7 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
         File file = new File(filePath);
 
         // เตรียม object ที่ใช้ในการอ่านไฟล์
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream;
 
         try {
             fileInputStream = new FileInputStream(file);
@@ -56,7 +52,7 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
         );
         BufferedReader buffer = new BufferedReader(inputStreamReader);
 
-        String line = "";
+        String line;
         try {
             // ใช้ while loop เพื่ออ่านข้อมูลรอบละบรรทัด
             while ( (line = buffer.readLine()) != null ){
@@ -67,20 +63,20 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
 
                 // อ่านข้อมูลตาม index แล้วจัดการประเภทของข้อมูลให้เหมาะสม
-                String eventID = data[0].trim();
                 String activityName = data[1].trim();
                 String activityDescription = data[2].trim();
                 String activityStart = data[3].trim();
                 String activityEnd = data[4].trim();
+                String activityID = data[0].trim();
+                String eventID = data[5].trim();
 
-                activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd);
+                activities.addActivity(eventID,activityName,activityDescription,activityStart,activityEnd,activityID);
 
                 // เพิ่มข้อมูลลงใน list
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         return activities;
     }
     @Override
@@ -89,7 +85,7 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
         File file = new File(filePath);
 
         // เตรียม object ที่ใช้ในการเขียนไฟล์
-        FileOutputStream fileOutputStream = null;
+        FileOutputStream fileOutputStream;
 
         try {
             fileOutputStream = new FileOutputStream(file);
@@ -104,8 +100,6 @@ public class ActivityListDataSource implements Datasource<ActivityList>{
         BufferedWriter buffer = new BufferedWriter(outputStreamWriter);
 
         try {
-            // สร้าง csv
-
             for (Activity activity : data.getActivities()) {
                 String line = activity.toString();
 

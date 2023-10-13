@@ -9,24 +9,101 @@
  -fx-background-color:  #FF971D;
 }
 .top-banner{
--fx-background-color: linear-gradient(to right,#FF971D, #F9F6F7);
+-fx-background-color: linear-gradient(to right,#FFA31A,#FFC473,#FFC473,#FFC473);
+}
+.tile-button{
+-fx-font-family: Consolas;
+-fx-font-weight: bold;
+-fx-font-size: 24;
+-fx-text-fill: #201f1d;
+-fx-background-radius: 3em;
+-fx-min-height: 55px;
+-fx-min-width: 55px;
+-fx-max-height: 55px;
+-fx-max-width: 55px;
+-fx-background-color: #F9F6F7;
+-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0, 0, 0);
+}
+.tile-button :hover {
+-fx-font-size: 20;
+-fx-font-weight: bold;
+-fx-text-fill: #7b7a77;
+-fx-background-color: #FFFFFF;
+-fx-opacity: 50%;
+}
+.cat-button {
+-fx-border-color : black;
+-fx-border-radius : 2em;
+-fx-background-radius: 2em;
+-fx-background-color: transparent;
+}
+.cat-button .label{
+-fx-text-fill: #413B3B;
+}
+.cat-button .menu-item {
+-fx-background-color: transparent;
+-fx-padding: 10 3 10 5;
+-fx-font-family: Leelawadee;
+-fx-background-radius: 5;
+-fx-font-size: 14;
+-fx-border-radius: 5;
+-fx-text-fill: #666666;
+-fx-alignment: center;
+}
+.cat-button .menu-item .label{
+-fx-text-fill: #413B3B;
+}
+.cat-button:hover{
+-fx-background-color: linear-gradient(#413B3B, #40382D);
+}
+.cat-button:hover .label{
+-fx-text-fill: #FFF5E5;
+}
+.cat-button .menu-item:hover {
+-fx-background-color: rgba(255, 153, 0, 0.37);
+}
+.cat-button .context-menu {
+-fx-font-size: 14;
+-fx-text-fill: #413B3B;
+-fx-background-color: #F6F4EE;
+-fx-text-alignment: center;
+-fx-alignment: center;
+}
+.explore:hover {
+-fx-underline: true;
+-fx-opacity:50%;
 }
 /*event tile*/
 .tile-bg{
--fx-border-radius: 20px;
--fx-border-color: black;
--fx-background-color: #F9F6F7;
--fx-background-radius: 20px;
+ -fx-border-radius: 20px;
+ -fx-background-color: #F9F6F7;
+ -fx-background-radius: 20px;
+ -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.18, 0, 0.7);
 }
+
 .font{
  -fx-font-family: Leelawadee;
- -fx-font-size: 18;
 }
-.h1{
- -fx-font-size: 24;
- -fx-font-family: Leelawadee;
 
+.h1{
+ -fx-font-size: 18;
+ -fx-font-weight: bold;
 }
+
+.up-coming-header{
+ -fx-font-size: 30;
+ -fx-font-weight: bold;
+}
+
+.card-header {
+  -fx-font-size: 18;
+  -fx-font-weight: bold;
+}
+
+.text-detail {
+    -fx-font-size: 15;
+}
+
 .list-view {
  -fx-background-color: #FFF5E5;
  -fx-background-radius: 15;

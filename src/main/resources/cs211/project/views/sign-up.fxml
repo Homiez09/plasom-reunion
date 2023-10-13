@@ -6,21 +6,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="signin-signup-background1" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.SignUpController">
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="signIn-signup-background1" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.auth.SignUpController">
    <children>
       <ImageView fx:id="signBackgroundImageView" fitHeight="768.0" fitWidth="615.0" layoutY="1.0" />
       <BorderPane fx:id="eventListImageView" prefHeight="768.0" prefWidth="610.0">
@@ -95,7 +91,7 @@
                         </Button>
                      </bottom>
                      <center>
-                        <PasswordField fx:id="confirmPasswordField" layoutY="10.0" onKeyReleased="#onKeyHideConfirmPassword" prefHeight="46.0" prefWidth="376.0" promptText="Confirm-Password" styleClass="signin-signup-field" BorderPane.alignment="TOP_CENTER">
+                        <PasswordField fx:id="confirmPasswordField" layoutY="10.0" onKeyReleased="#onKeyHideConfirmPassword" prefHeight="46.0" prefWidth="376.0" promptText="Confirm-Password" styleClass="signIn-signup-field" BorderPane.alignment="TOP_CENTER">
                            <BorderPane.margin>
                               <Insets top="28.0" />
                            </BorderPane.margin>
@@ -105,7 +101,7 @@
                         </PasswordField>
                      </center>
                      <top>
-                        <PasswordField fx:id="passwordField" onKeyReleased="#onKeyHidePassword" prefHeight="46.0" prefWidth="386.0" promptText="Password" styleClass="signin-signup-field" BorderPane.alignment="CENTER">
+                        <PasswordField fx:id="passwordField" onKeyReleased="#onKeyHidePassword" prefHeight="46.0" prefWidth="386.0" promptText="Password" styleClass="signIn-signup-field" BorderPane.alignment="CENTER">
                            <padding>
                               <Insets left="50.0" />
                            </padding>
@@ -123,7 +119,7 @@
                         <Insets bottom="2.0" left="50.0" top="2.0" />
                      </padding>
                      <styleClass>
-                        <String fx:value="signin-signup-field" />
+                        <String fx:value="signIn-signup-field" />
                         <String fx:value="text-base" />
                         <String fx:value="font" />
                      </styleClass>
@@ -140,7 +136,7 @@
                         <Insets left="50.0" />
                      </padding>
                      <styleClass>
-                        <String fx:value="signin-signup-field" />
+                        <String fx:value="signIn-signup-field" />
                         <String fx:value="font" />
                         <String fx:value="text-base" />
                      </styleClass>
@@ -163,6 +159,8 @@
                         <String fx:value="text-xs" />
                      </styleClass>
                   </Label>
+                  <ImageView fx:id="checkBoxPasswordImageView" fitHeight="30.0" fitWidth="30.0" layoutX="505.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="checkBoxConfirmPasswordImageView" fitHeight="30.0" fitWidth="30.0" layoutX="505.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </bottom>
@@ -224,168 +222,6 @@
          </fill>
       </Rectangle>
       <ImageView fx:id="upComingEventsBackgroundImageView" fitHeight="771.0" fitWidth="537.0" layoutX="615.0" layoutY="-3.0" />
-      <VBox layoutX="616.0" layoutY="-2.0" prefHeight="768.0" prefWidth="536.0">
-         <children>
-            <Label contentDisplay="CENTER" prefHeight="182.0" prefWidth="475.0" text="upcoming events" textAlignment="CENTER">
-               <font>
-                  <Font name="FreesiaUPC Bold" size="75.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="80.0" top="14.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets top="75.0" />
-               </padding>
-               <styleClass>
-                  <String fx:value="text-5xl" />
-                  <String fx:value="weight-bold" />
-                  <String fx:value="font" />
-               </styleClass>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="0.4360189573459715" startX="0.18009478672985782" startY="0.43601895734597157">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.9607843160629272" green="0.9529411792755127" blue="0.929411768913269" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Pane prefHeight="514.0" prefWidth="529.0">
-               <children>
-                  <ImageView fx:id="upComingEventsImageView" fitHeight="478.0" fitWidth="320.0" layoutX="115.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" styleClass="custom-box" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="224.0" layoutX="115.0" layoutY="267.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="320.0">
-                     <fill>
-                        <LinearGradient endX="0.6445497630331753" endY="0.16587677725118488" startX="0.5260663507109005" startY="0.8246445497630331">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.9921568632125854" green="0.658823549747467" blue="0.22745098173618317" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.9921568632125854" green="0.658823549747467" blue="0.22745098173618317" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                     <styleClass>
-                        <String fx:value="upcoming-border" />
-                        <String fx:value="custom-box" />
-                     </styleClass>
-                  </Rectangle>
-                  <Label fx:id="eventUpComingName" layoutX="155.0" layoutY="287.0" prefHeight="43.0" prefWidth="235.0" text="EVENT NAME" textFill="#f5f3ed">
-                     <font>
-                        <Font name="FreesiaUPC Bold" size="35.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="text-2xl" />
-                        <String fx:value="weight-bold" />
-                        <String fx:value="font" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="eventUpComingPlace" layoutX="155.0" layoutY="330.0" prefHeight="0.0" prefWidth="207.0" text="PLACE" textFill="#f5f3ed">
-                     <font>
-                        <Font name="FreesiaUPC Bold" size="35.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="text-xl" />
-                        <String fx:value="weight-bold" />
-                        <String fx:value="font" />
-                     </styleClass>
-                  </Label>
-                  <Circle fx:id="nextCircle" fill="#fff5e5d6" layoutX="445.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button" />
-                  <Label fx:id="eventUpComingDate" layoutX="155.0" layoutY="442.0" prefHeight="32.0" prefWidth="207.0" text="22  Aug,2023" textFill="#e8e8e8">
-                     <font>
-                        <Font name="FreesiaUPC" size="20.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="text-lg" />
-                        <String fx:value="font" />
-                     </styleClass>
-                  </Label>
-                  <Rectangle fx:id="passwordRequireBoxLabel" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="43.0" layoutX="-110.0" layoutY="210.0" rotate="144.8" stroke="#fff5f500" strokeType="INSIDE" styleClass="condition-box" width="44.0" />
-                  <Circle fx:id="backCircle" fill="#fff4e3d7" layoutX="104.0" layoutY="192.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="arrow-circle-button">
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </Circle>
-                  <Button fx:id="backButton" layoutX="43.0" layoutY="122.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="52.0" prefWidth="102.0" text="&lt;" textFill="#00000099">
-                     <font>
-                        <Font name="Agency FB" size="12.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="arrow-upcoming-button" />
-                        <String fx:value="arrow-circle-button" />
-                     </styleClass>
-                  </Button>
-                  <Rectangle fx:id="passwordRequireBox" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="120.0" layoutX="-107.0" layoutY="201.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="5.0" styleClass="condition-box" width="418.0" />
-                  <Button fx:id="nextButton" layoutX="390.0" layoutY="122.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="52.0" prefWidth="102.0" text="&gt;" textFill="#00000099">
-                     <styleClass>
-                        <String fx:value="arrow-upcoming-button" />
-                        <String fx:value="arrow-circle-button" />
-                     </styleClass>
-                  </Button>
-                  <Label fx:id="passwordRequireLabel" alignment="TOP_LEFT" layoutX="-83.0" layoutY="212.0" lineSpacing="1.0" prefHeight="115.0" prefWidth="449.0" text="Password Requirements:&#10;      •  &#10;      •  &#10;      •  &#10;      •  &#10;      •  ">
-                     <styleClass>
-                        <String fx:value="condition-box-text" />
-                        <String fx:value="font" />
-                        <String fx:value="text-s" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="passwordLengthReq" alignment="TOP_LEFT" layoutX="-53.0" layoutY="227.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Length must be 8 to 20 characters.">
-                     <styleClass>
-                        <String fx:value="condition-box-text" />
-                        <String fx:value="font" />
-                        <String fx:value="text-xs" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="passwordUpperCaseReq" alignment="TOP_LEFT" layoutX="-53.0" layoutY="244.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one uppercase letter (A-Z).">
-                     <styleClass>
-                        <String fx:value="condition-box-text" />
-                        <String fx:value="font" />
-                        <String fx:value="text-xs" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="passwordLowerCaseReq" alignment="TOP_LEFT" layoutX="-53.0" layoutY="260.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one lowercase letter (a-z).">
-                     <styleClass>
-                        <String fx:value="condition-box-text" />
-                        <String fx:value="font" />
-                        <String fx:value="text-xs" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="passwordSpecialReq" alignment="TOP_LEFT" layoutX="-53.0" layoutY="276.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one special character from the set: !, @, #, $.">
-                     <styleClass>
-                        <String fx:value="condition-box-text" />
-                        <String fx:value="font" />
-                        <String fx:value="text-xs" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="passwordNumReq" alignment="TOP_LEFT" layoutX="-53.0" layoutY="292.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one numeric digit (0-9).">
-                     <styleClass>
-                        <String fx:value="condition-box-text" />
-                        <String fx:value="font" />
-                        <String fx:value="text-xs" />
-                     </styleClass>
-                  </Label>
-                  <ImageView fx:id="checkBoxPasswordImageView" fitHeight="30.0" fitWidth="30.0" layoutX="-111.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="checkBoxConfirmPasswordImageView" fitHeight="30.0" fitWidth="30.0" layoutX="-111.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Pane>
-         </children>
-      </VBox>
       <Label fx:id="backButtonLabel" layoutX="30.0" layoutY="20.0" lineSpacing="2.0" onMouseClicked="#onBackClick" prefHeight="32.0" prefWidth="64.0" text="back " textFill="#413b3b">
          <font>
             <Font name="FreesiaUPC" size="26.0" />
@@ -421,7 +257,7 @@
             <Insets left="50.0" />
          </padding>
          <styleClass>
-            <String fx:value="signin-signup-field" />
+            <String fx:value="signIn-signup-field" />
             <String fx:value="text-base" />
             <String fx:value="font" />
          </styleClass>
@@ -437,7 +273,7 @@
             <Insets left="50.0" />
          </padding>
          <styleClass>
-            <String fx:value="signin-signup-field" />
+            <String fx:value="signIn-signup-field" />
             <String fx:value="text-base" />
             <String fx:value="font" />
          </styleClass>
@@ -459,5 +295,54 @@
             <String fx:value="font" />
          </styleClass>
       </Label>
+      <AnchorPane fx:id="upcomingZoneAnchorPane" layoutX="616.0" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane layoutX="496.0" layoutY="384.0">
+         <children>
+            <Rectangle fx:id="passwordRequireBoxLabel" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="43.0" layoutX="15.0" layoutY="13.0" rotate="-45.0" stroke="#fff5f500" strokeType="INSIDE" styleClass="condition-box" width="44.0" />
+            <Rectangle fx:id="passwordRequireBox" arcHeight="5.0" arcWidth="5.0" fill="#413b3b" height="120.0" layoutX="22.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="5.0" styleClass="condition-box" width="418.0" />
+            <Label fx:id="passwordRequireLabel" alignment="TOP_LEFT" layoutX="50.0" layoutY="7.0" lineSpacing="1.0" prefHeight="115.0" prefWidth="449.0" text="Password Requirements:&#10;      •  &#10;      •  &#10;      •  &#10;      •  &#10;      •  ">
+               <styleClass>
+                  <String fx:value="condition-box-text" />
+                  <String fx:value="font" />
+                  <String fx:value="text-s" />
+               </styleClass>
+            </Label>
+            <Label fx:id="passwordLengthReq" alignment="TOP_LEFT" layoutX="80.0" layoutY="22.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Length must be 8 to 20 characters.">
+               <styleClass>
+                  <String fx:value="condition-box-text" />
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+               </styleClass>
+            </Label>
+            <Label fx:id="passwordUpperCaseReq" alignment="TOP_LEFT" layoutX="80.0" layoutY="39.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one uppercase letter (A-Z).">
+               <styleClass>
+                  <String fx:value="condition-box-text" />
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+               </styleClass>
+            </Label>
+            <Label fx:id="passwordLowerCaseReq" alignment="TOP_LEFT" layoutX="80.0" layoutY="55.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one lowercase letter (a-z).">
+               <styleClass>
+                  <String fx:value="condition-box-text" />
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+               </styleClass>
+            </Label>
+            <Label fx:id="passwordSpecialReq" alignment="TOP_LEFT" layoutX="80.0" layoutY="71.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one special character from the set: !, @, #, $.">
+               <styleClass>
+                  <String fx:value="condition-box-text" />
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+               </styleClass>
+            </Label>
+            <Label fx:id="passwordNumReq" alignment="TOP_LEFT" layoutX="80.0" layoutY="87.0" lineSpacing="1.0" prefHeight="14.0" prefWidth="417.0" text="Must include at least one numeric digit (0-9).">
+               <styleClass>
+                  <String fx:value="condition-box-text" />
+                  <String fx:value="font" />
+                  <String fx:value="text-xs" />
+               </styleClass>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

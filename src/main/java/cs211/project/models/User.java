@@ -1,21 +1,39 @@
 package cs211.project.models;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import cs211.project.models.collections.UserList;
+import cs211.project.services.BanTeamMap;
+import cs211.project.services.GenerateRandomID;
+
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
-public class User {
-    private String  username,displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath;
-    private String  registerDate, userId, role, teamJoined;
+public class User implements Comparable<User> {
+    private String displayName, password, lastedLogin, imagePath, bio, contactNumber, newImagePath, userId, role, formattedDate;
+    private final String registerDate, username;
+    private boolean status, showContact, bookmark;
+    private final boolean admin;
 
-    private boolean bookmark;
-    private boolean admin, status, showContact;
+    @Override
+    public int compareTo(User user) {
+        return this.getUsername().compareTo(user.getUsername());
+    }
 
+    public User(String displayName, String username, String password) {
+        this.displayName = displayName;
+        this.username = username;
+        setPassword(password);
+        generateUserID();
+        this.contactNumber = "";
+        this.status = false;
+        this.admin = false;
+        this.registerDate = generateRegisterDate();
+        this.imagePath = generateAvatar();
+        this.showContact = false;
+        this.bio = "";
+    }
 
     public User(String userId, String displayName, String username, String password, String contactNumber,
                 String registerDate, String lastedLogin, String imagePath, String bio,
@@ -34,32 +52,74 @@ public class User {
         this.bio = bio;
     }
 
+    private String generateRegisterDate() {
+        LocalDate currentDate = LocalDate.now();
+        formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return formattedDate;
+    }
 
-    public boolean isAdmin(){
+    private String generateLastedLogin() {
+        LocalDateTime currentDate = LocalDateTime.now();
+        formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd : HH:mm:ss").withLocale(Locale.US));
+        return formattedDate;
+    }
+
+    private String generateAvatar() {
+        String path;
+        int randomAvatar = (int) (Math.random() * 10);
+        path = "x/images/profile/default-avatar/default" + randomAvatar + ".png";
+        return path;
+    }
+
+    private void generateUserID() {
+        String id = "user-";
+        id += new GenerateRandomID().getRandomText();
+        this.userId = id;
+    }
+
+    public boolean isAdmin() {
         return this.admin;
     }
-    public boolean isUserName(String username){
-        // to check user verified
+
+    public boolean isUserName(String username) {
         return this.username.equals(username);
     }
 
-    public boolean isDisplayName(String displayName){
-        // to check display name verified
+    public boolean isDisplayName(String displayName) {
         return this.displayName.equals(displayName);
     }
 
-    public boolean isId(String userId){
-        // to check user ID verified
+    public boolean isId(String userId) {
         return this.userId.equals(userId);
     }
 
+    public boolean isBookmarked() {
+        return bookmark;
+    }
 
-    public boolean validatePassword(String password){
-        // to check result verified
+    public boolean isShowContact() {
+        return showContact;
+    }
+
+    public boolean isBanFromTeam(String teamId) {
+        BanTeamMap banTeamMap = new BanTeamMap();
+        HashMap<String, Set<String>> banTeamHashMap = banTeamMap.readData();
+        if (!banTeamHashMap.containsKey(teamId)) return false;
+        else return banTeamHashMap.get(teamId).contains(userId);
+    }
+
+    public boolean isAlreadyJoinTeam(UserList memberList) {
+        if (memberList == null) return false;
+        for (User user : memberList.getUsers()) {
+            if (user.getUserId().equals(userId)) return true;
+        }
+        return false;
+    }
+
+    public boolean validatePassword(String password) {
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), this.password);
         return result.verified;
     }
-
 
     public String getUserId() {
         return userId;
@@ -93,21 +153,22 @@ public class User {
         return registerDate;
     }
 
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
     public String getImagePath() {
         return imagePath;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getNewImagePath() {
+        return newImagePath;
     }
 
     public String getRole() {
         return role;
     }
 
-    public boolean isBookmarked() {
-        return bookmark;
-    }
 
     public void setRole(String role) {
         this.role = role;
@@ -115,18 +176,6 @@ public class User {
 
     public void setBookmarked(boolean bookmark) {
         this.bookmark = bookmark;
-    }
-
-    public String getTeamJoined() {
-        return teamJoined;
-    }
-
-    public void setTeamJoined(String teamID) {
-        this.teamJoined = teamID;
-    }
-
-    public boolean isShowContact() {
-        return showContact;
     }
 
     public void setShowContact(boolean showContact) {
@@ -137,33 +186,12 @@ public class User {
         this.status = status;
     }
 
-    public String getNewImagePath() {
-        return newImagePath;
-    }
-
-
     public void setPassword(String password) {
-        this.password = password;
+        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
 
     public void setNewImagePath(String newImagePath) {
         this.newImagePath = newImagePath;
-    }
-
-    public void setRegisterDate(String registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public void setLastedLogin(String lastedLogin) {
-        this.lastedLogin = lastedLogin;
     }
 
     public void setImagePath(String imagePath) {
@@ -176,9 +204,26 @@ public class User {
         this.bio = bio;
         setImagePath(newImagePath);
     }
+    public void updateAfterLogin() {
+        this.lastedLogin = generateLastedLogin();
+        this.status = true;
+    }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        User user = (User) o;
+
+        return userId.equals(user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return userId.hashCode();
+    }
 }
 
 

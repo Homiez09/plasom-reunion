@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -10,65 +11,78 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane cache="true" onMouseClicked="#onClickCard" styleClass="card-event" stylesheets="@../../../../css/card-event.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.componentControllers.CardEventController">
+<AnchorPane cacheHint="SCALE" onMouseClicked="#onClickCard" styleClass="event-card" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.CardEventController">
    <children>
-      <VBox alignment="CENTER">
+      <HBox>
          <children>
-            <Separator opacity="0.0" prefHeight="5.0" />
-            <HBox alignment="CENTER">
+            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="9.0" />
+            <VBox alignment="CENTER" cacheHint="SCALE" prefHeight="270.0" prefWidth="184.0">
                <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
-                  <ImageView fx:id="eventImage" cache="true" cacheHint="QUALITY" fitHeight="250.0" fitWidth="220.0" pickOnBounds="true">
-                     <viewport>
-                        <Rectangle2D height="260.0" width="210.0" />
-                     </viewport>
-                  </ImageView>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="8.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefWidth="15.0" />
-                  <Label fx:id="eventNameLabel" prefHeight="27.0" prefWidth="200.0" text="event name" textOverrun="WORD_ELLIPSIS">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <Separator opacity="0.0" prefHeight="5.0" />
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="3.0" />
-                  <ImageView fx:id="profileImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <viewport>
-                        <Rectangle2D height="30.0" width="30.0" />
-                     </viewport>
-                  </ImageView>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="3.0" />
-                  <VBox prefHeight="34.0" prefWidth="103.0">
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="12.0" />
+                  <Separator cacheHint="SCALE" layoutX="10.0" layoutY="301.0" opacity="0.0" prefHeight="12.0" />
+                  <Separator cacheHint="SCALE" layoutX="10.0" layoutY="10.0" opacity="0.0" prefHeight="12.0" />
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="12.0" />
+                  <HBox alignment="CENTER" VBox.vgrow="NEVER">
                      <children>
-                        <Label fx:id="hostUsernameLabel" text="\@mingmmie" />
-                        <Label fx:id="hostNameLabel" text="PINKPPANTHER" />
-                     </children>
-                  </VBox>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="34.0" prefWidth="3.0" />
-                  <Label fx:id="memberCountLabel" text="10/15">
-                     <graphic>
-                        <ImageView fx:id="calendaImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../images/events/user-group.png" />
-                           </image>
+                        <ImageView fx:id="eventImage" fitHeight="216.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true" styleClass="image-card" HBox.hgrow="NEVER">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
                         </ImageView>
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
+                     </children>
+                  </HBox>
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="10.0" />
+                  <HBox alignment="CENTER_LEFT" cacheHint="SCALE" prefHeight="14.0" prefWidth="184.0">
+                     <children>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                        <Label fx:id="eventNameLabel" prefHeight="23.0" prefWidth="165.0" styleClass="font-head" text="event name" textOverrun="WORD_ELLIPSIS">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" cacheHint="SCALE">
+                     <children>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                        <ImageView fx:id="profileImageView" cacheHint="SCALE" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                        <Separator cacheHint="SCALE" opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
+                        <VBox alignment="CENTER_LEFT" cacheHint="SCALE" prefHeight="34.0" prefWidth="70.0">
+                           <children>
+                              <Label fx:id="hostUsernameLabel" styleClass="font-username" text="\@mingmmie" textOverrun="WORD_ELLIPSIS" />
+                              <Label fx:id="hostNameLabel" prefWidth="95.0" text="PINKPPANTHER" textOverrun="WORD_ELLIPSIS">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="font-display-name" />
+                                 </styleClass></Label>
+                           </children>
+                        </VBox>
+                        <Separator cacheHint="SCALE" opacity="0.0" orientation="VERTICAL" prefWidth="5.0" />
+                        <Label fx:id="memberCountLabel" cacheHint="SCALE" prefHeight="20.0" prefWidth="60.0" styleClass="font" text="10/15" textOverrun="WORD_ELLIPSIS">
+                           <graphic>
+                              <ImageView fx:id="calendaImageView" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/events/user-group.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="42.0" prefWidth="184.0" />
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="42.0" prefWidth="184.0" />
+                  <Separator cacheHint="SCALE" opacity="0.0" prefHeight="42.0" prefWidth="184.0" />
                </children>
-            </HBox>
-            <Separator opacity="0.0" prefHeight="5.0" />
+            </VBox>
+            <Separator opacity="0.0" orientation="VERTICAL" prefWidth="9.0" />
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

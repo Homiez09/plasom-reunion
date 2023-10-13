@@ -1,13 +1,12 @@
 package cs211.project.models.collections;
 
-import cs211.project.models.Team;
 import cs211.project.models.User;
+import cs211.project.services.JoinEventMap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class UserList {
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     public UserList() {
         users = new ArrayList<>();
@@ -15,7 +14,7 @@ public class UserList {
 
     public User findUsername(String username) {
         for (User exist: users) {
-            if (exist.isUserName(username)) {
+            if (exist.isUserName(username) && !username.isEmpty()) {
                 return exist;
             }
         }
@@ -24,7 +23,6 @@ public class UserList {
 
     public User findDisplayName(String displayName) {
         for (User exist: users) {
-            System.out.println();
             if (exist.isDisplayName(displayName)) {
                 return exist;
             }
@@ -45,7 +43,6 @@ public class UserList {
         users.add(user);
     }
 
-
     public void addUser(String userId, String displayName, String username, String password, String contactNumber, String registerDate, String lastedLogin, String imagePath, String bio, boolean status, boolean admin, boolean showContactNumber){
         username = username.trim();
         password = password.trim();
@@ -54,11 +51,18 @@ public class UserList {
             users.add(new User(userId, displayName, username, password, contactNumber, registerDate, lastedLogin, imagePath, bio, status, admin,showContactNumber));
         }
     }
-
+    public void addUser(String displayName, String username, String password){
+        username = username.trim();
+        password = password.trim();
+        User newUser = findUsername(username);
+        if(newUser == null){
+            users.add(new User(displayName, username, password));
+        }
+    }
 
     public User login(String username, String password){
         for(User exist: users){
-            if(exist.getUsername().equals(username) && exist.validatePassword(password)){
+            if(exist.getUsername().equals(username) && exist.validatePassword(password) && !username.isEmpty() && !password.isEmpty()){
                 return exist;
             }
         }
@@ -70,6 +74,12 @@ public class UserList {
         newUser.setStatus(false);
     }
 
+    public void resetPassword(String username, String newPassword){
+        User exist = findUsername(username);
+        if(exist != null){
+            exist.setPassword(newPassword);
+        }
+    }
 
     public void updateUserProfile(String username, String displayName, String contactNumber, String bio, String newImagePath) {
         User exist = findUsername(username);
@@ -84,7 +94,6 @@ public class UserList {
             exist.setShowContact(showContactNumber);
         }
     }
-
 
     public ArrayList<User> getNotAdminUsers() {
         ArrayList<User> notAdminUsers = new ArrayList<>();
@@ -106,6 +115,30 @@ public class UserList {
         return onlineUsers;
     }
 
+    public void promoteToLeader(String userID) {
+        User userLeader = getLeader();
+        if (userLeader != null) userLeader.setRole("Member");
+
+        User user = findUserId(userID);
+        user.setRole("Leader");
+
+    }
+
+    public void promoteToMember(String userID) {
+        User user = findUserId(userID);
+        user.setRole("Member");
+
+    }
+
+    public User getLeader() {
+        for (User user : users) {
+            if (user.getRole().equals("Leader")) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public HashMap<String, User> userHashMap() {
         HashMap<String, User> userHashMapTemp= new HashMap<>();
         for (User user: users) {
@@ -115,7 +148,39 @@ public class UserList {
         return userHashMapTemp;
     }
 
+    public HashMap<String, User> userIdHashMap() {
+        HashMap<String, User> userHashMapTemp= new HashMap<>();
+        for (User user: users) {
+            userHashMapTemp.put(user.getUserId(), user);
+        }
+
+        return userHashMapTemp;
+    }
+    public ArrayList<User> getUserOfEvent(String event) {
+        ArrayList<User> userList = new ArrayList<>();
+        HashMap<String, UserList> joinEventMap = new JoinEventMap().readData();
+
+        if (joinEventMap.containsKey(event)){
+            userList.addAll(joinEventMap.get(event).getUsers());
+        }
+        return userList;
+    }
+
+
+
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    public void sort(){
+        Collections.sort(users);
+    }
+
+    public void sort(Comparator<User> cmp){
+        users.sort(cmp);
+    }
+
+    public void reverse(){
+        Collections.reverse(users);
     }
 }

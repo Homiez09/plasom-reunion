@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1152.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.view.team.ManageTeamController">
+    <children>
+      <AnchorPane fx:id="manageTeamDisbleAnchorPane">
+         <children>
+            <AnchorPane prefHeight="768.0" prefWidth="1152.0" styleClass="bgProfile1" />
+            <AnchorPane prefHeight="768.0" prefWidth="1152.0">
+               <children>
+                  <AnchorPane fx:id="manageTeamsAnchorPane" layoutX="157.0" layoutY="121.0" prefHeight="612.0" prefWidth="972.0" style="-fx-background-color: #FFFCF6;" styleClass="manage-team-corner-radius" stylesheets="@../../../../css/style.css">
+                     <children>
+                        <AnchorPane fx:id="membersAnchorPane" layoutX="31.0" layoutY="109.0" visible="false">
+                           <children>
+                              <AnchorPane layoutX="35.0" prefHeight="399.0" prefWidth="782.0">
+                                 <children>
+                                    <AnchorPane layoutX="10.0" layoutY="15.0" prefHeight="24.0" prefWidth="758.0">
+                                       <children>
+                                          <AnchorPane fx:id="nameAnchorPane" layoutX="27.0" layoutY="3.0" onMouseClicked="#onSortNameClick" prefHeight="21.0" prefWidth="260.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="260.0" text="Display Name">
+                                                   <styleClass>
+                                                      <String fx:value="text-base" />
+                                                      <String fx:value="weight-bold" />
+                                                   </styleClass>
+                                                </Label>
+                                                <ImageView fx:id="nameImageView" fitHeight="16.0" fitWidth="16.0" layoutX="234.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="roleAnchorPane" layoutX="263.0" layoutY="2.0" onMouseClicked="#onSortRoleClick" prefHeight="22.0" prefWidth="217.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-9.0" layoutY="1.0" prefHeight="21.0" prefWidth="229.0" text="Membership">
+                                                   <styleClass>
+                                                      <String fx:value="text-base" />
+                                                      <String fx:value="weight-bold" />
+                                                   </styleClass>
+                                                </Label>
+                                                <ImageView fx:id="roleImageView" fitHeight="16.0" fitWidth="16.0" layoutX="188.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="statusAnchorPane" layoutX="483.0" layoutY="1.0" onMouseClicked="#onSortStatusClick" prefHeight="22.0" prefWidth="179.0">
+                                             <children>
+                                                <Label alignment="CENTER" layoutY="1.0" prefHeight="21.0" prefWidth="206.0" text="Status">
+                                                   <styleClass>
+                                                      <String fx:value="text-base" />
+                                                      <String fx:value="weight-bold" />
+                                                   </styleClass>
+                                                </Label>
+                                                <ImageView fx:id="statusImageView" fitHeight="16.0" fitWidth="16.0" layoutX="183.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <ScrollPane layoutY="46.0" prefHeight="448.0" prefWidth="928.0">
+                                 <content>
+                                    <AnchorPane prefHeight="449.0" prefWidth="916.0" style="-fx-background-color: #F6F4EE;">
+                                       <children>
+                                          <GridPane fx:id="memberContainer" layoutX="34.0" layoutY="3.0" prefHeight="63.0" prefWidth="867.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                                 <styleClass>
+                                    <String fx:value="selected-team-background" />
+                                    <String fx:value="scroll-bar" />
+                                    <String fx:value="scroll-pane" />
+                                 </styleClass>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="settingAnchorPane" layoutX="41.0" layoutY="119.0" prefHeight="475.0" prefWidth="910.0">
+                           <children>
+                              <Line endX="504.0" endY="452.0" layoutX="-31.0" layoutY="6.0" scaleX="-1.0" startX="504.0" startY="8.666671752929688">
+                                 <stroke>
+                                    <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="0.7490196228027344" green="0.7490196228027344" blue="0.7490196228027344" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </RadialGradient>
+                                 </stroke>
+                              </Line>
+                              <TextField fx:id="teamNameTextField" layoutX="66.0" layoutY="78.0" onKeyReleased="#onKeyTeamName" prefHeight="37.0" prefWidth="367.0" promptText="My Team">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="manage-text-field" />
+                                 </styleClass>
+                              </TextField>
+                              <Label layoutX="32.0" prefHeight="37.0" prefWidth="39.0" text="ID :">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-bold" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <Label layoutX="70.0" layoutY="9.0" prefHeight="16.0" prefWidth="12.0" text="#">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="teamIdLabel" layoutX="83.0" layoutY="9.0" prefHeight="24.0" prefWidth="174.0" text="2023092116214173">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <Label layoutX="262.0" layoutY="9.0" prefHeight="24.0" prefWidth="117.0" text="can't change">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-gray1" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <Label layoutX="32.0" layoutY="39.0" prefHeight="37.0" prefWidth="127.0" text="Team Name :">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-bold" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <Label layoutX="33.0" layoutY="128.0" prefHeight="37.0" prefWidth="127.0" text="Description :">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-bold" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <TextArea fx:id="teamDescriptionTextArea" layoutX="66.0" layoutY="168.0" onKeyReleased="#onKeyDescription" prefHeight="187.0" prefWidth="371.0" promptText="write something here..." styleClass="manage-text-area" />
+                              <Label fx:id="maximumCountDescriptionLabel" layoutX="382.0" layoutY="336.0" lineSpacing="1.0" prefHeight="15.0" prefWidth="36.0" text="/ 280">
+                                 <styleClass>
+                                    <String fx:value="text-xs" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="countDescriptionLabel" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="348.0" layoutY="336.0" lineSpacing="1.0" prefHeight="11.0" prefWidth="30.0" text="0">
+                                 <styleClass>
+                                    <String fx:value="text-xs" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                              </Label>
+                              <PasswordField fx:id="passwordField" layoutX="69.0" layoutY="410.0" onKeyReleased="#onKeyHidePassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxx">
+                                 <styleClass>
+                                    <String fx:value="profile-text-field2" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                              </PasswordField>
+                              <Label layoutX="32.0" layoutY="370.0" prefHeight="37.0" prefWidth="127.0" text="Password :">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-bold" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <TextField fx:id="showPasswordTextField" layoutX="69.0" layoutY="410.0" onKeyReleased="#onKeyShowPassword" prefHeight="37.0" prefWidth="263.0" promptText="xxxxxxxxx" visible="false">
+                                 <styleClass>
+                                    <String fx:value="profile-text-field2" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                              </TextField>
+                              <Label layoutX="503.0" layoutY="39.0" prefHeight="37.0" prefWidth="105.0" text="Members :">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-bold" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <Spinner fx:id="numMemberSpinner" editable="true" layoutX="522.0" layoutY="79.0" prefHeight="33.0" prefWidth="74.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
+                              <Label layoutX="503.0" layoutY="147.0" prefHeight="37.0" prefWidth="128.0" text="Team Period ">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-black" />
+                                    <String fx:value="weight-bold" />
+                                    <String fx:value="text-xl" />
+                                 </styleClass>
+                              </Label>
+                              <AnchorPane layoutX="521.0" layoutY="189.0" prefHeight="183.0" prefWidth="377.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="116.0" text="Date ( start )">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="color-gray" />
+                                          <String fx:value="weight-medium" />
+                                          <String fx:value="text-lg" />
+                                       </styleClass>
+                                    </Label>
+                                    <DatePicker fx:id="startDatePicker" layoutX="10.0" layoutY="32.0" prefHeight="30.0" prefWidth="154.0" stylesheets="@../../../../css/team/create-team.css">
+                                       <styleClass>
+                                          <String fx:value="create-date-picker" />
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                       </styleClass>
+                                    </DatePicker>
+                                    <DatePicker fx:id="endDatePicker" layoutX="10.0" layoutY="104.0" prefHeight="30.0" prefWidth="154.0" stylesheets="@../../../../css/team/create-team.css">
+                                       <styleClass>
+                                          <String fx:value="create-date-picker" />
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                       </styleClass>
+                                    </DatePicker>
+                                    <ChoiceBox fx:id="startDateChoiceBox" layoutX="319.0" layoutY="32.0" prefHeight="30.0" prefWidth="47.0" styleClass="create-team-choice-box" stylesheets="@../../../../css/style.css" />
+                                    <Spinner fx:id="endMinuteSpinner" editable="true" layoutX="249.0" layoutY="104.0" prefHeight="30.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
+                                    <Spinner fx:id="startMinuteSpinner" editable="true" layoutX="249.0" layoutY="32.0" prefHeight="30.0" prefWidth="57.0" stylesheets="@../../../../css/style.css">
+                                       <styleClass>
+                                          <String fx:value="create-team-spinner" />
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                       </styleClass>
+                                    </Spinner>
+                                    <Spinner fx:id="startHourSpinner" editable="true" layoutX="177.0" layoutY="33.0" prefHeight="30.0" prefWidth="57.0" styleClass="create-team-spinner" stylesheets="@../../../../css/style.css" />
+                                    <Spinner fx:id="endHourSpinner" editable="true" layoutX="177.0" layoutY="103.0" prefHeight="30.0" prefWidth="57.0" stylesheets="@../../../../css/style.css">
+                                       <styleClass>
+                                          <String fx:value="create-team-spinner" />
+                                          <String fx:value="font" />
+                                          <String fx:value="text-base" />
+                                       </styleClass>
+                                    </Spinner>
+                                    <ChoiceBox fx:id="endDateChoiceBox" layoutX="319.0" layoutY="103.0" prefHeight="30.0" prefWidth="47.0" styleClass="create-team-choice-box" stylesheets="@../../../../css/style.css" />
+                                    <Label layoutY="73.0" prefHeight="24.0" prefWidth="138.0" text="Date ( end )">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="color-gray" />
+                                          <String fx:value="weight-medium" />
+                                          <String fx:value="text-lg" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label fx:id="summaryPeriodLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="144.0" prefHeight="38.0" prefWidth="378.0" text="This team will take place on the July, 14, 2023 from 02:00 PM until July, 25, 2024 from 02:00 PM" textAlignment="CENTER" wrapText="true">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="color-gray" />
+                                          <String fx:value="weight-medium" />
+                                          <String fx:value="text-xxs" />
+                                       </styleClass>
+                                       <font>
+                                          <Font name="Leelawadee UI" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="errorContinueLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="261.0" prefHeight="30.0" prefWidth="335.0" text="Please make sure to fill in all the required information." textAlignment="CENTER" textFill="#ff1515" wrapText="true">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="color-red" />
+                                          <String fx:value="weight-medium" />
+                                          <String fx:value="text-xxs" />
+                                       </styleClass>
+                                       <font>
+                                          <Font name="Leelawadee UI" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <Button layoutX="669.0" layoutY="410.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefHeight="36.0" prefWidth="111.0" text="Delete Team" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-ms" />
+                                    <String fx:value="delete-button" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="5.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="796.0" layoutY="410.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="36.0" prefWidth="98.0" text="Save" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-ms" />
+                                    <String fx:value="edit-create-button" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="5.0" />
+                                 </font>
+                              </Button>
+                              <Label fx:id="nameRequirementLabel" layoutX="159.0" layoutY="48.0" prefHeight="22.0" prefWidth="284.0" textFill="#ff1515">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-red" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xs" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="dateRequirementLabel" layoutX="632.0" layoutY="156.0" prefHeight="21.0" prefWidth="274.0" text="Duplicate team name." textFill="#ff1515" visible="false">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-red" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-ms" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="passwordReq" layoutX="72.0" layoutY="448.0" prefHeight="22.0" prefWidth="284.0" text="Duplicate team name." textFill="#ff1515">
+                                 <styleClass>
+                                    <String fx:value="font" />
+                                    <String fx:value="color-red" />
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-xs" />
+                                 </styleClass>
+                              </Label>
+                              <ImageView fx:id="teamNameReqImageView" fitHeight="26.0" fitWidth="26.0" layoutX="438.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="passwordIconView" fitHeight="24.0" fitWidth="24.0" layoutX="71.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" x="5.0" y="2.0" />
+                              <Button layoutX="725.0" layoutY="75.0" mnemonicParsing="false" onAction="#onBannedButtonClick" prefHeight="43.0" prefWidth="111.0" text="Banned User" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="weight-medium" />
+                                    <String fx:value="text-ms" />
+                                    <String fx:value="ok-join-team-button" />
+                                    <String fx:value="font" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="5.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="39.0" layoutY="14.0" prefHeight="95.0" prefWidth="878.0">
+                           <children>
+                              <AnchorPane prefHeight="34.0" prefWidth="260.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="6.0" text="Manage Team">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-3xl" />
+                                          <String fx:value="weight-bold" />
+                                       </styleClass>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="27.0" layoutY="43.5" onMouseClicked="#onMembersClick" onMouseEntered="#onMembersEntered" onMouseExited="#onMembersExited" prefHeight="48.0" prefWidth="185.0">
+                                 <children>
+                                    <Rectangle fx:id="membersHover" arcHeight="5.0" arcWidth="5.0" fill="#bdbdbd24" height="48.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" width="205.0" />
+                                    <Label fx:id="membersLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="12.0" text="Members">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-lg" />
+                                          <String fx:value="weight-bold" />
+                                       </styleClass>
+                                    </Label>
+                                    <Line fx:id="memberHoverLine" endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-70.0" layoutY="-57.0" startX="272.0" startY="103.5" stroke="#ff9900" strokeWidth="3.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="settingHeaderAnchorPane" layoutX="232.0" layoutY="43.5" onMouseClicked="#onSettingClick" onMouseEntered="#onSettingEntered" onMouseExited="#onSettingExited" prefHeight="48.0" prefWidth="185.0">
+                                 <children>
+                                    <Rectangle fx:id="settingHover" arcHeight="5.0" arcWidth="5.0" fill="#bdbdbd24" height="47.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" width="205.0" />
+                                    <Label fx:id="settingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="12.0" text="Settings">
+                                       <styleClass>
+                                          <String fx:value="font" />
+                                          <String fx:value="text-lg" />
+                                          <String fx:value="weight-bold" />
+                                       </styleClass>
+                                    </Label>
+                                    <Line fx:id="settingHoverLine" endX="69.79998779296875" endY="104.0" fill="#403a3a" layoutX="-70.0" layoutY="-57.5" startX="272.0" startY="103.5" stroke="#ff9900" strokeWidth="3.0" visible="false" />
+                                 </children>
+                              </AnchorPane>
+                              <Line endX="775.0" fill="#403a3a" layoutX="101.0" layoutY="92.0" startX="-74.8" stroke="#403a3a" strokeWidth="2.0">
+                                 <rotationAxis>
+                                    <Point3D />
+                                 </rotationAxis>
+                              </Line>
+                           </children>
+                        </AnchorPane>
+                        <ImageView fx:id="visiblePasswordImageView" fitHeight="20.0" fitWidth="24.0" layoutX="379.0" layoutY="538.0" onMouseClicked="#onVisiblePasswordClick" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+              <AnchorPane fx:id="sideBarAnchorPane" prefHeight="768.0" prefWidth="162.0" />
+              <AnchorPane fx:id="navbarAnchorPane" prefHeight="72.0" prefWidth="1152.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="manageTeamExitAnchorPane" layoutY="1.0" onMouseClicked="#onManageTeamAnchorPaneClick" prefHeight="768.0" prefWidth="1152.0" visible="false" />
+      <AnchorPane fx:id="userCardProfileAnchorPane" layoutX="400.0" layoutY="150.0" prefHeight="435.0" prefWidth="324.0" visible="false" />
+      <AnchorPane fx:id="alertBoxAnchorPane" layoutX="425.0" layoutY="237.0" prefHeight="384.0" prefWidth="470.0" visible="false" />
+      <AnchorPane fx:id="unbanAnchorPane" layoutX="192.0" layoutY="134.0" prefHeight="500.0" prefWidth="768.0" visible="false" />
+    </children>
+</AnchorPane>

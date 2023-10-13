@@ -1,11 +1,11 @@
 .card-event{
     -fx-background-color:  #F6F4EE;
-    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-background-radius: 20;
 }
 
 .card-my-event{
     -fx-alignment: center;
     -fx-background-color:  #F6F4EE;
-    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-background-radius: 20;
 }
 

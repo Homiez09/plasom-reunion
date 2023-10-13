@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="325.0" prefWidth="250.0" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.component.EventTileController">
+   <children>
+      <AnchorPane prefHeight="325.0" prefWidth="250.0" styleClass="event-card" onMouseClicked="#onEventTileClick">
+         <children>
+            <StackPane fx:id="imageStackPane" layoutX="15.0" layoutY="14.0">
+               <children>
+                  <ImageView fx:id="eventTileImageView" fitHeight="220.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <Label fx:id="eventNameLabel" layoutX="21.0" layoutY="247.0" prefHeight="15.0" prefWidth="208.0" text="eventNameLabel" textAlignment="CENTER" textFill="#c71616">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="color-black" />
+                  <String fx:value="card-description-header" />
+               </styleClass>
+            </Label>
+            <ImageView fitHeight="27.0" fitWidth="17.0" layoutX="28.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons/team/side-bar/activity.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="eventDateLabel" layoutX="54.0" layoutY="271.0" text="eventDateLabel" textAlignment="CENTER">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="color-black" />
+                  <String fx:value="users-event-font-username" />
+               </styleClass>
+            </Label>
+            <ImageView fitHeight="19.0" fitWidth="17.0" layoutX="28.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons/team/side-bar/home.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="eventPlaceLabel" layoutX="54.0" layoutY="296.0" text="eventPlaceLabel">
+               <styleClass>
+                  <String fx:value="font" />
+                  <String fx:value="text-detail" />
+                  <String fx:value="color-black" />
+                  <String fx:value="users-event-font-username" />
+               </styleClass>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" layoutX="29.0" layoutY="19.0" prefHeight="18.0" prefWidth="201.0">
+               <children>
+                  <HBox alignment="CENTER" styleClass="event-card">
+                     <children>
+                        <AnchorPane prefHeight="18.0" prefWidth="10.0" />
+                        <ImageView fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/admin-sidebar/user_log.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane prefHeight="18.0" prefWidth="3.0" />
+                        <Label fx:id="eventMemberLabel" text="0">
+                           <styleClass>
+                              <String fx:value="font" />
+                              <String fx:value="text-detail" />
+                              <String fx:value="color-black" />
+                           </styleClass>
+                        </Label>
+                        <AnchorPane prefHeight="18.0" prefWidth="10.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

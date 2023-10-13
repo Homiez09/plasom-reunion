@@ -7,11 +7,13 @@ import cs211.project.models.collections.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 public class TeamListDataSource implements Datasource<TeamList> {
-    private String directoryName;
-    private String fileName;
-    private TeamList teamList;
+    private final String directoryName;
+    private final String fileName;
+    private final JoinTeamMap joinTeamMap = new JoinTeamMap();
+
 
     public TeamListDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
@@ -38,7 +40,13 @@ public class TeamListDataSource implements Datasource<TeamList> {
 
     @Override
     public TeamList readData() {
-        teamList = new TeamList();
+        TeamList teamList = new TeamList();
+
+        UserListDataSource userListDataSource = new UserListDataSource("data", "user-list.csv");
+        UserList userList = userListDataSource.readData();
+
+        HashMap<String, UserList> joinTeamMapHashMap = joinTeamMap.roleReadData();
+
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -62,15 +70,19 @@ public class TeamListDataSource implements Datasource<TeamList> {
                 if (line.equals("")) continue;
                 String[] data = line.split(",");
                 String teamID = data[0];
-                String teamName = data[1];
-                String teamDescription = data[2];
-                String startDate = data[3];
-                String endDate = data[4];
-                int maxSlotTeamMember = Integer.parseInt(data[5]);
-                String createdAt = data[6];
-                String eventID = data[7];
+                User teamHostUser = userList.findUserId(data[1].trim());
+                String teamName = data[2];
+                String teamDescription = data[3];
+                String startDate = data[4];
+                String endDate = data[5];
+                int maxSlotTeamMember = Integer.parseInt(data[6]);
+                String createdAt = data[7];
+                String eventID = data[8];
+                if (joinTeamMapHashMap.get(teamID)==null) {
+                    joinTeamMapHashMap.put(teamID, new UserList());
+                }
 
-                teamList.addTeam(teamID, teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID);
+                teamList.addTeam(teamID, teamHostUser,teamName, teamDescription, startDate, endDate, maxSlotTeamMember, createdAt, eventID, joinTeamMapHashMap.get(teamID));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
