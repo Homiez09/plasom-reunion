@@ -61,7 +61,7 @@ public class AllEventListController {
     private void setupPage() {
         Datasource<EventList> eventListDatasource = new EventListDataSource();
         eventList = eventListDatasource.readData();
-        this.eventObservableList = FXCollections.observableArrayList(eventList.getEvents());
+        this.eventObservableList = FXCollections.observableArrayList(eventList.getAvailableEvent().getEvents());
         initCategory();
         initSort();
         setupScrollBar();
