@@ -1,20 +1,1455 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.QuadCurve?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="950.0">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="950.0" spacing="20.0" AnchorPane.topAnchor="25.0">
             <children>
-                <TextFlow prefHeight="200.0" prefWidth="200.0">
+            <TextFlow layoutX="10.0" layoutY="10.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="วิธีการใส่ข้อมูลวันที่ และ เวลา">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในการสร้างอีเว้นต์ กิจกรรม ทีม ที่จำเป็นต้องใส่ข้อมูลเวลา แอปพลิเคชั่น Plasom นั้นใช้รูปแบบการใส่ข้อมูลแบบเดียวกัน ดังนี้">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="160.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/date.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="75.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="75.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/time.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER" spacing="80.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- แถบที่มีรูปปฏิทิน ใช้ในการเลือกวันที่">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- แถบที่มีลูกศรขึ้นลง ใช้ใส่ข้อมูลเวลา ในรูปแบบ ชั่วโมง : นาที">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+                <TextFlow textAlignment="CENTER">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="organizer" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Event การสร้างอีเว้นต์">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font></Text>
                     </children>
                 </TextFlow>
+            <TextFlow layoutX="10.0" layoutY="10.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="การสร้างอีเว้นต์ สามารถทำได้ที่หน้า Create Event ซึ่งเข้าถึงได้จากปุ่ม Create Event โดยภายในแอปพลิเคชั่น ปุ่ม Create Event จะอยู่ที่">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- หน้า All Event บริเวณขวาบนของหน้า ทางขวาของปุ่ม sort">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- หน้า My Event บริเวณขวาบนของหน้า ทางขวาของปุ่ม Manage Event">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/team/all-events.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="58.0" layoutX="677.0" layoutY="49.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="99.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/my-event.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" layoutX="694.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
+               </children>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่อเข้าสู่หน้า Create Event ให้ทำการกรอกข้อมูล ดังนี้">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="700.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/create-event.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="235.0" layoutX="218.0" layoutY="91.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="528.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="108.0" layoutX="206.0" layoutY="485.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="420.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="677.0" layoutY="572.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="55.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="29.0" layoutX="677.0" layoutY="297.0" stroke="#2900ff" strokeType="INSIDE" strokeWidth="3.0" width="55.0" />
+                  <Line endX="621.1000366210938" endY="391.0" startX="107.19999694824219" startY="391.0" stroke="RED" strokeWidth="2.0" />
+                  <Line endX="701.0" endY="391.0" layoutX="-1.0" layoutY="24.0" startX="208.7333526611328" startY="386.4666748046875" stroke="RED" strokeWidth="2.0" />
+                  <Line endX="621.1000366210938" endY="391.0" layoutX="-2.0" layoutY="68.0" startX="127.59999084472656" startY="391.0" stroke="RED" strokeWidth="2.0" />
+                  <Line endX="708.2000122070312" endY="391.0" layoutX="-1.0" layoutY="87.0" startX="211.29287719726562" startY="391.0" stroke="RED" strokeWidth="2.0" />
+                  <Circle fill="RED" layoutX="268.0" layoutY="160.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="206.0" layoutY="334.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="106.0" layoutY="392.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="125.0" layoutY="460.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="701.0" layoutY="416.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="708.0" layoutY="475.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="206.0" layoutY="359.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="203.0" layoutY="427.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="622.0" layoutY="519.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="731.0" layoutY="572.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="261.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="201.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="201.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="101.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="695.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="198.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="120.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="703.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="610.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="721.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Circle fill="RED" layoutX="538.0" layoutY="347.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="533.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="64.0">
+               <children>
+                  <VBox spacing="8.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. อัปโหลดรูปภาพของอีเว้นต์ โดยกดที่ปุ่ม Upload ในกรอบสีน้ำเงิน บริเวณขวาล่างของรูปตัวอย่าง">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. ใส่ชื่อของอีเว้นต์ โดยมีความยาวไม่เกิน 30 ตัวอักษร">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. เลือก tag ของอีเว้นต์ จาก Animal, Art, Business, Conference, Education, Food &amp; Drink, Music, Performance, Seminar, Sport, Workshop" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. ใส่ความจุของอีเว้นต์ เป็นจำนวนเต็ม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. ใส่วันเวลาในการเริ่มรับผู้เข้าร่วมอีเว้นต์ จะต้องมาก่อนเวลาสิ้นสุดอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6. ใส่วันเวลาในการหยุดรับผู้เข้าร่วมอีเว้นต์ จะต้องมาก่อนเวลาสิ้นสุดอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. ใส่สถานที่จัดอีเว้นต์ โดยมีความยาวไม่เกิน 50 ตัวอักษร">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8. ใส่วันเวลาในการเริ่มอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9. ใส่เวลาในการสิ้นสุดอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10. ใส่ข้อมูล รายละเอียดของอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11. หากใส่ข้อมูลครบ ปุ่ม submit จะขึ้นให้กด หากข้อมูลที่ใส่ไม่ตรงตามเงื่อนไข จะมีข้อความแจ้งเตือนผิดพลาดขึ้นมา หากข้อมูลถูกต้อง จะทำการสร้างอีเว้นต์ แล้วไปที่หน้า My Event" wrappingWidth="750.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="379.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="407.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Event การแก้ไขข้อมูลอีเว้นต์">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <TextFlow layoutX="10.0" layoutY="2158.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="การแก้ไขข้อมูลอีเว้นต์ สามารถทำได้ที่หน้า Edit Event ซึ่งเข้าถึงได้จากปุ่ม Edit Event ที่หน้า Event Page">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="600.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/event-page-edit.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="38.0" layoutX="415.0" layoutY="224.0" stroke="RED" strokeType="INSIDE" strokeWidth="4.0" width="73.0" />
+               </children>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่อเข้าสู่หน้า Edit Event จะเห็นว่าหน้ามีโครงสร้างแบบเดียวกันกับหน้า Create Event แต่จะมีข้อมูลของอีเว้นต์ที่ต้องการแก้ไข ถูกแสดงอยู่ ผู้จัดสามารถแก้ไขข้อมูลที่ต้องการ โดยคำนึงถึงข้อบังคับของข้อมูลอีเว้นต์แบบเดียวกับการสร้างอีเว้นต์ หากแน่ใจแล้วว่า ข้อมูลถูกต้อง จึงกด submit ได้" wrappingWidth="780.0">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="2256.0">
+               <children>
+                  <ImageView fitHeight="700.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/edit-event.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Separator layoutX="10.0" layoutY="2130.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="2158.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Events การจัดการอีเว้นต์">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <TextFlow layoutX="70.0" layoutY="2212.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="การจัดการอีเว้นต์ สามารถทำได้ที่หน้า Manage Events ซึ่งเข้าถึงได้จากปุ่ม Manage Events ที่หน้า My Event">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/user/my-event.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" layoutX="660.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="99.0" />
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="70.0" layoutY="3571.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Manage Event จะแสดงตารางข้อมูลอีเว้นต์ที่สร้างไว้ สามารถเลือกจัดการได้ ดังนี้">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="3615.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/manage.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="80.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/manage-action.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="1775.0">
+               <children>
+                  <VBox spacing="8.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ข้อมูลที่แสดงในตาราง ประกอบด้วย">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ชื่ออีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- วันเวลาเริ่มต้นอีเว้นต์" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- วันเวลาสิ้นสุดอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- จำนวนผู้เข้าร่วมอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- สถานะของอีเว้นต์ (เปิด / ปิดรับผู้เข้าร่วม)">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Action ที่สามารถทำได้ ดังนี้">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Edit : แก้ไขข้อมูลอีเว้นต์ ไปที่หน้า Edit Event">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. View : ดูข้อมูลของอีเว้นต์ ไปที่หน้า Event Page ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Delete : ลบข้อมูลของอีเว้นต์ออกจากระบบ ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="3489.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="3517.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Event Activity การสร้างกิจกรรมของอีเว้นต์">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <TextFlow layoutX="70.0" layoutY="3571.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="การสร้างกิจกรรมของอีเว้นต์ สามารถทำได้ที่หน้า Create Activity ซึ่งเข้าถึงได้จากปุ่ม Create activity ที่หน้า Manage Activity">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Manage Activity สามารถเข้าถึงได้โดย ไปที่หน้า Event Page &gt; กดไปที่ Event Schedule &gt; เลื่อนลงไปที่ตารางกิจกรรม ปุ่ม Manage activity จะอยู่บริเวณขวาบนของตาราง " wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextFlow>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/event-page-act.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" layoutX="720.0" layoutY="71.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
+               </children>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Manage Activity จะแสดงตารางกิจกรรม และมีปุ่ม Create activity อยู่บริเวณขวาบนของตาราง">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="4860.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/manage-act.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" layoutX="650.0" layoutY="68.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="111.0" />
+               </children>
+            </AnchorPane>
+            <Text layoutX="70.0" layoutY="5303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Create Activity จะต้องกรอกข้อมูลเพื่อสร้างกิจกรรม ดังนี้">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="5332.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/create-act.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="460.0">
+               <children>
+                  <VBox spacing="8.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. ชื่อกิจกรรม โดยชื่อจะต้องมีความยาวไม่เกิน 30 ตัวอักษร">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. เวลาเริ่มต้นกิจกรรม จะต้องอยู่ในระยะเวลาของอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. เวลาสิ้นสุดกิจกรรม จะต้องอยู่หลังเวลาเริ่มต้น และอยู่ในระยะเวลาของอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. รายละเอียดกิจกรรม ต้องมีความยาวไม่เกิน 50 ตัวอักษร">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. ปุ่ม Save จะขึ้นให้กดก็ต่อเมื่อมีการกรอกข้อมูลชื่อ และ รายละเอียดถูกต้อง หากข้อมูลเวลาไม่ตรงเงื่อนไข จะขึ้นข้อความแจ้งเตือนผิดพลาดเมื่อกด Save หากข้อมูลทุกอย่างถูกต้อง กิจกรรมจะถูกสร้าง แล้วกลับไปที่หน้า Manage Activity" wrappingWidth="780.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="4686.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="4714.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Event Activity การจัดการกิจกรรมของอีเว้นต์">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <TextFlow layoutX="10.0" layoutY="4768.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Manage Activity สามารถเลือกจัดการกิจกรรมได้ 2 รูปแบบ คือ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. คลิกแล้วลากกิจกรรมในตารางเพื่อสลับเปลี่ยนแปลงช่วงเวลา" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="5851.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/manage-act.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="30.0" layoutX="203.0" layoutY="174.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="570.0" />
+                  <QuadCurve controlX="33.19999694824219" controlY="-36.59989929199219" endX="73.19999694824219" endY="-66.19999694824219" fill="#1f93ff00" layoutX="130.0" layoutY="254.0" startX="81.99998474121094" startY="-3.8000946044921875" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" />
+                  <Circle fill="RED" layoutX="212.0" layoutY="250.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               </children>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. คลิกสองครั้งที่กิจกรรมในตาราง เพื่อไปหน้า Edit Activity" wrappingWidth="800.0">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="75.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="6653.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/edit-act.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="30.0" layoutX="587.0" layoutY="373.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="73.0" />
+               </children>
+            </AnchorPane>
+            <Text layoutX="70.0" layoutY="2741.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่อเข้าสู่หน้า Edit Activity จะเห็นว่าหน้ามีโครงสร้างแบบเดียวกันกับหน้า Create Activity แต่จะมีข้อมูลของกิจกรรม ที่ต้องการแก้ไขถูกแสดงอยู่ ผู้จัดสามารถแก้ไขข้อมูลที่ต้องการ โดยคำนึงถึงข้อบังคับของข้อมูลกิจกรรมแบบเดียวกับการสร้างกิจกรรม หากแน่ใจแล้วว่า ข้อมูลถูกต้อง จึงกด save ได้" wrappingWidth="780.0">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <Text layoutX="70.0" layoutY="7663.0" strokeType="OUTSIDE" strokeWidth="0.0" text="นอกจากนี้ ในหน้า Edit Activity ยังมีปุ่ม Delete เพิ่มเข้ามา ซึ่งปุ่ม Delete นี้ใช้ในการลบข้อมูลกิจกรรมออกจากระบบ" wrappingWidth="780.0">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <Separator layoutX="10.0" layoutY="379.0" prefWidth="200.0" />
+            <TextFlow textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Users การจัดการผู้ใช้ในอีเว้นต์">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Manage Users สำหรับการจัดการอีเว้นต์ สามารถเข้าถึงได้จากหน้า My Event โดยในกล่องที่อีเว้นต์แสดงข้อมูลอยู่จะมีปุ่ม Manage User">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/manage-event-user.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="38.0" layoutX="572.0" layoutY="144.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="111.0" />
+               </children>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="หน้า Manage Users จะแสดงผู้ใช้ที่เข้าร่วมอีเว้นต์ ซึ่งผู้จัดอีเว้นต์มีสิทธิ์จัดการได้ ดังนี้">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <TextFlow>
+               <children>
+                  <VBox spacing="8.0">
+                     <children>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Ban : แบนผู้เข้าร่วม จำกัดการเข้าถึงข้อมูลอีเว้นต์ และมองไม่เห็นตารางกิจกรรมของอีเว้นต์">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Unban : ปลดแบนผู้เข้าร่วม เข้าถึงข้อมูลได้ตามปกติเหมือนเดิม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Kick : เตะผู้เข้าร่วมออกจากทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/manage-event-user-table.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="141.0" layoutX="656.0" layoutY="89.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="73.0" />
+               </children>
+            </AnchorPane>
+            <Separator prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="6526.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Team การสร้างทีม">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="การสร้างทีมผู้ช่วยจัดอีเว้นต์ สามารถทำได้ที่หน้า Create Team ซึ่งเข้าถึงได้จากปุ่ม Create Team ที่หน้า Your Teams หากมีอีเว้นต์ที่เป็นผู้จัดอยู่">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="7172.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/your-team-create.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="49.0" layoutX="716.0" layoutY="6.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="130.0" />
+               </children>
+            </AnchorPane>
+            <Text layoutX="70.0" layoutY="7871.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่ออยู่ที่หน้า Create Team แล้วให้กรอกข้อมูลเพื่อสร้างทีม ดังนี้">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="7900.0">
+               <children>
+                  <ImageView fitHeight="500.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/create-team1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="500.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="80.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/create-team2.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="49.0" layoutX="117.0" layoutY="65.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="227.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="57.0" layoutX="117.0" layoutY="114.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="227.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="52.0" layoutX="117.0" layoutY="171.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="227.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="57.0" layoutX="594.0" layoutY="61.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="227.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="122.0" layoutX="594.0" layoutY="114.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="254.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="52.0" layoutX="93.0" layoutY="236.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="52.0" layoutX="281.0" layoutY="236.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="52.0" layoutX="584.0" layoutY="245.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="52.0" layoutX="763.0" layoutY="245.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
+                  <Circle fill="RED" layoutX="103.0" layoutY="90.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="103.0" layoutY="143.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="103.0" layoutY="197.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="93.0" layoutY="262.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="274.0" layoutY="262.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="570.0" layoutY="271.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="743.0" layoutY="272.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="584.0" layoutY="187.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="584.0" layoutY="90.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="RED" layoutX="369.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="RED" layoutX="848.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="96.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="96.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="96.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="89.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="267.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="577.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="577.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="563.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="736.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <HBox spacing="50.0">
+               <children>
+                  <VBox spacing="8.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. ชื่อทีม โดยชื่อที่ตั้งจะต้องไม่ซ้ำชื่อทีมที่มีอยู่แล้ว">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. เวลาเริ่มต้นรับสมัครทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. เวลาสิ้นสุดการรับสมัครทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. ปุ่ม Cancel ย้อนกลับไปหน้า Your Teams">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. ปุ่ม Continue ไปกรอกข้อมูลต่อที่หน้า B" wrappingWidth="311.9999694824219">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" spacing="8.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6. จำนวนสมาชิกที่ต้องการรับ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. รายละเอียดของทีม ความยาวไม่เกิน 280 ตัวอักษร">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8. ปุ่ม Back ย้อนกลับไปที่หน้า A">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9. ปุ่ม Create Team สร้างทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="7774.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="7802.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Team การจัดการทีม">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text layoutX="70.0" layoutY="7871.0" strokeType="OUTSIDE" strokeWidth="0.0" text="หน้าการจัดการทีม สามารถเข้าถึงได้จากหน้า Your Teams โดยการกดเข้าไปที่ทีม จากนั้นก็เลือก Manage Team บริเวณซ้ายล่าง">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="7900.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="280.0" fitWidth="420.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/your-team-create.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="94.0" layoutX="69.0" layoutY="59.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="99.0" />
+                  <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/edit-team.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="46.0" layoutX="511.0" layoutY="158.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="46.0" />
+                  <Circle fill="RED" layoutX="60.0" layoutY="106.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="498.0" layoutY="181.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="53.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="491.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="38.0" layoutX="562.0" layoutY="60.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="151.0" />
+                  <Circle fill="RED" layoutX="544.0" layoutY="83.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="537.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="6580.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ภายในหน้าการจัดการทีม จะเห็นได้ว่ามีการจัดการ 2 ประเภท คือ">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. การจัดการสมาชิก โดยจะแสดงตารางซึ่งบอกชื่อ ตำแหน่ง และสถานะของสมาชิก โดยที่จุด 3 จุดท้ายตาราง ผู้จัดอีเว้นต์สามารถ" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- View Profile : ดูข้อมูลบนโปรไฟล์ของสมาชิก" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Kick : เตะสมาชิกออกจากทีม แต่สมาชิกสามารถสมัครเข้าทีมใหม่ได้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Ban : แบนสมาชิกออกจากทีม สมาชิกคนนั้นจะสมัครเข้าทีมที่ถูกแบนไม่ได้อีก จนกว่าจะถูกปลดแบน" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Promote to Leader : มอบตำแหน่งให้สมาชิกคนหนึ่งเป็นหัวหน้า มีอำนาจจัดการสมาชิก และ ตารางกิจกรรมของทีม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="7900.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/manage-member.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="147.0" layoutX="704.0" layoutY="98.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="137.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="30.0" layoutX="631.0" layoutY="126.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="73.0" />
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="9352.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. การแก้ไขข้อมูลของทีม อยู่ใน Settings" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- ข้อมูลที่สามารถแก้ไขได้ รวมถึงเงื่อนไขของข้อมูล เหมือนกับตอนสร้างทีม แต่ในการแก้ไขจำเป็นต้องใส่รหัสผ่านยืนยัน(1)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Banned User(2) ดูสมาชิกที่ถูกแบนออกจากทีมได้ และสามารถทำการเลือกปลดแบนสมาชิกได้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Delete Team(3) สามารถลบทีมได้" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <AnchorPane layoutX="10.0" layoutY="9544.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/edit-team.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="30.0" layoutX="591.0" layoutY="368.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="73.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="30.0" layoutX="276.0" layoutY="368.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="174.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="30.0" layoutX="622.0" layoutY="195.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
+                  <Text fill="RED" layoutX="252.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="RED" layoutX="601.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="RED" layoutX="562.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Separator layoutX="10.0" layoutY="8924.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="9768.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Team Activity สร้างกิจกรรมสำหรับทีม">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text layoutX="70.0" layoutY="9837.0" strokeType="OUTSIDE" strokeWidth="0.0" text="หน้าสร้างกิจกรรมสำหรับทีม (3 - Create Team Activity) สามารถเข้าถึงได้จากหน้า Team Page(2 - Team Activity) หรือหน้ากิจกรรมสำหรับทีม โดยจะอยู่บริเวณขวาบนของตารางกิจกรรม" wrappingWidth="800.0">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <Text layoutX="70.0" layoutY="11385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="หน้ากิจกรรมสำหรับทีม สามารถเข้าถึงได้จากหน้า Your Teams โดยการกดเข้าไปที่ทีม(1) จากนั้นก็เลือก Activity บริเวณซ้ายบน">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="9865.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="280.0" fitWidth="420.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/your-team-create.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="94.0" layoutX="69.0" layoutY="59.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="99.0" />
+                  <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/team-act.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="46.0" layoutX="498.0" layoutY="82.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="46.0" />
+                  <Circle fill="RED" layoutX="60.0" layoutY="106.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="491.0" layoutY="91.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="53.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="484.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="24.0" layoutX="796.0" layoutY="104.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="68.0" />
+                  <Circle fill="RED" layoutX="787.0" layoutY="91.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="780.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Text layoutX="70.0" layoutY="5822.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Create Activity จะต้องกรอกข้อมูลเพื่อสร้างกิจกรรม ดังนี้">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="10813.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/create-team-act.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="58.0" layoutX="234.0" layoutY="132.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="345.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="58.0" layoutX="234.0" layoutY="190.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="550.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="128.0" layoutX="234.0" layoutY="248.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="550.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="38.0" layoutX="633.0" layoutY="376.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="92.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="38.0" layoutX="725.0" layoutY="376.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="92.0" />
+                  <Circle fill="RED" layoutX="222.0" layoutY="161.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="222.0" layoutY="219.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="222.0" layoutY="305.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="827.0" layoutY="395.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="RED" layoutX="619.0" layoutY="405.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="215.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="215.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="215.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="612.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="820.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <TextFlow layoutX="10.0" layoutY="10680.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text layoutX="70.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. ชื่อกิจกรรม โดยชื่อของแต่ละกิจกรรมในทีมจะต้องไม่ซ้ำกัน" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. เวลาเริ่มต้น - สิ้นสุดของกิจกรรม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. ข้อมูลรายละเอียดของกิจกรรม ความยาวไม่เกิน 280 ตัวอักษร" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. ปุ่ม Cancel ยกเลิกการสร้างกิจกรรม" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="85.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. ปุ่ม Save บันทึกข้อมูลกิจกรรม หากข้อมูลที่กรอกผิดพลาด จะมีข้อความแจ้งเตือนความผิดพลาดขึ้น หากข้อมูลถูกต้องสมบูรณ์ จะบันทึกข้อมูล แล้วกลับไปที่หน้า Team Activity" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </TextFlow>
+            <Separator layoutX="10.0" layoutY="11288.0" prefWidth="200.0" />
+            <TextFlow layoutX="10.0" layoutY="11316.0" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Team Activity แก้ไขกิจกรรมสำหรับทีม">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text layoutX="70.0" layoutY="11385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้ากิจกรรมสำหรับทีม สามารถแก้ไขกิจกรรมได้โดยการคลิก 2 ครั้งที่กิจกรรมที่เลือกในตาราง" wrappingWidth="800.0">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane layoutX="10.0" layoutY="10813.0">
+               <children>
+                  <ImageView fitHeight="450.0" fitWidth="750.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/team-act-table.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="29.0" layoutX="100.0" layoutY="53.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="750.0" />
+               </children>
+            </AnchorPane>
+            <Text layoutX="70.0" layoutY="12580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เมื่อคลิกแล้วจะมีหน้าป๊อปอัพของ Edit Activity ขึ้นมา" wrappingWidth="800.0">
+               <font>
+                  <Font name="Leelawadee" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+            </Text>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/organizer/team-act-edit.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="100.0" layoutX="566.0" layoutY="72.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="111.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4afba00" height="46.0" layoutX="210.0" layoutY="240.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="111.0" />
+                  <Text fill="RED" layoutX="546.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="RED" layoutX="203.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                     <font>
+                        <Font name="Leelawadee Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <VBox spacing="8.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="จะเห็นว่าหน้า Edit Activity มีโครงสร้างแบบเดียวกันกับหน้า Create Activity แต่จะมีข้อมูลของกิจกรรม ที่ต้องการแก้ไขถูกแสดงอยู่ ผู้จัดสามารถแก้ไขข้อมูลที่ต้องการ โดยคำนึงถึงข้อบังคับของข้อมูลกิจกรรมแบบเดียวกับการสร้างกิจกรรม หากแน่ใจแล้วว่า ข้อมูลถูกต้อง จึงกด save ได้" wrappingWidth="780.0">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="60.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ในหน้า Edit Activity มีสิ่งที่เพิ่มขึ้นมา คือ" wrappingWidth="780.0">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="60.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text layoutX="70.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. การตั้งสถานะของกิจกรรม เป็นกำลังดำเนินการ On-going และ จบแล้ว Complete" wrappingWidth="780.0">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="75.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text layoutX="85.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. ปุ่ม Delete สำหรับลบกิจกรรม" wrappingWidth="780.0">
+                     <font>
+                        <Font name="Leelawadee" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="75.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+            <Separator layoutX="10.0" layoutY="12137.0" prefWidth="200.0" />
             </children>
         </VBox>
     </children>

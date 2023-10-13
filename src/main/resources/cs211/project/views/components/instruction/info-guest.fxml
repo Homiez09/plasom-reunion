@@ -64,7 +64,7 @@
                <children>
                   <ImageView fitHeight="500.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/welcome.png" />
+                        <Image url="@../../../../../images/instruction/guest/welcome.png" />
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="29.0" layoutX="491.0" layoutY="6.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="107.0" />
@@ -97,13 +97,75 @@
                   </Text>
                </children>
             </AnchorPane>
-            <VBox spacing="5.0">
+            <TextFlow>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. ปุ่ม Instruction จะบอกข้อมูล และวิธีการใช้งานแอปพลิเคชั่น Plasom">
+                  <VBox spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. ปุ่ม Instruction จะบอกข้อมูล และวิธีการใช้งานแอปพลิเคชั่น Plasom โดยแบ่งเป็น 4 หมวดหมู่ สามารถเลือกดูได้ตามภาพด้านล่าง(5)" wrappingWidth="800.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="110.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- About Application &amp; Instruction for guest : แสดงข้อมูลเบื้องต้นเกี่ยวกับแอปพลิเคชั่น และข้อมูลเกี่ยวกับหน้าที่ผู้ใช้ภายนอกสามารถเข้าถึงได้ การสร้างบัญชีและเข้าสู่ระบบ" wrappingWidth="750.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="135.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Instruction for user : แสดงข้อมูลเกี่ยวกับการจัดการบัญชีของผู้ใช้ทั่วไป การเข้าร่วมอีเว้นต์ และจัดการอีเว้นต์ของตนเอง">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Instruction for organizer : แสดงข้อมูลเกี่ยวกับการสร้างอีเว้นต์ และ การจัดการสิ่งที่เกี่ยวข้องกับอีเว้นต์ เช่น กิจกรรมอีเว้นต์ ทีมช่วยจัดอีเว้นต์ ผู้เข้าร่วมอีเว้นต์" wrappingWidth="750.0">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Instruction for team staff : แสดงข้อมูลเกี่ยวกับทีมสตาฟผู้ช่วยจัดอีเว้นต์ ระบบต่าง ๆ ในทีม">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="125.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextFlow>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0">
+                     <image>
+                        <Image url="@../../../../../images/instruction/guest/instruct.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="342.0" layoutX="166.0" layoutY="46.0" stroke="RED" strokeType="INSIDE" strokeWidth="5.0" width="94.0" />
+                  <Circle fill="RED" layoutX="162.0" layoutY="50.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Text fill="WHITE" layoutX="155.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
                      <font>
-                        <Font name="Leelawadee" size="16.0" />
+                        <Font name="Leelawadee Bold" size="24.0" />
                      </font>
                   </Text>
+               </children>
+            </AnchorPane>
+            <VBox spacing="5.0">
+               <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. ปุ่ม Current Event  จะพาไปยังหน้า Home ของแอปพลิเคชั่นโดยไม่ต้อง Sign in หรือสมัครสมาชิก สามารถเลือกดูข้อมูลของอีเวนต์ต่าง ๆ ได้อย่างมีข้อจำกัด" wrappingWidth="800.0">
                      <font>
                         <Font name="Leelawadee" size="16.0" />
@@ -139,6 +201,14 @@
                               <Font name="Leelawadee" size="16.0" />
                            </font>
                         </Text>
+                        <Text layoutX="60.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- เมื่อเข้าสู่ระบบแล้ว จะไปที่หน้า Home">
+                           <font>
+                              <Font name="Leelawadee" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </Text>
                         <Text layoutX="60.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- หน้า sign up ให้กรอกข้อมูลตามกำหนด เพื่อสมัครสมาชิก">
                            <font>
                               <Font name="Leelawadee" size="16.0" />
@@ -155,12 +225,12 @@
                <children>
                   <ImageView fitHeight="400.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="50.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/sign-in.png" />
+                        <Image url="@../../../../../images/instruction/guest/sign-in.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="450.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="50.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/sign-up.png" />
+                        <Image url="@../../../../../images/instruction/guest/sign-up.png" />
                      </image>
                   </ImageView>
                   <Circle fill="RED" layoutX="398.0" layoutY="107.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -250,7 +320,7 @@
                <children>
                   <ImageView fitHeight="250.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/guest-nav.png" />
+                        <Image url="@../../../../../images/instruction/guest/guest-nav.png" />
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="48.0" layoutX="620.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="73.0" />
@@ -346,7 +416,7 @@
                <children>
                   <ImageView fitHeight="350.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/scroll-home.png" />
+                        <Image url="@../../../../../images/instruction/guest/scroll-home.png" />
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="49.0" layoutX="727.0" layoutY="14.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="123.0" />
@@ -505,12 +575,12 @@
                <children>
                   <ImageView fitHeight="400.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="150.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/rec-event.png" />
+                        <Image url="@../../../../../images/instruction/guest/rec-event.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/sort-home.png" />
+                        <Image url="@../../../../../images/instruction/guest/sort-home.png" />
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="36.0" layoutX="702.0" layoutY="5.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="85.0" />
@@ -644,7 +714,7 @@
                <children>
                   <ImageView fitHeight="500.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/event-guest.png" />
+                        <Image url="@../../../../../images/instruction/guest/event-guest.png" />
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="48.0" layoutX="100.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="57.0" />
@@ -782,7 +852,7 @@
                <children>
                   <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0">
                      <image>
-                        <Image url="@../../../../../images/instruction/all-events.png" />
+                        <Image url="@../../../../../images/instruction/guest/all-events.png" />
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="36.0" layoutX="145.0" layoutY="31.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" width="200.0" />
