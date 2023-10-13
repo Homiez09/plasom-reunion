@@ -167,6 +167,11 @@
         - alert-box
           - delete-team-alert-box.fxml
           - join-team-alert-box.fxml
+        - instruction
+          - info-guest.fxml
+          - info-user.fxml
+          - organizer.fxml
+          - team-staff.fxml
         - side-bar
           - sidebar-team.fxml
         - team
@@ -214,6 +219,7 @@
       - edit-event-activity.fxml
       - event-view.fxml
       - home.fxml
+      - instruction.fxml
       - join-team.fxml
       - my-event.fxml
       - setting.fxml
@@ -383,6 +389,63 @@
           - iconEllipse.png
           - iconFrame.png
           - iconProfile.png
+      - instruction
+        - guest
+          - all-events.png
+          - event-guest.png
+          - guest-nav.png
+          - instruct.png
+          - rec-event.png
+          - scroll-home.png
+          - sign-in.png
+          - sign-up.png
+          - sort-home.png
+          - welcome.png
+        - organizer
+          - create-act.png
+          - create-event.png
+          - create-team-act.png
+          - create-team1.png
+          - create-team2.png
+          - date.png
+          - edit-act.png
+          - edit-event.png
+          - edit-team.png
+          - event-page-act.png
+          - event-page-edit.png
+          - manage-act.png
+          - manage-action.png
+          - manage-event-user-table.png
+          - manage-event-user.png
+          - manage-member.png
+          - manage.png
+          - team-act-edit.png
+          - team-act-table.png
+          - team-act.png
+          - time.png
+          - your-team-create.png
+        - team
+          - all-events.png
+          - chat-room.png
+          - join-team.png
+          - joined.png
+          - manage-team-page.png
+          - manage-team.png
+          - sidebar.png
+          - team-act.png
+          - team-card.png
+          - team-rank.png
+          - your-team.png
+        - user
+          - activity.png
+          - event-page.png
+          - my-event.png
+          - navbar.png
+          - profile-edit.png
+          - profile.png
+          - profilepic.png
+          - profilpic-default.png
+          - setting.png
       - login
         - event0_test.jpg
         - event1_test.jpg
